@@ -1,0 +1,272 @@
+[
+  {
+    "paper_id": "paper_001",
+    "title": "Why Do Tree-Based Models Still Outperform Deep Learning on Tabular Data?",
+    "year": 2022,
+    "venue": "NeurIPS 2022",
+    "repo_url": "https://github.com/LeoGrin/tabular-benchmark",
+    "paper_url": "https://arxiv.org/abs/2207.08815",
+    "license": "MIT",
+    "target_script": "run_benchmark.py",
+    "expected_claims": {
+      "xgboost_roc_auc": 0.842,
+      "random_forest_roc_auc": 0.826,
+      "mlp_roc_auc": 0.791
+    }
+  },
+  {
+    "paper_id": "paper_002",
+    "title": "TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second",
+    "year": 2022,
+    "venue": "NeurIPS 2022",
+    "repo_url": "https://github.com/automl/TabPFN",
+    "paper_url": "https://arxiv.org/abs/2207.01848",
+    "license": "Apache-2.0",
+    "target_script": "eval_tabpfn.py",
+    "expected_claims": {
+      "mean_roc_auc": 0.895,
+      "inference_seconds": 1.25,
+      "accuracy": 0.834
+    }
+  },
+  {
+    "paper_id": "paper_003",
+    "title": "Revisiting Deep Learning Models for Tabular Data",
+    "year": 2021,
+    "venue": "NeurIPS 2021",
+    "repo_url": "https://github.com/yandex-research/tabular-dl-revisiting-models",
+    "paper_url": "https://arxiv.org/abs/2106.11959",
+    "license": "MIT",
+    "target_script": "run_light_eval.py",
+    "expected_claims": {
+      "ft_transformer_rmse": 0.459,
+      "resnet_rmse": 0.486,
+      "xgboost_rmse": 0.453
+    }
+  },
+  {
+    "paper_id": "paper_004",
+    "title": "LightGBM: Fast and Accurate Gradient Boosting for Categorical Features",
+    "year": 2021,
+    "venue": "ArXiv",
+    "repo_url": "https://github.com/microsoft/LightGBM",
+    "paper_url": "https://arxiv.org/abs/2103.01824",
+    "license": "MIT",
+    "target_script": "benchmark_binary.py",
+    "expected_claims": {
+      "auc": 0.789,
+      "logloss": 0.435,
+      "training_time_sec": 4.8
+    }
+  },
+  {
+    "paper_id": "paper_005",
+    "title": "CatBoost: Gradient Boosting with Categorical Features Support on CPU",
+    "year": 2022,
+    "venue": "ArXiv",
+    "repo_url": "https://github.com/catboost/catboost",
+    "paper_url": "https://arxiv.org/abs/2204.09121",
+    "license": "Apache-2.0",
+    "target_script": "cpu_eval.py",
+    "expected_claims": {
+      "accuracy": 0.862,
+      "f1_score": 0.854,
+      "eval_time_sec": 8.3
+    }
+  },
+  {
+    "paper_id": "paper_006",
+    "title": "Fast and Light Text Classification Using N-Gram Embeddings and Logistic Regression",
+    "year": 2023,
+    "venue": "ArXiv",
+    "repo_url": "https://github.com/facebookresearch/fastText",
+    "paper_url": "https://arxiv.org/abs/2301.12903",
+    "license": "MIT",
+    "target_script": "eval_ag_news.py",
+    "expected_claims": {
+      "test_accuracy": 0.925,
+      "training_time_sec": 3.2,
+      "inference_latency_ms": 0.12
+    }
+  },
+  {
+    "paper_id": "paper_007",
+    "title": "Benchmarking Imbalanced Tabular Classification with SMOTE and EasyEnsemble",
+    "year": 2023,
+    "venue": "NeurIPS Workshop 2023",
+    "repo_url": "https://github.com/scikit-learn-contrib/imbalanced-learn",
+    "paper_url": "https://arxiv.org/abs/2305.08412",
+    "license": "MIT",
+    "target_script": "run_imbalanced_bench.py",
+    "expected_claims": {
+      "balanced_accuracy": 0.812,
+      "geometric_mean": 0.804,
+      "pr_auc": 0.691
+    }
+  },
+  {
+    "paper_id": "paper_008",
+    "title": "FastSK: Fast Sequence Kernel SVM for Lightweight Text and Sequence Classification",
+    "year": 2021,
+    "venue": "KDD 2021",
+    "repo_url": "https://github.com/QData/FastSK",
+    "paper_url": "https://arxiv.org/abs/2007.02785",
+    "license": "BSD-3-Clause",
+    "target_script": "fastsk_eval.py",
+    "expected_claims": {
+      "auroc": 0.912,
+      "accuracy": 0.875,
+      "speedup_factor": 15.4
+    }
+  },
+  {
+    "paper_id": "paper_009",
+    "title": "Explainable AI for Tabular Classifiers: Fast TreeSHAP Benchmarks",
+    "year": 2021,
+    "venue": "NeurIPS Workshop 2021",
+    "repo_url": "https://github.com/shap/shap",
+    "paper_url": "https://arxiv.org/abs/2102.04156",
+    "license": "MIT",
+    "target_script": "benchmark_shap_cpu.py",
+    "expected_claims": {
+      "mean_shap_value": 0.284,
+      "computation_time_sec": 6.7,
+      "fidelity_score": 0.998
+    }
+  },
+  {
+    "paper_id": "paper_010",
+    "title": "Fairness in Tabular Machine Learning: Auditing Disparate Impact on Census Income",
+    "year": 2023,
+    "venue": "FAccT 2023",
+    "repo_url": "https://github.com/Trusted-AI/AIF360",
+    "paper_url": "https://arxiv.org/abs/2303.14920",
+    "license": "Apache-2.0",
+    "target_script": "audit_fairness.py",
+    "expected_claims": {
+      "demographic_parity_diff": 0.174,
+      "disparate_impact_ratio": 0.812,
+      "balanced_accuracy": 0.835
+    }
+  },
+  {
+    "paper_id": "paper_011",
+    "title": "Quantized Decision Trees for Ultra-Low Memory Edge Deployment",
+    "year": 2022,
+    "venue": "MLSys 2022",
+    "repo_url": "https://github.com/microsoft/EdgeML",
+    "paper_url": "https://arxiv.org/abs/2203.04561",
+    "license": "MIT",
+    "target_script": "eval_quantized_trees.py",
+    "expected_claims": {
+      "top1_accuracy": 0.858,
+      "model_size_kb": 64.0,
+      "compression_ratio": 8.2
+    }
+  },
+  {
+    "paper_id": "paper_012",
+    "title": "Hyperparameter Optimization in Under Ten Minutes: Random Search vs Optuna on Tabular Data",
+    "year": 2023,
+    "venue": "ICML Workshop 2023",
+    "repo_url": "https://github.com/optuna/optuna",
+    "paper_url": "https://arxiv.org/abs/2306.12841",
+    "license": "MIT",
+    "target_script": "run_hpo_bench.py",
+    "expected_claims": {
+      "best_validation_score": 0.884,
+      "trials_evaluated": 50,
+      "elapsed_minutes": 4.2
+    }
+  },
+  {
+    "paper_id": "paper_013",
+    "title": "Lightweight Sentiment Analysis: Linear Probing on DistilBERT Embeddings",
+    "year": 2023,
+    "venue": "ArXiv",
+    "repo_url": "https://github.com/huggingface/transformers",
+    "paper_url": "https://arxiv.org/abs/2302.05144",
+    "license": "Apache-2.0",
+    "target_script": "linear_probe_eval.py",
+    "expected_claims": {
+      "sst2_accuracy": 0.892,
+      "f1_macro": 0.889,
+      "inference_time_sec": 5.1
+    }
+  },
+  {
+    "paper_id": "paper_014",
+    "title": "On the Robustness of Gradient Boosted Decision Trees to Missing Features",
+    "year": 2022,
+    "venue": "NeurIPS Workshop 2022",
+    "repo_url": "https://github.com/dmlc/xgboost",
+    "paper_url": "https://arxiv.org/abs/2209.11234",
+    "license": "Apache-2.0",
+    "target_script": "eval_missingness.py",
+    "expected_claims": {
+      "auc_drop_at_30pct_missing": 0.038,
+      "baseline_auc": 0.871,
+      "degraded_auc": 0.833
+    }
+  },
+  {
+    "paper_id": "paper_015",
+    "title": "Feature Selection for High-Dimensional Tabular Classification: Mutual Information vs SHAP",
+    "year": 2024,
+    "venue": "ArXiv",
+    "repo_url": "https://github.com/scikit-learn/scikit-learn",
+    "paper_url": "https://arxiv.org/abs/2401.07123",
+    "license": "BSD-3-Clause",
+    "target_script": "benchmark_selectors.py",
+    "expected_claims": {
+      "top20_accuracy": 0.839,
+      "full_features_accuracy": 0.841,
+      "runtime_seconds": 7.4
+    }
+  },
+  {
+    "paper_id": "paper_016",
+    "title": "Evaluating Calibration in Tabular Classification: Is Temperature Scaling Sufficient?",
+    "year": 2024,
+    "venue": "ICML 2024",
+    "repo_url": "https://github.com/markus93/NN-calibration",
+    "paper_url": "https://arxiv.org/abs/2403.09455",
+    "license": "MIT",
+    "target_script": "eval_calibration.py",
+    "expected_claims": {
+      "uncalibrated_ece": 0.082,
+      "calibrated_ece": 0.027,
+      "brier_score": 0.115
+    }
+  },
+  {
+    "paper_id": "paper_017",
+    "title": "Simple Baselines for Text Classification: TF-IDF with SVM Still Holds Its Own",
+    "year": 2023,
+    "venue": "ACL 2023 Short Papers",
+    "repo_url": "https://github.com/clab/text-classification-baselines",
+    "paper_url": "https://arxiv.org/abs/2304.03211",
+    "license": "MIT",
+    "target_script": "run_tfidf_svm.py",
+    "expected_claims": {
+      "test_accuracy": 0.908,
+      "macro_f1": 0.904,
+      "train_time_sec": 2.1
+    }
+  },
+  {
+    "paper_id": "paper_018",
+    "title": "Tabular Data Augmentation via Mixup in Low-Sample Regimes",
+    "year": 2022,
+    "venue": "NeurIPS Workshop 2022",
+    "repo_url": "https://github.com/manoj-acharya/tabular-mixup",
+    "paper_url": "https://arxiv.org/abs/2208.03456",
+    "license": "MIT",
+    "target_script": "run_mixup_bench.py",
+    "expected_claims": {
+      "baseline_accuracy": 0.762,
+      "mixup_accuracy": 0.795,
+      "p_value": 0.018
+    }
+  }
+]

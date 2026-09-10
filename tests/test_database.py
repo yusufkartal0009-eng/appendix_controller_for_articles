@@ -1,0 +1,93 @@
+"""Unit tests for Repro Radar database initialization, seeding, and ORM operations."""
+
+import os
+import tempfile
+from pathlib import Path
+import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from src.database import (
+    get_all_papers,
+    get_paper_by_id,
+    init_db,
+    save_score,
+    seed_database,
+)
+from src.models import Base, PaperORM, ScoreORM
+
+
+@pytest.fixture
+def temp_db():
+    """Create an isolated temporary SQLite database for testing."""
+    fd, path = tempfile.mkstemp(suffix=".db")
+    os.close(fd)
+    db_url = f"sqlite:///{path}"
+    engine = create_engine(db_url, echo=False)
+
+    # Initialize schema
+    init_db(engine=engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    yield {"engine": engine, "session": session, "path": path}
+
+    session.close()
+    engine.dispose()
+    if os.path.exists(path):
+        try:
+            os.remove(path)
+        except PermissionError:
+            pass
+
+
+def test_init_db_creates_tables(temp_db):
+    """Test that all tables defined in schema.sql exist."""
+    session = temp_db["session"]
+    papers = session.query(PaperORM).all()
+    assert len(papers) == 0
+
+
+def test_seed_database_loads_papers(temp_db):
+    """Test seeding database from data/seed_papers.json."""
+    session = temp_db["session"]
+    count = seed_database(session=session)
+    assert count >= 15
+
+    # Verify query
+    all_papers = get_all_papers(session=session)
+    assert len(all_papers) == count
+
+    # Check paper_001
+    p1 = get_paper_by_id("paper_001", session=session)
+    assert p1 is not None
+    assert "Tree-Based" in p1.title
+    claims = p1.get_expected_claims_dict()
+    assert "xgboost_roc_auc" in claims
+    assert claims["xgboost_roc_auc"] == 0.842
+
+
+def test_save_and_retrieve_score(temp_db):
+    """Test inserting and updating reproducibility score."""
+    session = temp_db["session"]
+    seed_database(session=session)
+
+    score_dict = {
+        "score_id": "score_test_01",
+        "paper_id": "paper_001",
+        "tier1_build": 100.0,
+        "tier2_metrics": 90.0,
+        "tier3_stability": 85.0,
+        "tier4_artifacts": 100.0,
+        "total_score": 94.25,
+        "status_label": "Doğrulandı",
+        "summary": "Mükemmel tekrar edilebilirlik.",
+    }
+    saved = save_score(score_dict, session=session)
+    assert saved.score_id == "score_test_01"
+    assert saved.total_score == 94.25
+
+    # Update score
+    score_dict["total_score"] = 95.0
+    updated = save_score(score_dict, session=session)
+    assert updated.total_score == 95.0
