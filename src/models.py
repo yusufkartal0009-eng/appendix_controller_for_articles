@@ -108,7 +108,7 @@ class ScoreORM(Base):
     tier3_stability = Column(Float, nullable=False, default=0.0)
     tier4_artifacts = Column(Float, nullable=False, default=0.0)
     total_score = Column(Float, nullable=False, default=0.0)
-    status_label = Column(String, nullable=False)  # 'Doğrulandı', 'Kısmen Doğrulandı', 'İncelenmeli', 'Tekrarlanamadı'
+    status_label = Column(String, nullable=False)  # 'Verified', 'Partially Verified', 'Needs Review', 'Failed'
     summary = Column(Text, nullable=True)
     evaluated_at = Column(DateTime, default=func.now())
 

@@ -1,101 +1,101 @@
-# Repro Radar: Metodoloji ve Skorlama Rubriği
+# Repro Radar: Methodology & Scoring Rubric
 
-## 1. Giriş ve Problem Tanımı
+## 1. Introduction & Problem Definition
 
-Yapay zekâ ve makine öğrenimi literatüründe her gün yüzlerce yeni bildiri ve makale yayımlanmaktadır. Ancak akademik üretim hacmindeki bu devasa artışa karşın, sonuçların bağımsız ortamlarda yeniden üretilebilirliğini (**reproducibility**) denetleyecek otomatize kapasite son derece yetersizdir. Eksik hiperparametreler, sabitlenmemiş rastgele tohumlar (random seeds), belirsiz kütüphane sürümleri ve tescilli/ulaşılamayan veri setleri, literatürde güvenilirlik erozyonuna yol açmaktadır.
+In contemporary artificial intelligence and machine learning literature, hundreds of empirical papers are published weekly. Despite this extraordinary research output, automated infrastructure to verify the independent reproducibility of empirical results remains severely limited. Missing hyperparameters, unseeded pseudo-random number generators, unpinned package versions, and non-public data pipelines contribute to an ongoing reproducibility crisis.
 
-**Repro Radar**, makale ve kod çiftlerini izole sandbox ortamlarında test ederek çok kademeli bir **Reproducibility Skoru** (0–100) ve **AI Karar Katmanı** ile desteklenmiş nesnel bir doğrulama raporu üretir.
+**Repro Radar** systematically addresses this gap by evaluating research paper codebases in isolated execution sandboxes, calculating an empirical **Reproducibility Score** (0–100) across four tiers, and providing actionable diagnostic feedback powered by an **AI Decision Layer**.
 
 ---
 
-## 2. Dört Kademeli (4-Tier) Skorlama Mimarisi
+## 2. Four-Tier (4-Tier) Reproducibility Rubric
 
-Repro Radar, bir çalışmanın tekrarlanabilirliğini yalnızca "çalıştı / çalışmadı" ikiliğine indirgemez. Kapsamlı ve katmanlı bir değerlendirme modeli uygular:
+Repro Radar does not treat reproducibility as a binary "pass / fail" outcome. It employs a multi-dimensional rubric that measures buildability, empirical accuracy, variance stability, and software engineering hygiene:
 
-| Kademe | Odak Alanı | Ağırlık | Değerlendirilen Kriterler |
+| Tier | Focus Area | Weight | Evaluated Dimensions |
 | :--- | :--- | :---: | :--- |
-| **Tier 1: Build & Çalıştırma** | Kod ve Ortam Bütünlüğü | **%35** | Depo klonlama, bağımlılık kurulumu, hedef script çağrısı, hatasız çıkış kodu (Exit Code 0) |
-| **Tier 2: Metrik Örtüşmesi** | İddia Doğrulama | **%35** | Makalede belirtilen temel iddiaların (accuracy, ROC-AUC, F1, loss vb.) tolerans aralığında tekrarı |
-| **Tier 3: Kararlılık (Stability)**| Tohum ve Varyans Dayanımı | **%15** | Çoklu seed (rastgele tohum) altında varyasyon katsayısı (CV) ve deterministik tutarlılık |
-| **Tier 4: Dokümantasyon & Lisans**| Açıklık ve Sürdürülebilirlik | **%15** | Açık kaynak lisansı (MIT, Apache, BSD), ortam dosyaları (`requirements.txt`), log/artefakt çıktısı |
+| **Tier 1: Build & Execution** | Codebase Integrity | **35%** | Git clone, dependency resolution, script entrypoint invocation, clean exit code (0) |
+| **Tier 2: Metric Alignment** | Empirical Claim Verification | **35%** | Replication of reported metrics (accuracy, ROC-AUC, F1, loss) within tolerance bounds |
+| **Tier 3: Seed Stability** | Multi-Seed Invariance | **15%** | Coefficient of Variation (CV) across repeated seeds and stochastic stability |
+| **Tier 4: Documentation & License**| Open Science & Artifacts | **15%** | Permissive OSI license (MIT, Apache, BSD), pinned environment specs, structured logs |
 
 ---
 
-### Tier 1: Build ve Çalıştırma (%35)
+### Tier 1: Build & Execution (35%)
 
-Kod tabanının sıfırdan izole bir ortama kurulabilme kabiliyetini ölçer:
-- **Repo Klonlama (+25 Puan):** Depo açık, erişilebilir ve git aracılığıyla hatasız klonlanabiliyor.
-- **Bağımlılık Kurulumu (+25 Puan):** Paket yöneticisi (pip, conda, uv) tüm gereksinimleri çakışmasız kurabiliyor.
-- **Hedef Script Başlatma (+25 Puan):** Belirtilen giriş noktası (örn. `run.py`, `eval.py`) eksik dosya hatası vermeden başlatılıyor.
-- **Hatasız Tamamlanma (+25 Puan):** Süreç, beklenmeyen bir exception/crash olmaksızın çıkış kodu `0` ile sonlanıyor.
+Measures the ability to configure and run the software from scratch in an isolated environment:
+- **Repository Clone (+25 pts):** The repository is publicly accessible, cloneable without authentication, and structurally intact.
+- **Dependency Installation (+25 pts):** The package manager (pip, uv, conda) resolves and installs all required dependencies without unresolvable conflicts.
+- **Entrypoint Invocation (+25 pts):** The declared benchmark script (e.g. `run.py`, `eval.py`) launches without missing module exceptions.
+- **Clean Termination (+25 pts):** The benchmark process terminates cleanly with an exit code of `0`.
 
-$$\text{Tier 1 Skoru} \in [0, 100]$$
+$$\text{Tier 1 Score} \in [0, 100]$$
 
 ---
 
-### Tier 2: Sonuç ve Metrik Örtüşmesi (%35)
+### Tier 2: Metric Alignment (35%)
 
-Makalede raporlanan deneysel bulgular ile sandbox çalıştırmasından elde edilen çıktılar arasındaki bağıntıyı ölçer:
+Evaluates the concordance between numerical claims reported in the paper and values computed in the isolated sandbox run:
 
-1. **Bağıl Hata (Relative Error):**
+1. **Relative Error Formulation:**
    $$\text{RelError} = \frac{|\text{Reproduced} - \text{Claimed}|}{\max(|\text{Claimed}|, 10^{-6})}$$
 
-2. **Puanlama Mantığı:**
-   - $\text{RelError} \le \text{Tolerance}$ (Varsayılan: %5) $\rightarrow$ **Tam Puan (1.0)**
-   - $\text{Tolerance} < \text{RelError} \le 2 \times \text{Tolerance}$ $\rightarrow$ **Kısmi Puan (0.5)**
-   - $\text{RelError} > 2 \times \text{Tolerance}$ veya Metrik Bulunamadı $\rightarrow$ **0 Puan (0.0)**
+2. **Scoring Logic:**
+   - $\text{RelError} \le \text{Tolerance}$ (Default: 5%) $\rightarrow$ **Full Credit (1.0)**
+   - $\text{Tolerance} < \text{RelError} \le 2 \times \text{Tolerance}$ $\rightarrow$ **Partial Credit (0.5)**
+   - $\text{RelError} > 2 \times \text{Tolerance}$ or Missing Metric $\rightarrow$ **Zero Credit (0.0)**
 
-$$\text{Tier 2 Skoru} = \left( \frac{\sum \text{Kazanılan Puan}}{\text{Toplam İddia Sayısı}} \right) \times 100$$
+$$\text{Tier 2 Score} = \left( \frac{\sum \text{Earned Points}}{\text{Total Claims}} \right) \times 100$$
 
 ---
 
-### Tier 3: Kararlılık ve Tohum Varyansı (%15)
+### Tier 3: Seed Stability & Variance (15%)
 
-Deneysel sonucun tek bir "şanslı tohum" (cherry-picked seed) sonucunda mı yoksa sağlam bir metodolojiyle mi elde edildiğini inceler:
-- Çoklu tohum çalıştırmalarında ($n \ge 3$) **Varyasyon Katsayısı (Coefficient of Variation - CV)** hesaplanır:
+Verifies whether reported performance relies on a single cherry-picked seed or remains robust across stochastic initializations:
+- For multi-seed evaluations ($n \ge 3$), the **Coefficient of Variation (CV)** is computed:
   $$\text{CV} = \frac{\sigma}{\mu}$$
-- $\text{CV} \le 2\%$: **100 Puan** (Mükemmel stabilite)
-- $2\% < \text{CV} \le 5\%$: **85 Puan** (Yüksek stabilite)
-- $5\% < \text{CV} \le 10\%$: **65 Puan** (Kabul edilebilir hafif varyans)
-- $\text{CV} > 10\%$: **40 Puan** (Yüksek stokastik sapma)
-- Tek tohumlu temiz çalıştırma: **75 Puan** (Temel stabilite puanı)
+- $\text{CV} \le 2\%$: **100 Points** (Outstanding stability)
+- $2\% < \text{CV} \le 5\%$: **85 Points** (High stability)
+- $5\% < \text{CV} \le 10\%$: **65 Points** (Acceptable variance)
+- $\text{CV} > 10\%$: **40 Points** (High stochastic instability)
+- Single-seed clean run: **75 Points** (Baseline clean execution score)
 
 ---
 
-### Tier 4: Artefaktlar, Lisans ve Dokümantasyon (%15)
+### Tier 4: Artifacts, License, & Documentation (15%)
 
-Bilimsel kodun sürdürülebilirliğini ve açık bilim ilkelerine uyumunu denetler:
-- **Açık Kaynak Lisansı (+30 Puan):** OSI onaylı serbest lisanslar (MIT, Apache-2.0, BSD-2/3, CC-BY-4.0).
-- **Açık Ortam Tanımı (+30 Puan):** `requirements.txt`, `pyproject.toml`, `Pipfile` veya `environment.yml`.
-- **Dokümantasyon & Talimatlar (+20 Puan):** Detaylı çalıştırma adımlarını içeren `README.md`.
-- **Yapılandırılmış Çıktı ve Loglar (+20 Puan):** Sonuçların JSON, CSV veya açık konsol çıktısı olarak loglanması.
+Audits software engineering hygiene and open-science compliance:
+- **Permissive Open Source License (+30 pts):** Verified OSI-approved license (MIT, Apache-2.0, BSD-2/3, CC-BY-4.0).
+- **Explicit Environment Definition (+30 pts):** Presence of `requirements.txt`, `pyproject.toml`, or `environment.yml`.
+- **Documentation & Instructions (+20 pts):** Clear reproduction instructions in `README.md`.
+- **Structured Logs & Artifacts (+20 pts):** Programmatic capture of JSON/CSV benchmark summaries or model checkpoints.
 
 ---
 
-## 3. Toplam Skor ve Durum Sınıflandırması
+## 3. Composite Score & Status Classification
 
-Toplam kompozit skor ağırlıklı toplam formülüyle hesaplanır:
+The final composite reproducibility score is calculated as a weighted linear combination:
 
 $$\text{Total Score} = 0.35 \times \text{Tier 1} + 0.35 \times \text{Tier 2} + 0.15 \times \text{Tier 3} + 0.15 \times \text{Tier 4}$$
 
-### Nötr ve Bilimsel Durum Etiketleri (Status Labels)
+### Neutral & Objective Status Labels
 
-Repro Radar, araştırmacıları suçlayıcı veya sübjektif ifadeler ("Sahte", "Hatalı", "Geçersiz") **kesinlikle kullanmaz**. Tarafsız, bilimsel ve yapıcı etiketler esastır:
+Repro Radar strictly avoids accusatory or subjective characterizations ("Fake", "Fraudulent", "Invalid"). It applies constructive, scientifically neutral labels:
 
-1. **Doğrulandı (Verified) [Skor $\ge 85$, Tier 1 $\ge 90$, Tier 2 $\ge 80$]:**
-   Kod izole ortamda eksiksiz derlendi, iddia edilen metrikler tolerans sınırları içinde başarıyla elde edildi.
-2. **Kısmen Doğrulandı (Partially Verified) [Skor $\ge 60$]:**
-   Kod çalıştı, iddiaların büyük çoğunluğu veya bir alt kümesi doğrulandı; küçük tolerans farkı veya eksik çevre konfigürasyonu mevcut.
-3. **İncelenmeli (Needs Review / Inconclusive) [Skor $< 60$, Tier 1 $\ge 75$]:**
-   Kod başarıyla derlendi ve çalıştı; ancak üretilen metrikler makaledeki iddialardan belirgin şekilde ayrıştı. Donanım farklılığı, veri sürümü veya gizli stokastik süreçlerin manuel denetimini gerektirir.
-4. **Tekrarlanamadı (Failed) [Tier 1 $< 50$ veya Kritik Hata]:**
-   Eksik bağımlılıklar, kütüphane uyuşmazlığı, kırık linkler veya derleme hataları sebebiyle kod çalıştırılamadı.
+1. **`Verified` [Score $\ge 85$, Tier 1 $\ge 90$, Tier 2 $\ge 80$]:**
+   The codebase built cleanly and reproduced empirical claims within tight tolerance bounds.
+2. **`Partially Verified` [Score $\ge 60$]:**
+   The codebase executed cleanly and the majority of claims replicated; minor discrepancies or incomplete environment specifications exist.
+3. **`Needs Review` [Score $< 60$, Tier 1 $\ge 75$]:**
+   The codebase built and ran successfully, but reproduced metrics diverged significantly from reported claims. This indicates potential hardware disparities, dataset version shifts, or unseeded operations requiring human inspection.
+4. **`Failed` [Tier 1 $< 50$ or Fatal Crash]:**
+   The codebase could not be executed due to broken dependencies, missing files, or runtime exceptions.
 
 ---
 
-## 4. Güvenlik, İzolasyon ve Etik Standartları
+## 4. Security, Isolation, & Ethical Standards
 
-- **Konteyner Sandbox:** Tüm çalıştırmalar ağ erişimi kısıtlanmış, geçici ve yalıtılmış Docker konteynerlerinde yürütülür. Host sisteme erişim engellenir.
-- **Kaynak Sınırları:** Süre aşımı (timeout = 600s), RAM kotası (maks. 8GB) ve CPU sınırlaması uygulanarak kötü niyetli veya sonsuz döngüye giren scriptler engellenir.
-- **Yalnızca Açık Lisanslar:** Yalnızca açık lisanslı veya kamusal kod depoları taranır ve çalıştırılır. Telif hakkı saklı kodlar değerlendirmeye alınmaz.
-- **Şeffaf Günlükleme:** Başarısızlık durumunda tüm derleme hataları (`stdout`, `stderr`), kullanılan paket sürümleri ve ortam bilgisi araştırmacıyla şeffaf olarak paylaşılır.
+- **Containerized Sandboxing:** External repositories run in ephemeral, isolated Docker containers with host-system boundaries.
+- **Resource Constraints:** Strict limits on execution time (timeout = 600s), memory (max 8GB), and CPU allocation prevent infinite loops and denial-of-service vulnerabilities.
+- **Permissive Repositories Only:** Only publicly licensed repositories (MIT, Apache, BSD) are ingested and evaluated.
+- **Transparent Diagnostics:** Detailed build logs (`stdout`, `stderr`) and dependency resolutions are stored transparently alongside every score.

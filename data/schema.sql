@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS scores (
     tier3_stability REAL NOT NULL DEFAULT 0.0 CHECK(tier3_stability >= 0.0 AND tier3_stability <= 100.0),
     tier4_artifacts REAL NOT NULL DEFAULT 0.0 CHECK(tier4_artifacts >= 0.0 AND tier4_artifacts <= 100.0),
     total_score REAL NOT NULL DEFAULT 0.0 CHECK(total_score >= 0.0 AND total_score <= 100.0),
-    status_label TEXT NOT NULL CHECK(status_label IN ('Doğrulandı', 'Kısmen Doğrulandı', 'İncelenmeli', 'Tekrarlanamadı')),
+    status_label TEXT NOT NULL CHECK(status_label IN ('Verified', 'Partially Verified', 'Needs Review', 'Failed')),
     summary TEXT,
     evaluated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE,

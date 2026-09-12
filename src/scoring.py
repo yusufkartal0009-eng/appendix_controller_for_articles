@@ -7,10 +7,10 @@ Implements the 4-Tier Reproducibility Rubric:
 - Tier 4 (Artifacts & Doc): License, environment files, README, logging (Weight: 15%)
 
 Generates composite scores (0-100) and neutral status classifications:
-- 'Doğrulandı' (Verified)
-- 'Kısmen Doğrulandı' (Partially Verified)
-- 'İncelenmeli' (Needs Review / Inconclusive)
-- 'Tekrarlanamadı' (Failed)
+- 'Verified'
+- 'Partially Verified'
+- 'Needs Review'
+- 'Failed'
 """
 
 import math
@@ -257,43 +257,43 @@ class ReproducibilityScorer:
         total = round(min(100.0, max(0.0, total)), 2)
 
         # AI Decision Layer for Status Classification
-        if tier1 < 50.0 or has_critical_error or tier1_exit_code != 0 and tier1 < 75.0:
+        if tier1 < 50.0 or has_critical_error or (tier1_exit_code != 0 and tier1 < 75.0):
             status = STATUS_FAILED
             summary = (
-                f"Tekrarlanamadı (Total: {total}/100). Build veya çalıştırma katmanı "
-                f"başarısız oldu (Tier 1: {tier1}/100)."
+                f"Failed (Total: {total}/100). Build or execution runtime "
+                f"failed (Tier 1: {tier1}/100)."
             )
         elif total >= SCORE_VERIFIED_THRESHOLD and tier2 >= 80.0 and tier1 >= 90.0:
             status = STATUS_VERIFIED
             summary = (
-                f"Doğrulandı (Total: {total}/100). Build, metrikler ve kararlılık "
-                f"tüm tolerans sınırları içinde başarıyla tekrarlandı."
+                f"Verified (Total: {total}/100). Build, metrics, and stability "
+                f"were successfully reproduced within specified tolerance bounds."
             )
         elif total >= SCORE_PARTIALLY_VERIFIED_THRESHOLD:
             # Check if metrics diverged or partially matched
             if tier2 < 50.0 and tier1 >= 80.0:
                 status = STATUS_NEEDS_REVIEW
                 summary = (
-                    f"İncelenmeli (Total: {total}/100). Kod sorunsuz derlenip çalıştı ancak "
-                    f"iddia edilen metrikler ile üretilen sonuçlar arasında belirgin fark tespit edildi "
+                    f"Needs Review (Total: {total}/100). Code built and ran cleanly, but "
+                    f"significant divergence was observed between claimed and reproduced metrics "
                     f"(Tier 2: {tier2}/100)."
                 )
             else:
                 status = STATUS_PARTIALLY_VERIFIED
                 summary = (
-                    f"Kısmen Doğrulandı (Total: {total}/100). Çoğu metrik veya bileşen doğrulandı, "
-                    f"küçük tolerans aşımı veya eksik artefakt mevcut."
+                    f"Partially Verified (Total: {total}/100). Majority of metrics or components verified; "
+                    f"minor tolerance exceeded or incomplete artifacts."
                 )
         else:
             if tier1 >= 75.0:
                 status = STATUS_NEEDS_REVIEW
                 summary = (
-                    f"İncelenmeli (Total: {total}/100). Kod çalıştırıldı ancak sonuçlar bekleneni karşılamadı."
+                    f"Needs Review (Total: {total}/100). Code executed cleanly, but empirical outcomes fell short of claims."
                 )
             else:
                 status = STATUS_FAILED
                 summary = (
-                    f"Tekrarlanamadı (Total: {total}/100). Skor kritik eşiğin ({SCORE_PARTIALLY_VERIFIED_THRESHOLD}) altında kaldı."
+                    f"Failed (Total: {total}/100). Score remained below the critical threshold ({SCORE_PARTIALLY_VERIFIED_THRESHOLD})."
                 )
 
         return total, status, summary

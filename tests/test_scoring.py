@@ -101,7 +101,7 @@ def test_tier4_artifacts_evaluator():
 
 
 def test_composite_score_status_verified():
-    """Test composite calculation leading to 'Doğrulandı'."""
+    """Test composite calculation leading to 'Verified'."""
     total, status, summary = ReproducibilityScorer.calculate_composite_score(
         tier1=100.0,
         tier2=95.0,
@@ -110,11 +110,11 @@ def test_composite_score_status_verified():
     )
     assert total >= 85.0
     assert status == STATUS_VERIFIED
-    assert "Doğrulandı" in summary
+    assert "Verified" in summary
 
 
 def test_composite_score_status_needs_review():
-    """Test composite calculation leading to 'İncelenmeli' when build works but metrics diverge."""
+    """Test composite calculation leading to 'Needs Review' when build works but metrics diverge."""
     total, status, summary = ReproducibilityScorer.calculate_composite_score(
         tier1=100.0,
         tier2=30.0,  # Diverged metrics
@@ -122,11 +122,11 @@ def test_composite_score_status_needs_review():
         tier4=100.0,
     )
     assert status == STATUS_NEEDS_REVIEW
-    assert "İncelenmeli" in status
+    assert "Needs Review" in status
 
 
 def test_composite_score_status_failed():
-    """Test composite calculation leading to 'Tekrarlanamadı' on build failure."""
+    """Test composite calculation leading to 'Failed' on build failure."""
     total, status, summary = ReproducibilityScorer.calculate_composite_score(
         tier1=25.0,  # Build fail
         tier2=0.0,
@@ -135,4 +135,4 @@ def test_composite_score_status_failed():
         tier1_exit_code=1,
     )
     assert status == STATUS_FAILED
-    assert "Tekrarlanamadı" in status
+    assert "Failed" in status

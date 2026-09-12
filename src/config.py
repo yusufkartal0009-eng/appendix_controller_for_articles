@@ -34,10 +34,10 @@ SCORE_VERIFIED_THRESHOLD = 85.0
 SCORE_PARTIALLY_VERIFIED_THRESHOLD = 60.0
 
 # Neutral Status Labels
-STATUS_VERIFIED = "Doğrulandı"
-STATUS_PARTIALLY_VERIFIED = "Kısmen Doğrulandı"
-STATUS_NEEDS_REVIEW = "İncelenmeli"
-STATUS_FAILED = "Tekrarlanamadı"
+STATUS_VERIFIED = "Verified"
+STATUS_PARTIALLY_VERIFIED = "Partially Verified"
+STATUS_NEEDS_REVIEW = "Needs Review"
+STATUS_FAILED = "Failed"
 
 # Allowed Open Source Licenses for Evaluation
 ALLOWED_LICENSES = {

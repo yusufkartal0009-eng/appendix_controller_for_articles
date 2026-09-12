@@ -1,101 +1,101 @@
-# Repro Radar: 7 Haftalık Proje Yol Haritası (Roadmap)
+# Repro Radar: 7-Week Project Roadmap
 
-Bu doküman, "Repro Radar: Otomatize Bilimsel Kod Doğrulama ve Reproducibility Skorlama Sistemi"nin 7 haftalık geliştirme sürecini, her haftanın kilometre taşlarını (milestones) ve somut görev listelerini (tasks) tanımlar.
+This document defines the 7-week development schedule, milestones, and concrete task breakdowns for the Repro Radar automated replication and verification platform.
 
 ---
 
 ```mermaid
 gantt
-    title Repro Radar 7 Haftalık Geliştirme Takvimi
+    title Repro Radar 7-Week Development Schedule
     dateFormat  YYYY-MM-DD
-    section Hafta 1
-    Kurulum & Keşif Altyapısı        :done, h1, 2026-09-01, 7d
-    section Hafta 2
-    Docker Sandbox İzolasyonu        :active, h2, 2026-09-08, 7d
-    section Hafta 3
-    Statik Analiz & Bağımlılık       :h3, 2026-09-15, 7d
-    section Hafta 4
-    Metrik Çıkarım Motoru            :h4, 2026-09-22, 7d
-    section Hafta 5
-    AI Karar Katmanı & Pipeline      :h5, 2026-09-29, 7d
-    section Hafta 6
-    Dashboard & Raporlama            :h6, 2026-10-06, 7d
-    section Hafta 7
-    Entegrasyon, Test & Yayılım      :h7, 2026-10-13, 7d
+    section Week 1
+    Setup & Discovery Infrastructure :done, w1, 2026-09-01, 7d
+    section Week 2
+    Docker Sandbox & Isolation Engine:active, w2, 2026-09-08, 7d
+    section Week 3
+    Static Analysis & Dependency Solver:w3, 2026-09-15, 7d
+    section Week 4
+    Metric Extraction Engine         :w4, 2026-09-22, 7d
+    section Week 5
+    AI Decision Layer & Pipeline     :w5, 2026-09-29, 7d
+    section Week 6
+    Web Dashboard & Reporting        :w6, 2026-10-06, 7d
+    section Week 7
+    Integration, Verification & Release:w7, 2026-10-13, 7d
 ```
 
 ---
 
-## Hafta 1: Kurulum ve Keşif Altyapısı (Tamamlandı ✅)
-- **Hedef:** Projenin çekirdek iskeletini, veri şemasını, hedef makale setini ve 4 kademeli skorlama mantığını kurmak.
-- **Görevler:**
-  - [x] Repo mimarisini ve dizin hiyerarşisini kurma (`src/`, `data/`, `docs/`, `tests/`).
-  - [x] `schema.sql` ile SQLite ilişkisel veritabanı şemasını oluşturma (`papers`, `runs`, `claims`, `scores`).
-  - [x] SQLAlchemy ORM ve Pydantic doğrulama şemalarını yazma (`src/models.py`).
-  - [x] 18 makale içeren "Tabular Machine Learning & Light NLP" tohum veri setini hazırlama (`data/seed_papers.json`).
-  - [x] Otomatik veritabanı başlatma ve tohumlama (seeding) altyapısını yazma (`src/database.py`).
-  - [x] 4 Kademeli (Tier 1-4) reproducibility skorlama motorunu ve nötr durum sınıflandırmasını geliştirme (`src/scoring.py`).
-  - [x] Kapsamlı metodoloji ve etik ilkeleri dokümantasyonu (`docs/methodology.md`).
-  - [x] Birim testleri yazıp doğrulama (`tests/`).
+## Week 1: Setup & Discovery Infrastructure (Completed ✅)
+- **Objective:** Establish the core project skeleton, relational data schema, target seed paper dataset, and 4-tier reproducibility scoring engine.
+- **Tasks:**
+  - [x] Repository architecture & directory hierarchy (`src/`, `data/`, `docs/`, `tests/`).
+  - [x] SQLite relational schema via `schema.sql` (`papers`, `runs`, `claims`, `scores`).
+  - [x] SQLAlchemy ORM and Pydantic v2 validation models (`src/models.py`).
+  - [x] Curate 18-paper "Tabular Machine Learning & Light NLP" seed dataset (`data/seed_papers.json`).
+  - [x] Automated database initialization and seeding engine (`src/database.py`).
+  - [x] 4-Tier reproducibility scoring engine and neutral status classifier (`src/scoring.py`).
+  - [x] Methodology and ethical standards documentation (`docs/methodology.md`).
+  - [x] Comprehensive unit tests (20/20 passing) (`tests/`).
 
 ---
 
-## Hafta 2: Docker Sandbox ve İzolasyon Motoru
-- **Hedef:** Harici depoların ana sistemden tamamen yalıtılmış, kısıtlı kaynaklara sahip Docker konteynerlerinde çalıştırılması.
-- **Görevler:**
-  - [ ] Standartlaştırılmış Python 3.10 / 3.11 tabanlı Dockerfile ve çalışma imajlarının hazırlanması.
-  - [ ] Kaynak sınırlandırma altyapısı: CPU limitleri (2 çekirdek), RAM kotası (maks. 8GB), timeout denetimi (600s).
-  - [ ] Ağ izolasyonu kuralları (yalnızca paket indirme aşamasında açık, kod çalıştırma anında kapalı ağ modu).
-  - [ ] Konteyner yaşam döngüsü yöneticisi (`src/sandbox/runner.py`): Başlatma, log akışı, exit code takibi ve temizlik.
-  - [ ] Çoklu tohum (multi-seed) tekrarlama altyapısının sandbox'a entegre edilmesi.
+## Week 2: Docker Sandbox & Isolation Engine
+- **Objective:** Execute third-party repositories in ephemeral, resource-constrained container environments isolated from the host machine.
+- **Tasks:**
+  - [ ] Standardized Python 3.11 base Dockerfile and runtime images (`docker/Dockerfile.sandbox`).
+  - [ ] Resource quotas: CPU limits (2 vCPUs), memory caps (8GB max), execution timeout (600s).
+  - [ ] Network isolation policy (network permitted during dependency install, disabled with `--network none` during execution).
+  - [ ] Container lifecycle runner (`src/sandbox/runner.py`): Launch, log streaming, exit code capture, and cleanup.
+  - [ ] Multi-seed execution harness integrated with sandbox and SQLite `runs` table.
 
 ---
 
-## Hafta 3: Statik Kod Analizi ve Bağımlılık Ayrıştırıcı
-- **Hedef:** Klonlanan depolardaki eksik bağımlılıkları, donanım gereksinimlerini ve giriş scriptlerini çalıştırma öncesinde tespit etmek.
-- **Görevler:**
-  - [ ] Python AST (Abstract Syntax Tree) tarayıcısı ile örtük import edilen kütüphaneleri çıkarma.
-  - [ ] `requirements.txt`, `setup.py`, `pyproject.toml` ve `environment.yml` dosyalarını ayrıştıran çoklu parser.
-  - [ ] Sabitlenmemiş (unpinned) sürümler için akıllı sürüm çözümleyici (dependency solver).
-  - [ ] CUDA/GPU bağımlılıklarını tespit eden ve CPU uyumluluk bayraklarını (`--cpu`, `device='cpu'`) otomatik enjekte eden modül.
-  - [ ] Hedef script (entrypoint) tespit algoritması (`main.py`, `eval.py`, `run.py`, `test.py`).
+## Week 3: Static Code Analysis & Dependency Solver
+- **Objective:** Pre-analyze cloned repositories to detect implicit dependencies, hardware requirements, and entrypoint scripts before execution.
+- **Tasks:**
+  - [ ] Python AST (Abstract Syntax Tree) scanner to detect undeclared package imports.
+  - [ ] Multi-format manifest parser (`requirements.txt`, `setup.py`, `pyproject.toml`, `environment.yml`).
+  - [ ] Intelligent dependency solver for unpinned version constraints.
+  - [ ] GPU-to-CPU compatibility adapter (injecting `--cpu`, `device='cpu'` flags).
+  - [ ] Entrypoint script heuristic detector (`main.py`, `eval.py`, `run.py`, `test.py`).
 
 ---
 
-## Hafta 4: Metrik Çıkarım Motoru (Metric Extraction Engine)
-- **Hedef:** Konsol çıktısı (`stdout`), JSON/CSV logları veya model artefaktlarından makale iddialarına karşılık gelen sayısal sonuçları ayrıştırmak.
-- **Görevler:**
-  - [ ] Regex tabanlı metrik ayrıştırıcı (`accuracy: 0.85`, `AUC = 0.912`, `Loss: 0.42` kalıpları).
-  - [ ] Scikit-learn, PyTorch ve LightGBM standart değerlendirme çıktı formatlarının taranması.
-  - [ ] Yapılandırılmamış serbest konsol logları için yerel LLM destekli metrik eşleştirici fallback katmanı.
-  - [ ] Ayrıştırılan metriklerin `claims` tablosuna kaydedilmesi ve tolerans farklarının hesaplanması.
+## Week 4: Metric Extraction Engine
+- **Objective:** Parse console logs (`stdout`), structured outputs (JSON/CSV), and model checkpoints to extract empirical values matching paper claims.
+- **Tasks:**
+  - [ ] Regex-based metric extractor (`accuracy: 0.85`, `AUC = 0.912`, `Loss: 0.42`).
+  - [ ] Standardized evaluation parsers for Scikit-learn, PyTorch, and LightGBM output formats.
+  - [ ] Local LLM fallback parser for unstructured free-text console logs.
+  - [ ] Store extracted metrics in `claims` table and compute relative errors.
 
 ---
 
-## Hafta 5: AI Karar Katmanı ve Otomatize Değerlendirme Pipeline'ı
-- **Hedef:** Çalıştırma sonuçları, metrik sapmaları ve sistem günlüklerini birleştirerek tarafsız bir inceleme raporu üreten zekâ katmanı.
-- **Görevler:**
-  - [ ] Tier 1, 2, 3 ve 4 değerlendiricilerinin tek bir `PipelineController` altında orkestrasyonu.
-  - [ ] Hata teşhis motoru: Çökme (crash) nedenlerini sınıflandırma (bellek yetersizliği, eksik veri seti, paket çakışması).
-  - [ ] Nötr durum atama motoru ("İncelenmeli" vs "Kısmen Doğrulandı" ayrımı).
-  - [ ] Otomatik açıklama (diagnostic rationale) üreten karar şablonları.
+## Week 5: AI Decision Layer & Automated Pipeline
+- **Objective:** Synthesize execution logs, metric discrepancies, and system traces into an objective diagnostic report.
+- **Tasks:**
+  - [ ] Orchestrate Tier 1, 2, 3, and 4 evaluators under a unified `PipelineController`.
+  - [ ] Root-cause diagnostic engine (classify out-of-memory, missing data, version conflict errors).
+  - [ ] Automated decision rationale templates.
+  - [ ] Structured report generation (Markdown & JSON).
 
 ---
 
-## Hafta 6: Web Dashboard ve Doğrulama Raporu Üreticisi
-- **Hedef:** Değerlendirilen makalelerin arandığı, skorların karşılaştırıldığı interaktif bir panel ve dışa aktarılabilir doğrulama rozetleri (badges).
-- **Görevler:**
-  - [ ] FastAPI tabanlı REST API (`/papers`, `/scores`, `/runs/{id}`).
-  - [ ] Streamlit veya hafif modern Web arayüzü (skor tabloları, filtreler, metrik grafikler).
-  - [ ] GitHub README rozet üreteci (örn. `![Repro Radar: 92/100 Verified]`).
-  - [ ] Makale bazında PDF veya Markdown doğrulama raporu indirme fonksiyonu.
+## Week 6: Web Dashboard & Verification Badges
+- **Objective:** Interactive dashboard for querying evaluated papers, visualizing metrics, and generating embeddable GitHub badges.
+- **Tasks:**
+  - [ ] FastAPI REST API (`/papers`, `/scores`, `/runs/{id}`).
+  - [ ] Lightweight web UI for searching papers and inspecting diagnostic breakdowns.
+  - [ ] Dynamic GitHub SVG badge generator (`![Repro Radar: 92/100 Verified]`).
+  - [ ] Exportable PDF/Markdown reproducibility reports.
 
 ---
 
-## Hafta 7: Uçtan Uca Doğrulama, Topluluk Protokolü ve Yayınlama
-- **Hedef:** 18 makalenin tamamında pilot testlerin koşulması, dokümantasyonun nihayete erdirilmesi ve açık kaynak sürümünün duyurulması.
-- **Görevler:**
-  - [ ] Tohum makale setinde (18 paper) tam sandbox doğrulama testlerinin yürütülmesi.
-  - [ ] Topluluk katkı kuralları (`CONTRIBUTING.md`) ve yeni makale ekleme rehberi.
-  - [ ] CI/CD pipeline'ı (GitHub Actions üzerinden otomatik test koşumu).
-  - [ ] V1.0 sürüm duyurusu ve teknik blog/bildiri özeti.
+## Week 7: End-to-End Verification, Community Protocol & Release
+- **Objective:** Execute pilot verification across all 18 seed papers, finalize open documentation, and release version 1.0.
+- **Tasks:**
+  - [ ] Full sandbox verification runs across the 18-paper seed suite.
+  - [ ] Community contribution guidelines (`CONTRIBUTING.md`) and paper onboarding guide.
+  - [ ] Automated CI/CD pipeline with GitHub Actions.
+  - [ ] V1.0 public release announcement and summary report.

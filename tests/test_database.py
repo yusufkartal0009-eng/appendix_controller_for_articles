@@ -80,8 +80,8 @@ def test_save_and_retrieve_score(temp_db):
         "tier3_stability": 85.0,
         "tier4_artifacts": 100.0,
         "total_score": 94.25,
-        "status_label": "Doğrulandı",
-        "summary": "Mükemmel tekrar edilebilirlik.",
+        "status_label": "Verified",
+        "summary": "Excellent reproducibility.",
     }
     saved = save_score(score_dict, session=session)
     assert saved.score_id == "score_test_01"

@@ -95,9 +95,9 @@ def test_score_breakdown():
         "tier3_stability": 90.0,
         "tier4_artifacts": 100.0,
         "total_score": 96.5,
-        "status_label": "Doğrulandı",
-        "summary": "Sonuçlar tam doğrulandı.",
+        "status_label": "Verified",
+        "summary": "Results fully verified.",
     }
     score = ScoreBreakdown(**score_data)
     assert score.total_score == 96.5
-    assert score.status_label == "Doğrulandı"
+    assert score.status_label == "Verified"
