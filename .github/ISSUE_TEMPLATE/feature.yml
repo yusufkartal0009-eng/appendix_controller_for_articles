@@ -1,0 +1,49 @@
+name: Feature Request
+description: Propose a new feature, capability, or benchmark module for Repro Radar
+title: "feat(<area>): <short summary>"
+labels: ["feat"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill out this form according to the **projectflow** method.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What limitation, gap, or use case does this address?
+      placeholder: Describe the problem...
+    validations:
+      required: true
+  - type: textarea
+    id: wanted
+    attributes:
+      label: Wanted Solution
+      description: What capability or behavior do we want to introduce?
+      placeholder: Describe the desired capability...
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options & Trade-offs
+      description: Implementation alternatives with one-line trade-offs.
+      placeholder: - Option A: ...\n- Option B: ...
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files & Components
+      description: Which files or modules are expected to be created or modified?
+      placeholder: - src/...\n- tests/...
+    validations:
+      required: true
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Measurable criteria required to consider this complete.
+      placeholder: - [ ] Automated tests passing\n- [ ] Living docs updated
+    validations:
+      required: true

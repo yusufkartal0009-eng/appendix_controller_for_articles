@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Projectflow Methodology & Living Docs
+    url: https://github.com/yusufkartal0009-eng/appendix_controller_for_articles/tree/main/docs
+    about: Read our blueprint, progress log, and scoring methodology before opening an issue.

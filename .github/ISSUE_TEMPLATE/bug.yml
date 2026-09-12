@@ -1,0 +1,41 @@
+name: Bug Report
+description: Report an unexpected failure, metric mismatch, or crash
+title: "bug(<area>): <short summary>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report a bug following the **projectflow** method.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Description
+      description: What went wrong?
+      placeholder: Describe the issue...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps & Evidence
+      description: Exact commands, paper ID, exit codes, or logs.
+      placeholder: 1. Run command...\n2. Observe error...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs Actual
+      description: What was expected vs what occurred.
+      placeholder: Expected: ...\nActual: ...
+    validations:
+      required: true
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: What verifies this bug is permanently resolved?
+      placeholder: - [ ] Regression test added\n- [ ] Tests green
+    validations:
+      required: true

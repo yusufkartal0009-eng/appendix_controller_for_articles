@@ -1,0 +1,25 @@
+name: Testing & Benchmark Task
+description: Add test suites, reproduce benchmark papers, or add verification runs
+title: "testing(<area>): <short summary>"
+labels: ["testing"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Track a testing task under the **projectflow** method.
+  - type: textarea
+    id: scope
+    attributes:
+      label: Testing Scope
+      description: Target paper ID, edge cases, or test fixtures.
+      placeholder: Target paper_001...
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance Criteria & Tolerances
+      description: What thresholds or assertions must pass?
+      placeholder: RelError <= 0.05...
+    validations:
+      required: true
