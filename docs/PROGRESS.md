@@ -28,7 +28,7 @@
   - Verified open source licenses (MIT, Apache-2.0, BSD-3-Clause) and numerical claims.
 - **Reproducibility Scoring Engine:**
   - Implemented 4-tier rubric in `src/scoring.py` (%35 Build, %35 Metrics, %15 Stability, %15 Artifacts).
-  - Built AI Decision Layer with neutral status classifications (`Doğrulandı`, `Kısmen Doğrulandı`, `İncelenmeli`, `Tekrarlanamadı`).
+  - Built AI Decision Layer with neutral status classifications (`Verified`, `Partially Verified`, `Needs Review`, `Failed`).
 - **CLI & Diagnostics:**
   - Built `cli.py` with `init-db`, `list-papers`, `inspect`, and `score` commands (including simulation flags).
 - **Documentation & Standards:**

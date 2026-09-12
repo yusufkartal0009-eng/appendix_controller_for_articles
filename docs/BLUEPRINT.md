@@ -23,7 +23,7 @@ Repro Radar is an automated replication and verification platform for AI & Machi
    - **Tier 2 (Metric Alignment - 35%):** Claim vs reproduced metric match within 5% tolerance.
    - **Tier 3 (Seed Stability - 15%):** Multi-seed evaluation with Coefficient of Variation (CV) < 2%.
    - **Tier 4 (Documentation & License - 15%):** OSI license, pinned requirements, reproducible logs.
-4. **AI Decision Layer:** Neutral classification (`Doğrulandı`, `Kısmen Doğrulandı`, `İncelenmeli`, `Tekrarlanamadı`) with diagnostic reasoning.
+4. **AI Decision Layer:** Neutral classification (`Verified`, `Partially Verified`, `Needs Review`, `Failed`) with diagnostic reasoning.
 5. **Secure Sandbox Runner:** Ephemeral Docker containers with CPU/RAM quotas and network restrictions.
 
 ---
