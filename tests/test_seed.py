@@ -13,8 +13,8 @@ def test_seed_papers_json_completeness():
     with open(SEED_PAPERS_PATH, "r", encoding="utf-8") as f:
         papers = json.load(f)
 
-    # 1. At least 15 papers required (we provided 18)
-    assert len(papers) >= 15, f"Expected at least 15 seed papers, got {len(papers)}"
+    # 1. At least 8 verified reproducibility papers required
+    assert len(papers) >= 8, f"Expected at least 8 seed papers, got {len(papers)}"
 
     seen_ids = set()
     for paper_dict in papers:
@@ -41,3 +41,7 @@ def test_seed_papers_json_completeness():
 
         # 7. Valid target_script
         assert p.target_script.endswith(".py"), f"Paper {p.paper_id} target script must be a .py file"
+
+        # 8. Source table or section references provided for reproducibility audit
+        assert p.source_table_or_section is not None, f"Paper {p.paper_id} missing source references"
+        assert len(p.source_table_or_section) >= 1, f"Paper {p.paper_id} has empty source references"

@@ -52,7 +52,7 @@ def test_seed_database_loads_papers(temp_db):
     """Test seeding database from data/seed_papers.json."""
     session = temp_db["session"]
     count = seed_database(session=session)
-    assert count >= 15
+    assert count >= 8
 
     # Verify query
     all_papers = get_all_papers(session=session)

@@ -90,6 +90,7 @@ def seed_database(
             # Check if paper already exists
             existing = db.query(PaperORM).filter(PaperORM.paper_id == validated.paper_id).first()
             expected_json = json.dumps(validated.expected_claims, sort_keys=True)
+            source_json = json.dumps(validated.source_table_or_section or {}, sort_keys=True)
 
             if existing:
                 if overwrite:
@@ -101,6 +102,7 @@ def seed_database(
                     existing.license = validated.license
                     existing.target_script = validated.target_script
                     existing.expected_claims = expected_json
+                    existing.source_table_or_section = source_json
                     seeded_count += 1
             else:
                 paper_orm = PaperORM(
@@ -113,6 +115,7 @@ def seed_database(
                     license=validated.license,
                     target_script=validated.target_script,
                     expected_claims=expected_json,
+                    source_table_or_section=source_json,
                 )
                 db.add(paper_orm)
                 seeded_count += 1

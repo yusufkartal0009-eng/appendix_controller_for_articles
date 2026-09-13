@@ -41,6 +41,7 @@ class PaperORM(Base):
     license = Column(String, nullable=False)
     target_script = Column(String, nullable=False, default="run.py")
     expected_claims = Column(Text, nullable=False)  # Stored as JSON string
+    source_table_or_section = Column(Text, nullable=True)  # Stored as JSON string
     created_at = Column(DateTime, default=func.now())
 
     # Relationships
@@ -52,6 +53,13 @@ class PaperORM(Base):
         """Parse expected_claims JSON string into a Python dict."""
         try:
             return json.loads(self.expected_claims)
+        except (ValueError, TypeError):
+            return {}
+
+    def get_source_table_or_section_dict(self) -> Dict[str, str]:
+        """Parse source_table_or_section JSON string into a Python dict."""
+        try:
+            return json.loads(self.source_table_or_section or "{}")
         except (ValueError, TypeError):
             return {}
 
@@ -131,6 +139,7 @@ class PaperBase(BaseModel):
     license: str = Field(..., description="Open source license")
     target_script: str = Field("run.py", description="Target execution script")
     expected_claims: Dict[str, float] = Field(default_factory=dict, description="Key numerical claims")
+    source_table_or_section: Optional[Dict[str, str]] = Field(default_factory=dict, description="Source table or section reference for each claim")
 
     @field_validator("repo_url")
     @classmethod

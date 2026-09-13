@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS papers (
     license TEXT NOT NULL,
     target_script TEXT NOT NULL DEFAULT 'run.py',
     expected_claims TEXT NOT NULL, -- JSON formatted dict of {metric_name: value}
+    source_table_or_section TEXT, -- JSON formatted dict of {metric_name: table_or_section}
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
