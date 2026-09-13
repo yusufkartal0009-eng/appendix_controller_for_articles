@@ -136,3 +136,67 @@ def test_composite_score_status_failed():
     )
     assert status == STATUS_FAILED
     assert "Failed" in status
+
+
+def test_tier2_latency_metric_avoids_absolute_tolerance_trap():
+    """Test that time/latency metrics enforce relative tolerance and avoid the absolute tolerance trap."""
+    # 0.02s taking 0.06s is a 200% slowdown. Absolute diff is 0.04 <= 0.05,
+    # but for latency metrics this must NOT match.
+    claimed = {"inference_latency_sec": 0.02}
+    reproduced = {"inference_latency_sec": 0.06}
+    score, results, notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
+    assert score == 0.0
+    assert results["inference_latency_sec"]["matches"] is False
+
+
+def test_tier3_stability_zero_on_failed_execution():
+    """Test that Tier 3 returns 0.0 if execution did not succeed or build failed."""
+    score, notes = Tier3StabilityEvaluator.evaluate(
+        seed_results=[0.842, 0.844, 0.841],
+        execution_succeeded=False,
+    )
+    assert score == 0.0
+    assert "Execution failed" in notes[0]
+
+
+def test_tier4_detect_filesystem_artifacts(tmp_path):
+    """Test dynamic detection of environment file, README, and artifacts via filesystem checks."""
+    # Empty directory
+    has_env, has_readme, has_art = Tier4ArtifactsEvaluator.detect_filesystem_artifacts(repo_dir=tmp_path)
+    assert has_env is False
+    assert has_readme is False
+    assert has_art is False
+
+    # Directory with requirements.txt and README.md
+    (tmp_path / "requirements.txt").write_text("torch>=2.0\n", encoding="utf-8")
+    (tmp_path / "README.md").write_text("# Test Repo\n", encoding="utf-8")
+    run_dir = tmp_path / "runs"
+    run_dir.mkdir()
+    (run_dir / "metrics.json").write_text("{}", encoding="utf-8")
+
+    has_env, has_readme, has_art = Tier4ArtifactsEvaluator.detect_filesystem_artifacts(
+        repo_dir=tmp_path,
+        run_dir=run_dir,
+    )
+    assert has_env is True
+    assert has_readme is True
+    assert has_art is True
+
+
+def test_evaluate_paper_run_failed_build_zeros_tier2_and_tier3():
+    """Test that a build failure in evaluate_paper_run zeroes downstream metric and stability tiers."""
+    eval_res = ReproducibilityScorer.evaluate_paper_run(
+        paper_id="paper_001",
+        clone_success=True,
+        deps_installed=False,
+        script_executed=False,
+        exit_code=1,
+        claimed_metrics={"auc": 0.85},
+        reproduced_metrics={"auc": 0.85},
+        license_name="MIT",
+        seed_results=[0.85, 0.85],
+    )
+    bd = eval_res["breakdown"]
+    assert bd.tier2_metrics == 0.0
+    assert bd.tier3_stability == 0.0
+    assert bd.status_label == STATUS_FAILED

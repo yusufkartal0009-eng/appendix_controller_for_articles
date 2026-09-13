@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import os
+from pathlib import Path
 import sys
 import uuid
 from tabulate import tabulate
@@ -12,6 +14,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
+from src.config import DATA_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
 from src.database import (
     get_all_papers,
     get_paper_by_id,
@@ -21,7 +24,7 @@ from src.database import (
     seed_database,
 )
 from src.models import PaperORM, ScoreORM
-from src.scoring import ReproducibilityScorer
+from src.scoring import ReproducibilityScorer, Tier4ArtifactsEvaluator
 
 
 def cmd_init_db(args):
@@ -111,6 +114,34 @@ def cmd_score_paper(args):
     clone_success = not args.simulate_clone_error
     deps_installed = not args.simulate_deps_error
     script_executed = (exit_code == 0 or args.simulate_divergence or args.simulate_failure)
+    execution_succeeded = bool(
+        exit_code == 0 and script_executed and clone_success and deps_installed
+    )
+
+    # Dynamically detect environment file, README, and artifacts via filesystem checks (os.path.exists)
+    target_repo_dir = SANDBOX_TEMP_DIR / paper.paper_id
+    target_run_dir = SANDBOX_RUNS_DIR / paper.paper_id
+
+    if target_repo_dir.exists():
+        has_environment_file, has_readme, has_saved_artifacts = (
+            Tier4ArtifactsEvaluator.detect_filesystem_artifacts(
+                repo_dir=target_repo_dir,
+                run_dir=target_run_dir,
+            )
+        )
+    else:
+        # Dynamic filesystem fallback for Week 1 simulated mode: check repository root files
+        has_environment_file = os.path.exists(PROJECT_ROOT / "requirements.txt") or os.path.exists(PROJECT_ROOT / "pyproject.toml")
+        has_readme = os.path.exists(PROJECT_ROOT / "README.md")
+        has_saved_artifacts = execution_succeeded and os.path.exists(DATA_DIR / "seed_papers.json")
+
+    # If simulation flags specify clone or execution failure, reflect dynamically
+    if not clone_success:
+        has_environment_file = False
+        has_readme = False
+        has_saved_artifacts = False
+    elif not execution_succeeded:
+        has_saved_artifacts = False
 
     eval_result = ReproducibilityScorer.evaluate_paper_run(
         paper_id=paper.paper_id,
@@ -119,12 +150,12 @@ def cmd_score_paper(args):
         script_executed=script_executed,
         exit_code=exit_code,
         claimed_metrics=expected_claims,
-        reproduced_metrics=simulated_reproduced if script_executed else {},
+        reproduced_metrics=simulated_reproduced if execution_succeeded else {},
         license_name=paper.license,
-        seed_results=[0.842, 0.844, 0.841] if not args.simulate_failure else [0.84, 0.62, 0.75],
-        has_environment_file=True,
-        has_readme=True,
-        has_saved_artifacts=True,
+        seed_results=[0.842, 0.844, 0.841] if (execution_succeeded and not args.simulate_failure) else None,
+        has_environment_file=has_environment_file,
+        has_readme=has_readme,
+        has_saved_artifacts=has_saved_artifacts,
     )
 
     bd = eval_result["breakdown"]

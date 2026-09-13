@@ -14,7 +14,9 @@ Generates composite scores (0-100) and neutral status classifications:
 """
 
 import math
-from typing import Any, Dict, List, Optional, Tuple
+import os
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
 from src.config import (
     ALLOWED_LICENSES,
     DEFAULT_TOLERANCE,
@@ -114,20 +116,55 @@ class Tier2MetricsEvaluator:
             denom = max(abs(claimed_val), 1e-6)
             rel_error = abs_diff / denom
 
-            # Check if within tolerance
-            if rel_error <= tolerance or abs_diff <= tolerance:
-                points = 1.0
-                matches = True
-                notes.append(f"Metric '{metric_name}' MATCHED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
-            elif rel_error <= 2.0 * tolerance:
-                # Partial credit for being close
-                points = 0.5
-                matches = False
-                notes.append(f"Metric '{metric_name}' PARTIAL MATCH (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
+            # Differentiate tolerance logic by metric category
+            is_time_metric = any(
+                k in metric_name.lower()
+                for k in ("sec", "second", "time", "latency", "ms", "runtime", "duration")
+            )
+
+            if is_time_metric:
+                # Time / latency metrics must strictly evaluate relative tolerance
+                # to prevent the absolute tolerance trap (e.g. 0.02s taking 0.06s is 200% error)
+                if rel_error <= tolerance:
+                    points = 1.0
+                    matches = True
+                    notes.append(
+                        f"Metric '{metric_name}' (runtime/latency) MATCHED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})"
+                    )
+                elif rel_error <= 2.0 * tolerance:
+                    points = 0.5
+                    matches = False
+                    notes.append(
+                        f"Metric '{metric_name}' (runtime/latency) PARTIAL MATCH (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})"
+                    )
+                else:
+                    points = 0.0
+                    matches = False
+                    notes.append(
+                        f"Metric '{metric_name}' (runtime/latency) DIVERGED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})"
+                    )
             else:
-                points = 0.0
-                matches = False
-                notes.append(f"Metric '{metric_name}' DIVERGED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
+                # Rate, probability, and standard bounded metrics (accuracy, AUC, F1, etc.)
+                # Separate relative vs absolute bounds:
+                # 1. Matches if relative error is within tolerance OR
+                # 2. For bounded probability/ratio metrics (claimed in [0, 1]), absolute difference is within tolerance
+                is_bounded_rate = (0.0 <= claimed_val <= 1.0)
+                if rel_error <= tolerance:
+                    points = 1.0
+                    matches = True
+                    notes.append(f"Metric '{metric_name}' MATCHED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
+                elif is_bounded_rate and abs_diff <= tolerance:
+                    points = 1.0
+                    matches = True
+                    notes.append(f"Metric '{metric_name}' MATCHED (Absolute: Claimed {claimed_val}, Repro {reproduced_val}, AbsDiff: {abs_diff:.4f})")
+                elif rel_error <= 2.0 * tolerance or (is_bounded_rate and abs_diff <= 2.0 * tolerance):
+                    points = 0.5
+                    matches = False
+                    notes.append(f"Metric '{metric_name}' PARTIAL MATCH (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
+                else:
+                    points = 0.0
+                    matches = False
+                    notes.append(f"Metric '{metric_name}' DIVERGED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
 
             earned_points += points
             claim_results[metric_name] = {
@@ -150,9 +187,16 @@ class Tier3StabilityEvaluator:
     def evaluate(
         seed_results: Optional[List[float]] = None,
         single_run_clean: bool = True,
+        execution_succeeded: bool = True,
     ) -> Tuple[float, List[str]]:
         """Calculate Tier 3 stability score (0-100)."""
         notes = []
+
+        # If code did not execute cleanly or build failed, stability cannot be evaluated
+        if not execution_succeeded:
+            notes.append("Execution failed or was not invoked; stability score zeroed (0.0/100)")
+            return 0.0, notes
+
         if not seed_results or len(seed_results) < 2:
             if single_run_clean:
                 notes.append("Single seed verified without errors; baseline stability score assigned (75.0)")
@@ -187,6 +231,49 @@ class Tier3StabilityEvaluator:
 
 class Tier4ArtifactsEvaluator:
     """Evaluates documentation, license openness, environment specs, and structured artifacts."""
+
+    @classmethod
+    def detect_filesystem_artifacts(
+        cls,
+        repo_dir: Optional[Union[str, Path]] = None,
+        run_dir: Optional[Union[str, Path]] = None,
+    ) -> Tuple[bool, bool, bool]:
+        """Dynamically detect environment files, README, and saved artifacts via filesystem checks."""
+        has_environment_file = False
+        has_readme = False
+        has_saved_artifacts = False
+
+        if repo_dir:
+            r_path = Path(repo_dir)
+            if r_path.exists() and r_path.is_dir():
+                env_candidates = [
+                    "requirements.txt",
+                    "pyproject.toml",
+                    "environment.yml",
+                    "environment.yaml",
+                    "setup.py",
+                    "Pipfile",
+                ]
+                has_environment_file = any(os.path.exists(r_path / f) for f in env_candidates)
+
+                readme_candidates = [
+                    "README.md",
+                    "README.rst",
+                    "README.txt",
+                    "README",
+                    "readme.md",
+                ]
+                has_readme = any(os.path.exists(r_path / f) for f in readme_candidates)
+
+        if run_dir:
+            run_p = Path(run_dir)
+            if run_p.exists() and run_p.is_dir():
+                try:
+                    has_saved_artifacts = any(run_p.iterdir())
+                except OSError:
+                    has_saved_artifacts = False
+
+        return has_environment_file, has_readme, has_saved_artifacts
 
     @staticmethod
     def evaluate(
@@ -256,8 +343,13 @@ class ReproducibilityScorer:
         )
         total = round(min(100.0, max(0.0, total)), 2)
 
-        # AI Decision Layer for Status Classification
-        if tier1 < 50.0 or has_critical_error or (tier1_exit_code != 0 and tier1 < 75.0):
+        # AI Decision Layer for Status Classification: Clean operator grouping with explicit parentheses
+        is_build_failure = (
+            tier1 < 50.0
+            or has_critical_error
+            or ((tier1_exit_code is not None and tier1_exit_code != 0) and tier1 < 75.0)
+        )
+        if is_build_failure:
             status = STATUS_FAILED
             summary = (
                 f"Failed (Total: {total}/100). Build or execution runtime "
@@ -324,17 +416,23 @@ class ReproducibilityScorer:
             exit_code=exit_code,
         )
 
+        # Execution success gate: required for downstream empirical and stability validity
+        execution_succeeded = bool(
+            exit_code == 0 and script_executed and clone_success and deps_installed
+        )
+
         # 2. Tier 2 Metrics
         t2_score, claim_details, t2_notes = Tier2MetricsEvaluator.evaluate(
             claimed_metrics=claimed_metrics,
-            reproduced_metrics=reproduced_metrics,
+            reproduced_metrics=reproduced_metrics if execution_succeeded else {},
             tolerance=tolerance,
         )
 
-        # 3. Tier 3 Stability
+        # 3. Tier 3 Stability (tied to clean execution)
         t3_score, t3_notes = Tier3StabilityEvaluator.evaluate(
-            seed_results=seed_results,
-            single_run_clean=(exit_code == 0 and script_executed),
+            seed_results=seed_results if execution_succeeded else None,
+            single_run_clean=execution_succeeded,
+            execution_succeeded=execution_succeeded,
         )
 
         # 4. Tier 4 Artifacts
@@ -352,7 +450,7 @@ class ReproducibilityScorer:
             tier3=t3_score,
             tier4=t4_score,
             tier1_exit_code=exit_code,
-            has_critical_error=(exit_code is not None and exit_code != 0),
+            has_critical_error=bool(exit_code is not None and exit_code != 0),
         )
 
         breakdown = ScoreBreakdown(
