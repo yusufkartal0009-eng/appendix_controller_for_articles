@@ -19,9 +19,9 @@ gantt
     section Week 5
     AI Decision Layer & Pipeline     :w5, 2026-09-29, 7d
     section Week 6
-    Web Dashboard & Reporting        :w6, 2026-10-06, 7d
+    Field-Scale Analysis Across Papers:w6, 2026-10-06, 7d
     section Week 7
-    Integration, Verification & Release:w7, 2026-10-13, 7d
+    Polishing, Report Publication & Demo:w7, 2026-10-13, 7d
 ```
 
 ---
@@ -32,11 +32,11 @@ gantt
   - [x] Repository architecture & directory hierarchy (`src/`, `data/`, `docs/`, `tests/`).
   - [x] SQLite relational schema via `schema.sql` (`papers`, `runs`, `claims`, `scores`).
   - [x] SQLAlchemy ORM and Pydantic v2 validation models (`src/models.py`).
-  - [x] Curate 18-paper "Tabular Machine Learning & Light NLP" seed dataset (`data/seed_papers.json`).
+  - [x] Curate verified "Tabular Machine Learning & Light NLP" seed dataset with authentic claims (`data/seed_papers.json`).
   - [x] Automated database initialization and seeding engine (`src/database.py`).
   - [x] 4-Tier reproducibility scoring engine and neutral status classifier (`src/scoring.py`).
   - [x] Methodology and ethical standards documentation (`docs/methodology.md`).
-  - [x] Comprehensive unit tests (20/20 passing) (`tests/`).
+  - [x] Comprehensive unit tests (24/24 passing) (`tests/`).
 
 ---
 
@@ -82,20 +82,22 @@ gantt
 
 ---
 
-## Week 6: Web Dashboard & Verification Badges
-- **Objective:** Interactive dashboard for querying evaluated papers, visualizing metrics, and generating embeddable GitHub badges.
+## Week 6: Field-Scale Analysis (Reproducibility Study Across Papers)
+- **Objective:** Conduct a systematic, field-scale reproducibility study across the evaluated paper corpus to extract statistical patterns, reproducibility correlations, and macro benchmarks.
 - **Tasks:**
-  - [ ] FastAPI REST API (`/papers`, `/scores`, `/runs/{id}`).
-  - [ ] Lightweight web UI for searching papers and inspecting diagnostic breakdowns.
-  - [ ] Dynamic GitHub SVG badge generator (`![Repro Radar: 92/100 Verified]`).
-  - [ ] Exportable PDF/Markdown reproducibility reports.
+  - [ ] Execute automated batch evaluation across the entire benchmark paper corpus.
+  - [ ] Statistical factor analysis: correlate reproducibility rates with factors (open-source licenses, framework choices, pinned requirements, random seed documentation).
+  - [ ] Macro reproducibility scorecard: aggregate cross-paper metrics (mean tier scores, failure mode distributions, hardware discrepancy indices).
+  - [ ] REST API endpoints & paper leaderboard for cross-paper comparison.
+  - [ ] Dynamic SVG reproducibility badges for repository READMEs (`![Repro Radar: 95/100 Verified]`).
 
 ---
 
-## Week 7: End-to-End Verification, Community Protocol & Release
-- **Objective:** Execute pilot verification across all 18 seed papers, finalize open documentation, and release version 1.0.
+## Week 7: Polishing, Report Publication & Demo Video
+- **Objective:** Finalize project presentation, publish the comprehensive empirical findings report/paper, produce a demonstration video, and deliver the production release.
 - **Tasks:**
-  - [ ] Full sandbox verification runs across the 18-paper seed suite.
-  - [ ] Community contribution guidelines (`CONTRIBUTING.md`) and paper onboarding guide.
-  - [ ] Automated CI/CD pipeline with GitHub Actions.
-  - [ ] V1.0 public release announcement and summary report.
+  - [ ] Produce end-to-end demo video showcasing CLI, isolated sandbox execution, and automated AI diagnostics.
+  - [ ] Author comprehensive reproducibility findings report / blog paper detailing empirical results and failure modes.
+  - [ ] Polish developer documentation, API references, and open-source contribution guide (`CONTRIBUTING.md`).
+  - [ ] Automated CI/CD pipeline via GitHub Actions and release tagging (`v1.0.0`).
+  - [ ] Final portfolio presentation deck and project defense deliverables.
