@@ -90,7 +90,7 @@ pip install -r requirements.txt
 ```bash
 python cli.py init-db
 ```
-This executes `data/schema.sql` to initialize `data/repro_radar.db` and loads the 18 curated seed papers from `data/seed_papers.json`.
+This executes `data/schema.sql` to initialize `data/repro_radar.db` and loads the 8 verified seed papers from `data/seed_papers.json`.
 
 ### 4. List Curated Papers
 ```bash
@@ -107,6 +107,10 @@ python cli.py inspect paper_001
 python cli.py score paper_001
 ```
 
+> **IMPORTANT NOTE ON SIMULATION STATUS:**  
+> **The current scoring engine operates on simulated deterministic outputs as part of Week 1 discovery infrastructure. Real isolated sandbox/Docker container execution will be integrated in Week 2.**  
+> *(Mevcut skorlama motoru Hafta 1 gereği simüle edilmiş deterministik çıktılar üzerinde çalışmaktadır. Gerçek izole sandbox/Docker koşumu Hafta 2'de entegre edilecektir.)*
+
 ### 7. Run Test Suite
 ```bash
 pytest tests/ -v
@@ -117,8 +121,8 @@ pytest tests/ -v
 ## 🎯 Target Domain & Seed Dataset (`data/seed_papers.json`)
 
 For Week 1 discovery infrastructure, **"Tabular Machine Learning & Light NLP Benchmarks"** was selected to allow verification runs to conclude in 2–10 minutes on commodity CPUs without specialized GPU hardware:
-- **Frameworks:** Scikit-learn, XGBoost, LightGBM, CatBoost, TabPFN, DistilBERT linear probing, FastSK.
-- **Dataset:** 18 verified papers (2021–2024) with open source licenses (MIT, Apache-2.0, BSD-3-Clause) and numeric claims (`data/seed_papers.json`).
+- **Frameworks:** TabPFN, TabR, FT-Transformer, FastSK, SAINT, TabNet, DANet.
+- **Dataset:** 8 verified research papers with authentic open source licenses (MIT, Apache-2.0, BSD-3-Clause), dedicated repositories, and documented numeric claims (`data/seed_papers.json`).
 
 ---
 
@@ -148,7 +152,7 @@ repro-radar/
 │   └── models.py            # Pydantic and SQLAlchemy ORM schemas
 ├── data/
 │   ├── schema.sql           # SQLite DDL schema
-│   └── seed_papers.json     # 18 curated benchmark papers
+│   └── seed_papers.json     # 8 verified benchmark papers
 ├── docs/
 │   ├── BLUEPRINT.md         # Master project blueprint and milestone gates
 │   ├── ARCHITECTURE.md      # System constraints, components, and contracts
