@@ -1,57 +1,87 @@
 # Repro Radar — Architecture & Design Decisions
 
-> System constraints, component structure, data model contracts, and decision records.
+> System constraints, component structure, data model contracts, and decision records mapped to the 6 projectflow areas.
 
 ---
 
-## 1. System Structure
+## 1. System Topology across 6 Areas
 
 ```mermaid
 graph TD
-    CLI[cli.py / Web API] --> DB[(SQLite Database)]
-    CLI --> SC[Scoring Engine: src/scoring.py]
-    SC --> T1[Tier 1: Build Evaluator]
-    SC --> T2[Tier 2: Metrics Evaluator]
-    SC --> T3[Tier 3: Stability Evaluator]
-    SC --> T4[Tier 4: Artifacts Evaluator]
-    CLI --> SB[Sandbox Engine: Week 2]
-    SB --> DOCKER[Ephemeral Docker Container]
-    DOCKER --> RUNS[Execution Runs & Logs]
-    RUNS --> DB
+    subgraph CORPUS [area:corpus]
+        PAPERS[(seed_papers.json / ArXiv Metadata)]
+        SCHEMA[data/schema.sql & src/models.py]
+    end
+
+    subgraph SANDBOX [area:sandbox]
+        RUNNER[Container & Subprocess Runner]
+        DOCKER[Ephemeral Docker Container]
+        CGROUPS[Resource Limits: 2 vCPU, 8GB, 600s]
+        NETISOL[Zero-Network Mode]
+    end
+
+    subgraph SCORING [area:scoring]
+        T1[Tier 1: Build Evaluator]
+        T2[Tier 2: Metrics Evaluator]
+        T3[Tier 3: Stability Evaluator]
+        T4[Tier 4: Artifacts Evaluator]
+        COMPOSITE[Composite Score Calculator]
+    end
+
+    subgraph AI [area:ai]
+        DIAG[Diagnostic Rationale Engine]
+        CRASH[Crash Root-Cause Classifier]
+    end
+
+    subgraph WEB [area:web]
+        FASTAPI[FastAPI Backend / REST API]
+        LEADERBOARD[Paper Leaderboard UI]
+        BADGE[Dynamic SVG Badges]
+    end
+
+    subgraph DEVOPS [area:devops]
+        CI[GitHub Actions CI / CD]
+        RULES[Branch Protection & Commitlint]
+        PROGRESS[Living Progress Tracking]
+    end
+
+    CORPUS --> SANDBOX
+    SANDBOX --> SCORING
+    SCORING --> AI
+    SCORING --> WEB
+    AI --> WEB
+    DEVOPS -.-> CORPUS
+    DEVOPS -.-> SANDBOX
+    DEVOPS -.-> SCORING
 ```
 
 ---
 
-## 2. Component Boundaries & Layering
+## 2. Area Boundaries & Component Layering
 
-1. **`src/config.py`**:
-   - Single source of truth for paths, scoring weights, tolerance thresholds, and status labels.
-   - Independent of all other modules.
+1. **`area:corpus` (`data/`, `src/models.py`, `src/database.py`)**:
+   - Manages research paper catalog, metadata ingestion, validation models, and SQLite relational persistence.
+   - Pydantic v2 validates all paper inputs; SQLAlchemy models define relational schema (`papers`, `runs`, `claims`, `scores`).
 
-2. **`src/models.py`**:
-   - **SQLAlchemy ORM (`PaperORM`, `RunORM`, `ClaimORM`, `ScoreORM`)**: Defines database table structures, relationships, and cascade behaviors.
-   - **Pydantic v2 Models (`PaperCreate`, `RunCreate`, `ClaimCreate`, `ScoreBreakdown`, `ScoreCreate`)**: Enforces input validation, constraints (e.g. valid URLs, year between 1990–2100), and serialization.
+2. **`area:sandbox` (`src/sandbox/`, `docker/`)**:
+   - Dual-mode architecture: `DockerRunner` for full container cgroup & network isolation; `LocalProcessRunner` as local fallback.
+   - Strict execution budget: 2 vCPU cores, 8GB memory ceiling, 600-second hard timeout.
 
-3. **`src/database.py`**:
-   - Manages connection lifecycle (`get_engine()`, `get_session()`).
-   - Implements idempotent DDL initialization (`init_db()`) and paper seeding (`seed_database()`).
+3. **`area:scoring` (`src/scoring.py`)**:
+   - Pure functional evaluation engine computing Tier 1 (35%), Tier 2 (35%), Tier 3 (15%), Tier 4 (15%).
+   - Tolerance evaluation:
+     $$\text{Relative Error} = \frac{|\text{Reproduced} - \text{Claimed}|}{\max(|\text{Claimed}|, 10^{-6})}$$
+     - Exact match ($\le 5\%$ error): 1.0 pt
+     - Partial match ($\le 10\%$ error): 0.5 pt
+     - Diverged ($> 10\%$ error): 0.0 pt
 
-4. **`src/scoring.py`**:
-   - Pure functional and class-based evaluators without side effects.
-   - Receives execution results and returns structured `ScoreBreakdown` + diagnostics.
+4. **`area:ai` (`src/ai/`)**:
+   - AI Decision Layer providing neutral status assignments (`Verified`, `Partially Verified`, `Needs Review`, `Failed`).
+   - Generates objective, evidence-based diagnostic explanations for reviewers.
 
-5. **`cli.py`**:
-   - Orchestration interface for operator workflows (`init-db`, `list-papers`, `inspect`, `score`).
+5. **`area:web` (`src/web/`)**:
+   - REST endpoints for paper inspection and evaluation dispatch.
+   - Embeddable markdown/SVG badges and downloadable audit reports.
 
----
-
-## 3. Data Model Constraints
-
-- **Foreign Keys:** Enforced via `PRAGMA foreign_keys = ON;`.
-- **Cascading Deletes:** Deleting a `paper` record cascades and deletes associated `runs`, `claims`, and `scores`.
-- **Unique Constraints:** `paper_id` is unique across all tables; `scores.paper_id` is unique (1-to-1 relationship with paper).
-- **Metric Tolerance:**
-  $$\text{Relative Error} = \frac{|\text{Reproduced} - \text{Claimed}|}{\max(|\text{Claimed}|, 10^{-6})}$$
-  - Full match: $\text{Relative Error} \le 5\%$
-  - Partial match: $\text{Relative Error} \le 10\%$
-  - Diverged: $\text{Relative Error} > 10\%$
+6. **`area:devops` (`.github/`, `scripts/`, `docs/`)**:
+   - Projectflow guardrails, living documents (`docs/`), PR templates, and GitHub Actions CI automation.
