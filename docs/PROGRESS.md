@@ -4,48 +4,54 @@
 
 ---
 
-## Current Status: Week 1 Completed ✅ (Entering Week 2)
+## Current Status: M0 Baseline & Projectflow Adoption
 
-- **Active Milestone:** Milestone 2 — Docker Sandbox & Isolation Engine
-- **Completed Milestone:** Milestone 1 — Week 1 Setup & Discovery Infrastructure
+- **Active Milestone:** M0 — Baseline Hygiene & Audit
+- **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
+- **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
 - **Total Unit Tests Passing:** 20 / 20 tests green
+
+---
+
+## Milestone Roadmap & Progress
+
+| Milestone | Focus | Issues | Status |
+|---|---|:---:|:---:|
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #1 – #5 | **IN PROGRESS 🟡** |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #6 – #11 | QUEUED |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #12 – #17 | QUEUED |
+| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #18 – #23 | QUEUED |
+| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV | #24 – #29 | QUEUED |
+| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #30 – #35 | QUEUED |
+| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #36 – #40 | QUEUED |
+| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #41 – #45 | QUEUED |
 
 ---
 
 ## Changelog & Completed Work
 
-### Milestone 1: Week 1 Setup & Discovery Infrastructure (2026-09-10)
+### M0: Baseline Hygiene & Projectflow Adoption (2026-09-13)
+- **Git Identity & Contribution Profile:**
+  - Configured Git author identity to `yusufkartal0009-eng <yusufkartal0009@gmail.com>`.
+- **Projectflow Methodology Setup:**
+  - Standardized taxonomy to 6 core functional areas: `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`.
+  - Defined 8 milestones (M0 through M7) and 45 engineering issues in `docs/BLUEPRINT.md`.
+  - Created branch `chore/devops/adopt-projectflow` and pull request.
+  - Updated `AGENTS.md` and living documents (`docs/BLUEPRINT.md`, `docs/ARCHITECTURE.md`, `docs/PROGRESS.md`, `docs/STACK.md`).
+- **Language Standard:**
+  - Verified 100% English compliance across all repository files and database schemas.
+
+### Pre-M0 Foundations (2026-09-10)
 - **Repository Setup:**
-  - Initialized clean repository with comprehensive `.gitignore` and MIT `LICENSE`.
-  - Configured Python 3.11 virtual environment with `uv`.
-  - Added dependencies in `requirements.txt` (Pydantic, SQLAlchemy, Pandas, Pytest, PyYAML, Requests, Tabulate).
+  - Clean repository with `.gitignore`, MIT `LICENSE`, and Python 3.11 environment.
 - **Relational Data Layer:**
-  - Designed SQLite DDL schema in `data/schema.sql` (`papers`, `runs`, `claims`, `scores`).
-  - Implemented SQLAlchemy ORM & Pydantic v2 schemas in `src/models.py`.
-  - Built connection and session manager with idempotent seeding in `src/database.py`.
+  - SQLite DDL schema in `data/schema.sql` (`papers`, `runs`, `claims`, `scores`).
+  - SQLAlchemy ORM & Pydantic v2 schemas in `src/models.py`.
+  - Database initialization and seeding engine in `src/database.py`.
 - **Target Paper Dataset:**
-  - Curated 18 high-quality Tabular ML & Light NLP benchmark papers (2021–2024) in `data/seed_papers.json`.
-  - Verified open source licenses (MIT, Apache-2.0, BSD-3-Clause) and numerical claims.
+  - Seed dataset of 18 tabular ML & light NLP benchmark papers in `data/seed_papers.json`.
 - **Reproducibility Scoring Engine:**
-  - Implemented 4-tier rubric in `src/scoring.py` (%35 Build, %35 Metrics, %15 Stability, %15 Artifacts).
-  - Built AI Decision Layer with neutral status classifications (`Verified`, `Partially Verified`, `Needs Review`, `Failed`).
-- **CLI & Diagnostics:**
-  - Built `cli.py` with `init-db`, `list-papers`, `inspect`, and `score` commands (including simulation flags).
-- **Documentation & Standards:**
-  - Created `docs/methodology.md` with mathematical formulas, rubric definitions, and ethical standards.
-  - Created `docs/project_roadmap.md` with 7-week detailed milestones and tasks.
-- **Test Suite:**
-  - Wrote 20 tests across `test_database.py`, `test_models.py`, `test_scoring.py`, and `test_seed.py`. All passing.
-- **Projectflow & Superpowers Integration (2026-09-12):**
-  - Globally installed `projectflow` and 14 `superpowers` deep skills into `~/.gemini/config/skills/`.
-  - Added `AGENTS.md` and seeded living documentation (`docs/BLUEPRINT.md`, `docs/ARCHITECTURE.md`, `docs/PROGRESS.md`, `docs/STACK.md`).
-  - Added GitHub issue and PR templates in `.github/`.
-
----
-
-## Next Steps (Milestone 2: Week 2)
-1. Design Docker sandbox runner (`src/sandbox/runner.py`).
-2. Build standardized base Dockerfile for Python 3.10/3.11 lightweight ML.
-3. Add container resource limits (2 CPU cores, 8GB RAM, 600s execution timeout).
-4. Implement network isolation (allow network during dependency install, restrict during execution).
-5. Build multi-seed runner to evaluate Tier 3 variance automatically.
+  - 4-Tier rubric (%35 Build, %35 Metrics, %15 Stability, %15 Artifacts) in `src/scoring.py`.
+- **CLI & Test Suite:**
+  - Built `cli.py` with `init-db`, `list-papers`, `inspect`, and `score` commands.
+  - 20 unit tests in `tests/` passing.

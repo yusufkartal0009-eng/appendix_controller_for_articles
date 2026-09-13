@@ -1,37 +1,35 @@
 # Repro Radar — Stack & Environment Map
 
-> Technology choices, runtime requirements, dependencies, and external boundary definitions.
+> Technology choices, runtime requirements, dependencies, and external boundary definitions across the 6 functional areas.
 
 ---
 
-## 1. Core Stack
+## 1. Core Stack Across 6 Areas
 
-| Component | Technology | Version | Rationale |
-|---|---|---|---|
-| **Runtime** | Python | 3.11.x | Modern typing features, performance enhancements, CPython stability |
-| **Package Manager** | uv / pip | Latest | Blazing fast dependency resolution and isolated venvs |
-| **Database** | SQLite | 3.x | Zero-config, ACID-compliant, portable, single-file relational DB |
-| **ORM / Query Engine** | SQLAlchemy | >= 2.0.25 | Robust relational mapping, session lifecycle, connection pooling |
-| **Data Validation** | Pydantic | >= 2.6.0 | Strict type validation, fast Rust core (`pydantic-core`) |
-| **Data & Metrics** | Pandas, NumPy | >= 2.2.0 | Numerical operations, metric variance, coefficient of variation |
-| **Testing** | Pytest | >= 8.0.0 | Unit test discovery, fixtures, assertion rewriting |
-| **CLI Formatting** | Tabulate | >= 0.9.0 | Clean terminal table layouts for datasets and scores |
-| **Sandbox (Week 2)** | Docker / Containerd | Engine 24+ | CPU/RAM cgroups isolation and network sandboxing |
+| Area | Component | Technology | Version | Purpose |
+|---|---|---|---|---|
+| **`area:corpus`** | Metadata & Ingestion | Pydantic v2, Requests, SQLite | Python 3.11 | Data validation, JSON parsing, arXiv API ingestion |
+| **`area:sandbox`** | Container Sandbox | Docker Engine, cgroups, subprocess | 24.x+ | Hard CPU/RAM resource limits, timeout controls, zero-network mode |
+| **`area:scoring`** | Scoring Engine | Pandas, NumPy | >= 2.2.0 | Relative error calculation, multi-seed CV variance, tier weighting |
+| **`area:ai`** | Decision & Diagnostics | Local LLM / Prompt templates | Python 3.11 | Automated failure classification and neutral diagnostic summaries |
+| **`area:web`** | API & Dashboard | FastAPI, Uvicorn, Jinja2 / SVG | Latest | REST API endpoints, interactive leaderboard, dynamic badges |
+| **`area:devops`** | CI / CD & Tooling | GitHub Actions, Git, Pytest | Pytest 8.x | Test execution, PR validation, automated releases |
 
 ---
 
 ## 2. Directory & Path Layout
 
-- `src/` — Production application code
+- `src/` — Core application code partitioned by domain
 - `data/` — SQLite databases (`repro_radar.db`), SQL schemas (`schema.sql`), seed papers (`seed_papers.json`)
-- `docs/` — Living documentation, methodology, architectural decision records (ADRs)
-- `tests/` — Automated test suite
-- `.venv/` — Virtual environment directory (gitignored)
+- `docs/` — Living documentation (`BLUEPRINT.md`, `ARCHITECTURE.md`, `PROGRESS.md`, `STACK.md`, `methodology.md`, `project_roadmap.md`)
+- `tests/` — Automated test suite with Pytest fixtures
+- `.github/` — Issue forms, PR templates, and workflow actions
+- `.venv/` — Isolated virtual environment (gitignored)
 
 ---
 
 ## 3. Security & Boundary Controls
 
-- **Network Restrictions:** Sandbox containers will execute with `--network none` during evaluation.
-- **Resource Constraints:** Hard ceiling of 2 vCPUs, 8GB RAM, and 600 seconds per execution run.
-- **Local Data Only:** No telemetry, no external LLM data leaks; evaluations are computed deterministically.
+- **Network Policy:** Sandbox containers will execute with `--network none` during evaluation.
+- **Compute Quotas:** Strict boundaries of 2 vCPUs, 8GB RAM, and 600-second process timeout.
+- **Air-gapped Local Data:** No proprietary data leaks; deterministic evaluations conducted locally.

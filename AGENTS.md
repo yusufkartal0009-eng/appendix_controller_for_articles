@@ -31,15 +31,14 @@ This project follows the **projectflow** method paired with **superpowers** deep
 ---
 
 ## 3. Configuration
-- **areas:** `core, database, models, scoring, sandbox, cli, docs, tests`
-  - `core` — Config, base utilities, logging
-  - `database` — SQLite engine, migrations, DDL schema, seeding
-  - `models` — Pydantic schemas and SQLAlchemy ORM models
-  - `scoring` — 4-Tier reproducibility engine and AI decision layer
-  - `sandbox` — Docker isolation, container runner, timeout & resource controls
-  - `cli` — Command line interface and diagnostic tools
-  - `docs` — Living documentation, methodology, guides
-  - `tests` — Pytest test suites and fixtures
+- **areas:** `corpus, sandbox, scoring, ai, web, devops`
+  - `corpus` — Target research papers, metadata schemas, seed datasets, arXiv integrations
+  - `sandbox` — Docker containers, cgroup resource controls, timeouts, filesystem isolation, subprocess runner
+  - `scoring` — 4-Tier reproducibility engine (build, metrics, stability, artifacts), tolerances
+  - `ai` — AI Decision Layer, automated diagnostic reasoning, crash analysis, discrepancy explainers
+  - `web` — FastAPI REST API, paper leaderboard UI, SVG badges, PDF/Markdown report exporters
+  - `devops` — CI/CD pipelines, GitHub Actions, projectflow tooling, release automation, repository standards
+- **milestones:** `M0` through `M7` (Hygiene, Schema, Sandbox, Static Analysis, Metrics, AI Layer, Web, Release)
 - **test commands:**
   - Full suite: `.venv\Scripts\pytest.exe tests/ -v`
   - Database: `.venv\Scripts\pytest.exe tests/test_database.py -v`
