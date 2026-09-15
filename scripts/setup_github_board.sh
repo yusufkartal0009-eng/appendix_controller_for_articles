@@ -12,13 +12,13 @@ echo "Setting up 7-week milestones on GitHub for ${REPO}..."
 
 # 1. Create 7-Week Milestones
 declare -A MILESTONES=(
-  ["Hafta 1: Çekirdek Altyapı"]="Hafta 1: Çekirdek Altyapı, Veri Şeması, Doğrulama Modelleri ve 4-Kademeli Skorlama Motoru"
-  ["Hafta 2: Docker Sandbox & İzolasyon"]="Hafta 2: Docker Tabanlı İzole Konteyner Sandbox ve Güvenlik Sınırları"
-  ["Hafta 3: Statik Kod Analizi"]="Hafta 3: Statik Kod Analizi, AST Taraması ve Otomatik Bağımlılık Çözücü"
-  ["Hafta 4: Metrik Çıkarım Motoru"]="Hafta 4: Ampirik Metrik Çıkarım Motoru ve Çıktı Ayrıştırıcıları"
-  ["Hafta 5: AI Karar Katmanı"]="Hafta 5: AI Karar Katmanı, Hata Kök-Neden Teşhisi ve Otomasyon Hattı"
-  ["Hafta 6: Alan Ölçeğinde Analiz"]="Hafta 6: Alan Ölçeğinde Analiz, Makaleler Arası Çapraz Çalışma ve İstatistiksel Faktör Analizi"
-  ["Hafta 7: Demo & Rapor"]="Hafta 7: Demo Videosu, Makale Raporu Yayını, Topluluk Protokolü ve V1.0 Yayını"
+  ["Week 1: Core Infrastructure"]="Week 1: Core Infrastructure, Data Schemas, Verification Models, and 4-Tier Scoring Engine"
+  ["Week 2: Docker Sandbox & Isolation"]="Week 2: Docker-based Isolated Container Sandbox and Security Boundaries"
+  ["Week 3: Static Code Analysis"]="Week 3: Static Code Analysis, AST Scanning, and Automated Dependency Resolver"
+  ["Week 4: Metric Extraction Engine"]="Week 4: Empirical Metric Extraction Engine and Output Parsers"
+  ["Week 5: AI Decision Layer"]="Week 5: AI Decision Layer, Root-Cause Diagnostics, and Automation Pipeline"
+  ["Week 6: Field-Scale Analysis"]="Week 6: Field-Scale Analysis, Cross-Paper Study, and Statistical Factor Analysis"
+  ["Week 7: Demo & Report"]="Week 7: Demo Video Walkthrough, Empirical Report Publication, Community Protocol, and v1.0 Release"
 )
 
 for title in "${!MILESTONES[@]}"; do
