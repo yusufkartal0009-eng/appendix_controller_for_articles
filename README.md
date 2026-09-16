@@ -108,8 +108,7 @@ python cli.py score paper_001
 ```
 
 > **IMPORTANT NOTE ON SIMULATION STATUS:**  
-> **The current scoring engine operates on simulated deterministic outputs as part of Week 1 discovery infrastructure. Real isolated sandbox/Docker container execution will be integrated in Week 2.**  
-> *(Mevcut skorlama motoru Hafta 1 gereği simüle edilmiş deterministik çıktılar üzerinde çalışmaktadır. Gerçek izole sandbox/Docker koşumu Hafta 2'de entegre edilecektir.)*
+> **The current scoring engine operates on simulated deterministic outputs as part of Week 1 discovery infrastructure. Real isolated sandbox/Docker container execution will be integrated in Week 2.**
 
 ### 7. Run Test Suite
 ```bash

@@ -6,83 +6,83 @@ REPO = "yusufkartal0009-eng/appendix_controller_for_articles"
 
 WEEKS = [
     {
-        "milestone": "Hafta 1: Çekirdek Altyapı",
-        "description": "Çekirdek mimari, veri modelleri, doğrulanmış tohum makale seti ve 4-kademeli skorlama motoru.",
+        "milestone": "Week 1: Core Infrastructure",
+        "description": "Core architecture, data models, verified seed paper corpus, and 4-tier reproducibility scoring engine.",
         "issue_title": "feat(core): implement week 1 core infrastructure and discovery baseline",
-        "issue_body": """## Hafta 1 Hedefleri
-- [x] Depo mimarisi ve dosya hiyerarşisi oluşturuldu
-- [x] SQLite şeması ve SQLAlchemy ORM modelleri kuruldu
-- [x] 8 adet doğrulanmış açık kaynak makale-repo çifti eklendi
-- [x] 4-Kademeli (Tier 1-4) skorlama motoru ve tolerans mantığı geliştirildi
-- [x] 24/24 birim test yeşil""",
+        "issue_body": """## Week 1 Goals
+- [x] Repository architecture & directory hierarchy established
+- [x] SQLite schema and SQLAlchemy ORM models configured
+- [x] 8 verified open-source paper-repo pairs curated
+- [x] 4-Tier (Tier 1-4) scoring engine and tolerance logic developed
+- [x] 24/24 unit tests passing cleanly""",
         "labels": ["area:corpus", "area:scoring", "feat", "priority:high"],
     },
     {
-        "milestone": "Hafta 2: Docker Sandbox & İzolasyon",
-        "description": "Docker tabanlı izole konteyner ortamı, kaynak sınırları (cgroups), ağ izolasyonu ve zaman aşımı mekanizması.",
+        "milestone": "Week 2: Docker Sandbox & Isolation",
+        "description": "Docker-based isolated container environment, resource quotas (cgroups), network isolation, and timeout handler.",
         "issue_title": "feat(sandbox): build isolated Docker container sandbox and execution runner",
-        "issue_body": """## Hafta 2 Hedefleri
-- [ ] Python 3.11 tabanlı Dockerfile ve sandbox imajı
-- [ ] CPU (2 vCPU) ve bellek (8GB) kaynak kotaları
-- [ ] Ağ kısıtlama politikası (--network none)
-- [ ] Konteyner yaşam döngüsü yöneticisi (runner.py)
-- [ ] Çoklu rastgele tohum (multi-seed) yürütme mekanizması""",
+        "issue_body": """## Week 2 Goals
+- [ ] Python 3.11 base Dockerfile and sandbox runtime image
+- [ ] Resource quotas: CPU limits (2 vCPUs) and memory caps (8GB)
+- [ ] Network isolation policy (--network none during execution)
+- [ ] Container lifecycle management runner (runner.py)
+- [ ] Multi-seed randomized execution driver""",
         "labels": ["area:sandbox", "feat", "priority:high"],
     },
     {
-        "milestone": "Hafta 3: Statik Kod Analizi",
-        "description": "AST tabanlı import taraması, çoklu format gereksinim ayrıştırıcısı ve otomatik bağımlılık çözücü.",
+        "milestone": "Week 3: Static Code Analysis",
+        "description": "AST-based import scanning, multi-manifest parser, and automated dependency resolution.",
         "issue_title": "feat(solver): implement AST static analysis and dependency resolution",
-        "issue_body": """## Hafta 3 Hedefleri
-- [ ] Python AST ile eksik kütüphane tespiti
-- [ ] requirements.txt / pyproject.toml / setup.py ayrıştırıcı
-- [ ] Sürüm çakışmalarını gideren bağımlılık çözücü
-- [ ] GPU-CPU adaptörü ve cihaz bayrakları optimizasyonu
-- [ ] Giriş noktası (entrypoint) betiği otomatik tespit edici""",
+        "issue_body": """## Week 3 Goals
+- [ ] Python AST parser for missing undeclared packages
+- [ ] Multi-format manifest parser (requirements.txt / pyproject.toml / setup.py)
+- [ ] Automated dependency conflict solver
+- [ ] GPU-to-CPU adapter and hardware flag optimizations
+- [ ] Heuristic entrypoint script detector""",
         "labels": ["area:sandbox", "feat", "priority:medium"],
     },
     {
-        "milestone": "Hafta 4: Metrik Çıkarım Motoru",
-        "description": "Konsol çıktıları (stdout), JSON/CSV günlükleri ve model çıktılarından ampirik metrik çıkarımı.",
+        "milestone": "Week 4: Metric Extraction Engine",
+        "description": "Empirical metric extraction from console logs (stdout), JSON/CSV artifacts, and model checkpoints.",
         "issue_title": "feat(scoring): develop empirical metric extraction and parsing engine",
-        "issue_body": """## Hafta 4 Hedefleri
-- [ ] Regex tabanlı metrik çıkarıcı (accuracy, AUC, loss vb.)
-- [ ] Scikit-learn ve PyTorch standart çıktı ayrıştırıcıları
-- [ ] Yapısal olmayan loglar için LLM destekli metrik çıkarım motoru
-- [ ] Çıkarılan metriklerin claims tablosuna kaydı ve tolerans hesaplaması""",
+        "issue_body": """## Week 4 Goals
+- [ ] Regex-based metric extractor (accuracy, AUC, loss, latency, etc.)
+- [ ] Standardized Scikit-learn and PyTorch output parsers
+- [ ] LLM fallback parser for unstructured free-text console logs
+- [ ] Persist extracted metrics to claims table and compute tolerance bounds""",
         "labels": ["area:scoring", "feat", "priority:high"],
     },
     {
-        "milestone": "Hafta 5: AI Karar Katmanı",
-        "description": "Çalıştırma izleri ve metrik farklarını tarafsız teşhis raporuna dönüştüren AI Karar Katmanı.",
+        "milestone": "Week 5: AI Decision Layer",
+        "description": "AI Decision Layer converting execution traces and metric deltas into neutral diagnostic reports.",
         "issue_title": "feat(ai): integrate AI decision layer and automated diagnostics pipeline",
-        "issue_body": """## Hafta 5 Hedefleri
-- [ ] Tier 1-4 değerlendiricilerini orkestre eden PipelineController
-- [ ] Hata kök-neden sınıflandırıcısı (OOM, sürüm uyuşmazlığı, veri eksikliği)
-- [ ] Şablon tabanlı ve LLM destekli teşhis gerekçelendirme sistemi
-- [ ] Yapılandırılmış Markdown ve JSON audit raporu çıktısı""",
+        "issue_body": """## Week 5 Goals
+- [ ] PipelineController orchestrating Tier 1-4 evaluators
+- [ ] Root-cause failure classifier (OOM, dependency conflict, data missing)
+- [ ] Rule-based and LLM-assisted diagnostic rationale generator
+- [ ] Structured Markdown and JSON audit report outputs""",
         "labels": ["area:ai", "feat", "priority:high"],
     },
     {
-        "milestone": "Hafta 6: Alan Ölçeğinde Analiz",
-        "description": "Makaleler arası yeniden üretilebilirlik oranları, istatistiksel faktör analizi ve makro bulgular.",
+        "milestone": "Week 6: Field-Scale Analysis",
+        "description": "Cross-paper reproducibility rates, statistical factor analysis, and macro reproducibility study.",
         "issue_title": "feat(corpus): conduct field-scale reproducibility study across papers",
-        "issue_body": """## Hafta 6 Hedefleri
-- [ ] Tüm veri kümesi üzerinde toplu otomatik doğrulama testi
-- [ ] İstatistiksel faktör analizi (lisans, framework, seed etkisi)
-- [ ] Makaleler arası karşılaştırmalı meta-analiz tablosu
-- [ ] REST API liderlik tablosu (leaderboard) ve dinamik SVG rozetleri""",
+        "issue_body": """## Week 6 Goals
+- [ ] Automated batch verification across the full benchmark corpus
+- [ ] Statistical factor analysis (license, framework, seed variance effects)
+- [ ] Cross-paper comparative meta-analysis matrix
+- [ ] REST API paper leaderboard and dynamic SVG badge endpoints""",
         "labels": ["area:corpus", "area:web", "feat", "priority:high"],
     },
     {
-        "milestone": "Hafta 7: Demo & Rapor",
-        "description": "Uçtan uca demo videosu, makale/blog formatında nihai rapor yayını, topluluk rehberi ve v1.0 sürümü.",
+        "milestone": "Week 7: Demo & Report",
+        "description": "End-to-end demo video, final paper/blog report publication, community guide, and v1.0 release.",
         "issue_title": "feat(devops): publish comprehensive research report, demo video, and v1.0 release",
-        "issue_body": """## Hafta 7 Hedefleri
-- [ ] Uçtan uca çalışan sistemin tanıtım ve demo videosu
-- [ ] Yeniden üretilebilirlik bulgularını içeren akademik makale/blog raporu
-- [ ] CONTRIBUTING.md ve açık kaynak katkı protokolü
-- [ ] GitHub Actions CI/CD hattı ve v1.0.0 semantic versiyon etiketi""",
+        "issue_body": """## Week 7 Goals
+- [ ] End-to-end interactive system demo video
+- [ ] Comprehensive academic/blog report detailing empirical findings
+- [ ] CONTRIBUTING.md open-source protocol and paper onboarding specs
+- [ ] GitHub Actions CI/CD workflow and v1.0.0 semantic version tag""",
         "labels": ["area:devops", "feat", "priority:high"],
     },
 ]
