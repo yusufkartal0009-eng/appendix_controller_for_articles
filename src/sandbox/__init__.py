@@ -6,10 +6,18 @@ from src.sandbox.runner import (
     SandboxConfig,
     SandboxExecutionResult,
 )
+from src.sandbox.stager import (
+    DependencyManifest,
+    RepoStager,
+    StagedRepo,
+)
 
 __all__ = [
     "DockerSandboxRunner",
     "ProcessSandboxRunner",
     "SandboxConfig",
     "SandboxExecutionResult",
+    "DependencyManifest",
+    "RepoStager",
+    "StagedRepo",
 ]
