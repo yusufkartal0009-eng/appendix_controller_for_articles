@@ -1,0 +1,53 @@
+# ==============================================================================
+# Repro Radar: Docker Compose Sandbox Specification
+# Provides reference declarative configuration for isolated paper reproduction runs.
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  sandbox:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.sandbox
+    image: repro-radar-sandbox:latest
+    container_name: repro_radar_sandbox_runner
+
+    # Network Isolation: Completely disconnected from external network
+    network_mode: "none"
+
+    # Filesystem Protection: Root filesystem is strictly read-only
+    read_only: true
+
+    # In-memory transient storage with restricted execution flags
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /workspace/home:rw,noexec,nosuid,size=128m
+
+    # Privilege Escalation Prevention
+    security_opt:
+      - no-new-privileges:true
+
+    # Unprivileged user execution (UID 1000)
+    user: "1000:1000"
+
+    # Strict Resource & Process Limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 8192M
+          pids: 100
+
+    # Volume Mounts: Staged paper repository (ro) and isolated output workspace (rw)
+    volumes:
+      - ../temp_clones:/workspace/repo:ro
+      - ../sandbox_runs:/workspace/output:rw
+      - ../temp_packages:/workspace/packages:ro
+
+    environment:
+      - SANDBOX_TIMEOUT=600
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+
+    command: ["python", "-c", "import sys; print('Sandbox operational on Python', sys.version)"]
