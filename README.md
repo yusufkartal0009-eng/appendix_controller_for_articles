@@ -127,9 +127,21 @@ For Week 1 discovery infrastructure, **"Tabular Machine Learning & Light NLP Ben
 
 ## 🛡️ Security, Isolation, & Ethical Standards
 
-1. **Sandboxed Execution:** External code is never run unsandboxed on host operating systems; execution occurs in ephemeral containers with restricted CPU, memory, and network access.
+1. **Sandboxed Execution:** External code is never run unsandboxed on host operating systems; execution occurs in ephemeral containers with restricted CPU (2.0), memory (8GB), and complete network isolation (`--network none`).
 2. **Neutral Diagnostic Reporting:** When code fails to replicate claims, Repro Radar avoids accusatory language, providing detailed stack traces and assigning a `Needs Review` status.
 3. **Open Licenses Only:** Only open source repositories (MIT, Apache-2.0, BSD, etc.) are evaluated.
+
+For comprehensive security topology and container specifications, see [Sandbox Architecture & User Guide](docs/SANDBOX_GUIDE.md).
+
+### Quick Sandbox Execution CLI
+
+```bash
+# Clone a research paper repository, bundle dependencies, and run in isolated sandbox
+python scripts/stage_and_bundle_repo.py https://github.com/org/paper-repo.git \
+    --paper-id paper_benchmark_01 \
+    --script evaluate.py \
+    --bundle-deps
+```
 
 ---
 
@@ -143,12 +155,22 @@ repro-radar/
 ├── requirements.txt         # Core dependencies
 ├── cli.py                   # CLI management & diagnostics tool
 ├── AGENTS.md                # Project conventions & projectflow operating rules
+├── docker/
+│   ├── Dockerfile.sandbox   # Hardened Python 3.11-slim container (non-root UID 1000)
+│   ├── docker-compose.sandbox.yml # Compose isolation specs (read-only root, no network)
+│   └── entrypoint.sh        # Container timeout handler & meta logger
+├── scripts/
+│   └── stage_and_bundle_repo.py # Repo cloning, dependency bundling & sandbox CLI
 ├── src/
 │   ├── __init__.py          # Package init
 │   ├── config.py            # Paths, tier weights, and tolerances
 │   ├── database.py          # SQLite engine, sessions, init, and seeding
 │   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
-│   └── models.py            # Pydantic and SQLAlchemy ORM schemas
+│   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
+│   └── sandbox/
+│       ├── __init__.py      # Sandbox package exports
+│       ├── runner.py        # DockerSandboxRunner & ProcessSandboxRunner fallback
+│       └── stager.py        # RepoStager & DependencyManifest parser
 ├── data/
 │   ├── schema.sql           # SQLite DDL schema
 │   └── seed_papers.json     # 8 verified benchmark papers
@@ -157,14 +179,17 @@ repro-radar/
 │   ├── ARCHITECTURE.md      # System constraints, components, and contracts
 │   ├── PROGRESS.md          # Continuous living progress memory
 │   ├── STACK.md             # Technology stack and security boundaries
+│   ├── SANDBOX_GUIDE.md     # Sandbox architecture, security specs & CLI guide
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
 │   └── project_roadmap.md   # 7-week detailed roadmap
 └── tests/
     ├── __init__.py
     ├── test_database.py     # Database schema and seeding tests
     ├── test_models.py       # Validation and schema tests
+    ├── test_sandbox.py      # Container isolation & runner tests
     ├── test_scoring.py      # Tier 1-4 rubric and decision rules tests
-    └── test_seed.py         # Seed dataset completeness tests
+    ├── test_seed.py         # Seed dataset completeness tests
+    └── test_stager.py       # Staging, dependency analysis & CLI tests
 ```
 
 ---
