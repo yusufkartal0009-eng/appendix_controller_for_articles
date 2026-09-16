@@ -9,7 +9,7 @@
 - **Active Milestone:** M0 — Baseline Hygiene & Audit
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 20 / 20 tests green
+- **Total Unit Tests Passing:** 34 / 34 tests green
 
 ---
 
@@ -29,6 +29,23 @@
 ---
 
 ## Changelog & Completed Work
+
+### M2 / Core: Isolated Container Sandbox & Staging Subsystem (2026-09-17)
+- **Hardened Docker Sandbox (`docker/Dockerfile.sandbox`, `docker/docker-compose.sandbox.yml`, `docker/entrypoint.sh`):**
+  - Ephemeral unprivileged `sandboxuser` (UID: 1000).
+  - Strict security constraints: `--network none`, `--read-only` root, `tmpfs` mounts with `noexec,nosuid`.
+  - Hard quotas: 2.0 CPUs, 8192 MB RAM, 100 PIDs, signal-trapped timeout termination.
+- **Python Execution Engine (`src/sandbox/runner.py`):**
+  - `DockerSandboxRunner`: Automated command builder, volume mounter, and metadata collector.
+  - Automatic host detection with graceful fallback to `ProcessSandboxRunner`.
+- **Repository Staging & Offline Wheel Bundler (`src/sandbox/stager.py`, `scripts/stage_and_bundle_repo.py`):**
+  - Git cloning (GitHub / IEEE open repositories) with commit/tag pinning.
+  - Manifest discovery for `requirements.txt`, `pyproject.toml`, `setup.py`, `environment.yml`.
+  - Offline wheel compilation via `pip download` for network-isolated containers.
+  - Automated CLI script outputting structured run reports and metrics JSON.
+- **Documentation & Test Suite (`docs/SANDBOX_GUIDE.md`, `tests/test_sandbox.py`, `tests/test_stager.py`):**
+  - Complete architecture documentation and CLI manual.
+  - 34/34 tests passing with zero failures.
 
 ### M0: Baseline Hygiene & Projectflow Adoption (2026-09-13)
 - **Git Identity & Contribution Profile:**
