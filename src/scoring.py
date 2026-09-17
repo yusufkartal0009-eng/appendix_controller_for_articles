@@ -40,6 +40,7 @@ from src.validation_rubric import (
     MultiSeedStabilityResult,
     ValidationReport,
 )
+from src.metric_extractor import ExtractedMetric, MetricExtractor
 
 
 class Tier1BuildEvaluator:
