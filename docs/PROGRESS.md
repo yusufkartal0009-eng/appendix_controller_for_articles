@@ -9,7 +9,7 @@
 - **Active Milestone:** M0 — Baseline Hygiene & Audit
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 34 / 34 tests green
+- **Total Unit Tests Passing:** 49 / 49 tests green
 
 ---
 
@@ -17,18 +17,42 @@
 
 | Milestone | Focus | Issues | Status |
 |---|---|:---:|:---:|
-| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #1 – #5 | **IN PROGRESS 🟡** |
-| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #6 – #11 | QUEUED |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #12 – #17 | QUEUED |
-| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #18 – #23 | QUEUED |
-| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV | #24 – #29 | QUEUED |
-| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #30 – #35 | QUEUED |
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #1 – #5 | COMPLETED 🟢 |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #6 – #11 | COMPLETED 🟢 |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #12 – #17, #48 | COMPLETED 🟢 |
+| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #18 – #23, #49 | QUEUED |
+| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #24 – #29, #50, #55 | COMPLETED 🟢 |
+| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #30 – #35, #51 | QUEUED |
 | **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #36 – #40 | QUEUED |
-| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #41 – #45 | QUEUED |
+| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #41 – #45, #53 | QUEUED |
 
 ---
 
 ## Changelog & Completed Work
+
+### M4 / Core: Model Validation Rubric & Statistical Stability Analyzer (2026-09-18, PR #60)
+- **Model Validation Framework (`src/validation_rubric.py`, `docs/VALIDATION_RUBRIC.md`):**
+  - Formulated `MetricCategory` separating bounded rate metrics (accuracy, AUC, F1) from unbounded loss (MSE, RMSE, cross-entropy) and hardware runtime latencies.
+  - Implemented dual relative/absolute tolerance checks, asymmetric loss improvements, and hardware variance allowance.
+  - `MultiSeedStabilityAnalyzer`: Computes sample variance, standard deviation, Coefficient of Variation (CV <= 2% threshold), and 95% confidence intervals.
+  - `detect_anomalies`: Flags NaN/Inf values, suspicious 1.0000 accuracy scores (data leakage guard), and metric sign inversions.
+  - 41 unit tests verified green.
+
+### Documentation: Cover Hero Banner & Academic Introduction Word Document (2026-09-18, PR #61)
+- **Cover Visual Hero Asset (`docs/assets/repro_radar_banner.png`):**
+  - High-resolution 1200x420 dark-mode project banner with radar grid motif, typography, and architecture badges.
+- **Academic Publication Deliverable (`docs/repro_radar_introduction.docx`):**
+  - Formal publication-grade Word document authored via `scripts/generate_academic_introduction_doc.py`.
+  - Includes executive abstract, 5 structured academic sections, 3 styled comparison tables, callout blocks, and formal references (Claerbout, Donoho, Pineau, Stodden, Baker).
+
+### M4: Empirical Metric Extraction & Log Parsing Engine (2026-09-18, PR #62)
+- **Log Parsing Engine (`src/metric_extractor.py`):**
+  - Scikit-learn classification report parser (accuracy, macro/weighted precision, recall, F1).
+  - JSON and JSONL dictionary parser for HuggingFace/Lightning outputs.
+  - Framework log parser for LightGBM, XGBoost, and PyTorch training iterations.
+  - Multi-pattern regex extractor with attached unit handling (`ms`, `sec`, `qps`, `mb`, `gb`, `%\`).
+  - Seamless integration into `RepoStager.execute_staged()` to automatically extract metrics directly from sandbox logs.
+  - 49 unit tests verified green.
 
 ### M2 / Core: Isolated Container Sandbox & Staging Subsystem (2026-09-17)
 - **Hardened Docker Sandbox (`docker/Dockerfile.sandbox`, `docker/docker-compose.sandbox.yml`, `docker/entrypoint.sh`):**
