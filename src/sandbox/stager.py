@@ -18,6 +18,7 @@ from src.sandbox.runner import (
     SandboxConfig,
     SandboxExecutionResult,
 )
+from src.metric_extractor import MetricExtractor
 
 logger = logging.getLogger(__name__)
 
@@ -332,16 +333,14 @@ class RepoStager:
             "stderr_preview": result.stderr[:2000] if result.stderr else "",
         }
 
-        # Check if an explicit metrics.json or results.json was generated in output_dir
-        metrics_file = result.output_dir / "metrics.json"
-        if not metrics_file.exists():
-            metrics_file = result.output_dir / "results.json"
-
-        if metrics_file.exists():
-            try:
-                report["metrics"] = json.loads(metrics_file.read_text(encoding="utf-8"))
-            except Exception as exc:
-                report["metrics_parse_error"] = str(exc)
+        # Extract empirical metrics from output_dir (files and logs)
+        extractor = MetricExtractor()
+        try:
+            extracted_metrics = extractor.extract_from_run_dir(result.output_dir)
+            if extracted_metrics:
+                report["metrics"] = extracted_metrics
+        except Exception as exc:
+            report["metrics_extraction_error"] = str(exc)
 
         # Persist complete run report
         report_file = result.output_dir / "run_report.json"
