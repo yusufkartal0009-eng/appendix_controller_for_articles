@@ -47,6 +47,8 @@ graph TD
 | **Filesystem Integrity**| `--read-only` | Locks container root filesystem; untrusted code cannot tamper with OS binaries or persist system backdoors. |
 | **Repository Safety** | `-v <repo>:/workspace/repo:ro` | Mounts paper source code as strictly read-only; source code is never altered by execution. |
 | **Temporary Storage** | `--tmpfs /tmp:rw,noexec,nosuid,size=64m` | In-memory temporary directory forbidding binary execution (`noexec`) and privilege escalation (`nosuid`). |
+| **User Home & Packages**| `--tmpfs /workspace/home:rw,nosuid,size=2048m` | High-capacity in-memory home workspace allowing execution of compiled C-extensions (`.so`) for scientific packages (PyTorch, SciPy). |
+| **Working Directory** | `-w /workspace/repo` | Ensures execution runs directly in the cloned repository context so local imports (`import utils`) and relative data paths resolve seamlessly. |
 | **User Space Drop** | `--user 1000:1000` | Code executes under non-root unprivileged user `sandboxuser`. |
 | **Privilege Escalation**| `--security-opt no-new-privileges:true` | Prevents sub-processes from acquiring additional privileges via `setuid` or capabilities. |
 | **CPU Quota** | `--cpus 2.0` | Caps container execution to 2 CPU cores, preserving host responsiveness. |
@@ -58,7 +60,7 @@ graph TD
 
 ## 📦 Staging & Offline Dependency Pipeline
 
-Because production sandbox containers run with `--network none`, dependencies cannot be fetched via `pip install` during runtime. Repro Radar uses a two-phase staging workflow:
+Because production sandbox containers run with `--network none`, dependencies cannot be fetched via `pip install` during runtime from PyPI. Repro Radar resolves this with a two-phase staging and installation workflow:
 
 1. **Staging Phase (Online Host)**:
    - The repository is cloned via `git clone` (supporting GitHub, IEEE open repositories, or local directories).
@@ -66,11 +68,13 @@ Because production sandbox containers run with `--network none`, dependencies ca
    - Manifest files (`requirements.txt`, `pyproject.toml`, `setup.py`, `environment.yml`) are scanned.
    - When `--bundle-deps` is passed, `pip download` compiles an offline wheelhouse directory (`<paper_id>_packages/`).
 
-2. **Execution Phase (Isolated Sandbox)**:
+2. **Installation & Execution Phase (Isolated Sandbox)**:
    - The staged repository is mounted into `/workspace/repo:ro`.
    - The package wheelhouse is mounted into `/workspace/packages:ro`.
-   - Execution runs with offline environment flags (`PIP_NO_INDEX=1`, `PIP_FIND_LINKS=/workspace/packages`).
-   - All standard output, standard error, execution duration, and generated metrics are collected into `/workspace/output`.
+   - Container bootstrap (`entrypoint.sh`) executes an offline user installation:
+     `pip install --no-index --find-links=/workspace/packages --no-cache-dir --user -r /workspace/repo/requirements.txt`
+   - Installed packages are stored in writable in-memory `/workspace/home/.local` with `PYTHONUSERBASE` and `PYTHONPATH` preconfigured.
+   - All standard output, standard error, Python-measured duration, and generated metrics are collected into `/workspace/output`.
 
 ---
 
