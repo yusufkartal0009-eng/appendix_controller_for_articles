@@ -36,7 +36,7 @@ class SandboxConfig:
     network_isolated: bool = True
     read_only_root: bool = True
     tmpfs_tmp_size: str = "64m"
-    tmpfs_home_size: str = "128m"
+    tmpfs_home_size: str = "2048m"
     user_id: int = 1000
     group_id: int = 1000
     env_vars: Dict[str, str] = field(default_factory=dict)
@@ -110,12 +110,12 @@ class DockerSandboxRunner:
         if self.config.network_isolated:
             docker_cmd.extend(["--network", "none"])
 
-        # 2. Filesystem Security
+        # 2. Filesystem Security (read-only root + writable in-memory tmpfs)
         if self.config.read_only_root:
             docker_cmd.append("--read-only")
         docker_cmd.extend([
             "--tmpfs", f"/tmp:rw,noexec,nosuid,size={self.config.tmpfs_tmp_size}",
-            "--tmpfs", f"/workspace/home:rw,noexec,nosuid,size={self.config.tmpfs_home_size}",
+            "--tmpfs", f"/workspace/home:rw,nosuid,size={self.config.tmpfs_home_size}",
         ])
 
         # 3. Privilege Drop
@@ -132,11 +132,14 @@ class DockerSandboxRunner:
             f"--pids-limit={self.config.pids_limit}",
         ])
 
-        # 5. Environment Variables
+        # 5. Working Directory & Environment Variables
         docker_cmd.extend([
+            "-w", "/workspace/repo",
             "-e", f"SANDBOX_TIMEOUT={self.config.timeout_seconds}",
             "-e", "PYTHONUNBUFFERED=1",
             "-e", "PYTHONDONTWRITEBYTECODE=1",
+            "-e", "PYTHONUSERBASE=/workspace/home/.local",
+            "-e", "PYTHONPATH=/workspace/repo:/workspace/home/.local/lib/python3.11/site-packages",
         ])
         for k, v in self.config.env_vars.items():
             docker_cmd.extend(["-e", f"{k}={v}"])

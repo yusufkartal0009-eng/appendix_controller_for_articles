@@ -13,7 +13,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONHASHSEED=42 \
-    HOME=/workspace/home
+    HOME=/workspace/home \
+    PYTHONUSERBASE=/workspace/home/.local \
+    PATH="/workspace/home/.local/bin:${PATH}" \
+    PYTHONPATH="/workspace/repo:/workspace/home/.local/lib/python3.11/site-packages:${PYTHONPATH}"
 
 # Install essential execution dependencies & clean apt cache
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -21,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     coreutils \
     procps \
+    bc \
     && rm -rf /var/lib/apt/lists/*
 
 # Create unprivileged sandbox user and group
@@ -37,9 +41,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     tabulate>=0.9.0 \
     pytest>=7.4.0
 
-# Prepare workspace directories
-WORKDIR /workspace
-RUN mkdir -p /workspace/repo /workspace/output /workspace/home /workspace/packages && \
+# Prepare workspace directories and user local environment
+WORKDIR /workspace/repo
+RUN mkdir -p /workspace/repo /workspace/output /workspace/home/.local /workspace/packages && \
     chown -R sandboxuser:sandboxgroup /workspace
 
 # Copy security entrypoint wrapper

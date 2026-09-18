@@ -19,10 +19,12 @@ services:
     # Filesystem Protection: Root filesystem is strictly read-only
     read_only: true
 
-    # In-memory transient storage with restricted execution flags
+    working_dir: /workspace/repo
+
+    # In-memory transient storage with isolated execution permissions
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=64m
-      - /workspace/home:rw,noexec,nosuid,size=128m
+      - /workspace/home:rw,nosuid,size=2048m
 
     # Privilege Escalation Prevention
     security_opt:
@@ -49,5 +51,8 @@ services:
       - SANDBOX_TIMEOUT=600
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUSERBASE=/workspace/home/.local
+      - PYTHONPATH=/workspace/repo:/workspace/home/.local/lib/python3.11/site-packages
+      - PATH=/workspace/home/.local/bin:/usr/local/bin:/usr/bin:/bin
 
     command: ["python", "-c", "import sys; print('Sandbox operational on Python', sys.version)"]

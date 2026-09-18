@@ -14,8 +14,25 @@ META_JSON="${OUTPUT_DIR}/execution_meta.json"
 
 mkdir -p "${OUTPUT_DIR}"
 
+cd /workspace/repo || true
+
+# 1. Offline Package Installation Bootstrap
+# If pre-downloaded wheels exist in /workspace/packages, install into user space
+if [ -d "/workspace/packages" ] && [ -n "$(ls -A /workspace/packages 2>/dev/null)" ]; then
+  echo "=================================================="
+  echo "Repro Radar: Installing Offline Bundled Packages"
+  echo "=================================================="
+  mkdir -p /workspace/home/.local
+  if [ -f "/workspace/repo/requirements.txt" ]; then
+    pip install --no-index --find-links=/workspace/packages --no-cache-dir --user -r /workspace/repo/requirements.txt || true
+  else
+    pip install --no-index --find-links=/workspace/packages --no-cache-dir --user /workspace/packages/* || true
+  fi
+fi
+
 echo "=================================================="
 echo "Repro Radar: Isolated Sandbox Runtime Initiated"
+echo "Working Dir   : $(pwd)"
 echo "Timeout Limit : ${TIMEOUT_SECONDS}s"
 echo "Security Mode : Unprivileged (UID: $(id -u))"
 echo "Network State : Isolated (--network none)"
@@ -30,8 +47,14 @@ timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" "$@" > >(tee "${STDOUT_LOG}") 2> >
 EXIT_CODE=$?
 set -e
 
+# Flush buffers
+sync 2>/dev/null || true
+sleep 0.1
+
 END_TIME=$(date +%s.%N)
-DURATION=$(echo "${END_TIME} - ${START_TIME}" | bc -l 2>/dev/null || echo "0.0")
+
+# Calculate duration using Python for precision and zero external tool dependency
+DURATION=$(python3 -c "print(round(${END_TIME} - ${START_TIME}, 3))" 2>/dev/null || echo "0.0")
 
 # Classify exit status
 STATUS="COMPLETED"

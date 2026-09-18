@@ -66,9 +66,17 @@ def test_build_docker_command_security_flags():
     assert "--memory-swap=4g" in cmd
     assert "--pids-limit=50" in cmd
 
-    # 5. Volume read-only constraints
+    # 5. Working Directory & Python Environment Isolation
+    assert "-w" in cmd
+    w_idx = cmd.index("-w")
+    assert cmd[w_idx + 1] == "/workspace/repo"
+    assert any("PYTHONUSERBASE=/workspace/home/.local" in arg for arg in cmd)
+    assert any("PYTHONPATH=/workspace/repo" in arg for arg in cmd)
+
+    # 6. Volume read-only constraints & home tmpfs execution permissions
     assert any(":ro" in arg and "sample_repo" in arg for arg in cmd)
     assert any(":rw" in arg and "sample_output" in arg for arg in cmd)
+    assert any("/workspace/home:rw,nosuid,size=2048m" in arg for arg in cmd)
 
 
 def test_process_sandbox_runner_clean_execution(tmp_path):
