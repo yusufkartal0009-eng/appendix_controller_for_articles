@@ -30,6 +30,12 @@
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Repository Gap Analysis (2026-09-24, Issue #67)
+- Added `docs/gap_analysis.md`: 15 gaps (3 high, 7 medium, 5 low) across tracking, product, CI, tests, dependencies, sandbox, code quality, security, and docs, each with evidence, remedy, and related issue.
+- Measured baseline: 60% line coverage (`cli.py` 0%), 281 `ruff` findings, 49 / 49 tests green.
+- Highest-impact findings: living docs disagree with GitHub milestone/issue state (G1), `cli.py score` still runs on simulated outputs (G2), no CI (G3).
+- Report only; each gap is to be filed and fixed through the normal issue loop.
+
 ### M0 / DevOps: Environment & Dependency Inventory (2026-09-24, Issue #65)
 - Added `docs/ENVIRONMENT.md`: system tools (required vs optional), Python packages mapped to importing modules, sandbox image contents, environment variables, runtime paths, and fresh-machine setup steps for Windows and Linux/macOS.
 - Verified on a clean Windows 11 machine with Python 3.11.9: fresh `.venv`, `requirements.txt` installed, 49 / 49 tests green, `cli.py init-db` seeds 8 papers.
