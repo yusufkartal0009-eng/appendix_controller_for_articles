@@ -30,6 +30,12 @@
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Environment & Dependency Inventory (2026-09-24, Issue #65)
+- Added `docs/ENVIRONMENT.md`: system tools (required vs optional), Python packages mapped to importing modules, sandbox image contents, environment variables, runtime paths, and fresh-machine setup steps for Windows and Linux/macOS.
+- Verified on a clean Windows 11 machine with Python 3.11.9: fresh `.venv`, `requirements.txt` installed, 49 / 49 tests green, `cli.py init-db` seeds 8 papers.
+- Found that `pandas`, `pyyaml`, and `requests` are declared in `requirements.txt` but not imported anywhere yet (flagged for the gap analysis).
+- Linked the inventory from the README Quickstart.
+
 ### M4 / Core: Model Validation Rubric & Statistical Stability Analyzer (2026-09-18, PR #60)
 - **Model Validation Framework (`src/validation_rubric.py`, `docs/VALIDATION_RUBRIC.md`):**
   - Formulated `MetricCategory` separating bounded rate metrics (accuracy, AUC, F1) from unbounded loss (MSE, RMSE, cross-entropy) and hardware runtime latencies.

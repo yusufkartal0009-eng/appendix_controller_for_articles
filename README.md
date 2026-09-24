@@ -65,6 +65,8 @@ Repro Radar avoids subjective or punitive terminology. The AI Decision Layer ins
 - Python 3.10+ (Recommended: Python 3.11)
 - Git
 
+For the full list of system tools, Python packages, sandbox image contents, environment variables, and verified fresh-machine setup steps, see [Environment & Dependency Inventory](docs/ENVIRONMENT.md).
+
 ### 1. Clone Repository & Navigate
 ```bash
 git clone https://github.com/yusufkartal0009-eng/appendix_controller_for_articles.git
@@ -179,6 +181,7 @@ repro-radar/
 │   ├── ARCHITECTURE.md      # System constraints, components, and contracts
 │   ├── PROGRESS.md          # Continuous living progress memory
 │   ├── STACK.md             # Technology stack and security boundaries
+│   ├── ENVIRONMENT.md       # System tools, dependencies & fresh-machine setup
 │   ├── SANDBOX_GUIDE.md     # Sandbox architecture, security specs & CLI guide
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
 │   └── project_roadmap.md   # 7-week detailed roadmap
