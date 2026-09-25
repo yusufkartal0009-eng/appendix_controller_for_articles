@@ -116,3 +116,15 @@ def test_extract_from_run_dir(tmp_path):
     assert saved_file.exists()
     saved_data = json.loads(saved_file.read_text(encoding="utf-8"))
     assert saved_data["accuracy"] == 0.945
+
+
+def test_extract_from_json_logs_unparseable_blocks(caplog):
+    """Brace blocks that are not JSON are skipped with a debug trace, not silently."""
+    extractor = MetricExtractor()
+    text = "epoch done {not json at all} then {'accuracy': 0.91}"
+
+    with caplog.at_level("DEBUG", logger="src.metric_extractor"):
+        metrics = extractor.extract_from_json(text)
+
+    assert [m.canonical_name for m in metrics] == ["accuracy"]
+    assert any("not json at all" in r.getMessage() for r in caplog.records)
