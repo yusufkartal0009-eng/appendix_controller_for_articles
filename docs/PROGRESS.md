@@ -30,6 +30,10 @@
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Relaxed Side-Effect Approval Gate (2026-09-25, Issue #69)
+- `AGENTS.md` §5.6: after an approved proposal and a green suite, push, PR, merge, and merged-branch deletion no longer need a separate go-ahead.
+- Force-pushes, direct commits to `main`, closing issues without a merged PR, settings changes, and destructive operations still require explicit approval.
+
 ### M7 / DevOps: Continuous Integration (2026-09-25, Issue #42, PR #74)
 - `.github/workflows/ci.yml`: `ruff` and `pytest --cov` on Ubuntu and Windows (Python 3.11), plus a sandbox image job that builds `Dockerfile.sandbox`, checks for stray redirect files, and asserts `dependency_install_status` values. Resolves G3 and verifies the G7/G8 fixes from #71 on Docker.
 - First CI run exposed a host-dependent test: `test_execute_staged_produces_report_and_metrics` assumed Docker was absent and failed on Ubuntu runners, where Docker is installed. The test now forces the process runner, like the other sandbox tests.
