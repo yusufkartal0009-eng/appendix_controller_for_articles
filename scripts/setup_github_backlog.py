@@ -506,7 +506,7 @@ Structured artifact parser inspecting output directories for metric logs.
         "milestone": "M4: Empirical Metric Extraction Engine",
         "labels": ["area:scoring", "priority:high", "feat"],
         "body": """## Problem
-Evaluating Tier 3 requires computing mean, standard deviation, and Coefficient of Variation across $N \ge 3$ random seeds.
+Evaluating Tier 3 requires computing mean, standard deviation, and Coefficient of Variation across $N \\ge 3$ random seeds.
 
 ## Wanted
 Statistical utility computing CV and assigning Tier 3 points based on volatility thresholds.
@@ -857,32 +857,33 @@ Security audit report and hardening verification.
 ]
 
 
-def run_cmd(cmd):
-    """Run shell command and return stdout."""
-    res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+def run_cmd(args, stdin=None):
+    """Run a command from an argument list (no shell) and return (code, stdout, stderr)."""
+    res = subprocess.run(args, input=stdin, capture_output=True, text=True)
     return res.returncode, res.stdout.strip(), res.stderr.strip()
 
 
 def main():
     print("=== Step 1: Provisioning GitHub Labels ===")
     for name, color, desc in LABELS:
-        code, out, err = run_cmd(f'gh label create "{name}" --color "{color}" --description "{desc}" -R {REPO}')
+        label_args = [name, "--color", color, "--description", desc, "-R", REPO]
+        code, out, err = run_cmd(["gh", "label", "create", *label_args])
         if code == 0:
             print(f"  + Created label: {name}")
         else:
             # Try edit if already exists
-            run_cmd(f'gh label edit "{name}" --color "{color}" --description "{desc}" -R {REPO}')
+            run_cmd(["gh", "label", "edit", *label_args])
             print(f"  = Updated label: {name}")
 
     print("\n=== Step 2: Provisioning GitHub Milestones ===")
-    code, out, err = run_cmd(f'gh api repos/{REPO}/milestones?state=all --jq ".[].title"')
+    code, out, err = run_cmd(["gh", "api", f"repos/{REPO}/milestones?state=all", "--jq", ".[].title"])
     existing_ms = out.splitlines() if code == 0 and out else []
 
     for ms in MILESTONES:
         if ms in existing_ms:
             print(f"  = Milestone already exists: {ms}")
         else:
-            code, out, err = run_cmd(f'gh api repos/{REPO}/milestones -f title="{ms}"')
+            code, out, err = run_cmd(["gh", "api", f"repos/{REPO}/milestones", "-f", f"title={ms}"])
             if code == 0:
                 print(f"  + Created milestone: {ms}")
             else:
@@ -890,7 +891,9 @@ def main():
 
     print("\n=== Step 3: Creating 45 Backlog Issues on GitHub ===")
     # Fetch current issues to prevent duplicate creation
-    code, out, err = run_cmd(f'gh issue list -R {REPO} --state all --limit 100 --json title --jq ".[].title"')
+    code, out, err = run_cmd(
+        ["gh", "issue", "list", "-R", REPO, "--state", "all", "--limit", "100", "--json", "title", "--jq", ".[].title"]
+    )
     existing_issues = out.splitlines() if code == 0 and out else []
 
     created_count = 0
@@ -900,12 +903,11 @@ def main():
             print(f"  = Issue already exists: #{idx} {title}")
             continue
 
-        milestone = item["milestone"]
-        labels_str = " ".join([f'--label "{l}"' for l in item["labels"]])
-        body = item["body"].replace('"', '\\"')
-
-        cmd = f'gh issue create -R {REPO} --title "{title}" --milestone "{milestone}" {labels_str} --body "{body}"'
-        code, out, err = run_cmd(cmd)
+        cmd = ["gh", "issue", "create", "-R", REPO, "--title", title, "--milestone", item["milestone"]]
+        for label in item["labels"]:
+            cmd.extend(["--label", label])
+        cmd.extend(["--body-file", "-"])
+        code, out, err = run_cmd(cmd, stdin=item["body"])
         if code == 0:
             created_count += 1
             print(f"  + Created Issue #{idx}: {title} -> {out}")
