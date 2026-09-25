@@ -62,8 +62,9 @@ Repro Radar avoids subjective or punitive terminology. The AI Decision Layer ins
 ## 🚀 Quickstart & Local Setup
 
 ### Prerequisites
-- Python 3.10+ (Recommended: Python 3.11)
+- Python 3.11 (3.10+ supported)
 - Git
+- Optional: Docker Engine / Docker Desktop for isolated sandbox runs (a local process fallback is used without it)
 
 For the full list of system tools, Python packages, sandbox image contents, environment variables, and verified fresh-machine setup steps, see [Environment & Dependency Inventory](docs/ENVIRONMENT.md).
 
@@ -75,7 +76,7 @@ cd appendix_controller_for_articles
 
 ### 2. Create Virtual Environment & Install Dependencies
 ```bash
-# Create virtual environment
+# Create virtual environment (on Windows, use `py -3.11 -m venv .venv` if `python` opens the Microsoft Store)
 python -m venv .venv
 
 # Activate environment (Windows PowerShell)
@@ -84,8 +85,11 @@ python -m venv .venv
 # Activate environment (Linux/macOS)
 # source .venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Development setup: runtime packages + tests, lint, and document tooling
+pip install -r requirements-dev.txt
+
+# Runtime only (no tests or lint)
+# pip install -r requirements.txt
 ```
 
 ### 3. Initialize SQLite Database & Seed Papers
@@ -110,10 +114,11 @@ python cli.py score paper_001
 ```
 
 > **IMPORTANT NOTE ON SIMULATION STATUS:**  
-> **The current scoring engine operates on simulated deterministic outputs as part of Week 1 discovery infrastructure. Real isolated sandbox/Docker container execution will be integrated in Week 2.**
+> **`cli.py score` still scores simulated outputs derived from each paper's claimed values; it does not execute the paper's code.** Real isolated execution is available through `scripts/stage_and_bundle_repo.py` (see [Quick Sandbox Execution CLI](#quick-sandbox-execution-cli)); wiring it into `cli.py score` is tracked as G2 in [the gap analysis](docs/gap_analysis.md).
 
-### 7. Run Test Suite
+### 7. Lint & Run Test Suite
 ```bash
+ruff check .
 pytest tests/ -v
 ```
 
@@ -151,24 +156,33 @@ python scripts/stage_and_bundle_repo.py https://github.com/org/paper-repo.git \
 
 ```
 repro-radar/
+├── .dockerignore            # Limits the sandbox image build context
 ├── .gitignore               # Python, SQLite, venv, and cache rules
 ├── LICENSE                  # MIT License
 ├── README.md                # Project documentation
-├── requirements.txt         # Core dependencies
-├── cli.py                   # CLI management & diagnostics tool
 ├── AGENTS.md                # Project conventions & projectflow operating rules
+├── cli.py                   # CLI management & diagnostics tool
+├── pyproject.toml           # Tool configuration (ruff lint gate)
+├── requirements.txt         # Runtime dependencies
+├── requirements-dev.txt     # Runtime + tests, lint, and document tooling
 ├── docker/
 │   ├── Dockerfile.sandbox   # Hardened Python 3.11-slim container (non-root UID 1000)
 │   ├── docker-compose.sandbox.yml # Compose isolation specs (read-only root, no network)
-│   └── entrypoint.sh        # Container timeout handler & meta logger
+│   └── entrypoint.sh        # Timeout guard, log capture & execution_meta.json writer
 ├── scripts/
-│   └── stage_and_bundle_repo.py # Repo cloning, dependency bundling & sandbox CLI
+│   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
+│   ├── generate_academic_introduction_doc.py # Builds docs/repro_radar_introduction.docx
+│   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
+│   ├── setup_7week_board.py            # Provisions the weekly tracking board
+│   └── setup_github_board.sh           # Shell variant of the board provisioning
 ├── src/
 │   ├── __init__.py          # Package init
 │   ├── config.py            # Paths, tier weights, and tolerances
 │   ├── database.py          # SQLite engine, sessions, init, and seeding
-│   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
+│   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
+│   ├── metric_extractor.py  # Metric parsing from logs, JSON, and sklearn reports
+│   ├── validation_rubric.py # Metric tolerances & multi-seed stability analysis
 │   └── sandbox/
 │       ├── __init__.py      # Sandbox package exports
 │       ├── runner.py        # DockerSandboxRunner & ProcessSandboxRunner fallback
@@ -183,16 +197,24 @@ repro-radar/
 │   ├── STACK.md             # Technology stack and security boundaries
 │   ├── ENVIRONMENT.md       # System tools, dependencies & fresh-machine setup
 │   ├── SANDBOX_GUIDE.md     # Sandbox architecture, security specs & CLI guide
+│   ├── VALIDATION_RUBRIC.md # Metric validation rubric and tolerances
+│   ├── gap_analysis.md      # Known gaps, evidence, and remediation status
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
-│   └── project_roadmap.md   # 7-week detailed roadmap
+│   ├── project_roadmap.md   # 7-week detailed roadmap
+│   ├── repro_radar_introduction.docx # Academic introduction document
+│   └── assets/              # Images used by the docs
 └── tests/
     ├── __init__.py
-    ├── test_database.py     # Database schema and seeding tests
-    ├── test_models.py       # Validation and schema tests
-    ├── test_sandbox.py      # Container isolation & runner tests
-    ├── test_scoring.py      # Tier 1-4 rubric and decision rules tests
-    ├── test_seed.py         # Seed dataset completeness tests
-    └── test_stager.py       # Staging, dependency analysis & CLI tests
+    ├── test_academic_doc.py        # Introduction document generator tests
+    ├── test_database.py            # Database schema and seeding tests
+    ├── test_metric_extractor.py    # Log, JSON, and sklearn metric parsing tests
+    ├── test_models.py              # Validation and schema tests
+    ├── test_sandbox.py             # Container isolation & runner tests
+    ├── test_scoring.py             # Tier 1-4 rubric and decision rules tests
+    ├── test_seed.py                # Seed dataset completeness tests
+    ├── test_setup_github_backlog.py # Backlog script command-safety tests
+    ├── test_stager.py              # Staging, dependency analysis & execution report tests
+    └── test_validation_rubric.py   # Tolerance and stability analyzer tests
 ```
 
 ---

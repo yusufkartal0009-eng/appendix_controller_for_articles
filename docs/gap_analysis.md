@@ -9,23 +9,25 @@
 
 ## 1. Summary
 
-| ID | Severity | Category | Gap | Related issue |
-|---|---|---|---|---|
-| G1 | High | Tracking | `PROGRESS.md` / `BLUEPRINT.md` disagree with GitHub milestone and issue state | #5 |
-| G2 | High | Product | `cli.py score` scores simulated outputs only; sandbox and extractor are not reachable from the CLI | #43 |
-| G3 | High | DevOps | No CI: tests and lint never run on PRs | #42 |
-| G4 | Medium | Tracking | Duplicate non-English "Hafta 1–7" milestones run a second, parallel plan | — |
-| G5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18 |
-| G6 | Medium | Dependencies | Unused, unpinned, and mixed runtime/dev dependencies | — |
-| G7 | Medium | Sandbox | `Dockerfile.sandbox` version constraints are parsed as shell redirections | #13 |
-| G8 | Medium | Sandbox | `entrypoint.sh` silently ignores dependency install failures | #32 |
-| G9 | Medium | Code quality | Blind `except Exception`, two silently swallowed | — |
-| G10 | Medium | Security | `setup_github_backlog.py` builds `shell=True` commands from issue text | #46 |
-| G11 | Low | Code quality | 281 lint findings, no lint or type-check configuration | — |
-| G12 | Low | Docs | README directory layout is out of date | — |
-| G13 | Low | Repo structure | Missing `pyproject.toml`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CLAUDE.md` | #44, #45 |
-| G14 | Low | Sandbox | No `.dockerignore`; obsolete Compose `version` key | — |
-| G15 | Low | Repo hygiene | Generated `.docx` committed next to its generator | — |
+| ID | Severity | Category | Gap | Related issue | Status |
+|---|---|---|---|---|---|
+| G1 | High | Tracking | `PROGRESS.md` / `BLUEPRINT.md` disagree with GitHub milestone and issue state | #5 | Open |
+| G2 | High | Product | `cli.py score` scores simulated outputs only; sandbox and extractor are not reachable from the CLI | #43 | Open (README note corrected in #72) |
+| G3 | High | DevOps | No CI: tests and lint never run on PRs | #42 | In progress: workflow ready, push needs the `workflow` token scope |
+| G4 | Medium | Tracking | Duplicate non-English "Hafta 1–7" milestones run a second, parallel plan | — | Open |
+| G5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18 | Open (3 tests added in #71) |
+| G6 | Medium | Dependencies | Unused, unpinned, and mixed runtime/dev dependencies | — | Partly fixed in #71: split and unused removed; no lock file yet |
+| G7 | Medium | Sandbox | `Dockerfile.sandbox` version constraints are parsed as shell redirections | #13 | Fixed in #71; image build to be verified by CI (G3) |
+| G8 | Medium | Sandbox | `entrypoint.sh` silently ignores dependency install failures | #32 | Fixed in #71; behavior to be verified by CI (G3) |
+| G9 | Medium | Code quality | Blind `except Exception`, two silently swallowed | — | Partly fixed in #71: both silent cases fixed; 7 broad catches remain |
+| G10 | Medium | Security | `setup_github_backlog.py` builds `shell=True` commands from issue text | #46 | Fixed in #71 |
+| G11 | Low | Code quality | 281 lint findings, no lint or type-check configuration | — | Open (lint gate config added in #71) |
+| G12 | Low | Docs | README directory layout is out of date | — | Fixed in #72 |
+| G13 | Low | Repo structure | Missing `pyproject.toml`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CLAUDE.md` | #44, #45 | Partly fixed: `pyproject.toml` added in #71 |
+| G14 | Low | Sandbox | No `.dockerignore`; obsolete Compose `version` key | — | Fixed in #71 |
+| G15 | Low | Repo hygiene | Generated `.docx` committed next to its generator | — | Open |
+
+Status last updated 2026-09-25. Detailed findings below describe the state at the baseline commit.
 
 ---
 

@@ -21,20 +21,27 @@ On Windows, Docker Desktop additionally requires WSL 2 and hardware virtualizati
 
 ---
 
-## 2. Python Packages (`requirements.txt`)
+## 2. Python Packages
+
+### Runtime (`requirements.txt`)
 
 | Package | Constraint | Imported by | Role |
 |---|---|---|---|
 | `pydantic` | `>=2.6.0` | `src/models.py` | Schema validation for papers and claims |
 | `sqlalchemy` | `>=2.0.25` | `src/database.py`, `src/models.py` | SQLite ORM and sessions |
 | `tabulate` | `>=0.9.0` | `cli.py` | Terminal tables |
+
+### Development (`requirements-dev.txt`, includes `requirements.txt`)
+
+| Package | Constraint | Used by | Role |
+|---|---|---|---|
+| `pytest` | `>=8.0.0` | `tests/` | Test runner |
+| `pytest-cov` | `>=5.0.0` | `pytest --cov` | Coverage reports |
+| `ruff` | `==0.16.9` | `ruff check .` | Lint gate configured in `pyproject.toml` |
 | `python-docx` | `>=1.1.0` | `scripts/generate_academic_introduction_doc.py`, `tests/test_academic_doc.py` | Academic introduction `.docx` generation |
 | `pillow` | `>=10.0.0` | `scripts/generate_academic_introduction_doc.py`, `tests/test_academic_doc.py` | Banner image rendering |
-| `pytest` | `>=8.0.0` | `tests/` | Test runner |
-| `pandas` | `>=2.2.0` | — (not imported yet) | Reserved for metric/leaderboard work |
-| `pyyaml` | `>=6.0.1` | — (not imported yet) | Reserved for `environment.yml` parsing |
-| `requests` | `>=2.31.0` | — (not imported yet) | Reserved for arXiv ingestion |
 
+`ruff` is pinned so the lint gate gives the same result on every machine.
 All other imports are from the Python standard library (`argparse`, `json`, `logging`, `pathlib`,
 `shutil`, `subprocess`, `tempfile`, `unittest`, `uuid`, …).
 
@@ -50,16 +57,28 @@ Built as `repro-radar-sandbox:latest` (the default `SandboxConfig.image_name`).
 | apt packages | `bash`, `ca-certificates`, `coreutils`, `procps`, `bc` |
 | Pre-baked Python packages | `numpy>=1.24.0`, `scipy>=1.10.0`, `pandas>=2.0.0`, `scikit-learn>=1.3.0`, `tabulate>=0.9.0`, `pytest>=7.4.0` |
 | Runtime user | `sandboxuser` (UID/GID 1000, non-root) |
-| Entrypoint | `docker/entrypoint.sh` (timeout guard, log capture, `execution_meta.json`) |
+| Entrypoint | `docker/entrypoint.sh` (offline wheel install, timeout guard, log capture, `execution_meta.json`) |
 
 Container limits (from `docker/docker-compose.sandbox.yml` and `SandboxConfig`): 2 CPUs, 8 GB RAM,
 100 PIDs, `--network none`, read-only root filesystem, `no-new-privileges`.
 
-Build it once Docker is installed:
+Build it once Docker is installed (`.dockerignore` keeps the build context to `docker/entrypoint.sh`):
 
 ```bash
 docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .
 ```
+
+Smoke-test the image; `execution_meta.json` should report `"status": "COMPLETED"` and
+`"dependency_install_status": "SKIPPED"` (no bundled wheels were mounted):
+
+```bash
+mkdir -p sandbox_runs/smoke
+docker run --rm -v "$PWD/sandbox_runs/smoke:/workspace/output" repro-radar-sandbox:latest python -c "print('ok')"
+cat sandbox_runs/smoke/execution_meta.json
+```
+
+`dependency_install_status` is `INSTALLED` or `FAILED` when wheels are mounted at
+`/workspace/packages`; a `FAILED` install does not stop the run.
 
 ---
 
@@ -101,13 +120,20 @@ git clone https://github.com/yusufkartal0009-eng/appendix_controller_for_article
 cd appendix_controller_for_articles
 py -3.11 -m venv .venv
 .venv\Scripts\python.exe -m pip install --upgrade pip
-.venv\Scripts\python.exe -m pip install -r requirements.txt
+.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 
 # 3. Verify
+.venv\Scripts\ruff.exe check .
 .venv\Scripts\pytest.exe tests/ -v
 .venv\Scripts\python.exe cli.py init-db
 .venv\Scripts\python.exe cli.py list-papers
 ```
+
+Use `requirements.txt` instead of `requirements-dev.txt` for a runtime-only install (no tests,
+lint, or document tooling).
+
+New terminals pick up `git`, `gh`, and `python` from `PATH` only after the installers finish;
+open a fresh PowerShell window after step 1.
 
 If `python` opens the Microsoft Store, the App Execution Alias stub is shadowing the real
 interpreter: use `py -3.11` or disable the alias under *Settings → Apps → Advanced app settings →
@@ -121,15 +147,17 @@ cd appendix_controller_for_articles
 python3.11 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
+ruff check .
 pytest tests/ -v
 ```
 
 ### Verified baseline
 
-Clean Windows 11 Home machine, Python 3.11.9, fresh `.venv` (2026-09-24):
+Clean Windows 11 Home machine, Python 3.11.9, fresh `.venv` from `requirements-dev.txt` (2026-09-25):
 
-- `pytest tests/` → **49 passed**
+- `ruff check .` → **All checks passed**
+- `pytest tests/` → **52 passed**
 - `cli.py init-db` → schema initialized, 8 seed papers loaded
 - Docker not installed → the suite still passes: sandbox tests use `ProcessSandboxRunner` and
   mock the Docker availability check, so Docker is not needed to run tests
