@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from scripts.stage_and_bundle_repo import sanitize_paper_id
-from src.sandbox.runner import SandboxExecutionResult
+from src.sandbox.runner import DockerSandboxRunner, SandboxExecutionResult
 from src.sandbox.stager import DependencyManifest, RepoStager, StagedRepo
 
 
@@ -97,7 +97,9 @@ def test_stage_local_repository(tmp_path):
     assert "numpy" in staged.manifest.parsed_dependencies
 
 
-def test_execute_staged_produces_report_and_metrics(tmp_path):
+def test_execute_staged_produces_report_and_metrics(tmp_path, monkeypatch):
+    # Exercise the local process runner even on hosts where Docker is available (e.g. CI).
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
     staging_root = tmp_path / "staging"
     stager = RepoStager(staging_root=staging_root)
 

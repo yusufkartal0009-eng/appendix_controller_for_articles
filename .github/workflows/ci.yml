@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lint & tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+      - name: Lint
+        run: ruff check .
+      - name: Tests
+        run: pytest tests/ -q --cov=src --cov-report=term
+
+  sandbox-image:
+    name: Sandbox image build & smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build image
+        run: docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:ci .
+      - name: Scientific stack imports and no stray redirect files
+        run: |
+          docker run --rm --entrypoint python repro-radar-sandbox:ci \
+            -c "import numpy, scipy, sklearn, pandas; print(numpy.__version__, scipy.__version__, sklearn.__version__, pandas.__version__)"
+          docker run --rm --entrypoint sh repro-radar-sandbox:ci \
+            -c 'if ls / | grep "^="; then echo "stray redirect files found"; exit 1; fi'
+      - name: Entrypoint reports skipped dependency install
+        run: |
+          mkdir -p out-skip && chmod 777 out-skip
+          docker run --rm -v "$PWD/out-skip:/workspace/output" repro-radar-sandbox:ci python -c "print('ok')"
+          cat out-skip/execution_meta.json
+          python3 -c "import json; m = json.load(open('out-skip/execution_meta.json')); assert m['status'] == 'COMPLETED' and m['dependency_install_status'] == 'SKIPPED', m"
+      - name: Entrypoint reports failed dependency install
+        run: |
+          mkdir -p out-fail pkgs && chmod 777 out-fail
+          echo "not a wheel" > pkgs/bogus-0.0.0-py3-none-any.whl
+          docker run --rm -v "$PWD/out-fail:/workspace/output" -v "$PWD/pkgs:/workspace/packages:ro" \
+            repro-radar-sandbox:ci python -c "print('ok')"
+          cat out-fail/execution_meta.json
+          python3 -c "import json; m = json.load(open('out-fail/execution_meta.json')); assert m['status'] == 'COMPLETED' and m['dependency_install_status'] == 'FAILED', m"
