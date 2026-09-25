@@ -3,8 +3,6 @@
 # Provides reference declarative configuration for isolated paper reproduction runs.
 # ==============================================================================
 
-version: '3.8'
-
 services:
   sandbox:
     build:

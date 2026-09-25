@@ -1,0 +1,3 @@
+# The sandbox image only copies docker/entrypoint.sh; keep the build context to that.
+*
+!docker/entrypoint.sh
