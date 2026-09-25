@@ -17,16 +17,24 @@ mkdir -p "${OUTPUT_DIR}"
 cd /workspace/repo || true
 
 # 1. Offline Package Installation Bootstrap
-# If pre-downloaded wheels exist in /workspace/packages, install into user space
+# If pre-downloaded wheels exist in /workspace/packages, install into user space.
+# A failed install does not abort the run, but it is recorded in execution_meta.json.
+DEPENDENCY_STATUS="SKIPPED"
 if [ -d "/workspace/packages" ] && [ -n "$(ls -A /workspace/packages 2>/dev/null)" ]; then
   echo "=================================================="
   echo "Repro Radar: Installing Offline Bundled Packages"
   echo "=================================================="
   mkdir -p /workspace/home/.local
   if [ -f "/workspace/repo/requirements.txt" ]; then
-    pip install --no-index --find-links=/workspace/packages --no-cache-dir --user -r /workspace/repo/requirements.txt || true
+    PIP_TARGETS=(-r /workspace/repo/requirements.txt)
   else
-    pip install --no-index --find-links=/workspace/packages --no-cache-dir --user /workspace/packages/* || true
+    PIP_TARGETS=(/workspace/packages/*)
+  fi
+  if pip install --no-index --find-links=/workspace/packages --no-cache-dir --user "${PIP_TARGETS[@]}"; then
+    DEPENDENCY_STATUS="INSTALLED"
+  else
+    DEPENDENCY_STATUS="FAILED"
+    echo "Repro Radar: WARNING offline dependency installation failed; continuing" >&2
   fi
 fi
 
@@ -71,6 +79,7 @@ cat <<EOF > "${META_JSON}"
   "exit_code": ${EXIT_CODE},
   "duration_seconds": ${DURATION},
   "timeout_limit_seconds": ${TIMEOUT_SECONDS},
+  "dependency_install_status": "${DEPENDENCY_STATUS}",
   "user_id": $(id -u),
   "group_id": $(id -g)
 }
@@ -79,6 +88,7 @@ EOF
 echo "=================================================="
 echo "Repro Radar: Execution Concluded"
 echo "Status        : ${STATUS} (Exit Code: ${EXIT_CODE})"
+echo "Dependencies  : ${DEPENDENCY_STATUS}"
 echo "Duration      : ${DURATION}s"
 echo "=================================================="
 
