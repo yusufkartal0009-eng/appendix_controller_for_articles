@@ -131,3 +131,34 @@ def test_execute_staged_produces_report_and_metrics(tmp_path):
     assert report["metrics"]["accuracy"] == 0.942
     assert report["metrics"]["f1"] == 0.938
     assert Path(report["run_report_path"]).exists()
+
+
+def test_execute_staged_reports_unreadable_execution_meta(tmp_path, caplog):
+    """A corrupt execution_meta.json is surfaced in the report and logged, not swallowed."""
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print('ok')", encoding="utf-8")
+    staged = stager.stage_repository(paper_id="paper_meta_test", source=str(source_dir))
+
+    output_dir = tmp_path / "run_output"
+    output_dir.mkdir()
+    (output_dir / "execution_meta.json").write_text("{truncated", encoding="utf-8")
+    fake_result = SandboxExecutionResult(
+        status="COMPLETED",
+        exit_code=0,
+        stdout="",
+        stderr="",
+        duration_seconds=0.1,
+        command_executed=["python", "reproduce.py"],
+        docker_used=True,
+        output_dir=output_dir,
+    )
+
+    with patch("src.sandbox.stager.DockerSandboxRunner.run", return_value=fake_result):
+        with caplog.at_level("WARNING", logger="src.sandbox.stager"):
+            report = stager.execute_staged(staged, target_script="reproduce.py")
+
+    assert report["meta"] == {}
+    assert "execution_meta.json" in report["meta_error"]
+    assert any("execution_meta.json" in r.getMessage() for r in caplog.records)

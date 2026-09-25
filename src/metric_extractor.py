@@ -186,8 +186,8 @@ class MetricExtractor:
                     # Convert single quotes to double quotes for python repr dicts
                     safe_json = candidate.replace("'", '"')
                     parsed = json.loads(safe_json)
-                except Exception:
-                    pass
+                except json.JSONDecodeError:
+                    logger.debug("Skipping non-JSON brace block: %.120s", candidate)
 
             if isinstance(parsed, dict):
                 for k, v in parsed.items():

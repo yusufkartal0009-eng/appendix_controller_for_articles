@@ -306,14 +306,16 @@ class RepoStager:
         # Collect generated files and metadata from output_dir
         generated_files = []
         meta = {}
+        meta_error: Optional[str] = None
         if result.output_dir.exists():
             generated_files = [f.name for f in result.output_dir.iterdir() if f.is_file()]
             meta_file = result.output_dir / "execution_meta.json"
             if meta_file.exists():
                 try:
                     meta = json.loads(meta_file.read_text(encoding="utf-8"))
-                except Exception:
-                    pass
+                except (OSError, ValueError) as exc:
+                    meta_error = f"Unreadable execution_meta.json: {exc}"
+                    logger.warning(meta_error)
 
         # Collect structured results
         report: Dict[str, Any] = {
@@ -332,6 +334,8 @@ class RepoStager:
             "stdout_preview": result.stdout[:2000] if result.stdout else "",
             "stderr_preview": result.stderr[:2000] if result.stderr else "",
         }
+        if meta_error:
+            report["meta_error"] = meta_error
 
         # Extract empirical metrics from output_dir (files and logs)
         extractor = MetricExtractor()
