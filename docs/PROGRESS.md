@@ -30,6 +30,16 @@
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Gap Remediation — Sandbox, Dependency, and Safety Fixes (2026-09-25, Issue #70)
+- **CI (G3):** workflow prepared (lint, tests on Ubuntu and Windows, sandbox image build and smoke test) but not yet pushed: the GitHub token lacks the `workflow` scope. Follows in a separate PR.
+- **Dependencies (G6):** `requirements.txt` now holds runtime packages only (`pydantic`, `sqlalchemy`, `tabulate`); tests, lint, and document tooling moved to `requirements-dev.txt`; unused `pandas`, `pyyaml`, and `requests` removed. `pyproject.toml` defines the ruff correctness gate.
+- **Sandbox image (G7):** version constraints in `Dockerfile.sandbox` are quoted, so they are no longer parsed as shell redirections.
+- **Entrypoint (G8):** `execution_meta.json` gains `dependency_install_status` (`SKIPPED` / `INSTALLED` / `FAILED`) instead of hiding install failures behind `|| true`.
+- **Error handling (G9):** the metric extractor logs skipped non-JSON blocks; `execute_staged` reports an unreadable `execution_meta.json` as `meta_error`.
+- **Security (G10):** `setup_github_backlog.py` passes argument lists without a shell and sends issue bodies on stdin.
+- **Docker hygiene (G14):** `.dockerignore` limits the build context; obsolete Compose `version` key removed.
+- 52 / 52 tests green (3 new), verified in a clean venv built from `requirements-dev.txt`.
+
 ### M0 / DevOps: Repository Gap Analysis (2026-09-24, Issue #67)
 - Added `docs/gap_analysis.md`: 15 gaps (3 high, 7 medium, 5 low) across tracking, product, CI, tests, dependencies, sandbox, code quality, security, and docs, each with evidence, remedy, and related issue.
 - Measured baseline: 60% line coverage (`cli.py` 0%), 281 `ruff` findings, 49 / 49 tests green.
