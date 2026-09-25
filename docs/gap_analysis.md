@@ -11,10 +11,10 @@
 
 | ID | Severity | Category | Gap | Related issue | Status |
 |---|---|---|---|---|---|
-| G1 | High | Tracking | `PROGRESS.md` / `BLUEPRINT.md` disagree with GitHub milestone and issue state | #5 | Open |
+| G1 | High | Tracking | `PROGRESS.md` / `BLUEPRINT.md` disagree with GitHub milestone and issue state | #5 | Fixed in #76 |
 | G2 | High | Product | `cli.py score` scores simulated outputs only; sandbox and extractor are not reachable from the CLI | #43 | Open (README note corrected in #72) |
 | G3 | High | DevOps | No CI: tests and lint never run on PRs | #42 | Fixed in #74 |
-| G4 | Medium | Tracking | Duplicate non-English "Hafta 1–7" milestones run a second, parallel plan | — | Open |
+| G4 | Medium | Tracking | Duplicate non-English "Hafta 1–7" milestones run a second, parallel plan | — | Fixed: milestones removed, issues consolidated (#76) |
 | G5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18 | Open (3 tests added in #71) |
 | G6 | Medium | Dependencies | Unused, unpinned, and mixed runtime/dev dependencies | — | Partly fixed in #71: split and unused removed; no lock file yet |
 | G7 | Medium | Sandbox | `Dockerfile.sandbox` version constraints are parsed as shell redirections | #13 | Fixed in #71; verified by CI image build in #74 |

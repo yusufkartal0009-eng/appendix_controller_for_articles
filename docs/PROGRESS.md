@@ -9,26 +9,36 @@
 - **Active Milestone:** M0 — Baseline Hygiene & Audit
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 49 / 49 tests green
+- **Total Unit Tests Passing:** 52 / 52 tests green (CI: Ubuntu, Windows, sandbox image)
 
 ---
 
 ## Milestone Roadmap & Progress
 
-| Milestone | Focus | Issues | Status |
-|---|---|:---:|:---:|
-| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #1 – #5 | COMPLETED 🟢 |
-| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #6 – #11 | COMPLETED 🟢 |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #12 – #17, #48 | COMPLETED 🟢 |
-| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #18 – #23, #49 | QUEUED |
-| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #24 – #29, #50, #55 | COMPLETED 🟢 |
-| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #30 – #35, #51 | QUEUED |
-| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #36 – #40 | QUEUED |
-| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #41 – #45, #53 | QUEUED |
+Issue numbers and open/closed counts match GitHub as of 2026-09-25. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub.
+
+| Milestone | Focus | Backlog issues | Open / closed | Status |
+|---|---|:---:|:---:|:---:|
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 7 | IN PROGRESS |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 6 / 1 | IN PROGRESS |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 5 / 2 | IN PROGRESS |
+| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 6 / 1 | QUEUED |
+| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 2 / 5 | IN PROGRESS |
+| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 6 / 1 | QUEUED |
+| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #37 – #41 | 5 / 0 | QUEUED |
+| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 4 / 3 | IN PROGRESS |
+
+The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella issues (#47 – #53) were closed as completed or as duplicates of the backlog above and moved into the matching M milestones.
 
 ---
 
 ## Changelog & Completed Work
+
+### M0 / DevOps: Tracking Reconciled with GitHub (2026-09-25, Issue #76)
+- GitHub: closed implemented issues #5, #16, #27, #28, #47 with evidence; closed weekly umbrella issues #49, #51, #52, #53 as duplicates of the per-issue backlog; added done/missing status notes to #2, #4, #10, #11, #13, #14, #15, #17, #18, #30; removed the seven empty "Hafta" milestones.
+- `docs/BLUEPRINT.md`: all 45 backlog references renumbered by title match against GitHub (they were one lower than the real issue numbers).
+- This file: milestone table rebuilt from GitHub open/closed counts; no milestone is marked completed while it has open issues.
+- Resolves gap analysis G1 and G4.
 
 ### M0 / DevOps: Relaxed Side-Effect Approval Gate (2026-09-25, Issue #69)
 - `AGENTS.md` §5.6: after an approved proposal and a green suite, push, PR, merge, and merged-branch deletion no longer need a separate go-ahead.
