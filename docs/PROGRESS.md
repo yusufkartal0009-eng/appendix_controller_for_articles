@@ -30,6 +30,10 @@
 
 ## Changelog & Completed Work
 
+### M7 / DevOps: Continuous Integration (2026-09-25, Issue #42, PR #74)
+- `.github/workflows/ci.yml`: `ruff` and `pytest --cov` on Ubuntu and Windows (Python 3.11), plus a sandbox image job that builds `Dockerfile.sandbox`, checks for stray redirect files, and asserts `dependency_install_status` values. Resolves G3 and verifies the G7/G8 fixes from #71 on Docker.
+- First CI run exposed a host-dependent test: `test_execute_staged_produces_report_and_metrics` assumed Docker was absent and failed on Ubuntu runners, where Docker is installed. The test now forces the process runner, like the other sandbox tests.
+
 ### M0 / DevOps: Setup & Verification Docs for the New Environment (2026-09-25, Issue #72)
 - `README.md`: Quickstart installs `requirements-dev.txt` (runtime-only alternative noted), adds the Windows `py` launcher note, lint step, an accurate simulation note (G2), and a refreshed directory layout (G12).
 - `docs/ENVIRONMENT.md`: separate runtime and development package tables, updated Windows and Linux/macOS setup, sandbox image smoke test with `dependency_install_status`, and a new verified baseline (52 tests, ruff clean).
