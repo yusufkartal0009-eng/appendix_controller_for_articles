@@ -32,7 +32,7 @@ gantt
   - [x] Repository architecture & directory hierarchy (`src/`, `data/`, `docs/`, `tests/`).
   - [x] SQLite relational schema via `schema.sql` (`papers`, `runs`, `claims`, `scores`).
   - [x] SQLAlchemy ORM and Pydantic v2 validation models (`src/models.py`).
-  - [x] Curate verified "Tabular Machine Learning & Light NLP" seed dataset with authentic claims (`data/seed_papers.json`).
+  - [x] Curate "Tabular Machine Learning & Light NLP" seed dataset (`data/seed_papers.json`). Links, repositories, licenses, and pinned scripts are checked by `scripts/verify_corpus.py`; claim values are not yet verified (see `docs/CORPUS_VERIFICATION.md`).
   - [x] Automated database initialization and seeding engine (`src/database.py`).
   - [x] 4-Tier reproducibility scoring engine and neutral status classifier (`src/scoring.py`).
   - [x] Methodology and ethical standards documentation (`docs/methodology.md`).
