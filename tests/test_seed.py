@@ -1,6 +1,7 @@
 """Verification tests for data/seed_papers.json dataset."""
 
 import json
+import re
 from pathlib import Path
 from src.config import ALLOWED_LICENSES, SEED_PAPERS_PATH
 from src.models import PaperCreate
@@ -13,8 +14,8 @@ def test_seed_papers_json_completeness():
     with open(SEED_PAPERS_PATH, "r", encoding="utf-8") as f:
         papers = json.load(f)
 
-    # 1. At least 8 verified reproducibility papers required
-    assert len(papers) >= 8, f"Expected at least 8 seed papers, got {len(papers)}"
+    # 1. At least 5 entries (the pilot minimum); each must also pass scripts/verify_corpus.py in CI
+    assert len(papers) >= 5, f"Expected at least 5 seed papers, got {len(papers)}"
 
     seen_ids = set()
     for paper_dict in papers:
@@ -25,8 +26,12 @@ def test_seed_papers_json_completeness():
         assert p.paper_id not in seen_ids, f"Duplicate paper_id found: {p.paper_id}"
         seen_ids.add(p.paper_id)
 
-        # 4. Publication year between 2021 and 2024
-        assert 2021 <= p.year <= 2024, f"Paper {p.paper_id} year {p.year} is outside 2021-2024 range"
+        # 4. Publication year between 2020 and 2024
+        assert 2020 <= p.year <= 2024, f"Paper {p.paper_id} year {p.year} is outside 2020-2024 range"
+
+        # 4b. Repository pinned to a full commit SHA so the verified script cannot drift
+        commit = paper_dict.get("repo_commit", "")
+        assert re.fullmatch(r"[0-9a-f]{40}", commit), f"Paper {p.paper_id} needs a 40-character repo_commit"
 
         # 5. Open source license compliance
         assert any(

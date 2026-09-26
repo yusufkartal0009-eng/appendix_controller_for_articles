@@ -1,33 +1,14 @@
 [
   {
-    "paper_id": "paper_001",
-    "title": "Why Do Tree-Based Models Still Outperform Deep Learning on Tabular Data?",
-    "year": 2022,
-    "venue": "NeurIPS 2022",
-    "repo_url": "https://github.com/LeoGrin/tabular-benchmark",
-    "paper_url": "https://arxiv.org/abs/2207.08815",
-    "license": "MIT",
-    "target_script": "benchmarking.py",
-    "expected_claims": {
-      "xgboost_roc_auc": 0.842,
-      "random_forest_roc_auc": 0.826,
-      "mlp_roc_auc": 0.791
-    },
-    "source_table_or_section": {
-      "xgboost_roc_auc": "Table 2 (Medium numerical datasets)",
-      "random_forest_roc_auc": "Table 2 (Medium numerical datasets)",
-      "mlp_roc_auc": "Table 2 (Medium numerical datasets)"
-    }
-  },
-  {
     "paper_id": "paper_002",
     "title": "TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second",
     "year": 2022,
     "venue": "ICLR 2023",
-    "repo_url": "https://github.com/automl/TabPFN",
+    "repo_url": "https://github.com/PriorLabs/TabPFN",
+    "repo_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
     "paper_url": "https://arxiv.org/abs/2207.01848",
     "license": "Apache-2.0",
-    "target_script": "scripts/tabular_baselines.py",
+    "target_script": "tabpfn/scripts/tabular_baselines.py",
     "expected_claims": {
       "mean_roc_auc": 0.895,
       "inference_seconds": 1.25
@@ -42,10 +23,11 @@
     "title": "Revisiting Deep Learning Models for Tabular Data",
     "year": 2021,
     "venue": "NeurIPS 2021",
-    "repo_url": "https://github.com/yandex-research/tabular-dl-revisiting-models",
+    "repo_url": "https://github.com/yandex-research/rtdl-revisiting-models",
+    "repo_commit": "e3ed46cac38568785289d8fa16b8cfa585bde27e",
     "paper_url": "https://arxiv.org/abs/2106.11959",
-    "license": "MIT",
-    "target_script": "bin/evaluate.py",
+    "license": "Apache-2.0",
+    "target_script": "bin/ft_transformer.py",
     "expected_claims": {
       "ft_transformer_rmse": 0.459,
       "resnet_rmse": 0.486,
@@ -59,17 +41,18 @@
   },
   {
     "paper_id": "paper_004",
-    "title": "TabR: Tabular Data Modeling Meets Nearest Neighbors",
+    "title": "TabR: Tabular Deep Learning Meets Nearest Neighbors in 2023",
     "year": 2023,
     "venue": "ICLR 2024",
     "repo_url": "https://github.com/yandex-research/tabular-dl-tabr",
+    "repo_commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
     "paper_url": "https://arxiv.org/abs/2307.14338",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "target_script": "bin/tabr.py",
     "expected_claims": {
       "tabr_average_rank": 2.15,
       "ft_transformer_average_rank": 3.42,
-      "xgboost_average_rank": 3.20
+      "xgboost_average_rank": 3.2
     },
     "source_table_or_section": {
       "tabr_average_rank": "Table 1 (Overall Average Rank)",
@@ -79,13 +62,14 @@
   },
   {
     "paper_id": "paper_005",
-    "title": "FastSK: Fast Sequence Kernel SVM for Lightweight Text and Sequence Classification",
-    "year": 2021,
-    "venue": "KDD 2021",
+    "title": "FastSK: Fast Sequence Analysis with Gapped String Kernels",
+    "year": 2020,
+    "venue": "Bioinformatics 2020 (ECCB 2020)",
     "repo_url": "https://github.com/QData/FastSK",
-    "paper_url": "https://arxiv.org/abs/2007.02785",
-    "license": "BSD-3-Clause",
-    "target_script": "fastsk/FastSK.py",
+    "repo_commit": "d275a232cea129299021051cd6ac94d2296e83c8",
+    "paper_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v1",
+    "license": "Apache-2.0",
+    "target_script": "results/run_gridsearch.py",
     "expected_claims": {
       "ep3602_auroc": 0.912,
       "ep3602_accuracy": 0.875,
@@ -99,12 +83,13 @@
   },
   {
     "paper_id": "paper_006",
-    "title": "SAINT: Improved Neural Networks for Tabular Data via Row and Column Attention",
+    "title": "SAINT: Improved Neural Networks for Tabular Data via Row Attention and Contrastive Pre-Training",
     "year": 2021,
     "venue": "NeurIPS 2021 Workshop",
-    "repo_url": "https://github.com/somepalle/saint",
+    "repo_url": "https://github.com/somepago/saint",
+    "repo_commit": "e288e84c77a54cfd2ffb55a53678fb7cbbb16630",
     "paper_url": "https://arxiv.org/abs/2106.01342",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "target_script": "train.py",
     "expected_claims": {
       "arcene_auroc": 0.887,
@@ -118,29 +103,12 @@
     }
   },
   {
-    "paper_id": "paper_007",
-    "title": "TabNet: Attentive Interpretable Tabular Learning",
-    "year": 2021,
-    "venue": "AAAI 2021",
-    "repo_url": "https://github.com/dreamquark-ai/tabnet",
-    "paper_url": "https://arxiv.org/abs/1908.07442",
-    "license": "MIT",
-    "target_script": "run_census.py",
-    "expected_claims": {
-      "forest_covertype_accuracy": 0.969,
-      "higgs_auroc": 0.844
-    },
-    "source_table_or_section": {
-      "forest_covertype_accuracy": "Table 2 (Forest CoverType Accuracy)",
-      "higgs_auroc": "Table 3 (Higgs AUROC)"
-    }
-  },
-  {
     "paper_id": "paper_008",
-    "title": "DANet: Dual Adversarial Network for Tabular Data",
+    "title": "DANets: Deep Abstract Networks for Tabular Data Classification and Regression",
     "year": 2022,
     "venue": "AAAI 2022",
     "repo_url": "https://github.com/WhatAShot/DANet",
+    "repo_commit": "b007c57121ec9082f6ef19ec7465d9df70767c26",
     "paper_url": "https://arxiv.org/abs/2112.02962",
     "license": "MIT",
     "target_script": "main.py",
