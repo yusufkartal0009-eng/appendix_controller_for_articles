@@ -104,6 +104,11 @@ def summary(result, meta):
         lines.append(f"error_message={result.error_message}")
     if meta:
         lines.append(f"execution_meta.json: {json.dumps(meta)}")
+    else:
+        lines.append("execution_meta.json: <not written>")
+    if result.status != "COMPLETED" and result.stderr.strip():
+        lines.append("stderr (last 1500 chars):
+" + result.stderr.strip()[-1500:])
     return lines
 
 
