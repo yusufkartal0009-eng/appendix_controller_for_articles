@@ -11,7 +11,7 @@ The verifier runs in CI on every push and pull request, and the job is blocking.
 
 | Check | Passes when |
 |---|---|
-| `paper` | The paper page opens and its title matches the entry title (similarity ≥ 0.90) |
+| `paper` | The paper's title matches the entry title (similarity ≥ 0.90): read from the arXiv abstract page, or from Crossref for DOI links such as bioRxiv (whose pages rate-limit CI runners) |
 | `repo` | The GitHub repository exists (renames are followed and reported) |
 | `license` | GitHub's `license.spdx_id` is an allowed open license **and** equals the declared license |
 | `script` | `target_script` exists in the repository at the pinned `repo_commit` |

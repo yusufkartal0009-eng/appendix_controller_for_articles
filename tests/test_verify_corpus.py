@@ -155,3 +155,28 @@ def test_main_exit_code_reflects_any_failure(tmp_path, capsys):
     assert vc.main([str(corpus)], http=FakeHttp(routes_for())) == 1
     out = capsys.readouterr().out
     assert "paper_bad" in out and "FAIL" in out
+
+
+@pytest.mark.parametrize(
+    "url, expected",
+    [
+        ("https://www.biorxiv.org/content/10.1101/2020.04.21.053975v1", "10.1101/2020.04.21.053975"),
+        ("https://doi.org/10.1093/bioinformatics/btaa817", "10.1093/bioinformatics/btaa817"),
+        ("https://arxiv.org/abs/2106.11959", None),
+    ],
+)
+def test_parse_doi(url, expected):
+    assert vc.parse_doi(url) == expected
+
+
+def test_doi_paper_is_checked_through_crossref_not_the_publisher_page():
+    doi = "10.1101/2020.04.21.053975"
+    entry = dict(GOOD, paper_url=f"https://www.biorxiv.org/content/{doi}v1", title="FastSK: Fast Sequence Analysis with Gapped String Kernels")
+    routes = routes_for(entry)
+    routes[f"https://api.crossref.org/works/{doi}"] = (200, json.dumps({"message": {"title": [entry["title"]]}}))
+    http = FakeHttp(routes)
+
+    report = vc.verify_entry(entry, http)
+
+    assert report.ok, [(c.name, c.detail) for c in report.checks]
+    assert not any("biorxiv.org" in url for url in http.requested)
