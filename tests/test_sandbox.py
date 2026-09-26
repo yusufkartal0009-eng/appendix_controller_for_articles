@@ -175,3 +175,31 @@ def test_docker_runner_with_docker_reports_docker_used_and_isolated(tmp_path, mo
     assert result.docker_used is True
     assert result.isolated is True
     assert result.to_dict()["docker_used"] is True
+
+
+def test_docker_run_status_survives_unwritable_logs_written_by_container(tmp_path, monkeypatch):
+    """Logs created by the container user (another uid) must not turn a successful run into FAILED."""
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    out_dir = tmp_path / "runs" / "test_log_perms"
+    out_dir.mkdir(parents=True)
+    for name in ("stdout.log", "stderr.log"):
+        log = out_dir / name
+        log.write_text("written by the container entrypoint\n", encoding="utf-8")
+        log.chmod(0o444)  # simulates a file owned by uid 1000 that the host user cannot overwrite
+
+    def fake_run(cmd, **kwargs):
+        return subprocess.CompletedProcess(args=cmd, returncode=0, stdout="accuracy: 0.9\n", stderr="")
+
+    monkeypatch.setattr(runner_module.subprocess, "run", fake_run)
+    try:
+        result = DockerSandboxRunner().run(paper_id="test_log_perms", repo_dir=tmp_path, target_script="eval.py")
+    finally:
+        for name in ("stdout.log", "stderr.log"):
+            (out_dir / name).chmod(0o644)
+
+    assert result.status == "COMPLETED"
+    assert result.exit_code == 0
+    assert "accuracy: 0.9" in result.stdout
+    assert (out_dir / "stdout.log").read_text(encoding="utf-8") == "written by the container entrypoint\n"

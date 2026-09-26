@@ -172,6 +172,23 @@ class DockerSandboxRunner:
 
         return docker_cmd
 
+    @staticmethod
+    def _write_host_logs(output_dir: Path, stdout: str, stderr: str) -> None:
+        """Write captured logs unless the container entrypoint already wrote them.
+
+        The entrypoint tees stdout/stderr into the mounted output directory as the sandbox user
+        (uid 1000). On hosts running as another uid those files cannot be overwritten, so they are
+        kept as written, and a failed log write never changes the run's result.
+        """
+        for name, text in (("stdout.log", stdout), ("stderr.log", stderr)):
+            path = output_dir / name
+            if path.exists():
+                continue
+            try:
+                path.write_text(text, encoding="utf-8")
+            except OSError as exc:
+                logger.warning("Could not write %s: %s", path, exc)
+
     def run(
         self,
         paper_id: str,
@@ -230,11 +247,7 @@ class DockerSandboxRunner:
             if exit_code in (124, 137):
                 status = "TIMEOUT"
 
-            # Write stdout / stderr logs
-            stdout_path = output_dir / "stdout.log"
-            stderr_path = output_dir / "stderr.log"
-            stdout_path.write_text(res.stdout, encoding="utf-8")
-            stderr_path.write_text(res.stderr, encoding="utf-8")
+            self._write_host_logs(output_dir, res.stdout, res.stderr)
 
             return SandboxExecutionResult(
                 status=status,
