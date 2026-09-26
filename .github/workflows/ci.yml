@@ -63,8 +63,6 @@ jobs:
   corpus:
     name: Corpus verification
     runs-on: ubuntu-latest
-    # Non-blocking until the seed corpus is fixed (issue #82); made blocking in the corpus-fix step.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6

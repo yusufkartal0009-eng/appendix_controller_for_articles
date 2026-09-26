@@ -2,7 +2,8 @@
 """Verify that every seed corpus entry points at a real paper, repository, and script.
 
 For each entry in the corpus JSON (default: data/seed_papers.json):
-  1. paper   - the paper page opens and its title matches the entry title
+  1. paper   - the paper's title matches the entry title (arXiv abstract page; Crossref for DOI
+               links such as bioRxiv, whose pages rate-limit automated clients)
   2. repo    - the GitHub repository exists (renames are followed and reported)
   3. license - GitHub's license (spdx_id) is allowed and equals the declared license
   4. script  - target_script exists in the repository at the pinned commit (repo_commit)
@@ -34,6 +35,7 @@ if str(project_root) not in sys.path:
 from src.config import ALLOWED_LICENSES, SEED_PAPERS_PATH  # noqa: E402
 
 GITHUB_API = "https://api.github.com"
+CROSSREF_API = "https://api.crossref.org/works"
 TITLE_MATCH_THRESHOLD = 0.9
 USER_AGENT = "repro-radar-corpus-verifier/1.0 (+https://github.com/yusufkartal0009-eng/appendix_controller_for_articles)"
 
@@ -81,6 +83,11 @@ def parse_arxiv_id(url: str) -> Optional[str]:
     return match.group(1) if match else None
 
 
+def parse_doi(url: str) -> Optional[str]:
+    match = re.search(r"(?:doi\.org|biorxiv\.org/content|medrxiv\.org/content)/(10\.\d{4,9}/[^\s?#]+?)(?:v\d+)?/?(?:[?#].*)?$", url or "")
+    return match.group(1) if match else None
+
+
 def parse_github_repo(url: str) -> Optional[Tuple[str, str]]:
     match = re.match(r"https?://github\.com/([^/]+)/([^/]+?)(?:\.git)?/?$", url or "")
     return (match.group(1), match.group(2)) if match else None
@@ -110,14 +117,24 @@ def check_paper(entry: dict, http) -> CheckResult:
     if not url:
         return CheckResult("paper", False, "no paper_url")
     arxiv_id = parse_arxiv_id(url)
-    page_url = f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else url
+    doi = None if arxiv_id else parse_doi(url)
+    if arxiv_id:
+        page_url = f"https://arxiv.org/abs/{arxiv_id}"
+    elif doi:
+        page_url = f"{CROSSREF_API}/{doi}"
+    else:
+        page_url = url
     try:
         status, body = http.get(page_url)
     except OSError as exc:
         return CheckResult("paper", False, f"network error fetching {page_url}: {exc}")
     if status != 200:
         return CheckResult("paper", False, f"HTTP {status} for {page_url}")
-    page_title = _extract_page_title(body)
+    if doi:
+        titles = (json.loads(body).get("message") or {}).get("title") or []
+        page_title = html.unescape(titles[0]).strip() if titles else None
+    else:
+        page_title = _extract_page_title(body)
     if not page_title:
         return CheckResult("paper", False, f"no title found at {page_url}")
     similarity = title_similarity(entry.get("title", ""), page_title)

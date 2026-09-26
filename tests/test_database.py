@@ -52,19 +52,19 @@ def test_seed_database_loads_papers(temp_db):
     """Test seeding database from data/seed_papers.json."""
     session = temp_db["session"]
     count = seed_database(session=session)
-    assert count >= 8
+    assert count >= 5
 
     # Verify query
     all_papers = get_all_papers(session=session)
     assert len(all_papers) == count
 
-    # Check paper_001
-    p1 = get_paper_by_id("paper_001", session=session)
-    assert p1 is not None
-    assert "Tree-Based" in p1.title
-    claims = p1.get_expected_claims_dict()
-    assert "xgboost_roc_auc" in claims
-    assert claims["xgboost_roc_auc"] == 0.842
+    # Check paper_002
+    p2 = get_paper_by_id("paper_002", session=session)
+    assert p2 is not None
+    assert "TabPFN" in p2.title
+    claims = p2.get_expected_claims_dict()
+    assert "mean_roc_auc" in claims
+    assert claims["mean_roc_auc"] == 0.895
 
 
 def test_save_and_retrieve_score(temp_db):
@@ -74,7 +74,7 @@ def test_save_and_retrieve_score(temp_db):
 
     score_dict = {
         "score_id": "score_test_01",
-        "paper_id": "paper_001",
+        "paper_id": "paper_002",
         "tier1_build": 100.0,
         "tier2_metrics": 90.0,
         "tier3_stability": 85.0,

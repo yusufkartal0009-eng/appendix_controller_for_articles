@@ -96,7 +96,7 @@ pip install -r requirements-dev.txt
 ```bash
 python cli.py init-db
 ```
-This executes `data/schema.sql` to initialize `data/repro_radar.db` and loads the 8 verified seed papers from `data/seed_papers.json`.
+This executes `data/schema.sql` to initialize `data/repro_radar.db` and loads the seed papers from `data/seed_papers.json` (see [Corpus Verification](docs/CORPUS_VERIFICATION.md) for what has and has not been checked).
 
 ### 4. List Curated Papers
 ```bash
@@ -126,9 +126,9 @@ pytest tests/ -v
 
 ## 🎯 Target Domain & Seed Dataset (`data/seed_papers.json`)
 
-For Week 1 discovery infrastructure, **"Tabular Machine Learning & Light NLP Benchmarks"** was selected to allow verification runs to conclude in 2–10 minutes on commodity CPUs without specialized GPU hardware:
-- **Frameworks:** TabPFN, TabR, FT-Transformer, FastSK, SAINT, TabNet, DANet.
-- **Dataset:** 8 verified research papers with authentic open source licenses (MIT, Apache-2.0, BSD-3-Clause), dedicated repositories, and documented numeric claims (`data/seed_papers.json`).
+The seed domain is **"Tabular Machine Learning & Light NLP Benchmarks"**:
+- **Frameworks:** TabPFN, FT-Transformer, TabR, FastSK, SAINT, DANets.
+- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); CI enforces this on every change. Runnability (hardware, data downloads, script arguments) and the numeric claims are **not yet verified**; see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
 
 ---
 
@@ -171,6 +171,7 @@ repro-radar/
 │   └── entrypoint.sh        # Timeout guard, log capture & execution_meta.json writer
 ├── scripts/
 │   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
+│   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
 │   ├── generate_academic_introduction_doc.py # Builds docs/repro_radar_introduction.docx
 │   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
 │   ├── setup_7week_board.py            # Provisions the weekly tracking board
@@ -189,7 +190,7 @@ repro-radar/
 │       └── stager.py        # RepoStager & DependencyManifest parser
 ├── data/
 │   ├── schema.sql           # SQLite DDL schema
-│   └── seed_papers.json     # 8 verified benchmark papers
+│   └── seed_papers.json     # Seed corpus (checked by scripts/verify_corpus.py)
 ├── docs/
 │   ├── BLUEPRINT.md         # Master project blueprint and milestone gates
 │   ├── ARCHITECTURE.md      # System constraints, components, and contracts
@@ -199,6 +200,7 @@ repro-radar/
 │   ├── SANDBOX_GUIDE.md     # Sandbox architecture, security specs & CLI guide
 │   ├── VALIDATION_RUBRIC.md # Metric validation rubric and tolerances
 │   ├── gap_analysis.md      # Known gaps, evidence, and remediation status
+│   ├── CORPUS_VERIFICATION.md # Per-entry corpus checks and what remains unverified
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
 │   ├── project_roadmap.md   # 7-week detailed roadmap
 │   ├── repro_radar_introduction.docx # Academic introduction document
@@ -214,7 +216,8 @@ repro-radar/
     ├── test_seed.py                # Seed dataset completeness tests
     ├── test_setup_github_backlog.py # Backlog script command-safety tests
     ├── test_stager.py              # Staging, dependency analysis & execution report tests
-    └── test_validation_rubric.py   # Tolerance and stability analyzer tests
+    ├── test_validation_rubric.py   # Tolerance and stability analyzer tests
+    └── test_verify_corpus.py       # Corpus verifier tests (offline, fake HTTP)
 ```
 
 ---
