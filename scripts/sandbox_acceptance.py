@@ -107,8 +107,7 @@ def summary(result, meta):
     else:
         lines.append("execution_meta.json: <not written>")
     if result.status != "COMPLETED" and result.stderr.strip():
-        lines.append("stderr (last 1500 chars):
-" + result.stderr.strip()[-1500:])
+        lines.append("stderr (last 1500 chars):\n" + result.stderr.strip()[-1500:])
     return lines
 
 
