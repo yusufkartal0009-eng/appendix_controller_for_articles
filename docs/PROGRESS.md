@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Side-Effect Approval Gate Restored (2026-09-26, Issue #78)
+- `AGENTS.md` §5.6 restored verbatim to its wording before PR #75: explicit go-ahead before git pushes, PR merges, or DB drops.
+- Reason: a project review found that the relaxed gate removed the human check where the most serious problems originated (PRs merged minutes after opening without a diff review, completion claims without evidence). Green tests did not catch those problems. The maintainer and mentor decided to keep the original rule.
+- The #69 entry below is kept as history; this entry supersedes it.
+
 ### M0 / DevOps: Tracking Reconciled with GitHub (2026-09-25, Issue #76)
 - GitHub: closed implemented issues #5, #16, #27, #28, #47 with evidence; closed weekly umbrella issues #49, #51, #52, #53 as duplicates of the per-issue backlog; added done/missing status notes to #2, #4, #10, #11, #13, #14, #15, #17, #18, #30; removed the seven empty "Hafta" milestones.
 - `docs/BLUEPRINT.md`: all 45 backlog references renumbered by title match against GitHub (they were one lower than the real issue numbers).
