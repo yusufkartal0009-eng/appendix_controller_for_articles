@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M2 / Sandbox: Docker Runs Misreported as FAILED on Non-1000 UIDs (2026-09-26, Issue #88)
+- Found by the first real-Docker acceptance run (Ubuntu CI runner, uid 1001): the runner re-wrote `stdout.log`/`stderr.log` that the container had already written as uid 1000, hit `PermissionError`, and reported every successful run as `FAILED` with its output dropped.
+- The runner now keeps logs the entrypoint wrote and never lets a log write change a run's result.
+- 1 new regression test; 78 / 78 tests green.
+
 ### M1 / Corpus: Seed Corpus Repaired and Verified by CI (2026-09-26, Issue #84)
 - `data/seed_papers.json`: 6 entries, **6 of 6 pass `scripts/verify_corpus.py`**; every entry now pins a `repo_commit`. Removed `paper_001` (no license) and `paper_007` (community reimplementation with no runnable script).
 - Fixed script paths (3 entries), renamed or mistyped repositories (3), licenses (4), titles (4), and `paper_005`'s paper link, year, and venue.
