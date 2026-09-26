@@ -34,6 +34,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M1 / Corpus: Automated Corpus Verifier (2026-09-26, Issue #82)
+- `scripts/verify_corpus.py` checks every seed entry: paper page title matches, GitHub repository exists (renames followed and reported), GitHub license is allowed and equals the declared license, and `target_script` exists at a pinned `repo_commit`. Any failure, including a network error, exits 1.
+- First run against `data/seed_papers.json`: **0 of 8 entries pass**. Beyond the missing pinned commits, it found 4 license mismatches or unrecognized licenses, 4 title mismatches (including `paper_005` pointing to an unrelated physics paper), 2 renamed repositories, and 1 missing repository (`paper_006`).
+- CI runs the verifier as a non-blocking job until the corpus is fixed in the next step.
+- 16 new offline unit tests (fake HTTP client); 73 / 73 tests green.
+
 ### M2 / Sandbox: No Silent Unisolated Fallback (2026-09-26, Issue #80)
 - `DockerSandboxRunner.run()` now raises `SandboxUnavailableError` and executes nothing when Docker is unavailable; previously it silently ran paper code on the host.
 - Unisolated local execution requires the explicit `--allow-unsafe-local` flag (`SandboxConfig.allow_unsafe_local`); such runs print a red warning and are recorded as `"isolated": false` in `run_report.json`. Docker runs record `"isolated": true`.

@@ -59,3 +59,18 @@ jobs:
             repro-radar-sandbox:ci python -c "print('ok')"
           cat out-fail/execution_meta.json
           python3 -c "import json; m = json.load(open('out-fail/execution_meta.json')); assert m['status'] == 'COMPLETED' and m['dependency_install_status'] == 'FAILED', m"
+
+  corpus:
+    name: Corpus verification
+    runs-on: ubuntu-latest
+    # Non-blocking until the seed corpus is fixed (issue #82); made blocking in the corpus-fix step.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Verify seed corpus (paper links, repositories, licenses, pinned scripts)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/verify_corpus.py
