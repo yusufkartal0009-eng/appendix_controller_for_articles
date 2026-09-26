@@ -157,12 +157,20 @@ Upon completion, each execution run produces structured artifacts inside `sandbo
 
 ---
 
-## 🔄 Graceful Host Fallback Mode
+## ⛔ No Docker: Execution Is Refused
 
-If Docker is not installed or the Docker daemon is temporarily unreachable on the development machine, `DockerSandboxRunner` automatically activates `ProcessSandboxRunner`.
+If Docker is not installed or the daemon is unreachable, `DockerSandboxRunner.run()` raises `SandboxUnavailableError` and **executes nothing**. `scripts/stage_and_bundle_repo.py` prints the reason to stderr and exits with code `4`. There is no silent fallback.
 
-In fallback mode:
-- The script executes in a managed local subprocess jail.
-- Timeout protection and environment variable isolation (`SANDBOX_OUTPUT_DIR`, `PYTHONUNBUFFERED`) remain active.
-- Output logs and run reports are recorded identically.
-- The `docker_used` flag is set to `false`, and `error_message` records the fallback reason so review systems can track whether execution was containerized or local.
+## ⚠️ Unsafe Local Mode (`--allow-unsafe-local`)
+
+**Development only, and only for code you trust.** With `--allow-unsafe-local` (or `SandboxConfig(allow_unsafe_local=True)` in code), a machine without Docker runs the target script through `ProcessSandboxRunner`, directly on the host:
+
+- There is **no isolation**: the script has your user's file-system permissions and full network access. Only the timeout and log capture remain.
+- A red warning is printed to stderr before execution, and a red `WARNING: NOT ISOLATED` banner after the run summary.
+- The run report records `"docker_used": false` and `"isolated": false`, so unisolated results can never be mistaken for sandboxed ones.
+
+```bash
+python scripts/stage_and_bundle_repo.py ./my_own_trusted_repo --script run.py --allow-unsafe-local
+```
+
+Never use this flag for third-party paper repositories.

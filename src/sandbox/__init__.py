@@ -5,6 +5,7 @@ from src.sandbox.runner import (
     ProcessSandboxRunner,
     SandboxConfig,
     SandboxExecutionResult,
+    SandboxUnavailableError,
 )
 from src.sandbox.stager import (
     DependencyManifest,
@@ -17,6 +18,7 @@ __all__ = [
     "ProcessSandboxRunner",
     "SandboxConfig",
     "SandboxExecutionResult",
+    "SandboxUnavailableError",
     "DependencyManifest",
     "RepoStager",
     "StagedRepo",
