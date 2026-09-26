@@ -36,7 +36,7 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ### M1 / Corpus: Seed Corpus Repaired and Verified by CI (2026-09-26, Issue #84)
 - `data/seed_papers.json`: 6 entries, **6 of 6 pass `scripts/verify_corpus.py`**; every entry now pins a `repo_commit`. Removed `paper_001` (no license) and `paper_007` (community reimplementation with no runnable script).
-- Fixed script paths (4 entries), renamed or mistyped repositories (3), licenses (4), titles (4), and `paper_005`'s paper link, year, and venue.
+- Fixed script paths (3 entries), renamed or mistyped repositories (3), licenses (4), titles (4), and `paper_005`'s paper link, year, and venue.
 - CI corpus job is now blocking.
 - `docs/CORPUS_VERIFICATION.md` records per-entry checks; runnability and all claim values are **UNVERIFIED**, and the claims of `paper_005` and `paper_008` are flagged SUSPECT.
 - README no longer calls the corpus "8 verified" papers or promises short CPU-only runs.
