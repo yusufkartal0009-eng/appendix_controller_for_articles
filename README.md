@@ -64,7 +64,7 @@ Repro Radar avoids subjective or punitive terminology. The AI Decision Layer ins
 ### Prerequisites
 - Python 3.11 (3.10+ supported)
 - Git
-- Optional: Docker Engine / Docker Desktop for isolated sandbox runs (a local process fallback is used without it)
+- Docker Engine / Docker Desktop to execute paper code. Without Docker, execution is refused unless you pass `--allow-unsafe-local` (see *Security, Isolation, & Ethical Standards* below). Docker is not needed to run the test suite.
 
 For the full list of system tools, Python packages, sandbox image contents, environment variables, and verified fresh-machine setup steps, see [Environment & Dependency Inventory](docs/ENVIRONMENT.md).
 
@@ -134,7 +134,7 @@ For Week 1 discovery infrastructure, **"Tabular Machine Learning & Light NLP Ben
 
 ## 🛡️ Security, Isolation, & Ethical Standards
 
-1. **Sandboxed Execution:** External code is never run unsandboxed on host operating systems; execution occurs in ephemeral containers with restricted CPU (2.0), memory (8GB), and complete network isolation (`--network none`).
+1. **Sandboxed Execution:** External code runs in ephemeral containers with restricted CPU (2.0), memory (8GB), and complete network isolation (`--network none`). If Docker is unavailable, execution is refused (exit code 4). The only way to run paper code on the host is the explicit `--allow-unsafe-local` flag: **development only, and only for code you trust.** Such runs are marked `"isolated": false` in `run_report.json` and print a red warning.
 2. **Neutral Diagnostic Reporting:** When code fails to replicate claims, Repro Radar avoids accusatory language, providing detailed stack traces and assigning a `Needs Review` status.
 3. **Open Licenses Only:** Only open source repositories (MIT, Apache-2.0, BSD, etc.) are evaluated.
 
@@ -185,7 +185,7 @@ repro-radar/
 │   ├── validation_rubric.py # Metric tolerances & multi-seed stability analysis
 │   └── sandbox/
 │       ├── __init__.py      # Sandbox package exports
-│       ├── runner.py        # DockerSandboxRunner & ProcessSandboxRunner fallback
+│       ├── runner.py        # DockerSandboxRunner; opt-in unisolated ProcessSandboxRunner
 │       └── stager.py        # RepoStager & DependencyManifest parser
 ├── data/
 │   ├── schema.sql           # SQLite DDL schema

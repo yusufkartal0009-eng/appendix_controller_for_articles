@@ -64,7 +64,7 @@ graph TD
    - Pydantic v2 validates all paper inputs; SQLAlchemy models define relational schema (`papers`, `runs`, `claims`, `scores`).
 
 2. **`area:sandbox` (`src/sandbox/`, `docker/`)**:
-   - Dual-mode architecture: `DockerRunner` for full container cgroup & network isolation; `LocalProcessRunner` as local fallback.
+   - `DockerSandboxRunner` provides container cgroup & network isolation. Without Docker it raises `SandboxUnavailableError`; the unisolated `ProcessSandboxRunner` runs only with the explicit `allow_unsafe_local` opt-in, and such runs are marked `isolated: false`.
    - Strict execution budget: 2 vCPU cores, 8GB memory ceiling, 600-second hard timeout.
 
 3. **`area:scoring` (`src/scoring.py`)**:

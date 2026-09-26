@@ -13,7 +13,7 @@
 | **Python** | Required | 3.11 recommended (3.10+ supported) | everything | Runtime for `cli.py`, `src/`, `scripts/`, `tests/` |
 | **pip / venv** | Required | bundled with Python | setup | Isolated `.venv` and package install |
 | **Git** | Required | any recent | `src/sandbox/stager.py` (`git clone`, `git checkout`, `git rev-parse`) | Source control and staging paper repositories |
-| **Docker Engine / Docker Desktop** | Optional | 24.x+ | `src/sandbox/runner.py` (`docker info`, `docker run`) | Isolated sandbox execution. Without it, `ProcessSandboxRunner` is used as a local fallback |
+| **Docker Engine / Docker Desktop** | Required to execute paper code (not for tests) | 24.x+ | `src/sandbox/runner.py` (`docker info`, `docker run`) | Isolated sandbox execution. Without it, execution is refused; `--allow-unsafe-local` runs trusted code unisolated on the host |
 | **GitHub CLI (`gh`)** | Optional (maintainers) | any recent, authenticated | `scripts/setup_github_backlog.py`, `scripts/setup_7week_board.py`, `scripts/setup_github_board.sh` | Labels, milestones, issues, PRs |
 | **Bash** | Optional | 4+ (Git Bash on Windows) | `scripts/setup_github_board.sh`, `docker/entrypoint.sh` (inside the container) | Shell scripts |
 
@@ -159,5 +159,5 @@ Clean Windows 11 Home machine, Python 3.11.9, fresh `.venv` from `requirements-d
 - `ruff check .` → **All checks passed**
 - `pytest tests/` → **52 passed**
 - `cli.py init-db` → schema initialized, 8 seed papers loaded
-- Docker not installed → the suite still passes: sandbox tests use `ProcessSandboxRunner` and
-  mock the Docker availability check, so Docker is not needed to run tests
+- Docker not installed → the suite still passes: sandbox tests mock the Docker availability check and
+  opt into `ProcessSandboxRunner` explicitly, so Docker is not needed to run tests

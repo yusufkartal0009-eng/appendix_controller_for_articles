@@ -26,8 +26,9 @@
 | G13 | Low | Repo structure | Missing `pyproject.toml`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CLAUDE.md` | #44, #45 | Partly fixed: `pyproject.toml` added in #71 |
 | G14 | Low | Sandbox | No `.dockerignore`; obsolete Compose `version` key | — | Fixed in #71 |
 | G15 | Low | Repo hygiene | Generated `.docx` committed next to its generator | — | Open |
+| G16 | High | Security | Without Docker, paper code silently ran on the host with no isolation | #80 | Fixed in #80: execution refused without Docker; opt-in `--allow-unsafe-local` marks runs `isolated: false` |
 
-Status last updated 2026-09-25. Detailed findings below describe the state at the baseline commit.
+Status last updated 2026-09-26. Detailed findings below describe the state at the baseline commit. G16 was missed by this analysis and added after an external review on 2026-09-26.
 
 ---
 
@@ -154,12 +155,17 @@ Nine `subprocess.run` calls rely on manual return-code checks (`PLW1510`).
 
 **Remedy:** either treat the script as the source and publish the `.docx` as a release asset, or add a test that regenerates it and fails on drift.
 
+### G16 — Silent unisolated fallback without Docker (High, added 2026-09-26)
+Not found by the original analysis; reported by an external review. When `docker` was unavailable, `DockerSandboxRunner.run()` (`src/sandbox/runner.py`, "graceful fallback") silently switched to `ProcessSandboxRunner`, so third-party paper code ran directly on the host with the user's files and network, with no warning. This contradicted the README's claim that external code never runs unsandboxed, and several docs presented the fallback as a feature (the "good shape" list below did too).
+
+**Remedy (done in #80):** raise `SandboxUnavailableError` and execute nothing without Docker; allow unisolated runs only through the explicit `--allow-unsafe-local` / `SandboxConfig.allow_unsafe_local` opt-in, print a red warning, and record `"isolated": false` in the run report.
+
 ---
 
 ## 4. What is in good shape
 
 - The full suite is green on a clean machine, and core modules (`models`, `metric_extractor`, `scoring`, `validation_rubric`) sit at 82–96% coverage.
-- The sandbox design is defensive: non-root user, read-only root filesystem, `--network none`, CPU/memory/PID limits, and a process fallback when Docker is absent.
+- The container sandbox is defensive: non-root user, read-only root filesystem, `--network none`, and CPU/memory/PID limits. (The silent process fallback previously listed here was a security gap; see G16.)
 - Tracked text files contain no non-English content, consistent with `AGENTS.md` §5.1.
 - Environment and dependencies are inventoried in [`ENVIRONMENT.md`](ENVIRONMENT.md).
 
