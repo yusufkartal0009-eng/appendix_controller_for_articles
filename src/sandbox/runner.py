@@ -8,11 +8,14 @@ Implements:
   * Hardware resource quotas (--cpus, --memory, --memory-swap, --pids-limit)
   * Privilege escalation prevention (--security-opt no-new-privileges:true)
   * Non-root user execution (--user 1000:1000)
-- ProcessSandboxRunner: Local fallback subprocess runner enforcing timeouts and output capture.
+- ProcessSandboxRunner: Unisolated local subprocess runner (timeouts and output capture only).
+  DockerSandboxRunner never falls back to it silently: without Docker it raises
+  SandboxUnavailableError unless SandboxConfig.allow_unsafe_local is set.
 """
 
 from dataclasses import dataclass, field
 import json
+import logging
 import os
 from pathlib import Path
 import shutil
@@ -22,6 +25,12 @@ import time
 from typing import Any, Dict, List, Optional, Union
 
 from src.config import DEFAULT_TIMEOUT_SECONDS, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
+
+logger = logging.getLogger(__name__)
+
+
+class SandboxUnavailableError(RuntimeError):
+    """Raised when isolated execution is impossible and unisolated execution was not opted into."""
 
 
 @dataclass
@@ -40,6 +49,8 @@ class SandboxConfig:
     user_id: int = 1000
     group_id: int = 1000
     env_vars: Dict[str, str] = field(default_factory=dict)
+    # Run on the host without isolation when Docker is unavailable. Only for code you trust.
+    allow_unsafe_local: bool = False
 
 
 @dataclass
@@ -54,6 +65,7 @@ class SandboxExecutionResult:
     docker_used: bool
     output_dir: Path
     error_message: Optional[str] = None
+    isolated: bool = False  # True only when the code ran inside the Docker sandbox
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert execution result to serializable dictionary."""
@@ -63,6 +75,7 @@ class SandboxExecutionResult:
             "duration_seconds": round(self.duration_seconds, 3),
             "command_executed": self.command_executed,
             "docker_used": self.docker_used,
+            "isolated": self.isolated,
             "output_dir": str(self.output_dir),
             "error_message": self.error_message,
         }
@@ -167,7 +180,11 @@ class DockerSandboxRunner:
         script_args: Optional[List[str]] = None,
         packages_dir: Optional[Union[str, Path]] = None,
     ) -> SandboxExecutionResult:
-        """Execute paper code inside Docker sandbox, falling back to ProcessSandboxRunner if Docker is absent."""
+        """Execute paper code inside the Docker sandbox.
+
+        Raises SandboxUnavailableError when Docker is unavailable, unless the config explicitly
+        opts into unisolated local execution (allow_unsafe_local), which is only for trusted code.
+        """
         output_dir = SANDBOX_RUNS_DIR / paper_id
         output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -176,14 +193,20 @@ class DockerSandboxRunner:
             target_cmd.extend(script_args)
 
         if not self.is_docker_available():
-            # Graceful process fallback when Docker daemon is not running on the host
+            if not self.config.allow_unsafe_local:
+                raise SandboxUnavailableError(
+                    "Docker is not available, so the code cannot be isolated; refusing to run it on the host. "
+                    "Install and start Docker, or pass --allow-unsafe-local (SandboxConfig.allow_unsafe_local) "
+                    "to run unisolated, only for code you trust."
+                )
+            logger.warning("Docker unavailable; running %s WITHOUT isolation (allow_unsafe_local)", paper_id)
             fallback_runner = ProcessSandboxRunner(timeout_seconds=self.config.timeout_seconds)
             return fallback_runner.run(
                 paper_id=paper_id,
                 repo_dir=repo_dir,
                 target_script=target_script,
                 script_args=script_args,
-                fallback_reason="Docker CLI / daemon not detected on host environment",
+                fallback_reason="Docker unavailable; unisolated local run explicitly allowed (allow_unsafe_local)",
             )
 
         docker_cmd = self.build_docker_command(
@@ -222,6 +245,7 @@ class DockerSandboxRunner:
                 command_executed=docker_cmd,
                 docker_used=True,
                 output_dir=output_dir,
+                isolated=True,
             )
         except subprocess.TimeoutExpired as exc:
             duration = time.time() - start_time
@@ -235,6 +259,7 @@ class DockerSandboxRunner:
                 docker_used=True,
                 output_dir=output_dir,
                 error_message=f"Timeout of {self.config.timeout_seconds}s exceeded.",
+                isolated=True,
             )
         except Exception as err:
             duration = time.time() - start_time
@@ -248,11 +273,15 @@ class DockerSandboxRunner:
                 docker_used=True,
                 output_dir=output_dir,
                 error_message=str(err),
+                isolated=True,
             )
 
 
 class ProcessSandboxRunner:
-    """Local fallback runner that executes targets via subprocess with timeout guards."""
+    """Unisolated local runner: executes targets via subprocess with timeout guards only.
+
+    The code runs on the host with the caller's permissions and network access. Use only for trusted code.
+    """
 
     def __init__(self, timeout_seconds: int = DEFAULT_TIMEOUT_SECONDS):
         self.timeout_seconds = timeout_seconds

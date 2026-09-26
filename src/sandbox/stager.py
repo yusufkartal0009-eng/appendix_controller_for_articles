@@ -327,6 +327,7 @@ class RepoStager:
             "exit_code": result.exit_code,
             "duration_seconds": round(result.duration_seconds, 3),
             "docker_used": result.docker_used,
+            "isolated": result.isolated,
             "error_message": result.error_message,
             "output_dir": str(result.output_dir),
             "generated_files": generated_files,

@@ -7,8 +7,14 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from scripts import stage_and_bundle_repo
 from scripts.stage_and_bundle_repo import sanitize_paper_id
-from src.sandbox.runner import DockerSandboxRunner, SandboxExecutionResult
+from src.sandbox.runner import (
+    DockerSandboxRunner,
+    SandboxConfig,
+    SandboxExecutionResult,
+    SandboxUnavailableError,
+)
 from src.sandbox.stager import DependencyManifest, RepoStager, StagedRepo
 
 
@@ -98,7 +104,7 @@ def test_stage_local_repository(tmp_path):
 
 
 def test_execute_staged_produces_report_and_metrics(tmp_path, monkeypatch):
-    # Exercise the local process runner even on hosts where Docker is available (e.g. CI).
+    # Exercise the opted-in local process runner even on hosts where Docker is available (e.g. CI).
     monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
     staging_root = tmp_path / "staging"
     stager = RepoStager(staging_root=staging_root)
@@ -122,9 +128,13 @@ def test_execute_staged_produces_report_and_metrics(tmp_path, monkeypatch):
         source=str(source_dir),
     )
 
-    report = stager.execute_staged(staged, target_script="reproduce.py")
+    report = stager.execute_staged(
+        staged, target_script="reproduce.py", config=SandboxConfig(allow_unsafe_local=True)
+    )
 
     assert report["paper_id"] == "paper_metric_test"
+    assert report["isolated"] is False
+    assert json.loads(Path(report["run_report_path"]).read_text(encoding="utf-8"))["isolated"] is False
     assert report["status"] == "COMPLETED"
     assert report["exit_code"] == 0
     assert "reproduce.py" in report["target_script"]
@@ -164,3 +174,54 @@ def test_execute_staged_reports_unreadable_execution_meta(tmp_path, caplog):
     assert report["meta"] == {}
     assert "execution_meta.json" in report["meta_error"]
     assert any("execution_meta.json" in r.getMessage() for r in caplog.records)
+
+def test_execute_staged_refuses_without_docker_by_default(tmp_path, monkeypatch):
+    """Without Docker and without opt-in, staging does not execute the paper code."""
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    marker = tmp_path / "executed.marker"
+    (source_dir / "reproduce.py").write_text(f"open(r'{marker}', 'w').write('ran')\n", encoding="utf-8")
+    staged = stager.stage_repository(paper_id="paper_refuse_test", source=str(source_dir))
+
+    with pytest.raises(SandboxUnavailableError):
+        stager.execute_staged(staged, target_script="reproduce.py")
+
+    assert not marker.exists()
+
+
+def _run_cli(monkeypatch, argv):
+    monkeypatch.setattr(stage_and_bundle_repo.sys, "argv", ["stage_and_bundle_repo.py", *argv])
+    return stage_and_bundle_repo.main()
+
+
+def test_cli_without_docker_exits_with_error(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print('ran')\n", encoding="utf-8")
+
+    code = _run_cli(monkeypatch, [str(source_dir), "--paper-id", "cli_no_docker", "--staging-dir", str(tmp_path / "s")])
+
+    assert code == stage_and_bundle_repo.EXIT_SANDBOX_UNAVAILABLE
+    assert "--allow-unsafe-local" in capsys.readouterr().err
+
+
+def test_cli_unsafe_local_flag_runs_and_warns(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print('ran')\n", encoding="utf-8")
+    out_json = tmp_path / "report.json"
+
+    code = _run_cli(
+        monkeypatch,
+        [str(source_dir), "--paper-id", "cli_unsafe", "--staging-dir", str(tmp_path / "s"),
+         "--allow-unsafe-local", "--output-json", str(out_json)],
+    )
+
+    captured = capsys.readouterr()
+    assert code == 0
+    assert "NOT ISOLATED" in captured.err
+    assert json.loads(out_json.read_text(encoding="utf-8"))["isolated"] is False

@@ -19,7 +19,7 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.sandbox.runner import SandboxConfig
+from src.sandbox.runner import SandboxConfig, SandboxUnavailableError
 from src.sandbox.stager import RepoStager
 
 logging.basicConfig(
@@ -28,6 +28,18 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("sandbox-stager")
+
+EXIT_SANDBOX_UNAVAILABLE = 4
+RED = "\033[91m"
+RESET = "\033[0m"
+UNSAFE_LOCAL_PRERUN_WARNING = (
+    "WARNING: --allow-unsafe-local is set. If Docker is unavailable, the target code will run directly on "
+    "this machine with your files and network, NOT ISOLATED. Use only for code you trust."
+)
+UNSAFE_LOCAL_WARNING = (
+    "WARNING: NOT ISOLATED. Docker was unavailable and --allow-unsafe-local was set: the target code ran "
+    "directly on this machine with your files and network. Use only for code you trust."
+)
 
 
 def sanitize_paper_id(source: str) -> str:
@@ -109,6 +121,16 @@ def parse_args() -> argparse.Namespace:
         help="Container CPU quota (default: 2.0).",
     )
     parser.add_argument(
+        "--allow-unsafe-local",
+        dest="allow_unsafe_local",
+        action="store_true",
+        default=False,
+        help=(
+            "If Docker is unavailable, run the target script directly on this machine WITHOUT isolation. "
+            "Development only, and only for code you trust. The run report is marked isolated=false."
+        ),
+    )
+    parser.add_argument(
         "--output-json",
         dest="output_json",
         default=None,
@@ -180,7 +202,10 @@ def main() -> int:
         timeout_seconds=args.timeout,
         memory_limit=args.memory,
         cpus=args.cpus,
+        allow_unsafe_local=args.allow_unsafe_local,
     )
+    if args.allow_unsafe_local:
+        print(f"{RED}{UNSAFE_LOCAL_PRERUN_WARNING}{RESET}", file=sys.stderr)
 
     try:
         report = stager.execute_staged(
@@ -189,6 +214,9 @@ def main() -> int:
             script_args=args.script_args,
             config=config,
         )
+    except SandboxUnavailableError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return EXIT_SANDBOX_UNAVAILABLE
     except Exception as exc:
         logger.error("Execution failed: %s", exc)
         return 3
@@ -198,6 +226,7 @@ def main() -> int:
     print(f"Exit Code:       {report.get('exit_code')}")
     print(f"Duration:        {report.get('duration_seconds')}s")
     print(f"Docker Used:     {report.get('docker_used')}")
+    print(f"Isolated:        {report.get('isolated')}")
     if report.get("fallback_reason"):
         print(f"Fallback Reason: {report.get('fallback_reason')}")
     print(f"Output Dir:      {report.get('output_dir')}")
@@ -205,6 +234,8 @@ def main() -> int:
     if "metrics" in report:
         print(f"Metrics:         {json.dumps(report['metrics'], indent=2)}")
     print("=================================================================")
+    if not report.get("isolated"):
+        print(f"{RED}{UNSAFE_LOCAL_WARNING}{RESET}", file=sys.stderr)
 
     if args.output_json:
         out_path = Path(args.output_json).resolve()

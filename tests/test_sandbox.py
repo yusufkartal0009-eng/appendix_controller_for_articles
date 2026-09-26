@@ -2,13 +2,16 @@
 
 import os
 from pathlib import Path
+import subprocess
 import tempfile
 import pytest
 
+from src.sandbox import runner as runner_module
 from src.sandbox.runner import (
     DockerSandboxRunner,
     ProcessSandboxRunner,
     SandboxConfig,
+    SandboxUnavailableError,
 )
 
 
@@ -24,6 +27,7 @@ def test_sandbox_config_defaults():
     assert cfg.read_only_root is True
     assert cfg.user_id == 1000
     assert cfg.group_id == 1000
+    assert cfg.allow_unsafe_local is False
 
 
 def test_build_docker_command_security_flags():
@@ -120,21 +124,54 @@ def test_process_sandbox_runner_timeout(tmp_path):
     assert result.exit_code == 124
 
 
-def test_docker_sandbox_runner_fallback(tmp_path, monkeypatch):
-    """Verify DockerSandboxRunner gracefully falls back to local runner when docker is absent."""
-    script_file = tmp_path / "eval.py"
-    script_file.write_text("print('Fallback executed')\n", encoding="utf-8")
+def _docker_available(monkeypatch, available):
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: available))
 
-    # Force is_docker_available to return False
-    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
 
-    runner = DockerSandboxRunner()
-    result = runner.run(
-        paper_id="test_paper_fallback",
-        repo_dir=tmp_path,
-        target_script="eval.py",
+def test_docker_runner_refuses_to_run_without_docker(tmp_path, monkeypatch):
+    """Without Docker and without opt-in, nothing is executed on the host."""
+    marker = tmp_path / "executed.marker"
+    (tmp_path / "eval.py").write_text(
+        f"open(r'{marker}', 'w').write('ran')\n", encoding="utf-8"
     )
+    _docker_available(monkeypatch, False)
 
-    assert result.docker_used is False
+    with pytest.raises(SandboxUnavailableError, match="--allow-unsafe-local"):
+        DockerSandboxRunner().run(paper_id="test_no_docker", repo_dir=tmp_path, target_script="eval.py")
+
+    assert not marker.exists()
+
+
+def test_docker_runner_unsafe_local_opt_in_marks_run_unisolated(tmp_path, monkeypatch):
+    """With the explicit opt-in, the script runs locally and the result says it was not isolated."""
+    (tmp_path / "eval.py").write_text("print('Local run executed')\n", encoding="utf-8")
+    _docker_available(monkeypatch, False)
+
+    runner = DockerSandboxRunner(config=SandboxConfig(allow_unsafe_local=True))
+    result = runner.run(paper_id="test_unsafe_local", repo_dir=tmp_path, target_script="eval.py")
+
     assert result.status == "COMPLETED"
-    assert "Fallback executed" in result.stdout
+    assert "Local run executed" in result.stdout
+    assert result.docker_used is False
+    assert result.isolated is False
+    assert result.to_dict()["isolated"] is False
+
+
+def test_docker_runner_with_docker_reports_docker_used_and_isolated(tmp_path, monkeypatch):
+    """With Docker available, execution goes through `docker run` and is marked isolated."""
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    calls = []
+
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd)
+        return subprocess.CompletedProcess(args=cmd, returncode=0, stdout="ok\n", stderr="")
+
+    monkeypatch.setattr(runner_module.subprocess, "run", fake_run)
+
+    result = DockerSandboxRunner().run(paper_id="test_with_docker", repo_dir=tmp_path, target_script="eval.py")
+
+    assert calls and calls[0][:2] == ["docker", "run"]
+    assert result.docker_used is True
+    assert result.isolated is True
+    assert result.to_dict()["docker_used"] is True
