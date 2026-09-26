@@ -120,24 +120,5 @@
       "forest_covertype_accuracy": "Table 2 (Forest CoverType Accuracy)",
       "higgs_auroc": "Table 2 (HIGGS Classification AUROC)"
     }
-  },
-  {
-    "paper_id": "paper_999_broken_demo",
-    "title": "DANets: Deep Abstract Networks for Tabular Data Classification and Regression",
-    "year": 2022,
-    "venue": "AAAI 2022",
-    "repo_url": "https://github.com/WhatAShot/DANet",
-    "repo_commit": "b007c57121ec9082f6ef19ec7465d9df70767c26",
-    "paper_url": "https://arxiv.org/abs/2112.02962",
-    "license": "MIT",
-    "target_script": "does_not_exist.py",
-    "expected_claims": {
-      "forest_covertype_accuracy": 0.971,
-      "higgs_auroc": 0.849
-    },
-    "source_table_or_section": {
-      "forest_covertype_accuracy": "Table 2 (Forest CoverType Accuracy)",
-      "higgs_auroc": "Table 2 (HIGGS Classification AUROC)"
-    }
   }
 ]
