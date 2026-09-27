@@ -66,8 +66,8 @@ def generate_cover_banner() -> Path:
 
     # Text rendering with fallback font
     title_text = "REPRO RADAR"
-    subtitle_text = "Autonomous Scientific Replication & Multi-Tier Verification Platform"
-    mission_text = "Auditing Empirical Research Codebases Across IEEE, ACM, NeurIPS & Open Science"
+    subtitle_text = "Container-Isolated Reproducibility Checks for Paper Code"
+    mission_text = "DRAFT - pilot study on tabular ML benchmarks"
 
     # Draw Title
     draw.text((60, 90), title_text, fill=(240, 246, 252), font_size=56)
@@ -81,7 +81,7 @@ def generate_cover_banner() -> Path:
         ("4-Tier Scoring Rubric", (30, 58, 138), (147, 197, 253)),
         ("Isolated Docker Sandbox", (6, 78, 59), (110, 231, 183)),
         ("Multi-Seed Variance Engine", (88, 28, 135), (216, 180, 254)),
-        ("AI Decision Layer", (124, 45, 18), (253, 186, 116)),
+        ("Corpus Verification", (124, 45, 18), (253, 186, 116)),
     ]
 
     badge_x = 64
@@ -203,14 +203,14 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
         header = section.header
         hp = header.paragraphs[0]
         hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        hrun = hp.add_run("Repro Radar | Academic Introduction & System Architecture")
+        hrun = hp.add_run("DRAFT - not for citation | Repro Radar introduction | claims and sources: docs/INTRODUCTION_SOURCES.md")
         hrun.font.size = Pt(8.5)
         hrun.font.color.rgb = RGBColor(148, 163, 184)
 
         footer = section.footer
         fp = footer.paragraphs[0]
         fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        frun = fp.add_run("Appendix Controller for Empirical Scientific Research Articles • Open Science Specification")
+        frun = fp.add_run("Repro Radar (appendix_controller_for_articles) - draft introduction")
         frun.font.size = Pt(8.5)
         frun.font.color.rgb = RGBColor(148, 163, 184)
 
@@ -226,7 +226,7 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     p_title = doc.add_paragraph()
     p_title.paragraph_format.space_before = Pt(10)
     p_title.paragraph_format.space_after = Pt(4)
-    run_title = p_title.add_run("Repro Radar: Automated Empirical Replication and Multi-Tier Verification for Scientific Codebases")
+    run_title = p_title.add_run("DRAFT — Repro Radar: Container-Isolated Reproducibility Checks for Computational Paper Appendices")
     run_title.bold = True
     run_title.font.size = Pt(22)
     run_title.font.color.rgb = RGBColor(26, 54, 93)
@@ -234,7 +234,7 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     p_sub = doc.add_paragraph()
     p_sub.paragraph_format.space_before = Pt(0)
     p_sub.paragraph_format.space_after = Pt(14)
-    run_sub = p_sub.add_run("An Autonomous, Container-Isolated Audit Engine and 4-Tier Reproducibility Evaluation Rubric for Empirical AI, Machine Learning, and Scientific Computing Articles")
+    run_sub = p_sub.add_run("A sandboxed audit tool and 4-Tier reproducibility rubric, evaluated as a pilot study on tabular ML benchmarks")
     run_sub.font.size = Pt(12)
     run_sub.font.italic = True
     run_sub.font.color.rgb = RGBColor(74, 85, 104)
@@ -262,8 +262,8 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     cell_01.paragraphs[0].add_run("appendix_controller_for_articles\nGitHub: yusufkartal0009-eng/appendix_controller_for_articles")
     cell_01.paragraphs[0].runs[1].font.size = Pt(9.5)
 
-    cell_10.paragraphs[0].add_run("Publication Scope:\n").bold = True
-    cell_10.paragraphs[0].add_run("Universal Scientific Appendix Auditor (IEEE, ACM, NeurIPS, ICML)")
+    cell_10.paragraphs[0].add_run("Scope:\n").bold = True
+    cell_10.paragraphs[0].add_run("Pilot study on tabular ML benchmarks (6 seed papers)")
     cell_10.paragraphs[0].runs[1].font.size = Pt(9.5)
 
     cell_11.paragraphs[0].add_run("Evaluation Standard:\n").bold = True
@@ -275,31 +275,31 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     # Abstract Box
     add_callout(
         doc,
-        "EXECUTIVE ABSTRACT",
-        "Empirical scientific disciplines face a profound replication bottleneck. While publication velocity has accelerated exponentially, independent computational reproducibility has lagged severely behind. Published claims frequently fail verification due to unversioned dependencies, hidden random seeds, hardware-dependent microarchitecture variations, and non-deterministic execution environments. Repro Radar introduces a domain-agnostic, container-isolated automated verification platform designed to evaluate research codebases and their accompanying numerical claims. Operating across a hardened Docker sandbox with zero network egress, CPU/memory quotas, and ephemeral user namespaces, the system executes paper-code pairs and applies a rigorous 4-Tier Reproducibility Rubric (Build Integrity, Metric Concordance, Multi-Seed Variance, and Software Hygiene). Rather than assigning punitive labels, an AI Decision Layer generates objective, diagnostic evaluations ('Verified', 'Partially Verified', 'Needs Review', 'Failed') that assist peer reviewers, academic funding agencies, and downstream practitioners in certifying research integrity.",
+        "ABSTRACT (DRAFT)",
+        "Computational results can only be checked if the code, data, and environment behind them can be run again. Repro Radar is a tool that stages the code of a published paper, runs it inside a restricted Docker container, and compares the numbers it produces with the numbers the paper reports, using a 4-Tier rubric (build, metric agreement, seed stability, software hygiene). This draft describes a pilot study on tabular ML benchmarks. The sandbox's isolation properties are checked against a real Docker daemon in continuous integration; the seed corpus of 6 papers passes automated checks of links, repositories, licenses, and pinned scripts; no paper has been run end to end yet, and the rubric has so far only been exercised with simulated outputs. An AI component for diagnosing failed runs is planned but not implemented.",
     )
 
     # SECTION 1
     add_styled_heading(doc, "1. The Crisis of Empirical Reproducibility in Scientific Literature", level=1)
 
     p1 = doc.add_paragraph(
-        "Scientific discovery relies fundamentally on independent verifiability. In 1995, geophysicist Jon Claerbout formulated a founding tenet of computational science: 'An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.' Over the subsequent three decades, the transition from closed computational models to open scientific software has produced unprecedented scientific advances. However, this expansion has concurrently catalyzed a pervasive replication crisis across empirical computing, statistical modeling, and machine learning."
+        "Scientific results that depend on computation are only as checkable as the code behind them. Jon Claerbout argued for reproducible computational research in the early 1990s [1]. Donoho later recalled Claerbout's point, in a form paraphrased by Buckheit and Donoho [2]: “an article about computational result is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result” [3]. Practices and tools for implementing reproducible research have since been collected in book form [4]."
     )
     p1.paragraph_format.line_spacing = 1.15
     p1.paragraph_format.space_after = Pt(8)
 
     p2 = doc.add_paragraph(
-        "Recent large-scale replication initiatives conducted across flagship conferences (including NeurIPS, ICML, ICLR, and IEEE Transactions) reveal that fewer than 35% of published empirical papers can be independently reproduced from their repository artifacts without substantial manual interventions by domain experts. The root causes of this failure mode are multifaceted and systemic:"
+        "Concern about reproducibility is widespread: a Nature survey of 1,500 scientists described a ‘crisis’ in research reproducibility [5], and the NeurIPS 2019 reproducibility program published a report on improving reproducibility in machine learning research [6]. In deep reinforcement learning, reproducing state-of-the-art results is “seldom straightforward” because of non-deterministic benchmark environments and variance intrinsic to the methods [7]. The obstacles this project addresses, with evidence from its own pilot corpus, are:"
     )
     p2.paragraph_format.line_spacing = 1.15
     p2.paragraph_format.space_after = Pt(6)
 
     # Bullet list of failure modes
     bullet_points = [
-        ("The Silent Decay of Dependency Ecosystems: ", "Academic research repositories routinely omit version pinning in manifest files, or fail to document system-level library dependencies (e.g. CUDA drivers, OpenBLAS, compiler flags). Within 6 to 18 months of publication, breaking API changes in upstream libraries render research code entirely uncompilable."),
-        ("Stochastic Cherry-Picking and Seed Fragility: ", "Empirical improvements in deep learning and statistical models frequently hold true only under a singular, undisclosed random seed. In the absence of multi-seed variance analysis, minor statistical fluctuations are mistakenly celebrated as novel theoretical breakthroughs."),
-        ("Hardware Confounding and Floating-Point Drift: ", "Non-deterministic GPU reduction algorithms, non-associative floating-point summation (IEEE 754 standards), and differing CPU instruction sets (AVX-512 vs. ARM NEON) produce numerical variations that cause naive verification tools to reject valid scientific replications."),
-        ("Absence of Automated Verification Infrastructure: ", "Peer reviewers and journal editors operate under severe time constraints. Manually provisioning isolated hardware environments, debugging path errors, and executing hours of training runs is untenable for human reviewers without dedicated automation."),
+        ("Code that moved or changed: ", "in this project's seed corpus, repositories had been renamed and one target script had been deleted by a later rewrite of its code base, so papers must be pinned to an exact commit (docs/CORPUS_VERIFICATION.md)."),
+        ("Numbers that do not trace to the paper: ", "in the same corpus, only 2 of 16 recorded claims could be found in their papers; the rest must be re-extracted before they are compared (docs/CORPUS_VERIFICATION.md)."),
+        ("Run-to-run and seed variance: ", "results can vary between runs and random seeds, which makes a single reported number hard to interpret [7]."),
+        ("Manual effort: ", "re-running a paper requires reconstructing its environment, data, and hardware; this project aims to automate the parts that can be automated and to report the rest."),
     ]
 
     for title, body in bullet_points:
@@ -316,7 +316,7 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     add_styled_heading(doc, "2. Architectural Principles of Container-Isolated Sandboxing", level=1)
 
     p3 = doc.add_paragraph(
-        "Executing third-party scientific code poses acute operational risks. Untrusted research scripts may invoke unvetted system commands, initiate arbitrary network calls, consume boundless memory, or overwrite host filesystems. Repro Radar resolves this tension by decoupling execution from the host operating system through a defense-in-depth sandbox topology."
+        "Running third-party code carries risks: it may make network calls, exhaust memory, or write to the host file system. Repro Radar mitigates these risks by running paper code only inside a restricted Docker container, and it refuses to run the code when Docker is unavailable. Each property in the table below is checked against a real Docker daemon in continuous integration (docs/SANDBOX_ACCEPTANCE.md). The container still shares the host kernel, so these measures reduce the risk but do not eliminate it."
     )
     p3.paragraph_format.line_spacing = 1.15
     p3.paragraph_format.space_after = Pt(8)
@@ -340,11 +340,11 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
         run.font.size = Pt(9.5)
 
     table_data = [
-        ("Network Egress & Ingress", "Docker '--network none'", "Completely prevents unauthorized data exfiltration and eliminates hidden dependencies on dynamic external web services."),
-        ("Filesystem Immutability", "'--read-only' Root + Read-only Repo", "Locks container root. Source code is mounted under '/workspace/repo:ro' to guarantee that audited code cannot mutate its own source."),
-        ("Temporary Memory Jails", "'--tmpfs /tmp:rw,noexec,nosuid'", "In-memory scratchpad that strictly prohibits executable binaries or setuid elevation within temporary workspaces."),
-        ("User Space Isolation", "Non-Root UID:GID 1000:1000", "Enforces the principle of least privilege. Prevents container breakout vulnerabilities through Linux kernel capabilities."),
-        ("Resource Bounds", "--cpus=2.0, --memory=8g, --pids-limit=100", "Prevents host resource starvation, CPU monopolization, and malicious fork-bomb recursion."),
+        ("Network", "Docker '--network none'", "Outbound TCP, DNS, and HTTPS fail inside the container (acceptance check 2)."),
+        ("Filesystem", "'--read-only' root; repository mounted read-only", "Writes to /, /usr, and the paper's repository fail with EROFS (check 3)."),
+        ("Writable scratch space", "tmpfs /tmp and /workspace/home: noexec, nosuid", "Code can write scratch files but cannot execute or load what it wrote (check 7)."),
+        ("User", "Non-root UID:GID 1000:1000, no-new-privileges", "Code runs without root privileges (check 1); this alone does not prevent container escapes."),
+        ("Resources", "--cpus=2.0, --memory=8g, --pids-limit=100", "CPU, memory, and process limits are enforced; an out-of-memory kill is reported as OOM_KILLED (checks 8, 9)."),
     ]
 
     for row_idx, row in enumerate(table_data, start=1):
@@ -365,7 +365,7 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     add_styled_heading(doc, "3. The Four-Tier (4-Tier) Reproducibility Rubric", level=1)
 
     p4 = doc.add_paragraph(
-        "Binary classifications of reproducibility ('reproduced' vs. 'not reproduced') fail to capture the nuanced realities of scientific software engineering. A codebase that compiles effortlessly, adheres to open-source licensing standards, and produces metrics within 2% of reported claims differs profoundly from one that crashes on import or yields wildly conflicting predictions. Repro Radar evaluates replication fidelity across four structured, weighted tiers:"
+        "Binary classifications of reproducibility ('reproduced' vs. 'not reproduced') fail to capture the nuanced realities of scientific software engineering. A codebase that compiles effortlessly, adheres to open-source licensing standards, and produces metrics within tolerance of the reported claims differs profoundly from one that crashes on import or yields wildly conflicting predictions. Repro Radar evaluates replication fidelity across four weighted tiers. The rubric is implemented in the code base, but at the time of writing it has only been exercised with simulated outputs, not with real paper runs:"
     )
     p4.paragraph_format.line_spacing = 1.15
     p4.paragraph_format.space_after = Pt(8)
@@ -391,7 +391,7 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
 
     r_data = [
         ("Tier 1: Build & Execution", "35%", "Git cloning, dependency resolution, execution exit code 0", "Deterministic codebase compilability"),
-        ("Tier 2: Metric Alignment", "35%", "Empirical claim concordance (relative & absolute tolerance)", "Validation of quantitative findings"),
+        ("Tier 2: Metric Alignment", "35%", "Empirical claim concordance (default 5% tolerance)", "Validation of quantitative findings"),
         ("Tier 3: Seed Stability", "15%", "Multi-seed variance (CV <= 2%), coefficient of variation", "Mitigation of cherry-picked seeds"),
         ("Tier 4: Software Hygiene", "15%", "OSI license compliance, pinned environment files, logs", "Long-term open-science sustainability"),
     ]
@@ -411,30 +411,31 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
     # SECTION 4
-    add_styled_heading(doc, "4. Domain-Agnostic Scientific Auditing Scope", level=1)
+    add_styled_heading(doc, "4. Scope and Current Status", level=1)
 
     p5 = doc.add_paragraph(
-        "A foundational design objective of Repro Radar is domain independence. While initial development and calibration leveraged empirical machine learning and tabular classification benchmarks, the underlying verification engine is architecturally universal. Any peer-reviewed scientific paper that bundles an executable computational appendix—whether in IEEE Transactions on Signal Processing, bioinformatics gene expression pipelines, computational economics, physical simulations, or cryptography—can be formally audited through this infrastructure."
+        "This work is a pilot study on tabular ML benchmarks. The seed corpus contains 6 papers. All 6 pass automated checks of their paper link, repository, license, and target script at a pinned commit, but none has been run end to end yet, and only 2 of their 16 recorded claims have been found in the papers so far (docs/CORPUS_VERIFICATION.md). Other scientific fields are out of scope for this pilot."
     )
     p5.paragraph_format.line_spacing = 1.15
     p5.paragraph_format.space_after = Pt(8)
 
     p6 = doc.add_paragraph(
-        "By enforcing a strict separation between domain-specific mathematical parsing and general sandbox orchestration, Repro Radar provides a standardized verification protocol that bridges the gap between academic authors, conference program committees, and the broader global scientific community."
+        "Planned next steps are a small pilot run of the seed papers in the sandbox, extraction of claims directly from the papers with quoted evidence, and a report of which papers could and could not be reproduced and why."
     )
     p6.paragraph_format.line_spacing = 1.15
     p6.paragraph_format.space_after = Pt(12)
 
     # SECTION 5
-    add_styled_heading(doc, "5. References & Academic Bibliography", level=1)
+    add_styled_heading(doc, "5. References", level=1)
 
     references = [
-        ("1. Claerbout, J. F., & Karrenbach, M. (1992). ", "Electronic documents give reproducible research a new meaning. In SEG Technical Program Expanded Abstracts (pp. 601-604). Society of Exploration Geophysicists."),
-        ("2. Donoho, D. L. (2010). ", "An invitation to reproducible computational research. Biostatistics, 11(3), 385-388."),
-        ("3. Pineau, J., et al. (2021). ", "Improving reproducibility in machine learning research (a report from the NeurIPS 2019 reproducibility program). Journal of Machine Learning Research, 22(164), 1-20."),
-        ("4. Stodden, V., Leisch, F., & Peng, R. D. (Eds.). (2014). ", "Implementing reproducible research. CRC Press."),
-        ("5. Baker, M. (2016). ", "1,500 scientists lift the lid on reproducibility. Nature, 533(7604), 452-454."),
-        ("6. Henderson, P., et al. (2018). ", "Deep reinforcement learning that matters. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 32, No. 1)."),
+        ("[1] ", "Claerbout, J. F., & Karrenbach, M. (1992). Electronic documents give reproducible research a new meaning. SEG Technical Program Expanded Abstracts 1992, 601–604. https://doi.org/10.1190/1.1822162"),
+        ("[2] ", "Buckheit, J. B., & Donoho, D. L. (1995). WaveLab and reproducible research. In Wavelets and Statistics (Lecture Notes in Statistics, pp. 55–81). Springer. https://doi.org/10.1007/978-1-4612-2544-7_5"),
+        ("[3] ", "Donoho, D. L. (2010). An invitation to reproducible computational research. Biostatistics, 11(3), 385–388. https://doi.org/10.1093/biostatistics/kxq028"),
+        ("[4] ", "Stodden, V., Leisch, F., & Peng, R. D. (Eds.). (2014). Implementing reproducible research. CRC Press. https://doi.org/10.1201/b16868"),
+        ("[5] ", "Baker, M. (2016). 1,500 scientists lift the lid on reproducibility. Nature, 533(7604), 452–454. https://doi.org/10.1038/533452a"),
+        ("[6] ", "Pineau, J., et al. (2021). Improving reproducibility in machine learning research (a report from the NeurIPS 2019 reproducibility program). Journal of Machine Learning Research, 22(164), 1–20. https://jmlr.org/papers/v22/20-303.html"),
+        ("[7] ", "Henderson, P., Islam, R., Bachman, P., et al. (2018). Deep reinforcement learning that matters. Proceedings of the AAAI Conference on Artificial Intelligence, 32(1). https://doi.org/10.1609/aaai.v32i1.11694"),
     ]
 
     for ref_num, ref_text in references:
