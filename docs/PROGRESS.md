@@ -9,7 +9,7 @@
 - **Active Milestone:** M0 — Baseline Hygiene & Audit
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 85 / 85 tests green (CI: Ubuntu, Windows, sandbox image, corpus verification, real-Docker sandbox acceptance with 7 checks)
+- **Total Unit Tests Passing:** 86 / 86 on Linux (1 POSIX-permission test is skipped on Windows); CI: Ubuntu, Windows, sandbox image, corpus verification, real-Docker sandbox acceptance with 7 checks
 
 ---
 
@@ -39,7 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Rejected: `exec` on the home tmpfs (paper code could write and run binaries) and pre-installing packages into the image (papers pin different, large versions such as old PyTorch).
 - Bundling now downloads binary wheels for the sandbox platform (manylinux, CPython 3.11) instead of the host OS.
 - New acceptance check 7: `ujson` (C extension, not in the image) installs offline and loads from `/workspace/deps`; writes there fail with `Read-only file system`; the same `.so` copied to the noexec home fails to load. 7 of 7 checks pass in CI.
-- 6 new tests; 85 / 85 tests green.
+- The `deps` directory is world-writable only while the install container writes to it and is restored to 0755 before the run.
+- Found during review and left open: the acceptance script makes the output directory world-writable, which may hide an output-permission problem on hosts not running as uid 1000 (#96).
+- 7 new tests; 86 / 86 green on Linux.
 
 ### M0 / DevOps: Gap Analysis Cleanup (2026-09-27, Issue #93)
 - Gap IDs renamed `G<n>` → `GA-<n>` in `docs/gap_analysis.md`, `docs/PROGRESS.md`, and `README.md`, so they no longer collide with the maintainer's TODO items `G1`-`G6`.

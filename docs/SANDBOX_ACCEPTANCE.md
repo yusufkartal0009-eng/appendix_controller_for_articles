@@ -15,6 +15,8 @@
 
 The job runs on every push and pull request and fails if any check fails.
 
+**Caveat:** before each run the script makes the run's output directory world-writable so the container user (uid 1000) can write to it on the uid 1001 CI host. The runner itself does not do this for the output directory, so these checks do not prove that output writing works on hosts whose user is not uid 1000 (issue #96).
+
 ## Results
 
 | # | Check | Result | Evidence (below) |
@@ -55,6 +57,7 @@ results are not mistaken for "nothing was wrong":
 | `/workspace/home` tmpfs was root-owned, so uid 1000 could not write to it and offline installs always failed | Fixed in #91 (issue #90) |
 | The first version of check 5 used `six`, which is already in the image; its "pass" proved nothing | Replaced by `toolz`, which is not in the image, and the import path is asserted |
 | `/workspace/home` was `noexec` despite PR #64 removing the flag (Docker adds it by default), so offline-installed compiled wheels could not load | Fixed in #95 (issue #92): separate install phase, read-only `/workspace/deps`; verified by check 7 |
+| The acceptance script's `chmod` of the output directory hides whether the runner's own output directory is writable by uid 1000 on other hosts | Open: issue #96 (not reproduced yet) |
 
 ## Verbatim output
 
