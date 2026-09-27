@@ -72,12 +72,12 @@ Because production sandbox containers run with `--network none`, dependencies ca
    - The repository is cloned via `git clone` (supporting GitHub, IEEE open repositories, or local directories).
    - If a specific commit hash or tag is provided, it is checked out to guarantee version locking.
    - Manifest files (`requirements.txt`, `pyproject.toml`, `setup.py`, `environment.yml`) are scanned.
-   - When `--bundle-deps` is passed, `pip download` fetches an offline wheelhouse (`<paper_id>_packages/`) for the sandbox platform (manylinux, CPython 3.11), binary wheels only, regardless of the host OS. Dependencies published only as sdists are therefore not bundled.
+   - When `--bundle-deps` is passed, `pip download` fetches an offline wheelhouse (`<paper_id>_packages/`) for the sandbox platform (manylinux, CPython 3.11), binary wheels only, regardless of the host OS, from every `*requirements*.txt` in the repository root. Requirements without a binary wheel are never built on the host: the bundle result lists each of them as `NEEDS_SDIST_BUILD` (the staging CLI prints them).
 
 2. **Install Phase (separate container, network off)**:
    - The package wheelhouse is mounted at `/workspace/packages:ro`, the staged repository at `/workspace/repo:ro`, and a fresh host directory (`sandbox_runs/<paper_id>/deps`) at `/workspace/deps:rw`.
    - `entrypoint.sh` with `SANDBOX_PHASE=install` runs
-     `python -m pip install --no-index --find-links=/workspace/packages --only-binary=:all: --target /workspace/deps -r /workspace/repo/requirements.txt`.
+     `python -m pip install --no-index --find-links=/workspace/packages --only-binary=:all: --target /workspace/deps` with `-r` for every `*requirements*.txt` in the repository root (the same files that were bundled).
      Binary wheels only: installing a wheel copies files and runs no package code (an sdist would run `setup.py`).
    - The result is written to `install_meta.json` (`INSTALLED` or `FAILED`) and `install.log`.
 
