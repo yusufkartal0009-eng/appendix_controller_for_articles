@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M1 / Corpus: Claims Checked Against Papers; Seed Integrity Test (2026-09-27, Issue #100)
+- Every seed claim was searched in its paper's PDF text (all printable forms, tolerant of `pypdf` spacing) and read in context: **2 of 16 claims found** (`paper_003` FT-T and ResNet, Table 2, p. 7). `paper_002`'s 0.895 is AutoGluon's value, not TabPFN's (0.894); `paper_005` cites a dataset "EP3602" and `paper_008` a HIGGS result that their papers do not contain. Details in `docs/CORPUS_VERIFICATION.md`; claim values were not changed.
+- `tests/test_seed_integrity.py`: repository reachable, license allowed and matching, script at the pinned commit, one case per entry; network-only (`REPRO_RADAR_NETWORK_TESTS=1`), run in the CI corpus job. It fails for all 8 entries of the pre-fix corpus and passes for the current 6.
+- No entry is called verified: each still has unverified claims and unchecked runnability.
+
 ### M2 / Sandbox: Compiled Dependencies Without Loosening Isolation (2026-09-27, Issue #92)
 - Dependencies are installed by a separate install-phase container (network off, `--only-binary=:all:`, so no package code runs) into `sandbox_runs/<paper_id>/deps`, which the paper run mounts read-only at `/workspace/deps`. Compiled extensions load; `/workspace/home` and `/tmp` stay `noexec`, so paper code has no location that is both writable and executable.
 - Rejected: `exec` on the home tmpfs (paper code could write and run binaries) and pre-installing packages into the image (papers pin different, large versions such as old PyTorch).
