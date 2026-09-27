@@ -56,7 +56,7 @@ class SandboxConfig:
 @dataclass
 class SandboxExecutionResult:
     """Structured outcome from a sandbox execution run."""
-    status: str  # 'COMPLETED', 'FAILED', 'TIMEOUT', 'SKIPPED'
+    status: str  # 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED', 'SKIPPED'
     exit_code: int
     stdout: str
     stderr: str
@@ -187,6 +187,15 @@ class DockerSandboxRunner:
         return docker_cmd
 
     @staticmethod
+    def _status_from_meta(output_dir: Path) -> Optional[str]:
+        """Status written by the container entrypoint, if execution_meta.json exists and is valid."""
+        try:
+            status = json.loads((Path(output_dir) / "execution_meta.json").read_text(encoding="utf-8")).get("status")
+        except (OSError, ValueError):
+            return None
+        return status if status in ("COMPLETED", "FAILED", "TIMEOUT", "OOM_KILLED") else None
+
+    @staticmethod
     def _write_host_logs(output_dir: Path, stdout: str, stderr: str) -> None:
         """Write captured logs unless the container entrypoint already wrote them.
 
@@ -313,6 +322,9 @@ class DockerSandboxRunner:
             status = "COMPLETED" if exit_code == 0 else "FAILED"
             if exit_code in (124, 137):
                 status = "TIMEOUT"
+            # Exit 137 means SIGKILL from either the timeout watchdog or the kernel OOM killer; the
+            # entrypoint tells them apart (cgroup oom_kill counter), so its status wins when present.
+            status = self._status_from_meta(output_dir) or status
 
             self._write_host_logs(output_dir, res.stdout, res.stderr)
 

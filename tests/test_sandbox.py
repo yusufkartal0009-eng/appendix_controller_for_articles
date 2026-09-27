@@ -305,3 +305,31 @@ def test_deps_dir_is_not_world_writable_after_install(tmp_path, monkeypatch):
 
     mode = (tmp_path / "runs" / "perm_check" / "deps").stat().st_mode & 0o777
     assert mode & 0o002 == 0, oct(mode)
+
+
+def test_docker_run_reports_status_from_execution_meta(tmp_path, monkeypatch):
+    """Exit code 137 is SIGKILL for both the timeout watchdog and the OOM killer; the entrypoint knows which."""
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+
+    def fake_run(cmd, **kwargs):
+        out = next(v for v in _flag_value(cmd, "-v", lambda v: v.endswith(":/workspace/output:rw")))
+        host_out = out.rsplit(":/workspace/output:rw", 1)[0]
+        Path(host_out, "execution_meta.json").write_text(json.dumps({"status": "OOM_KILLED", "exit_code": 137}))
+        return subprocess.CompletedProcess(cmd, 137, "allocated 224 MiB\n", "Killed\n")
+
+    monkeypatch.setattr(runner_module.subprocess, "run", fake_run)
+    result = DockerSandboxRunner().run(paper_id="oom_status", repo_dir=tmp_path, target_script="eval.py")
+
+    assert result.exit_code == 137
+    assert result.status == "OOM_KILLED"
+
+
+def test_docker_run_without_meta_still_maps_137_to_timeout(tmp_path, monkeypatch):
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(runner_module.subprocess, "run", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 137, "", ""))
+    result = DockerSandboxRunner().run(paper_id="no_meta_137", repo_dir=tmp_path, target_script="eval.py")
+    assert result.status == "TIMEOUT"

@@ -72,6 +72,20 @@ echo "Network State : Isolated (--network none)"
 echo "Command       : $@"
 echo "=================================================="
 
+# Kernel OOM kills recorded for this container's cgroup (v2: memory.events; v1: memory.oom_control).
+# Both the timeout watchdog and the OOM killer end the process with SIGKILL (exit 137), so the
+# counter is what tells an out-of-memory kill apart from a timeout.
+oom_kill_count() {
+  local count=""
+  if [ -r /sys/fs/cgroup/memory.events ]; then
+    count=$(sed -n 's/^oom_kill //p' /sys/fs/cgroup/memory.events)
+  elif [ -r /sys/fs/cgroup/memory/memory.oom_control ]; then
+    count=$(sed -n 's/^oom_kill //p' /sys/fs/cgroup/memory/memory.oom_control)
+  fi
+  echo "${count:-0}"
+}
+OOM_KILLS_BEFORE=$(oom_kill_count)
+
 START_TIME=$(date +%s.%N)
 
 # Execute command under timeout guard with split output capture
@@ -90,8 +104,11 @@ END_TIME=$(date +%s.%N)
 DURATION=$(python3 -c "print(round(${END_TIME} - ${START_TIME}, 3))" 2>/dev/null || echo "0.0")
 
 # Classify exit status
+OOM_KILLS_AFTER=$(oom_kill_count)
 STATUS="COMPLETED"
-if [ ${EXIT_CODE} -eq 137 ] || [ ${EXIT_CODE} -eq 124 ]; then
+if [ ${EXIT_CODE} -ne 0 ] && [ "${OOM_KILLS_AFTER}" -gt "${OOM_KILLS_BEFORE}" ]; then
+  STATUS="OOM_KILLED"
+elif [ ${EXIT_CODE} -eq 137 ] || [ ${EXIT_CODE} -eq 124 ]; then
   STATUS="TIMEOUT"
 elif [ ${EXIT_CODE} -ne 0 ]; then
   STATUS="FAILED"

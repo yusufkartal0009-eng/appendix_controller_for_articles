@@ -138,7 +138,7 @@ Upon completion, each execution run produces structured artifacts inside `sandbo
 
 - **`stdout.log`**: Complete unbuffered console output.
 - **`stderr.log`**: Standard error traces or warning streams.
-- **`execution_meta.json`** (written by the container entrypoint): `status` (`COMPLETED` / `FAILED` / `TIMEOUT`), `exit_code`, `duration_seconds`, `timeout_limit_seconds`, `dependency_install_status` (`SKIPPED` when no wheels are mounted, `INSTALLED`, or `FAILED`; a failed install does not stop the run), `user_id`, and `group_id`.
+- **`execution_meta.json`** (written by the container entrypoint): `status` (`COMPLETED` / `FAILED` / `TIMEOUT` / `OOM_KILLED`; both the timeout and the OOM killer end the process with SIGKILL, exit 137, and the entrypoint tells them apart with the cgroup `oom_kill` counter), `exit_code`, `duration_seconds`, `timeout_limit_seconds`, `dependency_install_status` (`SKIPPED` when no wheels are mounted, `INSTALLED`, or `FAILED`; a failed install does not stop the run), `user_id`, and `group_id`.
 - **`run_report.json`**: Complete execution report. If `execution_meta.json` cannot be read, the report carries a `meta_error` field and `meta` is empty. The report also exposes `dependency_install_status` at the top level (`SKIPPED`, `INSTALLED`, `FAILED`, or `UNKNOWN` when no execution metadata was written), so scoring can use it without reading `meta`. Structured as:
 
 ```json
