@@ -32,6 +32,7 @@
 | GA-19 | High | Sandbox | `/workspace/home` is `noexec` (Docker default), so offline-installed compiled wheels cannot load | #92 | Fixed in #95: dependencies installed in a separate phase and mounted read-only; compiled wheel verified by acceptance check 7 |
 | GA-20 | High | Sandbox | Host log write turned every Docker run into `FAILED` on hosts not running as uid 1000 | #88 | Fixed in #89 |
 | GA-21 | High | Sandbox | `/workspace/home` tmpfs root-owned, so offline installs always failed | #90 | Fixed in #91 |
+| GA-22 | High | Security | `pip download` on the host ran repository-chosen package code (sdist `setup.py`) outside the sandbox | #108 | Fixed in #95 (binary wheels only, sandbox platform) and #103 (`NEEDS_SDIST_BUILD` instead of building) |
 
 Status last updated 2026-09-27. Detailed findings below describe the state at the baseline commit. GA-16, GA-17, and GA-18 were missed by this analysis and added after an external review on 2026-09-26; GA-19 to GA-21 were found by the real-Docker acceptance checks (`docs/SANDBOX_ACCEPTANCE.md`). IDs carry the `GA-` prefix so they are not confused with the `G1`-`G6` items of the maintainer's TODO list.
 
@@ -170,6 +171,8 @@ Not found by the original analysis; reported by an external review. Of the 8 ent
 
 **Remedy (done):** `scripts/verify_corpus.py` checks paper title, repository, license, and a script at a pinned commit, and runs as a blocking CI job (#83, #85). Two entries were removed, six repaired; `docs/CORPUS_VERIFICATION.md` records what is still unverified (runnability and every claim value).
 
+**Claims (2026-09-27, #101):** every seed claim was then compared with its paper: only **2 of 16** were found; `paper_002`'s value belongs to another method, and `paper_005` and `paper_008` cite datasets their papers do not contain. The removed TabNet entry (`paper_007`) had wrong claims as well: the external review found Forest Cover `0.9699` (Table 2) and Higgs test accuracy `0.7884` (Table 5) instead of the seed's 0.969 and "AUROC 0.844, Table 3" (not re-checked here, since the entry was removed).
+
 ### GA-18 — Work merged out of order and without review (Medium, added 2026-09-26)
 Not found by the original analysis; reported by an external review. Work outside the plan (cover image and docx: #54 / PR #61; validation rubric: #55 / PR #60) and ahead of the corpus and sandbox gates (metric extraction: PR #62) was merged, and PRs #56-#63 were each merged 3 to 12 seconds after being opened, with zero reviews (GitHub `createdAt`/`mergedAt`), so nobody read the diffs. Green tests did not catch GA-16 or GA-17.
 
@@ -177,6 +180,21 @@ Not found by the original analysis; reported by an external review. Work outside
 
 ### GA-19, GA-20, GA-21 — Found by the real-Docker acceptance checks (2026-09-27)
 See `docs/SANDBOX_ACCEPTANCE.md` (Findings). GA-20 (#88/#89) and GA-21 (#90/#91) are fixed; GA-19 (#92) is fixed in #95: dependencies are installed by a separate install-phase container into a directory the paper run mounts read-only, so compiled extensions load (acceptance check 7) while `/workspace/home` stays `noexec`.
+
+### GA-22 — `pip download` ran repository code on the host (High, added 2026-09-27)
+Reported by the external review, and not in the original analysis. `RepoStager.bundle_dependencies()` ran `pip download -r requirements.txt --prefer-binary` on the host, outside any sandbox. For a requirement published only as a source distribution, pip builds it to read its metadata, which runs the package's `setup.py`, so a paper's requirements file could make the host execute arbitrary code with the user's permissions and network.
+
+**Reproduction (2026-09-27, #108):** a local sdist whose `setup.py` writes a marker file, under a name not on PyPI, downloaded with pip 26.2.1 on Windows 11 (Python 3.11.9):
+```
+old command: pip download reproradar_probe_sdist_20260927==1.0 --find-links index -d dl_old --prefer-binary
+  Successfully downloaded reproradar_probe_sdist_20260927
+  marker: setup.py of reproradar_probe_sdist_20260927 ran on the host
+current command: ... --only-binary=:all: --platform manylinux2014_x86_64 --python-version 3.11 --implementation cp
+  ERROR: No matching distribution found for reproradar_probe_sdist_20260927==1.0
+  marker: not created
+```
+
+**Remedy (done):** bundling downloads binary wheels only, for the sandbox platform (#95); requirements without a wheel are reported as `NEEDS_SDIST_BUILD` and never built on the host (#103). Building sdists, if ever needed, must happen inside an isolated container (`docs/DECISIONS.md`, D-002).
 
 ---
 

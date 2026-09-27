@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Gap Analysis Addendum (2026-09-27, Issue #108)
+- GA-22: `pip download --prefer-binary` on the host ran an sdist's `setup.py`; reproduced with a marker-writing probe package (old command: marker written; current command: rejected, no marker). Fixed by #95 and #103.
+- GA-17 updated with the claim check (2 of 16 found, #101) and the removed TabNet entry's wrong claims.
+
 ### M2 / Sandbox: Install Status at the Top of the Run Report (2026-09-27, Issue #106)
 - `run_report.json` has a top-level `dependency_install_status` (`UNKNOWN` without execution metadata) for Tier 1 scoring.
 - New test follows a failed install phase through the run into the report (`FAILED`); 89 tests green, 7 skipped on Windows.
