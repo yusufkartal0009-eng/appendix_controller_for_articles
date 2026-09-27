@@ -29,7 +29,7 @@
 | GA-16 | High | Security | Without Docker, paper code silently ran on the host with no isolation | #80 | Fixed in #81: execution refused without Docker; opt-in `--allow-unsafe-local` marks runs `isolated: false` |
 | GA-17 | High | Corpus | Seed corpus broken (6 of 8 entries not runnable; wrong links, licenses, titles, script paths) while the README called it "8 verified" | #84 | Fixed in #85: verifier enforced in CI (#83); 6 of 6 entries pass; claim values still UNVERIFIED |
 | GA-18 | Medium | Process | Work merged out of plan order and without review | #78 | Mitigated: approval gate kept (#79); self-review comment on every PR since #81 |
-| GA-19 | High | Sandbox | `/workspace/home` is `noexec` (Docker default), so offline-installed compiled wheels cannot load | #92 | Open |
+| GA-19 | High | Sandbox | `/workspace/home` is `noexec` (Docker default), so offline-installed compiled wheels cannot load | #92 | Fixed in #95: dependencies installed in a separate phase and mounted read-only; compiled wheel verified by acceptance check 7 |
 | GA-20 | High | Sandbox | Host log write turned every Docker run into `FAILED` on hosts not running as uid 1000 | #88 | Fixed in #89 |
 | GA-21 | High | Sandbox | `/workspace/home` tmpfs root-owned, so offline installs always failed | #90 | Fixed in #91 |
 
@@ -176,7 +176,7 @@ Not found by the original analysis; reported by an external review. Work outside
 **Remedy:** the side-effect approval gate in `AGENTS.md` stays (the relaxation in #75 was reverted in #79); every PR since #81 carries a self-review comment written after reading the full diff. The out-of-order work is kept, but no new work is built on it until the pilot gates are passed.
 
 ### GA-19, GA-20, GA-21 — Found by the real-Docker acceptance checks (2026-09-27)
-See `docs/SANDBOX_ACCEPTANCE.md` (Findings). GA-20 (#88/#89) and GA-21 (#90/#91) are fixed; GA-19 (#92) is open and blocks offline installation of dependencies with compiled extensions that the image does not already provide.
+See `docs/SANDBOX_ACCEPTANCE.md` (Findings). GA-20 (#88/#89) and GA-21 (#90/#91) are fixed; GA-19 (#92) is fixed in #95: dependencies are installed by a separate install-phase container into a directory the paper run mounts read-only, so compiled extensions load (acceptance check 7) while `/workspace/home` stays `noexec`.
 
 ---
 

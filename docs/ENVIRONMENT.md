@@ -77,8 +77,8 @@ docker run --rm -v "$PWD/sandbox_runs/smoke:/workspace/output" repro-radar-sandb
 cat sandbox_runs/smoke/execution_meta.json
 ```
 
-`dependency_install_status` is `INSTALLED` or `FAILED` when wheels are mounted at
-`/workspace/packages`; a `FAILED` install does not stop the run.
+`dependency_install_status` is `INSTALLED` or `FAILED` when the runner installed offline wheels in its
+separate install phase (see `docs/SANDBOX_GUIDE.md`); a `FAILED` install does not stop the run.
 
 ---
 
