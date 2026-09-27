@@ -80,7 +80,7 @@ def test_build_docker_command_security_flags():
     # 6. Volume read-only constraints & home tmpfs execution permissions
     assert any(":ro" in arg and "sample_repo" in arg for arg in cmd)
     assert any(":rw" in arg and "sample_output" in arg for arg in cmd)
-    assert any("/workspace/home:rw,nosuid,size=2048m" in arg for arg in cmd)
+    assert any("/workspace/home:rw,nosuid,size=2048m,uid=1000,gid=1000" in arg for arg in cmd)
 
 
 def test_process_sandbox_runner_clean_execution(tmp_path):
@@ -203,3 +203,16 @@ def test_docker_run_status_survives_unwritable_logs_written_by_container(tmp_pat
     assert result.exit_code == 0
     assert "accuracy: 0.9" in result.stdout
     assert (out_dir / "stdout.log").read_text(encoding="utf-8") == "written by the container entrypoint\n"
+
+
+def test_home_tmpfs_is_owned_by_the_sandbox_user():
+    """The writable home tmpfs must be owned by the container user, or pip --user cannot write to it."""
+    cfg = SandboxConfig(user_id=1234, group_id=5678)
+    cmd = DockerSandboxRunner(config=cfg).build_docker_command(
+        repo_dir="/tmp/sample_repo", output_dir="/tmp/sample_output", command=["python", "train.py"]
+    )
+    home_mounts = [arg for arg in cmd if arg.startswith("/workspace/home:")]
+    assert len(home_mounts) == 1
+    options = home_mounts[0].split(":", 1)[1].split(",")
+    assert "uid=1234" in options and "gid=5678" in options
+    assert "--user" in cmd and cmd[cmd.index("--user") + 1] == "1234:5678"
