@@ -47,14 +47,16 @@ graph TD
 | **Filesystem Integrity**| `--read-only` | Locks container root filesystem; untrusted code cannot tamper with OS binaries or persist system backdoors. |
 | **Repository Safety** | `-v <repo>:/workspace/repo:ro` | Mounts paper source code as strictly read-only; source code is never altered by execution. |
 | **Temporary Storage** | `--tmpfs /tmp:rw,noexec,nosuid,size=64m` | In-memory temporary directory forbidding binary execution (`noexec`) and privilege escalation (`nosuid`). |
-| **User Home & Packages**| `--tmpfs /workspace/home:rw,nosuid,size=2048m` | High-capacity in-memory home workspace allowing execution of compiled C-extensions (`.so`) for scientific packages (PyTorch, SciPy). |
+| **User Home & Packages**| `--tmpfs /workspace/home:rw,nosuid,size=2048m,uid=1000,gid=1000` | Writable in-memory home owned by the sandbox user, where offline wheels are installed (`~/.local`). Docker adds `noexec` to tmpfs mounts by default, so files here cannot be executed. PR #64 removed `noexec` from the flag to allow compiled extensions (`.so`), but that had no effect; offline-installed compiled wheels are expected not to load (issue #92). The upside: code cannot write and then run a binary here. |
 | **Working Directory** | `-w /workspace/repo` | Ensures execution runs directly in the cloned repository context so local imports (`import utils`) and relative data paths resolve seamlessly. |
 | **User Space Drop** | `--user 1000:1000` | Code executes under non-root unprivileged user `sandboxuser`. |
 | **Privilege Escalation**| `--security-opt no-new-privileges:true` | Prevents sub-processes from acquiring additional privileges via `setuid` or capabilities. |
 | **CPU Quota** | `--cpus 2.0` | Caps container execution to 2 CPU cores, preserving host responsiveness. |
 | **Memory Ceiling** | `--memory 8g --memory-swap 8g` | Hard ceiling of 8 GB RAM; disabling swap expansion prevents host swap exhaustion. |
 | **Process Quota** | `--pids-limit 100` | Prevents fork-bomb vulnerabilities and uncontrolled thread spawning. |
-| **Hard Timeout** | `timeout <N>s` in `entrypoint.sh` | Enforces deterministic termination if code hangs, deadlocks, or loops indefinitely (default: 300s). |
+| **Hard Timeout** | `timeout --signal=SIGKILL <N>` in `entrypoint.sh` | Enforces termination if code hangs or loops; the run is recorded as `TIMEOUT` (default 600 s in `SandboxConfig`, 300 s in `scripts/stage_and_bundle_repo.py`). |
+
+Real-Docker evidence for the non-root user, network isolation, read-only root, timeout, offline install, and refusal without Docker, plus the CPU/memory/PID limits and the `noexec` home mount, is recorded in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md) and re-checked by CI on every change.
 
 ---
 
@@ -74,6 +76,8 @@ Because production sandbox containers run with `--network none`, dependencies ca
    - Container bootstrap (`entrypoint.sh`) executes an offline user installation:
      `pip install --no-index --find-links=/workspace/packages --no-cache-dir --user -r /workspace/repo/requirements.txt`
    - Installed packages are stored in writable in-memory `/workspace/home/.local` with `PYTHONUSERBASE` and `PYTHONPATH` preconfigured.
+   - The install result is recorded as `dependency_install_status` (`SKIPPED`, `INSTALLED`, or `FAILED`) in `execution_meta.json`; a failed install does not stop the run.
+   - Verified with a pure-Python wheel (`toolz`) in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md). Wheels with compiled extensions are not verified and are expected to fail to load from the `noexec` home (issue #92); dependencies the image already provides (numpy, scipy, pandas, scikit-learn) are unaffected.
    - All standard output, standard error, Python-measured duration, and generated metrics are collected into `/workspace/output`.
 
 ---

@@ -134,7 +134,7 @@ The seed domain is **"Tabular Machine Learning & Light NLP Benchmarks"**:
 
 ## 🛡️ Security, Isolation, & Ethical Standards
 
-1. **Sandboxed Execution:** External code runs in ephemeral containers with restricted CPU (2.0), memory (8GB), and complete network isolation (`--network none`). If Docker is unavailable, execution is refused (exit code 4). The only way to run paper code on the host is the explicit `--allow-unsafe-local` flag: **development only, and only for code you trust.** Such runs are marked `"isolated": false` in `run_report.json` and print a red warning.
+1. **Sandboxed Execution:** External code runs in ephemeral containers with restricted CPU (2.0), memory (8GB), and complete network isolation (`--network none`). If Docker is unavailable, execution is refused (exit code 4). The only way to run paper code on the host is the explicit `--allow-unsafe-local` flag: **development only, and only for code you trust.** Such runs are marked `"isolated": false` in `run_report.json` and print a red warning. Real-Docker evidence for these guarantees: [docs/SANDBOX_ACCEPTANCE.md](docs/SANDBOX_ACCEPTANCE.md).
 2. **Neutral Diagnostic Reporting:** When code fails to replicate claims, Repro Radar avoids accusatory language, providing detailed stack traces and assigning a `Needs Review` status.
 3. **Open Licenses Only:** Only open source repositories (MIT, Apache-2.0, BSD, etc.) are evaluated.
 
@@ -172,6 +172,7 @@ repro-radar/
 ├── scripts/
 │   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
 │   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
+│   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run in CI)
 │   ├── generate_academic_introduction_doc.py # Builds docs/repro_radar_introduction.docx
 │   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
 │   ├── setup_7week_board.py            # Provisions the weekly tracking board
@@ -201,6 +202,7 @@ repro-radar/
 │   ├── VALIDATION_RUBRIC.md # Metric validation rubric and tolerances
 │   ├── gap_analysis.md      # Known gaps, evidence, and remediation status
 │   ├── CORPUS_VERIFICATION.md # Per-entry corpus checks and what remains unverified
+│   ├── SANDBOX_ACCEPTANCE.md  # Real-Docker evidence of sandbox isolation
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
 │   ├── project_roadmap.md   # 7-week detailed roadmap
 │   ├── repro_radar_introduction.docx # Academic introduction document
