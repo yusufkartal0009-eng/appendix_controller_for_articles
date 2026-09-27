@@ -60,7 +60,7 @@ graph TD
 | **Process Quota** | `--pids-limit 100` | Prevents fork-bomb vulnerabilities and uncontrolled thread spawning. |
 | **Hard Timeout** | `timeout --signal=SIGKILL <N>` in `entrypoint.sh` | Enforces termination if code hangs or loops; the run is recorded as `TIMEOUT` (default 600 s in `SandboxConfig`, 300 s in `scripts/stage_and_bundle_repo.py`). |
 
-Real-Docker evidence for the non-root user, network isolation, read-only root, timeout, offline install, and refusal without Docker, plus the CPU/memory/PID limits and the `noexec` home mount, is recorded in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md) and re-checked by CI on every change.
+Real-Docker evidence for the non-root user, network isolation, read-only root, timeout, offline install, and refusal without Docker, plus the CPU/memory/PID limits and the `noexec` home mount, is recorded in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md) and re-checked by CI on every change. Why `/workspace/home` is `noexec` and dependencies are mounted read-only is recorded in [DECISIONS.md](DECISIONS.md) (D-001, D-002).
 
 ---
 
