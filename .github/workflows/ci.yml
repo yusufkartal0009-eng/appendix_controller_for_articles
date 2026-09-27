@@ -51,14 +51,24 @@ jobs:
           docker run --rm -v "$PWD/out-skip:/workspace/output" repro-radar-sandbox:ci python -c "print('ok')"
           cat out-skip/execution_meta.json
           python3 -c "import json; m = json.load(open('out-skip/execution_meta.json')); assert m['status'] == 'COMPLETED' and m['dependency_install_status'] == 'SKIPPED', m"
-      - name: Entrypoint reports failed dependency install
+      - name: Install phase records a failed dependency install
         run: |
-          mkdir -p out-fail pkgs && chmod 777 out-fail
+          mkdir -p out-fail pkgs deps && chmod 777 out-fail deps
           echo "not a wheel" > pkgs/bogus-0.0.0-py3-none-any.whl
-          docker run --rm -v "$PWD/out-fail:/workspace/output" -v "$PWD/pkgs:/workspace/packages:ro" \
+          set +e
+          docker run --rm -e SANDBOX_PHASE=install -v "$PWD/out-fail:/workspace/output" \
+            -v "$PWD/pkgs:/workspace/packages:ro" -v "$PWD/deps:/workspace/deps:rw" repro-radar-sandbox:ci
+          echo "install phase exit code: $?"
+          set -e
+          cat out-fail/install_meta.json
+          python3 -c "import json; m = json.load(open('out-fail/install_meta.json')); assert m['phase'] == 'install' and m['status'] == 'FAILED', m"
+      - name: Run phase reports the install status it was given
+        run: |
+          mkdir -p out-run && chmod 777 out-run
+          docker run --rm -e SANDBOX_DEPENDENCY_STATUS=FAILED -v "$PWD/out-run:/workspace/output" \
             repro-radar-sandbox:ci python -c "print('ok')"
-          cat out-fail/execution_meta.json
-          python3 -c "import json; m = json.load(open('out-fail/execution_meta.json')); assert m['status'] == 'COMPLETED' and m['dependency_install_status'] == 'FAILED', m"
+          cat out-run/execution_meta.json
+          python3 -c "import json; m = json.load(open('out-run/execution_meta.json')); assert m['status'] == 'COMPLETED' and m['dependency_install_status'] == 'FAILED', m"
 
   corpus:
     name: Corpus verification
@@ -83,8 +93,11 @@ jobs:
           python-version: "3.11"
       - name: Build sandbox image
         run: docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .
-      - name: Download a wheel for the offline install check
+      - name: Download wheels for the offline install checks (pure Python and compiled)
         run: |
           python -m pip download toolz==0.12.1 --only-binary=:all: --no-deps -d "$RUNNER_TEMP/wheels"
+          python -m pip download ujson==5.10.0 --only-binary=:all: --no-deps -d "$RUNNER_TEMP/wheels" \
+            --platform manylinux_2_28_x86_64 --platform manylinux2014_x86_64 --python-version 3.11 --implementation cp
+          ls -l "$RUNNER_TEMP/wheels"
       - name: Run acceptance checks through DockerSandboxRunner
         run: python scripts/sandbox_acceptance.py --wheel-dir "$RUNNER_TEMP/wheels"

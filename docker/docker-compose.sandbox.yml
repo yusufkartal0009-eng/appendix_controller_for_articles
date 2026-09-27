@@ -22,7 +22,7 @@ services:
     # In-memory transient storage with isolated execution permissions
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=64m
-      - /workspace/home:rw,nosuid,size=2048m,uid=1000,gid=1000
+      - /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000
 
     # Privilege Escalation Prevention
     security_opt:
@@ -39,18 +39,21 @@ services:
           memory: 8192M
           pids: 100
 
-    # Volume Mounts: Staged paper repository (ro) and isolated output workspace (rw)
+    # Volume Mounts: staged paper repository (ro), output workspace (rw), and dependencies (ro).
+    # Dependencies are installed beforehand by a separate install-phase container, e.g.:
+    #   docker run --rm --network none --read-only --user 1000:1000 -e SANDBOX_PHASE=install     #     -v ../temp_clones:/workspace/repo:ro -v ../temp_packages:/workspace/packages:ro     #     -v ../sandbox_deps:/workspace/deps:rw -v ../sandbox_runs:/workspace/output:rw repro-radar-sandbox:latest
+    # The run mounts them read-only: compiled extensions load, but paper code cannot modify them.
     volumes:
       - ../temp_clones:/workspace/repo:ro
       - ../sandbox_runs:/workspace/output:rw
-      - ../temp_packages:/workspace/packages:ro
+      - ../sandbox_deps:/workspace/deps:ro
 
     environment:
       - SANDBOX_TIMEOUT=600
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUSERBASE=/workspace/home/.local
-      - PYTHONPATH=/workspace/repo:/workspace/home/.local/lib/python3.11/site-packages
+      - PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages
       - PATH=/workspace/home/.local/bin:/usr/local/bin:/usr/bin:/bin
 
     command: ["python", "-c", "import sys; print('Sandbox operational on Python', sys.version)"]

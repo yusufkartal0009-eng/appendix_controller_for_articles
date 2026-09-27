@@ -23,11 +23,14 @@ graph TD
     end
 
     subgraph Docker Container Boundary [Isolated Container: repro-radar-sandbox]
-        Runner -->|docker run --network none| Sandbox[Container Runtime]
-        StagingDir -.->|Mount :ro| RepoMount[/workspace/repo:ro]
+        Runner -->|1. install phase, --network none| Install[Install container]
         PackageDir -.->|Mount :ro| PkgMount[/workspace/packages:ro]
+        Install -->|binary wheels only| DepsDir[host deps/ at /workspace/deps:rw]
+        Runner -->|2. run phase, --network none| Sandbox[Run container]
+        StagingDir -.->|Mount :ro| RepoMount[/workspace/repo:ro]
+        DepsDir -.->|Mount :ro, exec allowed| DepsMount[/workspace/deps:ro]
         Sandbox -->|Writes to| OutMount[/workspace/output:rw]
-        Sandbox -->|tmpfs noexec| TmpMount[/tmp:rw,noexec]
+        Sandbox -->|tmpfs noexec| TmpMount[/tmp and /workspace/home: noexec]
     end
 
     subgraph Output & Audit Artifacts
@@ -47,7 +50,8 @@ graph TD
 | **Filesystem Integrity**| `--read-only` | Locks container root filesystem; untrusted code cannot tamper with OS binaries or persist system backdoors. |
 | **Repository Safety** | `-v <repo>:/workspace/repo:ro` | Mounts paper source code as strictly read-only; source code is never altered by execution. |
 | **Temporary Storage** | `--tmpfs /tmp:rw,noexec,nosuid,size=64m` | In-memory temporary directory forbidding binary execution (`noexec`) and privilege escalation (`nosuid`). |
-| **User Home & Packages**| `--tmpfs /workspace/home:rw,nosuid,size=2048m,uid=1000,gid=1000` | Writable in-memory home owned by the sandbox user, where offline wheels are installed (`~/.local`). Docker adds `noexec` to tmpfs mounts by default, so files here cannot be executed. PR #64 removed `noexec` from the flag to allow compiled extensions (`.so`), but that had no effect; offline-installed compiled wheels are expected not to load (issue #92). The upside: code cannot write and then run a binary here. |
+| **User Home** | `--tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000` | Writable in-memory scratch home owned by the sandbox user. **`noexec`**: paper code can write here but cannot execute or load anything it wrote (a copied `.so` fails with `failed to map segment from shared object`). |
+| **Dependencies** | `-v <deps>:/workspace/deps:ro` (run) / `:rw` (install phase only) | Offline wheels are installed by a separate install-phase container, binary-only (no package code runs), into a host directory. The paper run mounts it **read-only**: compiled extensions load, but paper code cannot modify them or add executables. Together with the `noexec` home and `/tmp`, no location is both writable and executable for paper code. |
 | **Working Directory** | `-w /workspace/repo` | Ensures execution runs directly in the cloned repository context so local imports (`import utils`) and relative data paths resolve seamlessly. |
 | **User Space Drop** | `--user 1000:1000` | Code executes under non-root unprivileged user `sandboxuser`. |
 | **Privilege Escalation**| `--security-opt no-new-privileges:true` | Prevents sub-processes from acquiring additional privileges via `setuid` or capabilities. |
@@ -68,16 +72,19 @@ Because production sandbox containers run with `--network none`, dependencies ca
    - The repository is cloned via `git clone` (supporting GitHub, IEEE open repositories, or local directories).
    - If a specific commit hash or tag is provided, it is checked out to guarantee version locking.
    - Manifest files (`requirements.txt`, `pyproject.toml`, `setup.py`, `environment.yml`) are scanned.
-   - When `--bundle-deps` is passed, `pip download` compiles an offline wheelhouse directory (`<paper_id>_packages/`).
+   - When `--bundle-deps` is passed, `pip download` fetches an offline wheelhouse (`<paper_id>_packages/`) for the sandbox platform (manylinux, CPython 3.11), binary wheels only, regardless of the host OS. Dependencies published only as sdists are therefore not bundled.
 
-2. **Installation & Execution Phase (Isolated Sandbox)**:
-   - The staged repository is mounted into `/workspace/repo:ro`.
-   - The package wheelhouse is mounted into `/workspace/packages:ro`.
-   - Container bootstrap (`entrypoint.sh`) executes an offline user installation:
-     `pip install --no-index --find-links=/workspace/packages --no-cache-dir --user -r /workspace/repo/requirements.txt`
-   - Installed packages are stored in writable in-memory `/workspace/home/.local` with `PYTHONUSERBASE` and `PYTHONPATH` preconfigured.
+2. **Install Phase (separate container, network off)**:
+   - The package wheelhouse is mounted at `/workspace/packages:ro`, the staged repository at `/workspace/repo:ro`, and a fresh host directory (`sandbox_runs/<paper_id>/deps`) at `/workspace/deps:rw`.
+   - `entrypoint.sh` with `SANDBOX_PHASE=install` runs
+     `python -m pip install --no-index --find-links=/workspace/packages --only-binary=:all: --target /workspace/deps -r /workspace/repo/requirements.txt`.
+     Binary wheels only: installing a wheel copies files and runs no package code (an sdist would run `setup.py`).
+   - The result is written to `install_meta.json` (`INSTALLED` or `FAILED`) and `install.log`.
+
+3. **Run Phase (Isolated Sandbox)**:
+   - `/workspace/deps` is mounted **read-only** and is on `PYTHONPATH`; `/workspace/packages` is not mounted.
    - The install result is recorded as `dependency_install_status` (`SKIPPED`, `INSTALLED`, or `FAILED`) in `execution_meta.json`; a failed install does not stop the run.
-   - Verified with a pure-Python wheel (`toolz`) in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md). Wheels with compiled extensions are not verified and are expected to fail to load from the `noexec` home (issue #92); dependencies the image already provides (numpy, scipy, pandas, scikit-learn) are unaffected.
+   - Verified in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md) with a pure-Python wheel (`toolz`, check 5) and a wheel with a C extension (`ujson`, check 7), neither of which is in the image.
    - All standard output, standard error, Python-measured duration, and generated metrics are collected into `/workspace/output`.
 
 ---

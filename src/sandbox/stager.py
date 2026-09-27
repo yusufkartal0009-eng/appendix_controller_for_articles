@@ -8,6 +8,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -249,14 +250,18 @@ class RepoStager:
             }
 
         primary_req = staged.staged_path / staged.manifest.requirements_files[0]
+        # Wheels are installed in the Linux sandbox image (CPython 3.11, glibc), not on the host, so
+        # download for that platform. Binary wheels only: installing a wheel runs no package code,
+        # while building an sdist would execute its setup.py.
         cmd = [
-            "pip",
-            "download",
-            "-r",
-            str(primary_req),
-            "-d",
-            str(bundle_dir),
-            "--prefer-binary",
+            sys.executable, "-m", "pip", "download",
+            "-r", str(primary_req),
+            "-d", str(bundle_dir),
+            "--only-binary=:all:",
+            "--platform", "manylinux_2_28_x86_64",
+            "--platform", "manylinux2014_x86_64",
+            "--python-version", "3.11",
+            "--implementation", "cp",
         ]
 
         try:

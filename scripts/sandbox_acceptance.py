@@ -8,12 +8,18 @@ paper runs) and prints the command evidence for each check:
   2. network   - outbound network access fails
   3. readonly  - the root filesystem and the mounted repository are read-only
   4. timeout   - a run exceeding the time limit ends as TIMEOUT with duration_seconds > 0
-  5. offline   - wheels mounted at /workspace/packages install without network access
+  5. offline   - a pure-Python wheel not in the image installs offline (install phase) and is
+                 imported from the read-only /workspace/deps mount
   6. no-docker - without a Docker CLI on PATH, execution is refused and nothing runs
+  7. compiled  - a wheel with a C extension installs offline and loads from /workspace/deps, which
+                 the paper code cannot write to (control: the same .so fails to load from the
+                 noexec /workspace/home)
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
-Usage: python scripts/sandbox_acceptance.py --wheel-dir DIR   (DIR holds a wheel for `toolz`, a package not in the image)
+Usage: python scripts/sandbox_acceptance.py --wheel-dir DIR
+  DIR holds wheels for `toolz==0.12.1` (pure Python) and `ujson==5.10.0` (manylinux, CPython 3.11),
+  neither of which is in the image.
 Exit code 1 if any check fails.
 """
 
@@ -69,7 +75,28 @@ PROBES = {
     "probe_import.py": (
         "import toolz\n"
         "print(f'toolz {toolz.__version__} imported from {toolz.__file__}')\n"
-        "raise SystemExit(0 if toolz.__file__.startswith('/workspace/home/.local/') else 1)\n"
+        "raise SystemExit(0 if toolz.__file__.startswith('/workspace/deps/') else 1)\n"
+    ),
+    "probe_compiled.py": (
+        "import importlib.util, os, shutil\n"
+        "import ujson\n"
+        "print(f'ujson {ujson.__version__} imported from {ujson.__file__}')\n"
+        "print('ujson.dumps ->', ujson.dumps({'a': [1, 2]}))\n"
+        "ok = ujson.__file__.startswith('/workspace/deps/') and ujson.__file__.endswith('.so')\n"
+        "try:\n"
+        "    open('/workspace/deps/planted.so', 'w').write('x')\n"
+        "    print('/workspace/deps: WRITABLE by paper code'); ok = False\n"
+        "except OSError as exc:\n"
+        "    print(f'/workspace/deps write attempt: {exc.strerror}')\n"
+        "# Control: the same compiled module copied into the noexec home cannot be loaded.\n"
+        "os.makedirs('/workspace/home/nx', exist_ok=True)\n"
+        "copy = shutil.copy(ujson.__file__, '/workspace/home/nx/')\n"
+        "try:\n"
+        "    importlib.util.module_from_spec(importlib.util.spec_from_file_location('ujson', copy))\n"
+        "    print('control: same .so loaded from /workspace/home (noexec NOT enforced)')\n"
+        "except ImportError as exc:\n"
+        "    print(f'control: same .so from /workspace/home fails to load: {exc}')\n"
+        "raise SystemExit(0 if ok else 1)\n"
     ),
     "probe_info.py": (
         "import os, subprocess\n"
@@ -120,7 +147,7 @@ def summary(result, meta):
 
 def main():
     parser = argparse.ArgumentParser(description="Sandbox acceptance checks (requires Docker)")
-    parser.add_argument("--wheel-dir", required=True, help="Directory containing a wheel for `toolz` (not preinstalled in the image)")
+    parser.add_argument("--wheel-dir", required=True, help="Directory with wheels for toolz==0.12.1 and ujson==5.10.0 (neither is in the image)")
     args = parser.parse_args()
 
     repo = Path(tempfile.mkdtemp(prefix="acceptance_repo_"))
@@ -161,7 +188,21 @@ def main():
     show(f"5. Offline install from /workspace/packages ({', '.join(w.name for w in wheels)})",
          r.command_executed, "\n".join([r.stdout.strip()[-600:], *summary(r, meta)]))
     results["5 offline install"] = (
-        r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED" and "imported from /workspace/home/.local/" in r.stdout
+        r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED" and "imported from /workspace/deps/" in r.stdout
+    )
+
+    # 7. compiled wheel (C extension) installed offline and loaded from the read-only deps mount
+    compiled_wheels = sorted(Path(args.wheel_dir).glob("ujson-*.whl"))
+    compiled_repo = Path(tempfile.mkdtemp(prefix="acceptance_compiled_"))
+    (compiled_repo / "probe_compiled.py").write_text(PROBES["probe_compiled.py"])
+    (compiled_repo / "requirements.txt").write_text("ujson==5.10.0\n")
+    compiled_repo.chmod(0o755)
+    r, meta = run_probe(runner, compiled_repo, "probe_compiled.py", "acceptance_compiled", packages_dir=args.wheel_dir)
+    show(f"7. Compiled wheel installed offline ({', '.join(w.name for w in compiled_wheels)})",
+         r.command_executed, "\n".join([r.stdout.strip()[-900:], *summary(r, meta)]))
+    results["7 compiled wheel offline"] = (
+        r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED"
+        and "imported from /workspace/deps/" in r.stdout and ".so" in r.stdout
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only

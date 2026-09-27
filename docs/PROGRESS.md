@@ -9,19 +9,19 @@
 - **Active Milestone:** M0 — Baseline Hygiene & Audit
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 79 / 79 tests green (CI: Ubuntu, Windows, sandbox image, corpus verification, real-Docker sandbox acceptance)
+- **Total Unit Tests Passing:** 86 / 86 on Linux (1 POSIX-permission test is skipped on Windows); CI: Ubuntu, Windows, sandbox image, corpus verification, real-Docker sandbox acceptance with 7 checks
 
 ---
 
 ## Milestone Roadmap & Progress
 
-Issue numbers and open/closed counts match GitHub as of 2026-09-27 (issues only, not PRs; counted with #86 closed by its PR). Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
+Issue numbers and open/closed counts match GitHub as of 2026-09-27 (issues only, not PRs; counted with #92 closed by PR #95). Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
 
 | Milestone | Focus | Backlog issues | Open / closed | Status |
 |---|---|:---:|:---:|:---:|
 | **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 8 | IN PROGRESS |
 | **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 6 / 3 | IN PROGRESS |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 7 / 5 | IN PROGRESS |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 6 / 6 | IN PROGRESS |
 | **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 6 / 1 | QUEUED |
 | **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 2 / 5 | IN PROGRESS |
 | **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 6 / 1 | QUEUED |
@@ -33,6 +33,15 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### M2 / Sandbox: Compiled Dependencies Without Loosening Isolation (2026-09-27, Issue #92)
+- Dependencies are installed by a separate install-phase container (network off, `--only-binary=:all:`, so no package code runs) into `sandbox_runs/<paper_id>/deps`, which the paper run mounts read-only at `/workspace/deps`. Compiled extensions load; `/workspace/home` and `/tmp` stay `noexec`, so paper code has no location that is both writable and executable.
+- Rejected: `exec` on the home tmpfs (paper code could write and run binaries) and pre-installing packages into the image (papers pin different, large versions such as old PyTorch).
+- Bundling now downloads binary wheels for the sandbox platform (manylinux, CPython 3.11) instead of the host OS.
+- New acceptance check 7: `ujson` (C extension, not in the image) installs offline and loads from `/workspace/deps`; writes there fail with `Read-only file system`; the same `.so` copied to the noexec home fails to load. 7 of 7 checks pass in CI.
+- The `deps` directory is world-writable only while the install container writes to it and is restored to 0755 before the run.
+- Found during review and left open: the acceptance script makes the output directory world-writable, which may hide an output-permission problem on hosts not running as uid 1000 (#96).
+- 7 new tests; 86 / 86 green on Linux.
 
 ### M0 / DevOps: Gap Analysis Cleanup (2026-09-27, Issue #93)
 - Gap IDs renamed `G<n>` → `GA-<n>` in `docs/gap_analysis.md`, `docs/PROGRESS.md`, and `README.md`, so they no longer collide with the maintainer's TODO items `G1`-`G6`.

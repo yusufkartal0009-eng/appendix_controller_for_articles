@@ -2,6 +2,8 @@
 
 import json
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -225,3 +227,29 @@ def test_cli_unsafe_local_flag_runs_and_warns(tmp_path, monkeypatch, capsys):
     assert code == 0
     assert "NOT ISOLATED" in captured.err
     assert json.loads(out_json.read_text(encoding="utf-8"))["isolated"] is False
+
+
+def test_bundle_dependencies_downloads_linux_binary_wheels_only(tmp_path, monkeypatch):
+    """Wheels must match the Linux sandbox (not the host OS), and sdists are refused so install runs no code."""
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print(1)\n", encoding="utf-8")
+    (source_dir / "requirements.txt").write_text("ujson==5.10.0\n", encoding="utf-8")
+    staged = stager.stage_repository(paper_id="bundle_test", source=str(source_dir))
+    calls = []
+
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd)
+        return subprocess.CompletedProcess(cmd, 0, "", "")
+
+    monkeypatch.setattr("src.sandbox.stager.subprocess.run", fake_run)
+    stager.bundle_dependencies(staged)
+
+    cmd = calls[0]
+    assert cmd[:4] == [sys.executable, "-m", "pip", "download"]
+    assert "--only-binary=:all:" in cmd and "--prefer-binary" not in cmd
+    platforms = [cmd[i + 1] for i, a in enumerate(cmd) if a == "--platform"]
+    assert "manylinux2014_x86_64" in platforms
+    assert cmd[cmd.index("--python-version") + 1] == "3.11"
+    assert cmd[cmd.index("--implementation") + 1] == "cp"
