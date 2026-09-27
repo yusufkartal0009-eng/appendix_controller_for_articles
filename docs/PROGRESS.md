@@ -34,6 +34,13 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Docs: Introduction Draft Corrected and Sourced (2026-09-27, Issue #118)
+- `docs/repro_radar_introduction.docx` is now marked DRAFT (title, header, banner) and scoped to a pilot study on tabular ML benchmarks.
+- Unsourced claims (the 35% figure, the 1995 Claerbout date and long quote, dependency decay in 6–18 months, hardware drift) and out-of-scope claims (domain-agnostic scope, AI Decision Layer, "resolves") were removed.
+- References [1]–[7] are cited in the text and checked against Crossref or the publisher page; the Claerbout quote uses the wording read in Donoho (2010).
+- `docs/INTRODUCTION_SOURCES.md` maps each statement to its source and says how much of each source was read.
+- Tests: the draft marking, the removed phrases, and the reference/citation match are checked in `tests/test_academic_doc.py`.
+
 ### M0 / DevOps: PR Template and Working Agreement (2026-09-27, Issues #115, #116)
 - `.github/PULL_REQUEST_TEMPLATE.md`: what/why, how I tested it, what I did NOT verify, AI use, self-review checklist.
 - Standing, pinned issue #115 holds the working agreement and a per-session checklist.
