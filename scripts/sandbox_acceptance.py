@@ -77,6 +77,36 @@ PROBES = {
         "print(f'toolz {toolz.__version__} imported from {toolz.__file__}')\n"
         "raise SystemExit(0 if toolz.__file__.startswith('/workspace/deps/') else 1)\n"
     ),
+    "probe_oom.py": (
+        "chunks = []\n"
+        "for i in range(64):\n"
+        "    chunks.append(b'x' * (32 * 1024 * 1024))  # touches the pages, so they count\n"
+        "    print(f'allocated {(i + 1) * 32} MiB', flush=True)\n"
+        "print('NOT KILLED: allocated 2 GiB')\n"
+    ),
+    "probe_pids.py": (
+        "import threading, time\n"
+        "threads = []\n"
+        "try:\n"
+        "    for i in range(300):\n"
+        "        t = threading.Thread(target=time.sleep, args=(10,), daemon=True)\n"
+        "        t.start()\n"
+        "        threads.append(t)\n"
+        "    print(f'NOT LIMITED: started {len(threads)} threads')\n"
+        "    raise SystemExit(1)\n"
+        "except RuntimeError as exc:\n"
+        "    print(f'limited after {len(threads)} extra threads: RuntimeError: {exc}')\n"
+    ),
+    "probe_numpy.py": (
+        "import subprocess, sys\n"
+        "import numpy\n"
+        "out = subprocess.run([sys.executable, '-m', 'pip', 'show', 'numpy'], capture_output=True, text=True).stdout\n"
+        "print('\\n'.join(l for l in out.splitlines() if l.split(':')[0] in ('Name', 'Version', 'Location')))\n"
+        "major, minor = (int(x) for x in numpy.__version__.split('.')[:2])\n"
+        "ok = (major, minor) >= (1, 24)\n"
+        "print(f'numpy {numpy.__version__} satisfies >=1.24.0: {ok}')\n"
+        "raise SystemExit(0 if ok else 1)\n"
+    ),
     "probe_compiled.py": (
         "import importlib.util, os, shutil\n"
         "import ujson\n"
@@ -204,6 +234,37 @@ def main():
         r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED"
         and "imported from /workspace/deps/" in r.stdout and ".so" in r.stdout
     )
+
+    # 8. OOM: 256 MiB limit, the probe tries to hold 2 GiB
+    small = DockerSandboxRunner(SandboxConfig(timeout_seconds=60, memory_limit="256m", memory_swap="256m"))
+    r, meta = run_probe(small, repo, "probe_oom.py", "acceptance_oom")
+    show("8. Memory limit (256 MiB, probe allocates up to 2 GiB)", r.command_executed,
+         "\n".join([r.stdout.strip()[-400:], *summary(r, meta)]))
+    results["8 OOM killed and reported as OOM_KILLED"] = (
+        "NOT KILLED" not in r.stdout and r.status == "OOM_KILLED" and meta.get("status") == "OOM_KILLED"
+    )
+
+    # 9. pids limit (100): the probe tries to start 300 threads
+    r, meta = run_probe(runner, repo, "probe_pids.py", "acceptance_pids")
+    show("9. PID limit (100)", r.command_executed, "\n".join([r.stdout.strip()[-400:], *summary(r, meta)]))
+    results["9 pids limit holds"] = r.status == "COMPLETED" and "limited after" in r.stdout
+
+    # 10. numpy in the image respects the Dockerfile bound (numpy>=1.24.0)
+    r, meta = run_probe(runner, repo, "probe_numpy.py", "acceptance_numpy")
+    show("10. `pip show numpy` vs the Dockerfile bound", r.command_executed, "\n".join([r.stdout.strip(), *summary(r, meta)]))
+    results["10 numpy bound respected"] = r.status == "COMPLETED" and "satisfies >=1.24.0: True" in r.stdout
+
+    # 11. broken requirement: the install phase fails and the run reports FAILED
+    broken_repo = Path(tempfile.mkdtemp(prefix="acceptance_broken_"))
+    (broken_repo / "probe_identity.py").write_text(PROBES["probe_identity.py"])
+    (broken_repo / "requirements.txt").write_text("reproradar-no-such-package==9.9.9\n")
+    broken_repo.chmod(0o755)
+    r, meta = run_probe(runner, broken_repo, "probe_identity.py", "acceptance_broken_req", packages_dir=args.wheel_dir)
+    install_log = SANDBOX_RUNS_DIR / "acceptance_broken_req" / "install.log"
+    install_tail = install_log.read_text()[-300:] if install_log.exists() else "<install.log not written>"
+    show("11. Broken requirement (`reproradar-no-such-package==9.9.9`)", r.command_executed,
+         "\n".join([f"install.log (tail): {install_tail.strip()}", r.stdout.strip()[-300:], *summary(r, meta)]))
+    results["11 broken requirement reported FAILED"] = meta.get("dependency_install_status") == "FAILED"
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only
     marker = repo / "RAN.marker"
