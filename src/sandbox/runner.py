@@ -296,6 +296,23 @@ class DockerSandboxRunner:
                 fallback_reason="Docker unavailable; unisolated local run explicitly allowed (allow_unsafe_local)",
             )
 
+        # The containers run as the sandbox user (uid 1000) and write logs and metadata into the
+        # output directory. On hosts running as another uid it must be opened for the container
+        # phases; it is closed again afterwards, whatever happens.
+        output_dir.chmod(0o777)
+        try:
+            return self._run_docker_phases(repo_dir, output_dir, target_cmd, packages_dir)
+        finally:
+            output_dir.chmod(0o755)
+
+    def _run_docker_phases(
+        self,
+        repo_dir: Union[str, Path],
+        output_dir: Path,
+        target_cmd: List[str],
+        packages_dir: Optional[Union[str, Path]],
+    ) -> SandboxExecutionResult:
+        """Optional install phase, then the paper run, both in the Docker sandbox."""
         deps_dir = None
         dependency_status = None
         if packages_dir and Path(packages_dir).is_dir() and any(Path(packages_dir).iterdir()):
