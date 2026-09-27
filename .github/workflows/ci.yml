@@ -85,6 +85,6 @@ jobs:
         run: docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .
       - name: Download a wheel for the offline install check
         run: |
-          python -m pip download six==1.16.0 --only-binary=:all: --no-deps -d "$RUNNER_TEMP/wheels"
+          python -m pip download toolz==0.12.1 --only-binary=:all: --no-deps -d "$RUNNER_TEMP/wheels"
       - name: Run acceptance checks through DockerSandboxRunner
         run: python scripts/sandbox_acceptance.py --wheel-dir "$RUNNER_TEMP/wheels"

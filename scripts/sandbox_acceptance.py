@@ -13,7 +13,7 @@ paper runs) and prints the command evidence for each check:
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
-Usage: python scripts/sandbox_acceptance.py --wheel-dir DIR   (DIR holds a wheel for `six`)
+Usage: python scripts/sandbox_acceptance.py --wheel-dir DIR   (DIR holds a wheel for `toolz`, a package not in the image)
 Exit code 1 if any check fails.
 """
 
@@ -66,9 +66,16 @@ PROBES = {
         "raise SystemExit(0 if ok else 1)\n"
     ),
     "probe_sleep.py": "import time\nprint('sleeping 60s', flush=True)\ntime.sleep(60)\n",
-    "probe_import.py": "import six\nprint(f'six {six.__version__} imported from {six.__file__}')\n",
+    "probe_import.py": (
+        "import toolz\n"
+        "print(f'toolz {toolz.__version__} imported from {toolz.__file__}')\n"
+        "raise SystemExit(0 if toolz.__file__.startswith('/workspace/home/.local/') else 1)\n"
+    ),
     "probe_info.py": (
         "import os, subprocess\n"
+        "for line in open('/proc/self/mounts'):\n"
+        "    if line.split()[1] in ('/tmp', '/workspace/home'):\n"
+        "        print(f'mount: {line.split()[1]} {line.split()[3]}')\n"
         "for f in ['/sys/fs/cgroup/cpu.max', '/sys/fs/cgroup/memory.max', '/sys/fs/cgroup/pids.max']:\n"
         "    try:\n"
         "        print(f'{f}: {open(f).read().strip()}')\n"
@@ -113,7 +120,7 @@ def summary(result, meta):
 
 def main():
     parser = argparse.ArgumentParser(description="Sandbox acceptance checks (requires Docker)")
-    parser.add_argument("--wheel-dir", required=True, help="Directory containing a wheel for `six`")
+    parser.add_argument("--wheel-dir", required=True, help="Directory containing a wheel for `toolz` (not preinstalled in the image)")
     args = parser.parse_args()
 
     repo = Path(tempfile.mkdtemp(prefix="acceptance_repo_"))
@@ -145,16 +152,16 @@ def main():
     results["4 timeout"] = r.status == "TIMEOUT" and meta.get("status") == "TIMEOUT" and meta.get("duration_seconds", 0) > 0
 
     # 5. offline install
-    wheels = sorted(Path(args.wheel_dir).glob("six-*.whl"))
+    wheels = sorted(Path(args.wheel_dir).glob("toolz-*.whl"))
     offline_repo = Path(tempfile.mkdtemp(prefix="acceptance_offline_"))
     (offline_repo / "probe_import.py").write_text(PROBES["probe_import.py"])
-    (offline_repo / "requirements.txt").write_text("six\n")
+    (offline_repo / "requirements.txt").write_text("toolz==0.12.1\n")
     offline_repo.chmod(0o755)
     r, meta = run_probe(runner, offline_repo, "probe_import.py", "acceptance_offline", packages_dir=args.wheel_dir)
     show(f"5. Offline install from /workspace/packages ({', '.join(w.name for w in wheels)})",
          r.command_executed, "\n".join([r.stdout.strip()[-600:], *summary(r, meta)]))
     results["5 offline install"] = (
-        r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED" and "six " in r.stdout
+        r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED" and "imported from /workspace/home/.local/" in r.stdout
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only
