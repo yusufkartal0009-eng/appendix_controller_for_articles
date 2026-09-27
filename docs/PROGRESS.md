@@ -34,6 +34,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: Gap Analysis Cleanup (2026-09-27, Issue #93)
+- Gap IDs renamed `G<n>` → `GA-<n>` in `docs/gap_analysis.md`, `docs/PROGRESS.md`, and `README.md`, so they no longer collide with the maintainer's TODO items `G1`-`G6`.
+- Added gaps missed by the analysis: GA-17 (broken seed corpus labelled "verified", fixed in #85) and GA-18 (out-of-order work; PRs #56-#63 each merged 3-12 seconds after opening with no review), plus GA-19 to GA-21 found by the acceptance checks.
+- Status references now point to the PRs that did the work.
+- Checked: no "Hafta" milestones remain (removed in #76).
+
 ### M2 / Sandbox: Acceptance Evidence and Tracking Aligned (2026-09-27, Issue #86)
 - `scripts/sandbox_acceptance.py` runs six checks through `DockerSandboxRunner` against a real Docker daemon in CI; **6 of 6 pass** (non-root uid 1000, network blocked, read-only root, `TIMEOUT` with duration > 0, offline install of a package not in the image, refusal without Docker). Output recorded verbatim in `docs/SANDBOX_ACCEPTANCE.md`.
 - Building the evidence found and fixed two runner bugs (#88/#89, #90/#91), replaced a check that proved nothing (`six` was already in the image), and found that `/workspace/home` is `noexec` by Docker default (open: #92).
@@ -67,7 +73,7 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - `DockerSandboxRunner.run()` now raises `SandboxUnavailableError` and executes nothing when Docker is unavailable; previously it silently ran paper code on the host.
 - Unisolated local execution requires the explicit `--allow-unsafe-local` flag (`SandboxConfig.allow_unsafe_local`); such runs print a red warning and are recorded as `"isolated": false` in `run_report.json`. Docker runs record `"isolated": true`.
 - `scripts/stage_and_bundle_repo.py` exits with code 4 when execution is refused.
-- Docs aligned (`README.md`, `docs/SANDBOX_GUIDE.md`, `docs/ENVIRONMENT.md`, `docs/ARCHITECTURE.md`); gap added to `docs/gap_analysis.md` as G16.
+- Docs aligned (`README.md`, `docs/SANDBOX_GUIDE.md`, `docs/ENVIRONMENT.md`, `docs/ARCHITECTURE.md`); gap added to `docs/gap_analysis.md` as GA-16.
 - 57 / 57 tests green: 5 new tests, the old fallback test rewritten for the new behavior, and the stager execution test extended to assert `isolated: false`.
 
 ### M0 / DevOps: Side-Effect Approval Gate Restored (2026-09-26, Issue #78)
@@ -79,36 +85,36 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - GitHub: closed implemented issues #5, #16, #27, #28, #47 with evidence; closed weekly umbrella issues #49, #51, #52, #53 as duplicates of the per-issue backlog; added done/missing status notes to #2, #4, #10, #11, #13, #14, #15, #17, #18, #30; removed the seven empty "Hafta" milestones.
 - `docs/BLUEPRINT.md`: all 45 backlog references renumbered by title match against GitHub (they were one lower than the real issue numbers).
 - This file: milestone table rebuilt from GitHub open/closed counts; no milestone is marked completed while it has open issues.
-- Resolves gap analysis G1 and G4.
+- Resolves gap analysis GA-1 and GA-4.
 
 ### M0 / DevOps: Relaxed Side-Effect Approval Gate (2026-09-25, Issue #69)
 - `AGENTS.md` §5.6: after an approved proposal and a green suite, push, PR, merge, and merged-branch deletion no longer need a separate go-ahead.
 - Force-pushes, direct commits to `main`, closing issues without a merged PR, settings changes, and destructive operations still require explicit approval.
 
 ### M7 / DevOps: Continuous Integration (2026-09-25, Issue #42, PR #74)
-- `.github/workflows/ci.yml`: `ruff` and `pytest --cov` on Ubuntu and Windows (Python 3.11), plus a sandbox image job that builds `Dockerfile.sandbox`, checks for stray redirect files, and asserts `dependency_install_status` values. Resolves G3 and verifies the G7/G8 fixes from #71 on Docker.
+- `.github/workflows/ci.yml`: `ruff` and `pytest --cov` on Ubuntu and Windows (Python 3.11), plus a sandbox image job that builds `Dockerfile.sandbox`, checks for stray redirect files, and asserts `dependency_install_status` values. Resolves GA-3 and verifies the GA-7/GA-8 fixes from #71 on Docker.
 - First CI run exposed a host-dependent test: `test_execute_staged_produces_report_and_metrics` assumed Docker was absent and failed on Ubuntu runners, where Docker is installed. The test now forces the process runner, like the other sandbox tests.
 
 ### M0 / DevOps: Setup & Verification Docs for the New Environment (2026-09-25, Issue #72)
-- `README.md`: Quickstart installs `requirements-dev.txt` (runtime-only alternative noted), adds the Windows `py` launcher note, lint step, an accurate simulation note (G2), and a refreshed directory layout (G12).
+- `README.md`: Quickstart installs `requirements-dev.txt` (runtime-only alternative noted), adds the Windows `py` launcher note, lint step, an accurate simulation note (GA-2), and a refreshed directory layout (GA-12).
 - `docs/ENVIRONMENT.md`: separate runtime and development package tables, updated Windows and Linux/macOS setup, sandbox image smoke test with `dependency_install_status`, and a new verified baseline (52 tests, ruff clean).
 - `docs/SANDBOX_GUIDE.md`: actual `execution_meta.json` fields and the new `meta_error` report field.
 - `docs/gap_analysis.md`: status column tracking which gaps are fixed, partly fixed, or open.
 
 ### M0 / DevOps: Gap Remediation — Sandbox, Dependency, and Safety Fixes (2026-09-25, Issue #70)
-- **CI (G3):** workflow prepared (lint, tests on Ubuntu and Windows, sandbox image build and smoke test) but not yet pushed: the GitHub token lacks the `workflow` scope. Follows in a separate PR.
-- **Dependencies (G6):** `requirements.txt` now holds runtime packages only (`pydantic`, `sqlalchemy`, `tabulate`); tests, lint, and document tooling moved to `requirements-dev.txt`; unused `pandas`, `pyyaml`, and `requests` removed. `pyproject.toml` defines the ruff correctness gate.
-- **Sandbox image (G7):** version constraints in `Dockerfile.sandbox` are quoted, so they are no longer parsed as shell redirections.
-- **Entrypoint (G8):** `execution_meta.json` gains `dependency_install_status` (`SKIPPED` / `INSTALLED` / `FAILED`) instead of hiding install failures behind `|| true`.
-- **Error handling (G9):** the metric extractor logs skipped non-JSON blocks; `execute_staged` reports an unreadable `execution_meta.json` as `meta_error`.
-- **Security (G10):** `setup_github_backlog.py` passes argument lists without a shell and sends issue bodies on stdin.
-- **Docker hygiene (G14):** `.dockerignore` limits the build context; obsolete Compose `version` key removed.
+- **CI (GA-3):** workflow prepared (lint, tests on Ubuntu and Windows, sandbox image build and smoke test) but not yet pushed: the GitHub token lacks the `workflow` scope. Follows in a separate PR.
+- **Dependencies (GA-6):** `requirements.txt` now holds runtime packages only (`pydantic`, `sqlalchemy`, `tabulate`); tests, lint, and document tooling moved to `requirements-dev.txt`; unused `pandas`, `pyyaml`, and `requests` removed. `pyproject.toml` defines the ruff correctness gate.
+- **Sandbox image (GA-7):** version constraints in `Dockerfile.sandbox` are quoted, so they are no longer parsed as shell redirections.
+- **Entrypoint (GA-8):** `execution_meta.json` gains `dependency_install_status` (`SKIPPED` / `INSTALLED` / `FAILED`) instead of hiding install failures behind `|| true`.
+- **Error handling (GA-9):** the metric extractor logs skipped non-JSON blocks; `execute_staged` reports an unreadable `execution_meta.json` as `meta_error`.
+- **Security (GA-10):** `setup_github_backlog.py` passes argument lists without a shell and sends issue bodies on stdin.
+- **Docker hygiene (GA-14):** `.dockerignore` limits the build context; obsolete Compose `version` key removed.
 - 52 / 52 tests green (3 new), verified in a clean venv built from `requirements-dev.txt`.
 
 ### M0 / DevOps: Repository Gap Analysis (2026-09-24, Issue #67)
 - Added `docs/gap_analysis.md`: 15 gaps (3 high, 7 medium, 5 low) across tracking, product, CI, tests, dependencies, sandbox, code quality, security, and docs, each with evidence, remedy, and related issue.
 - Measured baseline: 60% line coverage (`cli.py` 0%), 281 `ruff` findings, 49 / 49 tests green.
-- Highest-impact findings: living docs disagree with GitHub milestone/issue state (G1), `cli.py score` still runs on simulated outputs (G2), no CI (G3).
+- Highest-impact findings: living docs disagree with GitHub milestone/issue state (GA-1), `cli.py score` still runs on simulated outputs (GA-2), no CI (GA-3).
 - Report only; each gap is to be filed and fixed through the normal issue loop.
 
 ### M0 / DevOps: Environment & Dependency Inventory (2026-09-24, Issue #65)
