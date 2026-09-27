@@ -203,6 +203,7 @@ repro-radar/
 │   ├── gap_analysis.md      # Known gaps, evidence, and remediation status
 │   ├── CORPUS_VERIFICATION.md # Per-entry corpus checks and what remains unverified
 │   ├── SANDBOX_ACCEPTANCE.md  # Real-Docker evidence of sandbox isolation
+│   ├── DECISIONS.md           # Security-relevant decisions with risks and evidence
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
 │   ├── project_roadmap.md   # 7-week detailed roadmap
 │   ├── repro_radar_introduction.docx # Academic introduction document

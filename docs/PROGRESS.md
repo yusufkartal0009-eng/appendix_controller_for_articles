@@ -34,6 +34,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M2 / Sandbox: Decision Log (2026-09-27, Issue #104)
+- `docs/DECISIONS.md`: D-001 records that PR #64's removal of `noexec` from `/workspace/home` had no effect (Docker's tmpfs default), why `noexec` is kept, and the risk that `exec` would add; D-002 records the two-phase, read-only dependency mount. Each fact cites a PR or CI output.
+
 ### M2 / Sandbox: Bundle Every Requirements File; Flag Packages Without Wheels (2026-09-27, Issue #102)
 - `bundle_dependencies()` downloads from every `*requirements*.txt` (previously only the first). If the download fails, each requirement is probed alone (binary-only, `--no-deps`) and the ones without a wheel are reported as `NEEDS_SDIST_BUILD`; nothing is built on the host.
 - The install phase installs from the same files.
