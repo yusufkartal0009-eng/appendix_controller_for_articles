@@ -160,7 +160,6 @@ def run_probe(runner, repo, name, paper_id, packages_dir=None):
     if out_dir.exists():
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
-    out_dir.chmod(0o777)  # the container user (uid 1000) writes execution_meta.json here
     result = runner.run(paper_id=paper_id, repo_dir=repo, target_script=name, packages_dir=packages_dir)
     meta_path = out_dir / "execution_meta.json"
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
