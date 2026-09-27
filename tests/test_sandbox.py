@@ -288,3 +288,20 @@ def test_run_with_packages_installs_first_then_runs_with_read_only_deps(tmp_path
     assert not _flag_value(run, "-v", lambda v: "/workspace/packages" in v)
     assert f"SANDBOX_DEPENDENCY_STATUS={install_status}" in run
     assert result.status == "COMPLETED"
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX permission bits")
+def test_deps_dir_is_not_world_writable_after_install(tmp_path, monkeypatch):
+    """The deps dir is opened for the install container only; afterwards nobody else may modify it."""
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    packages = tmp_path / "packages"
+    packages.mkdir()
+    (packages / "demo-1.0-py3-none-any.whl").write_text("x", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(runner_module.subprocess, "run", _fake_docker([], "INSTALLED"))
+
+    DockerSandboxRunner().run(paper_id="perm_check", repo_dir=tmp_path, target_script="eval.py", packages_dir=packages)
+
+    mode = (tmp_path / "runs" / "perm_check" / "deps").stat().st_mode & 0o777
+    assert mode & 0o002 == 0, oct(mode)
