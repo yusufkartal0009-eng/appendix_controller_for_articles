@@ -1,20 +1,26 @@
-## Summary
-<!-- Plain language: what changed, why, and what it affects -->
+## What / why
+<!-- Plain language: what changed, why, and what it affects. One item per PR (see the working agreement, #115). -->
 
 Closes #<!-- issue number -->
 
-## Changes Made
-<!-- List key files or component alterations -->
+## How I tested it
+<!-- Commands you ran and their real output (tests, CI job, manual steps). Evidence, not claims. -->
+```
+.venv\Scripts\pytest.exe tests/ -q
+```
+
+## What I did NOT verify
+<!-- Be specific: untested paths, platforms, assumptions. "Nothing" is rarely true. -->
 - 
 
-## Verification & Output Evidence
-<!-- Evidence is mandatory under projectflow. Paste test command output below -->
-```
-.venv\Scripts\pytest.exe tests/ -v
-```
+## AI use
+<!-- Which parts were AI-assisted, and what you checked by hand. -->
+- 
 
-## Checklist
-- [ ] Conforms to projectflow standards and AGENTS.md guardrails
-- [ ] No code written before approved proposal
-- [ ] Automated tests passing with output evidence attached
-- [ ] Living documentation (`docs/PROGRESS.md` and others) updated
+## Self-review
+<!-- Read the whole diff before merging, then tick. Post a short self-review comment on the PR. -->
+- [ ] No code was written before the approach was approved (AGENTS.md §5.2)
+- [ ] I read the full diff (not just the summary) and posted a self-review comment
+- [ ] Every claim of "fixed", "done", or "verified" above has output as evidence
+- [ ] `docs/PROGRESS.md` updated
+- [ ] Merged on the day the work was done

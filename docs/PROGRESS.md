@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M0 / DevOps: PR Template and Working Agreement (2026-09-27, Issues #115, #116)
+- `.github/PULL_REQUEST_TEMPLATE.md`: what/why, how I tested it, what I did NOT verify, AI use, self-review checklist.
+- Standing, pinned issue #115 holds the working agreement and a per-session checklist.
+
 ### M2 / Sandbox: Output Directory Writable by the Container on Any Host UID (2026-09-27, Issue #96)
 - Reproduced by removing the acceptance script's `chmod` workaround: on the uid 1001 CI runner, 10 of 11 Docker checks failed with `execution_meta.json: <not written>`.
 - The runner now opens the output directory only while the containers run and restores 0755 afterwards; all 11 acceptance checks pass without the workaround.
