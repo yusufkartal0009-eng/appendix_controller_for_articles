@@ -344,7 +344,7 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
         ("Filesystem", "'--read-only' root; repository mounted read-only", "Writes to /, /usr, and the paper's repository fail with EROFS (check 3)."),
         ("Writable scratch space", "tmpfs /tmp and /workspace/home: noexec, nosuid", "Code can write scratch files but cannot execute or load what it wrote (check 7)."),
         ("User", "Non-root UID:GID 1000:1000, no-new-privileges", "Code runs without root privileges (check 1); this alone does not prevent container escapes."),
-        ("Resources", "--cpus=2.0, --memory=8g, --pids-limit=100", "CPU, memory, and process limits are enforced; an out-of-memory kill is reported as OOM_KILLED (checks 8, 9)."),
+        ("Resources", "--cpus=2.0, --memory=8g, --pids-limit=100", "Memory and process limits are enforced, and an out-of-memory kill is reported as OOM_KILLED (checks 8, 9); the CPU limit is set but not tested."),
     ]
 
     for row_idx, row in enumerate(table_data, start=1):

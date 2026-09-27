@@ -43,7 +43,8 @@ The previous draft's reference list had 6 entries and no in-text citations. [2] 
 | §1 | Results can vary between runs and random seeds | [7] abstract | Verified (abstract read) |
 | §1 | Re-running a paper requires reconstructing its environment, data, and hardware | Project aim, not a factual claim about the literature | Motivation |
 | §2 | Paper code runs only inside the container; execution is refused without Docker | `docs/SANDBOX_ACCEPTANCE.md` check 6 | Project evidence |
-| §2 table | Network, read-only filesystem, noexec scratch space, non-root user, resource limits, OOM reporting | `docs/SANDBOX_ACCEPTANCE.md` checks 1, 2, 3, 7, 8, 9 | Project evidence |
+| §2 table | Network, read-only filesystem, noexec scratch space, non-root user, memory and process limits, OOM reporting | `docs/SANDBOX_ACCEPTANCE.md` checks 1, 2, 3, 7, 8, 9 | Project evidence |
+| §2 table | CPU limit `--cpus=2.0` is set but not tested | `src/sandbox/runner.py`; no acceptance check | Stated as untested |
 | §2 | The container shares the host kernel, so the measures reduce but do not eliminate risk | Stated as a limitation of container isolation | Limitation (not cited) |
 | §3 table | Tier weights 35/35/15/15; Tier 2 default tolerance 5% | `src/config.py` (`TIER*_WEIGHT`, `DEFAULT_TOLERANCE`) | Project code |
 | §3 table | Tier 3 uses the coefficient of variation with a 2% threshold | `src/scoring.py` (Tier 3) | Project code |
