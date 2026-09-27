@@ -95,6 +95,18 @@ jobs:
           assert result["status"] == "PARTIAL", result
           assert [e["requirement"] for e in result["needs_sdist_build"]] == ["docopt==0.6.2"], result
           PY
+      - name: OOM kill is reported as OOM_KILLED, a timeout still as TIMEOUT
+        run: |
+          mkdir -p out-oom out-timeout && chmod 777 out-oom out-timeout
+          set +e
+          docker run --rm --memory=128m --memory-swap=128m -v "$PWD/out-oom:/workspace/output" repro-radar-sandbox:ci \
+            python -c "x = [b'x' * (32 * 1024 * 1024) for _ in range(40)]"
+          docker run --rm -e SANDBOX_TIMEOUT=2 -v "$PWD/out-timeout:/workspace/output" repro-radar-sandbox:ci \
+            python -c "import time; time.sleep(30)"
+          set -e
+          cat out-oom/execution_meta.json out-timeout/execution_meta.json
+          python3 -c "import json; m = json.load(open('out-oom/execution_meta.json')); assert m['status'] == 'OOM_KILLED' and m['exit_code'] == 137, m"
+          python3 -c "import json; m = json.load(open('out-timeout/execution_meta.json')); assert m['status'] == 'TIMEOUT' and m['exit_code'] == 137, m"
       - name: Run phase reports the install status it was given
         run: |
           mkdir -p out-run && chmod 777 out-run
