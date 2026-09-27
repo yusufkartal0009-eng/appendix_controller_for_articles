@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M2 / Sandbox: Output Directory Writable by the Container on Any Host UID (2026-09-27, Issue #96)
+- Reproduced by removing the acceptance script's `chmod` workaround: on the uid 1001 CI runner, 10 of 11 Docker checks failed with `execution_meta.json: <not written>`.
+- The runner now opens the output directory only while the containers run and restores 0755 afterwards; all 11 acceptance checks pass without the workaround.
+- 1 new POSIX test (runs on Linux CI).
+
 ### M2 / Sandbox: Acceptance Checks 8-11 (2026-09-27, Issue #110)
 - New real-Docker checks: OOM kill under a 256 MiB limit (`OOM_KILLED` after 0.165 s), PID limit (thread creation stops after 95 extra threads), numpy 2.4.6 vs the Dockerfile floor `>=1.24.0`, and a non-existent requirement (install `FAILED`, run still completes). **11 of 11 pass** in CI run 36319286095.
 - Check 8 first failed and exposed that OOM kills were reported as `TIMEOUT`; fixed separately in #113.

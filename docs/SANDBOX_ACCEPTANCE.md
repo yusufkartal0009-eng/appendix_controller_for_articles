@@ -9,13 +9,12 @@
 |---|---|
 | Script | `scripts/sandbox_acceptance.py` (runs probe scripts through `DockerSandboxRunner`, the same code path as paper runs) |
 | Where | GitHub Actions `ubuntu-latest`, job `Sandbox acceptance (real Docker)`, host user uid 1001 |
-| Run | CI run `36319286095` on commit `2022790` (PR #111), 2026-09-27 |
+| Run | CI run `36319640682` on commit `18e759d` (PR #114), 2026-09-27 |
 | Image | `repro-radar-sandbox:latest` built from `docker/Dockerfile.sandbox` in the same job |
 | Re-run | `python scripts/sandbox_acceptance.py --wheel-dir <dir>` on a host with Docker; `<dir>` holds `toolz==0.12.1` and `ujson==5.10.0` wheels (manylinux, CPython 3.11) |
 
 The job runs on every push and pull request and fails if any check fails.
 
-**Caveat:** before each run the script makes the run's output directory world-writable so the container user (uid 1000) can write to it on the uid 1001 CI host. The runner itself does not do this for the output directory, so these checks do not prove that output writing works on hosts whose user is not uid 1000 (issue #96).
 
 ## Results
 
@@ -24,11 +23,11 @@ The job runs on every push and pull request and fails if any check fails.
 | 1 | Container runs as a non-root user | **PASS** | `uid=1000 gid=1000` |
 | 2 | Network is disabled | **PASS** | TCP, DNS, and HTTPS all fail (`Network is unreachable`, name resolution failure) |
 | 3 | Root filesystem is read-only | **PASS** | root mount `ro`; writes to `/`, `/usr`, `/workspace/repo` fail with `EROFS` |
-| 4 | Timeout produces `TIMEOUT` with `duration_seconds > 0` | **PASS** | limit 5 s: `TIMEOUT`, exit 137, `duration_seconds: 5.109` |
+| 4 | Timeout produces `TIMEOUT` with `duration_seconds > 0` | **PASS** | limit 5 s: `TIMEOUT`, exit 137, `duration_seconds: 5.114` |
 | 5 | Offline install of a pure-Python wheel | **PASS** | `toolz` (not in the image) imported from `/workspace/deps/toolz/__init__.py` |
 | 6 | Without Docker, execution is refused | **PASS** | `SandboxUnavailableError`; the probe's marker file was not created |
 | 7 | Offline install of a compiled wheel | **PASS** | `ujson` C extension loaded from `/workspace/deps/ujson.cpython-311-x86_64-linux-gnu.so`; writing to `/workspace/deps`: `Read-only file system` |
-| 8 | Memory limit: OOM kill reported as `OOM_KILLED` | **PASS** | 256 MiB limit: `OOM_KILLED`, exit 137, after `0.165` s (timeout limit 60 s) |
+| 8 | Memory limit: OOM kill reported as `OOM_KILLED` | **PASS** | 256 MiB limit: `OOM_KILLED`, exit 137, after `0.179` s (timeout limit 60 s) |
 | 9 | PID limit holds | **PASS** | `limited after 95 extra threads: RuntimeError: can't start new thread` (`pids.max 100`) |
 | 10 | `pip show numpy` vs the Dockerfile bound `numpy>=1.24.0` | **PASS** | numpy `2.4.6`. The Dockerfile sets only a floor, so the exact version is not pinned (GA-6) |
 | 11 | Broken requirement → `dependency_install_status: FAILED` | **PASS** | install log: `ERROR: Could not find a version that satisfies the requirement reproradar-no-such-package==9.9.9 (from versions: none)`; run status `COMPLETED`, `dependency_install_status: FAILED` |
@@ -62,13 +61,13 @@ results are not mistaken for "nothing was wrong":
 | The first version of check 5 used `six`, which is already in the image; its "pass" proved nothing | Replaced by `toolz`, which is not in the image, and the import path is asserted |
 | `/workspace/home` was `noexec` despite PR #64 removing the flag (Docker adds it by default), so offline-installed compiled wheels could not load | Fixed in #95 (issue #92): separate install phase, read-only `/workspace/deps`; verified by check 7 |
 | An OOM kill (exit 137) was reported as `TIMEOUT` (found by check 8) | Fixed in #113 (issue #112): the entrypoint reads the cgroup `oom_kill` counter |
-| The acceptance script's `chmod` of the output directory hides whether the runner's own output directory is writable by uid 1000 on other hosts | Open: issue #96 (not reproduced yet) |
+| The runner left the output directory unwritable for the container on hosts not running as uid 1000, so every Docker run there failed and wrote no `execution_meta.json`; the acceptance script hid it by pre-opening the directory | Fixed in #114 (issue #96): the runner opens the directory only during the container phases; the acceptance script no longer pre-opens it |
 
 ## Verbatim output
 
 ### 1. Non-root user
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_identity:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_identity.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_identity:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_identity.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -82,15 +81,15 @@ uid=1000 gid=1000
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.123s
+Duration      : 0.177s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.123, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.177, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 2. Network disabled
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_network:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_network.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_network:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_network.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -106,15 +105,15 @@ https://example.com: BLOCKED (URLError: <urlopen error [Errno -3] Temporary fail
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.321s
+Duration      : 0.281s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.321, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.281, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 3. Read-only root filesystem
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_readonly:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_readonly.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_readonly:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_readonly.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -123,7 +122,7 @@ Security Mode : Unprivileged (UID: 1000)
 Network State : Isolated (--network none)
 Command       : python /workspace/repo/probe_readonly.py
 ==================================================
-root mount: overlay / overlay ro,relatime,lowerdir=/var/lib/docker/overlay2/l/RYSUS6TFJZE4GTRQHDWRCXVUHG:/var/lib/docker/overlay2/l/AZL6OIPKETAVLYLNNHCX3O4CHE:/var/lib/docker/overlay2/l/4BI6HG37Y4PCIDBEK72YA5AVWM:/var/lib/docker/overlay2/l/J7FPSPCOAHHHF4LBQWMX4GXDQD:/var/lib/docker/overlay2/l/DWLS3QYYV5F3LD3TYBPHAOI5UU:/var/lib/docker/overlay2/l/SG6E2SGUAGO5L4JJN6BQFRRSQG:/var/lib/docker/overlay2/l/YDCLOKXUCRNKGOHWGQLBQJRJMQ:/var/lib/docker/overlay2/l/QHEFL5UJNXIOZIFNHV3T2GH2JL:/var/lib/docker/overlay2/l/UPMG7CDIK2S3P7AR6V55D3FGUH:/var/lib/docker/overlay2/l/MHCSKJKAHC6TE6NT76NZNFVXOL:/var/lib/docker/overlay2/l/XEMWLHRYXHYQQXZRUNOAKLYKXO:/var/lib/docker/overlay2/l/ZHAKTZGVSJL3DYVC43USSPZS7O,upperdir=/var/lib/docker/overlay2/0b6d0a398e32320abc87b3e2e3689150a9cf4a39d488c8a1350a9a8321e64739/diff,workdir=/var/lib/docker/overlay2/0b6d0a398e32320abc87b3e2e3689150a9cf4a39d488c8a1350a9a8321e64739/work,nouserxattr 0 0
+root mount: overlay / overlay ro,relatime,lowerdir=/var/lib/docker/overlay2/l/AGXJGANXOXR454GIFGW2UM2R2Z:/var/lib/docker/overlay2/l/YWVRBDXKH74V7CVNO54EXKZ62T:/var/lib/docker/overlay2/l/GACRMAJAC4TVUBBOAA54QSVYUJ:/var/lib/docker/overlay2/l/PYKKWZ5646HDZHVJCL6XVAZX5F:/var/lib/docker/overlay2/l/WXPE6HAKDB2VDYJG7WDGGFUFPZ:/var/lib/docker/overlay2/l/TVCM72H4KZFVSFWVMVMEVLFCKP:/var/lib/docker/overlay2/l/VZ3CERWU2VKLYU3PJZZMSN42PV:/var/lib/docker/overlay2/l/UV7FXDBFJ4QFQXRO4CPIONOM47:/var/lib/docker/overlay2/l/FNWXRS7JSFPVBSYLRGX3GFVZRX:/var/lib/docker/overlay2/l/K32BVKEGXAEJWSS5TELHDQLA6M:/var/lib/docker/overlay2/l/Z72WLAZDGM7QH6YF65A7N6VZ3R:/var/lib/docker/overlay2/l/C2BJSWCQPOUSX4LREE26IK2S4J,upperdir=/var/lib/docker/overlay2/e7cc4e688a281cdaded34772cd40a43d870c6aaccddddb79af6ccfbd521caa3b/diff,workdir=/var/lib/docker/overlay2/e7cc4e688a281cdaded34772cd40a43d870c6aaccddddb79af6ccfbd521caa3b/work,nouserxattr 0 0
 /probe_root.txt: EROFS (Read-only file system)
 /usr/probe.txt: EROFS (Read-only file system)
 /workspace/repo/probe.txt: EROFS (Read-only file system)
@@ -131,15 +130,15 @@ root mount: overlay / overlay ro,relatime,lowerdir=/var/lib/docker/overlay2/l/RY
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.123s
+Duration      : 0.126s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.123, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.126, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 4. Timeout (limit 5 s, script sleeps 60 s)
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=5 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_timeout:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_sleep.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=5 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_timeout:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_sleep.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -153,17 +152,17 @@ sleeping 60s
 Repro Radar: Execution Concluded
 Status        : TIMEOUT (Exit Code: 137)
 Dependencies  : SKIPPED
-Duration      : 5.109s
+Duration      : 5.114s
 ==================================================
 status=TIMEOUT exit_code=137 docker_used=True isolated=True
-execution_meta.json: {"status": "TIMEOUT", "exit_code": 137, "duration_seconds": 5.109, "timeout_limit_seconds": 5, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "TIMEOUT", "exit_code": 137, "duration_seconds": 5.114, "timeout_limit_seconds": 5, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 stderr (last 1500 chars):
 /entrypoint.sh: line 93:    13 Killed                  timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" "$@" > >(tee "${STDOUT_LOG}") 2> >(tee "${STDERR_LOG}" 1>&2)
 ```
 
 ### 5. Offline install from /workspace/packages (toolz-0.12.1-py3-none-any.whl)
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -e SANDBOX_DEPENDENCY_STATUS=INSTALLED -v /tmp/acceptance_offline_qpwy4v49:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_offline:/workspace/output:rw -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_offline/deps:/workspace/deps:ro repro-radar-sandbox:latest python /workspace/repo/probe_import.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -e SANDBOX_DEPENDENCY_STATUS=INSTALLED -v /tmp/acceptance_offline_7mzlc99d:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_offline:/workspace/output:rw -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_offline/deps:/workspace/deps:ro repro-radar-sandbox:latest python /workspace/repo/probe_import.py
 ========================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -177,15 +176,15 @@ toolz 0.12.1 imported from /workspace/deps/toolz/__init__.py
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : INSTALLED
-Duration      : 0.221s
+Duration      : 0.202s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.221, "timeout_limit_seconds": 120, "dependency_install_status": "INSTALLED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.202, "timeout_limit_seconds": 120, "dependency_install_status": "INSTALLED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 7. Compiled wheel installed offline (ujson-5.10.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl)
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -e SANDBOX_DEPENDENCY_STATUS=INSTALLED -v /tmp/acceptance_compiled_bm_q205j:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_compiled:/workspace/output:rw -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_compiled/deps:/workspace/deps:ro repro-radar-sandbox:latest python /workspace/repo/probe_compiled.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -e SANDBOX_DEPENDENCY_STATUS=INSTALLED -v /tmp/acceptance_compiled_qpcyztp7:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_compiled:/workspace/output:rw -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_compiled/deps:/workspace/deps:ro repro-radar-sandbox:latest python /workspace/repo/probe_compiled.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -202,15 +201,15 @@ control: same .so from /workspace/home fails to load: /workspace/home/nx/ujson.c
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : INSTALLED
-Duration      : 0.197s
+Duration      : 0.186s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.197, "timeout_limit_seconds": 120, "dependency_install_status": "INSTALLED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.186, "timeout_limit_seconds": 120, "dependency_install_status": "INSTALLED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 8. Memory limit (256 MiB, probe allocates up to 2 GiB)
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=256m --memory-swap=256m --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=60 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_oom:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_oom.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=256m --memory-swap=256m --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=60 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_oom:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_oom.py
 
 ==================================================
 allocated 32 MiB
@@ -224,18 +223,18 @@ allocated 224 MiB
 Repro Radar: Execution Concluded
 Status        : OOM_KILLED (Exit Code: 137)
 Dependencies  : SKIPPED
-Duration      : 0.165s
+Duration      : 0.179s
 ==================================================
 status=OOM_KILLED exit_code=137 docker_used=True isolated=True
-execution_meta.json: {"status": "OOM_KILLED", "exit_code": 137, "duration_seconds": 0.165, "timeout_limit_seconds": 60, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "OOM_KILLED", "exit_code": 137, "duration_seconds": 0.179, "timeout_limit_seconds": 60, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 stderr (last 1500 chars):
-/entrypoint.sh: line 93:    13 Killed                  timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" "$@" > >(tee "${STDOUT_LOG}") 2> >(tee "${STDERR_LOG}" 1>&2)
+/entrypoint.sh: line 93:    14 Killed                  timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" "$@" > >(tee "${STDOUT_LOG}") 2> >(tee "${STDERR_LOG}" 1>&2)
 ```
 
 ### 9. PID limit (100)
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_pids:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_pids.py
-none)
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_pids:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_pids.py
+one)
 Command       : python /workspace/repo/probe_pids.py
 ==================================================
 limited after 95 extra threads: RuntimeError: can't start new thread
@@ -243,15 +242,15 @@ limited after 95 extra threads: RuntimeError: can't start new thread
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.16s
+Duration      : 0.154s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.16, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.154, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 10. `pip show numpy` vs the Dockerfile bound
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_numpy:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_numpy.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_numpy:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_numpy.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -268,15 +267,15 @@ numpy 2.4.6 satisfies >=1.24.0: True
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.844s
+Duration      : 0.7s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.844, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.7, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 11. Broken requirement (`reproradar-no-such-package==9.9.9`)
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -e SANDBOX_DEPENDENCY_STATUS=FAILED -v /tmp/acceptance_broken__9u_t3h1:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_broken_req:/workspace/output:rw -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_broken_req/deps:/workspace/deps:ro repro-radar-sandbox:latest python /workspace/repo/probe_identity.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -e SANDBOX_DEPENDENCY_STATUS=FAILED -v /tmp/acceptance_broken_ukcsg0jt:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_broken_req:/workspace/output:rw -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_broken_req/deps:/workspace/deps:ro repro-radar-sandbox:latest python /workspace/repo/probe_identity.py
 install.log (tail): Looking in links: /workspace/packages
 ERROR: Could not find a version that satisfies the requirement reproradar-no-such-package==9.9.9 (from versions: none)
 ERROR: No matching distribution found for reproradar-no-such-package==9.9.9
@@ -287,10 +286,10 @@ uid=1000 gid=1000
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : FAILED
-Duration      : 0.122s
+Duration      : 0.127s
 ==================================================
 status=COMPLETED exit_code=0 docker_used=True isolated=True
-execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.122, "timeout_limit_seconds": 120, "dependency_install_status": "FAILED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 0.127, "timeout_limit_seconds": 120, "dependency_install_status": "FAILED", "user_id": 1000, "group_id": 1000}
 ```
 
 ### 6. Docker unavailable (Docker CLI removed from PATH)
@@ -303,7 +302,7 @@ script marker file exists: False
 
 ### Info: resource limits and /workspace/home exec
 ```
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_wocgod9h:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_info:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_info.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v /tmp/acceptance_repo_o0pnbdai:/workspace/repo:ro -v /home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/acceptance_info:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_info.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -321,10 +320,10 @@ mount: /workspace/home rw,nosuid,nodev,noexec,relatime,size=2097152k,mode=700,ui
 Repro Radar: Execution Concluded
 Status        : FAILED (Exit Code: 1)
 Dependencies  : SKIPPED
-Duration      : 0.205s
+Duration      : 0.19s
 ==================================================
 status=FAILED exit_code=1 docker_used=True isolated=True
-execution_meta.json: {"status": "FAILED", "exit_code": 1, "duration_seconds": 0.205, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
+execution_meta.json: {"status": "FAILED", "exit_code": 1, "duration_seconds": 0.19, "timeout_limit_seconds": 120, "dependency_install_status": "SKIPPED", "user_id": 1000, "group_id": 1000}
 stderr (last 1500 chars):
 Traceback (most recent call last):
   File "/workspace/repo/probe_info.py", line 12, in <module>
