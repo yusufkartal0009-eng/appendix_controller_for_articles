@@ -14,6 +14,11 @@ paper runs) and prints the command evidence for each check:
   7. compiled  - a wheel with a C extension installs offline and loads from /workspace/deps, which
                  the paper code cannot write to (control: the same .so fails to load from the
                  noexec /workspace/home)
+  8. oom       - under a 256 MiB limit, a memory hog is killed and reported as OOM_KILLED (not TIMEOUT)
+  9. pids      - the 100-PID limit stops thread creation
+  10. numpy    - `pip show numpy` in the image satisfies the Dockerfile floor numpy>=1.24.0
+  11. broken   - a requirement that does not exist makes the install phase fail and the run report
+                 dependency_install_status FAILED
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
