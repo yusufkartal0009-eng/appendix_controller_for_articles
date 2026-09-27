@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M2 / Sandbox: OOM Kills No Longer Reported as Timeouts (2026-09-27, Issue #112)
+- Found by the new acceptance check 8: an OOM kill after 0.185 s was reported as `TIMEOUT` (exit 137 is SIGKILL for both the timeout watchdog and the OOM killer).
+- The entrypoint compares the cgroup `oom_kill` counter before and after the run and writes `OOM_KILLED`; the runner reports the entrypoint's status instead of re-deriving it from the exit code.
+- 2 new tests; CI checks both an OOM kill and a real timeout on Docker.
+
 ### M0 / DevOps: Gap Analysis Addendum (2026-09-27, Issue #108)
 - GA-22: `pip download --prefer-binary` on the host ran an sdist's `setup.py`; reproduced with a marker-writing probe package (old command: marker written; current command: rejected, no marker). Fixed by #95 and #103.
 - GA-17 updated with the claim check (2 of 16 found, #101) and the removed TabNet entry's wrong claims.
