@@ -333,3 +333,23 @@ def test_docker_run_without_meta_still_maps_137_to_timeout(tmp_path, monkeypatch
     monkeypatch.setattr(runner_module.subprocess, "run", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 137, "", ""))
     result = DockerSandboxRunner().run(paper_id="no_meta_137", repo_dir=tmp_path, target_script="eval.py")
     assert result.status == "TIMEOUT"
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX permission bits")
+def test_output_dir_writable_by_container_only_during_the_run(tmp_path, monkeypatch):
+    """The container user (uid 1000) must be able to write the output directory on any host uid,
+    and the directory must not stay world-writable afterwards."""
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    modes_during_run = []
+
+    def fake_run(cmd, **kwargs):
+        modes_during_run.append((tmp_path / "runs" / "out_perm").stat().st_mode & 0o777)
+        return subprocess.CompletedProcess(cmd, 0, "ok\n", "")
+
+    monkeypatch.setattr(runner_module.subprocess, "run", fake_run)
+    DockerSandboxRunner().run(paper_id="out_perm", repo_dir=tmp_path, target_script="eval.py")
+
+    assert modes_during_run and all(m & 0o002 for m in modes_during_run), [oct(m) for m in modes_during_run]
+    assert (tmp_path / "runs" / "out_perm").stat().st_mode & 0o002 == 0
