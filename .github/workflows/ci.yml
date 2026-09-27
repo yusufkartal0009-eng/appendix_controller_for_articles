@@ -62,6 +62,39 @@ jobs:
           set -e
           cat out-fail/install_meta.json
           python3 -c "import json; m = json.load(open('out-fail/install_meta.json')); assert m['phase'] == 'install' and m['status'] == 'FAILED', m"
+      - name: Install phase uses every requirements file
+        run: |
+          mkdir -p multi-repo multi-out multi-deps multi-pkgs && chmod 777 multi-out multi-deps
+          printf 'toolz==0.12.1\n' > multi-repo/requirements.txt
+          printf 'ujson==5.10.0\n' > multi-repo/requirements-extra.txt
+          python3 -m pip download toolz==0.12.1 --only-binary=:all: --no-deps -d multi-pkgs
+          python3 -m pip download ujson==5.10.0 --only-binary=:all: --no-deps -d multi-pkgs \
+            --platform manylinux2014_x86_64 --python-version 3.11 --implementation cp
+          docker run --rm -e SANDBOX_PHASE=install -v "$PWD/multi-repo:/workspace/repo:ro" \
+            -v "$PWD/multi-pkgs:/workspace/packages:ro" -v "$PWD/multi-deps:/workspace/deps:rw" \
+            -v "$PWD/multi-out:/workspace/output" repro-radar-sandbox:ci
+          cat multi-out/install_meta.json
+          ls multi-deps
+          test -d multi-deps/toolz
+          ls multi-deps | grep -q '^ujson'
+      - name: Bundling flags requirements without wheels (real pip download)
+        run: |
+          mkdir -p bundle-repo
+          printf 'toolz==0.12.1\n' > bundle-repo/requirements.txt
+          printf 'docopt==0.6.2\n' > bundle-repo/requirements-extra.txt
+          echo "print(1)" > bundle-repo/run.py
+          python3 - <<'PY'
+          import json, sys
+          sys.path.insert(0, ".")
+          from src.sandbox.stager import RepoStager
+          stager = RepoStager(staging_root="bundle-stage")
+          staged = stager.stage_repository(paper_id="bundle_ci", source="bundle-repo")
+          result = stager.bundle_dependencies(staged)
+          print(json.dumps({k: result[k] for k in ("status", "requirements_files", "needs_sdist_build")}, indent=2))
+          assert sorted(result["requirements_files"]) == ["requirements-extra.txt", "requirements.txt"], result
+          assert result["status"] == "PARTIAL", result
+          assert [e["requirement"] for e in result["needs_sdist_build"]] == ["docopt==0.6.2"], result
+          PY
       - name: Run phase reports the install status it was given
         run: |
           mkdir -p out-run && chmod 777 out-run

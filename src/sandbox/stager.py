@@ -249,28 +249,23 @@ class RepoStager:
                 "bundle_dir": str(bundle_dir),
             }
 
-        primary_req = staged.staged_path / staged.manifest.requirements_files[0]
-        # Wheels are installed in the Linux sandbox image (CPython 3.11, glibc), not on the host, so
-        # download for that platform. Binary wheels only: installing a wheel runs no package code,
-        # while building an sdist would execute its setup.py.
-        cmd = [
-            sys.executable, "-m", "pip", "download",
-            "-r", str(primary_req),
-            "-d", str(bundle_dir),
-            "--only-binary=:all:",
-            "--platform", "manylinux_2_28_x86_64",
-            "--platform", "manylinux2014_x86_64",
-            "--python-version", "3.11",
-            "--implementation", "cp",
-        ]
+        req_paths = [staged.staged_path / name for name in staged.manifest.requirements_files]
+        cmd = self._pip_download_command(bundle_dir)
+        for req in req_paths:
+            cmd.extend(["-r", str(req)])
 
         try:
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-            wheels = list(bundle_dir.glob("*.whl")) + list(bundle_dir.glob("*.tar.gz"))
+            needs_sdist_build: List[Dict[str, str]] = []
+            if res.returncode != 0:
+                needs_sdist_build = self._find_requirements_without_wheels(req_paths, bundle_dir, timeout)
+            wheels = list(bundle_dir.glob("*.whl"))
             return {
                 "status": "SUCCESS" if res.returncode == 0 else "PARTIAL",
                 "wheel_count": len(wheels),
                 "bundle_dir": str(bundle_dir),
+                "requirements_files": list(staged.manifest.requirements_files),
+                "needs_sdist_build": needs_sdist_build,
                 "stdout": res.stdout[-1000:] if res.stdout else "",
                 "stderr": res.stderr[-1000:] if res.stderr else "",
             }
@@ -280,7 +275,58 @@ class RepoStager:
                 "message": f"Dependency bundling failed: {exc}",
                 "wheel_count": 0,
                 "bundle_dir": str(bundle_dir),
+                "needs_sdist_build": [],
             }
+
+    @staticmethod
+    def _pip_download_command(bundle_dir: Path) -> List[str]:
+        # Wheels are installed in the Linux sandbox image (CPython 3.11, glibc), not on the host, so
+        # download for that platform. Binary wheels only: installing a wheel runs no package code,
+        # while building an sdist would execute its setup.py on the host.
+        return [
+            sys.executable, "-m", "pip", "download",
+            "-d", str(bundle_dir),
+            "--only-binary=:all:",
+            "--platform", "manylinux_2_28_x86_64",
+            "--platform", "manylinux2014_x86_64",
+            "--python-version", "3.11",
+            "--implementation", "cp",
+        ]
+
+    def _find_requirements_without_wheels(
+        self, req_paths: List[Path], bundle_dir: Path, timeout: int
+    ) -> List[Dict[str, str]]:
+        """Probe each requirement alone (binary-only, --no-deps) to name the ones that have no wheel.
+
+        They are reported as NEEDS_SDIST_BUILD instead of being built on the host.
+        """
+        flagged: List[Dict[str, str]] = []
+        for req_path in req_paths:
+            for requirement in self._requirement_lines(req_path):
+                probe = self._pip_download_command(bundle_dir) + ["--no-deps", requirement]
+                try:
+                    res = subprocess.run(probe, capture_output=True, text=True, timeout=timeout)
+                except (subprocess.SubprocessError, OSError) as exc:
+                    flagged.append({"requirement": requirement, "status": "NEEDS_SDIST_BUILD", "reason": str(exc)})
+                    continue
+                if res.returncode != 0:
+                    lines = [line for line in (res.stderr or "").splitlines() if line.strip()]
+                    flagged.append({
+                        "requirement": requirement,
+                        "status": "NEEDS_SDIST_BUILD",
+                        "reason": lines[-1] if lines else f"pip exited {res.returncode}",
+                    })
+        return flagged
+
+    @staticmethod
+    def _requirement_lines(req_path: Path) -> List[str]:
+        """Requirement specifiers of a requirements file, without comments and pip options."""
+        lines: List[str] = []
+        for raw in req_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+            line = raw.split(" #")[0].strip()
+            if line and not line.startswith(("#", "-")):
+                lines.append(line)
+        return lines
 
     def execute_staged(
         self,
