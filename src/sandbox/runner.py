@@ -238,6 +238,8 @@ class DockerSandboxRunner:
         except (subprocess.SubprocessError, OSError) as exc:
             logger.warning("Dependency install phase could not run: %s", exc)
             return deps_dir, "FAILED"
+        finally:
+            deps_dir.chmod(0o755)  # close the directory again before the run phase
         try:
             status = json.loads(meta_path.read_text(encoding="utf-8")).get("status")
         except (OSError, ValueError) as exc:
