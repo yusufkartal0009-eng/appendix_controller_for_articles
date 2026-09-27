@@ -22,7 +22,7 @@ services:
     # In-memory transient storage with isolated execution permissions
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=64m
-      - /workspace/home:rw,nosuid,size=2048m
+      - /workspace/home:rw,nosuid,size=2048m,uid=1000,gid=1000
 
     # Privilege Escalation Prevention
     security_opt:
