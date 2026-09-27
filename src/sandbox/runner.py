@@ -22,7 +22,7 @@ import shutil
 import subprocess
 import sys
 import time
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from src.config import DEFAULT_TIMEOUT_SECONDS, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
 
@@ -110,8 +110,15 @@ class DockerSandboxRunner:
         output_dir: Union[str, Path],
         command: List[str],
         packages_dir: Optional[Union[str, Path]] = None,
+        deps_dir: Optional[Union[str, Path]] = None,
+        deps_writable: bool = False,
+        extra_env: Optional[Dict[str, str]] = None,
     ) -> List[str]:
-        """Construct the security-hardened `docker run` command with all isolation flags."""
+        """Construct the security-hardened `docker run` command with all isolation flags.
+
+        `deps_dir` is mounted at /workspace/deps: writable only for the dependency install phase,
+        read-only (but executable, so compiled extensions load) for the paper run.
+        """
         repo_path = Path(repo_dir).resolve()
         output_path = Path(output_dir).resolve()
 
@@ -128,9 +135,10 @@ class DockerSandboxRunner:
             docker_cmd.append("--read-only")
         docker_cmd.extend([
             "--tmpfs", f"/tmp:rw,noexec,nosuid,size={self.config.tmpfs_tmp_size}",
-            # Owned by the sandbox user: a plain tmpfs is root-owned and uid 1000 could not write to it.
+            # Writable scratch home owned by the sandbox user (a plain tmpfs is root-owned). Kept noexec:
+            # paper code can write here but never execute what it wrote. Dependencies go to /workspace/deps.
             "--tmpfs",
-            f"/workspace/home:rw,nosuid,size={self.config.tmpfs_home_size},"
+            f"/workspace/home:rw,noexec,nosuid,size={self.config.tmpfs_home_size},"
             f"uid={self.config.user_id},gid={self.config.group_id}",
         ])
 
@@ -155,9 +163,9 @@ class DockerSandboxRunner:
             "-e", "PYTHONUNBUFFERED=1",
             "-e", "PYTHONDONTWRITEBYTECODE=1",
             "-e", "PYTHONUSERBASE=/workspace/home/.local",
-            "-e", "PYTHONPATH=/workspace/repo:/workspace/home/.local/lib/python3.11/site-packages",
+            "-e", "PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages",
         ])
-        for k, v in self.config.env_vars.items():
+        for k, v in {**self.config.env_vars, **(extra_env or {})}.items():
             docker_cmd.extend(["-e", f"{k}={v}"])
 
         # 6. Volumes
@@ -168,6 +176,9 @@ class DockerSandboxRunner:
         if packages_dir and Path(packages_dir).exists():
             pkg_path = Path(packages_dir).resolve()
             docker_cmd.extend(["-v", f"{pkg_path}:/workspace/packages:ro"])
+        if deps_dir:
+            mode = "rw" if deps_writable else "ro"
+            docker_cmd.extend(["-v", f"{Path(deps_dir).resolve()}:/workspace/deps:{mode}"])
 
         # 7. Image and Command
         docker_cmd.append(self.config.image_name)
@@ -192,6 +203,48 @@ class DockerSandboxRunner:
             except OSError as exc:
                 logger.warning("Could not write %s: %s", path, exc)
 
+    def _install_dependencies(
+        self,
+        repo_dir: Union[str, Path],
+        output_dir: Path,
+        packages_dir: Union[str, Path],
+    ) -> Tuple[Path, str]:
+        """Install offline wheels in a separate, network-isolated container (install phase).
+
+        Wheels from /workspace/packages are installed binary-only (no package code runs) into a host
+        directory mounted writable at /workspace/deps. The paper run later mounts that directory
+        read-only, so compiled extensions can load but paper code cannot modify or add executables.
+        Returns the host deps directory and the install status (INSTALLED or FAILED).
+        """
+        deps_dir = Path(output_dir) / "deps"
+        if deps_dir.exists():
+            shutil.rmtree(deps_dir)
+        deps_dir.mkdir(parents=True)
+        deps_dir.chmod(0o777)  # written by the sandbox user (uid 1000) during the install phase only
+        meta_path = Path(output_dir) / "install_meta.json"
+        meta_path.unlink(missing_ok=True)
+
+        install_cmd = self.build_docker_command(
+            repo_dir=repo_dir,
+            output_dir=output_dir,
+            command=["install-dependencies"],
+            packages_dir=packages_dir,
+            deps_dir=deps_dir,
+            deps_writable=True,
+            extra_env={"SANDBOX_PHASE": "install"},
+        )
+        try:
+            subprocess.run(install_cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10)
+        except (subprocess.SubprocessError, OSError) as exc:
+            logger.warning("Dependency install phase could not run: %s", exc)
+            return deps_dir, "FAILED"
+        try:
+            status = json.loads(meta_path.read_text(encoding="utf-8")).get("status")
+        except (OSError, ValueError) as exc:
+            logger.warning("Unreadable install_meta.json: %s", exc)
+            status = None
+        return deps_dir, status if status in ("INSTALLED", "FAILED") else "FAILED"
+
     def run(
         self,
         paper_id: str,
@@ -201,6 +254,9 @@ class DockerSandboxRunner:
         packages_dir: Optional[Union[str, Path]] = None,
     ) -> SandboxExecutionResult:
         """Execute paper code inside the Docker sandbox.
+
+        With `packages_dir`, dependencies are first installed in a separate install-phase container
+        (see _install_dependencies) and mounted read-only into the run.
 
         Raises SandboxUnavailableError when Docker is unavailable, unless the config explicitly
         opts into unisolated local execution (allow_unsafe_local), which is only for trusted code.
@@ -229,11 +285,17 @@ class DockerSandboxRunner:
                 fallback_reason="Docker unavailable; unisolated local run explicitly allowed (allow_unsafe_local)",
             )
 
+        deps_dir = None
+        dependency_status = None
+        if packages_dir and Path(packages_dir).is_dir() and any(Path(packages_dir).iterdir()):
+            deps_dir, dependency_status = self._install_dependencies(repo_dir, output_dir, packages_dir)
+
         docker_cmd = self.build_docker_command(
             repo_dir=repo_dir,
             output_dir=output_dir,
             command=target_cmd,
-            packages_dir=packages_dir,
+            deps_dir=deps_dir,
+            extra_env={"SANDBOX_DEPENDENCY_STATUS": dependency_status} if dependency_status else None,
         )
 
         start_time = time.time()

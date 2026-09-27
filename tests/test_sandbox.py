@@ -1,5 +1,6 @@
 """Unit tests for the Docker and Process sandbox execution runner."""
 
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -80,7 +81,7 @@ def test_build_docker_command_security_flags():
     # 6. Volume read-only constraints & home tmpfs execution permissions
     assert any(":ro" in arg and "sample_repo" in arg for arg in cmd)
     assert any(":rw" in arg and "sample_output" in arg for arg in cmd)
-    assert any("/workspace/home:rw,nosuid,size=2048m,uid=1000,gid=1000" in arg for arg in cmd)
+    assert any("/workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000" in arg for arg in cmd)
 
 
 def test_process_sandbox_runner_clean_execution(tmp_path):
@@ -216,3 +217,74 @@ def test_home_tmpfs_is_owned_by_the_sandbox_user():
     options = home_mounts[0].split(":", 1)[1].split(",")
     assert "uid=1234" in options and "gid=5678" in options
     assert "--user" in cmd and cmd[cmd.index("--user") + 1] == "1234:5678"
+
+
+def _flag_value(cmd, flag, predicate):
+    return [cmd[i + 1] for i, arg in enumerate(cmd[:-1]) if arg == flag and predicate(cmd[i + 1])]
+
+
+def test_install_phase_command_mounts_packages_ro_and_deps_rw():
+    cmd = DockerSandboxRunner().build_docker_command(
+        repo_dir="/tmp/repo", output_dir="/tmp/out", command=["true"],
+        packages_dir=".", deps_dir="/tmp/deps", deps_writable=True, extra_env={"SANDBOX_PHASE": "install"},
+    )
+    assert _flag_value(cmd, "-v", lambda v: v.endswith(":/workspace/packages:ro"))
+    assert _flag_value(cmd, "-v", lambda v: v.endswith(":/workspace/deps:rw"))
+    assert "SANDBOX_PHASE=install" in _flag_value(cmd, "-e", lambda v: v.startswith("SANDBOX_PHASE="))
+    assert cmd[cmd.index("--network") + 1] == "none"
+
+
+def test_run_phase_command_mounts_deps_read_only_without_packages():
+    cmd = DockerSandboxRunner().build_docker_command(
+        repo_dir="/tmp/repo", output_dir="/tmp/out", command=["python", "train.py"], deps_dir="/tmp/deps",
+    )
+    assert _flag_value(cmd, "-v", lambda v: v.endswith(":/workspace/deps:ro"))
+    assert not _flag_value(cmd, "-v", lambda v: "/workspace/packages" in v)
+    pythonpath = _flag_value(cmd, "-e", lambda v: v.startswith("PYTHONPATH="))[0]
+    assert "/workspace/deps" in pythonpath.split("=", 1)[1].split(":")
+
+
+def test_home_tmpfs_stays_noexec():
+    cmd = DockerSandboxRunner().build_docker_command(repo_dir="/tmp/repo", output_dir="/tmp/out", command=["true"])
+    home = _flag_value(cmd, "--tmpfs", lambda v: v.startswith("/workspace/home:"))[0]
+    assert "noexec" in home.split(":", 1)[1].split(",")
+
+
+def _fake_docker(calls, install_status):
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd)
+        env = _flag_value(cmd, "-e", lambda v: True)
+        if "SANDBOX_PHASE=install" in env:
+            out = next(v for v in _flag_value(cmd, "-v", lambda v: v.endswith(":/workspace/output:rw")))
+            host_out = out.rsplit(":/workspace/output:rw", 1)[0]
+            Path(host_out, "install_meta.json").write_text(
+                json.dumps({"phase": "install", "status": install_status, "exit_code": 0 if install_status == "INSTALLED" else 1})
+            )
+            return subprocess.CompletedProcess(cmd, 0 if install_status == "INSTALLED" else 1, "", "")
+        return subprocess.CompletedProcess(cmd, 0, "ran\n", "")
+    return fake_run
+
+
+@pytest.mark.parametrize("install_status", ["INSTALLED", "FAILED"])
+def test_run_with_packages_installs_first_then_runs_with_read_only_deps(tmp_path, monkeypatch, install_status):
+    (tmp_path / "eval.py").write_text("print('ok')\n", encoding="utf-8")
+    packages = tmp_path / "packages"
+    packages.mkdir()
+    (packages / "demo-1.0-py3-none-any.whl").write_text("x", encoding="utf-8")
+    _docker_available(monkeypatch, True)
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    calls = []
+    monkeypatch.setattr(runner_module.subprocess, "run", _fake_docker(calls, install_status))
+
+    result = DockerSandboxRunner().run(
+        paper_id="two_phase", repo_dir=tmp_path, target_script="eval.py", packages_dir=packages
+    )
+
+    assert len(calls) == 2
+    install, run = calls
+    assert "SANDBOX_PHASE=install" in install
+    assert _flag_value(install, "-v", lambda v: v.endswith(":/workspace/deps:rw"))
+    assert _flag_value(run, "-v", lambda v: v.endswith(":/workspace/deps:ro"))
+    assert not _flag_value(run, "-v", lambda v: "/workspace/packages" in v)
+    assert f"SANDBOX_DEPENDENCY_STATUS={install_status}" in run
+    assert result.status == "COMPLETED"
