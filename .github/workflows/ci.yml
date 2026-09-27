@@ -82,6 +82,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/verify_corpus.py
+      - name: Seed integrity tests (network)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPRO_RADAR_NETWORK_TESTS: "1"
+        run: |
+          python -m pip install -r requirements-dev.txt
+          pytest tests/test_seed_integrity.py -v
 
   sandbox-acceptance:
     name: Sandbox acceptance (real Docker)

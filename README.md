@@ -128,7 +128,7 @@ pytest tests/ -v
 
 The seed domain is **"Tabular Machine Learning & Light NLP Benchmarks"**:
 - **Frameworks:** TabPFN, FT-Transformer, TabR, FastSK, SAINT, DANets.
-- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); CI enforces this on every change. Runnability (hardware, data downloads, script arguments) and the numeric claims are **not yet verified**; see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
+- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); CI enforces this on every change. Runnability (hardware, data downloads, script arguments) is **not yet verified**, and only **2 of 16** numeric claims were found in their papers; see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
 
 ---
 
