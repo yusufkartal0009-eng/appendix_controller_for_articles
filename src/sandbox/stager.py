@@ -382,6 +382,9 @@ class RepoStager:
             "error_message": result.error_message,
             "output_dir": str(result.output_dir),
             "generated_files": generated_files,
+            # Top level so scoring (Tier 1: dependencies installed) does not have to dig into `meta`.
+            # UNKNOWN when the container wrote no execution metadata.
+            "dependency_install_status": meta.get("dependency_install_status", "UNKNOWN"),
             "meta": meta,
             "stdout_preview": result.stdout[:2000] if result.stdout else "",
             "stderr_preview": result.stderr[:2000] if result.stderr else "",
