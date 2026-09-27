@@ -180,6 +180,8 @@ def main() -> int:
         print(f" -> Status: {bundle_res.get('status')}")
         print(f" -> Wheels downloaded: {bundle_res.get('wheel_count')}")
         print(f" -> Bundle directory: {bundle_res.get('bundle_dir')}")
+        for entry in bundle_res.get("needs_sdist_build") or []:
+            print(f" -> NEEDS_SDIST_BUILD: {entry['requirement']} ({entry['reason']})")
     else:
         print("\n[STAGE 3/4] Dependency pre-bundling skipped (run with --bundle-deps to bundle).")
 

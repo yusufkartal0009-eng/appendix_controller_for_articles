@@ -253,3 +253,53 @@ def test_bundle_dependencies_downloads_linux_binary_wheels_only(tmp_path, monkey
     assert "manylinux2014_x86_64" in platforms
     assert cmd[cmd.index("--python-version") + 1] == "3.11"
     assert cmd[cmd.index("--implementation") + 1] == "cp"
+
+
+def _stage_with_requirements(tmp_path, files):
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print(1)\n", encoding="utf-8")
+    for name, content in files.items():
+        (source_dir / name).write_text(content, encoding="utf-8")
+    return stager, stager.stage_repository(paper_id="bundle_multi", source=str(source_dir))
+
+
+def test_bundle_dependencies_uses_every_requirements_file(tmp_path, monkeypatch):
+    stager, staged = _stage_with_requirements(
+        tmp_path, {"requirements.txt": "toolz==0.12.1\n", "requirements-extra.txt": "ujson==5.10.0\n"}
+    )
+    calls = []
+    monkeypatch.setattr("src.sandbox.stager.subprocess.run",
+                        lambda cmd, **kw: calls.append(cmd) or subprocess.CompletedProcess(cmd, 0, "", ""))
+
+    result = stager.bundle_dependencies(staged)
+
+    requirement_args = [calls[0][i + 1] for i, a in enumerate(calls[0]) if a == "-r"]
+    assert sorted(Path(r).name for r in requirement_args) == ["requirements-extra.txt", "requirements.txt"]
+    assert result["status"] == "SUCCESS"
+    assert result["needs_sdist_build"] == []
+
+
+def test_bundle_dependencies_flags_requirements_without_wheels(tmp_path, monkeypatch):
+    stager, staged = _stage_with_requirements(
+        tmp_path, {"requirements.txt": "# comment\ntoolz==0.12.1\nlegacy-pkg==1.0  # sdist only\n--index-url https://x\n"}
+    )
+    calls = []
+
+    def fake_run(cmd, **kw):
+        calls.append(cmd)
+        if "-r" in cmd or "legacy-pkg==1.0" in cmd:
+            return subprocess.CompletedProcess(cmd, 1, "", "ERROR: No matching distribution found for legacy-pkg==1.0")
+        return subprocess.CompletedProcess(cmd, 0, "", "")
+
+    monkeypatch.setattr("src.sandbox.stager.subprocess.run", fake_run)
+    result = stager.bundle_dependencies(staged)
+
+    assert result["status"] == "PARTIAL"
+    assert [e["requirement"] for e in result["needs_sdist_build"]] == ["legacy-pkg==1.0"]
+    assert "No matching distribution" in result["needs_sdist_build"][0]["reason"]
+    for cmd in calls:  # never build on the host: every download is binary-only
+        assert "--only-binary=:all:" in cmd
+    probes = [c for c in calls if "--no-deps" in c]
+    assert sorted(c[c.index("--no-deps") + 1] for c in probes) == ["legacy-pkg==1.0", "toolz==0.12.1"]

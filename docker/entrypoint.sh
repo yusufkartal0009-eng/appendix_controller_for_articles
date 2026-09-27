@@ -24,13 +24,20 @@ cd /workspace/repo || true
 if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   INSTALL_LOG="${OUTPUT_DIR}/install.log"
   INSTALL_META="${OUTPUT_DIR}/install_meta.json"
-  if [ -f "/workspace/repo/requirements.txt" ]; then
-    PIP_TARGETS=(-r /workspace/repo/requirements.txt)
-  else
+  # Same files as the host-side bundling (RepoStager.analyze_dependencies): every *requirements*.txt
+  # in the repository root; without any, install every bundled wheel.
+  PIP_TARGETS=()
+  for req in /workspace/repo/*requirements*.txt; do
+    if [ -f "${req}" ]; then
+      PIP_TARGETS+=(-r "${req}")
+    fi
+  done
+  if [ ${#PIP_TARGETS[@]} -eq 0 ]; then
     PIP_TARGETS=(/workspace/packages/*)
   fi
   echo "=================================================="
   echo "Repro Radar: Install Phase (offline, binary wheels only)"
+  echo "Requirements  : ${PIP_TARGETS[*]}"
   echo "=================================================="
   # pip stages --target installs in TMPDIR; /tmp is a 64 MB tmpfs, too small for large wheels.
   export TMPDIR=/workspace/deps/.pip-tmp
