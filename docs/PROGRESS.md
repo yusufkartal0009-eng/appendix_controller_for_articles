@@ -193,7 +193,7 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
   - Database initialization and seeding engine in `src/database.py`.
 - **Target Paper Dataset:**
   - Seed dataset of 18 tabular ML & light NLP benchmark papers in `data/seed_papers.json`.
-  - *18 → 8 (2026-09-13, commit `7a7d9ac`):* the 18 Week 1 entries were placeholders ("mock seed papers" in that commit's title); several paired invented paper titles with general-purpose library repositories (e.g. `optuna/optuna`, `huggingface/transformers`, `scikit-learn/scikit-learn`). They were replaced by 8 entries meant to map to real paper repositories. That commit called them "verified", which a later check disproved: see the 2026-09-26 entries for issues #82 and #84 (now 6 entries).
+  - *18 → 8 (2026-09-13, commit `7a7d9ac`):* the 18 Week 1 entries were placeholders ("mock seed papers" in that commit's title); several paired paper titles with general-purpose library repositories (e.g. `optuna/optuna`, `huggingface/transformers`, `scikit-learn/scikit-learn`). They were replaced by 8 entries meant to map to real paper repositories. That commit called them "verified", which a later check disproved: see the 2026-09-26 entries for issues #82 and #84 (now 6 entries).
 - **Reproducibility Scoring Engine:**
   - 4-Tier rubric (%35 Build, %35 Metrics, %15 Stability, %15 Artifacts) in `src/scoring.py`.
 - **CLI & Test Suite:**
