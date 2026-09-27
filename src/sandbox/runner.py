@@ -128,7 +128,10 @@ class DockerSandboxRunner:
             docker_cmd.append("--read-only")
         docker_cmd.extend([
             "--tmpfs", f"/tmp:rw,noexec,nosuid,size={self.config.tmpfs_tmp_size}",
-            "--tmpfs", f"/workspace/home:rw,nosuid,size={self.config.tmpfs_home_size}",
+            # Owned by the sandbox user: a plain tmpfs is root-owned and uid 1000 could not write to it.
+            "--tmpfs",
+            f"/workspace/home:rw,nosuid,size={self.config.tmpfs_home_size},"
+            f"uid={self.config.user_id},gid={self.config.group_id}",
         ])
 
         # 3. Privilege Drop

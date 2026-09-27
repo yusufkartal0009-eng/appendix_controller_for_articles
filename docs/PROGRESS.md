@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M2 / Sandbox: Home tmpfs Writable by the Sandbox User (2026-09-27, Issue #90)
+- Found by the real-Docker acceptance run: the `/workspace/home` tmpfs was root-owned, so uid 1000 could not write to it and the offline wheel install could never succeed (`mkdir: cannot create directory '/workspace/home': Permission denied`).
+- The runner and `docker/docker-compose.sandbox.yml` now mount it with `uid`/`gid` of the sandbox user.
+- 1 new test; 79 / 79 tests green.
+
 ### M2 / Sandbox: Docker Runs Misreported as FAILED on Non-1000 UIDs (2026-09-26, Issue #88)
 - Found by the first real-Docker acceptance run (Ubuntu CI runner, uid 1001): the runner re-wrote `stdout.log`/`stderr.log` that the container had already written as uid 1000, hit `PermissionError`, and reported every successful run as `FAILED` with its output dropped.
 - The runner now keeps logs the entrypoint wrote and never lets a log write change a run's result.
