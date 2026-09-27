@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### M2 / Sandbox: Install Status at the Top of the Run Report (2026-09-27, Issue #106)
+- `run_report.json` has a top-level `dependency_install_status` (`UNKNOWN` without execution metadata) for Tier 1 scoring.
+- New test follows a failed install phase through the run into the report (`FAILED`); 89 tests green, 7 skipped on Windows.
+- Not done: `ReproducibilityScorer` does not consume run reports yet (it is only fed by the simulated `cli.py score`, GA-2).
+
 ### M2 / Sandbox: Decision Log (2026-09-27, Issue #104)
 - `docs/DECISIONS.md`: D-001 records that PR #64's removal of `noexec` from `/workspace/home` had no effect (Docker's tmpfs default), why `noexec` is kept, and the risk that `exec` would add; D-002 records the two-phase, read-only dependency mount. Each fact cites a PR or CI output.
 

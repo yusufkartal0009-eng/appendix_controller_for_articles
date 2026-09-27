@@ -303,3 +303,55 @@ def test_bundle_dependencies_flags_requirements_without_wheels(tmp_path, monkeyp
         assert "--only-binary=:all:" in cmd
     probes = [c for c in calls if "--no-deps" in c]
     assert sorted(c[c.index("--no-deps") + 1] for c in probes) == ["legacy-pkg==1.0", "toolz==0.12.1"]
+
+
+def _fake_docker_chain(install_status):
+    """Fake `docker run`: the install phase writes install_meta.json; the run phase writes execution_meta.json
+    with the dependency status passed to it, like docker/entrypoint.sh does."""
+    def fake_run(cmd, **kwargs):
+        env = dict(a.split("=", 1) for i, a in enumerate(cmd) if i and cmd[i - 1] == "-e")
+        out = next(a for a in cmd if a.endswith(":/workspace/output:rw")).rsplit(":/workspace/output:rw", 1)[0]
+        if env.get("SANDBOX_PHASE") == "install":
+            Path(out, "install_meta.json").write_text(json.dumps({"phase": "install", "status": install_status, "exit_code": 1}))
+            return subprocess.CompletedProcess(cmd, 1, "", "")
+        Path(out, "execution_meta.json").write_text(json.dumps({
+            "status": "COMPLETED", "exit_code": 0,
+            "dependency_install_status": env.get("SANDBOX_DEPENDENCY_STATUS", "SKIPPED"),
+        }))
+        return subprocess.CompletedProcess(cmd, 0, "ok\n", "")
+    return fake_run
+
+
+def test_failed_install_reaches_top_level_of_run_report(tmp_path, monkeypatch):
+    from src.sandbox import runner as runner_module
+
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print('ok')\n", encoding="utf-8")
+    staged = stager.stage_repository(paper_id="install_status_report", source=str(source_dir))
+    staged.bundle_dir = tmp_path / "pkgs"
+    staged.bundle_dir.mkdir()
+    (staged.bundle_dir / "broken-1.0-py3-none-any.whl").write_text("not a wheel", encoding="utf-8")
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *a, **k: True))
+    monkeypatch.setattr(runner_module, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(runner_module.subprocess, "run", _fake_docker_chain("FAILED"))
+
+    report = stager.execute_staged(staged, target_script="reproduce.py")
+
+    assert report["dependency_install_status"] == "FAILED"
+    assert json.loads(Path(report["run_report_path"]).read_text(encoding="utf-8"))["dependency_install_status"] == "FAILED"
+
+
+def test_run_report_install_status_is_unknown_without_execution_meta(tmp_path):
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print('ok')\n", encoding="utf-8")
+    staged = stager.stage_repository(paper_id="install_status_unknown", source=str(source_dir))
+    fake = SandboxExecutionResult(status="FAILED", exit_code=1, stdout="", stderr="", duration_seconds=0.0,
+                                  command_executed=["docker"], docker_used=True, output_dir=tmp_path / "no_meta")
+    (tmp_path / "no_meta").mkdir()
+    with patch("src.sandbox.stager.DockerSandboxRunner.run", return_value=fake):
+        report = stager.execute_staged(staged, target_script="reproduce.py")
+    assert report["dependency_install_status"] == "UNKNOWN"
