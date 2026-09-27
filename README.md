@@ -114,7 +114,7 @@ python cli.py score paper_001
 ```
 
 > **IMPORTANT NOTE ON SIMULATION STATUS:**  
-> **`cli.py score` still scores simulated outputs derived from each paper's claimed values; it does not execute the paper's code.** Real isolated execution is available through `scripts/stage_and_bundle_repo.py` (see [Quick Sandbox Execution CLI](#quick-sandbox-execution-cli)); wiring it into `cli.py score` is tracked as G2 in [the gap analysis](docs/gap_analysis.md).
+> **`cli.py score` still scores simulated outputs derived from each paper's claimed values; it does not execute the paper's code.** Real isolated execution is available through `scripts/stage_and_bundle_repo.py` (see [Quick Sandbox Execution CLI](#quick-sandbox-execution-cli)); wiring it into `cli.py score` is tracked as GA-2 in [the gap analysis](docs/gap_analysis.md).
 
 ### 7. Lint & Run Test Suite
 ```bash
