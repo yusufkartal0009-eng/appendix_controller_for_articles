@@ -9,19 +9,19 @@
 - **Active Milestone:** M0 — Baseline Hygiene & Audit
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 52 / 52 tests green (CI: Ubuntu, Windows, sandbox image)
+- **Total Unit Tests Passing:** 79 / 79 tests green (CI: Ubuntu, Windows, sandbox image, corpus verification, real-Docker sandbox acceptance)
 
 ---
 
 ## Milestone Roadmap & Progress
 
-Issue numbers and open/closed counts match GitHub as of 2026-09-25. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub.
+Issue numbers and open/closed counts match GitHub as of 2026-09-27 (issues only, not PRs; counted with #86 closed by its PR). Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
 
 | Milestone | Focus | Backlog issues | Open / closed | Status |
 |---|---|:---:|:---:|:---:|
-| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 7 | IN PROGRESS |
-| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 6 / 1 | IN PROGRESS |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 5 / 2 | IN PROGRESS |
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 8 | IN PROGRESS |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 6 / 3 | IN PROGRESS |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 7 / 5 | IN PROGRESS |
 | **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 6 / 1 | QUEUED |
 | **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 2 / 5 | IN PROGRESS |
 | **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 6 / 1 | QUEUED |
@@ -33,6 +33,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### M2 / Sandbox: Acceptance Evidence and Tracking Aligned (2026-09-27, Issue #86)
+- `scripts/sandbox_acceptance.py` runs six checks through `DockerSandboxRunner` against a real Docker daemon in CI; **6 of 6 pass** (non-root uid 1000, network blocked, read-only root, `TIMEOUT` with duration > 0, offline install of a package not in the image, refusal without Docker). Output recorded verbatim in `docs/SANDBOX_ACCEPTANCE.md`.
+- Building the evidence found and fixed two runner bugs (#88/#89, #90/#91), replaced a check that proved nothing (`six` was already in the image), and found that `/workspace/home` is `noexec` by Docker default (open: #92).
+- Issue #48 rewritten in English with evidence for 4 of 5 goals and reopened (multi-seed execution is not implemented). M2 issues #13, #14, #15, #17, #18: boxes ticked only where evidence exists, with evidence notes.
+- `docs/SANDBOX_GUIDE.md`: home mount, `noexec` finding, timeout defaults, and offline install status corrected.
 
 ### M2 / Sandbox: Home tmpfs Writable by the Sandbox User (2026-09-27, Issue #90)
 - Found by the real-Docker acceptance run: the `/workspace/home` tmpfs was root-owned, so uid 1000 could not write to it and the offline wheel install could never succeed (`mkdir: cannot create directory '/workspace/home': Permission denied`).
