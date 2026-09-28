@@ -34,6 +34,13 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Roadmap Recorded and Tracked (2026-09-28 20:33 +03:00, Issue #121)
+- `docs/ROADMAP_2026-09-27.md`: complete English translation of the 2026-09-27 plan (sections 0-8, P1-P7, W1-W7), with the tracking issue next to every item. The binding order: pilot (#43) and claim extraction (#9) first and in parallel; the CLI (#136) and the report (#120) only after both; low-priority cleanup (#137, #138, #139) last.
+- New issues: #122-#128 (P1-P7), #129-#133 (W1-W5), #134 (W7), #135 (section 3 closing step), #136 (GA-2), #137 (GA-15), #138 (coverage), #139 (GA-11). Updated instead of duplicated: #43 (pilot, now the current corpus), #9 (LLM extraction with quote verification), #10 (= W6), #120 (report order).
+- `AGENTS.md` §6: permanent roadmap rules (English only, binding order, one topic per PR, script-generated report numbers, no simulated data as results, no committed API keys, working loop, read the roadmap first). `CLAUDE.md` points agents to `AGENTS.md`.
+- `docs/gap_analysis.md`: GA-2, GA-5, GA-11, and GA-15 now link to their issues.
+- No roadmap work item (pilot, extraction, CLI) was started.
+
 ### Docs: Introduction Draft Corrected and Sourced (2026-09-27, Issue #118)
 - `docs/repro_radar_introduction.docx` is now marked DRAFT (title, header, banner) and scoped to a pilot study on tabular ML benchmarks.
 - Unsourced claims (the 35% figure, the 1995 Claerbout date and long quote, dependency decay in 6–18 months, hardware drift) and out-of-scope claims (domain-agnostic scope, AI Decision Layer, "resolves") were removed.

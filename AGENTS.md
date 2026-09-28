@@ -5,6 +5,7 @@ This project follows the **projectflow** method paired with **superpowers** deep
 ---
 
 ## 1. Living Docs (Read First)
+- `docs/ROADMAP_2026-09-27.md` — The current binding work order and its tracking issues. **Read it first in every new session** (see §6).
 - `docs/BLUEPRINT.md` — The master plan: what we're building, architecture, milestones, and how.
 - `docs/ARCHITECTURE.md` — Constraints, structure, design patterns, and database/scoring contracts.
 - `docs/PROGRESS.md` — What's been done. **Update it after every issue/PR.**
@@ -45,7 +46,7 @@ This project follows the **projectflow** method paired with **superpowers** deep
   - Models: `.venv\Scripts\pytest.exe tests/test_models.py -v`
   - Scoring: `.venv\Scripts\pytest.exe tests/test_scoring.py -v`
   - Seed dataset: `.venv\Scripts\pytest.exe tests/test_seed.py -v`
-- **traceability:** Milestone tracking in `docs/PROGRESS.md` and roadmap in `docs/project_roadmap.md`.
+- **traceability:** Milestone tracking in `docs/PROGRESS.md`; the current work order is `docs/ROADMAP_2026-09-27.md` (the older `docs/project_roadmap.md` is the original week plan).
 - **working language:** English for code/docs/commits/PRs; communicate with the maintainer in their preferred language.
 
 ---
@@ -81,3 +82,16 @@ Check this table every turn. If the matching deep skill is installed and the ste
    - Open decisions: <what needs maintainer call, if any>
    - Next: <immediate next step>
    ```
+
+---
+
+## 6. Roadmap Rules (from 2026-09-27, #121)
+These rules are permanent. They add to §5 and do not replace it.
+1. **Read the roadmap first:** at the start of every new session, read `docs/ROADMAP_2026-09-27.md` before doing anything else.
+2. **Everything in the repository and on GitHub is English:** file contents, file names, headings, issue titles, descriptions and comments, labels, commit messages, branch names, PR titles, PR descriptions, and self-review comments. Plans written in another language are translated, never committed in the original.
+3. **Binding work order:** Section 4 (connect the CLI to the real sandbox and extraction, #136) and Section 5 (report sections, #120) do not start before Section 2 (pilot, #43) and Section 3 (claim extraction, #9) are done. Sections 2 and 3 may run in parallel. Section 6 (low-priority cleanup) comes last.
+4. **One PR, one topic:** one item = one issue = one branch = one PR.
+5. **Every number in the report comes from a script output:** no hand-typed results; each number or figure names the script and data file it came from.
+6. **Simulated data is never presented as a real result:** simulated outputs are labeled as simulation wherever they appear (code, docs, reports, PRs).
+7. **API keys are never committed:** keys are read from environment variables only.
+8. **Working loop for every issue:** propose → get approval → open a branch → implement → run the tests and show the output → update `docs/PROGRESS.md` → open a PR → read the diff and write a self-review comment → merge.
