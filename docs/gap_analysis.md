@@ -12,20 +12,20 @@
 | ID | Severity | Category | Gap | Related issue | Status |
 |---|---|---|---|---|---|
 | GA-1 | High | Tracking | `PROGRESS.md` / `BLUEPRINT.md` disagree with GitHub milestone and issue state | #5 | Fixed in #77 (issue #76) |
-| GA-2 | High | Product | `cli.py score` scores simulated outputs only; sandbox and extractor are not reachable from the CLI | #43 | Open (README note corrected in #73) |
+| GA-2 | High | Product | `cli.py score` scores simulated outputs only; sandbox and extractor are not reachable from the CLI | #136 | Open (README note corrected in #73; tracked in #136 since 2026-09-28, was #43) |
 | GA-3 | High | DevOps | No CI: tests and lint never run on PRs | #42 | Fixed in #74 |
 | GA-4 | Medium | Tracking | Duplicate non-English "Hafta 1–7" milestones run a second, parallel plan | — | Fixed: milestones removed and issues consolidated (issue #76, PR #77) |
-| GA-5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18 | Open: tests added in #71, #81, #83, #85, #89, #91; coverage not re-measured since the baseline |
+| GA-5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18, #138 | Open: tests added in #71, #81, #83, #85, #89, #91; coverage not re-measured since the baseline (re-measurement: #138) |
 | GA-6 | Medium | Dependencies | Unused, unpinned, and mixed runtime/dev dependencies | — | Partly fixed in #71: split and unused removed; no lock file yet |
 | GA-7 | Medium | Sandbox | `Dockerfile.sandbox` version constraints are parsed as shell redirections | #13 | Fixed in #71; verified by CI image build in #74 |
 | GA-8 | Medium | Sandbox | `entrypoint.sh` silently ignores dependency install failures | #32 | Fixed in #71; verified by CI smoke tests in #74 |
 | GA-9 | Medium | Code quality | Blind `except Exception`, two silently swallowed | — | Partly fixed in #71: both silent cases fixed; 7 broad catches remain |
 | GA-10 | Medium | Security | `setup_github_backlog.py` builds `shell=True` commands from issue text | #46 | Fixed in #71 |
-| GA-11 | Low | Code quality | 281 lint findings, no lint or type-check configuration | — | Open (lint gate config added in #71) |
+| GA-11 | Low | Code quality | 281 lint findings, no lint or type-check configuration | #139 | Open (lint gate config added in #71) |
 | GA-12 | Low | Docs | README directory layout is out of date | — | Fixed in #73 |
 | GA-13 | Low | Repo structure | Missing `pyproject.toml`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CLAUDE.md` | #44, #45 | Partly fixed: `pyproject.toml` added in #71 |
 | GA-14 | Low | Sandbox | No `.dockerignore`; obsolete Compose `version` key | — | Fixed in #71 |
-| GA-15 | Low | Repo hygiene | Generated `.docx` committed next to its generator | — | Open |
+| GA-15 | Low | Repo hygiene | Generated `.docx` committed next to its generator | #137 | Open |
 | GA-16 | High | Security | Without Docker, paper code silently ran on the host with no isolation | #80 | Fixed in #81: execution refused without Docker; opt-in `--allow-unsafe-local` marks runs `isolated: false` |
 | GA-17 | High | Corpus | Seed corpus broken (6 of 8 entries not runnable; wrong links, licenses, titles, script paths) while the README called it "8 verified" | #84 | Fixed in #85: verifier enforced in CI (#83); 6 of 6 entries pass; claim values still UNVERIFIED |
 | GA-18 | Medium | Process | Work merged out of plan order and without review | #78 | Mitigated: approval gate kept (#79); self-review comment on every PR since #81 |
