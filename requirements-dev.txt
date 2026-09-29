@@ -5,6 +5,9 @@ pytest>=8.0.0
 pytest-cov>=5.0.0
 ruff==0.16.9
 
+# Workflow checks (tests/test_run_pilot.py)
+pyyaml>=6.0
+
 # Academic introduction document generator (scripts/generate_academic_introduction_doc.py)
 python-docx>=1.1.0
 pillow>=10.0.0

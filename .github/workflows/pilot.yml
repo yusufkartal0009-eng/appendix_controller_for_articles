@@ -1,0 +1,64 @@
+# Week 2 pilot (P2, #123): runs the seed papers in the real Docker sandbox exactly as docs/PILOT_WEEK2.md specifies.
+# Started by hand only; it uses GitHub Actions minutes, so every start needs the owner's approval of the estimate.
+name: Pilot (Week 2)
+
+on:
+  workflow_dispatch:
+    inputs:
+      papers:
+        description: 'JSON list of paper IDs to run (default: all six)'
+        required: true
+        default: '["paper_002", "paper_003", "paper_004", "paper_005", "paper_006", "paper_008"]'
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    name: Pilot ${{ matrix.paper_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        paper_id: ${{ fromJSON(inputs.papers) }}
+    env:
+      PAPER_ID: ${{ matrix.paper_id }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Record the runner environment
+        run: |
+          mkdir -p "sandbox_runs/$PAPER_ID"
+          {
+            echo "paper_id: $PAPER_ID"
+            echo "repro_radar_commit: $GITHUB_SHA"
+            echo "workflow_run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID (attempt $GITHUB_RUN_ATTEMPT)"
+            echo "runner_image: $ImageOS $ImageVersion"
+            echo "kernel: $(uname -r)"
+            echo "nproc: $(nproc)"
+            echo "--- free -m"; free -m
+            echo "--- df -h"; df -h / "$RUNNER_TEMP"
+            echo "--- docker version"; docker version
+          } | tee "sandbox_runs/$PAPER_ID/runner_environment.txt"
+      - name: Build sandbox image
+        run: docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .
+      - name: Run the paper in the sandbox (protocol docs/PILOT_WEEK2.md)
+        run: python scripts/run_pilot.py "$PAPER_ID" --staging-dir "$RUNNER_TEMP/staging"
+      - name: Disk use after the run
+        if: always()
+        run: df -h / "$RUNNER_TEMP" | tee -a "sandbox_runs/$PAPER_ID/runner_environment.txt"
+      - name: Upload the paper's sandbox output (without installed dependencies)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilot-${{ matrix.paper_id }}
+          path: |
+            sandbox_runs/${{ matrix.paper_id }}
+            !sandbox_runs/${{ matrix.paper_id }}/deps
+          if-no-files-found: error
+          retention-days: 90
