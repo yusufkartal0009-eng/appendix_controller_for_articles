@@ -73,7 +73,8 @@ class FakeStager:
     def execute_staged(self, staged, target_script, script_args, config):
         self.executed = (target_script, script_args, config)
         return {"status": "COMPLETED", "exit_code": 0, "duration_seconds": 1.0, "docker_used": True,
-                "isolated": True, "dependency_install_status": "INSTALLED"}
+                "isolated": True, "dependency_install_status": "INSTALLED",
+                "meta": {"peak_memory_bytes": 123456789}}
 
 
 def test_run_paper_uses_protocol_settings_and_writes_a_record(tmp_path, monkeypatch):
@@ -93,6 +94,7 @@ def test_run_paper_uses_protocol_settings_and_writes_a_record(tmp_path, monkeypa
     assert saved == record
     assert saved["stage"]["matches_pinned_commit"] is True
     assert saved["run"]["docker_used"] is True
+    assert saved["run"]["peak_memory_bytes"] == 123456789
 
 
 def test_staging_failure_is_recorded_not_raised(tmp_path, monkeypatch):

@@ -16,6 +16,21 @@ mkdir -p "${OUTPUT_DIR}"
 
 cd /workspace/repo || true
 
+# Peak memory of this container's cgroup in bytes (v2: memory.peak; v1: memory.max_usage_in_bytes), or null
+# when the kernel does not expose it. Recorded for the pilot's resource measurements (docs/PILOT_WEEK2.md section 6).
+peak_memory_bytes() {
+  local value=""
+  if [ -r /sys/fs/cgroup/memory.peak ]; then
+    value=$(cat /sys/fs/cgroup/memory.peak)
+  elif [ -r /sys/fs/cgroup/memory/memory.max_usage_in_bytes ]; then
+    value=$(cat /sys/fs/cgroup/memory/memory.max_usage_in_bytes)
+  fi
+  case "${value}" in
+    ''|*[!0-9]*) echo "null" ;;
+    *) echo "${value}" ;;
+  esac
+}
+
 # 1. Install phase (SANDBOX_PHASE=install): a separate container, run before the paper code.
 # Installs pre-downloaded wheels from /workspace/packages into /workspace/deps (the only writable
 # mount besides the output directory), binary-only so that no package code runs during install.
@@ -42,19 +57,22 @@ if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   # pip stages --target installs in TMPDIR; /tmp is a 64 MB tmpfs, too small for large wheels.
   export TMPDIR=/workspace/deps/.pip-tmp
   mkdir -p "${TMPDIR}"
+  INSTALL_START=$(date +%s.%N)
   set +e
   timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" python -m pip install --no-index \
     --find-links=/workspace/packages --only-binary=:all: --no-cache-dir \
     --target /workspace/deps "${PIP_TARGETS[@]}" > "${INSTALL_LOG}" 2>&1
   INSTALL_CODE=$?
   set -e
+  INSTALL_DURATION=$(python3 -c "print(round($(date +%s.%N) - ${INSTALL_START}, 3))" 2>/dev/null || echo "0.0")
   rm -rf "${TMPDIR}"
   cat "${INSTALL_LOG}"
   INSTALL_STATUS="INSTALLED"
   if [ ${INSTALL_CODE} -ne 0 ]; then
     INSTALL_STATUS="FAILED"
   fi
-  printf '{"phase": "install", "status": "%s", "exit_code": %d}\n' "${INSTALL_STATUS}" "${INSTALL_CODE}" > "${INSTALL_META}"
+  printf '{"phase": "install", "status": "%s", "exit_code": %d, "duration_seconds": %s, "peak_memory_bytes": %s}\n' \
+    "${INSTALL_STATUS}" "${INSTALL_CODE}" "${INSTALL_DURATION}" "$(peak_memory_bytes)" > "${INSTALL_META}"
   echo "Install Status: ${INSTALL_STATUS} (Exit Code: ${INSTALL_CODE})"
   exit ${INSTALL_CODE}
 fi
@@ -122,6 +140,7 @@ cat <<EOF > "${META_JSON}"
   "duration_seconds": ${DURATION},
   "timeout_limit_seconds": ${TIMEOUT_SECONDS},
   "dependency_install_status": "${DEPENDENCY_STATUS}",
+  "peak_memory_bytes": $(peak_memory_bytes),
   "user_id": $(id -u),
   "group_id": $(id -g)
 }

@@ -139,6 +139,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         key: report.get(key)
         for key in ("status", "exit_code", "duration_seconds", "docker_used", "isolated", "dependency_install_status")
     }
+    # Written by the container entrypoint from the cgroup (null when the kernel does not expose it).
+    record["run"]["peak_memory_bytes"] = (report.get("meta") or {}).get("peak_memory_bytes")
     install_meta = out_dir / "install_meta.json"
     if install_meta.exists():
         record["install_meta"] = json.loads(install_meta.read_text(encoding="utf-8"))
