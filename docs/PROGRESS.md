@@ -34,6 +34,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot Protocol Written Before Any Run (2026-09-28 21:28 +03:00, Issue #122, P1)
+- `docs/PILOT_WEEK2.md`: the pilot runs on GitHub-hosted runners (the development machine has no Docker) through a hand-started workflow built in P2 (#123); fixed limits (2 CPUs, 6 GB memory, 100 processes, 3600 s per phase, no network, CPU only); one exact command per paper, taken from each README at the pinned commit with no change to the repositories; the definitions of install success, run success, and pilot success rate; the failure categories with their evidence; and what may change after the runs start.
+- Found while reading the repositories: `paper_002`'s target script has no entry point, `paper_004` and `paper_006` have no pip requirements file (conda only), and `paper_005` needs a C++ extension the sandbox does not build. Recorded in the protocol, not fixed.
+- `tests/test_pilot_protocol.py`: the protocol has one command row per seed paper, with the same repository, commit, and target script as `data/seed_papers.json`.
+- No paper code was run.
+
 ### Roadmap Recorded and Tracked (2026-09-28 20:33 +03:00, Issue #121)
 - `docs/ROADMAP_2026-09-27.md`: complete English translation of the 2026-09-27 plan (sections 0-8, P1-P7, W1-W7), with the tracking issue next to every item. The binding order: pilot (#43) and claim extraction (#9) first and in parallel; the CLI (#136) and the report (#120) only after both; low-priority cleanup (#137, #138, #139) last.
 - New issues: #122-#128 (P1-P7), #129-#133 (W1-W5), #134 (W7), #135 (section 3 closing step), #136 (GA-2), #137 (GA-15), #138 (coverage), #139 (GA-11). Updated instead of duplicated: #43 (pilot, now the current corpus), #9 (LLM extraction with quote verification), #10 (= W6), #120 (report order).
