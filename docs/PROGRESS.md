@@ -34,6 +34,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot Runner and Workflow (2026-09-30 00:09 +03:00, Issue #123, P2 — not run yet)
+- `scripts/run_pilot.py`: runs one seed paper exactly as `docs/PILOT_WEEK2.md` specifies. It stages at the pinned commit, bundles binary wheels on the host, and runs the install and run phases with the protocol limits (2 CPUs, 6 GB, 100 processes, 3600 s per phase). It writes `pilot_record.json` next to `run_report.json`, exits 0 when the paper went through the pipeline, and exits 1 on a harness error.
+- `.github/workflows/pilot.yml`: started by hand only, one job per paper, `contents: read`, no secrets, no persisted credentials. It records the runner environment and uploads each paper's output (without installed dependencies) as an artifact.
+- `tests/test_run_pilot.py`: commands, environment variables, and limits equal the protocol table; staging failures are recorded; the workflow stays manual and read-only. `pyyaml` added to the dev requirements for the workflow check.
+- Local check without Docker: `paper_006` was cloned at its pinned commit and then refused to run (`SandboxUnavailableError`, exit 1). No paper code has run yet; the pilot run waits for the owner's approval of the Actions minutes.
+
 ### Pilot Protocol Written Before Any Run (2026-09-28 21:28 +03:00, Issue #122, P1)
 - `docs/PILOT_WEEK2.md`: the pilot runs on GitHub-hosted runners (the development machine has no Docker) through a hand-started workflow built in P2 (#123); fixed limits (2 CPUs, 6 GB memory, 100 processes, 3600 s per phase, no network, CPU only); one exact command per paper, taken from each README at the pinned commit with no change to the repositories; the definitions of install success, run success, and pilot success rate; the failure categories with their evidence; and what may change after the runs start.
 - Found while reading the repositories: `paper_002`'s target script has no entry point, `paper_004` and `paper_006` have no pip requirements file (conda only), and `paper_005` needs a C++ extension the sandbox does not build. Recorded in the protocol, not fixed.
