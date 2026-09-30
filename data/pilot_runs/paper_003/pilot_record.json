@@ -1,0 +1,94 @@
+{
+  "paper_id": "paper_003",
+  "protocol": "docs/PILOT_WEEK2.md",
+  "repro_radar_commit": "dbcbe5afcdc7f6b388459887f26e2f15a4ccd077",
+  "started_at": "2026-09-30T18:32:11+00:00",
+  "repo_url": "https://github.com/yandex-research/rtdl-revisiting-models",
+  "pinned_commit": "e3ed46cac38568785289d8fa16b8cfa585bde27e",
+  "target_script": "bin/ft_transformer.py",
+  "container_command": "python /workspace/repo/bin/ft_transformer.py output/california_housing/ft_transformer/default/0.toml -o /workspace/output/ft_transformer_default_0",
+  "environment": {
+    "PROJECT_DIR": "/workspace/repo",
+    "CUDA_VISIBLE_DEVICES": ""
+  },
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "e3ed46cac38568785289d8fa16b8cfa585bde27e",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 2.362
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "wheel_count": 22,
+    "bundle_dir": "/home/runner/work/_temp/staging/paper_003_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "catboost==0.24.4",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for catboost==0.24.4"
+      },
+      {
+        "requirement": "numba==0.53.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for numba==0.53.1"
+      },
+      {
+        "requirement": "pandas==1.2.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pandas==1.2.3"
+      },
+      {
+        "requirement": "pytomlpp==0.3.5",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pytomlpp==0.3.5"
+      },
+      {
+        "requirement": "scikit-learn==0.24.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scikit-learn==0.24.1"
+      },
+      {
+        "requirement": "scipy==1.6.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scipy==1.6.1"
+      }
+    ],
+    "stdout": "",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement catboost==0.24.4 (from versions: 1.2, 1.2.1, 1.2.1.1, 1.2.2, 1.2.3, 1.2.5, 1.2.6, 1.2.7, 1.2.8, 1.2.9, 1.2.10)\nERROR: No matching distribution found for catboost==0.24.4\n",
+    "duration_seconds": 18.968
+  },
+  "sandbox_duration_seconds": 4.897,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.568,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 19718144
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.682,
+    "peak_memory_bytes": 37699584
+  },
+  "finished_at": "2026-09-30T18:32:37+00:00"
+}

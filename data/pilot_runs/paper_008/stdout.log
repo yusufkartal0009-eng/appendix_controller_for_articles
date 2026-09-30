@@ -1,0 +1,18 @@
+===> Setting configuration ...
+Using config:  dataset: forest
+fit:
+  batch_size: 8192
+  lr: 0.008
+  max_epochs: 5000
+  patience: 1500
+  virtual_batch_size: 256
+logname: layer20
+model:
+  base_outdim: 64
+  drop_rate: 0.1
+  k: 5
+  layer: 20
+resume_dir: 
+seed: 324
+task: classification
+===> Getting data ...

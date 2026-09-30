@@ -1,0 +1,10 @@
+{
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.263,
+  "timeout_limit_seconds": 3600,
+  "dependency_install_status": "SKIPPED",
+  "peak_memory_bytes": 15437824,
+  "user_id": 1000,
+  "group_id": 1000
+}

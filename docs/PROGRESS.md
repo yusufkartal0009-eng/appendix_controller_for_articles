@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot Run and Measurements (2026-09-30 21:36 +03:00, Issues #123 P2 and #124 P3)
+- Pilot run: workflow run 36759195752 (commit `dbcbe5a`, 2026-09-30 18:31 UTC), all 6 papers, 1-4 minutes per job. Every `run_report.json` shows `docker_used: true` and `isolated: true`, and every repository was checked out at its pinned commit. The raw files are stored unchanged in `data/pilot_runs/`.
+- `scripts/pilot_measurements.py` (committed before the results were read) applies the protocol definitions: install success 1 / 6, run success 0 / 6, pilot success 0 / 6 (`data/pilot_runs/measurements.md`). A test fails if the stored measurements stop matching the stored runs.
+
 ### Peak Memory and Install Duration Recorded (2026-09-30 20:53 +03:00, Issue #124, P3 part 1)
 - `docker/entrypoint.sh`: `execution_meta.json` gets `peak_memory_bytes` (cgroup `memory.peak`, `null` if not exposed); `install_meta.json` gets `duration_seconds` and `peak_memory_bytes`. `scripts/run_pilot.py` copies the run peak into `pilot_record.json`. Done before the pilot runs, so the protocol's peak-memory measurement (section 6) is possible.
 - Acceptance check 12 (real Docker, CI run 36754386741): a probe holding 200 MiB reported `peak_memory_bytes: 221929472`, and the install phase reported `duration_seconds: 0.784`. 12 of 12 checks pass; `docs/SANDBOX_ACCEPTANCE.md` was regenerated from that run.

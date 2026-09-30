@@ -1,0 +1,26 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/certifi-2020.4.5.1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/joblib-0.14.1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/pandas-3.0.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/python_dateutil-2.8.1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/pytz-2019.3-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 6))
+Processing /workspace/packages/scikit_learn-1.9.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 8))
+Processing /workspace/packages/six-1.14.0-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 9))
+Processing /workspace/packages/tqdm-4.70.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 10))
+INFO: pip is looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+ERROR: Cannot install -r /workspace/repo/requirements.txt (line 4) and python-dateutil==2.8.1 because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    The user requested python-dateutil==2.8.1
+    pandas 3.0.6 depends on python-dateutil>=2.8.2
+
+Additionally, some packages in these conflicts have no matching distributions available for your environment:
+    python-dateutil
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip to attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
