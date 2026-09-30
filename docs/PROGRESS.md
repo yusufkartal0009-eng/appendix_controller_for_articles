@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot Failure Categories (2026-09-30 21:42 +03:00, Issue #125, P4)
+- `scripts/categorize_pilot_failures.py` applies protocol section 7 to the stored runs. The first failure (stage → install → run) decides, and the deciding log line is quoted verbatim. Result: 5 × `MISSING_DEPENDENCY` (002, 003, 005 at install; 004, 006 at run), 1 × `DATA_NOT_ACCESSIBLE` (008), no `OTHER` (`data/pilot_runs/failure_categories.json`).
+- `runs.failure_category` column (ORM, `data/schema.sql`; `init_db` adds it to older SQLite databases). `scripts/load_pilot_runs.py` stores the 6 pilot runs with their category next to each run.
+- Tests: the rules, the verbatim evidence lines, the column upgrade, and the loader.
+
 ### Pilot Run and Measurements (2026-09-30 21:36 +03:00, Issues #123 P2 and #124 P3)
 - Pilot run: workflow run 36759195752 (commit `dbcbe5a`, 2026-09-30 18:31 UTC), all 6 papers, 1-4 minutes per job. Every `run_report.json` shows `docker_used: true` and `isolated: true`, and every repository was checked out at its pinned commit. The raw files are stored unchanged in `data/pilot_runs/`.
 - `scripts/pilot_measurements.py` (committed before the results were read) applies the protocol definitions: install success 1 / 6, run success 0 / 6, pilot success 0 / 6 (`data/pilot_runs/measurements.md`). A test fails if the stored measurements stop matching the stored runs.

@@ -61,6 +61,25 @@ def init_db(engine: Optional[Engine] = None, schema_file: Optional[Path] = None,
         # Fallback to ORM metadata creation if schema.sql is absent
         Base.metadata.create_all(bind=eng)
 
+    ensure_failure_category_column(eng)
+
+
+def ensure_failure_category_column(engine: Engine) -> bool:
+    """Add runs.failure_category to SQLite databases created before the column existed.
+
+    `CREATE TABLE IF NOT EXISTS` leaves existing tables unchanged, so older local databases need this
+    one-column upgrade. Returns True when the column was added.
+    """
+    if engine.dialect.name != "sqlite":
+        return False
+    with engine.connect() as conn:
+        columns = [row[1] for row in conn.execute(text("PRAGMA table_info(runs)"))]
+        if not columns or "failure_category" in columns:
+            return False
+        conn.execute(text("ALTER TABLE runs ADD COLUMN failure_category TEXT"))
+        conn.commit()
+    return True
+
 
 def seed_database(
     seed_file: Optional[Path] = None,

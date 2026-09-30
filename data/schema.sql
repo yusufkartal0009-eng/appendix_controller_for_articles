@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS runs (
     stdout TEXT,
     stderr TEXT,
     seed INTEGER DEFAULT 42,
+    failure_category TEXT, -- pilot failure category (docs/PILOT_WEEK2.md section 7), NULL if not categorized
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
 );
