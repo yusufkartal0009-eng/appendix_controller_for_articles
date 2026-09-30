@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Peak Memory and Install Duration Recorded (2026-09-30 20:53 +03:00, Issue #124, P3 part 1)
+- `docker/entrypoint.sh`: `execution_meta.json` gets `peak_memory_bytes` (cgroup `memory.peak`, `null` if not exposed); `install_meta.json` gets `duration_seconds` and `peak_memory_bytes`. `scripts/run_pilot.py` copies the run peak into `pilot_record.json`. Done before the pilot runs, so the protocol's peak-memory measurement (section 6) is possible.
+- Acceptance check 12 (real Docker, CI run 36754386741): a probe holding 200 MiB reported `peak_memory_bytes: 221929472`, and the install phase reported `duration_seconds: 0.784`. 12 of 12 checks pass; `docs/SANDBOX_ACCEPTANCE.md` was regenerated from that run.
+
 ### Pilot Runner and Workflow (2026-09-30 00:09 +03:00, Issue #123, P2 — not run yet)
 - `scripts/run_pilot.py`: runs one seed paper exactly as `docs/PILOT_WEEK2.md` specifies. It stages at the pinned commit, bundles binary wheels on the host, and runs the install and run phases with the protocol limits (2 CPUs, 6 GB, 100 processes, 3600 s per phase). It writes `pilot_record.json` next to `run_report.json`, exits 0 when the paper went through the pipeline, and exits 1 on a harness error.
 - `.github/workflows/pilot.yml`: started by hand only, one job per paper, `contents: read`, no secrets, no persisted credentials. It records the runner environment and uploads each paper's output (without installed dependencies) as an artifact.
