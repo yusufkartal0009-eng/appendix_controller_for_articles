@@ -1,0 +1,34 @@
+{
+  "paper_id": "paper_008",
+  "source": "https://github.com/WhatAShot/DANet",
+  "commit_hash": "b007c57121ec9082f6ef19ec7465d9df70767c26",
+  "target_script": "main.py",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 3.957,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "/home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/paper_008",
+  "generated_files": [
+    "execution_meta.json",
+    "stdout.log",
+    "runner_environment.txt",
+    "install_meta.json",
+    "install.log",
+    "stderr.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.747,
+    "timeout_limit_seconds": 3600,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 442216448,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py -c config/forest_cover_type.yaml -g \n==================================================\n===> Setting configuration ...\nUsing config:  dataset: forest\nfit:\n  batch_size: 8192\n  lr: 0.008\n  max_epochs: 5000\n  patience: 1500\n  virtual_batch_size: 256\nlogname: layer20\nmodel:\n  base_outdim: 64\n  drop_rate: 0.1\n  k: 5\n  layer: 20\nresume_dir: \nseed: 324\ntask: classification\n===> Getting data ...\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 3.747s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 69, in <module>\n    X_train, y_train, X_valid, y_valid, X_test, y_test = get_data(train_config['dataset'])\n                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/data/dataset.py\", line 214, in get_data\n    return forest_cover()\n           ^^^^^^^^^^^^^^\n  File \"/workspace/repo/data/dataset.py\", line 55, in forest_cover\n    data = pd.read_csv('./data/forest_cover_type/forest-cover-type.csv', header=None, names=feature)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/pandas/io/parsers/readers.py\", line 872, in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/pandas/io/parsers/readers.py\", line 300, in _read\n    parser = TextFileReader(filepath_or_buffer, **kwds)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/pandas/io/parsers/readers.py\", line 1643, in __init__\n    self._engine = self._make_engine(f, self.engine)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/pandas/io/parsers/readers.py\", line 1907, in _make_engine\n    self.handles = get_handle(\n                   ^^^^^^^^^^^\n  File \"/workspace/deps/pandas/io/common.py\", line 930, in get_handle\n    handle = open(\n             ^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'\n"
+}

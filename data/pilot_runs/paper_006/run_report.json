@@ -1,0 +1,32 @@
+{
+  "paper_id": "paper_006",
+  "source": "https://github.com/somepago/saint",
+  "commit_hash": "e288e84c77a54cfd2ffb55a53678fb7cbbb16630",
+  "target_script": "train.py",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.378,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "/home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/paper_006",
+  "generated_files": [
+    "execution_meta.json",
+    "stdout.log",
+    "runner_environment.txt",
+    "stderr.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.126,
+    "timeout_limit_seconds": 3600,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 6971392,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/train.py --dset_id 1461 --task binary --savemodelroot /workspace/output/bestmodels\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : SKIPPED\nDuration      : 0.126s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/train.py\", line 1, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

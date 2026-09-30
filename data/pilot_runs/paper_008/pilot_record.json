@@ -1,0 +1,60 @@
+{
+  "paper_id": "paper_008",
+  "protocol": "docs/PILOT_WEEK2.md",
+  "repro_radar_commit": "dbcbe5afcdc7f6b388459887f26e2f15a4ccd077",
+  "started_at": "2026-09-30T18:32:15+00:00",
+  "repo_url": "https://github.com/WhatAShot/DANet",
+  "pinned_commit": "b007c57121ec9082f6ef19ec7465d9df70767c26",
+  "target_script": "main.py",
+  "container_command": "python /workspace/repo/main.py -c config/forest_cover_type.yaml -g \"\"",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "b007c57121ec9082f6ef19ec7465d9df70767c26",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 0.826
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "wheel_count": 48,
+    "bundle_dir": "/home/runner/work/_temp/staging/paper_008_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "stdout": " /home/runner/work/_temp/staging/paper_008_packages/packaging-26.3-py3-none-any.whl\nSaved /home/runner/work/_temp/staging/paper_008_packages/pillow-12.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved /home/runner/work/_temp/staging/paper_008_packages/pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSuccessfully downloaded torch nvidia-cublas-cu12 nvidia-cuda-cupti-cu12 nvidia-cuda-nvrtc-cu12 nvidia-cuda-runtime-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-cufile-cu12 nvidia-curand-cu12 nvidia-cusolver-cu12 nvidia-cusparse-cu12 nvidia-cusparselt-cu12 nvidia-nccl-cu12 nvidia-nvjitlink-cu12 nvidia-nvtx-cu12 triton category_encoders yacs tensorboard grpcio protobuf tensorboard-data-server typing-extensions qhoptim absl-py markdown numpy pandas python-dateutil scikit-learn joblib cloudpickle narwhals scipy setuptools six sympy mpmath threadpoolctl werkzeug markupsafe filelock fsspec jinja2 networkx packaging pillow PyYAML\n",
+    "stderr": "",
+    "duration_seconds": 71.72
+  },
+  "sandbox_duration_seconds": 75.725,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.957,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 442216448
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 62.919,
+    "peak_memory_bytes": 4772421632
+  },
+  "finished_at": "2026-09-30T18:34:43+00:00"
+}

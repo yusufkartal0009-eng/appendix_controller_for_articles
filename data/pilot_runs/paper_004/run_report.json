@@ -1,0 +1,32 @@
+{
+  "paper_id": "paper_004",
+  "source": "https://github.com/yandex-research/tabular-dl-tabr",
+  "commit_hash": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+  "target_script": "bin/tabr.py",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 2.263,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "/home/runner/work/appendix_controller_for_articles/appendix_controller_for_articles/sandbox_runs/paper_004",
+  "generated_files": [
+    "execution_meta.json",
+    "stdout.log",
+    "runner_environment.txt",
+    "stderr.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.263,
+    "timeout_limit_seconds": 3600,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 15437824,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/bin/tabr.py exp/tabr/california/0-evaluation/0.toml --force\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : SKIPPED\nDuration      : 0.263s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/bin/tabr.py\", line 19, in <module>\n    import delu\nModuleNotFoundError: No module named 'delu'\n"
+}

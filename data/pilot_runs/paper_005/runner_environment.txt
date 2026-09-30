@@ -1,0 +1,45 @@
+paper_id: paper_005
+repro_radar_commit: dbcbe5afcdc7f6b388459887f26e2f15a4ccd077
+workflow_run: https://github.com/yusufkartal0009-eng/appendix_controller_for_articles/actions/runs/36759195752 (attempt 1)
+runner_image: ubuntu24 20260920.314.1
+kernel: 6.17.0-1022-azure
+nproc: 2
+--- free -m
+               total        used        free      shared  buff/cache   available
+Mem:            7938        1121        4644          40        2500        6816
+Swap:           3071           0        3071
+--- df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        72G   59G   14G  82% /
+/dev/root        72G   59G   14G  82% /
+--- docker version
+Client: Docker Engine - Community
+ Version:           28.0.4
+ API version:       1.48
+ Go version:        go1.23.7
+ Git commit:        b8034c0
+ Built:             Tue Mar 25 15:07:16 2025
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          28.0.4
+  API version:      1.48 (minimum version 1.24)
+  Go version:       go1.23.7
+  Git commit:       6430e49
+  Built:            Tue Mar 25 15:07:16 2025
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.3.5
+  GitCommit:        1294c24a7da8e5a793ed378161673abe94118892
+ runc:
+  Version:          1.5.1
+  GitCommit:        v1.5.1-0-g8f2685a4
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        72G   60G   13G  83% /
+/dev/root        72G   60G   13G  83% /

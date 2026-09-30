@@ -1,0 +1,48 @@
+{
+  "paper_id": "paper_004",
+  "protocol": "docs/PILOT_WEEK2.md",
+  "repro_radar_commit": "dbcbe5afcdc7f6b388459887f26e2f15a4ccd077",
+  "started_at": "2026-09-30T18:32:08+00:00",
+  "repo_url": "https://github.com/yandex-research/tabular-dl-tabr",
+  "pinned_commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+  "target_script": "bin/tabr.py",
+  "container_command": "python /workspace/repo/bin/tabr.py exp/tabr/california/0-evaluation/0.toml --force",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": ""
+  },
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": true,
+    "duration_seconds": 7.196
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "/home/runner/work/_temp/staging/paper_004_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 4.347,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.263,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 15437824
+  },
+  "finished_at": "2026-09-30T18:32:19+00:00"
+}
