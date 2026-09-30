@@ -76,6 +76,8 @@ class RunORM(Base):
     stdout = Column(Text, nullable=True)
     stderr = Column(Text, nullable=True)
     seed = Column(Integer, default=42)
+    # Pilot failure category (docs/PILOT_WEEK2.md section 7); NULL for runs that were not categorized
+    failure_category = Column(String, nullable=True)
     timestamp = Column(DateTime, default=func.now())
 
     # Relationships

@@ -1,0 +1,86 @@
+{
+  "protocol": "docs/PILOT_WEEK2.md section 7",
+  "papers": [
+    {
+      "paper_id": "paper_002",
+      "category": "MISSING_DEPENDENCY",
+      "other_name": null,
+      "phase": "install",
+      "evidence": {
+        "file": "install.log",
+        "line_number": 3,
+        "line": "ERROR: Could not find a version that satisfies the requirement torch==1.9.0 (from versions: none)"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_003",
+      "category": "MISSING_DEPENDENCY",
+      "other_name": null,
+      "phase": "install",
+      "evidence": {
+        "file": "install.log",
+        "line_number": 2,
+        "line": "ERROR: Could not find a version that satisfies the requirement catboost==0.24.4 (from versions: none)"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_004",
+      "category": "MISSING_DEPENDENCY",
+      "other_name": null,
+      "phase": "run",
+      "evidence": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'delu'"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_005",
+      "category": "MISSING_DEPENDENCY",
+      "other_name": null,
+      "phase": "install",
+      "evidence": {
+        "file": "install.log",
+        "line_number": 13,
+        "line": "ERROR: Cannot install -r /workspace/repo/requirements.txt (line 4) and python-dateutil==2.8.1 because these package versions have conflicting dependencies."
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_006",
+      "category": "MISSING_DEPENDENCY",
+      "other_name": null,
+      "phase": "run",
+      "evidence": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'torch'"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_008",
+      "category": "DATA_NOT_ACCESSIBLE",
+      "other_name": null,
+      "phase": "run",
+      "evidence": {
+        "file": "stderr.log",
+        "line_number": 26,
+        "line": "FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      },
+      "pilot_success": false
+    }
+  ],
+  "counts": {
+    "MISSING_DEPENDENCY": 5,
+    "DATA_NOT_ACCESSIBLE": 1,
+    "HARDWARE_GPU_REQUIRED": 0,
+    "TIMEOUT": 0,
+    "SCRIPT_NOT_FOUND": 0,
+    "LICENSE_BLOCKED": 0,
+    "OTHER": 0
+  }
+}
