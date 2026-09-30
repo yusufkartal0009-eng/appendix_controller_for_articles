@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot Report (2026-09-30 21:50 +03:00, Issue #127, P6)
+- `docs/PILOT_WEEK2.md` section 11: pilot success 0 / 6, install success 1 / 6, run success 0 / 6, all 6 runs valid. Most frequent category `MISSING_DEPENDENCY` (5 of 6), with three causes: old pins without Python 3.11 wheels, a conflict inside the requirements, and conda-only repositories. What was surprising, proposed sandbox changes (Python version per paper first), and limits (n = 6 is anecdotal).
+- The tables are pasted from the generated files, and `tests/test_pilot_report.py` fails if they drift. The document's status note was updated; the frozen protocol text is unchanged.
+
 ### Pilot Dataset Findings (2026-09-30 21:47 +03:00, Issue #126, P5)
 - `docs/PILOT_WEEK2.md` section 10: for each paper, whether it downloads data, what, how large, under which license, and what happened in the pilot, each with its source. Largest downloads: `paper_003` 4.07 GiB (Dropbox) and `paper_004` 2.88 GiB (Hugging Face). `paper_005` ships 41.3 MiB in the repository.
 - `paper_008`'s loader needs split files (`train_idx.csv`, `valid_idx.csv`, `test_idx.csv`) that are not published.
