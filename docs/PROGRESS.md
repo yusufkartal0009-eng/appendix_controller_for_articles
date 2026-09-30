@@ -4,35 +4,40 @@
 
 ---
 
-## Current Status: M0 Baseline & Projectflow Adoption
+## Current Status (2026-09-30 21:54 +03:00): Week 2 Pilot Done, Claim Extraction Next
 
-- **Active Milestone:** M0 — Baseline Hygiene & Audit
+- **Work order:** `docs/ROADMAP_2026-09-27.md`. Section 2 (pilot, #43) is done: pilot success 0 / 6, install success 1 / 6, run success 0 / 6 (`docs/PILOT_WEEK2.md` sections 10-11). Next is section 3 (claim extraction, #9, starting with W1 #129 and W2 #130). Section 4 (CLI, #136) and the dashboard wait until sections 2 and 3 are both done.
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Total Unit Tests Passing:** 86 / 86 on Linux (1 POSIX-permission test is skipped on Windows); CI: Ubuntu, Windows, sandbox image, corpus verification, real-Docker sandbox acceptance with 7 checks
+- **Tests:** 139 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 12 checks
 
 ---
 
 ## Milestone Roadmap & Progress
 
-Issue numbers and open/closed counts match GitHub as of 2026-09-27 (issues only, not PRs; counted with #92 closed by PR #95). Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
+Issue numbers and open/closed counts match GitHub as of 2026-09-30 21:54 +03:00 (issues only, not PRs), counted with #128 and #43 closed by the P7 PR. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
 
 | Milestone | Focus | Backlog issues | Open / closed | Status |
 |---|---|:---:|:---:|:---:|
-| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 8 | IN PROGRESS |
-| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 6 / 3 | IN PROGRESS |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 6 / 6 | IN PROGRESS |
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 7 / 12 | IN PROGRESS |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 13 / 5 | IN PROGRESS |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 6 / 12 | IN PROGRESS |
 | **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 6 / 1 | QUEUED |
-| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 2 / 5 | IN PROGRESS |
+| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 3 / 5 | IN PROGRESS |
 | **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 6 / 1 | QUEUED |
 | **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #37 – #41 | 5 / 0 | QUEUED |
-| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 4 / 3 | IN PROGRESS |
+| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 4 / 12 | IN PROGRESS |
 
 The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella issues (#47 – #53) were closed as completed or as duplicates of the backlog above and moved into the matching M milestones.
 
 ---
 
 ## Changelog & Completed Work
+
+### Pilot Cleanup (2026-09-30 21:54 +03:00, Issue #128, P7; closes the pilot umbrella #43)
+- Evidence review of #48 and #13-#18 against the 12 acceptance checks and the pilot runs; each issue has a comment with its status. Only #16 gained a tick: the timeout watchdog, backed by `test_process_sandbox_runner_timeout`. Its "automatic driver detection" box is annotated as replaced by design in #80.
+- Still open, with the missing evidence named: #48 (multi-seed execution not implemented), #13 (image size not recorded), #14 (logs reach SQLite only after the run, via the loader), #15 (blocked network attempts are not logged), #17 (no kill at the 600 s default, no stored `TIMEOUT` row), #18 (no automated test for a failing exit code).
+- Status and milestone counts at the top of this file refreshed from GitHub.
 
 ### Pilot Report (2026-09-30 21:50 +03:00, Issue #127, P6)
 - `docs/PILOT_WEEK2.md` section 11: pilot success 0 / 6, install success 1 / 6, run success 0 / 6, all 6 runs valid. Most frequent category `MISSING_DEPENDENCY` (5 of 6), with three causes: old pins without Python 3.11 wheels, a conflict inside the requirements, and conda-only repositories. What was surprising, proposed sandbox changes (Python version per paper first), and limits (n = 6 is anecdotal).
