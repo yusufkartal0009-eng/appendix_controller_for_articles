@@ -89,6 +89,11 @@ PROBES = {
         "    print(f'allocated {(i + 1) * 32} MiB', flush=True)\n"
         "print('NOT KILLED: allocated 2 GiB')\n"
     ),
+    "probe_alloc.py": (
+        "import toolz\n"
+        "block = b'x' * (200 * 1024 * 1024)  # touches the pages, so they count\n"
+        "print(f'holding {len(block) // (1024 * 1024)} MiB; toolz {toolz.__version__} imported')\n"
+    ),
     "probe_pids.py": (
         "import threading, time\n"
         "threads = []\n"
@@ -269,6 +274,23 @@ def main():
     show("11. Broken requirement (`reproradar-no-such-package==9.9.9`)", r.command_executed,
          "\n".join([f"install.log (tail): {install_tail.strip()}", r.stdout.strip()[-300:], *summary(r, meta)]))
     results["11 broken requirement reported FAILED"] = meta.get("dependency_install_status") == "FAILED"
+
+    # 12. resource use recorded: peak memory of the run (probe holds 200 MiB) and duration and peak of the install phase
+    alloc_repo = Path(tempfile.mkdtemp(prefix="acceptance_alloc_"))
+    (alloc_repo / "probe_alloc.py").write_text(PROBES["probe_alloc.py"])
+    (alloc_repo / "requirements.txt").write_text("toolz==0.12.1\n")
+    alloc_repo.chmod(0o755)
+    r, meta = run_probe(runner, alloc_repo, "probe_alloc.py", "acceptance_resources", packages_dir=args.wheel_dir)
+    install_meta_path = SANDBOX_RUNS_DIR / "acceptance_resources" / "install_meta.json"
+    install_meta = json.loads(install_meta_path.read_text()) if install_meta_path.exists() else {}
+    peak = meta.get("peak_memory_bytes")
+    show("12. Resource use recorded (run holds 200 MiB after an offline install)", r.command_executed,
+         "\n".join([r.stdout.strip()[-300:], f"install_meta.json: {json.dumps(install_meta)}",
+                    f"run peak_memory_bytes: {peak}", *summary(r, meta)]))
+    results["12 peak memory and install duration recorded"] = (
+        r.status == "COMPLETED" and isinstance(peak, int) and peak >= 200 * 1024 * 1024
+        and isinstance(install_meta.get("peak_memory_bytes"), int) and install_meta.get("duration_seconds", 0) > 0
+    )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only
     marker = repo / "RAN.marker"
