@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot Dataset Findings (2026-09-30 21:47 +03:00, Issue #126, P5)
+- `docs/PILOT_WEEK2.md` section 10: for each paper, whether it downloads data, what, how large, under which license, and what happened in the pilot, each with its source. Largest downloads: `paper_003` 4.07 GiB (Dropbox) and `paper_004` 2.88 GiB (Hugging Face). `paper_005` ships 41.3 MiB in the repository.
+- `paper_008`'s loader needs split files (`train_idx.csv`, `valid_idx.csv`, `test_idx.csv`) that are not published.
+- Pre-cache input: a data cache would have changed no pilot outcome (five papers stopped at dependencies first), so it is not worth building before the dependency problems are addressed. No cache was built.
+
 ### Pilot Failure Categories (2026-09-30 21:42 +03:00, Issue #125, P4)
 - `scripts/categorize_pilot_failures.py` applies protocol section 7 to the stored runs. The first failure (stage → install → run) decides, and the deciding log line is quoted verbatim. Result: 5 × `MISSING_DEPENDENCY` (002, 003, 005 at install; 004, 006 at run), 1 × `DATA_NOT_ACCESSIBLE` (008), no `OTHER` (`data/pilot_runs/failure_categories.json`).
 - `runs.failure_category` column (ORM, `data/schema.sql`; `init_db` adds it to older SQLite databases). `scripts/load_pilot_runs.py` stores the 6 pilot runs with their category next to each run.

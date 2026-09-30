@@ -204,3 +204,34 @@ as "ran without installed dependencies".
 - No data is staged: papers that download data at run time are expected to stop at the data step, so the run phase
   of those papers measures little beyond start-up.
 - The target script of `paper_002` is not an experiment entry point (section 4).
+
+---
+
+# Results (written after the runs)
+
+The sections below were added after the pilot ran (workflow run 36759195752, 2026-09-30). The raw files are in
+`data/pilot_runs/`; the protocol above was not changed.
+
+## 10. Dataset findings (P5, #126)
+
+Checked on 2026-09-30. Sizes are the `Content-Length` reported by the data host, or the bytes actually downloaded
+where stated; no archive was unpacked. "not determined" means the value could not be checked.
+
+| Paper | Downloads data at run time? | What and where | Size | License | What happened in the pilot |
+|---|---|---|---|---|---|
+| `paper_002` | No, for the pilot command: the target script loads no data | The paper's experiments load OpenML datasets from notebooks (`openml==0.12.2` in `requirements.txt`) | not determined (depends on the notebook's dataset list) | not determined (per OpenML dataset) | Stopped at the install phase (`torch==1.9.0` has no wheel) |
+| `paper_003` | Yes, by hand before running (README "Data": `wget` from Dropbox, then unpack in the repository root) | `revisiting_models_data.tar.gz` (Dropbox link in the README) | 4,372,449,836 bytes (4.07 GiB), `Content-Length` of the download link | README: "by downloading our dataset you accept licenses of all its components"; no single license | Stopped at the install phase (`catboost==0.24.4` has no wheel) |
+| `paper_004` | Yes, by hand before running (README "Data": `wget` from Hugging Face, then unpack in the repository root) | `data.tar` from the Hugging Face dataset `puhsu/tabular-benchmarks` | 3,094,384,640 bytes (2.88 GiB), `Content-Length` of the download link | README: no license restrictions "in addition to the original licenses of the used dataset"; the Hugging Face dataset card declares no license | Stopped at import (`delu` not installed) |
+| `paper_005` | No: the datasets are in the repository (README: "We have provided all datasets we used in the subfolder `data`") | 80 files in `data/` at the pinned commit | 43,259,888 bytes (41.3 MiB), sum of the file sizes in the GitHub tree | The repository's Apache-2.0; the licenses of the original datasets are not stated | Stopped at the install phase (dependency conflict) |
+| `paper_006` | Yes, at run time from OpenML (`--dset_id 1461`) | OpenML dataset 1461 `bank-marketing` (ARFF, 45,211 rows, 17 features; original source UCI) | 3,660,226 bytes (3.5 MiB), `Content-Length` of the OpenML ARFF download | OpenML: `Public`; UCI page of the original dataset: CC BY 4.0 | Stopped at import (`torch` not installed), before any download |
+| `paper_008` | Yes, by hand before running (README "Downloads": links to the dataset pages) | UCI Covertype. The loader reads `./data/forest_cover_type/forest-cover-type.csv` **and** `train_idx.csv`, `valid_idx.csv`, `test_idx.csv` (`data/dataset.py`). The UCI download does not contain these files (the zip holds `covtype.data.gz`, `covtype.info`, `old_covtype.info`), and the split files are neither in the repository nor linked in the README | UCI `covertype.zip`: 10,881,440 bytes (10.4 MiB), downloaded | UCI: CC BY 4.0 | Stopped at the data step: `FileNotFoundError` for `forest-cover-type.csv` |
+
+**Input for the pre-cache decision (`/workspace/data`, read-only mount; not built):**
+- In this pilot, a data cache would have changed the outcome for **no paper**. Five papers stopped at their
+  dependencies before reading any data; only `paper_008` reached the data step.
+- `paper_008` could not be helped by a cache of the published data alone: its exact train/validation/test split
+  files are not published, so its reported split cannot be recreated from the README.
+- The two largest datasets (`paper_003` 4.07 GiB, `paper_004` 2.88 GiB) would each need several GiB of runner disk
+  and must be unpacked into the paper's own directory layout; the licenses of their components are not stated
+  in one place.
+- A cache is therefore only worth building after the dependency problems (section 7 categories) are addressed.
