@@ -34,6 +34,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### UI Decision Rule (2026-10-01 18:53 +03:00, Issue #149)
+- `AGENTS.md` §6.9: UI decisions (layout, colors, fonts, leaderboard, filters, detail page, badge design, report layout) are asked to the owner with 2-3 options and a preview before they are implemented.
+
 ### Pilot Cleanup (2026-09-30 21:54 +03:00, Issue #128, P7; closes the pilot umbrella #43)
 - Evidence review of #48 and #13-#18 against the 12 acceptance checks and the pilot runs; each issue has a comment with its status. Only #16 gained a tick: the timeout watchdog, backed by `test_process_sandbox_runner_timeout`. Its "automatic driver detection" box is annotated as replaced by design in #80.
 - Still open, with the missing evidence named: #48 (multi-seed execution not implemented), #13 (image size not recorded), #14 (logs reach SQLite only after the run, via the loader), #15 (blocked network attempts are not logged), #17 (no kill at the 600 s default, no stored `TIMEOUT` row), #18 (no automated test for a failing exit code).

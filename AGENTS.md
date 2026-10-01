@@ -95,3 +95,4 @@ These rules are permanent. They add to §5 and do not replace it.
 6. **Simulated data is never presented as a real result:** simulated outputs are labeled as simulation wherever they appear (code, docs, reports, PRs).
 7. **API keys are never committed:** keys are read from environment variables only.
 8. **Working loop for every issue:** propose → get approval → open a branch → implement → run the tests and show the output → update `docs/PROGRESS.md` → open a PR → read the diff and write a self-review comment → merge.
+9. **UI decisions belong to the owner (#149):** UI decisions (layout, colors, fonts, leaderboard, filters, detail page, badge design, report layout) must be asked to the owner with 2-3 options and a preview before implementing.
