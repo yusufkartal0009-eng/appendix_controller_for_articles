@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### PDF Text Extractor (2026-10-01 19:18 +03:00, Issue #130, W2)
+- `src/pdf_text.py`: page-by-page text with 1-based PDF page numbers (`pypdf`, now in `requirements.txt`), cached as `data/pdf_text_cache/<sha256>.json` keyed by the PDF bytes (not committed). `PdfText.find()` lists the pages that contain a string verbatim.
+- Real paper check (`paper_003`, arXiv 2106.11959v5, 25 pages): `FT-T 0.459` is on PDF page 7, as recorded in `docs/CORPUS_VERIFICATION.md`. First extraction 0.56 s, cached 0.010 s.
+- `docs/PDF_TEXT_EXTRACTION.md` documents the limitations, with that page as the example: table rows become single lines without column structure, `pypdf` inserts spaces inside numbers (`0 .850`), formatting is lost, scanned pages have no text, and figures are not read.
+
 ### Claim Schema (2026-10-01 19:06 +03:00, Issue #129, W1)
 - `docs/CLAIM_SCHEMA.md`: the twelve fields of an extracted claim with type and meaning, the normalization rule (`96.99 %` → `0.9699`, computed in decimal), the claim set per exact PDF (`pdf_sha256`), explicit "not found" answers (regression cases EP3602 and HIGGS), and what W4/W6 add later.
 - `src/claim_schema.py`: the same schema as Pydantic models (`ExtractedClaim`, `ClaimSet`, `NotFound`) and `normalize_value()`. A claim is rejected if its normalized value does not follow the rule or its quote does not contain the printed value.
