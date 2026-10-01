@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Verbatim Quote Guard (2026-10-01 21:04 +03:00, Issue #132, W4)
+- `src/quote_guard.py`: a claim becomes `AUTO_QUOTE_MATCH` only if its PDF hash matches, its page exists, its quote and printed value occur on that page with identical characters (whitespace runs count as one space), and its dataset and model occur in the paper as whole words. Otherwise it stays `UNVERIFIED` with the reasons. `scorable_claims()` returns only verified claims.
+- Rules documented in `docs/CLAIM_SCHEMA.md` section 5; 11 tests, including a matching and a non-matching quote, the `0.859`/`0 .859` case, and the invented `EP3602` dataset.
+
 ### Claim Extraction with Claude (2026-10-01 20:57 +03:00, Issue #131, W3)
 - `src/claim_extraction.py`: query-driven extraction with Claude Opus 5.5 (owner's choice), JSON-schema output, a mandatory verbatim quote and PDF page, and an explicit "not found" instead of guessing. `value_normalized` is computed by the schema rule. Responses are cached by a hash of model, prompt, schema, PDF, and queries (`data/llm_cache/`, not committed). Usage and estimated cost are recorded, and a server-side refusal fallback is enabled and recorded.
 - `docs/DECISIONS.md` D-003: why there is no temperature setting (Opus 5.5 rejects it) and what gives repeatability instead (cache, W4 quote guard, W7 human check).

@@ -81,5 +81,14 @@ Required regression cases (W5, #133): `paper_005` asked for "EP3602" must give "
 
 These are attached after extraction and are not produced by the extractor itself:
 
-- `verification_status`: `UNVERIFIED` until W4's verbatim check passes; a claim that fails the check is never scored.
+- `verification_status`: `UNVERIFIED` until the verbatim quote guard (W4, `src/quote_guard.py`) passes, then
+  `AUTO_QUOTE_MATCH`. A claim that fails the guard is never scored; scoring takes its claims from
+  `scorable_claims()`. The guard requires:
+  1. the claim set's `pdf_sha256` to equal the hash of the text's PDF, and the cited page to exist;
+  2. `source_quote` and `value_as_printed` to occur on the cited page with identical characters. The only
+     tolerance is that a run of whitespace counts as one space, and which mode matched (`exact` or
+     `whitespace_normalized`) is recorded. A value retyped without the space the extraction put inside it
+     (`0.859` for `0 .859`) does not match;
+  3. `dataset` and `model_variant` to occur somewhere in the paper as whole words (ignoring case), so a claim
+     about a dataset the paper never mentions (`EP3602`) cannot pass.
 - `verified_by`: `auto-quote-match` or `human` (W6, #10, and W7, #134).
