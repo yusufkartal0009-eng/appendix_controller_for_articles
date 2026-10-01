@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Claim Extraction with Claude (2026-10-01 20:57 +03:00, Issue #131, W3)
+- `src/claim_extraction.py`: query-driven extraction with Claude Opus 5.5 (owner's choice), JSON-schema output, a mandatory verbatim quote and PDF page, and an explicit "not found" instead of guessing. `value_normalized` is computed by the schema rule. Responses are cached by a hash of model, prompt, schema, PDF, and queries (`data/llm_cache/`, not committed). Usage and estimated cost are recorded, and a server-side refusal fallback is enabled and recorded.
+- `docs/DECISIONS.md` D-003: why there is no temperature setting (Opus 5.5 rejects it) and what gives repeatability instead (cache, W4 quote guard, W7 human check).
+- `scripts/extract_claims.py` with `data/claim_queries/paper_003.json` (pinned PDF `2106.11959v5`; queries without the seed values). `anthropic` is a runtime dependency. Tests use a fake client; no API call was made yet, because `ANTHROPIC_API_KEY` was not visible to the session.
+
 ### Lint Backlog Cleared (2026-10-01 20:39 +03:00, Issue #139, GA-11)
 - The CI lint gate is now ruff's default rule set plus the first gate's rules (`pyproject.toml`). Findings went from 393 (ruff 0.16.9 defaults) to 0. `ruff --fix` applied 375 fixes; the remaining 38 were handled by hand: 12 explicit `check=False`, 10 renamed unused test variables, 7 small simplifications, and 9 deliberate broad exception handlers marked `# noqa: BLE001` with their reason.
 - Behavior unchanged: 164 passed, 8 skipped before and after. The untested `cli.py` and scripts compile and run `--help` (and `cli.py list-papers`).
