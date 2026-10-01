@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Claim Schema (2026-10-01 19:06 +03:00, Issue #129, W1)
+- `docs/CLAIM_SCHEMA.md`: the twelve fields of an extracted claim with type and meaning, the normalization rule (`96.99 %` → `0.9699`, computed in decimal), the claim set per exact PDF (`pdf_sha256`), explicit "not found" answers (regression cases EP3602 and HIGGS), and what W4/W6 add later.
+- `src/claim_schema.py`: the same schema as Pydantic models (`ExtractedClaim`, `ClaimSet`, `NotFound`) and `normalize_value()`. A claim is rejected if its normalized value does not follow the rule or its quote does not contain the printed value.
+- `tests/test_claim_schema.py`: the documented fields, units, splits, and examples equal the code; invalid values and claims are rejected.
+
 ### Pilot Cleanup (2026-09-30 21:54 +03:00, Issue #128, P7; closes the pilot umbrella #43)
 - Evidence review of #48 and #13-#18 against the 12 acceptance checks and the pilot runs; each issue has a comment with its status. Only #16 gained a tick: the timeout watchdog, backed by `test_process_sandbox_runner_timeout`. Its "automatic driver detection" box is annotated as replaced by design in #80.
 - Still open, with the missing evidence named: #48 (multi-seed execution not implemented), #13 (image size not recorded), #14 (logs reach SQLite only after the run, via the loader), #15 (blocked network attempts are not logged), #17 (no kill at the 600 s default, no stored `TIMEOUT` row), #18 (no automated test for a failing exit code).
