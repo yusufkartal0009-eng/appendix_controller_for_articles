@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Coverage Re-measured (2026-10-01 20:32 +03:00, Issue #138)
+- Line coverage on the GA-5 baseline scope (`src`, `cli.py`, `scripts`) is 79% (2598 statements, 557 missed), up from 60%; `src/` alone is 87% (1379 statements, 180 missed), locally and in CI. `cli.py` is still 0%. Recorded in `docs/gap_analysis.md` (section 2 and GA-5).
+- Started ahead of the binding order (`AGENTS.md` §6.3) at the owner's explicit request.
+
 ### Generated Introduction No Longer Committed (2026-10-01 20:28 +03:00, Issue #137, GA-15)
 - `docs/repro_radar_introduction.docx` and `docs/assets/repro_radar_banner.png` are build outputs of `scripts/generate_academic_introduction_doc.py`: removed from version control and ignored. The script has an `--output-dir` option.
 - `tests/test_academic_doc.py` generates the document into a temporary directory on every run, and the CI test job uploads the generated `.docx` as the `introduction-docx` artifact.

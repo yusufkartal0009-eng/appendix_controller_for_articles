@@ -15,7 +15,7 @@
 | GA-2 | High | Product | `cli.py score` scores simulated outputs only; sandbox and extractor are not reachable from the CLI | #136 | Open (README note corrected in #73; tracked in #136 since 2026-09-28, was #43) |
 | GA-3 | High | DevOps | No CI: tests and lint never run on PRs | #42 | Fixed in #74 |
 | GA-4 | Medium | Tracking | Duplicate non-English "Hafta 1–7" milestones run a second, parallel plan | — | Fixed: milestones removed and issues consolidated (issue #76, PR #77) |
-| GA-5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18, #138 | Open: tests added in #71, #81, #83, #85, #89, #91; coverage not re-measured since the baseline (re-measurement: #138) |
+| GA-5 | Medium | Tests | 60% line coverage; `cli.py` and Docker execution path untested | #18, #138 | Open: re-measured 2026-10-01 (#138) at 79% on the baseline scope; `cli.py` is still 0% |
 | GA-6 | Medium | Dependencies | Unused, unpinned, and mixed runtime/dev dependencies | — | Partly fixed in #71: split and unused removed; no lock file yet |
 | GA-7 | Medium | Sandbox | `Dockerfile.sandbox` version constraints are parsed as shell redirections | #13 | Fixed in #71; verified by CI image build in #74 |
 | GA-8 | Medium | Sandbox | `entrypoint.sh` silently ignores dependency install failures | #32 | Fixed in #71; verified by CI smoke tests in #74 |
@@ -44,6 +44,7 @@ Status last updated 2026-09-27. Detailed findings below describe the state at th
 |---|---|---|
 | Test suite | `pytest tests/ -q` | 49 passed |
 | Coverage | `pytest tests/ --cov=src --cov=cli --cov=scripts` | **60%** (1604 statements, 644 missed) |
+| Coverage, re-measured 2026-10-01 (#138) | same command | **79%** (2598 statements, 557 missed): the command reports 82% (2474 statements, 433 missed) because coverage leaves out `cli.py`, which no test imports; counted at 0% as in the baseline, `cli.py` adds 124 missed statements |
 | Lint | `ruff check .` (ruff 0.16.9, default rules) | **281** findings, 229 auto-fixable |
 | Non-English text | scan of tracked text files for Turkish characters | none found |
 
@@ -98,6 +99,12 @@ GitHub has seven "Hafta 1–7" milestones (with issues #47–#53) alongside M0�
 - `src/database.py` is at 65%.
 
 **Remedy:** CLI tests via `subprocess` or by calling `main()` with a temporary database; an opt-in Docker integration test (`@pytest.mark.docker`, skipped when Docker is absent) as scoped in #18; local-bare-repo fixtures for the stager.
+
+**Re-measured (2026-10-01, #138):** 79% on the baseline scope (see section 2); `src/` alone is 87% (1379 statements, 180 missed) both locally on Windows and in CI on Ubuntu (run 36899982024). Still the weakest:
+- `cli.py`: 0% (124 statements; no test imports it).
+- `scripts/sandbox_acceptance.py` (0%, 124 statements) and `scripts/setup_7week_board.py` (0%, 25): not run by pytest. The acceptance script runs in its own CI job against real Docker.
+- `scripts/load_pilot_runs.py` 78%, `src/sandbox/stager.py` 80%, `src/database.py` 81%, `src/scoring.py` 82%.
+- The Docker path of `DockerSandboxRunner` is exercised by the CI acceptance job and the pilot, but still not by a unit test (#18).
 
 ### GA-6 — Dependency hygiene (Medium)
 - `pandas`, `pyyaml`, and `requests` are declared in `requirements.txt` but imported nowhere.
