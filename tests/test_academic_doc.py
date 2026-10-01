@@ -1,27 +1,31 @@
 """Unit tests verifying the generation, integrity, and layout of the academic docx document and banner asset."""
 
-from pathlib import Path
+import pytest
 from docx import Document
 from PIL import Image
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DOCS_DIR = PROJECT_ROOT / "docs"
-ASSETS_DIR = DOCS_DIR / "assets"
-BANNER_PATH = ASSETS_DIR / "repro_radar_banner.png"
-DOCX_PATH = DOCS_DIR / "repro_radar_introduction.docx"
+import scripts.generate_academic_introduction_doc as generator
 
 
-def test_cover_banner_image_properties():
-    assert BANNER_PATH.exists(), "Cover banner PNG must exist in docs/assets/"
-    with Image.open(BANNER_PATH) as img:
+@pytest.fixture(scope="module")
+def generated(tmp_path_factory):
+    """Generate the document from the script on every run: the .docx is a build output, not committed (#137)."""
+    out = tmp_path_factory.mktemp("introduction")
+    generator.main(["--output-dir", str(out)])
+    return {"docx": out / "repro_radar_introduction.docx", "banner": out / "assets" / "repro_radar_banner.png"}
+
+
+def test_cover_banner_image_properties(generated):
+    assert generated["banner"].exists(), "the generator must write the banner PNG"
+    with Image.open(generated["banner"]) as img:
         assert img.format == "PNG"
         assert img.width == 1200
         assert img.height == 420
 
 
-def test_academic_introduction_docx_integrity():
-    assert DOCX_PATH.exists(), "Academic introduction Word document (.docx) must exist in docs/"
-    doc = Document(DOCX_PATH)
+def test_academic_introduction_docx_integrity(generated):
+    assert generated["docx"].exists(), "the generator must write the .docx"
+    doc = Document(generated["docx"])
 
     # Verify paragraphs and text content
     full_text = "\n".join(p.text for p in doc.paragraphs)
@@ -48,25 +52,25 @@ def _body_text(doc):
     )
 
 
-def test_introduction_is_marked_draft():
-    doc = Document(DOCX_PATH)
+def test_introduction_is_marked_draft(generated):
+    doc = Document(generated["docx"])
     assert doc.paragraphs[0].text.startswith("DRAFT") or any(p.text.startswith("DRAFT") for p in doc.paragraphs[:4])
     header_text = " ".join(p.text for s in doc.sections for p in s.header.paragraphs)
     assert "DRAFT" in header_text
 
 
-def test_introduction_drops_unsourced_and_out_of_scope_claims():
-    text = _body_text(Document(DOCX_PATH))
+def test_introduction_drops_unsourced_and_out_of_scope_claims(generated):
+    text = _body_text(Document(generated["docx"]))
     for phrase in ["fewer than 35", "In 1995", "Domain-Agnostic", "domain-agnostic", "cryptography",
                    "computational economics", "Signal Processing", "resolves", "Universal Scientific"]:
         assert phrase not in text, phrase
     assert "pilot study on tabular ML benchmarks" in text
 
 
-def test_every_reference_is_cited_in_the_text():
+def test_every_reference_is_cited_in_the_text(generated):
     import re
 
-    doc = Document(DOCX_PATH)
+    doc = Document(generated["docx"])
     paragraphs = [p.text for p in doc.paragraphs]
     ref_start = next(i for i, t in enumerate(paragraphs) if "References" in t)
     body = "\n".join(paragraphs[:ref_start]) + "\n" + "\n".join(
