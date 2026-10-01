@@ -1,0 +1,83 @@
+"""Verbatim quote guard (W4, #132): only claims whose value and quote occur in the paper may be scored."""
+
+import pytest
+
+from src.claim_schema import ClaimSet, ExtractedClaim
+from src.pdf_text import PdfText
+from src.quote_guard import (
+    AUTO_QUOTE_MATCH,
+    UNVERIFIED,
+    find_on_page,
+    occurs_as_words,
+    scorable_claims,
+    verify_claim,
+    verify_claim_set,
+)
+
+SHA = "b" * 64
+PDF = PdfText(
+    sha256=SHA,
+    pages=[
+        "Datasets: California Housing (CA), Adult (AD). Models: FT-Transformer (FT-T), ResNet, XGBoost.",
+        "Table 2: Results\nCA ↓ AD ↑\nResNet 0.486 0 .854\nFT-T 0.459 0 .859\nThe EP300 dataset is not used here.",
+    ],
+    extractor="pypdf test",
+)
+
+
+def _claim(**overrides):
+    data = {"metric_name": "rmse", "value_as_printed": "0.459", "unit": "none", "dataset": "California Housing",
+            "model_variant": "FT-T", "split": "test", "higher_is_better": False, "table_or_figure": "Table 2",
+            "page": 2, "source_quote": "FT-T 0.459 0 .859", "confidence": 0.9}
+    data.update(overrides)
+    return ExtractedClaim(**data)
+
+
+def test_matching_claim_is_verified():
+    result = verify_claim(_claim(), PDF, SHA)
+    assert result.status == AUTO_QUOTE_MATCH, result.reasons
+    assert result.checks["quote_match"] == "exact" and result.checks["value_match"] == "exact"
+
+
+def test_quote_across_a_line_break_matches_with_whitespace_normalized():
+    claim = _claim(value_as_printed="0.486", source_quote="ResNet 0.486 0 .854 FT-T 0.459")  # page has a newline
+    result = verify_claim(claim, PDF, SHA)
+    assert result.status == AUTO_QUOTE_MATCH
+    assert result.checks["quote_match"] == "whitespace_normalized"
+
+
+@pytest.mark.parametrize("overrides, reason", [
+    ({"source_quote": "FT-T 0.459 0.859", "value_as_printed": "0.859"}, "does not occur on page 2"),  # space removed
+    ({"source_quote": "FT-T 0.461", "value_as_printed": "0.461"}, "does not occur on page 2"),         # invented value
+    ({"page": 1}, "does not occur on page 1"),                                                          # wrong page
+    ({"page": 9}, "page 9 does not exist"),
+    ({"dataset": "EP3602"}, "dataset 'EP3602' does not occur in the paper"),                           # invented dataset
+    ({"model_variant": "TabNet"}, "model_variant 'TabNet' does not occur in the paper"),
+])
+def test_non_matching_claims_stay_unverified(overrides, reason):
+    result = verify_claim(_claim(**overrides), PDF, SHA)
+    assert result.status == UNVERIFIED
+    assert any(reason in r for r in result.reasons), result.reasons
+
+
+def test_claim_from_another_pdf_is_unverified():
+    result = verify_claim(_claim(), PDF, "c" * 64)
+    assert result.status == UNVERIFIED
+    assert "different PDF" in result.reasons[0]
+
+
+def test_word_matching_rules():
+    assert find_on_page("0 .859", PDF.page(2)) == "exact"
+    assert find_on_page("0.859", PDF.page(2)) is None
+    assert occurs_as_words("CA", "CA ↓ AD ↑") and not occurs_as_words("CA", "the cat")
+    assert occurs_as_words("EP300", PDF.page(2)) and not occurs_as_words("EP3602", PDF.page(2))
+
+
+def test_only_verified_claims_are_scorable():
+    claim_set = ClaimSet(paper_id="paper_003", pdf_url="https://arxiv.org/pdf/2106.11959v5", pdf_sha256=SHA,
+                         extractor_version="test",
+                         claims=[_claim(), _claim(dataset="EP3602"), _claim(value_as_printed="0.461",
+                                                                             source_quote="FT-T 0.461")])
+    verified = verify_claim_set(claim_set, PDF)
+    assert [v.result.status for v in verified] == [AUTO_QUOTE_MATCH, UNVERIFIED, UNVERIFIED]
+    assert scorable_claims(verified) == [claim_set.claims[0]]
