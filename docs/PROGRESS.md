@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Lint Backlog Cleared (2026-10-01 20:39 +03:00, Issue #139, GA-11)
+- The CI lint gate is now ruff's default rule set plus the first gate's rules (`pyproject.toml`). Findings went from 393 (ruff 0.16.9 defaults) to 0. `ruff --fix` applied 375 fixes; the remaining 38 were handled by hand: 12 explicit `check=False`, 10 renamed unused test variables, 7 small simplifications, and 9 deliberate broad exception handlers marked `# noqa: BLE001` with their reason.
+- Behavior unchanged: 164 passed, 8 skipped before and after. The untested `cli.py` and scripts compile and run `--help` (and `cli.py list-papers`).
+- Started ahead of the binding order (`AGENTS.md` §6.3) at the owner's explicit request.
+
 ### Coverage Re-measured (2026-10-01 20:32 +03:00, Issue #138)
 - Line coverage on the GA-5 baseline scope (`src`, `cli.py`, `scripts`) is 79% (2598 statements, 557 missed), up from 60%; `src/` alone is 87% (1379 statements, 180 missed), locally and in CI. `cli.py` is still 0%. Recorded in `docs/gap_analysis.md` (section 2 and GA-5).
 - Started ahead of the binding order (`AGENTS.md` §6.3) at the owner's explicit request.

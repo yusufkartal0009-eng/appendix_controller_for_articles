@@ -8,7 +8,7 @@ from types import SimpleNamespace
 import pytest
 import yaml
 
-import scripts.run_pilot as run_pilot
+from scripts import run_pilot
 from src.config import PROJECT_ROOT, SEED_PAPERS_PATH
 
 PROTOCOL = (PROJECT_ROOT / "docs" / "PILOT_WEEK2.md").read_text(encoding="utf-8")

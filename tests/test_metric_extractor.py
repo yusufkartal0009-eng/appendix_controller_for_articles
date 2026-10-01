@@ -1,10 +1,8 @@
 """Unit tests for MetricExtractor log parsing, JSON extraction, and sklearn report parsing."""
 
 import json
-from pathlib import Path
-import pytest
 
-from src.metric_extractor import ExtractedMetric, MetricExtractor
+from src.metric_extractor import MetricExtractor
 
 
 def test_normalize_metric_names():

@@ -1,10 +1,8 @@
 """Unit tests for Repro Radar 4-tier reproducibility scoring rubric and AI decision layer."""
 
-import pytest
 from src.config import (
     STATUS_FAILED,
     STATUS_NEEDS_REVIEW,
-    STATUS_PARTIALLY_VERIFIED,
     STATUS_VERIFIED,
 )
 from src.scoring import (
@@ -30,7 +28,7 @@ def test_tier1_build_evaluator_all_pass():
 
 def test_tier1_build_evaluator_partial_fail():
     """Test reduced score on dependency or exit code failure."""
-    score, notes = Tier1BuildEvaluator.evaluate(
+    score, _notes = Tier1BuildEvaluator.evaluate(
         clone_success=True,
         deps_installed=True,
         script_executed=True,
@@ -43,7 +41,7 @@ def test_tier2_metrics_evaluator_perfect_match():
     """Test 100% score when reproduced metrics are within 5% tolerance."""
     claimed = {"acc": 0.85, "f1": 0.80}
     reproduced = {"acc": 0.852, "f1": 0.798}  # ~0.25% error
-    score, claim_results, notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
+    score, claim_results, _notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
     assert score == 100.0
     assert claim_results["acc"]["matches"] is True
     assert claim_results["f1"]["matches"] is True
@@ -53,7 +51,7 @@ def test_tier2_metrics_evaluator_partial_match():
     """Test partial credit when metric is within 2x tolerance."""
     claimed = {"acc": 0.80}
     reproduced = {"acc": 0.86}  # 7.5% error -> above 5% but below 10%
-    score, claim_results, notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
+    score, claim_results, _notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
     assert score == 50.0
     assert claim_results["acc"]["matches"] is False
 
@@ -62,7 +60,7 @@ def test_tier2_metrics_evaluator_diverged():
     """Test 0% metric score when values diverge significantly."""
     claimed = {"acc": 0.90}
     reproduced = {"acc": 0.50}  # Diverged
-    score, claim_results, notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
+    score, _claim_results, _notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
     assert score == 0.0
 
 
@@ -115,7 +113,7 @@ def test_composite_score_status_verified():
 
 def test_composite_score_status_needs_review():
     """Test composite calculation leading to 'Needs Review' when build works but metrics diverge."""
-    total, status, summary = ReproducibilityScorer.calculate_composite_score(
+    _total, status, _summary = ReproducibilityScorer.calculate_composite_score(
         tier1=100.0,
         tier2=30.0,  # Diverged metrics
         tier3=75.0,
@@ -127,7 +125,7 @@ def test_composite_score_status_needs_review():
 
 def test_composite_score_status_failed():
     """Test composite calculation leading to 'Failed' on build failure."""
-    total, status, summary = ReproducibilityScorer.calculate_composite_score(
+    _total, status, _summary = ReproducibilityScorer.calculate_composite_score(
         tier1=25.0,  # Build fail
         tier2=0.0,
         tier3=0.0,
@@ -144,7 +142,7 @@ def test_tier2_latency_metric_avoids_absolute_tolerance_trap():
     # but for latency metrics this must NOT match.
     claimed = {"inference_latency_sec": 0.02}
     reproduced = {"inference_latency_sec": 0.06}
-    score, results, notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
+    score, results, _notes = Tier2MetricsEvaluator.evaluate(claimed, reproduced, tolerance=0.05)
     assert score == 0.0
     assert results["inference_latency_sec"]["matches"] is False
 

@@ -2,7 +2,7 @@
 
 import json
 import re
-from pathlib import Path
+
 from src.config import ALLOWED_LICENSES, SEED_PAPERS_PATH
 from src.models import PaperCreate
 

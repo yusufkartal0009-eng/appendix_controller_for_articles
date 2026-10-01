@@ -12,7 +12,6 @@ import logging
 import re
 import sys
 from pathlib import Path
-from typing import Optional
 
 # Ensure project src is in sys.path when invoked directly
 project_root = Path(__file__).resolve().parent.parent
@@ -46,8 +45,7 @@ def sanitize_paper_id(source: str) -> str:
     """Derive a safe paper/repo identifier from the source URL or directory name."""
     clean = source.rstrip("/").rstrip("\\")
     name = Path(clean).stem
-    if name.endswith(".git"):
-        name = name[:-4]
+    name = name.removesuffix(".git")
     sanitized = re.sub(r"[^a-zA-Z0-9_\-]", "_", name).lower()
     return sanitized or "staged_paper"
 
@@ -145,7 +143,7 @@ def main() -> int:
     paper_id = args.paper_id or sanitize_paper_id(args.source)
 
     print("================================================================")
-    print(f"Repro Radar - Sandbox Staging & Dependency Automation")
+    print("Repro Radar - Sandbox Staging & Dependency Automation")
     print(f"Target:   {args.source}")
     print(f"Paper ID: {paper_id}")
     print("================================================================")
@@ -162,7 +160,7 @@ def main() -> int:
         )
         print(f" -> Staged at:   {staged.staged_path}")
         print(f" -> Git commit:  {staged.commit_hash}")
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - CLI boundary: any staging error becomes a logged exit code
         logger.error("Failed to stage repository: %s", exc)
         return 1
 
@@ -219,7 +217,7 @@ def main() -> int:
     except SandboxUnavailableError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return EXIT_SANDBOX_UNAVAILABLE
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - CLI boundary: any execution error becomes a logged exit code
         logger.error("Execution failed: %s", exc)
         return 3
 

@@ -4,22 +4,20 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import re
 import shutil
 import subprocess
 import sys
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
+from src.metric_extractor import MetricExtractor
 from src.sandbox.runner import (
     DockerSandboxRunner,
-    ProcessSandboxRunner,
     SandboxConfig,
     SandboxExecutionResult,
 )
-from src.metric_extractor import MetricExtractor
 
 logger = logging.getLogger(__name__)
 
@@ -40,11 +38,11 @@ DEFAULT_CANDIDATE_SCRIPTS = [
 class DependencyManifest:
     """Analysis result of repository dependency definitions."""
 
-    requirements_files: List[str] = field(default_factory=list)
+    requirements_files: list[str] = field(default_factory=list)
     has_pyproject: bool = False
     has_setup_py: bool = False
     has_conda_env: bool = False
-    parsed_dependencies: List[str] = field(default_factory=list)
+    parsed_dependencies: list[str] = field(default_factory=list)
     install_strategy: str = "pip_offline"
 
 
@@ -57,8 +55,8 @@ class StagedRepo:
     staged_path: Path
     commit_hash: str
     manifest: DependencyManifest
-    candidate_scripts: List[str] = field(default_factory=list)
-    bundle_dir: Optional[Path] = None
+    candidate_scripts: list[str] = field(default_factory=list)
+    bundle_dir: Path | None = None
 
 
 class RepoStager:
@@ -66,7 +64,7 @@ class RepoStager:
     bundles wheels for offline execution, and runs them inside the sandbox.
     """
 
-    def __init__(self, staging_root: Optional[Union[str, Path]] = None):
+    def __init__(self, staging_root: str | Path | None = None):
         self.staging_root = Path(staging_root or DEFAULT_STAGING_DIR).resolve()
         self.staging_root.mkdir(parents=True, exist_ok=True)
 
@@ -74,9 +72,7 @@ class RepoStager:
         """Determine whether source string is a remote Git repository URL."""
         source_clean = source.strip().lower()
         return (
-            source_clean.startswith("http://")
-            or source_clean.startswith("https://")
-            or source_clean.startswith("git@")
+            source_clean.startswith(("http://", "https://", "git@"))
             or source_clean.endswith(".git")
         )
 
@@ -84,7 +80,7 @@ class RepoStager:
         self,
         paper_id: str,
         source: str,
-        commit_or_tag: Optional[str] = None,
+        commit_or_tag: str | None = None,
         clean: bool = True,
     ) -> StagedRepo:
         """Clone remote git repo or copy local directory into an isolated staging directory."""
@@ -127,7 +123,7 @@ class RepoStager:
                     cwd=str(target_dir),
                     capture_output=True,
                     text=True,
-                    timeout=10,
+                    timeout=10, check=False,
                 )
                 if res.returncode == 0:
                     commit_hash = res.stdout.strip()
@@ -155,7 +151,7 @@ class RepoStager:
                     cwd=str(source_path),
                     capture_output=True,
                     text=True,
-                    timeout=10,
+                    timeout=10, check=False,
                 )
                 if res.returncode == 0:
                     commit_hash = res.stdout.strip()
@@ -192,18 +188,18 @@ class RepoStager:
             manifest.has_conda_env = True
 
         # Deduplicate dependencies
-        manifest.parsed_dependencies = sorted(list(set(manifest.parsed_dependencies)))
+        manifest.parsed_dependencies = sorted(set(manifest.parsed_dependencies))
 
         return manifest
 
-    def _parse_requirements_file(self, file_path: Path) -> List[str]:
+    def _parse_requirements_file(self, file_path: Path) -> list[str]:
         """Parse requirement lines ignoring comments, flags and local file paths."""
-        deps: List[str] = []
+        deps: list[str] = []
         try:
             content = file_path.read_text(encoding="utf-8", errors="ignore")
             for line in content.splitlines():
                 line = line.strip()
-                if not line or line.startswith("#") or line.startswith("-"):
+                if not line or line.startswith(("#", "-")):
                     continue
                 # Split off environment markers or inline comments
                 line = line.split(";")[0].split("#")[0].strip()
@@ -215,7 +211,7 @@ class RepoStager:
             logger.warning("Error reading requirements file %s: %s", file_path, exc)
         return deps
 
-    def detect_candidate_scripts(self, repo_dir: Path) -> List[str]:
+    def detect_candidate_scripts(self, repo_dir: Path) -> list[str]:
         """Detect potential target scripts in repository root and immediate subdirs."""
         detected = []
         for candidate in DEFAULT_CANDIDATE_SCRIPTS:
@@ -235,7 +231,7 @@ class RepoStager:
         self,
         staged: StagedRepo,
         timeout: int = 180,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Download wheel archives for offline installation inside network-isolated sandbox."""
         bundle_dir = self.staging_root / f"{staged.paper_id}_packages"
         bundle_dir.mkdir(parents=True, exist_ok=True)
@@ -255,8 +251,8 @@ class RepoStager:
             cmd.extend(["-r", str(req)])
 
         try:
-            res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-            needs_sdist_build: List[Dict[str, str]] = []
+            res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+            needs_sdist_build: list[dict[str, str]] = []
             if res.returncode != 0:
                 needs_sdist_build = self._find_requirements_without_wheels(req_paths, bundle_dir, timeout)
             wheels = list(bundle_dir.glob("*.whl"))
@@ -279,7 +275,7 @@ class RepoStager:
             }
 
     @staticmethod
-    def _pip_download_command(bundle_dir: Path) -> List[str]:
+    def _pip_download_command(bundle_dir: Path) -> list[str]:
         # Wheels are installed in the Linux sandbox image (CPython 3.11, glibc), not on the host, so
         # download for that platform. Binary wheels only: installing a wheel runs no package code,
         # while building an sdist would execute its setup.py on the host.
@@ -294,18 +290,18 @@ class RepoStager:
         ]
 
     def _find_requirements_without_wheels(
-        self, req_paths: List[Path], bundle_dir: Path, timeout: int
-    ) -> List[Dict[str, str]]:
+        self, req_paths: list[Path], bundle_dir: Path, timeout: int
+    ) -> list[dict[str, str]]:
         """Probe each requirement alone (binary-only, --no-deps) to name the ones that have no wheel.
 
         They are reported as NEEDS_SDIST_BUILD instead of being built on the host.
         """
-        flagged: List[Dict[str, str]] = []
+        flagged: list[dict[str, str]] = []
         for req_path in req_paths:
             for requirement in self._requirement_lines(req_path):
                 probe = self._pip_download_command(bundle_dir) + ["--no-deps", requirement]
                 try:
-                    res = subprocess.run(probe, capture_output=True, text=True, timeout=timeout)
+                    res = subprocess.run(probe, capture_output=True, text=True, timeout=timeout, check=False)
                 except (subprocess.SubprocessError, OSError) as exc:
                     flagged.append({"requirement": requirement, "status": "NEEDS_SDIST_BUILD", "reason": str(exc)})
                     continue
@@ -319,9 +315,9 @@ class RepoStager:
         return flagged
 
     @staticmethod
-    def _requirement_lines(req_path: Path) -> List[str]:
+    def _requirement_lines(req_path: Path) -> list[str]:
         """Requirement specifiers of a requirements file, without comments and pip options."""
-        lines: List[str] = []
+        lines: list[str] = []
         for raw in req_path.read_text(encoding="utf-8", errors="ignore").splitlines():
             line = raw.split(" #")[0].strip()
             if line and not line.startswith(("#", "-")):
@@ -331,10 +327,10 @@ class RepoStager:
     def execute_staged(
         self,
         staged: StagedRepo,
-        target_script: Optional[str] = None,
-        script_args: Optional[List[str]] = None,
-        config: Optional[SandboxConfig] = None,
-    ) -> Dict[str, Any]:
+        target_script: str | None = None,
+        script_args: list[str] | None = None,
+        config: SandboxConfig | None = None,
+    ) -> dict[str, Any]:
         """Run staged code inside the secure sandbox and return a comprehensive execution summary."""
         # Resolve target script
         if not target_script:
@@ -357,7 +353,7 @@ class RepoStager:
         # Collect generated files and metadata from output_dir
         generated_files = []
         meta = {}
-        meta_error: Optional[str] = None
+        meta_error: str | None = None
         if result.output_dir.exists():
             generated_files = [f.name for f in result.output_dir.iterdir() if f.is_file()]
             meta_file = result.output_dir / "execution_meta.json"
@@ -369,7 +365,7 @@ class RepoStager:
                     logger.warning(meta_error)
 
         # Collect structured results
-        report: Dict[str, Any] = {
+        report: dict[str, Any] = {
             "paper_id": staged.paper_id,
             "source": staged.source,
             "commit_hash": staged.commit_hash,
@@ -398,7 +394,7 @@ class RepoStager:
             extracted_metrics = extractor.extract_from_run_dir(result.output_dir)
             if extracted_metrics:
                 report["metrics"] = extracted_metrics
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - extraction errors are recorded in the run report, never fatal
             report["metrics_extraction_error"] = str(exc)
 
         # Persist complete run report

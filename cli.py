@@ -1,11 +1,10 @@
 """CLI Utility for Repro Radar."""
 
 import argparse
-import json
 import os
-from pathlib import Path
 import sys
 import uuid
+
 from tabulate import tabulate
 
 # Ensure UTF-8 output encoding for Windows consoles
@@ -18,12 +17,10 @@ from src.config import DATA_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DI
 from src.database import (
     get_all_papers,
     get_paper_by_id,
-    get_session,
     init_db,
     save_score,
     seed_database,
 )
-from src.models import PaperORM, ScoreORM
 from src.scoring import ReproducibilityScorer, Tier4ArtifactsEvaluator
 
 

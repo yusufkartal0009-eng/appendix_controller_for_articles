@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 from dataclasses import asdict, dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any
 
 
 class MetricCategory(str, Enum):
@@ -26,7 +26,7 @@ class MetricToleranceSpec:
     hardware_dependent: bool = False
 
 
-DEFAULT_TOLERANCE_SPECS: Dict[str, MetricToleranceSpec] = {
+DEFAULT_TOLERANCE_SPECS: dict[str, MetricToleranceSpec] = {
     # Bounded rates (higher is better)
     "accuracy": MetricToleranceSpec(MetricCategory.BOUNDED_RATE, relative_tolerance=0.05, absolute_tolerance=0.02),
     "acc": MetricToleranceSpec(MetricCategory.BOUNDED_RATE, relative_tolerance=0.05, absolute_tolerance=0.02),
@@ -68,21 +68,21 @@ class MetricEvaluationResult:
     absolute_error: float
     is_reproduced: bool
     score: float  # 0.0 to 100.0
-    notes: List[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
 
 
 @dataclass
 class MultiSeedStabilityResult:
     """Statistical stability outcome across multiple random seed executions."""
     metric_name: str
-    seed_values: List[float]
+    seed_values: list[float]
     mean: float
     variance: float
     std_dev: float
     coefficient_of_variation_pct: float
     stability_score: float  # 0.0 to 100.0
     status: str  # 'DETERMINISTIC', 'STABLE', 'MODERATE_VARIANCE', 'UNSTABLE'
-    confidence_interval_95: Tuple[float, float] = (0.0, 0.0)
+    confidence_interval_95: tuple[float, float] = (0.0, 0.0)
 
 
 @dataclass
@@ -91,12 +91,12 @@ class ValidationReport:
     paper_id: str
     overall_validity_score: float  # 0.0 to 100.0
     validation_status: str  # 'VERIFIED', 'PARTIALLY_VERIFIED', 'NEEDS_REVIEW', 'FAILED'
-    metric_results: Dict[str, MetricEvaluationResult]
-    stability_results: Dict[str, MultiSeedStabilityResult]
-    anomalies: List[str]
-    summary_notes: List[str]
+    metric_results: dict[str, MetricEvaluationResult]
+    stability_results: dict[str, MultiSeedStabilityResult]
+    anomalies: list[str]
+    summary_notes: list[str]
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert validation report into a serializable dictionary."""
         return {
             "paper_id": self.paper_id,
@@ -112,8 +112,8 @@ class ValidationReport:
 class ModelValidationRubric:
     """Executes quantitative, statistical, and category-aware model validation."""
 
-    def __init__(self, custom_specs: Optional[Dict[str, MetricToleranceSpec]] = None):
-        self.specs: Dict[str, MetricToleranceSpec] = dict(DEFAULT_TOLERANCE_SPECS)
+    def __init__(self, custom_specs: dict[str, MetricToleranceSpec] | None = None):
+        self.specs: dict[str, MetricToleranceSpec] = dict(DEFAULT_TOLERANCE_SPECS)
         if custom_specs:
             self.specs.update(custom_specs)
 
@@ -142,7 +142,7 @@ class ModelValidationRubric:
     ) -> MetricEvaluationResult:
         """Evaluate a single empirical claim with category-aware mathematical tolerance."""
         spec = self.resolve_spec(metric_name)
-        notes: List[str] = []
+        notes: list[str] = []
 
         abs_error = abs(reproduced - claimed)
 
@@ -225,7 +225,7 @@ class ModelValidationRubric:
     def analyze_multi_seed_stability(
         self,
         metric_name: str,
-        seed_values: List[float],
+        seed_values: list[float],
     ) -> MultiSeedStabilityResult:
         """Calculate multi-seed variance, standard deviation, and Coefficient of Variation (CV)."""
         n = len(seed_values)
@@ -288,11 +288,11 @@ class ModelValidationRubric:
 
     def detect_anomalies(
         self,
-        claimed: Dict[str, float],
-        reproduced: Dict[str, float],
-    ) -> List[str]:
+        claimed: dict[str, float],
+        reproduced: dict[str, float],
+    ) -> list[str]:
         """Detect potential edge cases, data leakage, and numerical anomalies."""
-        anomalies: List[str] = []
+        anomalies: list[str] = []
 
         for k, v in reproduced.items():
             # Check for NaN / Infinite corruption
@@ -300,28 +300,30 @@ class ModelValidationRubric:
                 anomalies.append(f"Metric '{k}' produced invalid numerical representation ({v})")
             # Check for exact 1.0000 on bounded metrics (possible data leakage or trivial split)
             clean_k = k.lower()
-            if any(term in clean_k for term in ["acc", "f1", "auc", "precision", "recall"]):
-                if math.isclose(v, 1.0, abs_tol=1e-6) and not math.isclose(claimed.get(k, 0.0), 1.0, abs_tol=1e-6):
-                    anomalies.append(f"Suspicious perfect score 1.0000 on '{k}' — verify test set contamination or target leakage")
+            if (
+                any(term in clean_k for term in ["acc", "f1", "auc", "precision", "recall"])
+                and math.isclose(v, 1.0, abs_tol=1e-6)
+                and not math.isclose(claimed.get(k, 0.0), 1.0, abs_tol=1e-6)
+            ):
+                anomalies.append(f"Suspicious perfect score 1.0000 on '{k}' — verify test set contamination or target leakage")
             # Check sign flip
-            if k in claimed:
-                if (claimed[k] > 0 and v < 0) or (claimed[k] < 0 and v > 0):
-                    anomalies.append(f"Sign inversion detected for metric '{k}': claimed {claimed[k]} vs reproduced {v}")
+            if k in claimed and ((claimed[k] > 0 and v < 0) or (claimed[k] < 0 and v > 0)):
+                anomalies.append(f"Sign inversion detected for metric '{k}': claimed {claimed[k]} vs reproduced {v}")
 
         return anomalies
 
     def validate_submission(
         self,
         paper_id: str,
-        claimed_metrics: Dict[str, float],
-        reproduced_metrics: Dict[str, float],
-        seed_runs: Optional[Dict[str, List[float]]] = None,
+        claimed_metrics: dict[str, float],
+        reproduced_metrics: dict[str, float],
+        seed_runs: dict[str, list[float]] | None = None,
     ) -> ValidationReport:
         """Run comprehensive validation analysis over paper metrics and seed replications."""
-        metric_evals: Dict[str, MetricEvaluationResult] = {}
+        metric_evals: dict[str, MetricEvaluationResult] = {}
         total_metric_score = 0.0
         anomalies = self.detect_anomalies(claimed_metrics, reproduced_metrics)
-        notes: List[str] = []
+        notes: list[str] = []
 
         if not claimed_metrics:
             notes.append("No claimed numeric baseline metrics provided; neutral baseline assigned.")
@@ -353,7 +355,7 @@ class ModelValidationRubric:
             overall_metric_score = total_metric_score / len(claimed_metrics)
 
         # Stability evaluation
-        stability_evals: Dict[str, MultiSeedStabilityResult] = {}
+        stability_evals: dict[str, MultiSeedStabilityResult] = {}
         stability_score_total = 0.0
 
         if seed_runs:

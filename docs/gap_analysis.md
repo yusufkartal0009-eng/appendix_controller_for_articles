@@ -21,7 +21,7 @@
 | GA-8 | Medium | Sandbox | `entrypoint.sh` silently ignores dependency install failures | #32 | Fixed in #71; verified by CI smoke tests in #74 |
 | GA-9 | Medium | Code quality | Blind `except Exception`, two silently swallowed | — | Partly fixed in #71: both silent cases fixed; 7 broad catches remain |
 | GA-10 | Medium | Security | `setup_github_backlog.py` builds `shell=True` commands from issue text | #46 | Fixed in #71 |
-| GA-11 | Low | Code quality | 281 lint findings, no lint or type-check configuration | #139 | Open (lint gate config added in #71) |
+| GA-11 | Low | Code quality | 281 lint findings, no lint or type-check configuration | #139 | Fixed in #139 for lint: ruff's default rules are the CI gate, 0 findings; no type checker yet |
 | GA-12 | Low | Docs | README directory layout is out of date | — | Fixed in #73 |
 | GA-13 | Low | Repo structure | Missing `pyproject.toml`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CLAUDE.md` | #44, #45 | Partly fixed: `pyproject.toml` added in #71 |
 | GA-14 | Low | Sandbox | No `.dockerignore`; obsolete Compose `version` key | — | Fixed in #71 |
@@ -143,6 +143,8 @@ Nine `subprocess.run` calls rely on manual return-code checks (`PLW1510`).
 `ruff check .` reports 281 findings: 164 legacy typing annotations (`UP006`/`UP045`/`UP007`/`UP035`), 60 unused imports (`F401`), 18 unsorted imports, 10 unused unpacked variables in `tests/test_scoring.py`, and one invalid escape sequence (`scripts/setup_github_backlog.py:509`). There is no `ruff`/`mypy` configuration, so nothing defines the target.
 
 **Remedy:** add `[tool.ruff]` (and optionally `mypy`) to a `pyproject.toml`, run `ruff check --fix` once in a dedicated PR, then gate new findings in CI (GA-3).
+
+**Done for lint (#139, 2026-10-01):** with ruff 0.16.9 defaults the repository had 393 findings. `ruff check --fix` applied 375 fixes (ruff counts fixes over repeated passes): modern type annotations, unused imports, import order, unused `noqa`. The remaining 38 were handled by hand. 12 `subprocess.run` calls got an explicit `check=False` (the existing behavior). 10 unused unpacked test variables were renamed, and 7 small simplifications were made. The 9 deliberate broad `except Exception` handlers (boundaries that record errors from paper code or tools instead of crashing) carry `# noqa: BLE001 - <reason>`. `pyproject.toml` now gates CI on ruff's default rules plus the first gate's rules. A type checker (`mypy`) is not set up.
 
 ### GA-12 — README directory layout out of date (Low)
 `README.md` "Directory Layout" omits `src/metric_extractor.py`, `src/validation_rubric.py`, `scripts/generate_academic_introduction_doc.py`, `scripts/setup_7week_board.py`, `scripts/setup_github_backlog.py`, `scripts/setup_github_board.sh`, `tests/test_metric_extractor.py`, `tests/test_validation_rubric.py`, `tests/test_academic_doc.py`, and `docs/VALIDATION_RUBRIC.md`.

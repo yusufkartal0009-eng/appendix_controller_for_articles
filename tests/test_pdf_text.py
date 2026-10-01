@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-import src.pdf_text as pdf_text
+from src import pdf_text
 from src.pdf_text import extract_pdf_text, sha256_of
 
 

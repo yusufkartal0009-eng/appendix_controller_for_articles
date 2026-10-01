@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from decimal import Decimal, InvalidOperation
 from enum import Enum
-from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -38,8 +37,7 @@ def normalize_value(value_as_printed: str, unit: Unit | str) -> float:
     unit = Unit(unit)
     text = re.split(r"±|\+/-", value_as_printed, maxsplit=1)[0]
     text = _SPACES.sub("", text).replace("−", "-")
-    if text.endswith("%"):
-        text = text[:-1]
+    text = text.removesuffix("%")
     if "," in text:
         if not _THOUSANDS.match(text):
             raise ValueError(f"ambiguous comma in {value_as_printed!r}")
@@ -60,19 +58,19 @@ class ExtractedClaim(BaseModel):
 
     metric_name: str = Field(..., min_length=1, pattern=r"^[a-z0-9_]+$")
     value_as_printed: str = Field(..., min_length=1)
-    value_normalized: Optional[float] = None
+    value_normalized: float | None = None
     unit: Unit
     dataset: str = Field(..., min_length=1)
     model_variant: str = Field(..., min_length=1)
     split: Split
-    higher_is_better: Optional[bool]
-    table_or_figure: Optional[str]
+    higher_is_better: bool | None
+    table_or_figure: str | None
     page: int = Field(..., ge=1)
     source_quote: str = Field(..., min_length=1, max_length=500)
     confidence: float = Field(..., ge=0.0, le=1.0)
 
     @model_validator(mode="after")
-    def _normalized_value_follows_the_rule(self) -> "ExtractedClaim":
+    def _normalized_value_follows_the_rule(self) -> ExtractedClaim:
         expected = normalize_value(self.value_as_printed, self.unit)
         if self.value_normalized is None:
             self.value_normalized = expected
@@ -104,5 +102,5 @@ class ClaimSet(BaseModel):
     pdf_url: str = Field(..., min_length=1)
     pdf_sha256: str = Field(..., pattern=r"^[0-9a-f]{64}$")
     extractor_version: str = Field(..., min_length=1)
-    claims: List[ExtractedClaim] = Field(default_factory=list)
-    not_found: List[NotFound] = Field(default_factory=list)
+    claims: list[ExtractedClaim] = Field(default_factory=list)
+    not_found: list[NotFound] = Field(default_factory=list)

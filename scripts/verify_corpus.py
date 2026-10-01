@@ -26,13 +26,12 @@ import urllib.parse
 import urllib.request
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.config import ALLOWED_LICENSES, SEED_PAPERS_PATH  # noqa: E402
+from src.config import ALLOWED_LICENSES, SEED_PAPERS_PATH
 
 GITHUB_API = "https://api.github.com"
 CROSSREF_API = "https://api.crossref.org/works"
@@ -50,7 +49,7 @@ class CheckResult:
 @dataclass
 class EntryReport:
     paper_id: str
-    checks: List[CheckResult] = field(default_factory=list)
+    checks: list[CheckResult] = field(default_factory=list)
 
     @property
     def ok(self) -> bool:
@@ -60,11 +59,11 @@ class EntryReport:
 class UrlHttp:
     """Minimal HTTP GET client. Returns (status, body); raises OSError on network failure."""
 
-    def __init__(self, token: Optional[str] = None, timeout: int = 30):
+    def __init__(self, token: str | None = None, timeout: int = 30):
         self.token = token
         self.timeout = timeout
 
-    def get(self, url: str) -> Tuple[int, str]:
+    def get(self, url: str) -> tuple[int, str]:
         headers = {"User-Agent": USER_AGENT}
         if url.startswith(GITHUB_API):
             headers["Accept"] = "application/vnd.github+json"
@@ -78,17 +77,17 @@ class UrlHttp:
             return exc.code, ""
 
 
-def parse_arxiv_id(url: str) -> Optional[str]:
+def parse_arxiv_id(url: str) -> str | None:
     match = re.search(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", url or "")
     return match.group(1) if match else None
 
 
-def parse_doi(url: str) -> Optional[str]:
+def parse_doi(url: str) -> str | None:
     match = re.search(r"(?:doi\.org|biorxiv\.org/content|medrxiv\.org/content)/(10\.\d{4,9}/[^\s?#]+?)(?:v\d+)?/?(?:[?#].*)?$", url or "")
     return match.group(1) if match else None
 
 
-def parse_github_repo(url: str) -> Optional[Tuple[str, str]]:
+def parse_github_repo(url: str) -> tuple[str, str] | None:
     match = re.match(r"https?://github\.com/([^/]+)/([^/]+?)(?:\.git)?/?$", url or "")
     return (match.group(1), match.group(2)) if match else None
 
@@ -105,10 +104,10 @@ def titles_match(a: str, b: str) -> bool:
     return title_similarity(a, b) >= TITLE_MATCH_THRESHOLD
 
 
-def _extract_page_title(body: str) -> Optional[str]:
+def _extract_page_title(body: str) -> str | None:
     match = re.search(r'<meta\s+name="citation_title"\s+content="([^"]*)"', body)
     if not match:
-        match = re.search(r"<title>(.*?)</title>", body, re.S)
+        match = re.search(r"<title>(.*?)</title>", body, re.DOTALL)
     return html.unescape(match.group(1)).strip() if match else None
 
 
@@ -143,7 +142,7 @@ def check_paper(entry: dict, http) -> CheckResult:
     return CheckResult("paper", True, f"title matches ({similarity:.2f})")
 
 
-def check_repo_and_license(entry: dict, http) -> Tuple[CheckResult, CheckResult, Optional[str]]:
+def check_repo_and_license(entry: dict, http) -> tuple[CheckResult, CheckResult, str | None]:
     parsed = parse_github_repo(entry.get("repo_url", ""))
     if not parsed:
         reason = f"not a GitHub repository URL: {entry.get('repo_url')}"
@@ -181,7 +180,7 @@ def check_repo_and_license(entry: dict, http) -> Tuple[CheckResult, CheckResult,
     return repo, license_check, full_name
 
 
-def check_script(entry: dict, full_name: Optional[str], http) -> CheckResult:
+def check_script(entry: dict, full_name: str | None, http) -> CheckResult:
     if not full_name:
         return CheckResult("script", False, "repository not found")
     commit = entry.get("repo_commit")
@@ -209,7 +208,7 @@ def verify_entry(entry: dict, http) -> EntryReport:
     return report
 
 
-def _print_report(reports: List[EntryReport]) -> None:
+def _print_report(reports: list[EntryReport]) -> None:
     for report in reports:
         print(f"{report.paper_id}: {'PASS' if report.ok else 'FAIL'}")
         for check in report.checks:
@@ -218,7 +217,7 @@ def _print_report(reports: List[EntryReport]) -> None:
     print(f"\n{passed} of {len(reports)} entries passed verification.")
 
 
-def main(argv: Optional[List[str]] = None, http=None) -> int:
+def main(argv: list[str] | None = None, http=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("corpus", nargs="?", default=str(SEED_PAPERS_PATH), help="Corpus JSON file")
     parser.add_argument("--json", dest="json_out", help="Also write the results as JSON to this path")

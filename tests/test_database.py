@@ -2,7 +2,7 @@
 
 import os
 import tempfile
-from pathlib import Path
+
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -14,7 +14,7 @@ from src.database import (
     save_score,
     seed_database,
 )
-from src.models import Base, PaperORM, ScoreORM
+from src.models import PaperORM
 
 
 @pytest.fixture

@@ -42,8 +42,12 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.config import SANDBOX_RUNS_DIR  # noqa: E402
-from src.sandbox.runner import DockerSandboxRunner, SandboxConfig, SandboxUnavailableError  # noqa: E402
+from src.config import SANDBOX_RUNS_DIR
+from src.sandbox.runner import (
+    DockerSandboxRunner,
+    SandboxConfig,
+    SandboxUnavailableError,
+)
 
 PROBES = {
     "probe_identity.py": "import os\nprint(f'uid={os.getuid()} gid={os.getgid()}')\n",

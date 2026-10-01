@@ -1,11 +1,10 @@
 """Unit tests for RepoStager, dependency analysis, and staging CLI automation."""
 
 import json
-import shutil
 import subprocess
 import sys
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -17,7 +16,7 @@ from src.sandbox.runner import (
     SandboxExecutionResult,
     SandboxUnavailableError,
 )
-from src.sandbox.stager import DependencyManifest, RepoStager, StagedRepo
+from src.sandbox.stager import RepoStager
 
 
 def test_sanitize_paper_id():
@@ -169,9 +168,11 @@ def test_execute_staged_reports_unreadable_execution_meta(tmp_path, caplog):
         output_dir=output_dir,
     )
 
-    with patch("src.sandbox.stager.DockerSandboxRunner.run", return_value=fake_result):
-        with caplog.at_level("WARNING", logger="src.sandbox.stager"):
-            report = stager.execute_staged(staged, target_script="reproduce.py")
+    with (
+        patch("src.sandbox.stager.DockerSandboxRunner.run", return_value=fake_result),
+        caplog.at_level("WARNING", logger="src.sandbox.stager"),
+    ):
+        report = stager.execute_staged(staged, target_script="reproduce.py")
 
     assert report["meta"] == {}
     assert "execution_meta.json" in report["meta_error"]
