@@ -173,7 +173,7 @@ repro-radar/
 │   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
 │   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
 │   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run in CI)
-│   ├── generate_academic_introduction_doc.py # Builds docs/repro_radar_introduction.docx
+│   ├── generate_academic_introduction_doc.py # Builds the introduction draft (.docx, not committed)
 │   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
 │   ├── setup_7week_board.py            # Provisions the weekly tracking board
 │   └── setup_github_board.sh           # Shell variant of the board provisioning
@@ -206,8 +206,7 @@ repro-radar/
 │   ├── DECISIONS.md           # Security-relevant decisions with risks and evidence
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
 │   ├── project_roadmap.md   # 7-week detailed roadmap
-│   ├── repro_radar_introduction.docx # Academic introduction document
-│   └── assets/              # Images used by the docs
+│   └── assets/              # Images used by the docs (the generated banner is not committed)
 └── tests/
     ├── __init__.py
     ├── test_academic_doc.py        # Introduction document generator tests

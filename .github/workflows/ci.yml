@@ -31,6 +31,17 @@ jobs:
         run: ruff check .
       - name: Tests
         run: pytest tests/ -q --cov=src --cov-report=term
+      - name: Generate the introduction draft (a build output, not committed; GA-15, #137)
+        if: matrix.os == 'ubuntu-latest'
+        run: python scripts/generate_academic_introduction_doc.py --output-dir "$RUNNER_TEMP/introduction"
+      - name: Upload the introduction draft
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: introduction-docx
+          path: ${{ runner.temp }}/introduction/repro_radar_introduction.docx
+          if-no-files-found: error
+          retention-days: 30
 
   sandbox-image:
     name: Sandbox image build & smoke test

@@ -6,6 +6,7 @@ Introduction section as a styled Microsoft Word document (.docx).
 
 from __future__ import annotations
 
+import argparse
 import os
 from pathlib import Path
 from docx import Document
@@ -24,9 +25,9 @@ BANNER_PATH = ASSETS_DIR / "repro_radar_banner.png"
 DOCX_PATH = DOCS_DIR / "repro_radar_introduction.docx"
 
 
-def generate_cover_banner() -> Path:
+def generate_cover_banner(banner_path: Path = BANNER_PATH) -> Path:
     """Generate a high-resolution, modern dark-mode application cover banner."""
-    ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+    banner_path.parent.mkdir(parents=True, exist_ok=True)
 
     width, height = 1200, 420
     img = Image.new("RGBA", (width, height), (13, 17, 23, 255))  # GitHub Dark Canvas
@@ -101,9 +102,9 @@ def generate_cover_banner() -> Path:
         draw.text((badge_x + padding_h, badge_y + 8), text, fill=text_color, font_size=13)
         badge_x += pill_width + 16
 
-    img.save(BANNER_PATH, "PNG")
-    print(f"Cover banner saved to: {BANNER_PATH}")
-    return BANNER_PATH
+    img.save(banner_path, "PNG")
+    print(f"Cover banner saved to: {banner_path}")
+    return banner_path
 
 
 def set_cell_background(cell, fill_hex: str):
@@ -187,7 +188,7 @@ def add_callout(doc: Document, title: str, text: str):
     sp.paragraph_format.space_after = Pt(4)
 
 
-def build_academic_introduction_docx(banner_img: Path) -> Path:
+def build_academic_introduction_docx(banner_img: Path, docx_path: Path = DOCX_PATH) -> Path:
     """Build the publication-grade academic Introduction Word document."""
     doc = Document()
 
@@ -451,15 +452,23 @@ def build_academic_introduction_docx(banner_img: Path) -> Path:
         r_txt = ref_p.add_run(ref_text)
         r_txt.font.size = Pt(9.5)
 
-    doc.save(DOCX_PATH)
-    print(f"Academic Introduction Word document saved to: {DOCX_PATH}")
-    return DOCX_PATH
+    docx_path.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(docx_path)
+    print(f"Academic Introduction Word document saved to: {docx_path}")
+    return docx_path
 
 
-def main():
+def main(argv=None):
+    """Generate the banner and the .docx. Both are build outputs and are not committed (GA-15, #137)."""
+    parser = argparse.ArgumentParser(description="Generate the Repro Radar introduction draft (.docx) and its banner.")
+    parser.add_argument("--output-dir", default=str(DOCS_DIR),
+                        help="Directory for the .docx; the banner goes to <output-dir>/assets/ (default: docs/).")
+    args = parser.parse_args(argv)
+    out = Path(args.output_dir)
+
     print("=== Generating Application Cover Banner & Academic Introduction (.docx) ===")
-    banner = generate_cover_banner()
-    docx_file = build_academic_introduction_docx(banner)
+    banner = generate_cover_banner(out / "assets" / BANNER_PATH.name)
+    docx_file = build_academic_introduction_docx(banner, out / DOCX_PATH.name)
     print(f"Successfully generated:\n - Banner: {banner}\n - Document: {docx_file}")
 
 

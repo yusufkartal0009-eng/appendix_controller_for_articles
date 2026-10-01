@@ -34,6 +34,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Generated Introduction No Longer Committed (2026-10-01 20:28 +03:00, Issue #137, GA-15)
+- `docs/repro_radar_introduction.docx` and `docs/assets/repro_radar_banner.png` are build outputs of `scripts/generate_academic_introduction_doc.py`: removed from version control and ignored. The script has an `--output-dir` option.
+- `tests/test_academic_doc.py` generates the document into a temporary directory on every run, and the CI test job uploads the generated `.docx` as the `introduction-docx` artifact.
+- Started ahead of the binding order (`AGENTS.md` §6.3: section 6 comes last) at the owner's explicit request.
+
 ### PDF Text Extractor (2026-10-01 19:18 +03:00, Issue #130, W2)
 - `src/pdf_text.py`: page-by-page text with 1-based PDF page numbers (`pypdf`, now in `requirements.txt`), cached as `data/pdf_text_cache/<sha256>.json` keyed by the PDF bytes (not committed). `PdfText.find()` lists the pages that contain a string verbatim.
 - Real paper check (`paper_003`, arXiv 2106.11959v5, 25 pages): `FT-T 0.459` is on PDF page 7, as recorded in `docs/CORPUS_VERIFICATION.md`. First extraction 0.56 s, cached 0.010 s.
