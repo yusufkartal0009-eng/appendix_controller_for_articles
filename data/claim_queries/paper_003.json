@@ -1,0 +1,10 @@
+{
+  "paper_id": "paper_003",
+  "pdf_url": "https://arxiv.org/pdf/2106.11959v5",
+  "note": "Queries are written from the seed entry's claim names (data/seed_papers.json) without the seed values, so the expected answer cannot leak into the question.",
+  "queries": [
+    {"query_id": "ft_transformer_rmse", "question": "Test RMSE of FT-Transformer on the California Housing dataset."},
+    {"query_id": "resnet_rmse", "question": "Test RMSE of ResNet on the California Housing dataset."},
+    {"query_id": "xgboost_rmse", "question": "Test RMSE of XGBoost on the California Housing dataset."}
+  ]
+}

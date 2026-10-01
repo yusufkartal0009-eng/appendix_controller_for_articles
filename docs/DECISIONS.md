@@ -1,7 +1,7 @@
 # Repro Radar — Decision Log
 
-> Decisions that change what the sandbox allows, with their context, risks, and evidence.
-> Architecture decisions that do not affect security go to `docs/ARCHITECTURE.md`.
+> Decisions that change what the sandbox allows, or that decide how evidence is produced (D-003), with their
+> context, risks, and evidence. Other architecture decisions go to `docs/ARCHITECTURE.md`.
 
 ---
 
@@ -66,3 +66,57 @@ The install phase reads the paper's requirements files (untrusted input), but on
 ### Evidence
 
 `docs/SANDBOX_ACCEPTANCE.md` check 7: `ujson` loads from `/workspace/deps/ujson.cpython-311-x86_64-linux-gnu.so`; writing to `/workspace/deps` fails with `Read-only file system`.
+
+---
+
+## D-003 — Claim extraction uses Claude Opus 5.5, without a temperature setting (2026-10-01)
+
+**Status:** accepted by the owner on 2026-10-01. **Related:** #131 (W3), #132 (W4), #9, roadmap section 3.
+
+### Context
+
+Roadmap W3 asks for temperature 0, JSON-schema output, a mandatory source quote, "not found" instead of guessing,
+one model provider with a written reason, the API key only from an environment variable, and cached responses.
+
+### Decision
+
+1. **Provider and model:** Anthropic, Claude Opus 5.5 (`claude-opus-5-5`), chosen by the owner. It supports JSON-schema
+   output, and its context window (1M tokens) holds a whole paper in one request (`paper_003`: 25 pages,
+   about 26,000 tokens), so every quote can name its PDF page. List price: $4 per million input tokens and $20 per
+   million output tokens, about $0.30 per paper estimated before the first run.
+2. **No temperature.** Claude Opus 5.5 rejects sampling parameters (`temperature`, `top_p`, `top_k` return HTTP 400),
+   and its thinking cannot be switched off. Repeatability is not taken from the model; it comes from three things
+   around it:
+   - **Response cache:** a response is stored under a hash of the model, effort, prompt version, output schema, PDF
+     hash, and queries (`src/claim_extraction.py`). A repeated run returns the stored answer unchanged.
+   - **Verbatim quote guard (W4):** a claim is used only if its printed value and its quote occur in the text of
+     the page it cites. A non-deterministic model can change which claims it finds, but not what an accepted
+     number says.
+   - **Human confirmation (W7):** only accepted claims enter scoring.
+3. **Structured output:** `output_config.format` with a JSON schema. `value_normalized` is computed by code from
+   `value_as_printed` (`src/claim_schema.py`), never by the model.
+4. **Refusal fallback:** requests opt into the server-side fallback (`fallbacks: "default"`). If a safety classifier
+   declines a request, the API runs it on Anthropic's recommended fallback model. The model that actually answered,
+   and whether a fallback ran, are recorded with every result.
+5. **Credentials:** the SDK reads `ANTHROPIC_API_KEY` from the environment; no key is passed in code, stored, or
+   committed (`AGENTS.md` §6.7). Tests use a fake client, so CI makes no API calls.
+
+### Alternatives rejected
+
+- **Claude Haiku 4.5 with temperature 0:** it still accepts sampling parameters, but it is a weaker model, and
+  temperature 0 does not guarantee identical output across model or API versions either.
+- **Relying on the model alone:** without the quote guard, a fluent but wrong number (like the seed's invented
+  `EP3602` claims) would be indistinguishable from a real one.
+
+### Remaining risk
+
+- A run with a cleared cache, or with a new prompt version, can return different answers. The stored extraction
+  results (`data/claim_extractions/`) record the model, prompt version, and response ID of each result.
+- If the fallback runs, a different model answered; this is recorded, and the cost estimate (computed with Opus 5.5
+  prices) is then approximate.
+
+### Evidence
+
+`tests/test_claim_extraction.py` checks the request settings (model, effort, no temperature, schema, fallback), the
+cache, and the handling of refusals and truncated output. The first real runs are recorded in #131 and #133.
+

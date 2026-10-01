@@ -31,6 +31,7 @@ On Windows, Docker Desktop additionally requires WSL 2 and hardware virtualizati
 | `sqlalchemy` | `>=2.0.25` | `src/database.py`, `src/models.py` | SQLite ORM and sessions |
 | `tabulate` | `>=0.9.0` | `cli.py` | Terminal tables |
 | `pypdf` | `>=6.0.0` | `src/pdf_text.py` | Page-by-page text of paper PDFs (claim extraction) |
+| `anthropic` | `>=1.11.0` | `src/claim_extraction.py` | Claude API client for claim extraction; reads `ANTHROPIC_API_KEY` |
 
 ### Development (`requirements-dev.txt`, includes `requirements.txt`)
 
