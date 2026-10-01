@@ -80,3 +80,6 @@ cover/
 *~
 .DS_Store
 Thumbs.db
+
+# Cached full text of paper PDFs (src/pdf_text.py); regenerated from the PDFs, never committed
+data/pdf_text_cache/

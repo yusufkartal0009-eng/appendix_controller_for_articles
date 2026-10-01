@@ -30,6 +30,7 @@ On Windows, Docker Desktop additionally requires WSL 2 and hardware virtualizati
 | `pydantic` | `>=2.6.0` | `src/models.py` | Schema validation for papers and claims |
 | `sqlalchemy` | `>=2.0.25` | `src/database.py`, `src/models.py` | SQLite ORM and sessions |
 | `tabulate` | `>=0.9.0` | `cli.py` | Terminal tables |
+| `pypdf` | `>=6.0.0` | `src/pdf_text.py` | Page-by-page text of paper PDFs (claim extraction) |
 
 ### Development (`requirements-dev.txt`, includes `requirements.txt`)
 
