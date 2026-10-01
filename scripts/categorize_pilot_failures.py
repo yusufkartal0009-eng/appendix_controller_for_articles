@@ -13,13 +13,13 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.config import SEED_PAPERS_PATH  # noqa: E402
+from src.config import SEED_PAPERS_PATH
 
 PILOT_RUNS_DIR = project_root / "data" / "pilot_runs"
 
@@ -41,22 +41,22 @@ DATA_EXTENSIONS = (".csv", ".tsv", ".npy", ".npz", ".pkl", ".pickle", ".parquet"
                    ".zip", ".h5", ".hdf5", ".json", ".txt", ".svm", ".libsvm")
 
 
-def _lines(path: Path) -> List[str]:
+def _lines(path: Path) -> list[str]:
     return path.read_text(encoding="utf-8", errors="replace").splitlines() if path.exists() else []
 
 
-def _evidence(path: Path, line_no: int, line: str) -> Dict[str, Any]:
+def _evidence(path: Path, line_no: int, line: str) -> dict[str, Any]:
     return {"file": path.name, "line_number": line_no, "line": line}
 
 
-def _first_matching(path: Path, predicate) -> Optional[Tuple[int, str]]:
+def _first_matching(path: Path, predicate) -> tuple[int, str] | None:
     for i, line in enumerate(_lines(path), start=1):
         if predicate(line):
             return i, line
     return None
 
 
-def _last_nonempty(path: Path) -> Optional[Tuple[int, str]]:
+def _last_nonempty(path: Path) -> tuple[int, str] | None:
     lines = _lines(path)
     for i in range(len(lines), 0, -1):
         if lines[i - 1].strip():
@@ -64,7 +64,7 @@ def _last_nonempty(path: Path) -> Optional[Tuple[int, str]]:
     return None
 
 
-def classify_exception(line: str) -> Tuple[str, Optional[str]]:
+def classify_exception(line: str) -> tuple[str, str | None]:
     """Category (and a name for OTHER) from the final exception line of a failed run."""
     lower = line.lower()
     if line.startswith(("ModuleNotFoundError", "ImportError")):
@@ -84,12 +84,12 @@ def classify_exception(line: str) -> Tuple[str, Optional[str]]:
     return "OTHER", None
 
 
-def categorize_paper(paper_id: str, runs_dir: Path) -> Dict[str, Any]:
+def categorize_paper(paper_id: str, runs_dir: Path) -> dict[str, Any]:
     paper_dir = runs_dir / paper_id
     record = json.loads((paper_dir / "pilot_record.json").read_text(encoding="utf-8"))
     report_path = paper_dir / "run_report.json"
     report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else None
-    result: Dict[str, Any] = {"paper_id": paper_id, "category": None, "other_name": None, "phase": None,
+    result: dict[str, Any] = {"paper_id": paper_id, "category": None, "other_name": None, "phase": None,
                               "evidence": None, "pilot_success": False}
 
     stage = record.get("stage") or {}
@@ -137,17 +137,17 @@ def categorize_paper(paper_id: str, runs_dir: Path) -> Dict[str, Any]:
     return result
 
 
-def categorize(runs_dir: Path = PILOT_RUNS_DIR) -> Dict[str, Any]:
+def categorize(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
     paper_ids = [e["paper_id"] for e in json.loads(SEED_PAPERS_PATH.read_text(encoding="utf-8"))]
     papers = [categorize_paper(pid, runs_dir) for pid in paper_ids]
-    counts: Dict[str, int] = {c: 0 for c in CATEGORIES}
+    counts: dict[str, int] = {c: 0 for c in CATEGORIES}
     for p in papers:
         if p["category"]:
             counts[p["category"]] += 1
     return {"protocol": "docs/PILOT_WEEK2.md section 7", "papers": papers, "counts": counts}
 
 
-def main(argv: List[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Categorize pilot failures from data/pilot_runs/.")
     parser.add_argument("--runs-dir", default=str(PILOT_RUNS_DIR))
     args = parser.parse_args(argv)

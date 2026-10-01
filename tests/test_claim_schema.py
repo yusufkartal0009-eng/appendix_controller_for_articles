@@ -5,7 +5,14 @@ import re
 import pytest
 from pydantic import ValidationError
 
-from src.claim_schema import ClaimSet, ExtractedClaim, NotFound, Split, Unit, normalize_value
+from src.claim_schema import (
+    ClaimSet,
+    ExtractedClaim,
+    NotFound,
+    Split,
+    Unit,
+    normalize_value,
+)
 from src.config import PROJECT_ROOT
 
 DOC = (PROJECT_ROOT / "docs" / "CLAIM_SCHEMA.md").read_text(encoding="utf-8")

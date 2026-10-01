@@ -1,6 +1,5 @@
 """Provision 7 weekly milestones and issue tracking on GitHub via GitHub CLI."""
 import subprocess
-import json
 
 REPO = "yusufkartal0009-eng/appendix_controller_for_articles"
 
@@ -96,7 +95,7 @@ def main():
         res = subprocess.run(
             ["gh", "api", f"repos/{REPO}/milestones", "-f", f"title={m_title}", "-f", f"description={m_desc}"],
             capture_output=True,
-            text=True
+            text=True, check=False
         )
         if res.returncode == 0:
             print(f"Created milestone: {m_title}")
@@ -114,7 +113,7 @@ def main():
         for lbl in week["labels"]:
             cmd.extend(["--label", lbl])
 
-        res = subprocess.run(cmd, input=week["issue_body"], capture_output=True, text=True)
+        res = subprocess.run(cmd, input=week["issue_body"], capture_output=True, text=True, check=False)
         if res.returncode == 0:
             print(f"Created issue: {week['issue_title']} -> {res.stdout.strip()}")
         else:

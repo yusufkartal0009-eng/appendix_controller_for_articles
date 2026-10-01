@@ -2,7 +2,8 @@
 
 import pytest
 from pydantic import ValidationError
-from src.models import PaperCreate, RunCreate, ClaimCreate, ScoreBreakdown
+
+from src.models import ClaimCreate, PaperCreate, RunCreate, ScoreBreakdown
 
 
 def test_paper_create_valid():

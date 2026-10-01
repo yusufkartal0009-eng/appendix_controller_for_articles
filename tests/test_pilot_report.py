@@ -14,7 +14,7 @@ pytestmark = pytest.mark.skipif("## 11. Pilot report" not in DOC, reason="pilot 
 
 
 def test_pasted_measurements_equal_the_generated_file():
-    block = re.search(r"<!-- measurements:start -->\n(.*?)<!-- measurements:end -->", DOC, re.S)
+    block = re.search(r"<!-- measurements:start -->\n(.*?)<!-- measurements:end -->", DOC, re.DOTALL)
     assert block, "measurements markers missing"
     assert block.group(1) == (RUNS / "measurements.md").read_text(encoding="utf-8")
 

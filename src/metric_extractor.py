@@ -5,14 +5,13 @@ from __future__ import annotations
 import json
 import logging
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
 
 logger = logging.getLogger(__name__)
 
 # Canonical metric normalization aliases
-CANONICAL_METRIC_MAP: Dict[str, str] = {
+CANONICAL_METRIC_MAP: dict[str, str] = {
     # Accuracy
     "acc": "accuracy",
     "accuracy": "accuracy",
@@ -111,7 +110,7 @@ class ExtractedMetric:
     raw_value_str: str
     confidence: float  # 0.0 to 1.0
     extraction_source: str  # 'json', 'sklearn', 'regex', 'framework'
-    line_number: Optional[int] = None
+    line_number: int | None = None
 
 
 class MetricExtractor:
@@ -120,7 +119,7 @@ class MetricExtractor:
     console outputs, Scikit-learn tables, JSON lines, and framework logs.
     """
 
-    def __init__(self, canonical_map: Optional[Dict[str, str]] = None):
+    def __init__(self, canonical_map: dict[str, str] | None = None):
         self.canonical_map = dict(CANONICAL_METRIC_MAP)
         if canonical_map:
             self.canonical_map.update(canonical_map)
@@ -147,7 +146,7 @@ class MetricExtractor:
 
         return self.canonical_map.get(clean, clean)
 
-    def normalize_value(self, canonical_name: str, raw_val_str: str) -> Optional[float]:
+    def normalize_value(self, canonical_name: str, raw_val_str: str) -> float | None:
         """Convert a string value representation to a float, converting percentages if needed."""
         val_str = raw_val_str.strip()
         is_percentage = val_str.endswith("%")
@@ -169,9 +168,9 @@ class MetricExtractor:
 
         return round(val, 6)
 
-    def extract_from_json(self, text: str) -> List[ExtractedMetric]:
+    def extract_from_json(self, text: str) -> list[ExtractedMetric]:
         """Parse JSON blocks or JSON lines emitted in the text."""
-        extracted: List[ExtractedMetric] = []
+        extracted: list[ExtractedMetric] = []
 
         # Find curly brace json objects
         json_pattern = re.compile(r"(\{[\s\S]*?\})")
@@ -208,9 +207,9 @@ class MetricExtractor:
 
         return extracted
 
-    def extract_from_sklearn_report(self, text: str) -> List[ExtractedMetric]:
+    def extract_from_sklearn_report(self, text: str) -> list[ExtractedMetric]:
         """Extract metrics from Scikit-learn classification_report outputs."""
-        extracted: List[ExtractedMetric] = []
+        extracted: list[ExtractedMetric] = []
 
         # Look for the accuracy row: 'accuracy                           0.83        24'
         acc_match = re.search(r"^\s*accuracy\s+([0-9\.]+)\s+\d+", text, re.MULTILINE | re.IGNORECASE)
@@ -258,9 +257,9 @@ class MetricExtractor:
 
         return extracted
 
-    def extract_from_framework_logs(self, text: str) -> List[ExtractedMetric]:
+    def extract_from_framework_logs(self, text: str) -> list[ExtractedMetric]:
         """Extract metrics from PyTorch Lightning, XGBoost, and LightGBM logs."""
-        extracted: List[ExtractedMetric] = []
+        extracted: list[ExtractedMetric] = []
 
         # LightGBM / XGBoost: [100] valid_0's auc: 0.89123
         gbdt_pattern = re.compile(
@@ -286,9 +285,9 @@ class MetricExtractor:
 
         return extracted
 
-    def extract_from_regex(self, text: str) -> List[ExtractedMetric]:
+    def extract_from_regex(self, text: str) -> list[ExtractedMetric]:
         """Regex-based key-value extraction for common academic stdout lines."""
-        extracted: List[ExtractedMetric] = []
+        extracted: list[ExtractedMetric] = []
 
         # Key-value pattern: e.g. "Test Accuracy: 0.942", "AUC = 0.912", "Loss: 0.231", "latency: 15.4ms"
         kv_pattern = re.compile(
@@ -325,12 +324,12 @@ class MetricExtractor:
 
         return extracted
 
-    def extract_metrics(self, text: str) -> Dict[str, float]:
+    def extract_metrics(self, text: str) -> dict[str, float]:
         """Unified extraction method running all parsers and returning consolidated canonical metrics.
 
         Later occurrences in the logs take precedence (representing final test/eval metrics).
         """
-        all_metrics: List[ExtractedMetric] = []
+        all_metrics: list[ExtractedMetric] = []
 
         # 1. Framework logs
         all_metrics.extend(self.extract_from_framework_logs(text))
@@ -345,7 +344,7 @@ class MetricExtractor:
         all_metrics.extend(self.extract_from_json(text))
 
         # Consolidate into dictionary: higher confidence or later occurrences win
-        consolidated: Dict[str, Tuple[float, float]] = {}  # canonical_name -> (confidence, value)
+        consolidated: dict[str, tuple[float, float]] = {}  # canonical_name -> (confidence, value)
 
         for metric in all_metrics:
             existing = consolidated.get(metric.canonical_name)
@@ -358,7 +357,7 @@ class MetricExtractor:
 
         return {k: round(v[1], 4) for k, v in consolidated.items()}
 
-    def extract_from_run_dir(self, run_dir: Union[str, Path]) -> Dict[str, float]:
+    def extract_from_run_dir(self, run_dir: str | Path) -> dict[str, float]:
         """Extract metrics from an executed sandbox run directory.
 
         Checks metrics.json, stdout.log, stderr.log, and persists extracted_metrics.json.
@@ -367,7 +366,7 @@ class MetricExtractor:
         if not run_path.exists() or not run_path.is_dir():
             raise FileNotFoundError(f"Run directory not found: {run_path}")
 
-        metrics: Dict[str, float] = {}
+        metrics: dict[str, float] = {}
 
         # 1. Check if explicit metrics.json or results.json exists
         for candidate_name in ["metrics.json", "results.json"]:
@@ -382,7 +381,7 @@ class MetricExtractor:
                                 val = self.normalize_value(canonical, str(v))
                                 if val is not None:
                                     metrics[canonical] = round(val, 4)
-                except Exception as exc:
+                except Exception as exc:  # noqa: BLE001 - files written by paper code; a bad file is logged, never fatal
                     logger.warning("Error reading %s: %s", m_file, exc)
 
         # 2. Parse stdout.log and stderr.log
@@ -396,7 +395,7 @@ class MetricExtractor:
                     for k, v in extracted.items():
                         if k not in metrics:
                             metrics[k] = v
-                except Exception as exc:
+                except Exception as exc:  # noqa: BLE001 - logs written by paper code; a bad log is logged, never fatal
                     logger.warning("Error reading %s: %s", log_file, exc)
 
         # 3. Persist consolidated extracted_metrics.json

@@ -18,20 +18,20 @@ import os
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.config import SANDBOX_RUNS_DIR, SEED_PAPERS_PATH  # noqa: E402
-from src.sandbox.runner import SandboxConfig  # noqa: E402
-from src.sandbox.stager import RepoStager  # noqa: E402
+from src.config import SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
+from src.sandbox.runner import SandboxConfig
+from src.sandbox.stager import RepoStager
 
 # docs/PILOT_WEEK2.md section 4: script arguments and environment per paper (frozen with the protocol).
-PILOT_SPECS: Dict[str, Dict[str, Any]] = {
+PILOT_SPECS: dict[str, dict[str, Any]] = {
     "paper_002": {"args": [], "env": {}},
     "paper_003": {
         "args": ["output/california_housing/ft_transformer/default/0.toml", "-o", "/workspace/output/ft_transformer_default_0"],
@@ -47,7 +47,7 @@ PILOT_SPECS: Dict[str, Dict[str, Any]] = {
 }
 
 # docs/PILOT_WEEK2.md section 3: limits for every paper.
-PILOT_LIMITS: Dict[str, Any] = {
+PILOT_LIMITS: dict[str, Any] = {
     "cpus": 2.0,
     "memory_limit": "6g",
     "memory_swap": "6g",
@@ -60,7 +60,7 @@ PILOT_LIMITS: Dict[str, Any] = {
 BUNDLE_TIMEOUT_SECONDS = 1800
 
 
-def load_entry(paper_id: str) -> Dict[str, Any]:
+def load_entry(paper_id: str) -> dict[str, Any]:
     entries = json.loads(SEED_PAPERS_PATH.read_text(encoding="utf-8"))
     for entry in entries:
         if entry["paper_id"] == paper_id:
@@ -70,7 +70,7 @@ def load_entry(paper_id: str) -> Dict[str, Any]:
 
 def container_command(paper_id: str, target_script: str) -> str:
     """The command as written in the protocol table (an empty argument is shown as "")."""
-    parts: List[str] = ["python", f"/workspace/repo/{target_script}", *PILOT_SPECS[paper_id]["args"]]
+    parts: list[str] = ["python", f"/workspace/repo/{target_script}", *PILOT_SPECS[paper_id]["args"]]
     return " ".join('""' if part == "" else part for part in parts)
 
 
@@ -78,29 +78,29 @@ def repro_radar_commit() -> str:
     if os.environ.get("GITHUB_SHA"):
         return os.environ["GITHUB_SHA"]
     try:
-        res = subprocess.run(["git", "rev-parse", "HEAD"], cwd=project_root, capture_output=True, text=True, timeout=10)
+        res = subprocess.run(["git", "rev-parse", "HEAD"], cwd=project_root, capture_output=True, text=True, timeout=10, check=False)
         return res.stdout.strip() or "unknown"
     except (subprocess.SubprocessError, OSError):
         return "unknown"
 
 
-def write_record(record: Dict[str, Any], out_dir: Path) -> Path:
+def write_record(record: dict[str, Any], out_dir: Path) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / "pilot_record.json"
     path.write_text(json.dumps(record, indent=2), encoding="utf-8")
     return path
 
 
-def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None) -> Dict[str, Any]:
+def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
     spec = PILOT_SPECS[paper_id]
     out_dir = SANDBOX_RUNS_DIR / paper_id
     stager = stager or RepoStager(staging_root=staging_dir)
-    record: Dict[str, Any] = {
+    record: dict[str, Any] = {
         "paper_id": paper_id,
         "protocol": "docs/PILOT_WEEK2.md",
         "repro_radar_commit": repro_radar_commit(),
-        "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "started_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "repo_url": entry["repo_url"],
         "pinned_commit": entry["repo_commit"],
         "target_script": entry["target_script"],
@@ -112,7 +112,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     start = time.time()
     try:
         staged = stager.stage_repository(paper_id=paper_id, source=entry["repo_url"], commit_or_tag=entry["repo_commit"])
-    except Exception as exc:  # a failed clone or checkout is a pilot result, recorded and categorized in P4
+    except Exception as exc:  # noqa: BLE001 - a failed clone or checkout is a pilot result, recorded and categorized in P4
         record["stage"] = {"status": "FAILED", "error": str(exc), "duration_seconds": round(time.time() - start, 3)}
         write_record(record, out_dir)
         return record
@@ -144,19 +144,19 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     install_meta = out_dir / "install_meta.json"
     if install_meta.exists():
         record["install_meta"] = json.loads(install_meta.read_text(encoding="utf-8"))
-    record["finished_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
     write_record(record, out_dir)
     return record
 
 
-def main(argv: List[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run one pilot paper as specified in docs/PILOT_WEEK2.md.")
     parser.add_argument("paper_id", choices=sorted(PILOT_SPECS))
     parser.add_argument("--staging-dir", default=".sandbox_staging", help="Where repositories are cloned.")
     args = parser.parse_args(argv)
     try:
         record = run_paper(args.paper_id, Path(args.staging_dir))
-    except Exception as exc:  # harness error: the paper was not run as specified
+    except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1
     print(json.dumps(record, indent=2))

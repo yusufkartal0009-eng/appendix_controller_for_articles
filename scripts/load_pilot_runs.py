@@ -13,16 +13,16 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from sqlalchemy import text  # noqa: E402
+from sqlalchemy import text
 
-from src.database import get_engine, get_session, init_db, seed_database  # noqa: E402
-from src.models import RunORM  # noqa: E402
+from src.database import get_engine, get_session, init_db, seed_database
+from src.models import RunORM
 
 PILOT_RUNS_DIR = project_root / "data" / "pilot_runs"
 
@@ -35,16 +35,16 @@ def workflow_run_id(paper_dir: Path) -> str:
     return match.group(1)
 
 
-def _text(path: Path) -> Optional[str]:
+def _text(path: Path) -> str | None:
     return path.read_text(encoding="utf-8", errors="replace") if path.exists() else None
 
 
-def load(db_url: Optional[str] = None, runs_dir: Path = PILOT_RUNS_DIR) -> List[Dict[str, Any]]:
+def load(db_url: str | None = None, runs_dir: Path = PILOT_RUNS_DIR) -> list[dict[str, Any]]:
     engine = get_engine(db_url)
     init_db(engine)
     session = get_session(engine)
     categories = json.loads((runs_dir / "failure_categories.json").read_text(encoding="utf-8"))
-    loaded: List[Dict[str, Any]] = []
+    loaded: list[dict[str, Any]] = []
     try:
         seed_database(session=session, overwrite=True)
         for item in categories["papers"]:
@@ -70,7 +70,7 @@ def load(db_url: Optional[str] = None, runs_dir: Path = PILOT_RUNS_DIR) -> List[
     return loaded
 
 
-def main(argv: List[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Load pilot runs with failure categories into the database.")
     parser.add_argument("--db-url", default=None, help="SQLAlchemy URL (default: the project database).")
     args = parser.parse_args(argv)

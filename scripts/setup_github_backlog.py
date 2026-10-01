@@ -1,8 +1,6 @@
 """Script to provision labels, milestones, and the 45-issue backlog on GitHub."""
 
 import subprocess
-import json
-import sys
 import time
 
 REPO = "yusufkartal0009-eng/appendix_controller_for_articles"
@@ -859,7 +857,7 @@ Security audit report and hardening verification.
 
 def run_cmd(args, stdin=None):
     """Run a command from an argument list (no shell) and return (code, stdout, stderr)."""
-    res = subprocess.run(args, input=stdin, capture_output=True, text=True)
+    res = subprocess.run(args, input=stdin, capture_output=True, text=True, check=False)
     return res.returncode, res.stdout.strip(), res.stderr.strip()
 
 

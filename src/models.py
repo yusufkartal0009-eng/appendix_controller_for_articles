@@ -5,9 +5,9 @@ Includes:
 - SQLAlchemy ORM models for relational persistence in SQLite
 """
 
-from datetime import datetime
 import json
-from typing import Any, Dict, List, Optional
+from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sqlalchemy import (
     Column,
@@ -49,14 +49,14 @@ class PaperORM(Base):
     claims = relationship("ClaimORM", back_populates="paper", cascade="all, delete-orphan")
     scores = relationship("ScoreORM", back_populates="paper", uselist=False, cascade="all, delete-orphan")
 
-    def get_expected_claims_dict(self) -> Dict[str, float]:
+    def get_expected_claims_dict(self) -> dict[str, float]:
         """Parse expected_claims JSON string into a Python dict."""
         try:
             return json.loads(self.expected_claims)
         except (ValueError, TypeError):
             return {}
 
-    def get_source_table_or_section_dict(self) -> Dict[str, str]:
+    def get_source_table_or_section_dict(self) -> dict[str, str]:
         """Parse source_table_or_section JSON string into a Python dict."""
         try:
             return json.loads(self.source_table_or_section or "{}")
@@ -137,11 +137,11 @@ class PaperBase(BaseModel):
     year: int = Field(..., ge=1990, le=2100, description="Publication year")
     venue: str = Field(..., description="Publication venue or archive")
     repo_url: str = Field(..., description="Target repository URL")
-    paper_url: Optional[str] = Field(None, description="Direct paper URL (e.g. arXiv)")
+    paper_url: str | None = Field(None, description="Direct paper URL (e.g. arXiv)")
     license: str = Field(..., description="Open source license")
     target_script: str = Field("run.py", description="Target execution script")
-    expected_claims: Dict[str, float] = Field(default_factory=dict, description="Key numerical claims")
-    source_table_or_section: Optional[Dict[str, str]] = Field(default_factory=dict, description="Source table or section reference for each claim")
+    expected_claims: dict[str, float] = Field(default_factory=dict, description="Key numerical claims")
+    source_table_or_section: dict[str, str] | None = Field(default_factory=dict, description="Source table or section reference for each claim")
 
     @field_validator("repo_url")
     @classmethod
@@ -156,7 +156,7 @@ class PaperCreate(PaperBase):
 
 
 class PaperRead(PaperBase):
-    created_at: Optional[datetime] = None
+    created_at: datetime | None = None
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -164,10 +164,10 @@ class RunBase(BaseModel):
     run_id: str
     paper_id: str
     status: str
-    execution_time: Optional[float] = None
-    exit_code: Optional[int] = None
-    stdout: Optional[str] = None
-    stderr: Optional[str] = None
+    execution_time: float | None = None
+    exit_code: int | None = None
+    stdout: str | None = None
+    stderr: str | None = None
     seed: int = 42
 
 
@@ -176,20 +176,20 @@ class RunCreate(RunBase):
 
 
 class RunRead(RunBase):
-    timestamp: Optional[datetime] = None
+    timestamp: datetime | None = None
     model_config = ConfigDict(from_attributes=True)
 
 
 class ClaimBase(BaseModel):
     claim_id: str
     paper_id: str
-    run_id: Optional[str] = None
+    run_id: str | None = None
     metric_name: str
     claimed_value: float
-    reproduced_value: Optional[float] = None
+    reproduced_value: float | None = None
     tolerance: float = 0.05
-    matches: Optional[bool] = None
-    difference: Optional[float] = None
+    matches: bool | None = None
+    difference: float | None = None
 
 
 class ClaimCreate(ClaimBase):
@@ -197,7 +197,7 @@ class ClaimCreate(ClaimBase):
 
 
 class ClaimRead(ClaimBase):
-    created_at: Optional[datetime] = None
+    created_at: datetime | None = None
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -208,15 +208,15 @@ class ScoreBreakdown(BaseModel):
     tier4_artifacts: float = Field(..., ge=0.0, le=100.0, description="Score for documentation, license & artifacts (0-100)")
     total_score: float = Field(..., ge=0.0, le=100.0, description="Weighted composite score (0-100)")
     status_label: str = Field(..., description="Neutral reproducibility classification")
-    summary: Optional[str] = None
+    summary: str | None = None
 
 
 class ScoreCreate(ScoreBreakdown):
     score_id: str
     paper_id: str
-    run_id: Optional[str] = None
+    run_id: str | None = None
 
 
 class ScoreRead(ScoreCreate):
-    evaluated_at: Optional[datetime] = None
+    evaluated_at: datetime | None = None
     model_config = ConfigDict(from_attributes=True)

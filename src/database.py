@@ -2,20 +2,21 @@
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from src.config import DB_URL, DEFAULT_DB_PATH, SCHEMA_PATH, SEED_PAPERS_PATH
-from src.models import Base, ClaimORM, PaperCreate, PaperORM, RunORM, ScoreORM
+from src.models import Base, PaperCreate, PaperORM, ScoreORM
 
 # Global engine and sessionmaker instances
-_engine: Optional[Engine] = None
-_SessionFactory: Optional[sessionmaker] = None
+_engine: Engine | None = None
+_SessionFactory: sessionmaker | None = None
 
 
-def get_engine(db_url: Optional[str] = None) -> Engine:
+def get_engine(db_url: str | None = None) -> Engine:
     """Get or create SQLAlchemy engine."""
     global _engine
     if db_url is not None:
@@ -28,7 +29,7 @@ def get_engine(db_url: Optional[str] = None) -> Engine:
     return _engine
 
 
-def get_session(engine: Optional[Engine] = None) -> Session:
+def get_session(engine: Engine | None = None) -> Session:
     """Create a new database session."""
     global _SessionFactory
     eng = engine or get_engine()
@@ -37,7 +38,7 @@ def get_session(engine: Optional[Engine] = None) -> Session:
     return _SessionFactory()
 
 
-def init_db(engine: Optional[Engine] = None, schema_file: Optional[Path] = None, drop_existing: bool = False) -> None:
+def init_db(engine: Engine | None = None, schema_file: Path | None = None, drop_existing: bool = False) -> None:
     """Initialize database tables using schema.sql script and/or ORM metadata."""
     eng = engine or get_engine()
     schema_path = schema_file or SCHEMA_PATH
@@ -82,8 +83,8 @@ def ensure_failure_category_column(engine: Engine) -> bool:
 
 
 def seed_database(
-    seed_file: Optional[Path] = None,
-    session: Optional[Session] = None,
+    seed_file: Path | None = None,
+    session: Session | None = None,
     overwrite: bool = False,
 ) -> int:
     """Load seed_papers.json, validate with Pydantic, and insert into the database.
@@ -149,7 +150,7 @@ def seed_database(
             db.close()
 
 
-def get_all_papers(session: Optional[Session] = None) -> List[PaperORM]:
+def get_all_papers(session: Session | None = None) -> list[PaperORM]:
     """Retrieve all papers from the database."""
     db = session or get_session()
     should_close = session is None
@@ -160,7 +161,7 @@ def get_all_papers(session: Optional[Session] = None) -> List[PaperORM]:
             db.close()
 
 
-def get_paper_by_id(paper_id: str, session: Optional[Session] = None) -> Optional[PaperORM]:
+def get_paper_by_id(paper_id: str, session: Session | None = None) -> PaperORM | None:
     """Retrieve a single paper by its ID."""
     db = session or get_session()
     should_close = session is None
@@ -171,7 +172,7 @@ def get_paper_by_id(paper_id: str, session: Optional[Session] = None) -> Optiona
             db.close()
 
 
-def save_score(score_data: Dict[str, Any], session: Optional[Session] = None) -> ScoreORM:
+def save_score(score_data: dict[str, Any], session: Session | None = None) -> ScoreORM:
     """Insert or update a reproducibility score for a paper."""
     db = session or get_session()
     should_close = session is None

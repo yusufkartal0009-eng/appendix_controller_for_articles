@@ -13,18 +13,18 @@ Implements:
   SandboxUnavailableError unless SandboxConfig.allow_unsafe_local is set.
 """
 
-from dataclasses import dataclass, field
 import json
 import logging
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import sys
 import time
-from typing import Any, Dict, List, Optional, Tuple, Union
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any
 
-from src.config import DEFAULT_TIMEOUT_SECONDS, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
+from src.config import DEFAULT_TIMEOUT_SECONDS, SANDBOX_RUNS_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +48,7 @@ class SandboxConfig:
     tmpfs_home_size: str = "2048m"
     user_id: int = 1000
     group_id: int = 1000
-    env_vars: Dict[str, str] = field(default_factory=dict)
+    env_vars: dict[str, str] = field(default_factory=dict)
     # Run on the host without isolation when Docker is unavailable. Only for code you trust.
     allow_unsafe_local: bool = False
 
@@ -61,13 +61,13 @@ class SandboxExecutionResult:
     stdout: str
     stderr: str
     duration_seconds: float
-    command_executed: List[str]
+    command_executed: list[str]
     docker_used: bool
     output_dir: Path
-    error_message: Optional[str] = None
+    error_message: str | None = None
     isolated: bool = False  # True only when the code ran inside the Docker sandbox
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert execution result to serializable dictionary."""
         return {
             "status": self.status,
@@ -84,7 +84,7 @@ class SandboxExecutionResult:
 class DockerSandboxRunner:
     """Manages containerized execution runs with strict sandboxing."""
 
-    def __init__(self, config: Optional[SandboxConfig] = None):
+    def __init__(self, config: SandboxConfig | None = None):
         self.config = config or SandboxConfig()
 
     @staticmethod
@@ -98,7 +98,7 @@ class DockerSandboxRunner:
                 ["docker", "info"],
                 capture_output=True,
                 text=True,
-                timeout=5,
+                timeout=5, check=False,
             )
             return res.returncode == 0
         except (subprocess.SubprocessError, OSError):
@@ -106,14 +106,14 @@ class DockerSandboxRunner:
 
     def build_docker_command(
         self,
-        repo_dir: Union[str, Path],
-        output_dir: Union[str, Path],
-        command: List[str],
-        packages_dir: Optional[Union[str, Path]] = None,
-        deps_dir: Optional[Union[str, Path]] = None,
+        repo_dir: str | Path,
+        output_dir: str | Path,
+        command: list[str],
+        packages_dir: str | Path | None = None,
+        deps_dir: str | Path | None = None,
         deps_writable: bool = False,
-        extra_env: Optional[Dict[str, str]] = None,
-    ) -> List[str]:
+        extra_env: dict[str, str] | None = None,
+    ) -> list[str]:
         """Construct the security-hardened `docker run` command with all isolation flags.
 
         `deps_dir` is mounted at /workspace/deps: writable only for the dependency install phase,
@@ -138,8 +138,10 @@ class DockerSandboxRunner:
             # Writable scratch home owned by the sandbox user (a plain tmpfs is root-owned). Kept noexec:
             # paper code can write here but never execute what it wrote. Dependencies go to /workspace/deps.
             "--tmpfs",
-            f"/workspace/home:rw,noexec,nosuid,size={self.config.tmpfs_home_size},"
-            f"uid={self.config.user_id},gid={self.config.group_id}",
+            (
+                f"/workspace/home:rw,noexec,nosuid,size={self.config.tmpfs_home_size},"
+                f"uid={self.config.user_id},gid={self.config.group_id}"
+            ),
         ])
 
         # 3. Privilege Drop
@@ -187,7 +189,7 @@ class DockerSandboxRunner:
         return docker_cmd
 
     @staticmethod
-    def _status_from_meta(output_dir: Path) -> Optional[str]:
+    def _status_from_meta(output_dir: Path) -> str | None:
         """Status written by the container entrypoint, if execution_meta.json exists and is valid."""
         try:
             status = json.loads((Path(output_dir) / "execution_meta.json").read_text(encoding="utf-8")).get("status")
@@ -214,10 +216,10 @@ class DockerSandboxRunner:
 
     def _install_dependencies(
         self,
-        repo_dir: Union[str, Path],
+        repo_dir: str | Path,
         output_dir: Path,
-        packages_dir: Union[str, Path],
-    ) -> Tuple[Path, str]:
+        packages_dir: str | Path,
+    ) -> tuple[Path, str]:
         """Install offline wheels in a separate, network-isolated container (install phase).
 
         Wheels from /workspace/packages are installed binary-only (no package code runs) into a host
@@ -243,7 +245,7 @@ class DockerSandboxRunner:
             extra_env={"SANDBOX_PHASE": "install"},
         )
         try:
-            subprocess.run(install_cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10)
+            subprocess.run(install_cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10, check=False)
         except (subprocess.SubprocessError, OSError) as exc:
             logger.warning("Dependency install phase could not run: %s", exc)
             return deps_dir, "FAILED"
@@ -259,10 +261,10 @@ class DockerSandboxRunner:
     def run(
         self,
         paper_id: str,
-        repo_dir: Union[str, Path],
+        repo_dir: str | Path,
         target_script: str,
-        script_args: Optional[List[str]] = None,
-        packages_dir: Optional[Union[str, Path]] = None,
+        script_args: list[str] | None = None,
+        packages_dir: str | Path | None = None,
     ) -> SandboxExecutionResult:
         """Execute paper code inside the Docker sandbox.
 
@@ -307,10 +309,10 @@ class DockerSandboxRunner:
 
     def _run_docker_phases(
         self,
-        repo_dir: Union[str, Path],
+        repo_dir: str | Path,
         output_dir: Path,
-        target_cmd: List[str],
-        packages_dir: Optional[Union[str, Path]],
+        target_cmd: list[str],
+        packages_dir: str | Path | None,
     ) -> SandboxExecutionResult:
         """Optional install phase, then the paper run, both in the Docker sandbox."""
         deps_dir = None
@@ -332,7 +334,7 @@ class DockerSandboxRunner:
                 docker_cmd,
                 capture_output=True,
                 text=True,
-                timeout=self.config.timeout_seconds + 10,  # Buffer for container teardown
+                timeout=self.config.timeout_seconds + 10, check=False,  # Buffer for container teardown
             )
             duration = time.time() - start_time
             exit_code = res.returncode
@@ -370,7 +372,7 @@ class DockerSandboxRunner:
                 error_message=f"Timeout of {self.config.timeout_seconds}s exceeded.",
                 isolated=True,
             )
-        except Exception as err:
+        except Exception as err:  # noqa: BLE001 - any runner error becomes a FAILED result, never a crash
             duration = time.time() - start_time
             return SandboxExecutionResult(
                 status="FAILED",
@@ -398,10 +400,10 @@ class ProcessSandboxRunner:
     def run(
         self,
         paper_id: str,
-        repo_dir: Union[str, Path],
+        repo_dir: str | Path,
         target_script: str,
-        script_args: Optional[List[str]] = None,
-        fallback_reason: Optional[str] = None,
+        script_args: list[str] | None = None,
+        fallback_reason: str | None = None,
     ) -> SandboxExecutionResult:
         """Run script using local Python interpreter within a designated sandbox run directory."""
         output_dir = SANDBOX_RUNS_DIR / paper_id
@@ -440,7 +442,7 @@ class ProcessSandboxRunner:
                 capture_output=True,
                 text=True,
                 timeout=self.timeout_seconds,
-                env=env,
+                env=env, check=False,
             )
             duration = time.time() - start_time
             status = "COMPLETED" if proc.returncode == 0 else "FAILED"
@@ -473,7 +475,7 @@ class ProcessSandboxRunner:
                 output_dir=output_dir,
                 error_message=f"Timeout of {self.timeout_seconds}s exceeded.",
             )
-        except Exception as err:
+        except Exception as err:  # noqa: BLE001 - any runner error becomes a FAILED result, never a crash
             duration = time.time() - start_time
             return SandboxExecutionResult(
                 status="FAILED",

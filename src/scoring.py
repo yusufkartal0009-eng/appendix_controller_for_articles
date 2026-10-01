@@ -16,7 +16,8 @@ Generates composite scores (0-100) and neutral status classifications:
 import math
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any
+
 from src.config import (
     ALLOWED_LICENSES,
     DEFAULT_TOLERANCE,
@@ -32,15 +33,6 @@ from src.config import (
     TIER4_ARTIFACTS_WEIGHT,
 )
 from src.models import ScoreBreakdown
-from src.validation_rubric import (
-    MetricCategory,
-    MetricEvaluationResult,
-    MetricToleranceSpec,
-    ModelValidationRubric,
-    MultiSeedStabilityResult,
-    ValidationReport,
-)
-from src.metric_extractor import ExtractedMetric, MetricExtractor
 
 
 class Tier1BuildEvaluator:
@@ -51,8 +43,8 @@ class Tier1BuildEvaluator:
         clone_success: bool,
         deps_installed: bool,
         script_executed: bool,
-        exit_code: Optional[int],
-    ) -> Tuple[float, List[str]]:
+        exit_code: int | None,
+    ) -> tuple[float, list[str]]:
         """Calculate Tier 1 build score (0-100) and diagnostic notes."""
         score = 0.0
         notes = []
@@ -91,10 +83,10 @@ class Tier2MetricsEvaluator:
 
     @staticmethod
     def evaluate(
-        claimed_metrics: Dict[str, float],
-        reproduced_metrics: Dict[str, float],
+        claimed_metrics: dict[str, float],
+        reproduced_metrics: dict[str, float],
         tolerance: float = DEFAULT_TOLERANCE,
-    ) -> Tuple[float, Dict[str, Dict[str, Any]], List[str]]:
+    ) -> tuple[float, dict[str, dict[str, Any]], list[str]]:
         """Calculate Tier 2 score (0-100) based on metric claims within tolerance."""
         if not claimed_metrics:
             return 70.0, {}, ["No numeric claims specified; neutral baseline applied (70.0)"]
@@ -102,7 +94,7 @@ class Tier2MetricsEvaluator:
         if not reproduced_metrics:
             return 0.0, {}, ["No metrics reproduced from execution run (0/100)"]
 
-        claim_results: Dict[str, Dict[str, Any]] = {}
+        claim_results: dict[str, dict[str, Any]] = {}
         total_claims = len(claimed_metrics)
         earned_points = 0.0
         notes = []
@@ -194,10 +186,10 @@ class Tier3StabilityEvaluator:
 
     @staticmethod
     def evaluate(
-        seed_results: Optional[List[float]] = None,
+        seed_results: list[float] | None = None,
         single_run_clean: bool = True,
         execution_succeeded: bool = True,
-    ) -> Tuple[float, List[str]]:
+    ) -> tuple[float, list[str]]:
         """Calculate Tier 3 stability score (0-100)."""
         notes = []
 
@@ -244,9 +236,9 @@ class Tier4ArtifactsEvaluator:
     @classmethod
     def detect_filesystem_artifacts(
         cls,
-        repo_dir: Optional[Union[str, Path]] = None,
-        run_dir: Optional[Union[str, Path]] = None,
-    ) -> Tuple[bool, bool, bool]:
+        repo_dir: str | Path | None = None,
+        run_dir: str | Path | None = None,
+    ) -> tuple[bool, bool, bool]:
         """Dynamically detect environment files, README, and saved artifacts via filesystem checks."""
         has_environment_file = False
         has_readme = False
@@ -290,7 +282,7 @@ class Tier4ArtifactsEvaluator:
         has_environment_file: bool = True,
         has_readme: bool = True,
         has_saved_artifacts: bool = True,
-    ) -> Tuple[float, List[str]]:
+    ) -> tuple[float, list[str]]:
         """Calculate Tier 4 documentation & artifact score (0-100)."""
         score = 0.0
         notes = []
@@ -340,9 +332,9 @@ class ReproducibilityScorer:
         tier2: float,
         tier3: float,
         tier4: float,
-        tier1_exit_code: Optional[int] = 0,
+        tier1_exit_code: int | None = 0,
         has_critical_error: bool = False,
-    ) -> Tuple[float, str, str]:
+    ) -> tuple[float, str, str]:
         """Compute composite score (0-100) and assign neutral status label."""
         total = (
             tier1 * TIER1_BUILD_WEIGHT
@@ -406,16 +398,16 @@ class ReproducibilityScorer:
         clone_success: bool,
         deps_installed: bool,
         script_executed: bool,
-        exit_code: Optional[int],
-        claimed_metrics: Dict[str, float],
-        reproduced_metrics: Dict[str, float],
+        exit_code: int | None,
+        claimed_metrics: dict[str, float],
+        reproduced_metrics: dict[str, float],
         license_name: str,
-        seed_results: Optional[List[float]] = None,
+        seed_results: list[float] | None = None,
         has_environment_file: bool = True,
         has_readme: bool = True,
         has_saved_artifacts: bool = True,
         tolerance: float = DEFAULT_TOLERANCE,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Perform full end-to-end evaluation and return complete breakdown dictionary."""
         # 1. Tier 1 Build
         t1_score, t1_notes = Tier1BuildEvaluator.evaluate(

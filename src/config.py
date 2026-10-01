@@ -1,7 +1,7 @@
 """Configuration settings for Repro Radar."""
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Base paths
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
