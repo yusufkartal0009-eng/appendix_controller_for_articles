@@ -34,6 +34,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### 2026-10-01 Plan Decisions Recorded (2026-10-02 12:22 +03:00, Issue #168, plan item 0.2)
+- `docs/DECISIONS.md` D-004 to D-007: agent-assisted extraction without an API key (the API code stays); "temperature 0" replaced by the rule that two independent extractions must agree on the normalized numbers, with every mismatch going to the owner in W7; everything runs locally (dashboard on `localhost`, paper runs on the owner's machine, GitHub Actions only for CI); papers that cannot run may be replaced, with a recorded reason and Pilot 1's 0 / 6 kept. D-003 is marked as partly superseded.
+
 ### 2026-10-01 Plan Recorded (2026-10-02 12:18 +03:00, Issue #167, plan item 0.1)
 - `docs/PLAN_2026-10-01.md`: complete English translation of the 2026-10-01 work plan (decisions, owner tasks Y1-Y5, stages 0-5, the work loop, the summary order), with the issue number next to every item. `docs/ROADMAP_2026-09-27.md` now starts with a link to it; nothing else there changed.
 - New issues opened for the items without a number: #167 (0.1), #168 (0.2), #169 (0.3, local GPU), #170 (D0 dashboard skeleton), #171 (Pilot 2), #172 (Y1, owner installs Docker).
