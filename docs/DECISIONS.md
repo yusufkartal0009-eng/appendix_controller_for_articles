@@ -71,7 +71,7 @@ The install phase reads the paper's requirements files (untrusted input), but on
 
 ## D-003 — Claim extraction uses Claude Opus 5.5, without a temperature setting (2026-10-01)
 
-**Status:** accepted by the owner on 2026-10-01. **Related:** #131 (W3), #132 (W4), #9, roadmap section 3.
+**Status:** accepted by the owner on 2026-10-01; **partly superseded on the same day by D-004 and D-005**: extraction is agent-assisted for now, and the consistency rule of D-005 replaces the temperature question. The API path described here stays in the code for later use. **Related:** #131 (W3), #132 (W4), #9, roadmap section 3.
 
 ### Context
 
@@ -120,3 +120,122 @@ one model provider with a written reason, the API key only from an environment v
 `tests/test_claim_extraction.py` checks the request settings (model, effort, no temperature, schema, fallback), the
 cache, and the handling of refusals and truncated output. The first real runs are recorded in #131 and #133.
 
+---
+
+## D-004 — Claim extraction is agent-assisted; no API key for now (2026-10-01)
+
+**Status:** decided by the owner on 2026-10-01 (`docs/PLAN_2026-10-01.md`, section 0, decision 1; recorded in #168).
+**Related:** #131, #132, #133, #134, D-003.
+
+### Context
+
+PR #156 (W3) added extraction through the Claude API (`src/claim_extraction.py`), which needs `ANTHROPIC_API_KEY`.
+No real API call was made: the key was not available to the working session.
+
+### Decision
+
+- **No API key will be used for now.** Claim extraction is done by the Claude Code agent ("agent-assisted
+  extraction"): it reads the paper's page text (W2, `src/pdf_text.py`) and records every claim as JSON according to
+  the W1 schema (`docs/CLAIM_SCHEMA.md`), with its verbatim quote and page number, in `data/claims/<paper_id>.json`.
+- **The API code of PR #156 is not deleted.** If a key becomes available later, it is used with the same schema.
+
+### Reason
+
+The owner's decision: no API key is used for now. The plan gives no further reason.
+
+### Consequences
+
+- Extraction is not a script that anyone can re-run; the checks around it carry the weight: the consistency rule
+  (D-005), the verbatim quote guard (W4, `src/quote_guard.py`), and the owner's approval (W7, #134).
+- The extracting agent's own answers cannot serve as the gold set for measuring it. The owner chooses and confirms
+  the gold values (plan item Y3, #133); the agent only prepares the form.
+- D-003 still describes the API path; it applies only when that path is used. Because both paths use the same
+  schema, they produce the same kind of record and pass through the same checks.
+
+---
+
+## D-005 — "Temperature 0" is dropped; two independent extractions must agree on the numbers (2026-10-01)
+
+**Status:** decided by the owner on 2026-10-01 (`docs/PLAN_2026-10-01.md`, section 0, decision 2; recorded in #168).
+**Related:** #131, #134, D-003, D-004.
+
+### Context
+
+The 2026-09-27 roadmap (W3) required "temperature 0" for extraction, so that repeated extractions would give the
+same answers. D-003 already recorded that Claude Opus 5.5 rejects a temperature setting; with agent-assisted
+extraction (D-004) there is no such setting either.
+
+### Decision
+
+The temperature requirement is dropped. A simpler consistency rule replaces it:
+
+> When the same claim is found in two separate extractions, **the numeric value after W1 normalization must be the
+> same** (e.g. `96.99 %` → `0.9699`). The quote text, the description, or the field names may differ; all that
+> matters is that the numbers agree. Every value that does not agree goes to the owner for approval in W7.
+
+### Reason
+
+As the plan states, the quote text, description, or field names may differ; what matters is only that the numbers
+agree. Comparing normalized values checks exactly that.
+
+### Consequences
+
+- Every paper is extracted **twice, independently of each other** (plan step 1.1), and a script compares the two
+  extractions by normalized value (step 1.2, #131).
+- Every disagreement is listed and goes to the owner in W7 (#134); it is never resolved silently.
+
+---
+
+## D-006 — Everything runs locally; no server or website (2026-10-01)
+
+**Status:** decided by the owner on 2026-10-01 (`docs/PLAN_2026-10-01.md`, section 0, decision 3; recorded in #168).
+**Related:** #170, #171, #172, #37-#41, `docs/PILOT_WEEK2.md`.
+
+### Context
+
+Pilot 1 ran on GitHub-hosted runners (`.github/workflows/pilot.yml`) because the owner's machine had no Docker. The
+dashboard backlog (#37-#41) did not say where the dashboard would run.
+
+### Decision
+
+- There is no server or website. Everything runs locally on the owner's computer; the dashboard too, on `localhost`.
+- Paper runs happen locally, once Docker is installed on the owner's computer (plan item Y1, #172).
+- GitHub Actions stays only for CI.
+
+### Reason
+
+The owner's decision; the plan gives no further reason.
+
+### Consequences
+
+- The dashboard skeleton (D0, #170) and D1-D5 (#37-#41) are built and tested for `localhost` only; nothing is deployed.
+- Pilot 2 (#171) runs on the owner's machine in real Docker, not on GitHub Actions. Pilot 1's workflow and stored
+  results stay in the repository as the record of Pilot 1.
+- Local runs depend on Docker Desktop with WSL2 and enough disk space (#172); using the local GPU is #169.
+
+---
+
+## D-007 — Papers that cannot be made to run may be replaced, with a record (2026-10-01)
+
+**Status:** decided by the owner on 2026-10-01 (`docs/PLAN_2026-10-01.md`, section 0, decision 4; recorded in #168).
+**Related:** #166, #171, `docs/PILOT_WEEK2.md`, `docs/CORPUS_VERIFICATION.md`.
+
+### Context
+
+In Pilot 1 none of the six papers reached its experiment code (pilot success 0 / 6).
+
+### Decision
+
+Papers that cannot be fixed may be replaced with new ones (#166). Every replacement is recorded with its reason, and
+the first pilot result (0 / 6) stays on record.
+
+### Reason
+
+As the plan states: choosing only papers that "work" would raise the success rate artificially. Recording every
+replacement and keeping Pilot 1's result makes such a selection visible instead of hiding it.
+
+### Consequences
+
+- A replacement is decided per paper (fix or replace, plan step 2.5, #166) and written down with its reason, for
+  example in `docs/CORPUS_VERIFICATION.md`.
+- The Pilot 2 report (#171) shows Pilot 1's result next to its own and names every replaced paper.
