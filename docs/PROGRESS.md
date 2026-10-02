@@ -34,6 +34,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### 2026-10-01 Plan Recorded (2026-10-02 12:18 +03:00, Issue #167, plan item 0.1)
+- `docs/PLAN_2026-10-01.md`: complete English translation of the 2026-10-01 work plan (decisions, owner tasks Y1-Y5, stages 0-5, the work loop, the summary order), with the issue number next to every item. `docs/ROADMAP_2026-09-27.md` now starts with a link to it; nothing else there changed.
+- New issues opened for the items without a number: #167 (0.1), #168 (0.2), #169 (0.3, local GPU), #170 (D0 dashboard skeleton), #171 (Pilot 2), #172 (Y1, owner installs Docker).
+
 ### Verbatim Quote Guard (2026-10-01 21:04 +03:00, Issue #132, W4)
 - `src/quote_guard.py`: a claim becomes `AUTO_QUOTE_MATCH` only if its PDF hash matches, its page exists, its quote and printed value occur on that page with identical characters (whitespace runs count as one space), and its dataset and model occur in the paper as whole words. Otherwise it stays `UNVERIFIED` with the reasons. `scorable_claims()` returns only verified claims.
 - Rules documented in `docs/CLAIM_SCHEMA.md` section 5; 11 tests, including a matching and a non-matching quote, the `0.859`/`0 .859` case, and the invented `EP3602` dataset.
