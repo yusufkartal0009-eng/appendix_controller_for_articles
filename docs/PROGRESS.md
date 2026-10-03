@@ -4,35 +4,42 @@
 
 ---
 
-## Current Status (2026-09-30 21:54 +03:00): Week 2 Pilot Done, Claim Extraction Next
+## Current Status (2026-10-03 20:55 +03:00): 2026-10-01 Plan Recorded, Stage 0b and Stage 1 Next
 
-- **Work order:** `docs/ROADMAP_2026-09-27.md`. Section 2 (pilot, #43) is done: pilot success 0 / 6, install success 1 / 6, run success 0 / 6 (`docs/PILOT_WEEK2.md` sections 10-11). Next is section 3 (claim extraction, #9, starting with W1 #129 and W2 #130). Section 4 (CLI, #136) and the dashboard wait until sections 2 and 3 are both done.
+- **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). Stage 0 is done (#167, #168; decisions D-004 to D-007). Next: the D0 dashboard skeleton (#170, stage 0b) and claim extraction steps 1.1-1.3 (#131, #162).
+- **Pilot 1** (`docs/PILOT_WEEK2.md`): pilot success 0 / 6, install success 1 / 6, run success 0 / 6. Pilot 2 (#171) runs on the owner's machine once Docker is installed (#172).
+- **Claim extraction:** W1 schema (#129), W2 PDF text (#130), W3 API extractor (#131, PR #156; never called, no key), and W4 quote guard (#132) are merged. Extraction is now agent-assisted, with no API key (D-004). No extracted claim has been approved yet.
+- **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 139 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 12 checks
+- **Tests:** 185 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 12 checks
 
 ---
 
 ## Milestone Roadmap & Progress
 
-Issue numbers and open/closed counts match GitHub as of 2026-09-30 21:54 +03:00 (issues only, not PRs), counted with #128 and #43 closed by the P7 PR. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
+Issue numbers and open/closed counts match GitHub as of 2026-10-03 20:55 +03:00 (issues only, not PRs), counted with #175 closed by its PR. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
 
 | Milestone | Focus | Backlog issues | Open / closed | Status |
 |---|---|:---:|:---:|:---:|
-| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 7 / 12 | IN PROGRESS |
-| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 13 / 5 | IN PROGRESS |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 6 / 12 | IN PROGRESS |
-| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 6 / 1 | QUEUED |
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 19 | IN PROGRESS |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 12 / 8 | IN PROGRESS |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 9 / 12 | IN PROGRESS |
+| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 10 / 1 | QUEUED |
 | **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 3 / 5 | IN PROGRESS |
 | **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 6 / 1 | QUEUED |
-| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #37 – #41 | 5 / 0 | QUEUED |
-| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 4 / 12 | IN PROGRESS |
+| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #37 – #41 | 6 / 0 | QUEUED |
+| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 6 / 12 | IN PROGRESS |
 
 The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella issues (#47 – #53) were closed as completed or as duplicates of the backlog above and moved into the matching M milestones.
 
 ---
 
 ## Changelog & Completed Work
+
+### Agents Point at the 2026-10-01 Plan (2026-10-03 20:55 +03:00, Issue #175)
+- `AGENTS.md` (living docs list, traceability line, §6.1 and §6.3) and `CLAUDE.md` now point at `docs/PLAN_2026-10-01.md` as the current work order; §6.3 states the plan's stage order. The status summary above, the milestone counts, and the `docs/DECISIONS.md` header were refreshed.
+- On the owner's decision: the unmerged gold-set branch `test/issue-133-gold-set` (`7b3dcbc`) was closed without merging; the merged old branches `chore/devops/adopt-projectflow` (PR #1) and `feature/issue-0-translate-to-english` (PR #56) were deleted; #131 was reopened for plan steps 1.1-1.2.
 
 ### 2026-10-01 Plan Decisions Recorded (2026-10-02 12:22 +03:00, Issue #168, plan item 0.2)
 - `docs/DECISIONS.md` D-004 to D-007: agent-assisted extraction without an API key (the API code stays); "temperature 0" replaced by the rule that two independent extractions must agree on the normalized numbers, with every mismatch going to the owner in W7; everything runs locally (dashboard on `localhost`, paper runs on the owner's machine, GitHub Actions only for CI); papers that cannot run may be replaced, with a recorded reason and Pilot 1's 0 / 6 kept. D-003 is marked as partly superseded.

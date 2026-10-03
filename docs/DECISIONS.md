@@ -1,7 +1,8 @@
 # Repro Radar — Decision Log
 
-> Decisions that change what the sandbox allows, or that decide how evidence is produced (D-003), with their
-> context, risks, and evidence. Other architecture decisions go to `docs/ARCHITECTURE.md`.
+> Decisions that change what the sandbox allows (D-001, D-002), or that decide how evidence is produced and where
+> the work runs (D-003 to D-007), with their context, risks, and evidence. Other architecture decisions go to
+> `docs/ARCHITECTURE.md`.
 
 ---
 

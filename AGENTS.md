@@ -5,7 +5,7 @@ This project follows the **projectflow** method paired with **superpowers** deep
 ---
 
 ## 1. Living Docs (Read First)
-- `docs/ROADMAP_2026-09-27.md` — The current binding work order and its tracking issues. **Read it first in every new session** (see §6).
+- `docs/PLAN_2026-10-01.md` — The current binding work order and its tracking issues. **Read it first in every new session** (see §6). It continues `docs/ROADMAP_2026-09-27.md`, which is kept as history.
 - `docs/BLUEPRINT.md` — The master plan: what we're building, architecture, milestones, and how.
 - `docs/ARCHITECTURE.md` — Constraints, structure, design patterns, and database/scoring contracts.
 - `docs/PROGRESS.md` — What's been done. **Update it after every issue/PR.**
@@ -46,7 +46,7 @@ This project follows the **projectflow** method paired with **superpowers** deep
   - Models: `.venv\Scripts\pytest.exe tests/test_models.py -v`
   - Scoring: `.venv\Scripts\pytest.exe tests/test_scoring.py -v`
   - Seed dataset: `.venv\Scripts\pytest.exe tests/test_seed.py -v`
-- **traceability:** Milestone tracking in `docs/PROGRESS.md`; the current work order is `docs/ROADMAP_2026-09-27.md` (the older `docs/project_roadmap.md` is the original week plan).
+- **traceability:** Milestone tracking in `docs/PROGRESS.md`; the current work order is `docs/PLAN_2026-10-01.md` (it continues `docs/ROADMAP_2026-09-27.md`; the older `docs/project_roadmap.md` is the original week plan).
 - **working language:** English for code/docs/commits/PRs; communicate with the maintainer in their preferred language.
 
 ---
@@ -87,9 +87,9 @@ Check this table every turn. If the matching deep skill is installed and the ste
 
 ## 6. Roadmap Rules (from 2026-09-27, #121)
 These rules are permanent. They add to §5 and do not replace it.
-1. **Read the roadmap first:** at the start of every new session, read `docs/ROADMAP_2026-09-27.md` before doing anything else.
+1. **Read the plan first:** at the start of every new session, read `docs/PLAN_2026-10-01.md` before doing anything else (since 2026-10-03, #175; before that, `docs/ROADMAP_2026-09-27.md`).
 2. **Everything in the repository and on GitHub is English:** file contents, file names, headings, issue titles, descriptions and comments, labels, commit messages, branch names, PR titles, PR descriptions, and self-review comments. Plans written in another language are translated, never committed in the original.
-3. **Binding work order:** Section 4 (connect the CLI to the real sandbox and extraction, #136) and Section 5 (report sections, #120) do not start before Section 2 (pilot, #43) and Section 3 (claim extraction, #9) are done. Sections 2 and 3 may run in parallel. Section 6 (low-priority cleanup) comes last.
+3. **Binding work order:** section 2 of `docs/PLAN_2026-10-01.md`. The stages are done in order and no step is skipped: claim extraction (stage 1) and making the papers run with Pilot 2 (stage 2) come before connecting the CLI (stage 3, #136); the dashboard D1-D5 (stage 4) starts only after stage 3, with the D0 skeleton (#170) as the one exception; the final report (stage 5, #120) is written only from evidence in the repository. Where the plan says STOP, the agent stops and asks the owner.
 4. **One PR, one topic:** one item = one issue = one branch = one PR.
 5. **Every number in the report comes from a script output:** no hand-typed results; each number or figure names the script and data file it came from.
 6. **Simulated data is never presented as a real result:** simulated outputs are labeled as simulation wherever they appear (code, docs, reports, PRs).
