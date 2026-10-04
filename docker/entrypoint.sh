@@ -14,7 +14,8 @@ META_JSON="${OUTPUT_DIR}/execution_meta.json"
 
 mkdir -p "${OUTPUT_DIR}"
 
-cd /workspace/repo || true
+# Working directory of the paper's run setup (#166), set by the runner; the repository root by default.
+cd "${SANDBOX_WORKDIR:-/workspace/repo}" || true
 
 # Peak memory of this container's cgroup in bytes (v2: memory.peak; v1: memory.max_usage_in_bytes), or null
 # when the kernel does not expose it. Recorded for the pilot's resource measurements (docs/PILOT_WEEK2.md section 6).

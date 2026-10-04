@@ -16,6 +16,7 @@ Implements:
 import json
 import logging
 import os
+import posixpath
 import shutil
 import subprocess
 import sys
@@ -62,6 +63,12 @@ class SandboxConfig:
     user_id: int = 1000
     group_id: int = 1000
     env_vars: dict[str, str] = field(default_factory=dict)
+    # Run setup of a paper (#166). Working directory relative to the repository root ('' = the root).
+    working_dir: str = ""
+    # Run on a writable per-run copy of the repository (for papers that write next to their own files).
+    writable_repo: bool = False
+    # Read-only data mounts: container path (absolute, or relative to /workspace/repo) -> host directory.
+    data_mounts: dict[str, str] = field(default_factory=dict)
     # Run on the host without isolation when Docker is unavailable. Only for code you trust.
     allow_unsafe_local: bool = False
 
@@ -69,6 +76,32 @@ class SandboxConfig:
         image = image_for(self.python_version)  # also validates the version
         if not self.image_name:
             self.image_name = image
+        self.working_dir = repo_relative(self.working_dir, "working_dir")
+        self.data_mounts = {container_data_path(target): host for target, host in self.data_mounts.items()}
+
+
+def repo_relative(path: str, what: str) -> str:
+    """A normalized path inside the repository; refuses absolute paths and '..' (#166)."""
+    norm = posixpath.normpath(path.replace("\\", "/")) if path else ""
+    if norm in ("", "."):
+        return ""
+    if norm.startswith(("/", "..")):
+        raise ValueError(f"{what} must stay inside the repository: {path!r}")
+    return norm
+
+
+# Container paths a data mount may target: inside the repository or the sandbox home (#166).
+DATA_MOUNT_ROOTS = ("/workspace/repo/", "/workspace/home/")
+
+
+def container_data_path(target: str) -> str:
+    """Absolute container path of a data mount; a relative target is relative to /workspace/repo."""
+    if not target.startswith("/"):
+        return "/workspace/repo/" + repo_relative(target, "data mount target")
+    norm = posixpath.normpath(target)
+    if not norm.startswith(DATA_MOUNT_ROOTS):
+        raise ValueError(f"data mount target must be under {DATA_MOUNT_ROOTS}: {target!r}")
+    return norm
 
 
 @dataclass
@@ -177,8 +210,10 @@ class DockerSandboxRunner:
         ])
 
         # 5. Working Directory & Environment Variables
+        workdir = posixpath.join("/workspace/repo", self.config.working_dir) if self.config.working_dir else "/workspace/repo"
         docker_cmd.extend([
-            "-w", "/workspace/repo",
+            "-w", workdir,
+            "-e", f"SANDBOX_WORKDIR={workdir}",
             "-e", f"SANDBOX_TIMEOUT={self.config.timeout_seconds}",
             "-e", "PYTHONUNBUFFERED=1",
             "-e", "PYTHONDONTWRITEBYTECODE=1",
@@ -190,8 +225,9 @@ class DockerSandboxRunner:
             docker_cmd.extend(["-e", f"{k}={v}"])
 
         # 6. Volumes
+        repo_mode = "rw" if self.config.writable_repo else "ro"
         docker_cmd.extend([
-            "-v", f"{repo_path}:/workspace/repo:ro",
+            "-v", f"{repo_path}:/workspace/repo:{repo_mode}",
             "-v", f"{output_path}:/workspace/output:rw",
         ])
         if packages_dir and Path(packages_dir).exists():
@@ -200,6 +236,8 @@ class DockerSandboxRunner:
         if deps_dir:
             mode = "rw" if deps_writable else "ro"
             docker_cmd.extend(["-v", f"{Path(deps_dir).resolve()}:/workspace/deps:{mode}"])
+        for target, host in sorted(self.config.data_mounts.items()):
+            docker_cmd.extend(["-v", f"{Path(host).resolve()}:{target}:ro"])
 
         # 7. Image and Command
         docker_cmd.append(self.config.image_name)
@@ -284,11 +322,13 @@ class DockerSandboxRunner:
         target_script: str,
         script_args: list[str] | None = None,
         packages_dir: str | Path | None = None,
+        command: list[str] | None = None,
     ) -> SandboxExecutionResult:
         """Execute paper code inside the Docker sandbox.
 
         With `packages_dir`, dependencies are first installed in a separate install-phase container
-        (see _install_dependencies) and mounted read-only into the run.
+        (see _install_dependencies) and mounted read-only into the run. `command` replaces
+        `python <target_script> <script_args>`, for papers whose entry point is not a script (#166).
 
         Raises SandboxUnavailableError when Docker is unavailable, unless the config explicitly
         opts into unisolated local execution (allow_unsafe_local), which is only for trusted code.
@@ -296,8 +336,8 @@ class DockerSandboxRunner:
         output_dir = SANDBOX_RUNS_DIR / paper_id
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        target_cmd = ["python", f"/workspace/repo/{target_script}"]
-        if script_args:
+        target_cmd = list(command) if command else ["python", f"/workspace/repo/{target_script}"]
+        if script_args and not command:
             target_cmd.extend(script_args)
 
         if not self.is_docker_available():
@@ -307,6 +347,9 @@ class DockerSandboxRunner:
                     "Install and start Docker, or pass --allow-unsafe-local (SandboxConfig.allow_unsafe_local) "
                     "to run unisolated, only for code you trust."
                 )
+            if command or self.config.working_dir or self.config.writable_repo or self.config.data_mounts:
+                # The local fallback cannot honor a run setup (#166); running without it would be a different run.
+                raise SandboxUnavailableError("Docker is not available, and this paper's run setup needs the Docker sandbox.")
             logger.warning("Docker unavailable; running %s WITHOUT isolation (allow_unsafe_local)", paper_id)
             fallback_runner = ProcessSandboxRunner(timeout_seconds=self.config.timeout_seconds)
             return fallback_runner.run(
@@ -322,9 +365,37 @@ class DockerSandboxRunner:
         # phases; it is closed again afterwards, whatever happens.
         output_dir.chmod(0o777)
         try:
+            if self.config.writable_repo:
+                repo_dir = self._writable_copy(repo_dir, output_dir)
+            self._create_mount_points(repo_dir)
             return self._run_docker_phases(repo_dir, output_dir, target_cmd, packages_dir)
         finally:
             output_dir.chmod(0o755)
+
+    @staticmethod
+    def _writable_copy(repo_dir: str | Path, output_dir: Path) -> Path:
+        """A per-run copy of the repository that the sandbox user may write to (#166).
+
+        The staged repository itself stays read-only and unchanged. The copy lives in the run's output
+        directory, so whatever the paper writes next to its own files is kept with the run.
+        """
+        copy = Path(output_dir) / "repo_copy"
+        if copy.exists():
+            shutil.rmtree(copy)
+        shutil.copytree(repo_dir, copy, ignore=shutil.ignore_patterns(".git"))
+        for path in [copy, *copy.rglob("*")]:
+            if not path.is_symlink():
+                path.chmod(0o777 if path.is_dir() else 0o666)
+        return copy
+
+    def _create_mount_points(self, repo_dir: str | Path) -> None:
+        """Create the mount points of data mounts inside the repository on the host.
+
+        The repository is mounted read-only, so Docker could not create them inside the container.
+        """
+        for target in self.config.data_mounts:
+            if target.startswith("/workspace/repo/"):
+                (Path(repo_dir) / target[len("/workspace/repo/"):]).mkdir(parents=True, exist_ok=True)
 
     def _run_docker_phases(
         self,

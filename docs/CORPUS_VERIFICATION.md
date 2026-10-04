@@ -103,3 +103,25 @@ Not checked for any entry. Known obstacles from the READMEs:
 | `paper_008` | Title corrected to the linked paper (DANets). |
 
 All kept entries were pinned to a `repo_commit`.
+
+## 5. Fix or replace after Pilot 1 (2026-10-04, #166)
+
+Pilot 1 ran 0 of 6 papers (`docs/PILOT_WEEK2.md` section 11). That result stays in the record. **No paper was
+replaced.** Replacing papers because they fail would raise the success rate artificially, and the claims of all six
+papers were already extracted (plan stage 1). The owner decided on 2026-10-04 to fix `paper_002` to `paper_006` and
+to keep `paper_008` and report it as data not accessible.
+
+Each decision, its reason, and the sandbox options it needs are in the paper's `run_setup` entry in
+`data/seed_papers.json` (read by `src/sandbox/run_setup.py`). Datasets are fetched on the host with
+`scripts/fetch_data.py` and mounted read-only, because the sandbox has no network. **No paper has been run with
+its run setup yet.** Whether the fixes work is a question for Pilot 2 (#171).
+
+| Paper | Decision | What the run setup changes | Still open (not done) |
+|---|---|---|---|
+| `paper_002` | fix | Entry point: the notebook `tabpfn/RunFullDatasetAnalyses.ipynb`, run with `nbconvert`, from `tabpfn/`, on a writable copy (the notebook writes `results/`) | `nbconvert` and `ipykernel` are not in the repository's requirements. The notebook's OpenML-CC18 datasets are not yet listed for the data cache |
+| `paper_003` | fix | The dataset archive (4.07 GiB, README "Data") is fetched on the host and mounted as `data/` | — |
+| `paper_004` | fix | Runs on a writable per-run copy (it writes next to its config). `data.tar` (2.88 GiB) is mounted as `data/` | — |
+| `paper_005` | fix | Starts in `results/` (README: `cd results/`) | The `fastsk` C++ extension needs a compiler and a build step that runs package code; both are owner decisions. The `python-dateutil` / `pandas` conflict is in the repository's own requirements |
+| `paper_006` | fix | OpenML dataset 1461 is fetched on the host into an OpenML cache and mounted at `~/.openml/cache` | Not checked: whether openml 0.11.0 reads the cache without contacting the server |
+| `paper_008` | keep, report as `DATA_NOT_ACCESSIBLE` | The pilot command unchanged | — (the split files `train_idx.csv`, `valid_idx.csv`, and `test_idx.csv` are not published; this is a finding about the paper) |
+

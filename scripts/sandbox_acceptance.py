@@ -19,6 +19,10 @@ paper runs) and prints the command evidence for each check:
   10. numpy    - `pip show numpy` in the image satisfies the Dockerfile floor numpy>=1.24.0
   11. broken   - a requirement that does not exist makes the install phase fail and the run report
                  dependency_install_status FAILED
+  12-14         resource use recorded, conda-only repository, installed versions (see the code)
+  15. run setup - a paper's run setup (#166): the run starts in a repository subfolder, writes to a
+                 writable per-run copy of the repository (the staged repository is unchanged), and reads
+                 a read-only data mount from the host cache
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
@@ -342,6 +346,42 @@ def main():
     results["14 installed versions recorded"] = (
         isinstance(installed, list) and {"name": "toolz", "version": "0.12.1"} in
         [{"name": x.get("name"), "version": x.get("version")} for x in installed]
+    )
+
+    # 15. run setup (#166): working directory, writable per-run copy, read-only data mount
+    setup_repo = Path(tempfile.mkdtemp(prefix="acceptance_setup_repo_"))
+    (setup_repo / "sub").mkdir()
+    (setup_repo / "sub" / "probe_runsetup.py").write_text(
+        "import os\n"
+        "print(f'cwd={os.getcwd()}')\n"
+        "open('written_by_paper.txt', 'w').write('ok')\n"
+        "print('written next to the script: ok')\n"
+        "print('data: ' + open('/workspace/repo/data/X.csv').read().strip())\n"
+        "try:\n"
+        "    open('/workspace/repo/data/new.txt', 'w')\n"
+        "    print('data writable: True')\n"
+        "except OSError as exc:\n"
+        "    print(f'data writable: False ({exc.strerror})')\n"
+    )
+    for path in [setup_repo, *setup_repo.rglob("*")]:
+        path.chmod(0o755 if path.is_dir() else 0o644)
+    data_cache = Path(tempfile.mkdtemp(prefix="acceptance_data_cache_"))
+    (data_cache / "X.csv").write_text("a,b\n1,2\n")
+    data_cache.chmod(0o755)
+    (data_cache / "X.csv").chmod(0o644)
+    setup_runner = DockerSandboxRunner(SandboxConfig(timeout_seconds=120, python_version=args.python_version,
+                                                     working_dir="sub", writable_repo=True,
+                                                     data_mounts={"data": str(data_cache)}))
+    r, meta = run_probe(setup_runner, setup_repo, "sub/probe_runsetup.py", "acceptance_runsetup")
+    copy_file = SANDBOX_RUNS_DIR / "acceptance_runsetup" / "repo_copy" / "sub" / "written_by_paper.txt"
+    show("15. Run setup: working directory, writable copy, read-only data", r.command_executed,
+         "\n".join([r.stdout.strip(), *summary(r, meta),
+                    f"file in the per-run copy: {copy_file.exists()}",
+                    f"file in the staged repository: {(setup_repo / 'sub' / 'written_by_paper.txt').exists()}"]))
+    results["15 run setup (working dir, writable copy, read-only data)"] = (
+        r.status == "COMPLETED" and "cwd=/workspace/repo/sub" in r.stdout and "data: a,b" in r.stdout
+        and "data writable: False" in r.stdout and copy_file.exists()
+        and not (setup_repo / "sub" / "written_by_paper.txt").exists()
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only
