@@ -1,0 +1,168 @@
+{
+  "rule": "docs/DECISIONS.md D-005",
+  "questions": 16,
+  "agreements": 16,
+  "disagreements": 0,
+  "rows": [
+    {
+      "paper_id": "paper_002",
+      "query_id": "mean_roc_auc",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.934,
+      "b": 0.934,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_002",
+      "query_id": "inference_seconds",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.6172,
+      "b": 0.6172,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_003",
+      "query_id": "ft_transformer_rmse",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.459,
+      "b": 0.459,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_003",
+      "query_id": "resnet_rmse",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.486,
+      "b": 0.486,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_003",
+      "query_id": "xgboost_rmse",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.433,
+      "b": 0.433,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_004",
+      "query_id": "tabr_average_rank",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 1.3,
+      "b": 1.3,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_004",
+      "query_id": "ft_transformer_average_rank",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_004",
+      "query_id": "xgboost_average_rank",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 2.5,
+      "b": 2.5,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_005",
+      "query_id": "ep3602_auroc",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_005",
+      "query_id": "ep3602_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_005",
+      "query_id": "kernel_speedup_factor",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_006",
+      "query_id": "arcene_auroc",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.9104,
+      "b": 0.9104,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_006",
+      "query_id": "bank_marketing_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_006",
+      "query_id": "xgboost_arcene_auroc",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.8141,
+      "b": 0.8141,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_008",
+      "query_id": "forest_covertype_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_008",
+      "query_id": "higgs_auroc",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    }
+  ]
+}
