@@ -1,0 +1,94 @@
+{
+  "paper_id": "paper_002",
+  "pdf_url": "https://arxiv.org/pdf/2207.01848v6",
+  "pdf_sha256": "97796b6e6b134b200555a7ebbacea2f6daecb9ab309279ba50d915d5ac5c9df6",
+  "pdf_text_extractor": "pypdf 6.19.0",
+  "questions": "data/claim_queries/paper_002.json",
+  "protocol": "docs/AGENT_EXTRACTION.md",
+  "extractions": {
+    "A": {
+      "method": "Claude Code agent, pass A: searched each paper for the question's metric and dataset terms, then read the matching table or sentence in the pypdf page text (docs/AGENT_EXTRACTION.md).",
+      "made_at": "2026-10-04T15:21:17+03:00",
+      "answers": {
+        "mean_roc_auc": {
+          "status": "found",
+          "reason": "Table 1 (18 numerical OpenML-CC18 datasets), column TabPFN (7th of 8). Other value: Table 2 on 30 datasets including categorical features, TabPFN 0.894 ±.01 (page 18).",
+          "claim": {
+            "metric_name": "mean_roc_auc_ovo",
+            "value_as_printed": "0.934±.0086",
+            "unit": "fraction",
+            "dataset": "OpenML-CC18",
+            "model_variant": "TabPFN",
+            "split": "not_stated",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
+            "confidence": 0.8,
+            "value_normalized": 0.934
+          }
+        },
+        "inference_seconds": {
+          "status": "found",
+          "reason": "The paper reports TabPFN's time as tune + train + predict in one step (Table 1, row 'Mean time (s)'); the GPU line is used. Other values: 37.59 s on CPU (Table 1), 0.62s on GPU (Figure 5 caption), 4.4 seconds per dataset on one CPU (OpenML-AutoML benchmark, page 9), 0.4 seconds (conclusion, page 9).",
+          "claim": {
+            "metric_name": "tune_train_predict_seconds",
+            "value_as_printed": "0.6172",
+            "unit": "seconds",
+            "dataset": "OpenML-CC18",
+            "model_variant": "TabPFN",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
+            "confidence": 0.5,
+            "value_normalized": 0.6172
+          }
+        }
+      }
+    },
+    "B": {
+      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
+      "made_at": "2026-10-04T15:21:58+03:00",
+      "answers": {
+        "mean_roc_auc": {
+          "status": "found",
+          "reason": "Row 'Mean AUC OVO' of Table 1, 7th of 8 columns (header: LightGBM CatBoost XGBoost ASKL2.0 AutoGluon TabPFN n.e. TabPFN TabPFN + AutoGluon). Also printed: 0.894 ±.01 in Table 2 (30 datasets, page 18).",
+          "claim": {
+            "metric_name": "mean_roc_auc_ovo",
+            "value_as_printed": "0.934±.0086",
+            "unit": "fraction",
+            "dataset": "OpenML-CC18",
+            "model_variant": "TabPFN",
+            "split": "not_stated",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
+            "confidence": 0.8,
+            "value_normalized": 0.934
+          }
+        },
+        "inference_seconds": {
+          "status": "found",
+          "reason": "TabPFN trains and predicts in one step (page 18), so it has no separate inference time; Table 1 gives its joint time, 0.6172 on GPU and 37.59 on CPU. Table 2's separate 'Predict (s)' values are for the baselines only. Also printed: 0.62s (Figure 5 caption), 4.374 (CPU) in Table 3 (page 19), 0.4 seconds (conclusion).",
+          "claim": {
+            "metric_name": "tune_train_predict_seconds",
+            "value_as_printed": "0.6172",
+            "unit": "seconds",
+            "dataset": "OpenML-CC18",
+            "model_variant": "TabPFN",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)\n(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
+            "confidence": 0.5,
+            "value_normalized": 0.6172
+          }
+        }
+      }
+    }
+  }
+}

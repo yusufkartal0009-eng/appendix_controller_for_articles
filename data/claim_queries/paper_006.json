@@ -1,0 +1,10 @@
+{
+  "paper_id": "paper_006",
+  "pdf_url": "https://arxiv.org/pdf/2106.01342v1",
+  "note": "Queries are written from the seed entry's claim names and cited sources (data/seed_papers.json) without the seed values. The PDF is arXiv version 1, as in docs/CORPUS_VERIFICATION.md.",
+  "queries": [
+    {"query_id": "arcene_auroc", "question": "AUROC of SAINT on the Arcene dataset."},
+    {"query_id": "bank_marketing_accuracy", "question": "Accuracy of SAINT on the Bank Marketing dataset."},
+    {"query_id": "xgboost_arcene_auroc", "question": "AUROC of XGBoost on the Arcene dataset."}
+  ]
+}

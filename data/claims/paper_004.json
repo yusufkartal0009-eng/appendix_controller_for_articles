@@ -1,0 +1,104 @@
+{
+  "paper_id": "paper_004",
+  "pdf_url": "https://arxiv.org/pdf/2307.14338v2",
+  "pdf_sha256": "f6855570a0d96fcc445d355ab10f320f192d5100344d24b08c7308e5377a32fb",
+  "pdf_text_extractor": "pypdf 6.19.0",
+  "questions": "data/claim_queries/paper_004.json",
+  "protocol": "docs/AGENT_EXTRACTION.md",
+  "extractions": {
+    "A": {
+      "method": "Claude Code agent, pass A: searched each paper for the question's metric and dataset terms, then read the matching table or sentence in the pypdf page text (docs/AGENT_EXTRACTION.md).",
+      "made_at": "2026-10-04T15:21:17+03:00",
+      "answers": {
+        "tabr_average_rank": {
+          "status": "found",
+          "reason": "Table 3 (single models on the default benchmark), column 'Avg. Rank'. Other values: 1.3± 0.9 (ensembles vs GBDT, Table 4), 1.2± 0.6 (Table 11).",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "1.3± 0.6",
+            "unit": "none",
+            "dataset": "default benchmark",
+            "model_variant": "TabR",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "TabR 0.862 0 .400 3.105 0.870 0 .133 0 .825 0 .729 0 .676 1 .690 0 .976 0.750 1.3± 0.6",
+            "confidence": 0.8,
+            "value_normalized": 1.3
+          }
+        },
+        "ft_transformer_average_rank": {
+          "status": "not_found",
+          "reason": "FT-Transformer occurs only in the introduction (page 1) and in its hyperparameter space (appendix D.10, page 23); no table reports an average rank for it.",
+          "claim": null
+        },
+        "xgboost_average_rank": {
+          "status": "found",
+          "reason": "XGBoost appears only in the comparison of ensembles with GBDT. Table 4, tuned hyperparameters, column 'Avg. Rank'. Other values: 3.4± 0.9 (default, Table 4), 1.9± 0.7 (Table 11).",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "2.5± 0.9",
+            "unit": "none",
+            "dataset": "default benchmark",
+            "model_variant": "XGBoost",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 4",
+            "page": 7,
+            "source_quote": "XGBoost 0.861 0 .432 3 .164 0.872 0.136 0.832 0.726 0 .680 1 .769 0 .971 0 .741 2.5± 0.9",
+            "confidence": 0.6,
+            "value_normalized": 2.5
+          }
+        }
+      }
+    },
+    "B": {
+      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
+      "made_at": "2026-10-04T15:21:58+03:00",
+      "answers": {
+        "tabr_average_rank": {
+          "status": "found",
+          "reason": "Row TabR of Table 3 (single models), last column 'Avg. Rank'. Also printed: 1.3± 0.9 (Table 4, ensembles) and 1.2± 0.6 (Table 11).",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "1.3± 0.6",
+            "unit": "none",
+            "dataset": "default benchmark",
+            "model_variant": "TabR",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "TabR 0.862 0 .400 3.105 0.870 0 .133 0 .825 0 .729 0 .676 1 .690 0 .976 0.750 1.3± 0.6",
+            "confidence": 0.8,
+            "value_normalized": 1.3
+          }
+        },
+        "ft_transformer_average_rank": {
+          "status": "not_found",
+          "reason": "No row for FT-Transformer in any table; the name occurs only on page 1 and in appendix D.10 (hyperparameters, page 23).",
+          "claim": null
+        },
+        "xgboost_average_rank": {
+          "status": "found",
+          "reason": "XGBoost has no row in Table 3; Table 4 (ensembles vs GBDT), tuned XGBoost row, last column 'Avg. Rank'. Also printed: 3.4± 0.9 (default) and 1.9± 0.7 (Table 11). Ranks are relative to each table's set of models.",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "2.5± 0.9",
+            "unit": "none",
+            "dataset": "default benchmark",
+            "model_variant": "XGBoost",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 4",
+            "page": 7,
+            "source_quote": "XGBoost 0.861 0 .432 3 .164 0.872 0.136 0.832 0.726 0 .680 1 .769 0 .971 0 .741 2.5± 0.9",
+            "confidence": 0.6,
+            "value_normalized": 2.5
+          }
+        }
+      }
+    }
+  }
+}

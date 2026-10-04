@@ -1,0 +1,130 @@
+{
+  "paper_id": "paper_003",
+  "pdf_url": "https://arxiv.org/pdf/2106.11959v5",
+  "pdf_sha256": "f2faa32ffd8c15ed8534677f978dc02730fdbe1f94e9c9557ada6aa19163478d",
+  "pdf_text_extractor": "pypdf 6.19.0",
+  "questions": "data/claim_queries/paper_003.json",
+  "protocol": "docs/AGENT_EXTRACTION.md",
+  "extractions": {
+    "A": {
+      "method": "Claude Code agent, pass A: searched each paper for the question's metric and dataset terms, then read the matching table or sentence in the pypdf page text (docs/AGENT_EXTRACTION.md).",
+      "made_at": "2026-10-04T15:21:17+03:00",
+      "answers": {
+        "ft_transformer_rmse": {
+          "status": "found",
+          "reason": "Table 2 (single models, tuned), column CA (RMSE). Other values: 0.448 (ensemble, Tables 3 and 4), 0.454 (ensemble, default, Table 4), 0.469±3.8e-3 (single, default, Table 8).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.459",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "FT-T",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "FT-T 0.459 0 .859 0.391 0.732",
+            "confidence": 0.9,
+            "value_normalized": 0.459
+          }
+        },
+        "resnet_rmse": {
+          "status": "found",
+          "reason": "Table 2 (single models, tuned), column CA (RMSE). Other value: 0.478 (ensemble, Tables 3 and 4).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.486",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "ResNet",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "ResNet 0.486 0 .854 0.396 0.728",
+            "confidence": 0.9,
+            "value_normalized": 0.486
+          }
+        },
+        "xgboost_rmse": {
+          "status": "found",
+          "reason": "XGBoost is not in Table 2 (deep models only). Single tuned model from Table 8 (appendix), column CA. Other values: 0.462 (default) and 0.431 (tuned ensemble) in Table 4; 0.462±0.0 (default) and 0.431±3.6e-4 (ensemble) in Tables 8 and 9.",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.433±1.6e-3",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "XGBoost",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 8",
+            "page": 15,
+            "source_quote": "XGBoost 0.433±1.6e-3 0.872±4.6e-4",
+            "confidence": 0.7,
+            "value_normalized": 0.433
+          }
+        }
+      }
+    },
+    "B": {
+      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
+      "made_at": "2026-10-04T15:21:58+03:00",
+      "answers": {
+        "ft_transformer_rmse": {
+          "status": "found",
+          "reason": "Row FT-T of Table 2, first column CA (RMSE, lower is better). Also printed: 0.448 and 0.454 for ensembles (Tables 3, 4, 9), 0.469±3.8e-3 default (Table 8).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.459",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "FT-T",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "FT-T 0.459 0 .859 0.391 0.732 0 .729 0.960 0.8982 8.855 0.970 0.756 0 .746 1.8 (1.2)",
+            "confidence": 0.9,
+            "value_normalized": 0.459
+          }
+        },
+        "resnet_rmse": {
+          "status": "found",
+          "reason": "Row ResNet of Table 2, first column CA. Also printed: 0.478 for ensembles (Tables 3, 4, 9) and 0.486±2.9e-3 (Table 8).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.486",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "ResNet",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "ResNet 0.486 0 .854 0.396 0.728 0 .727 0.963 0.8969 8 .846 0 .964 0 .757 0 .748 3.3 (1.8)",
+            "confidence": 0.9,
+            "value_normalized": 0.486
+          }
+        },
+        "xgboost_rmse": {
+          "status": "found",
+          "reason": "No XGBoost row in Table 2. Single tuned model: Table 8, first column CA. Also printed: 0.462 default and 0.431 tuned ensembles (Table 4), 0.431±3.6e-4 (Table 9), 0.433 (Table 11, tuning budgets).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.433±1.6e-3",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "XGBoost",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 8",
+            "page": 15,
+            "source_quote": "XGBoost 0.433±1.6e-3 0.872±4.6e-4 0.375±1.2e-3 0.721±1.0e-3 0.727±1.0e-3",
+            "confidence": 0.7,
+            "value_normalized": 0.433
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "paper_id": "paper_004",
+  "pdf_url": "https://arxiv.org/pdf/2307.14338v2",
+  "note": "Queries are written from the seed entry's claim names and cited sources (data/seed_papers.json) without the seed values. The PDF is arXiv version 2, as in docs/CORPUS_VERIFICATION.md.",
+  "queries": [
+    {"query_id": "tabr_average_rank", "question": "Average rank of TabR over the benchmark datasets in the paper's overall comparison."},
+    {"query_id": "ft_transformer_average_rank", "question": "Average rank of FT-Transformer over the benchmark datasets in the paper's overall comparison."},
+    {"query_id": "xgboost_average_rank", "question": "Average rank of XGBoost over the benchmark datasets in the paper's overall comparison."}
+  ]
+}

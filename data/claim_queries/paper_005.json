@@ -1,0 +1,10 @@
+{
+  "paper_id": "paper_005",
+  "pdf_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v2.full.pdf",
+  "note": "Queries are written from the seed entry's claim names and cited sources (data/seed_papers.json) without the seed values. The PDF is bioRxiv version 2 (2020-06-30), as in docs/CORPUS_VERIFICATION.md.",
+  "queries": [
+    {"query_id": "ep3602_auroc", "question": "Test AUROC of FastSK on the EP3602 dataset."},
+    {"query_id": "ep3602_accuracy", "question": "Test accuracy of FastSK on the EP3602 dataset."},
+    {"query_id": "kernel_speedup_factor", "question": "Kernel computation speedup factor of FastSK shown in Figure 4."}
+  ]
+}
