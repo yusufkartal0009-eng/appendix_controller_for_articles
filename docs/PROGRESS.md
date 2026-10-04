@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Python Version per Paper (2026-10-04 18:48 +03:00, Issue #158, plan step 2.1)
+- `docker/Dockerfile.sandbox` takes `--build-arg PYTHON_VERSION` (3.11 and 3.8). `SandboxConfig.python_version` selects the image (`repro-radar-sandbox:latest` for 3.11, `repro-radar-sandbox:py3.8`) and the site-packages path; bundling downloads wheels for that version; `run_report.json` records `python_version` and `image`.
+- `data/seed_papers.json`: `paper_002` and `paper_003` run on Python 3.8 (`python_version` with its source); the others stay on 3.11 (`paper_004`/`paper_006` are conda-only, #159). The pilot runner follows the field.
+- CI runs the real-Docker acceptance checks for both images. Re-running `paper_002`/`paper_003` in real Docker is left for Pilot 2 (#171): no local Docker yet (#172).
+
 ### Blind Packet for an Independent Pass B (2026-10-04 18:41 +03:00, Issue #186)
 - `scripts/make_blind_packet.py` writes a self-contained folder outside the repository (questions, rules, a schema description without real values, the pinned PDFs' page text, an answer template, and a README with the prompt) for a new session that cannot see pass A. `scripts/import_pass.py` checks the filled answers (schema, quote on the cited page) and stores them as pass B. A packet was generated at `C:\Users\USER\blind_pass_b` (6 papers, 18 questions); a leak check found none of the 12 stored answer values outside the paper texts.
 

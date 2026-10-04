@@ -353,3 +353,16 @@ def test_output_dir_writable_by_container_only_during_the_run(tmp_path, monkeypa
 
     assert modes_during_run and all(m & 0o002 for m in modes_during_run), [oct(m) for m in modes_during_run]
     assert (tmp_path / "runs" / "out_perm").stat().st_mode & 0o002 == 0
+
+
+def test_python_version_selects_the_image_and_site_packages():
+    """#158: one sandbox image per supported Python version."""
+    assert SandboxConfig().image_name == "repro-radar-sandbox:latest"  # 3.11 keeps the historic tag
+    config = SandboxConfig(python_version="3.8")
+    assert config.image_name == "repro-radar-sandbox:py3.8"
+    cmd = DockerSandboxRunner(config).build_docker_command("/repo", "/out", ["python", "x.py"])
+    assert "repro-radar-sandbox:py3.8" in cmd
+    assert any("/workspace/home/.local/lib/python3.8/site-packages" in a for a in cmd)
+    assert SandboxConfig(python_version="3.8", image_name="custom:tag").image_name == "custom:tag"
+    with pytest.raises(ValueError, match="no sandbox image for Python 3.7"):
+        SandboxConfig(python_version="3.7")

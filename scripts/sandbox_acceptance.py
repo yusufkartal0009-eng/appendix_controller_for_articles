@@ -44,9 +44,11 @@ if str(project_root) not in sys.path:
 
 from src.config import SANDBOX_RUNS_DIR
 from src.sandbox.runner import (
+    DEFAULT_PYTHON_VERSION,
     DockerSandboxRunner,
     SandboxConfig,
     SandboxUnavailableError,
+    image_for,
 )
 
 PROBES = {
@@ -191,13 +193,16 @@ def summary(result, meta):
 def main():
     parser = argparse.ArgumentParser(description="Sandbox acceptance checks (requires Docker)")
     parser.add_argument("--wheel-dir", required=True, help="Directory with wheels for toolz==0.12.1 and ujson==5.10.0 (neither is in the image)")
+    parser.add_argument("--python-version", default=DEFAULT_PYTHON_VERSION,
+                        help="Python version of the sandbox image to check (#158); the image must be built first")
     args = parser.parse_args()
+    print(f"Sandbox image: {image_for(args.python_version)} (Python {args.python_version})")
 
     repo = Path(tempfile.mkdtemp(prefix="acceptance_repo_"))
     for name, body in PROBES.items():
         (repo / name).write_text(body)
     repo.chmod(0o755)
-    runner = DockerSandboxRunner(SandboxConfig(timeout_seconds=120))
+    runner = DockerSandboxRunner(SandboxConfig(timeout_seconds=120, python_version=args.python_version))
     results = {}
 
     # 1. identity
@@ -216,7 +221,7 @@ def main():
     results["3 read-only root"] = r.status == "COMPLETED"
 
     # 4. timeout
-    short = DockerSandboxRunner(SandboxConfig(timeout_seconds=5))
+    short = DockerSandboxRunner(SandboxConfig(timeout_seconds=5, python_version=args.python_version))
     r, meta = run_probe(short, repo, "probe_sleep.py", "acceptance_timeout")
     show("4. Timeout (limit 5 s, script sleeps 60 s)", r.command_executed, "\n".join([r.stdout.strip(), *summary(r, meta)]))
     results["4 timeout"] = r.status == "TIMEOUT" and meta.get("status") == "TIMEOUT" and meta.get("duration_seconds", 0) > 0
@@ -249,7 +254,8 @@ def main():
     )
 
     # 8. OOM: 256 MiB limit, the probe tries to hold 2 GiB
-    small = DockerSandboxRunner(SandboxConfig(timeout_seconds=60, memory_limit="256m", memory_swap="256m"))
+    small = DockerSandboxRunner(SandboxConfig(timeout_seconds=60, memory_limit="256m", memory_swap="256m",
+                                              python_version=args.python_version))
     r, meta = run_probe(small, repo, "probe_oom.py", "acceptance_oom")
     show("8. Memory limit (256 MiB, probe allocates up to 2 GiB)", r.command_executed,
          "\n".join([r.stdout.strip()[-400:], *summary(r, meta)]))

@@ -356,3 +356,14 @@ def test_run_report_install_status_is_unknown_without_execution_meta(tmp_path):
     with patch("src.sandbox.stager.DockerSandboxRunner.run", return_value=fake):
         report = stager.execute_staged(staged, target_script="reproduce.py")
     assert report["dependency_install_status"] == "UNKNOWN"
+
+
+def test_bundling_downloads_wheels_for_the_papers_python_version(tmp_path, monkeypatch):
+    """#158: pip download targets the Python version of the paper's sandbox image."""
+    stager, staged = _stage_with_requirements(tmp_path, {"requirements.txt": "toolz==0.12.1\n"})
+    calls = []
+    monkeypatch.setattr("src.sandbox.stager.subprocess.run",
+                        lambda cmd, **kw: calls.append(cmd) or subprocess.CompletedProcess(cmd, 0, "", ""))
+    result = stager.bundle_dependencies(staged, python_version="3.8")
+    assert calls[0][calls[0].index("--python-version") + 1] == "3.8"
+    assert result["python_version"] == "3.8"

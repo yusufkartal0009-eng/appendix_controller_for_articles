@@ -14,6 +14,7 @@ from typing import Any
 
 from src.metric_extractor import MetricExtractor
 from src.sandbox.runner import (
+    DEFAULT_PYTHON_VERSION,
     DockerSandboxRunner,
     SandboxConfig,
     SandboxExecutionResult,
@@ -231,6 +232,7 @@ class RepoStager:
         self,
         staged: StagedRepo,
         timeout: int = 180,
+        python_version: str = DEFAULT_PYTHON_VERSION,
     ) -> dict[str, Any]:
         """Download wheel archives for offline installation inside network-isolated sandbox."""
         bundle_dir = self.staging_root / f"{staged.paper_id}_packages"
@@ -246,7 +248,7 @@ class RepoStager:
             }
 
         req_paths = [staged.staged_path / name for name in staged.manifest.requirements_files]
-        cmd = self._pip_download_command(bundle_dir)
+        cmd = self._pip_download_command(bundle_dir, python_version)
         for req in req_paths:
             cmd.extend(["-r", str(req)])
 
@@ -254,10 +256,11 @@ class RepoStager:
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
             needs_sdist_build: list[dict[str, str]] = []
             if res.returncode != 0:
-                needs_sdist_build = self._find_requirements_without_wheels(req_paths, bundle_dir, timeout)
+                needs_sdist_build = self._find_requirements_without_wheels(req_paths, bundle_dir, timeout, python_version)
             wheels = list(bundle_dir.glob("*.whl"))
             return {
                 "status": "SUCCESS" if res.returncode == 0 else "PARTIAL",
+                "python_version": python_version,
                 "wheel_count": len(wheels),
                 "bundle_dir": str(bundle_dir),
                 "requirements_files": list(staged.manifest.requirements_files),
@@ -275,8 +278,8 @@ class RepoStager:
             }
 
     @staticmethod
-    def _pip_download_command(bundle_dir: Path) -> list[str]:
-        # Wheels are installed in the Linux sandbox image (CPython 3.11, glibc), not on the host, so
+    def _pip_download_command(bundle_dir: Path, python_version: str = DEFAULT_PYTHON_VERSION) -> list[str]:
+        # Wheels are installed in the Linux sandbox image (CPython `python_version`, glibc), not on the host, so
         # download for that platform. Binary wheels only: installing a wheel runs no package code,
         # while building an sdist would execute its setup.py on the host.
         return [
@@ -285,12 +288,12 @@ class RepoStager:
             "--only-binary=:all:",
             "--platform", "manylinux_2_28_x86_64",
             "--platform", "manylinux2014_x86_64",
-            "--python-version", "3.11",
+            "--python-version", python_version,
             "--implementation", "cp",
         ]
 
     def _find_requirements_without_wheels(
-        self, req_paths: list[Path], bundle_dir: Path, timeout: int
+        self, req_paths: list[Path], bundle_dir: Path, timeout: int, python_version: str = DEFAULT_PYTHON_VERSION
     ) -> list[dict[str, str]]:
         """Probe each requirement alone (binary-only, --no-deps) to name the ones that have no wheel.
 
@@ -299,7 +302,7 @@ class RepoStager:
         flagged: list[dict[str, str]] = []
         for req_path in req_paths:
             for requirement in self._requirement_lines(req_path):
-                probe = self._pip_download_command(bundle_dir) + ["--no-deps", requirement]
+                probe = self._pip_download_command(bundle_dir, python_version) + ["--no-deps", requirement]
                 try:
                     res = subprocess.run(probe, capture_output=True, text=True, timeout=timeout, check=False)
                 except (subprocess.SubprocessError, OSError) as exc:
@@ -339,6 +342,7 @@ class RepoStager:
             else:
                 raise ValueError(f"No executable script specified or found in staged repo: {staged.staged_path}")
 
+        config = config or SandboxConfig()
         runner = DockerSandboxRunner(config=config)
         packages_dir = staged.bundle_dir if (staged.bundle_dir and staged.bundle_dir.exists()) else None
 
@@ -370,6 +374,9 @@ class RepoStager:
             "source": staged.source,
             "commit_hash": staged.commit_hash,
             "target_script": target_script,
+            # Sandbox image and its Python version (#158)
+            "python_version": config.python_version,
+            "image": config.image_name,
             "status": result.status,
             "exit_code": result.exit_code,
             "duration_seconds": round(result.duration_seconds, 3),

@@ -6,7 +6,9 @@
 #   - Pre-baked core computational dependencies for offline evaluation (--network none)
 # ==============================================================================
 
-FROM python:3.11-slim
+ARG PYTHON_VERSION=3.11
+FROM python:${PYTHON_VERSION}-slim
+ARG PYTHON_VERSION
 
 # Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -16,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     HOME=/workspace/home \
     PYTHONUSERBASE=/workspace/home/.local \
     PATH="/workspace/home/.local/bin:${PATH}" \
-    PYTHONPATH="/workspace/repo:/workspace/home/.local/lib/python3.11/site-packages:${PYTHONPATH}"
+    PYTHONPATH="/workspace/repo:/workspace/home/.local/lib/python${PYTHON_VERSION}/site-packages:${PYTHONPATH}"
 
 # Install essential execution dependencies & clean apt cache
 RUN apt-get update && apt-get install -y --no-install-recommends \

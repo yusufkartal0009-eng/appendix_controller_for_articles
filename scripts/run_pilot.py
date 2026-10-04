@@ -27,7 +27,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from src.config import SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
-from src.sandbox.runner import SandboxConfig
+from src.sandbox.runner import DEFAULT_PYTHON_VERSION, SandboxConfig
 from src.sandbox.stager import RepoStager
 
 # docs/PILOT_WEEK2.md section 4: script arguments and environment per paper (frozen with the protocol).
@@ -127,11 +127,14 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     }
 
     start = time.time()
-    bundle = stager.bundle_dependencies(staged, timeout=BUNDLE_TIMEOUT_SECONDS)
+    # Python version of the paper's sandbox image (data/seed_papers.json, #158; 3.11 when not set)
+    python_version = entry.get("python_version", DEFAULT_PYTHON_VERSION)
+    record["python_version"] = python_version
+    bundle = stager.bundle_dependencies(staged, timeout=BUNDLE_TIMEOUT_SECONDS, python_version=python_version)
     record["bundle"] = {**bundle, "duration_seconds": round(time.time() - start, 3)}
 
     start = time.time()
-    config = SandboxConfig(**PILOT_LIMITS, env_vars=dict(spec["env"]))
+    config = SandboxConfig(**PILOT_LIMITS, env_vars=dict(spec["env"]), python_version=python_version)
     report = stager.execute_staged(staged, target_script=entry["target_script"], script_args=list(spec["args"]), config=config)
     record["sandbox_duration_seconds"] = round(time.time() - start, 3)
     record["run_report"] = "run_report.json"
