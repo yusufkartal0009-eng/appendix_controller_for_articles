@@ -28,25 +28,46 @@
             "value_normalized": 0.934
           }
         },
-        "inference_seconds": {
+        "inference_seconds__gpu": {
           "status": "found",
-          "reason": "The paper reports TabPFN's time as tune + train + predict in one step (Table 1, row 'Mean time (s)'); the GPU line is used. Other values: 37.59 s on CPU (Table 1), 0.62s on GPU (Figure 5 caption), 4.4 seconds per dataset on one CPU (OpenML-AutoML benchmark, page 9), 0.4 seconds (conclusion, page 9).",
           "claim": {
+            "split": "not_stated",
+            "confidence": 0.7,
             "metric_name": "tune_train_predict_seconds",
             "value_as_printed": "0.6172",
             "unit": "seconds",
             "dataset": "OpenML-CC18",
             "model_variant": "TabPFN",
-            "split": "not_stated",
             "higher_is_better": false,
             "table_or_figure": "Table 1",
             "page": 8,
             "source_quote": "(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
-            "confidence": 0.5,
             "value_normalized": 0.6172
-          }
+          },
+          "reason": "Table 1, TabPFN column, GPU line of 'Mean time (s) (Tune + Train + Predict)'; TabPFN trains and predicts in one step. Revised on 2026-10-04 by owner decision 1 (#184)."
+        },
+        "inference_seconds__cpu": {
+          "status": "found",
+          "claim": {
+            "split": "not_stated",
+            "confidence": 0.7,
+            "metric_name": "tune_train_predict_seconds",
+            "value_as_printed": "37.59",
+            "unit": "seconds",
+            "dataset": "OpenML-CC18",
+            "model_variant": "TabPFN",
+            "higher_is_better": false,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)",
+            "value_normalized": 37.59
+          },
+          "reason": "Table 1, TabPFN column, CPU line of 'Mean time (s)'. Revised on 2026-10-04 by owner decision 1 (#184)."
         }
-      }
+      },
+      "revisions": [
+        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
+      ]
     },
     "B": {
       "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
@@ -70,25 +91,46 @@
             "value_normalized": 0.934
           }
         },
-        "inference_seconds": {
+        "inference_seconds__gpu": {
           "status": "found",
-          "reason": "TabPFN trains and predicts in one step (page 18), so it has no separate inference time; Table 1 gives its joint time, 0.6172 on GPU and 37.59 on CPU. Table 2's separate 'Predict (s)' values are for the baselines only. Also printed: 0.62s (Figure 5 caption), 4.374 (CPU) in Table 3 (page 19), 0.4 seconds (conclusion).",
           "claim": {
+            "split": "not_stated",
+            "confidence": 0.7,
             "metric_name": "tune_train_predict_seconds",
             "value_as_printed": "0.6172",
             "unit": "seconds",
             "dataset": "OpenML-CC18",
             "model_variant": "TabPFN",
-            "split": "not_stated",
             "higher_is_better": false,
             "table_or_figure": "Table 1",
             "page": 8,
-            "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)\n(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
-            "confidence": 0.5,
+            "source_quote": "(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
             "value_normalized": 0.6172
-          }
+          },
+          "reason": "Table 1, TabPFN column, GPU line of 'Mean time (s) (Tune + Train + Predict)'; TabPFN trains and predicts in one step. Revised on 2026-10-04 by owner decision 1 (#184)."
+        },
+        "inference_seconds__cpu": {
+          "status": "found",
+          "claim": {
+            "split": "not_stated",
+            "confidence": 0.7,
+            "metric_name": "tune_train_predict_seconds",
+            "value_as_printed": "37.59",
+            "unit": "seconds",
+            "dataset": "OpenML-CC18",
+            "model_variant": "TabPFN",
+            "higher_is_better": false,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)",
+            "value_normalized": 37.59
+          },
+          "reason": "Table 1, TabPFN column, CPU line of 'Mean time (s)'. Revised on 2026-10-04 by owner decision 1 (#184)."
         }
-      }
+      },
+      "revisions": [
+        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
+      ]
     }
   }
 }

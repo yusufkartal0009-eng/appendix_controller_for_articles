@@ -1,7 +1,7 @@
 {
   "rule": "docs/DECISIONS.md D-005",
-  "questions": 16,
-  "agreements": 16,
+  "questions": 18,
+  "agreements": 18,
   "disagreements": 0,
   "rows": [
     {
@@ -16,11 +16,21 @@
     },
     {
       "paper_id": "paper_002",
-      "query_id": "inference_seconds",
+      "query_id": "inference_seconds__gpu",
       "verdict": "agree_value",
       "agree": true,
       "a": 0.6172,
       "b": 0.6172,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_002",
+      "query_id": "inference_seconds__cpu",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 37.59,
+      "b": 37.59,
       "a_status": "found",
       "b_status": "found"
     },
@@ -146,7 +156,7 @@
     },
     {
       "paper_id": "paper_008",
-      "query_id": "forest_covertype_accuracy",
+      "query_id": "higgs_auroc",
       "verdict": "agree_not_found",
       "agree": true,
       "a": null,
@@ -156,13 +166,23 @@
     },
     {
       "paper_id": "paper_008",
-      "query_id": "higgs_auroc",
-      "verdict": "agree_not_found",
+      "query_id": "forest_covertype_accuracy__danet_20",
+      "verdict": "agree_value",
       "agree": true,
-      "a": null,
-      "b": null,
-      "a_status": "not_found",
-      "b_status": "not_found"
+      "a": 0.9723,
+      "b": 0.9723,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_008",
+      "query_id": "forest_covertype_accuracy__danet_32",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.9727,
+      "b": 0.9727,
+      "a_status": "found",
+      "b_status": "found"
     }
   ]
 }

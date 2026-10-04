@@ -8,7 +8,7 @@
 
 - **Questions:** `data/claim_queries/<paper_id>.json`, one question per claim in `data/seed_papers.json`, written from
   the claim's name and cited source **without the seed value**, so the expected answer cannot leak into the question.
-  6 papers, 16 questions.
+  6 papers, 16 seed claims; 18 questions after the owner's splits of 2026-10-04 (#184).
 - **Paper text:** the pypdf page text of the exact PDF named in the question file (`src/pdf_text.py`, W2), page by
   page. The PDF's SHA-256 is recorded with every extraction.
 - Nothing else: not `data/seed_papers.json`'s values, not `docs/CORPUS_VERIFICATION.md`, not the other extraction,
@@ -32,6 +32,13 @@
    a single model with the paper's own recommended setting, and say in `reason` which other values exist.
 8. Fields follow `docs/CLAIM_SCHEMA.md`; `value_normalized` is never written by hand, it is computed by
    `src/claim_schema.py`.
+9. **Owner decisions of 2026-10-04 (#184, `data/claims/owner_decisions.json`):**
+   - values measured on different hardware are separate claims (one question each, e.g. GPU and CPU time);
+   - model variants with different results are separate claims, distinguished by `model_variant` (e.g. DANet-20
+     and DANet-32);
+   - ranks that are compared must come from the same table; if no table holds both, the answer says they are not
+     comparable.
+   A question split by these rules keeps the seed claim it comes from in `seed_claim` (`<seed claim>__<variant>`).
 
 ## 3. Two extractions (A and B), and how independent they are
 

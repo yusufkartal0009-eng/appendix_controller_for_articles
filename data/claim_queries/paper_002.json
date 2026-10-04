@@ -3,7 +3,21 @@
   "pdf_url": "https://arxiv.org/pdf/2207.01848v6",
   "note": "Queries are written from the seed entry's claim names and cited sources (data/seed_papers.json) without the seed values. The PDF is arXiv version 6, as in docs/CORPUS_VERIFICATION.md.",
   "queries": [
-    {"query_id": "mean_roc_auc", "question": "Mean ROC AUC of TabPFN on the OpenML-CC18 datasets in the paper's main comparison."},
-    {"query_id": "inference_seconds", "question": "Inference time of TabPFN in seconds."}
+    {
+      "query_id": "mean_roc_auc",
+      "question": "Mean ROC AUC of TabPFN on the OpenML-CC18 datasets in the paper's main comparison."
+    },
+    {
+      "query_id": "inference_seconds__gpu",
+      "seed_claim": "inference_seconds",
+      "question": "Inference time of TabPFN in seconds, on GPU.",
+      "split_note": "Revised on 2026-10-04 by owner decision 1 (#184)."
+    },
+    {
+      "query_id": "inference_seconds__cpu",
+      "seed_claim": "inference_seconds",
+      "question": "Inference time of TabPFN in seconds, on CPU.",
+      "split_note": "Revised on 2026-10-04 by owner decision 1 (#184)."
+    }
   ]
 }

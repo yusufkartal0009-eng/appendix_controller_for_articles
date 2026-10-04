@@ -1,10 +1,10 @@
 {
   "guard": "src/quote_guard.py",
-  "answers": 32,
-  "found_claims": 18,
-  "auto_quote_match": 18,
+  "answers": 36,
+  "found_claims": 24,
+  "auto_quote_match": 24,
   "unverified": 0,
-  "from_table": 18,
+  "from_table": 24,
   "rows": [
     {
       "paper_id": "paper_002",
@@ -22,9 +22,22 @@
     {
       "paper_id": "paper_002",
       "pass": "A",
-      "query_id": "inference_seconds",
+      "query_id": "inference_seconds__gpu",
       "answer": "found",
       "value_as_printed": "0.6172",
+      "page": 8,
+      "status": "AUTO_QUOTE_MATCH",
+      "quote_match": "exact",
+      "value_match": "exact",
+      "from_table": true,
+      "reasons": []
+    },
+    {
+      "paper_id": "paper_002",
+      "pass": "A",
+      "query_id": "inference_seconds__cpu",
+      "answer": "found",
+      "value_as_printed": "37.59",
       "page": 8,
       "status": "AUTO_QUOTE_MATCH",
       "quote_match": "exact",
@@ -48,9 +61,22 @@
     {
       "paper_id": "paper_002",
       "pass": "B",
-      "query_id": "inference_seconds",
+      "query_id": "inference_seconds__gpu",
       "answer": "found",
       "value_as_printed": "0.6172",
+      "page": 8,
+      "status": "AUTO_QUOTE_MATCH",
+      "quote_match": "exact",
+      "value_match": "exact",
+      "from_table": true,
+      "reasons": []
+    },
+    {
+      "paper_id": "paper_002",
+      "pass": "B",
+      "query_id": "inference_seconds__cpu",
+      "answer": "found",
+      "value_as_printed": "37.59",
       "page": 8,
       "status": "AUTO_QUOTE_MATCH",
       "quote_match": "exact",
@@ -141,7 +167,7 @@
       "pass": "A",
       "query_id": "tabr_average_rank",
       "answer": "found",
-      "value_as_printed": "1.3± 0.6",
+      "value_as_printed": "1.3± 0.9",
       "page": 7,
       "status": "AUTO_QUOTE_MATCH",
       "quote_match": "exact",
@@ -173,7 +199,7 @@
       "pass": "B",
       "query_id": "tabr_average_rank",
       "answer": "found",
-      "value_as_printed": "1.3± 0.6",
+      "value_as_printed": "1.3± 0.9",
       "page": 7,
       "status": "AUTO_QUOTE_MATCH",
       "quote_match": "exact",
@@ -303,26 +329,66 @@
     {
       "paper_id": "paper_008",
       "pass": "A",
-      "query_id": "forest_covertype_accuracy",
+      "query_id": "higgs_auroc",
       "answer": "not_found"
     },
     {
       "paper_id": "paper_008",
       "pass": "A",
+      "query_id": "forest_covertype_accuracy__danet_20",
+      "answer": "found",
+      "value_as_printed": "97.23%±2e-4",
+      "page": 6,
+      "status": "AUTO_QUOTE_MATCH",
+      "quote_match": "exact",
+      "value_match": "exact",
+      "from_table": true,
+      "reasons": []
+    },
+    {
+      "paper_id": "paper_008",
+      "pass": "A",
+      "query_id": "forest_covertype_accuracy__danet_32",
+      "answer": "found",
+      "value_as_printed": "97.27%±5e-4",
+      "page": 6,
+      "status": "AUTO_QUOTE_MATCH",
+      "quote_match": "exact",
+      "value_match": "exact",
+      "from_table": true,
+      "reasons": []
+    },
+    {
+      "paper_id": "paper_008",
+      "pass": "B",
       "query_id": "higgs_auroc",
       "answer": "not_found"
     },
     {
       "paper_id": "paper_008",
       "pass": "B",
-      "query_id": "forest_covertype_accuracy",
-      "answer": "not_found"
+      "query_id": "forest_covertype_accuracy__danet_20",
+      "answer": "found",
+      "value_as_printed": "97.23%±2e-4",
+      "page": 6,
+      "status": "AUTO_QUOTE_MATCH",
+      "quote_match": "exact",
+      "value_match": "exact",
+      "from_table": true,
+      "reasons": []
     },
     {
       "paper_id": "paper_008",
       "pass": "B",
-      "query_id": "higgs_auroc",
-      "answer": "not_found"
+      "query_id": "forest_covertype_accuracy__danet_32",
+      "answer": "found",
+      "value_as_printed": "97.27%±5e-4",
+      "page": 6,
+      "status": "AUTO_QUOTE_MATCH",
+      "quote_match": "exact",
+      "value_match": "exact",
+      "from_table": true,
+      "reasons": []
     }
   ]
 }
