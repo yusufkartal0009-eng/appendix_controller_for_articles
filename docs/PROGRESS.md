@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 185 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 12 checks
+- **Tests:** 243 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 13 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
