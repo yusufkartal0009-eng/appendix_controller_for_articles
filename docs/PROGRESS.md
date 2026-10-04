@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Quote Guard Run on the Extractions (2026-10-04 15:32 +03:00, Issue #182, plan step 1.4)
+- `scripts/check_claims.py` runs the W4 guard (with the #162 repair) on every found claim of passes A and B against the pinned PDFs and writes `data/claims/guard_report.json`/`.md`. Result: 18 of 18 found claims `AUTO_QUOTE_MATCH` (all `exact`), 0 `UNVERIFIED`; all 18 come from tables, so all go to the owner in W7. A pass shows the quote is on the page, not that the value answers the question.
+
 ### Split Numbers Repaired, Table Claims Flagged (2026-10-04 15:29 +03:00, Issue #162, plan step 1.3)
 - `src/pdf_text.py`: `repair_split_numbers()` joins numbers pypdf split before the decimal point (`0 .850` → `0.850`); 1,213 occurrences in the seed PDFs (`paper_003` 226, `paper_004` 986, `paper_006` 1). The quote guard compares after the repair on both sides (match mode `split_numbers_repaired`), so a correctly retyped value is no longer rejected.
 - Table claims are flagged (`from_table`) and always go to the owner in W7; table structure is not reconstructed. Documented in `docs/PDF_TEXT_EXTRACTION.md` and `docs/CLAIM_SCHEMA.md`.
