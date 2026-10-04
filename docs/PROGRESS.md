@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Agent-Assisted Claim Extraction, Two Passes (2026-10-04 15:22 +03:00, Issue #131, plan step 1.1)
+- 16 questions (one per seed claim, written without the seed values) in `data/claim_queries/` for all 6 papers; pinned PDFs (arXiv `2207.01848v6`, `2106.11959v5`, `2307.14338v2`, `2106.01342v1`, `2112.02962v4`; bioRxiv `2020.04.21.053975v2`).
+- `docs/AGENT_EXTRACTION.md`: the rules (same as the API prompt, plus a rule for values printed in several places) and how independent the two passes are.
+- `data/claims/<paper_id>.json`: passes A and B. Both: 9 found, 7 not found (EP3602 x2, Figure 4 speedup, FT-Transformer rank in TabR, Bank accuracy in SAINT, DANet Forest row ambiguous, HIGGS). **Pass B is not independent:** same agent, same session (owner's instruction, no subagent); its re-search confirmed every A answer, so its values were taken over from A. Not approved: the quote guard (W4) and the owner (W5, W7) decide.
+
 ### D0 Dashboard Skeleton (2026-10-04 13:00 +03:00, Issue #170, plan stage 0b)
 - `src/web/app.py`: FastAPI app with `GET /api/v1/papers` (a real SQLAlchemy query: catalog fields plus each paper's latest run; an empty database gives `[]`) and a server-rendered page in the owner's chosen design (option A: light, plain table, system font). Seed claim values are never exposed (unverified). `python -m src.web` serves it on `127.0.0.1` only (D-006).
 - The owner chose option A out of three previews on 2026-10-04 (`AGENTS.md` §6.9). Screenshots of an empty, a one-row, and the local database are in `docs/evidence/d0/`.

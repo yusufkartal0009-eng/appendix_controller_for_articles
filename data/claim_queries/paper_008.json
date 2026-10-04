@@ -1,0 +1,9 @@
+{
+  "paper_id": "paper_008",
+  "pdf_url": "https://arxiv.org/pdf/2112.02962v4",
+  "note": "Queries are written from the seed entry's claim names (data/seed_papers.json) without the seed values.",
+  "queries": [
+    {"query_id": "forest_covertype_accuracy", "question": "Test accuracy of DANet on the Forest Cover Type dataset."},
+    {"query_id": "higgs_auroc", "question": "Test AUROC of DANet on the HIGGS dataset."}
+  ]
+}

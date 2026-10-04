@@ -1,0 +1,9 @@
+{
+  "paper_id": "paper_002",
+  "pdf_url": "https://arxiv.org/pdf/2207.01848v6",
+  "note": "Queries are written from the seed entry's claim names and cited sources (data/seed_papers.json) without the seed values. The PDF is arXiv version 6, as in docs/CORPUS_VERIFICATION.md.",
+  "queries": [
+    {"query_id": "mean_roc_auc", "question": "Mean ROC AUC of TabPFN on the OpenML-CC18 datasets in the paper's main comparison."},
+    {"query_id": "inference_seconds", "question": "Inference time of TabPFN in seconds."}
+  ]
+}
