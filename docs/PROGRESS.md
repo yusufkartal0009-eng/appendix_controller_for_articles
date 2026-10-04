@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### D0 Dashboard Skeleton (2026-10-04 13:00 +03:00, Issue #170, plan stage 0b)
+- `src/web/app.py`: FastAPI app with `GET /api/v1/papers` (a real SQLAlchemy query: catalog fields plus each paper's latest run; an empty database gives `[]`) and a server-rendered page in the owner's chosen design (option A: light, plain table, system font). Seed claim values are never exposed (unverified). `python -m src.web` serves it on `127.0.0.1` only (D-006).
+- The owner chose option A out of three previews on 2026-10-04 (`AGENTS.md` §6.9). Screenshots of an empty, a one-row, and the local database are in `docs/evidence/d0/`.
+- The local database was rebuilt from the current `data/seed_papers.json` (`cli.py init-db --reset`, then `scripts/load_pilot_runs.py`): 6 papers and their 6 pilot runs; the removed `paper_001` and `paper_007` are gone. The database file is not tracked.
+- `fastapi`, `uvicorn` (runtime) and `httpx` (tests) added. 6 tests in `tests/test_web_app.py`.
+
 ### Agents Point at the 2026-10-01 Plan (2026-10-03 20:55 +03:00, Issue #175)
 - `AGENTS.md` (living docs list, traceability line, §6.1 and §6.3) and `CLAUDE.md` now point at `docs/PLAN_2026-10-01.md` as the current work order; §6.3 states the plan's stage order. The status summary above, the milestone counts, and the `docs/DECISIONS.md` header were refreshed.
 - On the owner's decision: the unmerged gold-set branch `test/issue-133-gold-set` (`7b3dcbc`) was closed without merging; the merged old branches `chore/devops/adopt-projectflow` (PR #1) and `feature/issue-0-translate-to-english` (PR #56) were deleted; #131 was reopened for plan steps 1.1-1.2.
