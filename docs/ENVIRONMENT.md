@@ -34,6 +34,7 @@ On Windows, Docker Desktop additionally requires WSL 2 and hardware virtualizati
 | `anthropic` | `>=1.11.0` | `src/claim_extraction.py` | Claude API client for claim extraction; reads `ANTHROPIC_API_KEY` |
 | `fastapi` | `>=0.115` | `src/web/app.py` | Local dashboard API and page (D0) |
 | `uvicorn` | `>=0.30` | `src/web/__main__.py` | Serves the dashboard on `127.0.0.1` |
+| `pyyaml` | `>=6.0` | `src/sandbox/conda_env.py` | Reads conda environment files (#159) |
 
 ### Development (`requirements-dev.txt`, includes `requirements.txt`)
 

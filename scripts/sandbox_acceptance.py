@@ -50,6 +50,7 @@ from src.sandbox.runner import (
     SandboxUnavailableError,
     image_for,
 )
+from src.sandbox.stager import RepoStager
 
 PROBES = {
     "probe_identity.py": "import os\nprint(f'uid={os.getuid()} gid={os.getgid()}')\n",
@@ -99,6 +100,11 @@ PROBES = {
         "import toolz\n"
         "block = b'x' * (200 * 1024 * 1024)  # touches the pages, so they count\n"
         "print(f'holding {len(block) // (1024 * 1024)} MiB; toolz {toolz.__version__} imported')\n"
+    ),
+    "probe_conda.py": (
+        "import toolz, ujson\n"
+        "for m in (toolz, ujson):\n"
+        "    print(f'{m.__name__} imported from {m.__file__}')\n"
     ),
     "probe_pids.py": (
         "import threading, time\n"
@@ -300,6 +306,32 @@ def main():
     results["12 peak memory and install duration recorded"] = (
         r.status == "COMPLETED" and isinstance(peak, int) and peak >= 200 * 1024 * 1024
         and isinstance(install_meta.get("peak_memory_bytes"), int) and install_meta.get("duration_seconds", 0) > 0
+    )
+
+    # 13. conda-only repository (#159): environment.yml converted to pinned wheels, bundled on the host with
+    # pip download --no-deps (binary only), installed offline in the install phase, imported in the run phase
+    conda_repo = Path(tempfile.mkdtemp(prefix="acceptance_conda_"))
+    (conda_repo / "probe_conda.py").write_text(PROBES["probe_conda.py"])
+    (conda_repo / "environment.yml").write_text(
+        "name: acceptance\ndependencies:\n"
+        f"  - python={args.python_version}\n  - _libgcc_mutex=0.1=conda_forge\n  - libgcc-ng=13.2.0\n"
+        "  - toolz=0.12.1=pyhd8ed1ab_0\n  - pip:\n    - ujson==5.10.0\n"
+    )
+    conda_repo.chmod(0o755)
+    stager = RepoStager(staging_root=Path(tempfile.mkdtemp(prefix="acceptance_conda_staging_")))
+    staged = stager.stage_repository(paper_id="acceptance_conda", source=str(conda_repo))
+    bundle = stager.bundle_dependencies(staged, python_version=args.python_version)
+    r, meta = run_probe(runner, staged.staged_path, "probe_conda.py", "acceptance_conda", packages_dir=bundle["bundle_dir"])
+    show("13. Conda-only repository (environment.yml, no requirements file)", r.command_executed,
+         "\n".join([(f"bundle: status={bundle['status']} converted={bundle.get('converted')} "
+                    f"downloaded={bundle.get('downloaded')} conda_only={bundle.get('conda_only')} "
+                    f"skipped={[x['package'] for x in bundle.get('skipped', [])]} "
+                    f"env_python_versions={bundle.get('env_python_versions')}"),
+                    r.stdout.strip()[-500:], *summary(r, meta)]))
+    results["13 conda-only repository installed offline"] = (
+        bundle.get("source") == "conda_env" and bundle["status"] == "SUCCESS"
+        and r.status == "COMPLETED" and meta.get("dependency_install_status") == "INSTALLED"
+        and r.stdout.count("imported from /workspace/deps/") == 2
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only

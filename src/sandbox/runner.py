@@ -34,7 +34,7 @@ class SandboxUnavailableError(RuntimeError):
 
 
 # Python versions with a sandbox image (docker/Dockerfile.sandbox, build arg PYTHON_VERSION; #158).
-SUPPORTED_PYTHON_VERSIONS = ("3.8", "3.11")
+SUPPORTED_PYTHON_VERSIONS = ("3.8", "3.9", "3.11")
 DEFAULT_PYTHON_VERSION = "3.11"
 
 

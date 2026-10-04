@@ -62,7 +62,9 @@
       "tabr_average_rank": "Table 1 (Overall Average Rank)",
       "ft_transformer_average_rank": "Table 1 (Overall Average Rank)",
       "xgboost_average_rank": "Table 1 (Overall Average Rank)"
-    }
+    },
+    "python_version": "3.9",
+    "python_version_source": "environment.yaml: 'python=3.9.16' (conda-only repository, #159)."
   },
   {
     "paper_id": "paper_005",
@@ -104,7 +106,9 @@
       "arcene_auroc": "Table 1 (Arcene Benchmark AUROC)",
       "bank_marketing_accuracy": "Table 1 (Bank Marketing Accuracy)",
       "xgboost_arcene_auroc": "Table 1 (Arcene XGBoost Baseline)"
-    }
+    },
+    "python_version": "3.8",
+    "python_version_source": "saint_environment.yml: 'python=3.8.10' (conda-only repository, #159)."
   },
   {
     "paper_id": "paper_008",
