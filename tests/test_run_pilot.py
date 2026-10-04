@@ -66,8 +66,9 @@ class FakeStager:
         manifest = SimpleNamespace(requirements_files=["requirements.txt"], has_conda_env=False)
         return SimpleNamespace(staged_path=repo, commit_hash=commit_or_tag, manifest=manifest)
 
-    def bundle_dependencies(self, staged, timeout):
+    def bundle_dependencies(self, staged, timeout, python_version):
         assert timeout == run_pilot.BUNDLE_TIMEOUT_SECONDS
+        self.bundled_for = python_version
         return {"status": "SUCCESS", "wheel_count": 3}
 
     def execute_staged(self, staged, target_script, script_args, config):
@@ -89,6 +90,9 @@ def test_run_paper_uses_protocol_settings_and_writes_a_record(tmp_path, monkeypa
         "6g", "6g", 2.0, 100, 3600)
     assert config.env_vars == {"PROJECT_DIR": "/workspace/repo", "CUDA_VISIBLE_DEVICES": ""}
     assert config.allow_unsafe_local is False
+    # paper_003 runs on Python 3.8 (data/seed_papers.json, #158): bundle and image follow it
+    assert stager.bundled_for == "3.8" and config.python_version == "3.8"
+    assert config.image_name == "repro-radar-sandbox:py3.8" and record["python_version"] == "3.8"
 
     saved = json.loads((tmp_path / "runs" / "paper_003" / "pilot_record.json").read_text())
     assert saved == record

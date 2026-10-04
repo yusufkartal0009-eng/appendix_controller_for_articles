@@ -16,7 +16,9 @@
     "source_table_or_section": {
       "mean_roc_auc": "Table 1 (OpenML-CC18 comparison)",
       "inference_seconds": "Section 4.2 (Inference latency benchmarks)"
-    }
+    },
+    "python_version": "3.8",
+    "python_version_source": "README and requirements.txt: 'Please use python V 3.7'; 3.8 is the oldest sandbox image (#158)."
   },
   {
     "paper_id": "paper_003",
@@ -37,7 +39,9 @@
       "ft_transformer_rmse": "Table 2 (California Housing RMSE)",
       "resnet_rmse": "Table 2 (California Housing RMSE)",
       "xgboost_rmse": "Table 2 (California Housing RMSE)"
-    }
+    },
+    "python_version": "3.8",
+    "python_version_source": "README: 'conda create -n revisiting-models python=3.8.8' (#158)."
   },
   {
     "paper_id": "paper_004",

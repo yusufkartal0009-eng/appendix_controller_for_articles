@@ -33,10 +33,23 @@ class SandboxUnavailableError(RuntimeError):
     """Raised when isolated execution is impossible and unisolated execution was not opted into."""
 
 
+# Python versions with a sandbox image (docker/Dockerfile.sandbox, build arg PYTHON_VERSION; #158).
+SUPPORTED_PYTHON_VERSIONS = ("3.8", "3.11")
+DEFAULT_PYTHON_VERSION = "3.11"
+
+
+def image_for(python_version: str) -> str:
+    """Image tag of the sandbox for a Python version (3.11 keeps the historic `latest` tag)."""
+    if python_version not in SUPPORTED_PYTHON_VERSIONS:
+        raise ValueError(f"no sandbox image for Python {python_version}; supported: {SUPPORTED_PYTHON_VERSIONS}")
+    return "repro-radar-sandbox:latest" if python_version == DEFAULT_PYTHON_VERSION else f"repro-radar-sandbox:py{python_version}"
+
+
 @dataclass
 class SandboxConfig:
     """Configuration parameters for isolated execution."""
-    image_name: str = "repro-radar-sandbox:latest"
+    python_version: str = DEFAULT_PYTHON_VERSION
+    image_name: str = ""  # empty: the image of python_version (image_for)
     cpus: float = 2.0
     memory_limit: str = "8g"
     memory_swap: str = "8g"
@@ -51,6 +64,11 @@ class SandboxConfig:
     env_vars: dict[str, str] = field(default_factory=dict)
     # Run on the host without isolation when Docker is unavailable. Only for code you trust.
     allow_unsafe_local: bool = False
+
+    def __post_init__(self) -> None:
+        image = image_for(self.python_version)  # also validates the version
+        if not self.image_name:
+            self.image_name = image
 
 
 @dataclass
@@ -165,7 +183,8 @@ class DockerSandboxRunner:
             "-e", "PYTHONUNBUFFERED=1",
             "-e", "PYTHONDONTWRITEBYTECODE=1",
             "-e", "PYTHONUSERBASE=/workspace/home/.local",
-            "-e", "PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages",
+            "-e", ("PYTHONPATH=/workspace/repo:/workspace/deps:"
+                   f"/workspace/home/.local/lib/python{self.config.python_version}/site-packages"),
         ])
         for k, v in {**self.config.env_vars, **(extra_env or {})}.items():
             docker_cmd.extend(["-e", f"{k}={v}"])
