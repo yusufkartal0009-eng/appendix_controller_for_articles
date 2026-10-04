@@ -1,0 +1,79 @@
+"""Per-paper run setup from `data/seed_papers.json` (#166).
+
+The first pilot showed that several papers cannot run from the repository root with `python <target_script>`.
+A paper's `run_setup` records the owner's decision (fix or report as it is), why, and the sandbox options the
+fix needs:
+
+- `command`: replaces `python /workspace/repo/<target_script> <args>` (for an entry point that is not a script)
+- `args`, `env`: script arguments and environment variables
+- `working_dir`: relative to the repository root (the README runs `cd results/ && python ...`)
+- `writable_repo`: run on a writable per-run copy (the paper writes next to its own files)
+- `data`: datasets fetched on the host into the data cache (`scripts/fetch_data.py`) and mounted read-only,
+  because the sandbox has no network
+- `open_items`: what the fix still needs and was not done; a paper with open items is not ready to run
+
+The setup is what Repro Radar will run in Pilot 2 (#171); none of it is a result about the paper.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any
+
+DECISIONS = ("fix", "report_as_is")
+DATA_KINDS = ("url", "openml")
+UNPACK_FORMATS = ("tar", "zip", "none")
+
+
+def run_setup_of(entry: dict[str, Any]) -> dict[str, Any]:
+    """The paper's run setup; raises ValueError when it is missing or malformed."""
+    setup = entry.get("run_setup")
+    if not isinstance(setup, dict):
+        raise ValueError(f"{entry.get('paper_id')}: no run_setup")  # noqa: TRY004 - a data error, like the checks below
+    if setup.get("decision") not in DECISIONS:
+        raise ValueError(f"{entry['paper_id']}: decision must be one of {DECISIONS}")
+    if not setup.get("reason"):
+        raise ValueError(f"{entry['paper_id']}: a decision needs a reason")
+    for item in setup.get("data", []):
+        if item.get("kind") not in DATA_KINDS:
+            raise ValueError(f"{entry['paper_id']}: data kind must be one of {DATA_KINDS}: {item}")
+        if not item.get("name") or not item.get("target"):
+            raise ValueError(f"{entry['paper_id']}: data item needs a name and a target: {item}")
+        if item["kind"] == "url" and (not item.get("url") or item.get("unpack") not in UNPACK_FORMATS):
+            raise ValueError(f"{entry['paper_id']}: url data needs a url and unpack in {UNPACK_FORMATS}: {item}")
+        if item["kind"] == "openml" and not isinstance(item.get("dataset_id"), int):
+            raise ValueError(f"{entry['paper_id']}: openml data needs an integer dataset_id: {item}")
+    return setup
+
+
+def data_dir(cache_root: Path, paper_id: str, item: dict[str, Any]) -> Path:
+    """Host directory of one data item in the cache."""
+    return Path(cache_root) / paper_id / item["name"]
+
+
+def mount_source(cache_root: Path, paper_id: str, item: dict[str, Any]) -> Path:
+    """The cached directory that is mounted (`path_in_archive` selects a folder of the unpacked archive)."""
+    base = data_dir(cache_root, paper_id, item)
+    return base / item["path_in_archive"] if item.get("path_in_archive") else base
+
+
+def is_cached(cache_root: Path, paper_id: str, item: dict[str, Any]) -> bool:
+    return (data_dir(cache_root, paper_id, item) / ".complete").exists()
+
+
+def sandbox_options(entry: dict[str, Any], cache_root: Path) -> dict[str, Any]:
+    """SandboxConfig and run options of a paper. Raises ValueError when cached data is missing."""
+    setup = run_setup_of(entry)
+    missing = [item["name"] for item in setup.get("data", []) if not is_cached(cache_root, entry["paper_id"], item)]
+    if missing:
+        raise ValueError(f"{entry['paper_id']}: data not in the cache, run scripts/fetch_data.py first: {missing}")
+    return {
+        "command": setup.get("command"),
+        "script_args": list(setup.get("args", [])),
+        "env_vars": dict(setup.get("env", {})),
+        "working_dir": setup.get("working_dir", ""),
+        "writable_repo": bool(setup.get("writable_repo", False)),
+        "data_mounts": {
+            item["target"]: str(mount_source(cache_root, entry["paper_id"], item)) for item in setup.get("data", [])
+        },
+    }

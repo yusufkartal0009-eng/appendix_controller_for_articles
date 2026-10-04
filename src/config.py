@@ -19,6 +19,8 @@ SEED_PAPERS_PATH = DATA_DIR / "seed_papers.json"
 # Sandbox & Execution Paths
 SANDBOX_TEMP_DIR = PROJECT_ROOT / "temp_clones"
 SANDBOX_RUNS_DIR = PROJECT_ROOT / "sandbox_runs"
+# Host cache of the datasets that run setups mount read-only into the sandbox (#166)
+DATA_CACHE_DIR = Path(os.getenv("REPRO_RADAR_DATA_CACHE", str(PROJECT_ROOT / ".data_cache")))
 
 # Scoring Tier Weights (Must sum to 1.0)
 TIER1_BUILD_WEIGHT = 0.35       # Build: clone + dependency install + exit code 0

@@ -18,7 +18,30 @@
       "inference_seconds": "Section 4.2 (Inference latency benchmarks)"
     },
     "python_version": "3.8",
-    "python_version_source": "README and requirements.txt: 'Please use python V 3.7'; 3.8 is the oldest sandbox image (#158)."
+    "python_version_source": "README and requirements.txt: 'Please use python V 3.7'; 3.8 is the oldest sandbox image (#158).",
+    "run_setup": {
+      "decision": "fix",
+      "reason": "The pilot's target script only defines helper functions; the paper's experiments run in tabpfn/RunFullDatasetAnalyses.ipynb, which imports the `datasets` module next to it, computes on `device = 'cpu'`, and writes results under its working directory.",
+      "command": [
+        "python",
+        "-m",
+        "nbconvert",
+        "--to",
+        "notebook",
+        "--execute",
+        "--output-dir",
+        "/workspace/output",
+        "/workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb"
+      ],
+      "working_dir": "tabpfn",
+      "writable_repo": true,
+      "data": [],
+      "open_items": [
+        "nbconvert and ipykernel are not in the repository's requirements.txt; the install phase installs only what the repository asks for, so the notebook cannot be executed yet.",
+        "The notebook loads the OpenML-CC18 datasets (`open_cc_dids`) at run time; their IDs are not yet listed as `openml` data items, so they are not in the data cache."
+      ],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+    }
   },
   {
     "paper_id": "paper_003",
@@ -41,7 +64,34 @@
       "xgboost_rmse": "Table 2 (California Housing RMSE)"
     },
     "python_version": "3.8",
-    "python_version_source": "README: 'conda create -n revisiting-models python=3.8.8' (#158)."
+    "python_version_source": "README: 'conda create -n revisiting-models python=3.8.8' (#158).",
+    "run_setup": {
+      "decision": "fix",
+      "reason": "The README downloads the dataset archive by hand and unpacks it in the repository root; the sandbox has no network, so the archive is fetched on the host and mounted as `data/`.",
+      "args": [
+        "output/california_housing/ft_transformer/default/0.toml",
+        "-o",
+        "/workspace/output/ft_transformer_default_0"
+      ],
+      "env": {
+        "PROJECT_DIR": "/workspace/repo",
+        "CUDA_VISIBLE_DEVICES": ""
+      },
+      "data": [
+        {
+          "name": "revisiting_models_data",
+          "kind": "url",
+          "url": "https://www.dropbox.com/s/o53umyg6mn3zhxy/data.tar.gz?dl=1",
+          "bytes": 4372449836,
+          "unpack": "tar",
+          "path_in_archive": "data",
+          "target": "data",
+          "source": "README 'Data' steps 1-4; size from docs/PILOT_WEEK2.md section 10"
+        }
+      ],
+      "open_items": [],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+    }
   },
   {
     "paper_id": "paper_004",
@@ -64,7 +114,33 @@
       "xgboost_average_rank": "Table 1 (Overall Average Rank)"
     },
     "python_version": "3.9",
-    "python_version_source": "environment.yaml: 'python=3.9.16' (conda-only repository, #159)."
+    "python_version_source": "environment.yaml: 'python=3.9.16' (conda-only repository, #159).",
+    "run_setup": {
+      "decision": "fix",
+      "reason": "The paper writes its results next to its config (exp/...), but the repository is read-only in the sandbox; it runs on a writable per-run copy. The README downloads data.tar by hand; it is fetched on the host and mounted as `data/`.",
+      "args": [
+        "exp/tabr/california/0-evaluation/0.toml",
+        "--force"
+      ],
+      "env": {
+        "CUDA_VISIBLE_DEVICES": ""
+      },
+      "writable_repo": true,
+      "data": [
+        {
+          "name": "tabular_benchmarks",
+          "kind": "url",
+          "url": "https://huggingface.co/datasets/puhsu/tabular-benchmarks/resolve/main/data.tar",
+          "bytes": 3094384640,
+          "unpack": "tar",
+          "path_in_archive": "data",
+          "target": "data",
+          "source": "README 'Data'; size from docs/PILOT_WEEK2.md section 10"
+        }
+      ],
+      "open_items": [],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+    }
   },
   {
     "paper_id": "paper_005",
@@ -85,6 +161,17 @@
       "ep3602_auroc": "Table 3 (EP3602 Dataset AUROC)",
       "ep3602_accuracy": "Table 3 (EP3602 Dataset Accuracy)",
       "kernel_speedup_factor": "Figure 4 (Kernel Computation Speedup)"
+    },
+    "run_setup": {
+      "decision": "fix",
+      "reason": "The README runs `cd results/ && python run_gridsearch.py`; the script opens spreadsheets/datasets_to_use.csv relative to its working directory. The datasets are in the repository.",
+      "working_dir": "results",
+      "data": [],
+      "open_items": [
+        "The script imports `fastsk`, a C++ extension built from the repository (`pip install .`). PyPI has no Linux wheel (0.0.1 and 0.0.2: macOS wheels and sdists only). Building needs a C++ compiler, which the sandbox image does not have, and runs package code in the install phase, which the sandbox does not allow today. Both are owner decisions.",
+        "requirements.txt pins python-dateutil==2.8.1 while leaving pandas unpinned; recent pandas needs python-dateutil>=2.8.2, so the requirements conflict (Pilot 1). Resolving it means choosing a pandas version the repository does not name."
+      ],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
     }
   },
   {
@@ -108,7 +195,32 @@
       "xgboost_arcene_auroc": "Table 1 (Arcene XGBoost Baseline)"
     },
     "python_version": "3.8",
-    "python_version_source": "saint_environment.yml: 'python=3.8.10' (conda-only repository, #159)."
+    "python_version_source": "saint_environment.yml: 'python=3.8.10' (conda-only repository, #159).",
+    "run_setup": {
+      "decision": "fix",
+      "reason": "train.py downloads OpenML dataset 1461 (bank-marketing) at run time; the sandbox has no network, so the dataset is fetched on the host into an OpenML cache and mounted where openml 0.11.0 (the version in saint_environment.yml) looks for it (~/.openml/cache, HOME=/workspace/home).",
+      "args": [
+        "--dset_id",
+        "1461",
+        "--task",
+        "binary",
+        "--savemodelroot",
+        "/workspace/output/bestmodels"
+      ],
+      "data": [
+        {
+          "name": "openml_1461",
+          "kind": "openml",
+          "dataset_id": 1461,
+          "target": "/workspace/home/.openml/cache",
+          "source": "docs/PILOT_WEEK2.md sections 4 and 10; openml=0.11.0 in saint_environment.yml"
+        }
+      ],
+      "open_items": [
+        "Whether openml 0.11.0 reads the dataset from the mounted cache without contacting the server is not checked; the host fetch must use the same openml version, because the cache layout differs between versions."
+      ],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+    }
   },
   {
     "paper_id": "paper_008",
@@ -127,6 +239,20 @@
     "source_table_or_section": {
       "forest_covertype_accuracy": "Table 2 (Forest CoverType Accuracy)",
       "higgs_auroc": "Table 2 (HIGGS Classification AUROC)"
+    },
+    "run_setup": {
+      "decision": "report_as_is",
+      "reason": "The loader reads train_idx.csv, valid_idx.csv, and test_idx.csv (data/dataset.py). These split files are not in the repository, not in the UCI download, and not linked in the README, so the paper's split cannot be recreated. The paper is kept and reported as DATA_NOT_ACCESSIBLE; this is a finding about the paper, not a sandbox limit, and replacing it would hide it.",
+      "args": [
+        "-c",
+        "config/forest_cover_type.yaml",
+        "-g",
+        ""
+      ],
+      "data": [],
+      "expected_outcome": "DATA_NOT_ACCESSIBLE",
+      "open_items": [],
+      "status_note": "Pilot 1 (docs/PILOT_WEEK2.md section 11): FileNotFoundError at the data step."
     }
   }
 ]

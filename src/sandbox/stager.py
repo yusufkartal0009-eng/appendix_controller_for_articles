@@ -404,6 +404,7 @@ class RepoStager:
         target_script: str | None = None,
         script_args: list[str] | None = None,
         config: SandboxConfig | None = None,
+        command: list[str] | None = None,
     ) -> dict[str, Any]:
         """Run staged code inside the secure sandbox and return a comprehensive execution summary."""
         # Resolve target script
@@ -423,6 +424,7 @@ class RepoStager:
             target_script=target_script,
             script_args=script_args,
             packages_dir=packages_dir,
+            command=command,
         )
 
         # Collect generated files and metadata from output_dir
@@ -445,6 +447,11 @@ class RepoStager:
             "source": staged.source,
             "commit_hash": staged.commit_hash,
             "target_script": target_script,
+            # Run setup (#166): the command when it replaces the target script, and the sandbox options
+            "command": command,
+            "working_dir": config.working_dir,
+            "writable_repo": config.writable_repo,
+            "data_mounts": sorted(config.data_mounts),
             # Sandbox image and its Python version (#158)
             "python_version": config.python_version,
             "image": config.image_name,

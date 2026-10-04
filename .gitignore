@@ -91,3 +91,6 @@ docs/assets/repro_radar_banner.png
 # Claim extraction: downloaded paper PDFs and cached model responses (src/claim_extraction.py); never committed
 data/pdfs/
 data/llm_cache/
+
+# Host data cache of the run setups (#166; scripts/fetch_data.py)
+.data_cache/
