@@ -1,7 +1,7 @@
 """D0 dashboard skeleton (#170): one real endpoint and a page, with an explicit empty state and no hard-coded data."""
 
 import json
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -23,7 +23,7 @@ def _add_paper(db_url, with_run=True):
                          source_table_or_section="{}"))
     if with_run:
         session.add(RunORM(run_id="run-1", paper_id="paper_901", status="FAILED", exit_code=1,
-                           failure_category="MISSING_DEPENDENCY", timestamp=datetime(2026, 9, 30, 18, 31)))
+                           failure_category="MISSING_DEPENDENCY", timestamp=datetime(2026, 9, 30, 18, 31, tzinfo=UTC)))
     session.commit()
     session.close()
 
@@ -63,7 +63,7 @@ def test_latest_run_is_the_newest(tmp_path):
     _add_paper(db_url)
     session = get_session(get_engine(db_url))
     session.add(RunORM(run_id="run-2", paper_id="paper_901", status="COMPLETED", exit_code=0,
-                       timestamp=datetime(2026, 10, 2, 9, 0)))
+                       timestamp=datetime(2026, 10, 2, 9, 0, tzinfo=UTC)))
     session.commit()
     session.close()
     assert client.get("/api/v1/papers").json()[0]["latest_run"]["run_id"] == "run-2"
