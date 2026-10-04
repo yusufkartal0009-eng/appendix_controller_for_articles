@@ -18,6 +18,7 @@ from src.sandbox.dependency_conflicts import (
     name_requirement_lines,
     parse_dependency_conflicts,
 )
+from src.sandbox.installed_versions import read_installed, requested_vs_installed
 from src.sandbox.runner import (
     DEFAULT_PYTHON_VERSION,
     DockerSandboxRunner,
@@ -379,6 +380,14 @@ class RepoStager:
                     })
         return flagged
 
+    def _requested_requirements(self, staged: StagedRepo) -> list[str]:
+        """What the repository asks for: its requirement files, or the pins of its conda environment file."""
+        if staged.manifest.requirements_files:
+            return [line for name in staged.manifest.requirements_files
+                    for line in self._requirement_lines(staged.staged_path / name)]
+        return [r for name in staged.manifest.conda_env_files
+                for r in convert_env_file(staged.staged_path / name).requirements]
+
     @staticmethod
     def _requirement_lines(req_path: Path) -> list[str]:
         """Requirement specifiers of a requirements file, without comments and pip options."""
@@ -454,6 +463,9 @@ class RepoStager:
             "dependency_conflicts": name_requirement_lines(
                 parse_dependency_conflicts(_read_text(result.output_dir / "install.log")), staged.staged_path),
             "meta": meta,
+            # What was installed, and how it compares with what the repository asks for (#161)
+            "installed_packages": (installed := read_installed(result.output_dir / "installed_packages.json")),
+            "requested_vs_installed": requested_vs_installed(self._requested_requirements(staged), installed),
             "stdout_preview": result.stdout[:2000] if result.stdout else "",
             "stderr_preview": result.stderr[:2000] if result.stderr else "",
         }

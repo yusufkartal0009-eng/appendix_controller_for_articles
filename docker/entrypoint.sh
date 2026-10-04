@@ -66,6 +66,9 @@ if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   set -e
   INSTALL_DURATION=$(python3 -c "print(round($(date +%s.%N) - ${INSTALL_START}, 3))" 2>/dev/null || echo "0.0")
   rm -rf "${TMPDIR}"
+  # Record what was actually installed, to compare with what the repository asks for (#161).
+  python -m pip list --path /workspace/deps --format=json > "${OUTPUT_DIR}/installed_packages.json" 2>/dev/null \
+    || echo "[]" > "${OUTPUT_DIR}/installed_packages.json"
   cat "${INSTALL_LOG}"
   INSTALL_STATUS="INSTALLED"
   if [ ${INSTALL_CODE} -ne 0 ]; then
