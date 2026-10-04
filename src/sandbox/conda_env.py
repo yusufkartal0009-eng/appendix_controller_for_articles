@@ -13,8 +13,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 # conda package name -> PyPI name, where they differ.
 CONDA_TO_PIP = {
     "pytorch": "torch",
@@ -62,6 +60,8 @@ def _parse_conda_spec(spec: str) -> tuple[str, str | None]:
 
 
 def convert_env_file(path: Path) -> CondaConversion:
+    import yaml  # imported here: the sandbox code path stays importable without PyYAML
+
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     result = CondaConversion(env_file=path.name)
     for dep in data.get("dependencies") or []:
