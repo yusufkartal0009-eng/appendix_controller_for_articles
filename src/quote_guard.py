@@ -5,9 +5,10 @@ extracted from. Everything else stays `UNVERIFIED` and must not be used in scori
 `scorable_claims()`. Rules (docs/CLAIM_SCHEMA.md section 5):
 
 1. The claim set's `pdf_sha256` equals the hash of the text's PDF, and the cited page exists.
-2. `source_quote` and `value_as_printed` occur on the cited page. Characters must be identical; the only tolerance is
-   that any run of whitespace counts as one space (the extracted text breaks lines where a quote may use a space).
-   A value retyped without the space the extraction put inside it (`0.859` for `0 .859`) does not match.
+2. `source_quote` and `value_as_printed` occur on the cited page. Characters must be identical; the only tolerances
+   are that any run of whitespace counts as one space (the extracted text breaks lines where a quote may use a
+   space), and that numbers the extraction split before their decimal point are joined on both sides first
+   (`0 .859` = `0.859`, #162). The mode that matched is recorded.
 3. `dataset` and `model_variant` occur somewhere in the paper text as whole words (ignoring case and whitespace
    runs, so "CA" does not match inside "cat"), so a claim
    about a dataset or model the paper never mentions (the seed's invented "EP3602") cannot pass.
@@ -19,7 +20,7 @@ import re
 from dataclasses import dataclass, field
 
 from src.claim_schema import ClaimSet, ExtractedClaim
-from src.pdf_text import PdfText
+from src.pdf_text import PdfText, repair_split_numbers
 
 AUTO_QUOTE_MATCH = "AUTO_QUOTE_MATCH"
 UNVERIFIED = "UNVERIFIED"
@@ -32,12 +33,15 @@ def _squash(text: str) -> str:
 
 
 def find_on_page(needle: str, page_text: str) -> str | None:
-    """'exact', 'whitespace_normalized', or None when `needle` does not occur in `page_text`."""
+    """'exact', 'whitespace_normalized', 'split_numbers_repaired', or None when `needle` does not occur."""
     if needle and needle in page_text:
         return "exact"
     squashed = _squash(needle)
     if squashed and squashed in _squash(page_text):
         return "whitespace_normalized"
+    repaired = repair_split_numbers(squashed)
+    if repaired and repaired in repair_split_numbers(_squash(page_text)):
+        return "split_numbers_repaired"
     return None
 
 
@@ -75,6 +79,9 @@ def verify_claim(claim: ExtractedClaim, pdf: PdfText, pdf_sha256: str) -> GuardR
 
     if checks["same_pdf"] and checks["page_exists"]:
         page_text = pdf.page(claim.page)
+        # Table rows lose their column structure in the extracted text (docs/PDF_TEXT_EXTRACTION.md), so table
+        # claims are flagged; the owner reviews them in W7 (#134) even when the quote matches.
+        checks["from_table"] = bool(claim.table_or_figure) and claim.table_or_figure.lower().startswith("table")
         checks["quote_match"] = find_on_page(claim.source_quote, page_text)
         checks["value_match"] = find_on_page(claim.value_as_printed, page_text)
         if checks["quote_match"] is None:

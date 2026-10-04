@@ -29,12 +29,19 @@ FT-T 0.459 0 .859 0.391 0.732 0 .729 0.960 0.8982 8.855 0.970 0.756 0 .746 1.8 (
    line, so a value's column can only be found by counting positions. Empty cells (`–`) shift those positions,
    and labels can be split (`Y A↓` for `YA ↓`). The text alone does not reliably say which column a number belongs to.
 2. **Spaces can appear inside numbers.** `0 .850` and `8 .909` above are `0.850` and `8.909` in the PDF. The same value
-   can be extracted with or without the space in one table (`0.859` and `0 .859` both occur on this page). A
-   verbatim check (W4) must compare against the text as extracted, so `value_as_printed` and `source_quote` must be
-   copied from this text, not retyped from the rendered PDF.
+   can be extracted with or without the space in one table (`0.859` and `0 .859` both occur on this page).
+   **Repaired (#162):** `repair_split_numbers()` in `src/pdf_text.py` removes a single space between a digit and a
+   following decimal point (`0 .850` → `0.850`), and the quote guard compares quotes and values after this repair
+   on both sides (match mode `split_numbers_repaired`). In the six seed PDFs the pattern occurs 1,213 times
+   (`paper_003`: 226, `paper_004`: 986, `paper_006`: 1, the others: 0); every match that was checked is a split
+   number, including the one in running text (`β1 = 0 .9`). A space after a period (`2019. 22`, reference lists)
+   is not changed. The stored page text is not modified; the repair is applied only when comparing.
 3. **Formatting is gone.** Bold or underlined "best" results, colors, and footnote markers are not in the text.
 4. **Scanned PDFs have no text.** A page that is an image gives an empty string; there is no OCR.
 5. Figures are not read: values that appear only in a plot are not in the text.
 
 Because of 1, the column of a value (and so its `dataset` and `metric_name`) cannot be decided from the extracted
-text alone. Claims taken from tables need the human confirmation step (W7, #134).
+text alone. **Approach for table claims (#162):** table structure is not reconstructed. Instead, the quote guard
+flags every claim whose `table_or_figure` names a table (`from_table` in its checks), and flagged claims always go
+to the owner in the human confirmation step (W7, #134), even when their quote matches. The extraction rules
+(`docs/AGENT_EXTRACTION.md`) also require "not found" when a value's column cannot be determined with certainty.
