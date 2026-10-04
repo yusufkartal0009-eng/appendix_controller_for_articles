@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Blind Packet for an Independent Pass B (2026-10-04 18:41 +03:00, Issue #186)
+- `scripts/make_blind_packet.py` writes a self-contained folder outside the repository (questions, rules, a schema description without real values, the pinned PDFs' page text, an answer template, and a README with the prompt) for a new session that cannot see pass A. `scripts/import_pass.py` checks the filled answers (schema, quote on the cited page) and stores them as pass B. A packet was generated at `C:\Users\USER\blind_pass_b` (6 papers, 18 questions); a leak check found none of the 12 stored answer values outside the paper texts.
+
 ### Owner Decisions Applied to the Extractions (2026-10-04 18:35 +03:00, Issue #184)
 - TabPFN time split into GPU (`0.6172`) and CPU (`37.59`) claims; DANet Forest split into DANet-20 (`97.23%`) and DANet-32 (`97.27%`); TabR's rank moved to Table 4 (`1.3± 0.9`), the table that also ranks XGBoost (`2.5± 0.9`); XGBoost RMSE `0.433` accepted by the owner. 18 questions now; both passes revised; 18/18 agree; 24/24 found claims `AUTO_QUOTE_MATCH`. Decisions recorded in `data/claims/owner_decisions.json` and as rule 9 of `docs/AGENT_EXTRACTION.md`.
 

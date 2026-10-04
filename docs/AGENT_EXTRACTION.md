@@ -56,3 +56,7 @@
 - Step 1.2 compares them by normalized value (D-005). Every disagreement goes to the owner in W7 (#134); neither
   extraction is "right" by default.
 - Neither extraction is approved by being extracted. Approval comes only from the quote guard (W4) and the owner (W7).
+- **Making pass B independent (#186):** `python scripts/make_blind_packet.py <folder outside the repository>` writes a
+  blind packet; the owner runs a new Claude Code session in that folder with the prompt in its README; then
+  `python scripts/import_pass.py <folder>` checks the answers and replaces pass B. After that, step 1.2's comparison
+  is meaningful.
