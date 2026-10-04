@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 185 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 12 checks
+- **Tests:** 243 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 13 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Conda-Only Repositories Bundled Offline (2026-10-04 18:53 +03:00, Issue #159, plan step 2.2)
+- `src/sandbox/conda_env.py` converts a conda environment file into pinned pip requirements (conda-to-pip name map; system, CUDA, and `_`-internal packages skipped with reasons; the file's Python version read). Conda itself is not run. A conda-only repository is bundled one requirement at a time with `pip download --no-deps` (binary only); packages without a wheel are reported as `conda_only`. Real files: `paper_004` → Python 3.9, 300 requirements (114 skipped); `paper_006` → Python 3.8, 156 requirements (37 skipped).
+- Python 3.9 image added (`paper_004`); `paper_004` → 3.9 and `paper_006` → 3.8 in `data/seed_papers.json`. `pyyaml` is now a runtime dependency. New real-Docker acceptance check 13 (conda-only repository: bundle, offline install, import). Re-running `paper_004`/`paper_006` is left for Pilot 2 (#171).
 
 ### Python Version per Paper (2026-10-04 18:48 +03:00, Issue #158, plan step 2.1)
 - `docker/Dockerfile.sandbox` takes `--build-arg PYTHON_VERSION` (3.11 and 3.8). `SandboxConfig.python_version` selects the image (`repro-radar-sandbox:latest` for 3.11, `repro-radar-sandbox:py3.8`) and the site-packages path; bundling downloads wheels for that version; `run_report.json` records `python_version` and `image`.

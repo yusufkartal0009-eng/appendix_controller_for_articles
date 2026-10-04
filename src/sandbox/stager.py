@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from src.metric_extractor import MetricExtractor
+from src.sandbox.conda_env import convert_env_file, find_conda_env_files
 from src.sandbox.runner import (
     DEFAULT_PYTHON_VERSION,
     DockerSandboxRunner,
@@ -43,6 +44,7 @@ class DependencyManifest:
     has_pyproject: bool = False
     has_setup_py: bool = False
     has_conda_env: bool = False
+    conda_env_files: list[str] = field(default_factory=list)
     parsed_dependencies: list[str] = field(default_factory=list)
     install_strategy: str = "pip_offline"
 
@@ -185,8 +187,8 @@ class RepoStager:
             manifest.has_pyproject = True
         if (repo_dir / "setup.py").exists():
             manifest.has_setup_py = True
-        if (repo_dir / "environment.yml").exists() or (repo_dir / "environment.yaml").exists():
-            manifest.has_conda_env = True
+        manifest.conda_env_files = find_conda_env_files(repo_dir)
+        manifest.has_conda_env = bool(manifest.conda_env_files)
 
         # Deduplicate dependencies
         manifest.parsed_dependencies = sorted(set(manifest.parsed_dependencies))
@@ -239,6 +241,8 @@ class RepoStager:
         bundle_dir.mkdir(parents=True, exist_ok=True)
         staged.bundle_dir = bundle_dir
 
+        if not staged.manifest.requirements_files and staged.manifest.conda_env_files:
+            return self._bundle_conda_env(staged, bundle_dir, timeout, python_version)
         if not staged.manifest.requirements_files:
             return {
                 "status": "SKIPPED",
@@ -276,6 +280,48 @@ class RepoStager:
                 "bundle_dir": str(bundle_dir),
                 "needs_sdist_build": [],
             }
+
+    def _bundle_conda_env(
+        self, staged: StagedRepo, bundle_dir: Path, timeout: int, python_version: str
+    ) -> dict[str, Any]:
+        """Bundle a conda-only repository through its pinned Python packages (#159; src/sandbox/conda_env.py).
+
+        Each converted requirement is downloaded alone with --no-deps: the environment file already pins every
+        dependency. Requirements without a wheel for the sandbox's Python and platform are reported as conda_only.
+        """
+        conversions = [convert_env_file(staged.staged_path / name) for name in staged.manifest.conda_env_files]
+        requirements = list(dict.fromkeys(r for c in conversions for r in c.requirements))
+        downloaded: list[str] = []
+        conda_only: list[dict[str, str]] = []
+        for requirement in requirements:
+            cmd = self._pip_download_command(bundle_dir, python_version) + ["--no-deps", requirement]
+            try:
+                res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+            except (subprocess.SubprocessError, OSError) as exc:
+                conda_only.append({"requirement": requirement, "reason": str(exc)})
+                continue
+            if res.returncode == 0:
+                downloaded.append(requirement)
+            else:
+                lines = [line for line in (res.stderr or "").splitlines() if line.strip()]
+                conda_only.append({"requirement": requirement,
+                                   "reason": lines[-1] if lines else f"pip exited {res.returncode}"})
+        env_versions = sorted({c.python_version for c in conversions if c.python_version})
+        status = "SUCCESS" if requirements and not conda_only else ("PARTIAL" if downloaded else "FAILED")
+        return {
+            "status": status,
+            "source": "conda_env",
+            "python_version": python_version,
+            "env_python_versions": env_versions,
+            "conda_env_files": list(staged.manifest.conda_env_files),
+            "converted": len(requirements),
+            "downloaded": downloaded,
+            "conda_only": conda_only,
+            "skipped": [s for c in conversions for s in c.skipped],
+            "wheel_count": len(list(bundle_dir.glob("*.whl"))),
+            "bundle_dir": str(bundle_dir),
+            "needs_sdist_build": [],
+        }
 
     @staticmethod
     def _pip_download_command(bundle_dir: Path, python_version: str = DEFAULT_PYTHON_VERSION) -> list[str]:
