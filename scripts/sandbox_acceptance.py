@@ -23,6 +23,9 @@ paper runs) and prints the command evidence for each check:
   15. run setup - a paper's run setup (#166): the run starts in a repository subfolder, writes to a
                  writable per-run copy of the repository (the staged repository is unchanged), and reads
                  a read-only data mount from the host cache
+  16. image    - the size of the sandbox image is measured (`docker image inspect`) (#163)
+  17. cpu      - under --cpus=0.5, two busy worker processes together get at most 0.6 CPUs; control: the
+                 same probe with the limit set to the host's CPU count gets more than 1.5 CPUs (#163)
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
@@ -38,6 +41,7 @@ import argparse
 import json
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -153,6 +157,29 @@ PROBES = {
         "except ImportError as exc:\n"
         "    print(f'control: same .so from /workspace/home fails to load: {exc}')\n"
         "raise SystemExit(0 if ok else 1)\n"
+    ),
+    # Two worker processes busy-loop for 3 s of wall time; the CPU time they get, divided by the wall time,
+    # is the number of CPUs the container really had (#163).
+    "probe_cpu.py": (
+        "import multiprocessing as mp, os, time\n"
+        "def burn(seconds):\n"
+        "    end = time.time() + seconds\n"
+        "    while time.time() < end:\n"
+        "        pass\n"
+        "if __name__ == '__main__':\n"
+        "    try:\n"
+        "        print('cpu.max: ' + open('/sys/fs/cgroup/cpu.max').read().strip())\n"
+        "    except OSError as exc:\n"
+        "        print(f'cpu.max: unreadable ({exc.strerror})')\n"
+        "    t0, c0 = time.time(), os.times()\n"
+        "    workers = [mp.Process(target=burn, args=(3,)) for _ in range(2)]\n"
+        "    for w in workers:\n"
+        "        w.start()\n"
+        "    for w in workers:\n"
+        "        w.join()\n"
+        "    wall, c1 = time.time() - t0, os.times()\n"
+        "    cpu = (c1.children_user - c0.children_user) + (c1.children_system - c0.children_system)\n"
+        "    print(f'workers=2 wall={wall:.2f}s cpu={cpu:.2f}s effective_cpus={cpu / wall:.2f}')\n"
     ),
     "probe_info.py": (
         "import os, subprocess\n"
@@ -382,6 +409,38 @@ def main():
         r.status == "COMPLETED" and "cwd=/workspace/repo/sub" in r.stdout and "data: a,b" in r.stdout
         and "data writable: False" in r.stdout and copy_file.exists()
         and not (setup_repo / "sub" / "written_by_paper.txt").exists()
+    )
+
+    # 16. image size (#163)
+    inspect = subprocess.run(["docker", "image", "inspect", image_for(args.python_version), "--format", "{{.Size}}"],
+                             capture_output=True, text=True, timeout=60, check=False)
+    size = int(inspect.stdout.strip()) if inspect.returncode == 0 and inspect.stdout.strip().isdigit() else None
+    show("16. Image size", ["docker", "image", "inspect", image_for(args.python_version), "--format", "{{.Size}}"],
+         f"{inspect.stdout.strip() or inspect.stderr.strip()}"
+         + (f"\nsize: {size} bytes ({size / 2**20:.1f} MiB)" if size else ""))
+    results["16 image size measured"] = size is not None and size > 0
+
+    # 17. CPU limit (#163): --cpus=0.5 must hold two busy workers to at most 0.6 CPUs together. The control run
+    # sets the limit to the host's CPU count and must exceed 1.5 CPUs, or the probe proves nothing.
+    def effective_cpus(stdout):
+        for line in stdout.splitlines():
+            if "effective_cpus=" in line:
+                return float(line.rsplit("=", 1)[1])
+        return None
+
+    host_cpus = os.cpu_count() or 1
+    limited = DockerSandboxRunner(SandboxConfig(timeout_seconds=60, cpus=0.5, python_version=args.python_version))
+    r, meta = run_probe(limited, repo, "probe_cpu.py", "acceptance_cpu_limited")
+    limited_cpus = effective_cpus(r.stdout)
+    control = DockerSandboxRunner(SandboxConfig(timeout_seconds=60, cpus=float(host_cpus), python_version=args.python_version))
+    rc, meta_c = run_probe(control, repo, "probe_cpu.py", "acceptance_cpu_control")
+    control_cpus = effective_cpus(rc.stdout)
+    show("17. CPU limit under load", r.command_executed,
+         "\n".join([f"host CPUs: {host_cpus}", "--cpus=0.5:", r.stdout.strip(), *summary(r, meta),
+                    f"control --cpus={float(host_cpus)}:", rc.stdout.strip(), *summary(rc, meta_c)]))
+    results["17 cpu limit holds under load"] = (
+        r.status == "COMPLETED" and limited_cpus is not None and limited_cpus <= 0.6
+        and rc.status == "COMPLETED" and control_cpus is not None and control_cpus > 1.5
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only
