@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -20,6 +21,18 @@ from src.config import DATA_DIR
 logger = logging.getLogger(__name__)
 
 DEFAULT_CACHE_DIR = DATA_DIR / "pdf_text_cache"
+
+# pypdf sometimes puts a space between a digit and the decimal point that follows it ("0 .850" for "0.850").
+_SPLIT_NUMBER = re.compile(r"(?<=\d) (?=\.\d)")
+
+
+def repair_split_numbers(text: str) -> str:
+    """Join numbers that the PDF text extraction split before their decimal point: "0 .850" -> "0.850" (#162).
+
+    Only the pattern digit, one space, ".", digit is changed. Spacing after a period ("2019. 22", common in
+    reference lists) is left alone. See docs/PDF_TEXT_EXTRACTION.md.
+    """
+    return _SPLIT_NUMBER.sub("", text)
 
 
 @dataclass(frozen=True)

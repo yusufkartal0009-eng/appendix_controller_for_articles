@@ -85,3 +85,16 @@ def test_unreadable_or_stale_cache_entries_are_replaced(pdf, tmp_path, bad_entry
     text = extract_pdf_text(pdf, cache_dir=cache)
     assert text.find("0.459") == [2]
     assert json.loads((cache / f"{text.sha256}.json").read_text(encoding="utf-8"))["pages"] == text.pages
+
+
+# Real lines from the pypdf text of the seed papers (paper_003 p. 7, paper_004 p. 7, paper_006 p. 7; #162).
+@pytest.mark.parametrize("extracted, repaired", [
+    ("FT-T 0.459 0 .859 0.391 0.732 0 .729 0.960 0.8982 8.855 0.970 0.756 0 .746 1.8 (1.2)",
+     "FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)"),
+    ("XGBoost 0.861 0 .432 3 .164 0.872 0.136 0.832 0.726 0 .680 1 .769 0 .971 0 .741 2.5± 0.9",
+     "XGBoost 0.861 0.432 3.164 0.872 0.136 0.832 0.726 0.680 1.769 0.971 0.741 2.5± 0.9"),
+    ("s) using AdamW with β1 = 0 .9,", "s) using AdamW with β1 = 0.9,"),
+    ("NeurIPS, 2021. 1, 2, 1", "NeurIPS, 2021. 1, 2, 1"),  # a reference list entry is left alone
+])
+def test_split_numbers_are_joined(extracted, repaired):
+    assert pdf_text.repair_split_numbers(extracted) == repaired

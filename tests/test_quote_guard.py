@@ -47,7 +47,7 @@ def test_quote_across_a_line_break_matches_with_whitespace_normalized():
 
 
 @pytest.mark.parametrize("overrides, reason", [
-    ({"source_quote": "FT-T 0.459 0.859", "value_as_printed": "0.859"}, "does not occur on page 2"),  # space removed
+    ({"source_quote": "FT-T 0.459 0.858", "value_as_printed": "0.858"}, "does not occur on page 2"),  # wrong digit
     ({"source_quote": "FT-T 0.461", "value_as_printed": "0.461"}, "does not occur on page 2"),         # invented value
     ({"page": 1}, "does not occur on page 1"),                                                          # wrong page
     ({"page": 9}, "page 9 does not exist"),
@@ -68,7 +68,9 @@ def test_claim_from_another_pdf_is_unverified():
 
 def test_word_matching_rules():
     assert find_on_page("0 .859", PDF.page(2)) == "exact"
-    assert find_on_page("0.859", PDF.page(2)) is None
+    assert find_on_page("0.859", PDF.page(2)) == "split_numbers_repaired"  # #162: retyped without the space
+    assert find_on_page("FT-T 0.459 0.859", PDF.page(2)) == "split_numbers_repaired"
+    assert find_on_page("0.858", PDF.page(2)) is None
     assert occurs_as_words("CA", "CA ↓ AD ↑") and not occurs_as_words("CA", "the cat")
     assert occurs_as_words("EP300", PDF.page(2)) and not occurs_as_words("EP3602", PDF.page(2))
 
@@ -81,3 +83,13 @@ def test_only_verified_claims_are_scorable():
     verified = verify_claim_set(claim_set, PDF)
     assert [v.result.status for v in verified] == [AUTO_QUOTE_MATCH, UNVERIFIED, UNVERIFIED]
     assert scorable_claims(verified) == [claim_set.claims[0]]
+
+
+def test_retyped_value_matches_after_number_repair_and_table_claims_are_flagged():
+    claim = _claim(value_as_printed="0.859", source_quote="FT-T 0.459 0.859", metric_name="accuracy",
+                   dataset="Adult")
+    result = verify_claim(claim, PDF, SHA)
+    assert result.status == AUTO_QUOTE_MATCH, result.reasons
+    assert result.checks["quote_match"] == result.checks["value_match"] == "split_numbers_repaired"
+    assert result.checks["from_table"] is True
+    assert verify_claim(_claim(table_or_figure=None), PDF, SHA).checks["from_table"] is False

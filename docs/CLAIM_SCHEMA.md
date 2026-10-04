@@ -86,9 +86,9 @@ These are attached after extraction and are not produced by the extractor itself
   `scorable_claims()`. The guard requires:
   1. the claim set's `pdf_sha256` to equal the hash of the text's PDF, and the cited page to exist;
   2. `source_quote` and `value_as_printed` to occur on the cited page with identical characters. The only
-     tolerance is that a run of whitespace counts as one space, and which mode matched (`exact` or
-     `whitespace_normalized`) is recorded. A value retyped without the space the extraction put inside it
-     (`0.859` for `0 .859`) does not match;
+     tolerances are that a run of whitespace counts as one space, and that numbers the extraction split before
+     their decimal point are joined on both sides first (`0 .859` = `0.859`, #162). The mode that matched
+     (`exact`, `whitespace_normalized`, or `split_numbers_repaired`) is recorded;
   3. `dataset` and `model_variant` to occur somewhere in the paper as whole words (ignoring case), so a claim
      about a dataset the paper never mentions (`EP3602`) cannot pass.
 - `verified_by`: `auto-quote-match` or `human` (W6, #10, and W7, #134).

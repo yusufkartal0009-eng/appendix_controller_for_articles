@@ -37,6 +37,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Split Numbers Repaired, Table Claims Flagged (2026-10-04 15:29 +03:00, Issue #162, plan step 1.3)
+- `src/pdf_text.py`: `repair_split_numbers()` joins numbers pypdf split before the decimal point (`0 .850` → `0.850`); 1,213 occurrences in the seed PDFs (`paper_003` 226, `paper_004` 986, `paper_006` 1). The quote guard compares after the repair on both sides (match mode `split_numbers_repaired`), so a correctly retyped value is no longer rejected.
+- Table claims are flagged (`from_table`) and always go to the owner in W7; table structure is not reconstructed. Documented in `docs/PDF_TEXT_EXTRACTION.md` and `docs/CLAIM_SCHEMA.md`.
+
 ### Extraction Passes Compared (2026-10-04 15:25 +03:00, Issue #179, plan step 1.2)
 - `scripts/compare_extractions.py` compares passes A and B by normalized value (D-005) and writes `data/claims/consistency.json`/`.md`. Result: 16 of 16 questions agree, 0 disagreements. Because pass B is not independent of A (#178), this agreement is expected and weak evidence; correctness is decided in steps 1.4, 1.5, and 1.7.
 
