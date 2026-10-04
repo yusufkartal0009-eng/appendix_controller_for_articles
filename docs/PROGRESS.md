@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Extraction Passes Compared (2026-10-04 15:25 +03:00, Issue #179, plan step 1.2)
+- `scripts/compare_extractions.py` compares passes A and B by normalized value (D-005) and writes `data/claims/consistency.json`/`.md`. Result: 16 of 16 questions agree, 0 disagreements. Because pass B is not independent of A (#178), this agreement is expected and weak evidence; correctness is decided in steps 1.4, 1.5, and 1.7.
+
 ### Agent-Assisted Claim Extraction, Two Passes (2026-10-04 15:22 +03:00, Issue #131, plan step 1.1)
 - 16 questions (one per seed claim, written without the seed values) in `data/claim_queries/` for all 6 papers; pinned PDFs (arXiv `2207.01848v6`, `2106.11959v5`, `2307.14338v2`, `2106.01342v1`, `2112.02962v4`; bioRxiv `2020.04.21.053975v2`).
 - `docs/AGENT_EXTRACTION.md`: the rules (same as the API prompt, plus a rule for values printed in several places) and how independent the two passes are.
