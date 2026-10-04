@@ -10,33 +10,101 @@
       "method": "Claude Code agent, pass A: searched each paper for the question's metric and dataset terms, then read the matching table or sentence in the pypdf page text (docs/AGENT_EXTRACTION.md).",
       "made_at": "2026-10-04T15:21:17+03:00",
       "answers": {
-        "forest_covertype_accuracy": {
-          "status": "not_found",
-          "reason": "column or row ambiguous: the question names DANet without a depth, and Table 2 has two DANet rows for Forest (DANet-20: 97.23%±2e-4, DANet-32: 97.27%±5e-4); Table 4 has further DANet-20 widths.",
-          "claim": null
-        },
         "higgs_auroc": {
           "status": "not_found",
           "reason": "\"HIGGS\" does not occur in the paper.",
           "claim": null
+        },
+        "forest_covertype_accuracy__danet_20": {
+          "status": "found",
+          "claim": {
+            "split": "not_stated",
+            "confidence": 0.8,
+            "metric_name": "accuracy",
+            "value_as_printed": "97.23%±2e-4",
+            "unit": "percent",
+            "dataset": "Forest Cover Type",
+            "model_variant": "DANet-20",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 6,
+            "source_quote": "DAN ET-20 (ours) 2 97.23%±2e-4",
+            "value_normalized": 0.9723
+          },
+          "reason": "Table 2, row DANet-20 (printed 'DAN ET-20'), column Forest. Revised on 2026-10-04 by owner decision 4 (#184)."
+        },
+        "forest_covertype_accuracy__danet_32": {
+          "status": "found",
+          "claim": {
+            "split": "not_stated",
+            "confidence": 0.8,
+            "metric_name": "accuracy",
+            "value_as_printed": "97.27%±5e-4",
+            "unit": "percent",
+            "dataset": "Forest Cover Type",
+            "model_variant": "DANet-32",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 6,
+            "source_quote": "DAN ET-32 (ours) 1 97.27%±5e-4",
+            "value_normalized": 0.9727
+          },
+          "reason": "Table 2, row DANet-32 (printed 'DAN ET-32'), column Forest. Revised on 2026-10-04 by owner decision 4 (#184)."
         }
-      }
+      },
+      "revisions": [
+        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
+      ]
     },
     "B": {
       "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
       "made_at": "2026-10-04T15:21:58+03:00",
       "answers": {
-        "forest_covertype_accuracy": {
-          "status": "not_found",
-          "reason": "column or row ambiguous: two DANet rows in Table 2 (DANet-20 and DANet-32, printed as 'DAN ET-20' and 'DAN ET-32') with different Forest accuracies; the question gives no depth.",
-          "claim": null
-        },
         "higgs_auroc": {
           "status": "not_found",
           "reason": "No \"HIGGS\" or \"Higgs\" in the paper.",
           "claim": null
+        },
+        "forest_covertype_accuracy__danet_20": {
+          "status": "found",
+          "claim": {
+            "split": "not_stated",
+            "confidence": 0.8,
+            "metric_name": "accuracy",
+            "value_as_printed": "97.23%±2e-4",
+            "unit": "percent",
+            "dataset": "Forest Cover Type",
+            "model_variant": "DANet-20",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 6,
+            "source_quote": "DAN ET-20 (ours) 2 97.23%±2e-4",
+            "value_normalized": 0.9723
+          },
+          "reason": "Table 2, row DANet-20 (printed 'DAN ET-20'), column Forest. Revised on 2026-10-04 by owner decision 4 (#184)."
+        },
+        "forest_covertype_accuracy__danet_32": {
+          "status": "found",
+          "claim": {
+            "split": "not_stated",
+            "confidence": 0.8,
+            "metric_name": "accuracy",
+            "value_as_printed": "97.27%±5e-4",
+            "unit": "percent",
+            "dataset": "Forest Cover Type",
+            "model_variant": "DANet-32",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 6,
+            "source_quote": "DAN ET-32 (ours) 1 97.27%±5e-4",
+            "value_normalized": 0.9727
+          },
+          "reason": "Table 2, row DANet-32 (printed 'DAN ET-32'), column Forest. Revised on 2026-10-04 by owner decision 4 (#184)."
         }
-      }
+      },
+      "revisions": [
+        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
+      ]
     }
   }
 }

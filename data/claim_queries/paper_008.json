@@ -3,7 +3,21 @@
   "pdf_url": "https://arxiv.org/pdf/2112.02962v4",
   "note": "Queries are written from the seed entry's claim names (data/seed_papers.json) without the seed values.",
   "queries": [
-    {"query_id": "forest_covertype_accuracy", "question": "Test accuracy of DANet on the Forest Cover Type dataset."},
-    {"query_id": "higgs_auroc", "question": "Test AUROC of DANet on the HIGGS dataset."}
+    {
+      "query_id": "forest_covertype_accuracy__danet_20",
+      "seed_claim": "forest_covertype_accuracy",
+      "question": "Test accuracy of DANet-20 on the Forest Cover Type dataset.",
+      "split_note": "Revised on 2026-10-04 by owner decision 4 (#184)."
+    },
+    {
+      "query_id": "forest_covertype_accuracy__danet_32",
+      "seed_claim": "forest_covertype_accuracy",
+      "question": "Test accuracy of DANet-32 on the Forest Cover Type dataset.",
+      "split_note": "Revised on 2026-10-04 by owner decision 4 (#184)."
+    },
+    {
+      "query_id": "higgs_auroc",
+      "question": "Test AUROC of DANet on the HIGGS dataset."
+    }
   ]
 }

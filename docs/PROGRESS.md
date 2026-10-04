@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Owner Decisions Applied to the Extractions (2026-10-04 18:35 +03:00, Issue #184)
+- TabPFN time split into GPU (`0.6172`) and CPU (`37.59`) claims; DANet Forest split into DANet-20 (`97.23%`) and DANet-32 (`97.27%`); TabR's rank moved to Table 4 (`1.3± 0.9`), the table that also ranks XGBoost (`2.5± 0.9`); XGBoost RMSE `0.433` accepted by the owner. 18 questions now; both passes revised; 18/18 agree; 24/24 found claims `AUTO_QUOTE_MATCH`. Decisions recorded in `data/claims/owner_decisions.json` and as rule 9 of `docs/AGENT_EXTRACTION.md`.
+
 ### Quote Guard Run on the Extractions (2026-10-04 15:32 +03:00, Issue #182, plan step 1.4)
 - `scripts/check_claims.py` runs the W4 guard (with the #162 repair) on every found claim of passes A and B against the pinned PDFs and writes `data/claims/guard_report.json`/`.md`. Result: 18 of 18 found claims `AUTO_QUOTE_MATCH` (all `exact`), 0 `UNVERIFIED`; all 18 come from tables, so all go to the owner in W7. A pass shows the quote is on the page, not that the value answers the question.
 

@@ -1,0 +1,28 @@
+{
+  "made_on": "2026-10-04",
+  "by": "owner",
+  "issue": "#184",
+  "decisions": [
+    {
+      "n": 1,
+      "rule": "Times measured on different hardware are separate claims (paper_002: GPU and CPU)."
+    },
+    {
+      "n": 2,
+      "rule": "Ranks that are compared must come from the same table; if no table holds both, mark them as not comparable. Applied: TabR and XGBoost both from paper_004 Table 4 (tuned)."
+    },
+    {
+      "n": 3,
+      "rule": "Accepted: paper_003 xgboost_rmse = 0.433±1.6e-3 (Table 8, single tuned model).",
+      "accepted": {
+        "paper_id": "paper_003",
+        "query_id": "xgboost_rmse",
+        "value_as_printed": "0.433±1.6e-3"
+      }
+    },
+    {
+      "n": 4,
+      "rule": "Model variants with different results are separate claims, distinguished by model_variant (paper_008: DANet-20 and DANet-32)."
+    }
+  ]
+}
