@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Dependency Conflicts Named in the Reports (2026-10-04 19:04 +03:00, Issue #160, plan step 2.3)
+- `src/sandbox/dependency_conflicts.py` parses pip's "Cannot install ... conflicting dependencies" blocks and their "caused by" lines; `-r <file> (line N)` is replaced by that line's text from the staged repository. The bundle report (from the full pip output; pip prints the cause lines to stdout) and `run_report.json` (from `install.log`) now carry `dependency_conflicts`. On Pilot 1's real `paper_005` log: `pandas 3.0.6 depends on python-dateutil>=2.8.2` vs. the pinned `python-dateutil==2.8.1`.
+
 ### Conda-Only Repositories Bundled Offline (2026-10-04 18:53 +03:00, Issue #159, plan step 2.2)
 - `src/sandbox/conda_env.py` converts a conda environment file into pinned pip requirements (conda-to-pip name map; system, CUDA, and `_`-internal packages skipped with reasons; the file's Python version read). Conda itself is not run. A conda-only repository is bundled one requirement at a time with `pip download --no-deps` (binary only); packages without a wheel are reported as `conda_only`. Real files: `paper_004` → Python 3.9, 300 requirements (114 skipped); `paper_006` → Python 3.8, 156 requirements (37 skipped).
 - Python 3.9 image added (`paper_004`); `paper_004` → 3.9 and `paper_006` → 3.8 in `data/seed_papers.json`. `pyyaml` is now a runtime dependency. New real-Docker acceptance check 13 (conda-only repository: bundle, offline install, import). Re-running `paper_004`/`paper_006` is left for Pilot 2 (#171).
