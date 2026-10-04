@@ -367,3 +367,29 @@ def test_bundling_downloads_wheels_for_the_papers_python_version(tmp_path, monke
     result = stager.bundle_dependencies(staged, python_version="3.8")
     assert calls[0][calls[0].index("--python-version") + 1] == "3.8"
     assert result["python_version"] == "3.8"
+
+
+def test_run_report_compares_requested_and_installed_versions(tmp_path, monkeypatch):
+    """#161: installed_packages.json from the install phase is compared with the repository's requirements."""
+    monkeypatch.setattr(DockerSandboxRunner, "is_docker_available", staticmethod(lambda *args, **kwargs: False))
+    source_dir = tmp_path / "source_repo"
+    source_dir.mkdir()
+    (source_dir / "reproduce.py").write_text("print('ok')\n", encoding="utf-8")
+    (source_dir / "requirements.txt").write_text("torch>=1.4.0\nnumpy==1.21.2\n", encoding="utf-8")
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    staged = stager.stage_repository(paper_id="paper_versions_test", source=str(source_dir))
+
+    real_run = DockerSandboxRunner.run
+
+    def run_and_write_install_record(self, paper_id, **kwargs):
+        result = real_run(self, paper_id=paper_id, **kwargs)
+        (result.output_dir / "installed_packages.json").write_text(
+            json.dumps([{"name": "torch", "version": "2.7.1"}, {"name": "numpy", "version": "2.4.6"}]))
+        return result
+
+    monkeypatch.setattr(DockerSandboxRunner, "run", run_and_write_install_record)
+    report = stager.execute_staged(staged, target_script="reproduce.py", config=SandboxConfig(allow_unsafe_local=True))
+    rows = {r["name"]: r for r in report["requested_vs_installed"]}
+    assert rows["torch"]["installed"] == "2.7.1" and rows["torch"]["satisfied"] is True
+    assert rows["numpy"]["satisfied"] is False
+    assert {"name": "torch", "version": "2.7.1"} in report["installed_packages"]

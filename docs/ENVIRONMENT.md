@@ -35,6 +35,7 @@ On Windows, Docker Desktop additionally requires WSL 2 and hardware virtualizati
 | `fastapi` | `>=0.115` | `src/web/app.py` | Local dashboard API and page (D0) |
 | `uvicorn` | `>=0.30` | `src/web/__main__.py` | Serves the dashboard on `127.0.0.1` |
 | `pyyaml` | `>=6.0` | `src/sandbox/conda_env.py` | Reads conda environment files (#159) |
+| `packaging` | `>=23.0` | `src/sandbox/installed_versions.py` | Compares requested and installed versions (#161) |
 
 ### Development (`requirements-dev.txt`, includes `requirements.txt`)
 

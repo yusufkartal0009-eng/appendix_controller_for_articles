@@ -334,6 +334,16 @@ def main():
         and r.stdout.count("imported from /workspace/deps/") == 2
     )
 
+    # 14. installed versions recorded (#161): the install phase of check 5 wrote installed_packages.json
+    installed_path = SANDBOX_RUNS_DIR / "acceptance_offline" / "installed_packages.json"
+    installed = json.loads(installed_path.read_text()) if installed_path.exists() else None
+    show("14. Installed package versions recorded by the install phase", ["(reads installed_packages.json of check 5)"],
+         f"installed_packages.json: {json.dumps(installed)}")
+    results["14 installed versions recorded"] = (
+        isinstance(installed, list) and {"name": "toolz", "version": "0.12.1"} in
+        [{"name": x.get("name"), "version": x.get("version")} for x in installed]
+    )
+
     # 6. no Docker: remove the Docker CLI from PATH for this check only
     marker = repo / "RAN.marker"
     (repo / "probe_marker.py").write_text(f"open({str(marker)!r}, 'w').write('ran')\n")

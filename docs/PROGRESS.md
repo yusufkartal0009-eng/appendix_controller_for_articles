@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 243 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 13 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 253 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 14 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Installed Versions Recorded (2026-10-04 19:08 +03:00, Issue #161, plan step 2.4)
+- The install phase writes `installed_packages.json` (`pip list --path /workspace/deps`). `run_report.json` gets `installed_packages` and `requested_vs_installed`: per requirement (or converted conda pin), the requested specifier, the installed version, whether it satisfies the request, and whether it was pinned. This makes drift like `paper_008`'s `torch>=1.4.0` → `2.7.1` visible. `packaging` is now a runtime dependency. Real-Docker acceptance check 14.
 
 ### Dependency Conflicts Named in the Reports (2026-10-04 19:04 +03:00, Issue #160, plan step 2.3)
 - `src/sandbox/dependency_conflicts.py` parses pip's "Cannot install ... conflicting dependencies" blocks and their "caused by" lines; `-r <file> (line N)` is replaced by that line's text from the staged repository. The bundle report (from the full pip output; pip prints the cause lines to stdout) and `run_report.json` (from `install.log`) now carry `dependency_conflicts`. On Pilot 1's real `paper_005` log: `pandas 3.0.6 depends on python-dateutil>=2.8.2` vs. the pinned `python-dateutil==2.8.1`.
