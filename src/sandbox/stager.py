@@ -14,6 +14,10 @@ from typing import Any
 
 from src.metric_extractor import MetricExtractor
 from src.sandbox.conda_env import convert_env_file, find_conda_env_files
+from src.sandbox.dependency_conflicts import (
+    name_requirement_lines,
+    parse_dependency_conflicts,
+)
 from src.sandbox.runner import (
     DEFAULT_PYTHON_VERSION,
     DockerSandboxRunner,
@@ -60,6 +64,13 @@ class StagedRepo:
     manifest: DependencyManifest
     candidate_scripts: list[str] = field(default_factory=list)
     bundle_dir: Path | None = None
+
+
+def _read_text(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
 
 
 class RepoStager:
@@ -269,6 +280,11 @@ class RepoStager:
                 "bundle_dir": str(bundle_dir),
                 "requirements_files": list(staged.manifest.requirements_files),
                 "needs_sdist_build": needs_sdist_build,
+                # Parsed from the full output: pip prints the ERROR line to stderr and the cause lines to stdout, and
+                # the stored excerpts below are cut (#160)
+                "dependency_conflicts": name_requirement_lines(
+                    parse_dependency_conflicts((res.stderr or "") + "\n" + (res.stdout or "")), staged.staged_path
+                ),
                 "stdout": res.stdout[-1000:] if res.stdout else "",
                 "stderr": res.stderr[-1000:] if res.stderr else "",
             }
@@ -434,6 +450,9 @@ class RepoStager:
             # Top level so scoring (Tier 1: dependencies installed) does not have to dig into `meta`.
             # UNKNOWN when the container wrote no execution metadata.
             "dependency_install_status": meta.get("dependency_install_status", "UNKNOWN"),
+            # Conflicts named from the install phase log, if pip could not resolve the requirements (#160)
+            "dependency_conflicts": name_requirement_lines(
+                parse_dependency_conflicts(_read_text(result.output_dir / "install.log")), staged.staged_path),
             "meta": meta,
             "stdout_preview": result.stdout[:2000] if result.stdout else "",
             "stderr_preview": result.stderr[:2000] if result.stderr else "",
