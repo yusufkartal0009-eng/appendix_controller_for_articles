@@ -86,6 +86,25 @@ cat sandbox_runs/smoke/execution_meta.json
 `dependency_install_status` is `INSTALLED` or `FAILED` when the runner installed offline wheels in its
 separate install phase (see `docs/SANDBOX_GUIDE.md`); a `FAILED` install does not stop the run.
 
+### Local GPU (opt-in, #169)
+
+A run gets the local NVIDIA GPU only when `SandboxConfig.gpus` is set (`"all"`, a count, or `"device=0[,1]"`). It
+is passed to `docker run --gpus`; every other isolation flag stays the same. This needs Docker Desktop with the WSL2
+backend and the NVIDIA Windows driver; no CUDA toolkit is needed inside the image, because the NVIDIA runtime adds
+the driver libraries and `nvidia-smi` to the container. The run records `gpu_requested`, the GPUs it could see
+(`gpu_devices`), and the peak GPU memory in use, sampled once per second (`gpu_peak_memory_used_mib`), in
+`execution_meta.json`. `run_report.json` summarizes this as `gpu` (`available`, `used` = memory rose above its value
+before the run). Other programs on the host that use the GPU can raise that value too.
+
+Check it on the machine with the GPU:
+
+```bash
+python scripts/gpu_check.py            # --gpus all; exit 0 only if the GPU is visible and the isolation holds
+```
+
+The RTX 5070 (Blackwell) needs a PyTorch build for CUDA 12.8 or newer; papers that pin PyTorch 1.x cannot use it and
+run on the CPU.
+
 ---
 
 ## 4. Environment Variables

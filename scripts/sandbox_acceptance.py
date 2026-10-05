@@ -30,6 +30,8 @@ paper runs) and prints the command evidence for each check:
                  of the repository) into wheels with the network off; the run phase installs them offline and
                  imports both, and the run image has no compiler
   19. data copy - a writable data mount is a per-run copy: the run writes into it, the host cache is unchanged
+  20. gpu off  - the GPU is opt-in (#169): a default run has no --gpus flag and records gpu_requested false and
+                 no GPU devices (a run with the GPU needs an NVIDIA host: scripts/gpu_check.py)
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
@@ -526,6 +528,20 @@ def main():
     results["19 writable data copy"] = (
         r.status == "COMPLETED" and "read: <cached/>" in r.stdout and "wrote parsed.pkl: True" in r.stdout
         and copied.exists() and sorted(p.name for p in cache_dir.iterdir()) == ["description.xml"]
+    )
+
+    # 20. GPU is opt-in (#169): the default run of check 1 asked for no GPU and saw none
+    identity_meta_path = SANDBOX_RUNS_DIR / "acceptance_identity" / "execution_meta.json"
+    identity_meta = json.loads(identity_meta_path.read_text()) if identity_meta_path.exists() else {}
+    identity_cmd = DockerSandboxRunner(SandboxConfig(python_version=args.python_version)).build_docker_command(
+        repo, SANDBOX_RUNS_DIR / "acceptance_identity", ["python", "probe_identity.py"])
+    show("20. GPU is opt-in", ["(reads execution_meta.json of check 1)"],
+         f"--gpus in the default command: {'--gpus' in identity_cmd}\n"
+         f"gpu_requested={identity_meta.get('gpu_requested')} gpu_devices={identity_meta.get('gpu_devices')} "
+         f"gpu_peak_memory_used_mib={identity_meta.get('gpu_peak_memory_used_mib')}")
+    results["20 gpu is opt-in"] = (
+        "--gpus" not in identity_cmd and identity_meta.get("gpu_requested") is False
+        and identity_meta.get("gpu_devices") == [] and identity_meta.get("gpu_peak_memory_used_mib") is None
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only
