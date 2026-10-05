@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 264 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 17 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 268 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 17 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Docker Detection Tolerates Slow Runners (2026-10-05 17:15 +03:00, Issue #164, plan step 2.8)
+- `DockerSandboxRunner.is_docker_available` asks `docker info` up to 3 times (15 s each, 2 s apart) instead of once for 5 s; worst case 49 s for a daemon that never answers. A missing Docker CLI still fails at once, and a daemon that stays unavailable is still refused (`tests/test_docker_detection.py`; real-Docker check 6 unchanged).
 
 ### Image Size and CPU Limit Measured (2026-10-04 21:58 +03:00, Issue #163, plan step 2.7)
 - Real-Docker acceptance checks 16 and 17 (CI run 37224145290). Image sizes: 477.1 MiB (Python 3.11), 451.2 MiB (3.9), 417.1 MiB (3.8). Under `--cpus=0.5`, two busy workers got 0.49 CPUs together; the control at the runner's 2 CPUs got 1.97. `docs/SANDBOX_ACCEPTANCE.md` regenerated from that run (it now also lists check 15 from #166).

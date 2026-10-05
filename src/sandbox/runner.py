@@ -34,6 +34,12 @@ class SandboxUnavailableError(RuntimeError):
     """Raised when isolated execution is impossible and unisolated execution was not opted into."""
 
 
+# Docker detection (#164): `docker info` attempts, seconds per attempt, and the wait between attempts.
+# Worst case before reporting an unresponsive daemon: 3 x 15 s + 2 x 2 s = 49 s.
+DOCKER_DETECT_ATTEMPTS = 3
+DOCKER_DETECT_TIMEOUT = 15
+DOCKER_DETECT_WAIT_SECONDS = 2.0
+
 # Python versions with a sandbox image (docker/Dockerfile.sandbox, build arg PYTHON_VERSION; #158).
 SUPPORTED_PYTHON_VERSIONS = ("3.8", "3.9", "3.11")
 DEFAULT_PYTHON_VERSION = "3.11"
@@ -139,21 +145,26 @@ class DockerSandboxRunner:
         self.config = config or SandboxConfig()
 
     @staticmethod
-    def is_docker_available() -> bool:
-        """Check whether the Docker CLI and daemon are operational."""
-        docker_bin = shutil.which("docker")
-        if not docker_bin:
+    def is_docker_available(attempts: int = DOCKER_DETECT_ATTEMPTS, timeout: int = DOCKER_DETECT_TIMEOUT,
+                            wait_seconds: float = DOCKER_DETECT_WAIT_SECONDS) -> bool:
+        """Check whether the Docker CLI and daemon are operational.
+
+        A missing Docker CLI is reported at once. A daemon that does not answer `docker info` in time, or answers
+        with an error, is asked again: on slow CI runners the first answer can take longer than a few seconds
+        (#164). Only a daemon that stays unavailable for every attempt is reported as unavailable.
+        """
+        if not shutil.which("docker"):
             return False
-        try:
-            res = subprocess.run(
-                ["docker", "info"],
-                capture_output=True,
-                text=True,
-                timeout=5, check=False,
-            )
-            return res.returncode == 0
-        except (subprocess.SubprocessError, OSError):
-            return False
+        for attempt in range(attempts):
+            try:
+                res = subprocess.run(["docker", "info"], capture_output=True, text=True, timeout=timeout, check=False)
+                if res.returncode == 0:
+                    return True
+            except (subprocess.SubprocessError, OSError):
+                pass
+            if attempt < attempts - 1:
+                time.sleep(wait_seconds)
+        return False
 
     def build_docker_command(
         self,
