@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import posixpath
+import re
 import shutil
 import subprocess
 import sys
@@ -86,6 +87,10 @@ class SandboxConfig:
     writable_data: list[str] = field(default_factory=list)
     # Requirements installed in the install phase in addition to the repository's requirement files (#193).
     extra_requirements: list[str] = field(default_factory=list)
+    # Local NVIDIA GPU for the run (#169), opt-in: "" (none, the default), "all", a count ("1"), or
+    # "device=0[,1]". Passed to `docker run --gpus` (Docker Desktop with WSL2 and the NVIDIA driver); every other
+    # isolation flag stays as it is.
+    gpus: str = ""
     # Run on the host without isolation when Docker is unavailable. Only for code you trust.
     allow_unsafe_local: bool = False
 
@@ -94,6 +99,8 @@ class SandboxConfig:
         if not self.image_name:
             self.image_name = image
         self.working_dir = repo_relative(self.working_dir, "working_dir")
+        if self.gpus and not GPUS_RE.fullmatch(self.gpus):
+            raise ValueError(f"gpus must be 'all', a count, or 'device=<ids>': {self.gpus!r}")
         self.data_mounts = {container_data_path(target): host for target, host in self.data_mounts.items()}
         self.writable_data = [container_data_path(target) for target in self.writable_data]
         unknown = set(self.writable_data) - set(self.data_mounts)
@@ -109,6 +116,10 @@ def repo_relative(path: str, what: str) -> str:
     if norm.startswith(("/", "..")):
         raise ValueError(f"{what} must stay inside the repository: {path!r}")
     return norm
+
+
+# Accepted values of SandboxConfig.gpus (#169): "all", a count, or "device=" with comma-separated indexes.
+GPUS_RE = re.compile(r"all|[1-9][0-9]?|device=[0-9]+(,[0-9]+)*")
 
 
 # Container paths a data mount may target: inside the repository or the sandbox home (#166).
@@ -239,6 +250,11 @@ class DockerSandboxRunner:
             "--security-opt", "no-new-privileges:true",
             "--user", f"{self.config.user_id}:{self.config.group_id}",
         ])
+
+        # 3b. GPU (#169): only when asked for; the container gets the GPU devices and the NVIDIA driver's
+        # libraries and tools (nvidia-smi), nothing else changes.
+        if self.config.gpus:
+            docker_cmd.extend(["--gpus", self.config.gpus, "-e", "SANDBOX_GPUS_REQUESTED=1"])
 
         # 4. Resource & Process Quotas
         docker_cmd.extend([
@@ -390,7 +406,7 @@ class DockerSandboxRunner:
                     "Install and start Docker, or pass --allow-unsafe-local (SandboxConfig.allow_unsafe_local) "
                     "to run unisolated, only for code you trust."
                 )
-            if command or self.config.working_dir or self.config.writable_repo or self.config.data_mounts:
+            if command or self.config.working_dir or self.config.writable_repo or self.config.data_mounts or self.config.gpus:
                 # The local fallback cannot honor a run setup (#166); running without it would be a different run.
                 raise SandboxUnavailableError("Docker is not available, and this paper's run setup needs the Docker sandbox.")
             logger.warning("Docker unavailable; running %s WITHOUT isolation (allow_unsafe_local)", paper_id)

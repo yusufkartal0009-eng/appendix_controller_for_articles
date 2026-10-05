@@ -70,6 +70,16 @@ class StagedRepo:
     built_dir: Path | None = None
 
 
+def gpu_summary(requested: str, meta: dict[str, Any]) -> dict[str, Any]:
+    """Whether the run asked for a GPU, which GPUs it could see, and whether GPU memory use rose during the run."""
+    devices = meta.get("gpu_devices") or []
+    peak = meta.get("gpu_peak_memory_used_mib")
+    before = max((d.get("memory_used_before_mib", 0) for d in devices), default=None)
+    used = None if peak is None or before is None else peak > before
+    return {"requested": requested or None, "available": bool(devices), "devices": devices,
+            "peak_memory_used_mib": peak, "used": used}
+
+
 def _read_text(path: Path) -> str:
     try:
         return path.read_text(encoding="utf-8", errors="replace")
@@ -555,6 +565,8 @@ class RepoStager:
             # Top level so scoring (Tier 1: dependencies installed) does not have to dig into `meta`.
             # UNKNOWN when the container wrote no execution metadata.
             "dependency_install_status": meta.get("dependency_install_status", "UNKNOWN"),
+            # GPU (#169): requested, visible inside the container, and used (GPU memory rose during the run)
+            "gpu": gpu_summary(config.gpus, meta),
             # Conflicts named from the install phase log, if pip could not resolve the requirements (#160)
             "dependency_conflicts": name_requirement_lines(
                 parse_dependency_conflicts(_read_text(result.output_dir / "install.log")), staged.staged_path),

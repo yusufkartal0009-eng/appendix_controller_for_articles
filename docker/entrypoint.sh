@@ -164,6 +164,29 @@ oom_kill_count() {
 }
 OOM_KILLS_BEFORE=$(oom_kill_count)
 
+# GPU (#169): with `docker run --gpus`, the NVIDIA runtime adds nvidia-smi to the container. Record the GPUs the run
+# could see, and sample the GPU memory in use once per second during the run, so the report can say whether a GPU
+# was used (peak memory above the value before the run). Without a GPU nothing is sampled.
+GPU_DIR="${OUTPUT_DIR}/.gpu"
+GPU_SAMPLER_PID=""
+GPU_DEVICES_JSON="[]"
+if [ -n "${SANDBOX_GPUS_REQUESTED:-}" ] && command -v nvidia-smi >/dev/null 2>&1; then
+  mkdir -p "${GPU_DIR}"
+  nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.used --format=csv,noheader,nounits \
+    > "${GPU_DIR}/devices.csv" 2>/dev/null || true
+  GPU_DEVICES_JSON=$(python3 -c "
+import csv, json, sys
+rows = [r for r in csv.reader(open(sys.argv[1])) if len(r) == 5]
+print(json.dumps([{'index': int(r[0]), 'name': r[1].strip(), 'driver': r[2].strip(),
+                   'memory_total_mib': int(r[3]), 'memory_used_before_mib': int(r[4])} for r in rows]))
+" "${GPU_DIR}/devices.csv" 2>/dev/null || echo "[]")
+  ( while true; do
+      nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits >> "${GPU_DIR}/samples.txt" 2>/dev/null
+      sleep 1
+    done ) &
+  GPU_SAMPLER_PID=$!
+fi
+
 START_TIME=$(date +%s.%N)
 
 # Execute command under timeout guard with split output capture
@@ -177,6 +200,15 @@ sync 2>/dev/null || true
 sleep 0.1
 
 END_TIME=$(date +%s.%N)
+
+if [ -n "${GPU_SAMPLER_PID}" ]; then
+  kill "${GPU_SAMPLER_PID}" 2>/dev/null || true
+fi
+GPU_PEAK_MIB="null"
+if [ -s "${GPU_DIR}/samples.txt" ]; then
+  GPU_PEAK_MIB=$(sort -n "${GPU_DIR}/samples.txt" | tail -1 | tr -dc '0-9')
+  GPU_PEAK_MIB="${GPU_PEAK_MIB:-null}"
+fi
 
 # Calculate duration using Python for precision and zero external tool dependency
 DURATION=$(python3 -c "print(round(${END_TIME} - ${START_TIME}, 3))" 2>/dev/null || echo "0.0")
@@ -201,6 +233,9 @@ cat <<EOF > "${META_JSON}"
   "timeout_limit_seconds": ${TIMEOUT_SECONDS},
   "dependency_install_status": "${DEPENDENCY_STATUS}",
   "peak_memory_bytes": $(peak_memory_bytes),
+  "gpu_requested": $([ -n "${SANDBOX_GPUS_REQUESTED:-}" ] && echo true || echo false),
+  "gpu_devices": ${GPU_DEVICES_JSON},
+  "gpu_peak_memory_used_mib": ${GPU_PEAK_MIB},
   "user_id": $(id -u),
   "group_id": $(id -g)
 }
