@@ -1,0 +1,23 @@
+{
+  "paper_id": "paper_006",
+  "made_by": "owner",
+  "source": "owner's gold set form (W5, #133)",
+  "questions": {
+    "arcene_auroc": {
+      "accepted_values": [
+        "91.04"
+      ],
+      "not_in_paper": false
+    },
+    "bank_marketing_accuracy": {
+      "accepted_values": [],
+      "not_in_paper": true
+    },
+    "xgboost_arcene_auroc": {
+      "accepted_values": [
+        "81.41"
+      ],
+      "not_in_paper": false
+    }
+  }
+}

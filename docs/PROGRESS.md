@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Gold Set and Extraction Precision/Recall (W5) (2026-10-05 21:02 +03:00, Issue #133, plan step 1.5)
+- The owner filled the gold set form question by question (18 questions, 6 papers): `tests/data/gold_claims/paper_*.json` (`made_by: owner`, written by `scripts/evaluate_gold.py from-form`, no `needs_decision`). Pass A scored by `scripts/evaluate_gold.py score --pass A` (`data/claims/gold_score_pass_A.json`): TP 12, FP 0, FN 0, TN 6, precision 1.0, recall 1.0; the regression cases EP3602 (AUROC, accuracy) and HIGGS are all TN. Caveat: the form's candidate values were listed by the same agent that extracted pass A, so a value it never found could only enter through "other"; pass B is not independent yet.
+
 ### Final Report Skeleton (2026-10-05 18:22 +03:00, Issue #120, step R2)
 - `docs/report/REPORT.md`: the 10 sections of #120, each with its one-line purpose, what it needs, and its status. No section body is written; sections are written only when their evidence exists.
 

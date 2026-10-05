@@ -1,0 +1,19 @@
+{
+  "paper_id": "paper_005",
+  "made_by": "owner",
+  "source": "owner's gold set form (W5, #133)",
+  "questions": {
+    "ep3602_auroc": {
+      "accepted_values": [],
+      "not_in_paper": true
+    },
+    "ep3602_accuracy": {
+      "accepted_values": [],
+      "not_in_paper": true
+    },
+    "kernel_speedup_factor": {
+      "accepted_values": [],
+      "not_in_paper": true
+    }
+  }
+}
