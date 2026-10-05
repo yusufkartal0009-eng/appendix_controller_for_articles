@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 287 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 19 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 291 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 19 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Human Review of Extracted Claims (W7) (2026-10-05 17:50 +03:00, Issue #134, plan step 1.7)
+- `python cli.py review-claims [paper_id]` shows each pending claim with its provenance and asks accept / reject / skip / quit (optional note); each decision is committed at once with `verified_by = human`. `--list` shows the review status without asking. `claims_for_scoring` (`src/claim_review.py`) returns only accepted claims. No claim has been accepted or rejected; that is the owner's step.
 
 ### Extracted Claims Stored with Provenance (W6) (2026-10-05 17:49 +03:00, Issue #10, plan step 1.6)
 - New table `extracted_claims` (`data/schema.sql`, `ExtractedClaimORM`): page, table or section, quote, source file, PDF hash, extractor version, `verified_by` (`auto-quote-match` = quote guard matched, not an approval; `human` = a person decided), and the review status. The database refuses a non-pending claim without `verified_by = 'human'`. `src/claim_store.py` saves, updates, queries (by paper, review status, and run), and records reviews; `accepted_claims` is what may reach the scorer. `scripts/import_claims.py` imports pass A as 12 `pending` claims. No claim has been accepted.
