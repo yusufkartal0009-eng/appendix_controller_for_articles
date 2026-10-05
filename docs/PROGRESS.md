@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 264 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 15 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 264 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 17 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Image Size and CPU Limit Measured (2026-10-04 21:58 +03:00, Issue #163, plan step 2.7)
+- Real-Docker acceptance checks 16 and 17 (CI run 37224145290). Image sizes: 477.1 MiB (Python 3.11), 451.2 MiB (3.9), 417.1 MiB (3.8). Under `--cpus=0.5`, two busy workers got 0.49 CPUs together; the control at the runner's 2 CPUs got 1.97. `docs/SANDBOX_ACCEPTANCE.md` regenerated from that run (it now also lists check 15 from #166).
 
 ### Paper Run Setups: Fix, Do Not Replace (2026-10-04 21:15 +03:00, Issue #166, plan step 2.5)
 - Owner decision: no paper is replaced. `paper_002`–`paper_006` get a `run_setup` in `data/seed_papers.json`; `paper_008` is kept and reported as `DATA_NOT_ACCESSIBLE` (its split files are not published). The decisions and what is still open are in `docs/CORPUS_VERIFICATION.md` section 5. The sandbox gained a repository-relative working directory, a writable per-run copy of the repository, read-only data mounts from a host cache (`scripts/fetch_data.py`), and a command that replaces the target script (real-Docker acceptance check 15). Not verified: no paper has been run with its run setup (Pilot 2, #171). Open: `paper_002` (nbconvert, OpenML-CC18 list), `paper_005` (C++ build, dateutil conflict), and `paper_006` (offline OpenML cache).
