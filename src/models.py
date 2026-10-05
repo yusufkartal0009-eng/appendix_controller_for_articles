@@ -10,6 +10,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
     Column,
     DateTime,
     Float,
@@ -17,6 +19,7 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
+    UniqueConstraint,
     func,
 )
 from sqlalchemy.orm import declarative_base, relationship
@@ -47,6 +50,7 @@ class PaperORM(Base):
     # Relationships
     runs = relationship("RunORM", back_populates="paper", cascade="all, delete-orphan")
     claims = relationship("ClaimORM", back_populates="paper", cascade="all, delete-orphan")
+    extracted_claims = relationship("ExtractedClaimORM", back_populates="paper", cascade="all, delete-orphan")
     scores = relationship("ScoreORM", back_populates="paper", uselist=False, cascade="all, delete-orphan")
 
     def get_expected_claims_dict(self) -> dict[str, float]:
@@ -104,6 +108,47 @@ class ClaimORM(Base):
     # Relationships
     paper = relationship("PaperORM", back_populates="claims")
     run = relationship("RunORM", back_populates="claims")
+
+
+class ExtractedClaimORM(Base):
+    """A claim extracted from a paper, with its provenance and its human review (W6, #10).
+
+    `verified_by`: 'auto-quote-match' (the quote guard found quote and value in the paper text; not an approval)
+    or 'human' (a person accepted or rejected it). Only `review_status == 'accepted'` with `verified_by == 'human'`
+    reaches the scorer (src/claim_store.py).
+    """
+    __tablename__ = "extracted_claims"
+
+    extracted_claim_id = Column(String, primary_key=True)  # "<paper_id>:<query_id>"
+    paper_id = Column(String, ForeignKey("papers.paper_id", ondelete="CASCADE"), nullable=False)
+    query_id = Column(String, nullable=False)  # question in data/claim_queries/<paper_id>.json
+    metric_name = Column(String, nullable=False)
+    dataset = Column(String, nullable=True)
+    model_variant = Column(String, nullable=True)
+    split = Column(String, nullable=True)
+    value = Column(Float, nullable=False)  # normalized value
+    value_as_printed = Column(String, nullable=False)
+    higher_is_better = Column(Boolean, nullable=True)
+    page = Column(Integer, nullable=False)  # PDF page number
+    table_or_section = Column(String, nullable=True)
+    quote = Column(Text, nullable=False)
+    source_file = Column(String, nullable=False)  # extraction file, e.g. data/claims/paper_003.json
+    pdf_sha256 = Column(String, nullable=True)
+    extractor_version = Column(String, nullable=False)
+    verified_by = Column(String, nullable=True)  # 'auto-quote-match' | 'human' | NULL (quote not matched)
+    review_status = Column(String, nullable=False, default="pending")  # 'pending' | 'accepted' | 'rejected'
+    reviewed_at = Column(DateTime, nullable=True)
+    review_note = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("paper_id", "query_id"),
+        CheckConstraint("verified_by IN ('auto-quote-match', 'human') OR verified_by IS NULL"),
+        CheckConstraint("review_status IN ('pending', 'accepted', 'rejected')"),
+        CheckConstraint("review_status = 'pending' OR verified_by = 'human'"),
+    )
+
+    paper = relationship("PaperORM", back_populates="extracted_claims")
 
 
 class ScoreORM(Base):

@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 278 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 19 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 287 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 19 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Extracted Claims Stored with Provenance (W6) (2026-10-05 17:49 +03:00, Issue #10, plan step 1.6)
+- New table `extracted_claims` (`data/schema.sql`, `ExtractedClaimORM`): page, table or section, quote, source file, PDF hash, extractor version, `verified_by` (`auto-quote-match` = quote guard matched, not an approval; `human` = a person decided), and the review status. The database refuses a non-pending claim without `verified_by = 'human'`. `src/claim_store.py` saves, updates, queries (by paper, review status, and run), and records reviews; `accepted_claims` is what may reach the scorer. `scripts/import_claims.py` imports pass A as 12 `pending` claims. No claim has been accepted.
 
 ### Build Phase and the Open Run-Setup Items (#193) (2026-10-05 17:41 +03:00, Issue #193)
 - Finding: `openml` (0.11.0 and 0.12.2) and `liac-arff` exist on PyPI only as sdists, so `paper_002` and `paper_006` could not install with the binary-only install phase. New isolated **build phase** (D-008): sdists downloaded from the PyPI JSON API with a SHA-256 check (never run on the host), built into wheels in the build image (`docker build --target build`) with the network off; the install phase stays binary-only. Run setups gained `build`, `extra_requirements`, `constraints`, and writable data copies; OpenML datasets are fetched over HTTP (MD5-checked). `paper_005`: Python 3.8, `fastsk` built from the repository, unpinned packages limited to their newest release before the pinned commit's date (resolves for Python 3.8, pip dry run). `paper_006`: offline load of dataset 1461 by openml 0.11.0 shown on the host with sockets blocked. Real-Docker acceptance checks 18 (build phase) and 19 (writable data copy). Still open: `paper_002` lists its datasets through the OpenML API at run time, which needs network (owner decision). Not verified: no paper run (Pilot 2, #171).

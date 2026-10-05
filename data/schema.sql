@@ -49,6 +49,36 @@ CREATE TABLE IF NOT EXISTS claims (
     FOREIGN KEY (run_id) REFERENCES runs(run_id) ON DELETE SET NULL
 );
 
+-- 3b. EXTRACTED CLAIMS: claims extracted from the paper text, with provenance and human review (W6, #10).
+-- verified_by: 'auto-quote-match' (quote guard matched, not an approval) or 'human' (a person decided).
+-- Only review_status = 'accepted' with verified_by = 'human' reaches the scorer.
+CREATE TABLE IF NOT EXISTS extracted_claims (
+    extracted_claim_id TEXT PRIMARY KEY, -- "<paper_id>:<query_id>"
+    paper_id TEXT NOT NULL,
+    query_id TEXT NOT NULL,
+    metric_name TEXT NOT NULL,
+    dataset TEXT,
+    model_variant TEXT,
+    split TEXT,
+    value REAL NOT NULL,
+    value_as_printed TEXT NOT NULL,
+    higher_is_better BOOLEAN,
+    page INTEGER NOT NULL,
+    table_or_section TEXT,
+    quote TEXT NOT NULL,
+    source_file TEXT NOT NULL,
+    pdf_sha256 TEXT,
+    extractor_version TEXT NOT NULL,
+    verified_by TEXT CHECK(verified_by IN ('auto-quote-match', 'human') OR verified_by IS NULL),
+    review_status TEXT NOT NULL DEFAULT 'pending' CHECK(review_status IN ('pending', 'accepted', 'rejected')),
+    reviewed_at TIMESTAMP,
+    review_note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (paper_id, query_id),
+    CHECK(review_status = 'pending' OR verified_by = 'human'),
+    FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
+);
+
 -- 4. SCORES: 4-Tier Reproducibility Evaluation Scores and Neutral Status Classifications
 CREATE TABLE IF NOT EXISTS scores (
     score_id TEXT PRIMARY KEY,
@@ -69,5 +99,7 @@ CREATE TABLE IF NOT EXISTS scores (
 -- Indexes for efficient queries
 CREATE INDEX IF NOT EXISTS idx_runs_paper_id ON runs(paper_id);
 CREATE INDEX IF NOT EXISTS idx_claims_paper_id ON claims(paper_id);
+CREATE INDEX IF NOT EXISTS idx_claims_run_id ON claims(run_id);
+CREATE INDEX IF NOT EXISTS idx_extracted_claims_paper_id ON extracted_claims(paper_id);
 CREATE INDEX IF NOT EXISTS idx_scores_paper_id ON scores(paper_id);
 CREATE INDEX IF NOT EXISTS idx_scores_status_label ON scores(status_label);
