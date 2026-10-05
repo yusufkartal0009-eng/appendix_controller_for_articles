@@ -10,12 +10,14 @@
     "license": "Apache-2.0",
     "target_script": "tabpfn/scripts/tabular_baselines.py",
     "expected_claims": {
-      "mean_roc_auc": 0.895,
-      "inference_seconds": 1.25
+      "inference_seconds__cpu": 37.59,
+      "inference_seconds__gpu": 0.6172,
+      "mean_roc_auc": 0.934
     },
     "source_table_or_section": {
-      "mean_roc_auc": "Table 1 (OpenML-CC18 comparison)",
-      "inference_seconds": "Section 4.2 (Inference latency benchmarks)"
+      "inference_seconds__cpu": "Table 1, p. 8: 37.59 (quote-matched, accepted by a person)",
+      "inference_seconds__gpu": "Table 1, p. 8: 0.6172 (quote-matched, accepted by a person)",
+      "mean_roc_auc": "Table 1, p. 8: 0.934±.0086 (quote-matched, accepted by a person)"
     },
     "python_version": "3.8",
     "python_version_source": "README and requirements.txt: 'Please use python V 3.7'; 3.8 is the oldest sandbox image (#158).",
@@ -93,6 +95,17 @@
         "nbconvert",
         "ipykernel"
       ]
+    },
+    "seed_claims_before_extraction": {
+      "expected_claims": {
+        "mean_roc_auc": 0.895,
+        "inference_seconds": 1.25
+      },
+      "source_table_or_section": {
+        "mean_roc_auc": "Table 1 (OpenML-CC18 comparison)",
+        "inference_seconds": "Section 4.2 (Inference latency benchmarks)"
+      },
+      "note": "Seed values before claim extraction; see docs/CORPUS_VERIFICATION.md (2026-09-27 check)"
     }
   },
   {
@@ -108,12 +121,12 @@
     "expected_claims": {
       "ft_transformer_rmse": 0.459,
       "resnet_rmse": 0.486,
-      "xgboost_rmse": 0.453
+      "xgboost_rmse": 0.433
     },
     "source_table_or_section": {
-      "ft_transformer_rmse": "Table 2 (California Housing RMSE)",
-      "resnet_rmse": "Table 2 (California Housing RMSE)",
-      "xgboost_rmse": "Table 2 (California Housing RMSE)"
+      "ft_transformer_rmse": "Table 2, p. 7: 0.459 (quote-matched, accepted by a person)",
+      "resnet_rmse": "Table 2, p. 7: 0.486 (quote-matched, accepted by a person)",
+      "xgboost_rmse": "Table 8, p. 15: 0.433±1.6e-3 (quote-matched, accepted by a person)"
     },
     "python_version": "3.8",
     "python_version_source": "README: 'conda create -n revisiting-models python=3.8.8' (#158).",
@@ -143,6 +156,19 @@
       ],
       "open_items": [],
       "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+    },
+    "seed_claims_before_extraction": {
+      "expected_claims": {
+        "ft_transformer_rmse": 0.459,
+        "resnet_rmse": 0.486,
+        "xgboost_rmse": 0.453
+      },
+      "source_table_or_section": {
+        "ft_transformer_rmse": "Table 2 (California Housing RMSE)",
+        "resnet_rmse": "Table 2 (California Housing RMSE)",
+        "xgboost_rmse": "Table 2 (California Housing RMSE)"
+      },
+      "note": "Seed values before claim extraction; see docs/CORPUS_VERIFICATION.md (2026-09-27 check)"
     }
   },
   {
@@ -156,14 +182,12 @@
     "license": "MIT",
     "target_script": "bin/tabr.py",
     "expected_claims": {
-      "tabr_average_rank": 2.15,
-      "ft_transformer_average_rank": 3.42,
-      "xgboost_average_rank": 3.2
+      "tabr_average_rank": 1.3,
+      "xgboost_average_rank": 2.5
     },
     "source_table_or_section": {
-      "tabr_average_rank": "Table 1 (Overall Average Rank)",
-      "ft_transformer_average_rank": "Table 1 (Overall Average Rank)",
-      "xgboost_average_rank": "Table 1 (Overall Average Rank)"
+      "tabr_average_rank": "Table 4, p. 7: 1.3± 0.9 (quote-matched, accepted by a person)",
+      "xgboost_average_rank": "Table 4, p. 7: 2.5± 0.9 (quote-matched, accepted by a person)"
     },
     "python_version": "3.9",
     "python_version_source": "environment.yaml: 'python=3.9.16' (conda-only repository, #159).",
@@ -192,6 +216,19 @@
       ],
       "open_items": [],
       "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+    },
+    "seed_claims_before_extraction": {
+      "expected_claims": {
+        "tabr_average_rank": 2.15,
+        "ft_transformer_average_rank": 3.42,
+        "xgboost_average_rank": 3.2
+      },
+      "source_table_or_section": {
+        "tabr_average_rank": "Table 1 (Overall Average Rank)",
+        "ft_transformer_average_rank": "Table 1 (Overall Average Rank)",
+        "xgboost_average_rank": "Table 1 (Overall Average Rank)"
+      },
+      "note": "Seed values before claim extraction; see docs/CORPUS_VERIFICATION.md (2026-09-27 check)"
     }
   },
   {
@@ -204,16 +241,8 @@
     "paper_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v1",
     "license": "Apache-2.0",
     "target_script": "results/run_gridsearch.py",
-    "expected_claims": {
-      "ep3602_auroc": 0.912,
-      "ep3602_accuracy": 0.875,
-      "kernel_speedup_factor": 15.4
-    },
-    "source_table_or_section": {
-      "ep3602_auroc": "Table 3 (EP3602 Dataset AUROC)",
-      "ep3602_accuracy": "Table 3 (EP3602 Dataset Accuracy)",
-      "kernel_speedup_factor": "Figure 4 (Kernel Computation Speedup)"
-    },
+    "expected_claims": {},
+    "source_table_or_section": {},
     "run_setup": {
       "decision": "fix",
       "reason": "The README runs `cd results/ && python run_gridsearch.py`; the script opens spreadsheets/datasets_to_use.csv relative to its working directory. The datasets are in the repository.",
@@ -242,7 +271,20 @@
       "constraints_source": "requirements.txt leaves numpy, pandas, scikit-learn, scipy, and tqdm unpinned; for each, the newest release with a CPython 3.8 manylinux or pure-Python wheel uploaded to PyPI before the pinned commit's date (d275a23, 2021-05-11T18:11:25Z), from the PyPI JSON API on 2026-10-05. pandas 1.2.4 accepts the pinned python-dateutil==2.8.1 (it needs >=2.7.3), which removes Pilot 1's conflict."
     },
     "python_version": "3.8",
-    "python_version_source": "README: 'Python 3.6+'; the pinned commit is from 2021-05-11, and 3.8 is the oldest sandbox image (#158, #193)."
+    "python_version_source": "README: 'Python 3.6+'; the pinned commit is from 2021-05-11, and 3.8 is the oldest sandbox image (#158, #193).",
+    "seed_claims_before_extraction": {
+      "expected_claims": {
+        "ep3602_auroc": 0.912,
+        "ep3602_accuracy": 0.875,
+        "kernel_speedup_factor": 15.4
+      },
+      "source_table_or_section": {
+        "ep3602_auroc": "Table 3 (EP3602 Dataset AUROC)",
+        "ep3602_accuracy": "Table 3 (EP3602 Dataset Accuracy)",
+        "kernel_speedup_factor": "Figure 4 (Kernel Computation Speedup)"
+      },
+      "note": "Seed values before claim extraction; see docs/CORPUS_VERIFICATION.md (2026-09-27 check)"
+    }
   },
   {
     "paper_id": "paper_006",
@@ -255,14 +297,12 @@
     "license": "Apache-2.0",
     "target_script": "train.py",
     "expected_claims": {
-      "arcene_auroc": 0.887,
-      "bank_marketing_accuracy": 0.914,
-      "xgboost_arcene_auroc": 0.865
+      "arcene_auroc": 0.9104,
+      "xgboost_arcene_auroc": 0.8141
     },
     "source_table_or_section": {
-      "arcene_auroc": "Table 1 (Arcene Benchmark AUROC)",
-      "bank_marketing_accuracy": "Table 1 (Bank Marketing Accuracy)",
-      "xgboost_arcene_auroc": "Table 1 (Arcene XGBoost Baseline)"
+      "arcene_auroc": "Table 2, p. 7: 91.04 (quote-matched, accepted by a person)",
+      "xgboost_arcene_auroc": "Table 2, p. 7: 81.41 (quote-matched, accepted by a person)"
     },
     "python_version": "3.8",
     "python_version_source": "saint_environment.yml: 'python=3.8.10' (conda-only repository, #159).",
@@ -301,6 +341,19 @@
         "source": "saint_environment.yml pins openml=0.11.0 and liac-arff=2.5.0; both exist on PyPI only as sdists. The other sdist-only pins of the environment are not imported by the pilot command (wandb and its dependencies only with --active_log) (#193)"
       },
       "host_check": "2026-10-05: on the host (Python 3.11, openml 0.11.0, numpy 1.26.4, pandas 1.5.3, sockets blocked), openml.datasets.get_dataset(1461) and get_data() loaded bank-marketing (45211 rows, 16 features) from a cache written by scripts/fetch_data.py, and wrote dataset.pkl.py3 into it. Not the sandbox's Python 3.8 environment."
+    },
+    "seed_claims_before_extraction": {
+      "expected_claims": {
+        "arcene_auroc": 0.887,
+        "bank_marketing_accuracy": 0.914,
+        "xgboost_arcene_auroc": 0.865
+      },
+      "source_table_or_section": {
+        "arcene_auroc": "Table 1 (Arcene Benchmark AUROC)",
+        "bank_marketing_accuracy": "Table 1 (Bank Marketing Accuracy)",
+        "xgboost_arcene_auroc": "Table 1 (Arcene XGBoost Baseline)"
+      },
+      "note": "Seed values before claim extraction; see docs/CORPUS_VERIFICATION.md (2026-09-27 check)"
     }
   },
   {
@@ -314,12 +367,12 @@
     "license": "MIT",
     "target_script": "main.py",
     "expected_claims": {
-      "forest_covertype_accuracy": 0.971,
-      "higgs_auroc": 0.849
+      "forest_covertype_accuracy__danet_20": 0.9723,
+      "forest_covertype_accuracy__danet_32": 0.9727
     },
     "source_table_or_section": {
-      "forest_covertype_accuracy": "Table 2 (Forest CoverType Accuracy)",
-      "higgs_auroc": "Table 2 (HIGGS Classification AUROC)"
+      "forest_covertype_accuracy__danet_20": "Table 2, p. 6: 97.23%±2e-4 (quote-matched, accepted by a person)",
+      "forest_covertype_accuracy__danet_32": "Table 2, p. 6: 97.27%±5e-4 (quote-matched, accepted by a person)"
     },
     "run_setup": {
       "decision": "report_as_is",
@@ -334,6 +387,17 @@
       "expected_outcome": "DATA_NOT_ACCESSIBLE",
       "open_items": [],
       "status_note": "Pilot 1 (docs/PILOT_WEEK2.md section 11): FileNotFoundError at the data step."
+    },
+    "seed_claims_before_extraction": {
+      "expected_claims": {
+        "forest_covertype_accuracy": 0.971,
+        "higgs_auroc": 0.849
+      },
+      "source_table_or_section": {
+        "forest_covertype_accuracy": "Table 2 (Forest CoverType Accuracy)",
+        "higgs_auroc": "Table 2 (HIGGS Classification AUROC)"
+      },
+      "note": "Seed values before claim extraction; see docs/CORPUS_VERIFICATION.md (2026-09-27 check)"
     }
   }
 ]
