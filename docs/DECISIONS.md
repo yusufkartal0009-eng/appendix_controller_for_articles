@@ -240,3 +240,40 @@ replacement and keeping Pilot 1's result makes such a selection visible instead 
 - A replacement is decided per paper (fix or replace, plan step 2.5, #166) and written down with its reason, for
   example in `docs/CORPUS_VERIFICATION.md`.
 - The Pilot 2 report (#171) shows Pilot 1's result next to its own and names every replaced paper.
+
+## D-008 — Package build code runs in a separate, isolated build phase (2026-10-05)
+
+**Status:** decided by the agent on 2026-10-05 while resolving #193, under the owner's instruction to resolve the
+open run-setup items without waiting; open to the owner's review.
+**Related:** #193, #166, D-001, `docker/Dockerfile.sandbox` (target `build`), `docker/entrypoint.sh` (build phase).
+
+### Context
+
+The install phase installs binary wheels only, so that no package code runs while installing. Three seed papers
+need packages that exist only as source: `openml` and `liac-arff` (`paper_002`, `paper_006`) and the `fastsk` C++
+extension (`paper_005`). Building them runs their `setup.py`. Building on the host would run third-party code
+outside the sandbox, and `pip download` of an sdist already runs its metadata hooks on the host.
+
+### Decision
+
+- Sdists are downloaded on the host from the PyPI JSON API and checked against PyPI's SHA-256 digest; nothing in
+  them runs on the host.
+- A separate **build phase** builds them into wheels inside the sandbox, from the build image (the sandbox image
+  plus `build-essential`, `setuptools`, and `wheel`). It runs under the same isolation as paper code: network off,
+  uid 1000, read-only root. Only the build output directory is writable, plus a per-run copy of the repository
+  when building from it.
+- The install phase stays binary-only and installs the built wheels like any other wheel. Paper runs use the
+  default image, which has no compiler.
+
+### Reason
+
+Build code is third-party code, like paper code, so it gets the paper code's isolation. Keeping the compiler out of
+the run image and keeping the install phase binary-only keeps the earlier guarantees (D-001) unchanged.
+
+### Consequences
+
+- CI builds a second image per Python version (`repro-radar-sandbox:build`, `:py3.9-build`, `:py3.8-build`), and
+  real-Docker acceptance check 18 covers the phase.
+- Wheels built this way carry the plain `linux_x86_64` tag. Bundling accepts that platform only when built wheels
+  are present.
+

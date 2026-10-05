@@ -25,6 +25,7 @@ from src.sandbox.runner import (
     SandboxConfig,
     SandboxExecutionResult,
 )
+from src.sandbox.sdist import download_sdist
 
 logger = logging.getLogger(__name__)
 
@@ -65,6 +66,8 @@ class StagedRepo:
     manifest: DependencyManifest
     candidate_scripts: list[str] = field(default_factory=list)
     bundle_dir: Path | None = None
+    # Wheels built from source in the build phase (#193), added to the bundle
+    built_dir: Path | None = None
 
 
 def _read_text(path: Path) -> str:
@@ -247,14 +250,23 @@ class RepoStager:
         staged: StagedRepo,
         timeout: int = 180,
         python_version: str = DEFAULT_PYTHON_VERSION,
+        extra_requirements: list[str] | None = None,
+        constraints: list[str] | None = None,
     ) -> dict[str, Any]:
-        """Download wheel archives for offline installation inside network-isolated sandbox."""
+        """Download wheel archives for offline installation inside network-isolated sandbox.
+
+        Run setup options (#193): `extra_requirements` are resolved together with the repository's requirements,
+        `constraints` (pip constraints) limit versions the repository leaves open, and wheels built in the build
+        phase (`staged.built_dir`) are offered to the resolver and copied into the bundle.
+        """
         bundle_dir = self.staging_root / f"{staged.paper_id}_packages"
         bundle_dir.mkdir(parents=True, exist_ok=True)
         staged.bundle_dir = bundle_dir
+        options = self._run_setup_options(staged, bundle_dir, extra_requirements, constraints)
 
         if not staged.manifest.requirements_files and staged.manifest.conda_env_files:
-            return self._bundle_conda_env(staged, bundle_dir, timeout, python_version)
+            report = self._bundle_conda_env(staged, bundle_dir, timeout, python_version, options)
+            return self._with_extras(report, staged, bundle_dir, timeout, python_version, options, extra_requirements)
         if not staged.manifest.requirements_files:
             return {
                 "status": "SKIPPED",
@@ -264,19 +276,24 @@ class RepoStager:
             }
 
         req_paths = [staged.staged_path / name for name in staged.manifest.requirements_files]
-        cmd = self._pip_download_command(bundle_dir, python_version)
+        cmd = self._pip_download_command(bundle_dir, python_version) + options
         for req in req_paths:
             cmd.extend(["-r", str(req)])
+        cmd.extend(extra_requirements or [])
 
         try:
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
             needs_sdist_build: list[dict[str, str]] = []
             if res.returncode != 0:
                 needs_sdist_build = self._find_requirements_without_wheels(req_paths, bundle_dir, timeout, python_version)
+            self._copy_built_wheels(staged, bundle_dir)
             wheels = list(bundle_dir.glob("*.whl"))
             return {
                 "status": "SUCCESS" if res.returncode == 0 else "PARTIAL",
                 "python_version": python_version,
+                "extra_requirements": list(extra_requirements or []),
+                "constraints": list(constraints or []),
+                "built_wheels": sorted(p.name for p in (staged.built_dir or Path("/nonexistent")).glob("*.whl")),
                 "wheel_count": len(wheels),
                 "bundle_dir": str(bundle_dir),
                 "requirements_files": list(staged.manifest.requirements_files),
@@ -299,7 +316,7 @@ class RepoStager:
             }
 
     def _bundle_conda_env(
-        self, staged: StagedRepo, bundle_dir: Path, timeout: int, python_version: str
+        self, staged: StagedRepo, bundle_dir: Path, timeout: int, python_version: str, options: list[str] | None = None
     ) -> dict[str, Any]:
         """Bundle a conda-only repository through its pinned Python packages (#159; src/sandbox/conda_env.py).
 
@@ -311,7 +328,7 @@ class RepoStager:
         downloaded: list[str] = []
         conda_only: list[dict[str, str]] = []
         for requirement in requirements:
-            cmd = self._pip_download_command(bundle_dir, python_version) + ["--no-deps", requirement]
+            cmd = self._pip_download_command(bundle_dir, python_version) + (options or []) + ["--no-deps", requirement]
             try:
                 res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
             except (subprocess.SubprocessError, OSError) as exc:
@@ -323,6 +340,7 @@ class RepoStager:
                 lines = [line for line in (res.stderr or "").splitlines() if line.strip()]
                 conda_only.append({"requirement": requirement,
                                    "reason": lines[-1] if lines else f"pip exited {res.returncode}"})
+        self._copy_built_wheels(staged, bundle_dir)
         env_versions = sorted({c.python_version for c in conversions if c.python_version})
         status = "SUCCESS" if requirements and not conda_only else ("PARTIAL" if downloaded else "FAILED")
         return {
@@ -339,6 +357,77 @@ class RepoStager:
             "bundle_dir": str(bundle_dir),
             "needs_sdist_build": [],
         }
+
+    @staticmethod
+    def _run_setup_options(staged: StagedRepo, bundle_dir: Path, extra_requirements: list[str] | None,
+                           constraints: list[str] | None) -> list[str]:
+        """pip options for the run setup: built wheels as find-links, constraints as a file (#193)."""
+        options: list[str] = []
+        if staged.built_dir and staged.built_dir.is_dir():
+            # Wheels built in the sandbox carry the plain linux_x86_64 tag (no auditwheel), so allow that platform
+            options += ["--find-links", str(staged.built_dir), "--platform", "linux_x86_64"]
+        if constraints:
+            path = bundle_dir.parent / f"{staged.paper_id}_constraints.txt"
+            path.write_text("\n".join(constraints) + "\n", encoding="utf-8")
+            options += ["-c", str(path)]
+        return options
+
+    @staticmethod
+    def _copy_built_wheels(staged: StagedRepo, bundle_dir: Path) -> None:
+        for wheel in (staged.built_dir.glob("*.whl") if staged.built_dir and staged.built_dir.is_dir() else []):
+            shutil.copy2(wheel, bundle_dir / wheel.name)
+
+    def _with_extras(self, report: dict[str, Any], staged: StagedRepo, bundle_dir: Path, timeout: int,
+                     python_version: str, options: list[str], extra_requirements: list[str] | None) -> dict[str, Any]:
+        """Download the run setup's extra requirements (with their dependencies) for a conda-only repository."""
+        report["extra_requirements"] = list(extra_requirements or [])
+        if not extra_requirements:
+            return report
+        cmd = self._pip_download_command(bundle_dir, python_version) + options + list(extra_requirements)
+        try:
+            res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+            ok = res.returncode == 0
+            reason = "" if ok else ((res.stderr or "").strip().splitlines() or [f"pip exited {res.returncode}"])[-1]
+        except (subprocess.SubprocessError, OSError) as exc:
+            ok, reason = False, str(exc)
+        if not ok:
+            report["status"] = "PARTIAL"
+            report["extra_requirements_error"] = reason
+        report["wheel_count"] = len(list(bundle_dir.glob("*.whl")))
+        return report
+
+    def build_from_source(self, staged: StagedRepo, build: dict[str, Any], config: SandboxConfig) -> dict[str, Any]:
+        """Build phase of a run setup (#193): sdists and/or the repository itself, built into wheels in the sandbox.
+
+        The sdists are downloaded on the host from the PyPI JSON API (verified, never run); build requirements are
+        downloaded as binary wheels. The wheels built in the sandbox are kept in `staged.built_dir` for bundling.
+        """
+        inputs = self.staging_root / f"{staged.paper_id}_build_inputs"
+        if inputs.exists():
+            shutil.rmtree(inputs)
+        inputs.mkdir(parents=True)
+        sdists = [download_sdist(req, inputs) for req in build.get("sdists", [])]
+        build_requirements = list(build.get("build_requirements", []))
+        if build_requirements:
+            cmd = self._pip_download_command(inputs, config.python_version) + build_requirements
+            res = subprocess.run(cmd, capture_output=True, text=True, timeout=600, check=False)
+            if res.returncode != 0:
+                return {"status": "FAILED", "stage": "download build requirements",
+                        "error": (res.stderr or "").strip()[-1000:]}
+        targets = [f"/workspace/packages/{p.name}" for p in sdists]
+        if build.get("from_repo"):
+            targets.append("/workspace/repo")
+        result = DockerSandboxRunner(config).build_wheels(
+            staged.paper_id, staged.staged_path, inputs, targets, build_requirements, bool(build.get("from_repo")))
+        built = self.staging_root / f"{staged.paper_id}_built"
+        if built.exists():
+            shutil.rmtree(built)
+        built.mkdir(parents=True)
+        for wheel in result["wheels"]:
+            shutil.copy2(wheel, built / Path(wheel).name)
+        staged.built_dir = built
+        result["sdists"] = [p.name for p in sdists]
+        return result
 
     @staticmethod
     def _pip_download_command(bundle_dir: Path, python_version: str = DEFAULT_PYTHON_VERSION) -> list[str]:

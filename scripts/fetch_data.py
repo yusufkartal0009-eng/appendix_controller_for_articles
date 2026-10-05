@@ -8,13 +8,16 @@ marker is written only after the download matched its expected size and was unpa
     python scripts/fetch_data.py paper_003 --dry-run     # list the items and their sizes, download nothing
     python scripts/fetch_data.py paper_003
 
-`openml` items need the `openml` package on the host, in the version the paper uses (the cache layout differs
-between versions); it is not a project dependency.
+`openml` items are fetched over plain HTTP from the OpenML REST API, without the openml package (#193): for each
+dataset its description, features, and qualities XML and its ARFF file (MD5-checked), laid out as openml-python
+0.11 and 0.12 read their cache (`<cache>/org/openml/www/datasets/<id>/`). openml writes into its cache when it
+loads a dataset, so these items are mounted as a writable per-run copy (`"writable": true`).
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import sys
@@ -23,13 +26,17 @@ import urllib.request
 import zipfile
 from pathlib import Path
 from typing import Any
+from xml.etree import ElementTree
 
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from src.config import DATA_CACHE_DIR, SEED_PAPERS_PATH
-from src.sandbox.run_setup import data_dir, is_cached, run_setup_of
+from src.sandbox.run_setup import data_dir, is_cached, openml_ids, run_setup_of
+
+OPENML_API = "https://www.openml.org/api/v1/xml"
+OML = "{http://openml.org/openml}"
 
 
 def download(url: str, dest: Path, expected_bytes: int | None) -> int:
@@ -55,6 +62,29 @@ def unpack(archive: Path, fmt: str, target: Path) -> None:
         shutil.copy2(archive, target / archive.name)
 
 
+def fetch_openml_dataset(dataset_id: int, cache_dir: Path, api: str = OPENML_API) -> int:
+    """Write one dataset into an openml-python cache layout; returns the bytes written."""
+    did_dir = cache_dir / "org" / "openml" / "www" / "datasets" / str(dataset_id)
+    did_dir.mkdir(parents=True, exist_ok=True)
+    total = 0
+    for name, path in (("description.xml", f"data/{dataset_id}"), ("features.xml", f"data/features/{dataset_id}"),
+                       ("qualities.xml", f"data/qualities/{dataset_id}")):
+        with urllib.request.urlopen(f"{api}/{path}", timeout=60) as response:
+            payload = response.read()
+        (did_dir / name).write_bytes(payload)
+        total += len(payload)
+    description = ElementTree.parse(did_dir / "description.xml").getroot()
+    url = description.findtext(f"{OML}url")
+    md5 = description.findtext(f"{OML}md5_checksum")
+    if not url:
+        raise ValueError(f"OpenML dataset {dataset_id}: no file URL in its description")
+    arff = did_dir / "dataset.arff"
+    total += download(url, arff, None)
+    if md5 and hashlib.md5(arff.read_bytes()).hexdigest() != md5:  # OpenML publishes MD5 checksums
+        raise ValueError(f"OpenML dataset {dataset_id}: MD5 mismatch")
+    return total
+
+
 def fetch_item(paper_id: str, item: dict[str, Any], cache_root: Path) -> dict[str, Any]:
     out = data_dir(cache_root, paper_id, item)
     if is_cached(cache_root, paper_id, item):
@@ -71,11 +101,9 @@ def fetch_item(paper_id: str, item: dict[str, Any], cache_root: Path) -> dict[st
             archive.unlink(missing_ok=True)
         result = {"name": item["name"], "status": "FETCHED", "bytes": size, "path": str(out)}
     else:
-        import openml  # host-only; see the module docstring
-
-        openml.config.cache_directory = str(out)
-        openml.datasets.get_dataset(item["dataset_id"], download_data=True)
-        result = {"name": item["name"], "status": "FETCHED", "openml_version": openml.__version__, "path": str(out)}
+        size = sum(fetch_openml_dataset(dataset_id, out) for dataset_id in openml_ids(item))
+        result = {"name": item["name"], "status": "FETCHED", "bytes": size, "datasets": openml_ids(item),
+                  "path": str(out)}
     (out / ".complete").write_text(json.dumps(result), encoding="utf-8")
     return result
 
@@ -97,7 +125,7 @@ def main(argv: list[str] | None = None) -> int:
     status = 0
     for item in items:
         if args.dry_run:
-            print(json.dumps({k: item.get(k) for k in ("name", "kind", "url", "dataset_id", "bytes", "target")}))
+            print(json.dumps({k: item.get(k) for k in ("name", "kind", "url", "dataset_ids", "bytes", "target", "writable")}))
             continue
         try:
             print(json.dumps(fetch_item(args.paper_id, item, Path(args.cache))))

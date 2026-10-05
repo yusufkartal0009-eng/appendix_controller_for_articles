@@ -32,6 +32,57 @@ peak_memory_bytes() {
   esac
 }
 
+# 0. Build phase (SANDBOX_PHASE=build, #193): a separate container of the build image (C/C++ compiler), run on
+# the host's request before bundling. Turns sdists from /workspace/packages, and /workspace/repo when asked (a
+# writable per-run copy), into wheels in /workspace/output/built_wheels. Build code runs here under the same
+# isolation as paper code (network off, uid 1000, read-only root); the install phase below stays binary-only.
+if [ "${SANDBOX_PHASE:-run}" = "build" ]; then
+  BUILD_LOG="${OUTPUT_DIR}/build.log"
+  BUILD_META="${OUTPUT_DIR}/build_meta.json"
+  BUILT_DIR="${OUTPUT_DIR}/built_wheels"
+  BUILD_DEPS="${OUTPUT_DIR}/.build-deps"
+  mkdir -p "${BUILT_DIR}" "${BUILD_DEPS}" "${OUTPUT_DIR}/.build-tmp"
+  # Compilers write temporary files to TMPDIR; /tmp is a small noexec tmpfs.
+  export TMPDIR="${OUTPUT_DIR}/.build-tmp"
+  echo "=================================================="
+  echo "Repro Radar: Build Phase (offline, isolated)"
+  echo "Targets            : ${SANDBOX_BUILD_TARGETS:-<none>}"
+  echo "Build requirements : ${SANDBOX_BUILD_REQUIREMENTS:-<none>}"
+  echo "=================================================="
+  BUILD_START=$(date +%s.%N)
+  set +e
+  BUILD_CODE=0
+  : > "${BUILD_LOG}"
+  if [ -n "${SANDBOX_BUILD_REQUIREMENTS:-}" ]; then
+    # Build requirements are binary wheels only (no package code runs to install them).
+    # shellcheck disable=SC2086
+    timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" python -m pip install --no-index \
+      --find-links=/workspace/packages --only-binary=:all: --no-cache-dir --target "${BUILD_DEPS}" \
+      ${SANDBOX_BUILD_REQUIREMENTS} >> "${BUILD_LOG}" 2>&1
+    BUILD_CODE=$?
+  fi
+  if [ ${BUILD_CODE} -eq 0 ]; then
+    # shellcheck disable=SC2086
+    PYTHONPATH="${BUILD_DEPS}:${PYTHONPATH:-}" timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" python -m pip wheel \
+      --no-index --find-links=/workspace/packages --no-build-isolation --no-deps --no-cache-dir \
+      -w "${BUILT_DIR}" ${SANDBOX_BUILD_TARGETS} >> "${BUILD_LOG}" 2>&1
+    BUILD_CODE=$?
+  fi
+  set -e
+  BUILD_DURATION=$(python3 -c "print(round($(date +%s.%N) - ${BUILD_START}, 3))" 2>/dev/null || echo "0.0")
+  rm -rf "${OUTPUT_DIR}/.build-tmp" "${BUILD_DEPS}"
+  cat "${BUILD_LOG}"
+  BUILD_STATUS="BUILT"
+  if [ ${BUILD_CODE} -ne 0 ]; then
+    BUILD_STATUS="FAILED"
+  fi
+  WHEEL_COUNT=$(find "${BUILT_DIR}" -name '*.whl' | wc -l)
+  printf '{"phase": "build", "status": "%s", "exit_code": %d, "duration_seconds": %s, "wheel_count": %d}\n' \
+    "${BUILD_STATUS}" "${BUILD_CODE}" "${BUILD_DURATION}" "${WHEEL_COUNT}" > "${BUILD_META}"
+  echo "Build Status: ${BUILD_STATUS} (Exit Code: ${BUILD_CODE}, wheels: ${WHEEL_COUNT})"
+  exit ${BUILD_CODE}
+fi
+
 # 1. Install phase (SANDBOX_PHASE=install): a separate container, run before the paper code.
 # Installs pre-downloaded wheels from /workspace/packages into /workspace/deps (the only writable
 # mount besides the output directory), binary-only so that no package code runs during install.
@@ -50,6 +101,11 @@ if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   done
   if [ ${#PIP_TARGETS[@]} -eq 0 ]; then
     PIP_TARGETS=(/workspace/packages/*)
+  elif [ -n "${SANDBOX_EXTRA_REQUIREMENTS:-}" ]; then
+    # Requirements of the paper's run setup that its requirement files do not name (#193); without requirement
+    # files every bundled wheel is installed, extras included.
+    # shellcheck disable=SC2206
+    PIP_TARGETS+=(${SANDBOX_EXTRA_REQUIREMENTS})
   fi
   echo "=================================================="
   echo "Repro Radar: Install Phase (offline, binary wheels only)"

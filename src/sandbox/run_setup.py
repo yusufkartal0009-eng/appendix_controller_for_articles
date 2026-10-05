@@ -9,7 +9,12 @@ fix needs:
 - `working_dir`: relative to the repository root (the README runs `cd results/ && python ...`)
 - `writable_repo`: run on a writable per-run copy (the paper writes next to its own files)
 - `data`: datasets fetched on the host into the data cache (`scripts/fetch_data.py`) and mounted read-only,
-  because the sandbox has no network
+  because the sandbox has no network; `"writable": true` mounts a per-run copy instead (#193)
+- `build`: sdists (`name==version`) and/or the repository itself (`from_repo`) built into wheels in the sandbox's
+  build phase, with `build_requirements` as binary wheels (#193)
+- `extra_requirements`: installed with the repository's requirements, for an entry point they do not cover
+- `constraints`: pip constraints for versions the repository leaves open, with `constraints_source` saying how
+  they were chosen
 - `open_items`: what the fix still needs and was not done; a paper with open items is not ready to run
 
 The setup is what Repro Radar will run in Pilot 2 (#171); none of it is a result about the paper.
@@ -41,9 +46,20 @@ def run_setup_of(entry: dict[str, Any]) -> dict[str, Any]:
             raise ValueError(f"{entry['paper_id']}: data item needs a name and a target: {item}")
         if item["kind"] == "url" and (not item.get("url") or item.get("unpack") not in UNPACK_FORMATS):
             raise ValueError(f"{entry['paper_id']}: url data needs a url and unpack in {UNPACK_FORMATS}: {item}")
-        if item["kind"] == "openml" and not isinstance(item.get("dataset_id"), int):
-            raise ValueError(f"{entry['paper_id']}: openml data needs an integer dataset_id: {item}")
+        if item["kind"] == "openml" and not openml_ids(item):
+            raise ValueError(f"{entry['paper_id']}: openml data needs integer dataset_ids: {item}")
+    build = setup.get("build")
+    if build is not None and (not isinstance(build, dict) or not (build.get("sdists") or build.get("from_repo"))):
+        raise ValueError(f"{entry['paper_id']}: build needs sdists or from_repo: {build}")
+    if setup.get("constraints") and not setup.get("constraints_source"):
+        raise ValueError(f"{entry['paper_id']}: constraints need a constraints_source")
     return setup
+
+
+def openml_ids(item: dict[str, Any]) -> list[int]:
+    """Dataset IDs of an openml data item (`dataset_ids`, or a single `dataset_id`); [] if malformed."""
+    ids = item.get("dataset_ids", [item["dataset_id"]] if "dataset_id" in item else [])
+    return ids if ids and all(isinstance(i, int) and not isinstance(i, bool) for i in ids) else []
 
 
 def data_dir(cache_root: Path, paper_id: str, item: dict[str, Any]) -> Path:
@@ -76,4 +92,8 @@ def sandbox_options(entry: dict[str, Any], cache_root: Path) -> dict[str, Any]:
         "data_mounts": {
             item["target"]: str(mount_source(cache_root, entry["paper_id"], item)) for item in setup.get("data", [])
         },
+        "writable_data": [item["target"] for item in setup.get("data", []) if item.get("writable")],
+        "extra_requirements": list(setup.get("extra_requirements", [])),
+        "constraints": list(setup.get("constraints", [])),
+        "build": setup.get("build"),
     }

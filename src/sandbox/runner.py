@@ -21,7 +21,7 @@ import shutil
 import subprocess
 import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -52,6 +52,12 @@ def image_for(python_version: str) -> str:
     return "repro-radar-sandbox:latest" if python_version == DEFAULT_PYTHON_VERSION else f"repro-radar-sandbox:py{python_version}"
 
 
+def build_image_for(python_version: str) -> str:
+    """Image tag of the build phase (#193): the sandbox image plus a C/C++ compiler (Dockerfile target `build`)."""
+    image_for(python_version)  # validates the version
+    return "repro-radar-sandbox:build" if python_version == DEFAULT_PYTHON_VERSION else f"repro-radar-sandbox:py{python_version}-build"
+
+
 @dataclass
 class SandboxConfig:
     """Configuration parameters for isolated execution."""
@@ -75,6 +81,11 @@ class SandboxConfig:
     writable_repo: bool = False
     # Read-only data mounts: container path (absolute, or relative to /workspace/repo) -> host directory.
     data_mounts: dict[str, str] = field(default_factory=dict)
+    # Data mount targets that get a writable per-run copy instead of the read-only cache (#193): for libraries that
+    # write into their own cache (openml writes a parsed copy and a log next to the data).
+    writable_data: list[str] = field(default_factory=list)
+    # Requirements installed in the install phase in addition to the repository's requirement files (#193).
+    extra_requirements: list[str] = field(default_factory=list)
     # Run on the host without isolation when Docker is unavailable. Only for code you trust.
     allow_unsafe_local: bool = False
 
@@ -84,6 +95,10 @@ class SandboxConfig:
             self.image_name = image
         self.working_dir = repo_relative(self.working_dir, "working_dir")
         self.data_mounts = {container_data_path(target): host for target, host in self.data_mounts.items()}
+        self.writable_data = [container_data_path(target) for target in self.writable_data]
+        unknown = set(self.writable_data) - set(self.data_mounts)
+        if unknown:
+            raise ValueError(f"writable_data targets without a data mount: {sorted(unknown)}")
 
 
 def repo_relative(path: str, what: str) -> str:
@@ -108,6 +123,17 @@ def container_data_path(target: str) -> str:
     if not norm.startswith(DATA_MOUNT_ROOTS):
         raise ValueError(f"data mount target must be under {DATA_MOUNT_ROOTS}: {target!r}")
     return norm
+
+
+def _open_copy(source: Path, dest: Path, ignore: tuple[str, ...] = ()) -> Path:
+    """Copy a directory for one run and open it to the sandbox user (uid 1000), whatever uid the host runs as."""
+    if dest.exists():
+        shutil.rmtree(dest)
+    shutil.copytree(source, dest, ignore=shutil.ignore_patterns(*ignore) if ignore else None)
+    for path in [dest, *dest.rglob("*")]:
+        if not path.is_symlink():
+            path.chmod(0o777 if path.is_dir() else 0o666)
+    return dest
 
 
 @dataclass
@@ -143,6 +169,8 @@ class DockerSandboxRunner:
 
     def __init__(self, config: SandboxConfig | None = None):
         self.config = config or SandboxConfig()
+        # Host directories that replace data mounts for the current run (writable per-run copies, #193)
+        self._run_data_hosts: dict[str, Path] = {}
 
     @staticmethod
     def is_docker_available(attempts: int = DOCKER_DETECT_ATTEMPTS, timeout: int = DOCKER_DETECT_TIMEOUT,
@@ -248,7 +276,10 @@ class DockerSandboxRunner:
             mode = "rw" if deps_writable else "ro"
             docker_cmd.extend(["-v", f"{Path(deps_dir).resolve()}:/workspace/deps:{mode}"])
         for target, host in sorted(self.config.data_mounts.items()):
-            docker_cmd.extend(["-v", f"{Path(host).resolve()}:{target}:ro"])
+            if target in self._run_data_hosts:
+                docker_cmd.extend(["-v", f"{self._run_data_hosts[target].resolve()}:{target}:rw"])
+            else:
+                docker_cmd.extend(["-v", f"{Path(host).resolve()}:{target}:ro"])
 
         # 7. Image and Command
         docker_cmd.append(self.config.image_name)
@@ -310,7 +341,8 @@ class DockerSandboxRunner:
             packages_dir=packages_dir,
             deps_dir=deps_dir,
             deps_writable=True,
-            extra_env={"SANDBOX_PHASE": "install"},
+            extra_env={"SANDBOX_PHASE": "install",
+                       "SANDBOX_EXTRA_REQUIREMENTS": " ".join(self.config.extra_requirements)},
         )
         try:
             subprocess.run(install_cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10, check=False)
@@ -379,6 +411,7 @@ class DockerSandboxRunner:
             if self.config.writable_repo:
                 repo_dir = self._writable_copy(repo_dir, output_dir)
             self._create_mount_points(repo_dir)
+            self._run_data_hosts = self._writable_data_copies(output_dir)
             return self._run_docker_phases(repo_dir, output_dir, target_cmd, packages_dir)
         finally:
             output_dir.chmod(0o755)
@@ -390,14 +423,74 @@ class DockerSandboxRunner:
         The staged repository itself stays read-only and unchanged. The copy lives in the run's output
         directory, so whatever the paper writes next to its own files is kept with the run.
         """
-        copy = Path(output_dir) / "repo_copy"
-        if copy.exists():
-            shutil.rmtree(copy)
-        shutil.copytree(repo_dir, copy, ignore=shutil.ignore_patterns(".git"))
-        for path in [copy, *copy.rglob("*")]:
-            if not path.is_symlink():
-                path.chmod(0o777 if path.is_dir() else 0o666)
-        return copy
+        return _open_copy(Path(repo_dir), Path(output_dir) / "repo_copy", ignore=(".git",))
+
+    def _writable_data_copies(self, output_dir: Path) -> dict[str, Path]:
+        """Per-run writable copies of the data mounts listed in writable_data; the host cache is not changed (#193)."""
+        copies = {}
+        for i, target in enumerate(sorted(self.config.writable_data)):
+            copies[target] = _open_copy(Path(self.config.data_mounts[target]), Path(output_dir) / "data_copies" / str(i))
+        return copies
+
+    def build_wheels(
+        self,
+        paper_id: str,
+        repo_dir: str | Path,
+        inputs_dir: str | Path,
+        targets: list[str],
+        build_requirements: list[str] | None = None,
+        from_repo: bool = False,
+    ) -> dict[str, Any]:
+        """Build phase (#193): turn sdists, and optionally the repository itself, into wheels inside the sandbox.
+
+        Package build code (setup.py) runs here, under the same isolation as paper code: network off, uid 1000,
+        read-only root, only the output directory (and the repository copy, when building from it) writable. The
+        build image adds a C/C++ compiler. `targets` are container paths (sdists in /workspace/packages, or
+        /workspace/repo); `inputs_dir` holds the sdists and the binary wheels of `build_requirements`. The install
+        phase stays binary-only: it installs the wheels built here like any other wheel.
+        """
+        if not self.is_docker_available():
+            raise SandboxUnavailableError("Docker is not available; the build phase only runs in the Docker sandbox.")
+        output_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
+        if output_dir.exists():
+            shutil.rmtree(output_dir)
+        output_dir.mkdir(parents=True)
+        builder = DockerSandboxRunner(replace(
+            self.config, image_name=build_image_for(self.config.python_version), writable_repo=from_repo,
+            working_dir="", data_mounts={}, writable_data=[], extra_requirements=[],
+        ))
+        output_dir.chmod(0o777)
+        try:
+            repo = builder._writable_copy(repo_dir, output_dir) if from_repo else Path(repo_dir)
+            cmd = builder.build_docker_command(
+                repo_dir=repo, output_dir=output_dir, command=["build-wheels"], packages_dir=inputs_dir,
+                extra_env={"SANDBOX_PHASE": "build", "SANDBOX_BUILD_TARGETS": " ".join(targets),
+                           "SANDBOX_BUILD_REQUIREMENTS": " ".join(build_requirements or [])},
+            )
+            try:
+                res = subprocess.run(cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10, check=False)
+                exit_code = res.returncode
+            except subprocess.TimeoutExpired:
+                exit_code = 124
+        finally:
+            output_dir.chmod(0o755)
+        try:
+            meta = json.loads((output_dir / "build_meta.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            meta = {}
+        log = (output_dir / "build.log").read_text(encoding="utf-8", errors="replace") if (output_dir / "build.log").exists() else ""
+        wheels = sorted((output_dir / "built_wheels").glob("*.whl"))
+        return {
+            "status": meta.get("status") if meta.get("status") in ("BUILT", "FAILED") else "FAILED",
+            "exit_code": exit_code,
+            "image": builder.config.image_name,
+            "targets": targets,
+            "build_requirements": list(build_requirements or []),
+            "wheels": [str(w) for w in wheels],
+            "duration_seconds": meta.get("duration_seconds"),
+            "log_tail": log[-2000:],
+            "command_executed": cmd,
+        }
 
     def _create_mount_points(self, repo_dir: str | Path) -> None:
         """Create the mount points of data mounts inside the repository on the host.

@@ -7,7 +7,7 @@
 # ==============================================================================
 
 ARG PYTHON_VERSION=3.11
-FROM python:${PYTHON_VERSION}-slim
+FROM python:${PYTHON_VERSION}-slim AS sandbox
 ARG PYTHON_VERSION
 
 # Prevent interactive prompts during installation
@@ -57,3 +57,18 @@ USER sandboxuser
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["python", "--version"]
+
+# ------------------------------------------------------------------------------
+# Build image (#193, `docker build --target build`): the sandbox plus a C/C++ compiler and the packaging tools,
+# used only by the build phase (SANDBOX_PHASE=build), which turns sdists into wheels with the network off.
+# Paper runs and the install phase keep using the default image above, which has no compiler.
+# ------------------------------------------------------------------------------
+FROM sandbox AS build
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir setuptools wheel
+USER sandboxuser
+
+# The default target (no --target) stays the sandbox image without a compiler.
+FROM sandbox AS default
