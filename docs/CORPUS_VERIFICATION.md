@@ -125,3 +125,16 @@ its run setup yet.** Whether the fixes work is a question for Pilot 2 (#171).
 | `paper_006` | fix | OpenML dataset 1461 is fetched on the host into an OpenML cache and mounted at `~/.openml/cache` | Not checked: whether openml 0.11.0 reads the cache without contacting the server |
 | `paper_008` | keep, report as `DATA_NOT_ACCESSIBLE` | The pilot command unchanged | — (the split files `train_idx.csv`, `valid_idx.csv`, and `test_idx.csv` are not published; this is a finding about the paper) |
 
+### Open items resolved (2026-10-05, #193)
+
+A new isolated build phase (`docs/DECISIONS.md`, D-008) builds packages that PyPI has only as source. The
+remaining open items of section 5 were handled as follows. Each row says what is shown and what is not.
+
+| Paper | What changed | Evidence | Still open |
+|---|---|---|---|
+| `paper_002` | Builds `openml==0.12.2` and `liac-arff==2.5.0`; installs `nbconvert` and `ipykernel`; the 30 OpenML-CC18 datasets of `open_cc_dids` are fetched into a writable OpenML cache | Build phase: real-Docker check 18 (toy packages) | **Owner decision:** the notebook lists its datasets with `openml.datasets.list_datasets`, which openml 0.12.2 always sends to the OpenML server (`__list_datasets` calls `_perform_api_call`); with the network off it stops there |
+| `paper_005` | Python 3.8; `fastsk` built from the repository with `pybind11==2.6.2` (its `pyproject.toml` asks for `~=2.6.1`); unpinned packages limited to the newest release before the pinned commit's date (2021-05-11): numpy 1.20.3, pandas 1.2.4, scikit-learn 0.24.2, scipy 1.6.3, tqdm 4.60.0 | Host resolution for Python 3.8 (pip dry run): the requirements resolve with `python-dateutil==2.8.1` and pandas 1.2.4. Without the limits pip would choose pandas 1.3.5; Pilot 1's conflict came from Python 3.11 | — (building `fastsk` itself is not verified) |
+| `paper_006` | Builds `openml==0.11.0` and `liac-arff==2.5.0`; dataset 1461 is fetched over HTTP (MD5-checked) into a writable per-run OpenML cache | Host check with sockets blocked: openml 0.11.0 loaded bank-marketing (45,211 rows) from that cache and wrote `dataset.pkl.py3` into it, which is why the mount is writable | — |
+
+None of this is a paper result. Whether the papers run is a question for Pilot 2 (#171).
+

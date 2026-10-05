@@ -26,6 +26,10 @@ paper runs) and prints the command evidence for each check:
   16. image    - the size of the sandbox image is measured (`docker image inspect`) (#163)
   17. cpu      - under --cpus=0.5, two busy worker processes together get at most 0.6 CPUs; control: the
                  same probe with the limit set to the host's CPU count gets more than 1.5 CPUs (#163)
+  18. build    - the build phase (#193) turns a pure-Python sdist and a C extension (built from a writable copy
+                 of the repository) into wheels with the network off; the run phase installs them offline and
+                 imports both, and the run image has no compiler
+  19. data copy - a writable data mount is a per-run copy: the run writes into it, the host cache is unchanged
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
@@ -38,11 +42,13 @@ Exit code 1 if any check fails.
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import os
 import shutil
 import subprocess
 import sys
+import tarfile
 import tempfile
 from pathlib import Path
 
@@ -56,6 +62,7 @@ from src.sandbox.runner import (
     DockerSandboxRunner,
     SandboxConfig,
     SandboxUnavailableError,
+    build_image_for,
     image_for,
 )
 from src.sandbox.stager import RepoStager
@@ -441,6 +448,84 @@ def main():
     results["17 cpu limit holds under load"] = (
         r.status == "COMPLETED" and limited_cpus is not None and limited_cpus <= 0.6
         and rc.status == "COMPLETED" and control_cpus is not None and control_cpus > 1.5
+    )
+
+    # 18. build phase (#193): a pure-Python sdist and a C extension built into wheels in the sandbox, then installed
+    build_inputs = Path(tempfile.mkdtemp(prefix="acceptance_build_inputs_"))
+    with tarfile.open(build_inputs / "rrtoy_pure-1.0.tar.gz", "w:gz") as tar:
+        for name, body in {
+            "rrtoy_pure-1.0/setup.py": "from setuptools import setup\nsetup(name='rrtoy_pure', version='1.0', py_modules=['rrtoy_pure'])\n",
+            "rrtoy_pure-1.0/rrtoy_pure.py": "VALUE = 'pure-ok'\n",
+            "rrtoy_pure-1.0/PKG-INFO": "Metadata-Version: 1.0\nName: rrtoy_pure\nVersion: 1.0\n",
+        }.items():
+            data = body.encode()
+            info = tarfile.TarInfo(name)
+            info.size = len(data)
+            tar.addfile(info, io.BytesIO(data))
+    c_repo = Path(tempfile.mkdtemp(prefix="acceptance_c_repo_"))
+    (c_repo / "setup.py").write_text(
+        "from setuptools import Extension, setup\n"
+        "setup(name='rrtoy_c', version='1.0', ext_modules=[Extension('rrtoy_c', ['rrtoy_c.c'])])\n")
+    (c_repo / "rrtoy_c.c").write_text(
+        "#include <Python.h>\n"
+        "static PyObject* answer(PyObject* self, PyObject* args) { return PyLong_FromLong(42); }\n"
+        "static PyMethodDef M[] = {{\"answer\", answer, METH_NOARGS, \"\"}, {NULL, NULL, 0, NULL}};\n"
+        "static struct PyModuleDef D = {PyModuleDef_HEAD_INIT, \"rrtoy_c\", NULL, -1, M};\n"
+        "PyMODINIT_FUNC PyInit_rrtoy_c(void) { return PyModule_Create(&D); }\n")
+    for path in [build_inputs, c_repo, *build_inputs.iterdir(), *c_repo.iterdir()]:
+        path.chmod(0o755 if path.is_dir() else 0o644)
+    built = runner.build_wheels("acceptance_build", c_repo, build_inputs,
+                                ["/workspace/packages/rrtoy_pure-1.0.tar.gz", "/workspace/repo"], [], from_repo=True)
+    built_names = sorted(Path(w).name for w in built["wheels"])
+    run_packages = Path(tempfile.mkdtemp(prefix="acceptance_built_packages_"))
+    for wheel in built["wheels"]:
+        shutil.copy2(wheel, run_packages / Path(wheel).name)
+    run_packages.chmod(0o755)
+    use_repo = Path(tempfile.mkdtemp(prefix="acceptance_use_repo_"))
+    (use_repo / "requirements.txt").write_text("rrtoy_pure==1.0\nrrtoy_c==1.0\n")
+    (use_repo / "probe_built.py").write_text(
+        "import shutil, rrtoy_pure, rrtoy_c\n"
+        "print(f'pure: {rrtoy_pure.VALUE} from {rrtoy_pure.__file__}')\n"
+        "print(f'c extension: answer()={rrtoy_c.answer()} from {rrtoy_c.__file__}')\n"
+        "print(f'compiler in the run image: {shutil.which(\"gcc\")}')\n")
+    for path in [use_repo, *use_repo.iterdir()]:
+        path.chmod(0o755 if path.is_dir() else 0o644)
+    r, meta = run_probe(runner, use_repo, "probe_built.py", "acceptance_build_use", packages_dir=run_packages)
+    show("18. Build phase: sdist and C extension built offline, then installed and imported", built["command_executed"],
+         "\n".join([f"build image: {built['image']} ({build_image_for(args.python_version)})",
+                    f"build status={built['status']} exit_code={built['exit_code']} wheels={built_names}",
+                    "build log (last 800 chars):", built["log_tail"][-800:].strip(),
+                    "--- run phase ---", r.stdout.strip(), *summary(r, meta)]))
+    results["18 build phase (sdist and C extension, offline)"] = (
+        built["status"] == "BUILT" and len(built_names) == 2 and any("rrtoy_c" in n for n in built_names)
+        and "--network" in built["command_executed"] and r.status == "COMPLETED"
+        and meta.get("dependency_install_status") == "INSTALLED"
+        and "pure: pure-ok from /workspace/deps/" in r.stdout and "answer()=42 from /workspace/deps/" in r.stdout
+        and "compiler in the run image: None" in r.stdout
+    )
+
+    # 19. writable data copy (#193): the run writes into its copy of the data; the host cache stays unchanged
+    cache_dir = Path(tempfile.mkdtemp(prefix="acceptance_writable_cache_"))
+    (cache_dir / "description.xml").write_text("<cached/>\n")
+    cache_dir.chmod(0o755)
+    (cache_dir / "description.xml").chmod(0o644)
+    (repo / "probe_datacopy.py").write_text(
+        "import os\n"
+        "base = '/workspace/home/.cache/lib'\n"
+        "print('read: ' + open(base + '/description.xml').read().strip())\n"
+        "open(base + '/parsed.pkl', 'w').write('parsed')\n"
+        "print('wrote parsed.pkl: ' + str(os.path.exists(base + '/parsed.pkl')))\n")
+    copy_runner = DockerSandboxRunner(SandboxConfig(
+        timeout_seconds=120, python_version=args.python_version,
+        data_mounts={"/workspace/home/.cache/lib": str(cache_dir)}, writable_data=["/workspace/home/.cache/lib"]))
+    r, meta = run_probe(copy_runner, repo, "probe_datacopy.py", "acceptance_datacopy")
+    copied = SANDBOX_RUNS_DIR / "acceptance_datacopy" / "data_copies" / "0" / "parsed.pkl"
+    show("19. Writable data copy", r.command_executed,
+         "\n".join([r.stdout.strip(), *summary(r, meta), f"file in the per-run copy: {copied.exists()}",
+                    f"host cache files: {sorted(p.name for p in cache_dir.iterdir())}"]))
+    results["19 writable data copy"] = (
+        r.status == "COMPLETED" and "read: <cached/>" in r.stdout and "wrote parsed.pkl: True" in r.stdout
+        and copied.exists() and sorted(p.name for p in cache_dir.iterdir()) == ["description.xml"]
     )
 
     # 6. no Docker: remove the Docker CLI from PATH for this check only

@@ -35,12 +35,64 @@
       ],
       "working_dir": "tabpfn",
       "writable_repo": true,
-      "data": [],
-      "open_items": [
-        "nbconvert and ipykernel are not in the repository's requirements.txt; the install phase installs only what the repository asks for, so the notebook cannot be executed yet.",
-        "The notebook loads the OpenML-CC18 datasets (`open_cc_dids`) at run time; their IDs are not yet listed as `openml` data items, so they are not in the data cache."
+      "data": [
+        {
+          "name": "openml_cc18",
+          "kind": "openml",
+          "dataset_ids": [
+            11,
+            14,
+            15,
+            16,
+            18,
+            22,
+            23,
+            29,
+            31,
+            37,
+            50,
+            54,
+            188,
+            458,
+            469,
+            1049,
+            1050,
+            1063,
+            1068,
+            1510,
+            1494,
+            1480,
+            1462,
+            1464,
+            6332,
+            23381,
+            40966,
+            40982,
+            40994,
+            40975
+          ],
+          "writable": true,
+          "target": "/workspace/home/.openml/cache",
+          "source": "open_cc_dids in tabpfn/datasets/__init__.py at the pinned commit (30 IDs); openml 0.12.2 reads ~/.openml/cache"
+        }
       ],
-      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+      "open_items": [
+        "The notebook calls openml.datasets.list_datasets(open_cc_dids) (load_openml_list in tabpfn/datasets/__init__.py). In openml 0.12.2 this listing is always an OpenML API request (__list_datasets calls _perform_api_call in openml/datasets/functions.py); the cache does not serve it. With the sandbox's network off, the notebook stops there. Owner decision: allow network access for this paper, or record it as not runnable offline."
+      ],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171).",
+      "build": {
+        "sdists": [
+          "openml==0.12.2",
+          "liac-arff==2.5.0"
+        ],
+        "from_repo": false,
+        "build_requirements": [],
+        "source": "requirements.txt pins openml==0.12.2; it and its dependency liac-arff (2.5.0 is the newest release) exist on PyPI only as sdists (#193)"
+      },
+      "extra_requirements": [
+        "nbconvert",
+        "ipykernel"
+      ]
     }
   },
   {
@@ -167,12 +219,30 @@
       "reason": "The README runs `cd results/ && python run_gridsearch.py`; the script opens spreadsheets/datasets_to_use.csv relative to its working directory. The datasets are in the repository.",
       "working_dir": "results",
       "data": [],
-      "open_items": [
-        "The script imports `fastsk`, a C++ extension built from the repository (`pip install .`). PyPI has no Linux wheel (0.0.1 and 0.0.2: macOS wheels and sdists only). Building needs a C++ compiler, which the sandbox image does not have, and runs package code in the install phase, which the sandbox does not allow today. Both are owner decisions.",
-        "requirements.txt pins python-dateutil==2.8.1 while leaving pandas unpinned; recent pandas needs python-dateutil>=2.8.2, so the requirements conflict (Pilot 1). Resolving it means choosing a pandas version the repository does not name."
+      "open_items": [],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171).",
+      "build": {
+        "sdists": [],
+        "from_repo": true,
+        "build_requirements": [
+          "pybind11==2.6.2"
+        ],
+        "source": "pyproject.toml build-system requires pybind11~=2.6.1 (2.6.2 is the newest in that range); setup.py builds fastsk._fastsk with Pybind11Extension (#193)"
+      },
+      "extra_requirements": [
+        "fastsk==0.0.2"
       ],
-      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
-    }
+      "constraints": [
+        "numpy==1.20.3",
+        "pandas==1.2.4",
+        "scikit-learn==0.24.2",
+        "scipy==1.6.3",
+        "tqdm==4.60.0"
+      ],
+      "constraints_source": "requirements.txt leaves numpy, pandas, scikit-learn, scipy, and tqdm unpinned; for each, the newest release with a CPython 3.8 manylinux or pure-Python wheel uploaded to PyPI before the pinned commit's date (d275a23, 2021-05-11T18:11:25Z), from the PyPI JSON API on 2026-10-05. pandas 1.2.4 accepts the pinned python-dateutil==2.8.1 (it needs >=2.7.3), which removes Pilot 1's conflict."
+    },
+    "python_version": "3.8",
+    "python_version_source": "README: 'Python 3.6+'; the pinned commit is from 2021-05-11, and 3.8 is the oldest sandbox image (#158, #193)."
   },
   {
     "paper_id": "paper_006",
@@ -211,15 +281,26 @@
         {
           "name": "openml_1461",
           "kind": "openml",
-          "dataset_id": 1461,
+          "dataset_ids": [
+            1461
+          ],
+          "writable": true,
           "target": "/workspace/home/.openml/cache",
-          "source": "docs/PILOT_WEEK2.md sections 4 and 10; openml=0.11.0 in saint_environment.yml"
+          "source": "docs/PILOT_WEEK2.md sections 4 and 10; openml 0.11.0 reads ~/.openml/cache and writes a parsed copy (dataset.pkl.py3) next to the data, so the mount is a writable per-run copy"
         }
       ],
-      "open_items": [
-        "Whether openml 0.11.0 reads the dataset from the mounted cache without contacting the server is not checked; the host fetch must use the same openml version, because the cache layout differs between versions."
-      ],
-      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171)."
+      "open_items": [],
+      "status_note": "Not verified: no paper has been run with this setup yet (Pilot 2, #171).",
+      "build": {
+        "sdists": [
+          "openml==0.11.0",
+          "liac-arff==2.5.0"
+        ],
+        "from_repo": false,
+        "build_requirements": [],
+        "source": "saint_environment.yml pins openml=0.11.0 and liac-arff=2.5.0; both exist on PyPI only as sdists. The other sdist-only pins of the environment are not imported by the pilot command (wandb and its dependencies only with --active_log) (#193)"
+      },
+      "host_check": "2026-10-05: on the host (Python 3.11, openml 0.11.0, numpy 1.26.4, pandas 1.5.3, sockets blocked), openml.datasets.get_dataset(1461) and get_data() loaded bank-marketing (45211 rows, 16 features) from a cache written by scripts/fetch_data.py, and wrote dataset.pkl.py3 into it. Not the sandbox's Python 3.8 environment."
     }
   },
   {

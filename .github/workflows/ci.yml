@@ -164,6 +164,11 @@ jobs:
           if [ "${{ matrix.python }}" = "3.11" ]; then TAG=latest; else TAG=py${{ matrix.python }}; fi
           docker build -f docker/Dockerfile.sandbox --build-arg PYTHON_VERSION=${{ matrix.python }} \
             -t repro-radar-sandbox:$TAG .
+      - name: Build the build-phase image (sandbox + compiler, #193)
+        run: |
+          if [ "${{ matrix.python }}" = "3.11" ]; then TAG=build; else TAG=py${{ matrix.python }}-build; fi
+          docker build -f docker/Dockerfile.sandbox --target build --build-arg PYTHON_VERSION=${{ matrix.python }} \
+            -t repro-radar-sandbox:$TAG .
       - name: Download wheels for the offline install checks (pure Python and compiled)
         run: |
           python -m pip download toolz==0.12.1 --only-binary=:all: --no-deps -d "$RUNNER_TEMP/wheels"
