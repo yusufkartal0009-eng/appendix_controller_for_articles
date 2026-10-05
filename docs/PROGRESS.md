@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Seed Claim Values Replaced by Accepted Claims (2026-10-05 22:12 +03:00, Issue #135, plan step 1.8)
+- The owner accepted all 12 extracted claims one by one (`data/claims/review_decisions.json`). `scripts/apply_accepted_claims.py` wrote them into `expected_claims` of `data/seed_papers.json` (old values kept under `seed_claims_before_extraction`; `check` fails on disagreement). `paper_005` has no accepted claim (all its questions were answered "not in the paper") and stays in the corpus. `docs/CORPUS_VERIFICATION.md` section 6 replaces the UNVERIFIED/SUSPECT status. Three tests were adjusted to accepted-only claims.
+
 ### Gold Set and Extraction Precision/Recall (W5) (2026-10-05 21:02 +03:00, Issue #133, plan step 1.5)
 - The owner filled the gold set form question by question (18 questions, 6 papers): `tests/data/gold_claims/paper_*.json` (`made_by: owner`, written by `scripts/evaluate_gold.py from-form`, no `needs_decision`). Pass A scored by `scripts/evaluate_gold.py score --pass A` (`data/claims/gold_score_pass_A.json`): TP 12, FP 0, FN 0, TN 6, precision 1.0, recall 1.0; the regression cases EP3602 (AUROC, accuracy) and HIGGS are all TN. Caveat: the form's candidate values were listed by the same agent that extracted pass A, so a value it never found could only enter through "other"; pass B is not independent yet.
 

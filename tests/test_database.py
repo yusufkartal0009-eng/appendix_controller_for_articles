@@ -64,7 +64,7 @@ def test_seed_database_loads_papers(temp_db):
     assert "TabPFN" in p2.title
     claims = p2.get_expected_claims_dict()
     assert "mean_roc_auc" in claims
-    assert claims["mean_roc_auc"] == 0.895
+    assert claims["mean_roc_auc"] == 0.934  # accepted by the owner (#135)
 
 
 def test_save_and_retrieve_score(temp_db):

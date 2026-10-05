@@ -138,3 +138,24 @@ remaining open items of section 5 were handled as follows. Each row says what is
 
 None of this is a paper result. Whether the papers run is a question for Pilot 2 (#171).
 
+## 6. Claims after extraction (2026-10-05, #135)
+
+The 2026-09-27 table in section 2 is kept as history: it lists the values the seed file had *before* claim extraction,
+and its `UNVERIFIED` and `SUSPECT` labels describe those old values. Since the claim extraction (W1-W7), the
+`expected_claims` in `data/seed_papers.json` hold only claims that were extracted from the paper text, matched to a
+quote by the quote guard, and **accepted one by one by the owner** (`data/claims/review_decisions.json`). The old values
+are kept under `seed_claims_before_extraction`. `python scripts/apply_accepted_claims.py check` fails if the seed file
+disagrees with the decisions.
+
+| Entry | Accepted claims (value, source) | Old label | Now |
+|---|---|---|---|
+| `paper_002` | `mean_roc_auc` 0.934 (Table 1, p. 8); `inference_seconds__gpu` 0.6172 and `inference_seconds__cpu` 37.59 (Table 1, p. 8) | UNVERIFIED | verified, 3 claims (old: 0.895 was AutoGluon's value; 1.25 not in the paper) |
+| `paper_003` | `ft_transformer_rmse` 0.459, `resnet_rmse` 0.486 (Table 2, p. 7); `xgboost_rmse` 0.433 (Table 8, p. 15) | 2 of 3 found | verified, 3 claims |
+| `paper_004` | `tabr_average_rank` 1.3 and `xgboost_average_rank` 2.5 (Table 4, p. 7); `ft_transformer_average_rank`: not in the paper | UNVERIFIED | verified, 2 claims |
+| `paper_005` | none: EP3602 (AUROC, accuracy) is not in the paper, and Figure 4 shows no speedup | UNVERIFIED, **SUSPECT** | **no verifiable claim**; reported as it is |
+| `paper_006` | `arcene_auroc` 0.9104 and `xgboost_arcene_auroc` 0.8141 (Table 2, p. 7); `bank_marketing_accuracy`: not in the paper (the table gives AUROC) | UNVERIFIED | verified, 2 claims |
+| `paper_008` | `forest_covertype_accuracy__danet_20` 0.9723 and `__danet_32` 0.9727 (Table 2, p. 6); `higgs_auroc`: not in the paper | UNVERIFIED, **SUSPECT** | verified, 2 claims |
+
+**Summary: 12 claims accepted in 5 of 6 papers.** `paper_005` has none. No paper was replaced (plan decision, #166): its
+metadata errors were fixed earlier (section 4), and the paper stays in the corpus with no claim to score.
+

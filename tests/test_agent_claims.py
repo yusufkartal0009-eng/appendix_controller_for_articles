@@ -54,9 +54,10 @@ def test_questions_do_not_contain_the_seed_values():
         q = json.loads(questions)["queries"]
         # Every seed claim has at least one question; split questions (owner decisions, #184) name their seed claim.
         seed_claims = [x.get("seed_claim", x["query_id"]) for x in q]
-        assert sorted(set(seed_claims)) == sorted(entry["expected_claims"])
+        before = entry["seed_claims_before_extraction"]["expected_claims"]  # the questions come from the old seed claims (#135)
+        assert sorted(set(seed_claims)) == sorted(before)
         for x in q:
             if "seed_claim" in x:
                 assert x["query_id"].startswith(x["seed_claim"] + "__") and x["split_note"]
-        for value in entry["expected_claims"].values():
+        for value in before.values():
             assert str(value) not in json.dumps(q), (entry["paper_id"], value)
