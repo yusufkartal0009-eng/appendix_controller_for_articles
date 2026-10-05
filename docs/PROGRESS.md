@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Final Report Skeleton (2026-10-05 18:22 +03:00, Issue #120, step R2)
+- `docs/report/REPORT.md`: the 10 sections of #120, each with its one-line purpose, what it needs, and its status. No section body is written; sections are written only when their evidence exists.
+
 ### Pilot 2 Protocol (no run) (2026-10-05 18:17 +03:00, Issue #171, plan step 2.9)
 - `docs/PILOT_2.md`: Pilot 1's definitions, limits, and failure categories unchanged; runs on the owner's machine (Docker Desktop, WSL2) with each paper's `run_setup`; counted run CPU-only; build phase added to the failure order; Pilot 1's 0 / 6 shown alongside. Written before any Pilot 2 run. STOP before the first run: the owner confirms Docker (#172) and approves the protocol; `paper_002`'s network question (#193) is open.
 
