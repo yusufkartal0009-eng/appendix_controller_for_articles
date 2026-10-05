@@ -1,0 +1,27 @@
+{
+  "paper_id": "paper_003",
+  "made_by": "owner",
+  "source": "owner's gold set form (W5, #133)",
+  "questions": {
+    "ft_transformer_rmse": {
+      "accepted_values": [
+        "0.459",
+        "0.459±3.5e-3"
+      ],
+      "not_in_paper": false
+    },
+    "resnet_rmse": {
+      "accepted_values": [
+        "0.486",
+        "0.486±2.9e-3"
+      ],
+      "not_in_paper": false
+    },
+    "xgboost_rmse": {
+      "accepted_values": [
+        "0.433±1.6e-3"
+      ],
+      "not_in_paper": false
+    }
+  }
+}

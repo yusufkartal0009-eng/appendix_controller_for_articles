@@ -1,0 +1,23 @@
+{
+  "paper_id": "paper_008",
+  "made_by": "owner",
+  "source": "owner's gold set form (W5, #133)",
+  "questions": {
+    "forest_covertype_accuracy__danet_20": {
+      "accepted_values": [
+        "97.23%±2e-4"
+      ],
+      "not_in_paper": false
+    },
+    "forest_covertype_accuracy__danet_32": {
+      "accepted_values": [
+        "97.27%±5e-4"
+      ],
+      "not_in_paper": false
+    },
+    "higgs_auroc": {
+      "accepted_values": [],
+      "not_in_paper": true
+    }
+  }
+}

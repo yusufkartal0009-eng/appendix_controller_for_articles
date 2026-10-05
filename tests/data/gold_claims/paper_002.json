@@ -1,0 +1,26 @@
+{
+  "paper_id": "paper_002",
+  "made_by": "owner",
+  "source": "owner's gold set form (W5, #133)",
+  "questions": {
+    "mean_roc_auc": {
+      "accepted_values": [
+        "0.934±.0086"
+      ],
+      "not_in_paper": false
+    },
+    "inference_seconds__gpu": {
+      "accepted_values": [
+        "0.6172",
+        "0.62s"
+      ],
+      "not_in_paper": false
+    },
+    "inference_seconds__cpu": {
+      "accepted_values": [
+        "37.59"
+      ],
+      "not_in_paper": false
+    }
+  }
+}

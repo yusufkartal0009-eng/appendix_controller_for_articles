@@ -1,0 +1,23 @@
+{
+  "paper_id": "paper_004",
+  "made_by": "owner",
+  "source": "owner's gold set form (W5, #133)",
+  "questions": {
+    "tabr_average_rank": {
+      "accepted_values": [
+        "1.3± 0.9"
+      ],
+      "not_in_paper": false
+    },
+    "ft_transformer_average_rank": {
+      "accepted_values": [],
+      "not_in_paper": true
+    },
+    "xgboost_average_rank": {
+      "accepted_values": [
+        "2.5± 0.9"
+      ],
+      "not_in_paper": false
+    }
+  }
+}

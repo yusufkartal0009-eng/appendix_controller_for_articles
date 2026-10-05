@@ -1,0 +1,171 @@
+{
+  "pass": "A",
+  "scored_questions": 18,
+  "needs_decision": [],
+  "tp": 12,
+  "fp": 0,
+  "fn": 0,
+  "tn": 6,
+  "precision": 1.0,
+  "recall": 1.0,
+  "regression_cases": {
+    "paper_005:ep3602_auroc": "TN",
+    "paper_005:ep3602_accuracy": "TN",
+    "paper_008:higgs_auroc": "TN"
+  },
+  "rows": [
+    {
+      "question": "paper_002:inference_seconds__cpu",
+      "extracted": "37.59",
+      "gold": [
+        "37.59"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_002:inference_seconds__gpu",
+      "extracted": "0.6172",
+      "gold": [
+        "0.6172",
+        "0.62s"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_002:mean_roc_auc",
+      "extracted": "0.934±.0086",
+      "gold": [
+        "0.934±.0086"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_003:ft_transformer_rmse",
+      "extracted": "0.459",
+      "gold": [
+        "0.459",
+        "0.459±3.5e-3"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_003:resnet_rmse",
+      "extracted": "0.486",
+      "gold": [
+        "0.486",
+        "0.486±2.9e-3"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_003:xgboost_rmse",
+      "extracted": "0.433±1.6e-3",
+      "gold": [
+        "0.433±1.6e-3"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_004:ft_transformer_average_rank",
+      "extracted": null,
+      "gold": [],
+      "gold_not_in_paper": true,
+      "outcome": "TN"
+    },
+    {
+      "question": "paper_004:tabr_average_rank",
+      "extracted": "1.3± 0.9",
+      "gold": [
+        "1.3± 0.9"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_004:xgboost_average_rank",
+      "extracted": "2.5± 0.9",
+      "gold": [
+        "2.5± 0.9"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_005:ep3602_accuracy",
+      "extracted": null,
+      "gold": [],
+      "gold_not_in_paper": true,
+      "outcome": "TN"
+    },
+    {
+      "question": "paper_005:ep3602_auroc",
+      "extracted": null,
+      "gold": [],
+      "gold_not_in_paper": true,
+      "outcome": "TN"
+    },
+    {
+      "question": "paper_005:kernel_speedup_factor",
+      "extracted": null,
+      "gold": [],
+      "gold_not_in_paper": true,
+      "outcome": "TN"
+    },
+    {
+      "question": "paper_006:arcene_auroc",
+      "extracted": "91.04",
+      "gold": [
+        "91.04"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_006:bank_marketing_accuracy",
+      "extracted": null,
+      "gold": [],
+      "gold_not_in_paper": true,
+      "outcome": "TN"
+    },
+    {
+      "question": "paper_006:xgboost_arcene_auroc",
+      "extracted": "81.41",
+      "gold": [
+        "81.41"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_008:forest_covertype_accuracy__danet_20",
+      "extracted": "97.23%±2e-4",
+      "gold": [
+        "97.23%±2e-4"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_008:forest_covertype_accuracy__danet_32",
+      "extracted": "97.27%±5e-4",
+      "gold": [
+        "97.27%±5e-4"
+      ],
+      "gold_not_in_paper": false,
+      "outcome": "TP"
+    },
+    {
+      "question": "paper_008:higgs_auroc",
+      "extracted": null,
+      "gold": [],
+      "gold_not_in_paper": true,
+      "outcome": "TN"
+    }
+  ]
+}
