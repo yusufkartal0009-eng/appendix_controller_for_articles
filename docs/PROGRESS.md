@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot 2 Protocol (no run) (2026-10-05 18:17 +03:00, Issue #171, plan step 2.9)
+- `docs/PILOT_2.md`: Pilot 1's definitions, limits, and failure categories unchanged; runs on the owner's machine (Docker Desktop, WSL2) with each paper's `run_setup`; counted run CPU-only; build phase added to the failure order; Pilot 1's 0 / 6 shown alongside. Written before any Pilot 2 run. STOP before the first run: the owner confirms Docker (#172) and approves the protocol; `paper_002`'s network question (#193) is open.
+
 ### Opt-in Local GPU (code only) (2026-10-05 18:09 +03:00, Issue #169, plan step 2.6)
 - `SandboxConfig.gpus` (`all`, a count, or `device=<ids>`; validated) adds `docker run --gpus` and nothing else; the default stays without a GPU, and the local fallback refuses a GPU run. The entrypoint records the visible GPUs and samples GPU memory during the run; `run_report.json` gets a `gpu` summary (available, used). `scripts/gpu_check.py` shows the GPU inside the sandbox with the isolation checks; acceptance check 20 shows the GPU is off by default. **Not verified:** no real GPU run (this machine has no Docker; GitHub's runners have no GPU).
 
