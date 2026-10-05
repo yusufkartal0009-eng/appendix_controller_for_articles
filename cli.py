@@ -13,10 +13,14 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
+from src.claim_review import review_claims
+from src.claim_store import get_extracted_claims
 from src.config import DATA_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
 from src.database import (
     get_all_papers,
+    get_engine,
     get_paper_by_id,
+    get_session,
     init_db,
     save_score,
     seed_database,
@@ -183,6 +187,23 @@ def cmd_score_paper(args):
     print("-----------------------------------------------------\n")
 
 
+def cmd_review_claims(args):
+    """Accept or reject extracted claims one by one (W7, #134); only accepted claims reach the scorer."""
+    session = get_session(get_engine(args.db_url) if args.db_url else get_engine())
+    try:
+        if args.list:
+            rows = [[c.extracted_claim_id, c.value_as_printed, f"p. {c.page}, {c.table_or_section}", c.review_status,
+                     c.verified_by or "not matched"] for c in get_extracted_claims(session, args.paper_id)]
+            if not rows:
+                print("No extracted claims. Run 'python scripts/import_claims.py' first.")
+                return
+            print(tabulate(rows, headers=["Claim", "Value", "Where", "Review", "Verified by"], tablefmt="grid"))
+            return
+        review_claims(session, args.paper_id)
+    finally:
+        session.close()
+
+
 def main():
     parser = argparse.ArgumentParser(description="Repro Radar CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -210,6 +231,13 @@ def main():
     p_score.add_argument("--simulate-clone-error", action="store_true", help="Simulate clone failure")
     p_score.add_argument("--simulate-deps-error", action="store_true", help="Simulate dependency failure")
     p_score.set_defaults(func=cmd_score_paper)
+
+    # review-claims
+    p_review = subparsers.add_parser("review-claims", help="Accept or reject extracted claims one by one")
+    p_review.add_argument("paper_id", nargs="?", default=None, help="Only this paper (default: all papers)")
+    p_review.add_argument("--list", action="store_true", help="List the claims and their review status; ask nothing")
+    p_review.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
+    p_review.set_defaults(func=cmd_review_claims)
 
     args = parser.parse_args()
     args.func(args)
