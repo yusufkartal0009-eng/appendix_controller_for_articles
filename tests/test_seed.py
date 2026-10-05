@@ -40,7 +40,10 @@ def test_seed_papers_json_completeness():
         ), f"Paper {p.paper_id} license '{p.license}' is not in allowed open licenses"
 
         # 6. Non-empty expected_claims dict with numeric values
-        assert len(p.expected_claims) >= 1, f"Paper {p.paper_id} has empty expected_claims"
+        # Since #135 only claims accepted by a person are stored: a paper may have none (every question answered
+        # "not in the paper"), and then the values it had before extraction are kept for the record.
+        if not p.expected_claims:
+            assert paper_dict.get("seed_claims_before_extraction"), f"Paper {p.paper_id} has no claims and no record why"
         for metric_name, val in p.expected_claims.items():
             assert isinstance(val, (int, float)), f"Metric {metric_name} in {p.paper_id} must be numeric"
 
@@ -49,4 +52,4 @@ def test_seed_papers_json_completeness():
 
         # 8. Source table or section references provided for reproducibility audit
         assert p.source_table_or_section is not None, f"Paper {p.paper_id} missing source references"
-        assert len(p.source_table_or_section) >= 1, f"Paper {p.paper_id} has empty source references"
+        assert len(p.source_table_or_section) >= len(p.expected_claims), f"Paper {p.paper_id} has claims without source references"
