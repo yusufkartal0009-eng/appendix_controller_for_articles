@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 291 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 19 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 296 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 19 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Gold Set Form Reader and Precision/Recall (W5) (2026-10-05 18:05 +03:00, Issue #133, plan step 1.5)
+- `scripts/evaluate_gold.py from-form` reads the owner's filled gold set form by its structure (checkboxes, backtick values, the free "other" answer, "not in the paper") into `tests/data/gold_claims/<paper_id>.json`, reporting unclear answers as `needs_decision`; `score` gives TP/FP/FN/TN, precision, recall, and the EP3602/HIGGS regression cases. On the real form it found all 18 questions, none filled yet. No gold value was chosen and no precision/recall number exists yet.
 
 ### Human Review of Extracted Claims (W7) (2026-10-05 17:50 +03:00, Issue #134, plan step 1.7)
 - `python cli.py review-claims [paper_id]` shows each pending claim with its provenance and asks accept / reject / skip / quit (optional note); each decision is committed at once with `verified_by = human`. `--list` shows the review status without asking. `claims_for_scoring` (`src/claim_review.py`) returns only accepted claims. No claim has been accepted or rejected; that is the owner's step.
