@@ -5,6 +5,11 @@ Stages the paper's repository at its pinned commit, bundles binary wheels on the
 then runs the install and run phases in the Docker sandbox with the protocol's limits. Writes
 `pilot_record.json` next to the sandbox's `run_report.json` in `sandbox_runs/<paper_id>/`.
 
+Pilot 1's mode (the default) runs the frozen commands of docs/PILOT_WEEK2.md. `--pilot2` runs the paper with its
+`run_setup` from data/seed_papers.json instead (docs/PILOT_2.md; #205): build phase, bundling with extras and
+constraints, working directory, writable copy, data mounts, and command. The data must already be in the cache
+(`scripts/fetch_data.py`).
+
 Exit codes: 0 when the paper went through the pipeline, whatever the paper's own result (staging, install, and run
 failures are pilot results and are recorded); 1 on a harness error (for example Docker unavailable), so a failed
 CI job always means Repro Radar did not run the paper as specified.
@@ -26,7 +31,8 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.config import SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
+from src.config import DATA_CACHE_DIR, SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
+from src.sandbox.run_setup import run_setup_of, sandbox_options
 from src.sandbox.runner import DEFAULT_PYTHON_VERSION, SandboxConfig
 from src.sandbox.stager import RepoStager
 
@@ -74,6 +80,11 @@ def container_command(paper_id: str, target_script: str) -> str:
     return " ".join('""' if part == "" else part for part in parts)
 
 
+def container_command_for(target_script: str, args: list[str]) -> str:
+    parts = ["python", f"/workspace/repo/{target_script}", *args]
+    return " ".join('""' if part == "" else part for part in parts)
+
+
 def repro_radar_commit() -> str:
     if os.environ.get("GITHUB_SHA"):
         return os.environ["GITHUB_SHA"]
@@ -91,20 +102,28 @@ def write_record(record: dict[str, Any], out_dir: Path) -> Path:
     return path
 
 
-def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None) -> dict[str, Any]:
+def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
+              data_cache: Path | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
-    spec = PILOT_SPECS[paper_id]
+    setup_options: dict[str, Any] | None = None
+    if pilot2:
+        # Harness error (raised, exit 1) when the setup is malformed or its data is not in the cache
+        setup_options = sandbox_options(entry, data_cache or DATA_CACHE_DIR)
+        spec = {"args": setup_options["script_args"], "env": setup_options["env_vars"]}
+    else:
+        spec = PILOT_SPECS[paper_id]
     out_dir = SANDBOX_RUNS_DIR / paper_id
     stager = stager or RepoStager(staging_root=staging_dir)
     record: dict[str, Any] = {
         "paper_id": paper_id,
-        "protocol": "docs/PILOT_WEEK2.md",
+        "protocol": "docs/PILOT_2.md" if pilot2 else "docs/PILOT_WEEK2.md",
         "repro_radar_commit": repro_radar_commit(),
         "started_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "repo_url": entry["repo_url"],
         "pinned_commit": entry["repo_commit"],
         "target_script": entry["target_script"],
-        "container_command": container_command(paper_id, entry["target_script"]),
+        "container_command": (" ".join(setup_options["command"]) if setup_options and setup_options["command"]
+                              else container_command_for(entry["target_script"], spec["args"])),
         "environment": spec["env"],
         "limits": PILOT_LIMITS,
     }
@@ -130,12 +149,40 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     # Python version of the paper's sandbox image (data/seed_papers.json, #158; 3.11 when not set)
     python_version = entry.get("python_version", DEFAULT_PYTHON_VERSION)
     record["python_version"] = python_version
-    bundle = stager.bundle_dependencies(staged, timeout=BUNDLE_TIMEOUT_SECONDS, python_version=python_version)
+    config_extra: dict[str, Any] = {}
+    bundle_extra: dict[str, Any] = {}
+    command = None
+    if setup_options:
+        record["run_setup"] = {k: setup_options[k] for k in
+                               ("command", "working_dir", "writable_repo", "extra_requirements", "constraints", "build")}
+        record["run_setup"]["decision"] = run_setup_of(entry)["decision"]
+        record["run_setup"]["data_mounts"] = sorted(setup_options["data_mounts"])
+        config_extra = {k: setup_options[k] for k in ("working_dir", "writable_repo", "data_mounts", "writable_data")}
+        bundle_extra = {"extra_requirements": setup_options["extra_requirements"],
+                        "constraints": setup_options["constraints"]}
+        command = setup_options["command"]
+    config = SandboxConfig(**PILOT_LIMITS, env_vars=dict(spec["env"]), python_version=python_version, **config_extra)
+
+    if setup_options and setup_options["build"]:
+        build_start = time.time()
+        build = stager.build_from_source(staged, setup_options["build"], config)
+        record["build"] = {k: v for k, v in build.items() if k != "command_executed"}
+        record["build"]["duration_seconds_total"] = round(time.time() - build_start, 3)
+        if build.get("status") != "BUILT":
+            # Protocol section 5: a failed build counts as a failed install; the run is not started
+            record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
+            write_record(record, out_dir)
+            return record
+
+    start = time.time()
+    bundle = stager.bundle_dependencies(staged, timeout=BUNDLE_TIMEOUT_SECONDS, python_version=python_version,
+                                        **bundle_extra)
     record["bundle"] = {**bundle, "duration_seconds": round(time.time() - start, 3)}
 
     start = time.time()
-    config = SandboxConfig(**PILOT_LIMITS, env_vars=dict(spec["env"]), python_version=python_version)
-    report = stager.execute_staged(staged, target_script=entry["target_script"], script_args=list(spec["args"]), config=config)
+    run_kwargs = {"command": command} if command else {}
+    report = stager.execute_staged(staged, target_script=entry["target_script"], script_args=list(spec["args"]),
+                                   config=config, **run_kwargs)
     record["sandbox_duration_seconds"] = round(time.time() - start, 3)
     record["run_report"] = "run_report.json"
     record["run"] = {
@@ -156,9 +203,11 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run one pilot paper as specified in docs/PILOT_WEEK2.md.")
     parser.add_argument("paper_id", choices=sorted(PILOT_SPECS))
     parser.add_argument("--staging-dir", default=".sandbox_staging", help="Where repositories are cloned.")
+    parser.add_argument("--pilot2", action="store_true", help="Run with the paper's run_setup (docs/PILOT_2.md).")
+    parser.add_argument("--data-cache", default=str(DATA_CACHE_DIR), help="Host data cache (scripts/fetch_data.py).")
     args = parser.parse_args(argv)
     try:
-        record = run_paper(args.paper_id, Path(args.staging_dir))
+        record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache))
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1

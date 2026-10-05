@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 310 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 315 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Pilot 2 Driver (no run) (2026-10-05 22:36 +03:00, Issue #205, plan step 2.9)
+- `python scripts/run_pilot.py <paper_id> --pilot2` runs a paper with its `run_setup` (build phase, extras and constraints, working directory, writable copy, data mounts, command); Pilot 1's mode is unchanged. A missing data cache is a harness error naming `scripts/fetch_data.py`; a failed build ends the paper before install and is recorded. Fake-stager tests only: no paper was run.
 
 ### Seed Claim Values Replaced by Accepted Claims (2026-10-05 22:12 +03:00, Issue #135, plan step 1.8)
 - The owner accepted all 12 extracted claims one by one (`data/claims/review_decisions.json`). `scripts/apply_accepted_claims.py` wrote them into `expected_claims` of `data/seed_papers.json` (old values kept under `seed_claims_before_extraction`; `check` fails on disagreement). `paper_005` has no accepted claim (all its questions were answered "not in the paper") and stays in the corpus. `docs/CORPUS_VERIFICATION.md` section 6 replaces the UNVERIFIED/SUSPECT status. Three tests were adjusted to accepted-only claims.

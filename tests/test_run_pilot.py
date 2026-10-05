@@ -134,3 +134,87 @@ def test_workflow_is_manual_read_only_and_keeps_no_credentials():
     assert checkout["with"]["persist-credentials"] is False
     upload = next(step for step in job["steps"] if step.get("uses", "").startswith("actions/upload-artifact"))
     assert "!sandbox_runs/${{ matrix.paper_id }}/deps" in upload["with"]["path"]
+
+
+class Pilot2Stager(FakeStager):
+    """FakeStager that also records the run setup options (#205)."""
+
+    def __init__(self, tmp_path, build_status="BUILT"):
+        super().__init__(tmp_path)
+        self.build_status = build_status
+        self.built = None
+        self.bundle_kwargs = None
+        self.run_kwargs = None
+
+    def build_from_source(self, staged, build, config):
+        self.built = (build, config.python_version)
+        return {"status": self.build_status, "wheels": [], "command_executed": ["docker"], "image": "x-build"}
+
+    def bundle_dependencies(self, staged, timeout, python_version, **kwargs):
+        self.bundle_kwargs = kwargs
+        return {"status": "SUCCESS", "wheel_count": 3}
+
+    def execute_staged(self, staged, target_script, script_args, config, **kwargs):
+        self.run_kwargs = kwargs
+        return super().execute_staged(staged, target_script, script_args, config)
+
+
+def _cache_for(tmp_path, paper_id):
+    for item in ENTRIES[paper_id]["run_setup"].get("data", []):
+        marker = tmp_path / "cache" / paper_id / item["name"] / ".complete"
+        marker.parent.mkdir(parents=True, exist_ok=True)
+        marker.write_text("{}")
+    return tmp_path / "cache"
+
+
+def test_pilot2_missing_data_is_a_harness_error_naming_the_fetch_script(tmp_path):
+    with pytest.raises(ValueError, match="fetch_data.py"):
+        run_pilot.run_paper("paper_003", tmp_path / "staging", stager=Pilot2Stager(tmp_path), pilot2=True,
+                            data_cache=tmp_path / "empty")
+
+
+def test_pilot2_runs_with_the_run_setup(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
+                                 data_cache=_cache_for(tmp_path, "paper_006"))
+    build, build_python = stager.built
+    assert build["sdists"] == ["openml==0.11.0", "liac-arff==2.5.0"] and build_python == "3.8"
+    assert stager.bundle_kwargs == {"extra_requirements": [], "constraints": []}
+    assert stager.run_kwargs == {}  # paper_006 runs a script, so there is no command override
+    _, script_args, config = stager.executed
+    assert script_args == ["--dset_id", "1461", "--task", "binary", "--savemodelroot", "/workspace/output/bestmodels"]
+    assert config.writable_data == ["/workspace/home/.openml/cache"] and config.gpus == ""
+    assert (config.memory_limit, config.cpus, config.timeout_seconds) == ("6g", 2.0, 3600)  # Pilot 1's limits
+    assert record["protocol"] == "docs/PILOT_2.md" and record["build"]["status"] == "BUILT"
+    assert record["run_setup"]["decision"] == "fix" and record["run"]["status"] == "COMPLETED"
+
+
+def test_pilot2_passes_the_command_extras_and_constraints(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path)
+    run_pilot.run_paper("paper_002", tmp_path / "staging", stager=stager, pilot2=True,
+                        data_cache=_cache_for(tmp_path, "paper_002"))
+    assert stager.bundle_kwargs["extra_requirements"] == ["nbconvert", "ipykernel"]
+    assert stager.run_kwargs["command"][:4] == ["python", "-m", "nbconvert", "--to"]
+    stager5 = Pilot2Stager(tmp_path / "p5")
+    run_pilot.run_paper("paper_005", tmp_path / "staging5", stager=stager5, pilot2=True, data_cache=tmp_path)
+    assert "pandas==1.2.4" in stager5.bundle_kwargs["constraints"]
+    assert stager5.executed[2].working_dir == "results"
+
+
+def test_pilot2_failed_build_ends_the_paper_before_install(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path, build_status="FAILED")
+    record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
+                                 data_cache=_cache_for(tmp_path, "paper_006"))
+    assert record["build"]["status"] == "FAILED" and "run" not in record and "bundle" not in record
+    assert stager.bundle_kwargs is None and stager.executed is None
+    assert (tmp_path / "runs" / "paper_006" / "pilot_record.json").exists()
+
+
+def test_pilot1_mode_does_not_use_the_run_setup(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager)
+    assert stager.built is None and "run_setup" not in record and record["protocol"] == "docs/PILOT_WEEK2.md"
