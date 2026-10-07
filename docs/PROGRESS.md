@@ -37,6 +37,16 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Report Sections Written: Introduction, Method, Experimental Setup (2026-10-07 19:47 +03:00, Issue #120)
+- `docs/report/REPORT.md` sections 2, 4, and 5 are written from evidence already in the repository: the
+  sourced introduction draft (#118/#119), the sandbox threat model and four-tier score (`docs/SANDBOX_ACCEPTANCE.md`,
+  `src/config.py`, `src/scoring.py`, `src/validation_rubric.py`), the claim extraction pipeline (W1-W7, gold-set
+  precision/recall 1.0/1.0), and the corpus's 18→8→6 history with its automated verification (6/6 pass).
+- Corrected section 6 (Results)'s own needs list: the gold set (#133) is filled now, so Results is blocked on
+  Pilot 2 alone, not three things.
+- Not written: Related work (needs a separately verified external source list) and anything needing Pilot 2
+  data (Results, Limitations, Lessons learned, Conclusion).
+
 ### Stale Umbrella Issue #9 Closed (2026-10-07 19:39 +03:00, Issue #9, housekeeping)
 - All 8 checklist items (#129 W1, #130 W2, #131 W3, #132 W4, #133 W5, #10 W6, #134 W7, #135 closing step) were
   already closed; the Definition of Done (claims extracted and quote-verified, gold-set precision/recall,
