@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Stale Umbrella Issue #9 Closed (2026-10-07 19:39 +03:00, Issue #9, housekeeping)
+- All 8 checklist items (#129 W1, #130 W2, #131 W3, #132 W4, #133 W5, #10 W6, #134 W7, #135 closing step) were
+  already closed; the Definition of Done (claims extracted and quote-verified, gold-set precision/recall,
+  EP3602/HIGGS regression cases returning "not found") is satisfied. Closed as done, no code change. This also
+  clears one of the two issues #136 names as a precondition (the other, #43, was already closed).
+
 ### Pilot 2 Output Location Fixed (2026-10-07 19:31 +03:00, Issue #207)
 - `--pilot2` now writes `pilot_record.json` into `data/pilot2_runs/<paper_id>/`, as `docs/PILOT_2.md` section 6
   asks, instead of `sandbox_runs/<paper_id>/` (where PR #206 left it — that gap was not named in #205 or #206).
