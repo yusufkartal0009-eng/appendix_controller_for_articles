@@ -37,6 +37,22 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot 2 Output Location Fixed (2026-10-07 19:31 +03:00, Issue #207)
+- `--pilot2` now writes `pilot_record.json` into `data/pilot2_runs/<paper_id>/`, as `docs/PILOT_2.md` section 6
+  asks, instead of `sandbox_runs/<paper_id>/` (where PR #206 left it — that gap was not named in #205 or #206).
+  `scripts/run_pilot.py`'s new `_collect_pilot2_files` copies the protocol's other named files (`run_report.json`,
+  `execution_meta.json`, `install.log`, `install_meta.json`, `build.log`, `stdout.log`, `stderr.log`) from their
+  sandbox locations into the same directory, skipping any that do not exist yet. `src/sandbox/runner.py` and
+  `stager.py` are untouched: they still write under `sandbox_runs/`, shared with Pilot 1 and real-Docker CI.
+- Pilot 1's output location and mode are unchanged.
+- Tests: 2 new (full completion copies exactly the files the protocol names, plus a staging failure); the 3
+  existing Pilot 2 tests updated to assert the new location; all 18 Pilot 1 tests untouched. Full suite:
+  319 passed, 6 skipped; `ruff check` clean.
+- `data/pilot2_runs/` added to `.gitignore` (next to `sandbox_runs/`): run output, not something to commit.
+- **Not verified:** no real Docker run (no Docker on this machine yet, #172). While testing, an intermediate
+  (uncommitted) run of the old test file wrote real files into `data/pilot2_runs/`; found via `git status`
+  (untracked) and deleted before committing.
+
 ### Pilot 2 Driver (no run) (2026-10-05 22:36 +03:00, Issue #205, plan step 2.9)
 - `python scripts/run_pilot.py <paper_id> --pilot2` runs a paper with its `run_setup` (build phase, extras and constraints, working directory, writable copy, data mounts, command); Pilot 1's mode is unchanged. A missing data cache is a harness error naming `scripts/fetch_data.py`; a failed build ends the paper before install and is recorded. Fake-stager tests only: no paper was run.
 

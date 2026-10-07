@@ -139,8 +139,8 @@ def test_workflow_is_manual_read_only_and_keeps_no_credentials():
 class Pilot2Stager(FakeStager):
     """FakeStager that also records the run setup options (#205)."""
 
-    def __init__(self, tmp_path, build_status="BUILT"):
-        super().__init__(tmp_path)
+    def __init__(self, tmp_path, build_status="BUILT", fail_stage=False):
+        super().__init__(tmp_path, fail_stage=fail_stage)
         self.build_status = build_status
         self.built = None
         self.bundle_kwargs = None
@@ -175,6 +175,7 @@ def test_pilot2_missing_data_is_a_harness_error_naming_the_fetch_script(tmp_path
 
 def test_pilot2_runs_with_the_run_setup(tmp_path, monkeypatch):
     monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
     stager = Pilot2Stager(tmp_path)
     record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
                                  data_cache=_cache_for(tmp_path, "paper_006"))
@@ -188,10 +189,39 @@ def test_pilot2_runs_with_the_run_setup(tmp_path, monkeypatch):
     assert (config.memory_limit, config.cpus, config.timeout_seconds) == ("6g", 2.0, 3600)  # Pilot 1's limits
     assert record["protocol"] == "docs/PILOT_2.md" and record["build"]["status"] == "BUILT"
     assert record["run_setup"]["decision"] == "fix" and record["run"]["status"] == "COMPLETED"
+    # docs/PILOT_2.md section 6: the record lives in data/pilot2_runs/<paper_id>/, not sandbox_runs/ (#207).
+    assert (tmp_path / "pilot2" / "paper_006" / "pilot_record.json").exists()
+    assert not (tmp_path / "runs" / "paper_006" / "pilot_record.json").exists()
+
+
+def test_pilot2_collects_the_protocol_files_into_pilot2_runs(tmp_path, monkeypatch):
+    """The sandbox/stager still write under sandbox_runs/ (unchanged); #207 copies the named files from there."""
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
+    run_dir = tmp_path / "runs" / "paper_006"
+    build_dir = tmp_path / "runs" / "paper_006.build"
+    run_dir.mkdir(parents=True)
+    build_dir.mkdir(parents=True)
+    (run_dir / "run_report.json").write_text("{}")
+    (run_dir / "stdout.log").write_text("hi\n")
+    (run_dir / "a_file_the_protocol_does_not_name.txt").write_text("skip me")
+    (build_dir / "build.log").write_text("building\n")
+
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
+                                 data_cache=_cache_for(tmp_path, "paper_006"))
+
+    dest = tmp_path / "pilot2" / "paper_006"
+    assert (dest / "run_report.json").read_text() == "{}"
+    assert (dest / "stdout.log").read_text() == "hi\n"
+    assert (dest / "build.log").read_text() == "building\n"
+    assert not (dest / "a_file_the_protocol_does_not_name.txt").exists()
+    assert sorted(record["collected_files"]) == ["build.log", "run_report.json", "stdout.log"]
 
 
 def test_pilot2_passes_the_command_extras_and_constraints(tmp_path, monkeypatch):
     monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
     stager = Pilot2Stager(tmp_path)
     run_pilot.run_paper("paper_002", tmp_path / "staging", stager=stager, pilot2=True,
                         data_cache=_cache_for(tmp_path, "paper_002"))
@@ -205,12 +235,24 @@ def test_pilot2_passes_the_command_extras_and_constraints(tmp_path, monkeypatch)
 
 def test_pilot2_failed_build_ends_the_paper_before_install(tmp_path, monkeypatch):
     monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
     stager = Pilot2Stager(tmp_path, build_status="FAILED")
     record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
                                  data_cache=_cache_for(tmp_path, "paper_006"))
     assert record["build"]["status"] == "FAILED" and "run" not in record and "bundle" not in record
     assert stager.bundle_kwargs is None and stager.executed is None
-    assert (tmp_path / "runs" / "paper_006" / "pilot_record.json").exists()
+    assert (tmp_path / "pilot2" / "paper_006" / "pilot_record.json").exists()
+    assert not (tmp_path / "runs" / "paper_006" / "pilot_record.json").exists()
+
+
+def test_pilot2_staging_failure_is_also_collected(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
+    stager = Pilot2Stager(tmp_path, fail_stage=True)
+    record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
+                                 data_cache=_cache_for(tmp_path, "paper_006"))
+    assert record["stage"]["status"] == "FAILED"
+    assert (tmp_path / "pilot2" / "paper_006" / "pilot_record.json").exists()
 
 
 def test_pilot1_mode_does_not_use_the_run_setup(tmp_path, monkeypatch):

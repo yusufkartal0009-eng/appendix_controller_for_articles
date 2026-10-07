@@ -10,6 +10,11 @@ Pilot 1's mode (the default) runs the frozen commands of docs/PILOT_WEEK2.md. `-
 constraints, working directory, writable copy, data mounts, and command. The data must already be in the cache
 (`scripts/fetch_data.py`).
 
+Pilot 2's files land in `data/pilot2_runs/<paper_id>/`, not `sandbox_runs/<paper_id>/` (docs/PILOT_2.md section 6;
+#207): the sandbox and stager still write under `sandbox_runs/` (shared with Pilot 1 and real-Docker CI, left
+untouched), and `_collect_pilot2_files` copies the protocol's named files from there afterwards, next to
+`pilot_record.json`, which is written directly into `data/pilot2_runs/<paper_id>/` for this mode.
+
 Exit codes: 0 when the paper went through the pipeline, whatever the paper's own result (staging, install, and run
 failures are pilot results and are recorded); 1 on a harness error (for example Docker unavailable), so a failed
 CI job always means Repro Radar did not run the paper as specified.
@@ -20,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -31,10 +37,21 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.config import DATA_CACHE_DIR, SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
+from src.config import DATA_CACHE_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
 from src.sandbox.run_setup import run_setup_of, sandbox_options
 from src.sandbox.runner import DEFAULT_PYTHON_VERSION, SandboxConfig
 from src.sandbox.stager import RepoStager
+
+# docs/PILOT_2.md section 6: where a Pilot 2 run's files are collected (#207). The sandbox and stager are
+# shared with Pilot 1 and real-Docker CI and are not changed to write here directly.
+PILOT2_RUNS_DIR = PROJECT_ROOT / "data" / "pilot2_runs"
+
+# Files docs/PILOT_2.md section 6 names, other than pilot_record.json (written directly into the target
+# directory, not copied). "build.log" comes from the build phase's own output directory; the rest from the
+# run/install phases' output directory.
+_PILOT2_RUN_FILES = ("run_report.json", "execution_meta.json", "install.log", "install_meta.json",
+                     "stdout.log", "stderr.log")
+_PILOT2_BUILD_FILES = ("build.log",)
 
 # docs/PILOT_WEEK2.md section 4: script arguments and environment per paper (frozen with the protocol).
 PILOT_SPECS: dict[str, dict[str, Any]] = {
@@ -102,6 +119,25 @@ def write_record(record: dict[str, Any], out_dir: Path) -> Path:
     return path
 
 
+def _collect_pilot2_files(sandbox_dir: Path, build_dir: Path, target_dir: Path) -> list[str]:
+    """Copy the protocol's named files (docs/PILOT_2.md section 6) into `target_dir`, next to where
+    `pilot_record.json` is written for this run. A file that does not exist yet (no build happened, or the
+    run never reached the install/run phase) is skipped, not an error. Returns the names actually copied."""
+    target_dir.mkdir(parents=True, exist_ok=True)
+    copied = []
+    for name in _PILOT2_BUILD_FILES:
+        source = build_dir / name
+        if source.is_file():
+            shutil.copy2(source, target_dir / name)
+            copied.append(name)
+    for name in _PILOT2_RUN_FILES:
+        source = sandbox_dir / name
+        if source.is_file():
+            shutil.copy2(source, target_dir / name)
+            copied.append(name)
+    return copied
+
+
 def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
               data_cache: Path | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
@@ -112,7 +148,11 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         spec = {"args": setup_options["script_args"], "env": setup_options["env_vars"]}
     else:
         spec = PILOT_SPECS[paper_id]
-    out_dir = SANDBOX_RUNS_DIR / paper_id
+    # The sandbox and stager always write here (shared with Pilot 1 and real-Docker CI). For Pilot 2, the
+    # pilot record and the protocol's named files are additionally collected into `record_dir` below (#207).
+    sandbox_dir = SANDBOX_RUNS_DIR / paper_id
+    build_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
+    record_dir = PILOT2_RUNS_DIR / paper_id if pilot2 else sandbox_dir
     stager = stager or RepoStager(staging_root=staging_dir)
     record: dict[str, Any] = {
         "paper_id": paper_id,
@@ -133,7 +173,9 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         staged = stager.stage_repository(paper_id=paper_id, source=entry["repo_url"], commit_or_tag=entry["repo_commit"])
     except Exception as exc:  # noqa: BLE001 - a failed clone or checkout is a pilot result, recorded and categorized in P4
         record["stage"] = {"status": "FAILED", "error": str(exc), "duration_seconds": round(time.time() - start, 3)}
-        write_record(record, out_dir)
+        if pilot2:
+            record["collected_files"] = _collect_pilot2_files(sandbox_dir, build_dir, record_dir)
+        write_record(record, record_dir)
         return record
     record["stage"] = {
         "status": "STAGED",
@@ -171,7 +213,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         if build.get("status") != "BUILT":
             # Protocol section 5: a failed build counts as a failed install; the run is not started
             record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
-            write_record(record, out_dir)
+            record["collected_files"] = _collect_pilot2_files(sandbox_dir, build_dir, record_dir)
+            write_record(record, record_dir)
             return record
 
     start = time.time()
@@ -191,11 +234,13 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     }
     # Written by the container entrypoint from the cgroup (null when the kernel does not expose it).
     record["run"]["peak_memory_bytes"] = (report.get("meta") or {}).get("peak_memory_bytes")
-    install_meta = out_dir / "install_meta.json"
+    install_meta = sandbox_dir / "install_meta.json"
     if install_meta.exists():
         record["install_meta"] = json.loads(install_meta.read_text(encoding="utf-8"))
     record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
-    write_record(record, out_dir)
+    if pilot2:
+        record["collected_files"] = _collect_pilot2_files(sandbox_dir, build_dir, record_dir)
+    write_record(record, record_dir)
     return record
 
 
