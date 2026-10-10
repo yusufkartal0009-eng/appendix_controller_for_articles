@@ -73,8 +73,12 @@ def test_conda_only_repository_is_bundled_one_requirement_at_a_time(tmp_path, mo
 
     monkeypatch.setattr("src.sandbox.stager.subprocess.run", fake_run)
     result = stager.bundle_dependencies(staged, python_version="3.8")
-    assert all("--no-deps" in c and c[c.index("--python-version") + 1] == "3.8" for c in calls)
-    assert [c[-1] for c in calls] == ["numpy==1.20.2", "torch==1.8.1", "xgboost==1.4.0", "delu==0.0.15"]
+    per_pin = [c for c in calls if "--no-deps" in c]
+    assert all(c[c.index("--python-version") + 1] == "3.8" for c in per_pin)
+    assert [c[-1] for c in per_pin] == ["numpy==1.20.2", "torch==1.8.1", "xgboost==1.4.0", "delu==0.0.15"]
+    # #227: one resolver pass over the exact pins that did download (with dependencies, so no --no-deps)
+    (gap_pass,) = [c for c in calls if "--no-deps" not in c]
+    assert gap_pass[-3:] == ["numpy==1.20.2", "xgboost==1.4.0", "delu==0.0.15"]
     assert result["source"] == "conda_env" and result["status"] == "PARTIAL"
     assert result["env_python_versions"] == ["3.8"]
     assert result["conda_only"] == [{"requirement": "torch==1.8.1", "reason": "ERROR: No matching distribution"}]
@@ -106,3 +110,52 @@ def test_setuptools_wheel_and_certifi_are_converted_but_pip_and_python_are_not(t
     skipped = {s["package"].split("=")[0] for s in result.skipped}
     assert {"pip", "openssl", "ca-certificates"} <= skipped
     assert result.python_version == "3.8"  # python is not pip-installed; its minor version selects the sandbox image
+
+
+def test_gap_fill_adds_the_dependencies_the_environment_did_not_provide(tmp_path, monkeypatch):
+    """#227: pyrsistent 0.17.3 has no wheel; jsonschema (a bundled wheel) still needs some pyrsistent."""
+    source = tmp_path / "repo"
+    source.mkdir()
+    (source / "train.py").write_text("print(1)\n")
+    (source / "environment.yml").write_text(
+        "name: d\ndependencies:\n  - python=3.8.10=x\n  - jsonschema=3.2.0=py_0\n  - pyrsistent=0.17.3=py38_0\n")
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    staged = stager.stage_repository(paper_id="gap", source=str(source))
+    bundle = stager.staging_root / "gap_packages"
+
+    def fake_run(cmd, **kwargs):
+        if "--no-deps" in cmd:
+            missing = cmd[-1].startswith("pyrsistent")
+            if not missing:
+                (bundle / "jsonschema-3.2.0-py2.py3-none-any.whl").write_text("w")
+            return subprocess.CompletedProcess(cmd, 1 if missing else 0, "", "ERROR: No matching distribution" if missing else "")
+        (bundle / "pyrsistent-0.20.0-cp38-cp38-manylinux_2_17_x86_64.whl").write_text("w")  # the resolver pass
+        return subprocess.CompletedProcess(cmd, 0, "", "")
+
+    monkeypatch.setattr("src.sandbox.stager.subprocess.run", fake_run)
+    result = stager.bundle_dependencies(staged, python_version="3.8")
+    assert result["conda_only"] == [{"requirement": "pyrsistent==0.17.3", "reason": "ERROR: No matching distribution"}]
+    assert result["gap_fill"] == {"status": "SUCCESS", "added": ["pyrsistent-0.20.0-cp38-cp38-manylinux_2_17_x86_64.whl"]}
+    assert result["wheel_count"] == 2
+
+
+def test_a_failed_gap_fill_is_reported_and_adds_nothing(tmp_path, monkeypatch):
+    source = tmp_path / "repo"
+    source.mkdir()
+    (source / "train.py").write_text("print(1)\n")
+    (source / "environment.yml").write_text("name: d\ndependencies:\n  - python=3.8.10=x\n  - numpy=1.20.2=py38_0\n")
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    staged = stager.stage_repository(paper_id="gapfail", source=str(source))
+    monkeypatch.setattr("src.sandbox.stager.subprocess.run", lambda cmd, **kw: subprocess.CompletedProcess(
+        cmd, 0 if "--no-deps" in cmd else 1, "", "" if "--no-deps" in cmd else "ERROR: ResolutionImpossible"))
+    result = stager.bundle_dependencies(staged, python_version="3.8")
+    assert result["gap_fill"] == {"status": "FAILED", "added": [], "error": "ERROR: ResolutionImpossible"}
+
+
+def test_python_graphviz_is_pypi_graphviz_and_the_conda_c_tool_is_skipped(tmp_path):
+    env = tmp_path / "environment.yml"
+    env.write_text("name: d\ndependencies:\n  - graphviz=7.1.0=h2e5815a_0\n  - python-graphviz=0.20.1=pyh22cad53_0\n",
+                   encoding="utf-8")
+    result = convert_env_file(env)
+    assert result.requirements == ["graphviz==0.20.1"]
+    assert any(item["package"].startswith("graphviz=7.1.0") for item in result.skipped)
