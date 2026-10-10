@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from src.config import PROJECT_ROOT
 from src.sandbox import runner as runner_module
 from src.sandbox.runner import (
     DockerSandboxRunner,
@@ -366,3 +367,10 @@ def test_python_version_selects_the_image_and_site_packages():
     assert SandboxConfig(python_version="3.8", image_name="custom:tag").image_name == "custom:tag"
     with pytest.raises(ValueError, match="no sandbox image for Python 3.7"):
         SandboxConfig(python_version="3.7")
+
+
+def test_container_scripts_keep_lf_line_endings():
+    """A CRLF entrypoint fails in the Linux container with `env: 'bash\r': No such file or directory` (#211)."""
+    for name in ("docker/entrypoint.sh", "docker/Dockerfile.sandbox"):
+        assert b"\r\n" not in (PROJECT_ROOT / name).read_bytes(), f"{name} has CRLF line endings"
+    assert "*.sh text eol=lf" in (PROJECT_ROOT / ".gitattributes").read_text(encoding="utf-8")

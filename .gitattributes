@@ -1,0 +1,4 @@
+# Files copied into Linux containers must keep LF line endings on every platform (a CRLF "bash" shebang
+# fails at container start; found on a Windows checkout with core.autocrlf=true, Pilot 2 preparation).
+*.sh text eol=lf
+docker/Dockerfile* text eol=lf
