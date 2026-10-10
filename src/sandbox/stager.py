@@ -24,10 +24,13 @@ from src.sandbox.runner import (
     DockerSandboxRunner,
     SandboxConfig,
     SandboxExecutionResult,
+    image_for,
 )
 from src.sandbox.sdist import download_sdist
 
 logger = logging.getLogger(__name__)
+
+DOCKER_USER_ID = 1000  # the sandbox user (docker/Dockerfile.sandbox)
 
 DEFAULT_STAGING_DIR = Path(".sandbox_staging")
 DEFAULT_CANDIDATE_SCRIPTS = [
@@ -92,9 +95,13 @@ class RepoStager:
     bundles wheels for offline execution, and runs them inside the sandbox.
     """
 
-    def __init__(self, staging_root: str | Path | None = None):
+    def __init__(self, staging_root: str | Path | None = None, bundle_in_docker: bool = False):
         self.staging_root = Path(staging_root or DEFAULT_STAGING_DIR).resolve()
         self.staging_root.mkdir(parents=True, exist_ok=True)
+        # Run `pip download` inside the paper's sandbox image instead of on the host (#215): pip evaluates
+        # environment markers (platform_system, python_version) where it runs, so only the container gives the
+        # right answer for the sandbox's Linux and Python. Binary wheels only: no package code runs.
+        self.bundle_in_docker = bundle_in_docker
 
     def is_git_url(self, source: str) -> bool:
         """Determine whether source string is a remote Git repository URL."""
@@ -292,7 +299,7 @@ class RepoStager:
         cmd.extend(extra_requirements or [])
 
         try:
-            res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+            res = self._run_pip(cmd, timeout)
             needs_sdist_build: list[dict[str, str]] = []
             if res.returncode != 0:
                 needs_sdist_build = self._find_requirements_without_wheels(req_paths, bundle_dir, timeout, python_version)
@@ -340,7 +347,7 @@ class RepoStager:
         for requirement in requirements:
             cmd = self._pip_download_command(bundle_dir, python_version) + (options or []) + ["--no-deps", requirement]
             try:
-                res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+                res = self._run_pip(cmd, timeout)
             except (subprocess.SubprocessError, OSError) as exc:
                 conda_only.append({"requirement": requirement, "reason": str(exc)})
                 continue
@@ -395,7 +402,7 @@ class RepoStager:
             return report
         cmd = self._pip_download_command(bundle_dir, python_version) + options + list(extra_requirements)
         try:
-            res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+            res = self._run_pip(cmd, timeout)
             ok = res.returncode == 0
             reason = "" if ok else ((res.stderr or "").strip().splitlines() or [f"pip exited {res.returncode}"])[-1]
         except (subprocess.SubprocessError, OSError) as exc:
@@ -420,7 +427,7 @@ class RepoStager:
         build_requirements = list(build.get("build_requirements", []))
         if build_requirements:
             cmd = self._pip_download_command(inputs, config.python_version) + build_requirements
-            res = subprocess.run(cmd, capture_output=True, text=True, timeout=600, check=False)
+            res = self._run_pip(cmd, 600)
             if res.returncode != 0:
                 return {"status": "FAILED", "stage": "download build requirements",
                         "error": (res.stderr or "").strip()[-1000:]}
@@ -438,6 +445,56 @@ class RepoStager:
         staged.built_dir = built
         result["sdists"] = [p.name for p in sdists]
         return result
+
+    def _run_pip(self, cmd: list[str], timeout: int) -> subprocess.CompletedProcess:
+        """Run a `pip download` command: on the host, or inside the paper's sandbox image (`bundle_in_docker`)."""
+        if self.bundle_in_docker:
+            cmd = self._docker_pip_command(cmd)
+        return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+
+    def _docker_pip_command(self, cmd: list[str]) -> list[str]:
+        """Rewrite a host `pip download` command to run inside the sandbox image of its Python version (#215).
+
+        The host's interpreter and the platform flags are dropped (the container is the target, so pip picks its own
+        tags and evaluates markers for it), and the paths of the staging directory are mapped to /staging. The
+        container has the network on for this step only, runs as the sandbox user, and downloads binary wheels only.
+        """
+        python_version = DEFAULT_PYTHON_VERSION
+        args: list[str] = []
+        skip_next = False
+        translate_next = False
+        for i, arg in enumerate(cmd[4:], start=4):  # cmd[:4] is [python, -m, pip, download]
+            if skip_next:
+                skip_next = False
+                continue
+            if arg in ("--platform", "--implementation"):
+                skip_next = True
+                continue
+            if arg == "--python-version":
+                python_version = cmd[i + 1]
+                skip_next = True
+                continue
+            if translate_next:
+                arg = self._to_container_path(arg)
+                translate_next = False
+            elif arg in ("-d", "-r", "-c", "--find-links"):
+                translate_next = True
+            args.append(arg)
+        self.staging_root.chmod(0o777)  # written by the sandbox user (uid 1000) on hosts with another uid
+        return [
+            "docker", "run", "--rm", "--user", f"{DOCKER_USER_ID}:{DOCKER_USER_ID}",
+            "--security-opt", "no-new-privileges:true",
+            "-v", f"{self.staging_root}:/staging", "-w", "/staging",
+            "-e", "PIP_CACHE_DIR=/staging/.pip-cache", "-e", "PIP_DISABLE_PIP_VERSION_CHECK=1",
+            "--entrypoint", "python", image_for(python_version), "-m", "pip", "download", *args,
+        ]
+
+    def _to_container_path(self, arg: str) -> str:
+        try:
+            relative = Path(arg).resolve().relative_to(self.staging_root)
+        except ValueError as exc:
+            raise ValueError(f"path outside the staging directory cannot be used in the bundling container: {arg}") from exc
+        return "/staging/" + relative.as_posix() if relative.parts else "/staging"
 
     @staticmethod
     def _pip_download_command(bundle_dir: Path, python_version: str = DEFAULT_PYTHON_VERSION) -> list[str]:
@@ -466,7 +523,7 @@ class RepoStager:
             for requirement in self._requirement_lines(req_path):
                 probe = self._pip_download_command(bundle_dir, python_version) + ["--no-deps", requirement]
                 try:
-                    res = subprocess.run(probe, capture_output=True, text=True, timeout=timeout, check=False)
+                    res = self._run_pip(probe, timeout)
                 except (subprocess.SubprocessError, OSError) as exc:
                     flagged.append({"requirement": requirement, "status": "NEEDS_SDIST_BUILD", "reason": str(exc)})
                     continue

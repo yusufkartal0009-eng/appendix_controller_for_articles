@@ -176,3 +176,38 @@ def test_bundle_passes_extras_constraints_and_built_wheels(tmp_path, monkeypatch
     assert (tmp_path / "staging" / "p_packages" / "fastsk-0.0.2-cp38-cp38-linux_x86_64.whl").exists()
     assert report["built_wheels"] == ["fastsk-0.0.2-cp38-cp38-linux_x86_64.whl"]
     assert report["constraints"] == ["pandas==1.2.4"]
+
+
+def test_bundling_in_docker_runs_pip_in_the_target_image(tmp_path, monkeypatch):
+    """#215: pip must evaluate environment markers for the sandbox's Linux and Python, not the host's."""
+    stager = RepoStager(staging_root=tmp_path / "staging", bundle_in_docker=True)
+    bundle = stager.staging_root / "p_packages"
+    req = stager.staging_root / "p" / "requirements.txt"
+    cons = stager.staging_root / "p_constraints.txt"
+    host = stager._pip_download_command(bundle, "3.8") + ["-c", str(cons), "-r", str(req), "--find-links",
+                                                          str(stager.staging_root / "p_built"), "torch>=1.4.0"]
+    cmd = stager._docker_pip_command(host)
+    assert cmd[:3] == ["docker", "run", "--rm"] and "--entrypoint" in cmd
+    assert cmd[cmd.index("--entrypoint") + 1:cmd.index("--entrypoint") + 6] == ["python", "repro-radar-sandbox:py3.8", "-m", "pip", "download"]
+    tail = cmd[cmd.index("download") + 1:]
+    assert tail == ["-d", "/staging/p_packages", "--only-binary=:all:", "-c", "/staging/p_constraints.txt",
+                    "-r", "/staging/p/requirements.txt", "--find-links", "/staging/p_built", "torch>=1.4.0"]
+    for dropped in ("--platform", "--python-version", "--implementation", "manylinux2014_x86_64", "cp"):
+        assert dropped not in cmd
+    assert f"{stager.staging_root}:/staging" in cmd and "no-new-privileges:true" in cmd
+    assert cmd[cmd.index("--user") + 1] == "1000:1000"
+    assert "--network" not in cmd  # the network is on for this one step (wheels only)
+
+
+def test_bundling_in_docker_refuses_paths_outside_the_staging_directory(tmp_path):
+    stager = RepoStager(staging_root=tmp_path / "staging", bundle_in_docker=True)
+    with pytest.raises(ValueError, match="outside the staging directory"):
+        stager._docker_pip_command(stager._pip_download_command(tmp_path / "elsewhere", "3.11"))
+
+
+def test_host_bundling_stays_the_default(tmp_path, monkeypatch):
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    seen = []
+    monkeypatch.setattr(stager_module.subprocess, "run", lambda cmd, **k: seen.append(cmd) or SimpleNamespace(returncode=0, stdout="", stderr=""))
+    stager._run_pip(stager._pip_download_command(tmp_path, "3.8"), 10)
+    assert seen[0][1:4] == ["-m", "pip", "download"] and "--platform" in seen[0]

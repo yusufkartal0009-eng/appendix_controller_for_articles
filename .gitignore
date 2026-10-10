@@ -94,3 +94,6 @@ data/llm_cache/
 
 # Host data cache of the run setups (#166; scripts/fetch_data.py)
 .data_cache/
+
+# Cloned paper repositories and downloaded wheels of the pilot runs
+.sandbox_staging/

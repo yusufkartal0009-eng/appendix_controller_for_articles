@@ -153,7 +153,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     sandbox_dir = SANDBOX_RUNS_DIR / paper_id
     build_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
     record_dir = PILOT2_RUNS_DIR / paper_id if pilot2 else sandbox_dir
-    stager = stager or RepoStager(staging_root=staging_dir)
+    # Pilot 2 bundles inside the paper's sandbox image, so pip evaluates markers for Linux and the paper's Python (#215)
+    stager = stager or RepoStager(staging_root=staging_dir, bundle_in_docker=pilot2)
     record: dict[str, Any] = {
         "paper_id": paper_id,
         "protocol": "docs/PILOT_2.md" if pilot2 else "docs/PILOT_WEEK2.md",

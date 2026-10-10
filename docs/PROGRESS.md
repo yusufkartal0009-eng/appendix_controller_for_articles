@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 318 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 321 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Bundling Inside the Sandbox Image (found by the first Pilot 2 attempt) (2026-10-10 14:49 +03:00, Issue #215)
+- First Pilot 2 attempt on the owner's Windows machine (`paper_008`, kept in `data/pilot2_runs/first_attempts/paper_008_attempt1/`): the install phase failed with `Could not find a version that satisfies the requirement cuda-toolkit==13.0.3; platform_system == "Linux"`. Host-side `pip download` evaluated environment markers for Windows and the host's Python, not the sandbox's. With `RepoStager(bundle_in_docker=True)` (used by `run_pilot.py --pilot2`) the download runs inside the paper's sandbox image (binary wheels only), and the bundle for `paper_008` went from 34 to 52 wheels, now including `cuda_toolkit-13.0.3.0`. Pilot 1's mode and the host path are unchanged. `.sandbox_staging/` is git-ignored.
 
 ### Pilot 2 Environment and the Real GPU Check (2026-10-10 14:30 +03:00, Issues #213 and #169)
 - `scripts/record_pilot2_environment.py` wrote `data/pilot2_runs/environment.txt` from command output (commit, `docker version` and `info`, `nvidia-smi`, `gpu_check.py`, images, disk). On this machine `gpu_check.py` showed the RTX 5070 (driver 591.86) inside the sandbox container with uid 1000, the network blocked, and a read-only root: `GPU visible with isolation intact: YES`. `data/pilot2_runs/` is no longer git-ignored, so the Pilot 2 evidence can be committed.
