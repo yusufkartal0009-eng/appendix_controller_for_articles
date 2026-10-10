@@ -94,3 +94,12 @@ def test_comparison_of_the_stored_pilot_1_with_itself_matches_the_pilot_1_report
     result = pilot_compare.compare(runs, runs)
     assert result["rates"]["pilot_success_rate"]["pilot1"] == {"count": 0, "of": 6, "rate": 0.0}
     assert result["rates"]["install_success_rate"]["pilot1"] == {"count": 1, "of": 6, "rate": 0.167}
+
+
+def test_a_paper_without_a_record_is_not_run_and_the_header_names_its_directory(tmp_path):
+    result = cat.categorize_paper("paper_004", tmp_path)
+    assert (result["category"], result["other_name"], result["pilot_success"]) == ("OTHER", "NOT_RUN", False)
+    runs = tmp_path / "pilot2_runs"
+    write_run(runs, "paper_005", build="FAILED")
+    assert "from data/pilot2_runs/;" in pm.to_markdown(pm.measure(runs))
+    assert "from data/pilot_runs/;" in pm.to_markdown(pm.measure(tmp_path))
