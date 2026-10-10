@@ -1,0 +1,183 @@
+{
+  "paper_id": "paper_005",
+  "source": "https://github.com/QData/FastSK",
+  "commit_hash": "d275a232cea129299021051cd6ac94d2296e83c8",
+  "target_script": "results/run_gridsearch.py",
+  "command": null,
+  "working_dir": "results",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.8",
+  "image": "repro-radar-sandbox:py3.8",
+  "status": "OOM_KILLED",
+  "exit_code": 137,
+  "duration_seconds": 465.776,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_005",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "OOM_KILLED",
+    "exit_code": 137,
+    "duration_seconds": 465.288,
+    "timeout_limit_seconds": 3600,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 6442450944,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "certifi",
+      "version": "2020.4.5.1"
+    },
+    {
+      "name": "fastsk",
+      "version": "0.0.2"
+    },
+    {
+      "name": "joblib",
+      "version": "0.14.1"
+    },
+    {
+      "name": "numpy",
+      "version": "1.20.3"
+    },
+    {
+      "name": "pandas",
+      "version": "1.2.4"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.8.1"
+    },
+    {
+      "name": "pytz",
+      "version": "2019.3"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "0.24.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.6.3"
+    },
+    {
+      "name": "six",
+      "version": "1.14.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.5.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.60.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "certifi==2020.4.5.1",
+      "name": "certifi",
+      "requested": "==2020.4.5.1",
+      "installed": "2020.4.5.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==0.14.1",
+      "name": "joblib",
+      "requested": "==0.14.1",
+      "installed": "0.14.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": "1.20.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas",
+      "name": "pandas",
+      "requested": "any",
+      "installed": "1.2.4",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "python-dateutil==2.8.1",
+      "name": "python-dateutil",
+      "requested": "==2.8.1",
+      "installed": "2.8.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2019.3",
+      "name": "pytz",
+      "requested": "==2019.3",
+      "installed": "2019.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn",
+      "name": "scikit-learn",
+      "requested": "any",
+      "installed": "0.24.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy",
+      "name": "scipy",
+      "requested": "any",
+      "installed": "1.6.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "six==1.14.0",
+      "name": "six",
+      "requested": "==1.14.0",
+      "installed": "1.14.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm",
+      "name": "tqdm",
+      "requested": "any",
+      "installed": "4.60.0",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo/results\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/results/run_gridsearch.py\n==================================================\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 4, k = 4, 547204 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 1 mismatch profiles using 1 threads...\nThread 0 finished in 1 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 4, k = 3, 547204 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 4 mismatch profiles using 1 threads...\nThread 0 finished in 4 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 5, k = 5, 543630 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 1 mismatch profiles using 1 threads...\nThread 0 finished in 1 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 5, k = 4, 543630 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 5 mismatch profiles using 1 threads...\nThread 0 finished in 5 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 5, k = 3, 543630 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 10 mismatch profiles using 1 threads...\nThread 0 finished in 10 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 6, k = 6, 540056 features\nInitializ",
+  "stderr_preview": ""
+}

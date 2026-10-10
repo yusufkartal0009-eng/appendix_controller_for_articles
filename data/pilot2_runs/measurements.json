@@ -1,0 +1,118 @@
+{
+  "protocol": "docs/PILOT_2.md",
+  "papers": [
+    {
+      "paper_id": "paper_002",
+      "valid_run": true,
+      "install_success": true,
+      "run_success": false,
+      "pilot_success": false,
+      "stage_status": "STAGED",
+      "dependency_install_status": "INSTALLED",
+      "run_status": "FAILED",
+      "exit_code": 1,
+      "install_seconds": 687.762,
+      "run_seconds": 38.147,
+      "run_peak_memory_mib": 475.5,
+      "install_peak_memory_mib": 87.6,
+      "build_status": "BUILT"
+    },
+    {
+      "paper_id": "paper_003",
+      "valid_run": true,
+      "install_success": true,
+      "run_success": false,
+      "pilot_success": false,
+      "stage_status": "STAGED",
+      "dependency_install_status": "INSTALLED",
+      "run_status": "FAILED",
+      "exit_code": 1,
+      "install_seconds": 1011.087,
+      "run_seconds": 14.995,
+      "run_peak_memory_mib": 355.8,
+      "install_peak_memory_mib": 169.1
+    },
+    {
+      "paper_id": "paper_004",
+      "valid_run": true,
+      "install_success": true,
+      "run_success": false,
+      "pilot_success": false,
+      "stage_status": "STAGED",
+      "dependency_install_status": "INSTALLED",
+      "run_status": "TIMEOUT",
+      "exit_code": 137,
+      "install_seconds": 1663.447,
+      "run_seconds": 3600.761,
+      "run_peak_memory_mib": 3953.0,
+      "install_peak_memory_mib": 190.1
+    },
+    {
+      "paper_id": "paper_005",
+      "valid_run": true,
+      "install_success": true,
+      "run_success": false,
+      "pilot_success": false,
+      "stage_status": "STAGED",
+      "dependency_install_status": "INSTALLED",
+      "run_status": "OOM_KILLED",
+      "exit_code": 137,
+      "install_seconds": 176.881,
+      "run_seconds": 469.451,
+      "run_peak_memory_mib": 6144.0,
+      "install_peak_memory_mib": 70.7,
+      "build_status": "BUILT"
+    },
+    {
+      "paper_id": "paper_006",
+      "valid_run": true,
+      "install_success": true,
+      "run_success": true,
+      "pilot_success": true,
+      "stage_status": "STAGED",
+      "dependency_install_status": "INSTALLED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "install_seconds": 563.184,
+      "run_seconds": 3122.657,
+      "run_peak_memory_mib": 664.2,
+      "install_peak_memory_mib": 79.1,
+      "build_status": "BUILT"
+    },
+    {
+      "paper_id": "paper_008",
+      "valid_run": true,
+      "install_success": true,
+      "run_success": false,
+      "pilot_success": false,
+      "stage_status": "STAGED",
+      "dependency_install_status": "INSTALLED",
+      "run_status": "FAILED",
+      "exit_code": 1,
+      "install_seconds": 734.835,
+      "run_seconds": 26.077,
+      "run_peak_memory_mib": 755.4,
+      "install_peak_memory_mib": 136.5
+    }
+  ],
+  "valid_runs": {
+    "count": 6,
+    "of": 6,
+    "rate": 1.0
+  },
+  "install_success_rate": {
+    "count": 6,
+    "of": 6,
+    "rate": 1.0
+  },
+  "run_success_rate": {
+    "count": 1,
+    "of": 6,
+    "rate": 0.167
+  },
+  "pilot_success_rate": {
+    "count": 1,
+    "of": 6,
+    "rate": 0.167
+  }
+}
