@@ -9,6 +9,7 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 
 - `pilot1`: Pilot 1 rates and failure categories (`data/pilot_runs/measurements.json`, `failure_categories.json`)
 - `pilot2`: Pilot 1 and Pilot 2 side by side (`data/pilot2_runs/comparison.json`, from scripts/pilot_compare.py)
+- `pilot2measurements`: the rates and the per-paper table of Pilot 2 (`data/pilot2_runs/measurements.md`)
 - `pilot2summary`: one sentence with the three rates of Pilot 2 next to Pilot 1's (`data/pilot2_runs/comparison.json`)
 - `pilot2failures`: per paper of Pilot 2, the failure category, the phase, and the deciding log line
   (`data/pilot2_runs/failure_categories.json`)
@@ -65,6 +66,15 @@ def pilot2_block(data: Path = DATA) -> str:
     return "\n".join([HEADER.format(sources="data/pilot2_runs/comparison.json (scripts/pilot_compare.py)"), "", body])
 
 
+def pilot2measurements_block(data: Path = DATA) -> str:
+    source = data / "pilot2_runs" / "measurements.md"
+    if not source.is_file():
+        raise FileNotFoundError(f"{source} not found")
+    lines = [line for line in source.read_text(encoding="utf-8").splitlines() if not line.startswith("<!--")]
+    header = HEADER.format(sources="data/pilot2_runs/measurements.md (scripts/pilot_measurements.py)")
+    return "\n".join([header, "", "\n".join(lines).strip()])
+
+
 def pilot2summary_block(data: Path = DATA) -> str:
     rates = _load(data / "pilot2_runs" / "comparison.json")["rates"]
 
@@ -111,7 +121,8 @@ def extraction_block(data: Path = DATA) -> str:
     return "\n".join(lines)
 
 
-BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2summary": pilot2summary_block,
+BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
+          "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "extraction": extraction_block}
 BLOCK_RE = re.compile(r"(<!-- numbers:(?P<name>[a-z0-9]+):start -->\n)(?P<body>.*?)(\n<!-- numbers:(?P=name):end -->)", re.DOTALL)
 

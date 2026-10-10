@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 347 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 348 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Report Block for the Pilot 2 Measurements Table (2026-10-10 21:03 +03:00, Issue #241)
+- `scripts/report_numbers.py` gained `pilot2measurements`: the rates and the per-paper table (times, peak memory, statuses) copied from `data/pilot2_runs/measurements.md`; a hand edit makes `--check` fail.
 
 ### Report Number Blocks for the Pilot 2 Summary and Failures (2026-10-10 21:02 +03:00, Issue #239)
 - `scripts/report_numbers.py` gained `pilot2summary` (one sentence with the three rates of Pilot 2 next to Pilot 1's) and `pilot2failures` (per paper: category, phase, and the deciding log line from `failure_categories.json`); a hand edit of either makes `--check` fail.
