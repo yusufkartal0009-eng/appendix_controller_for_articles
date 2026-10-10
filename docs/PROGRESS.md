@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 338 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 341 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Conda-only Bundles Get the Dependencies the Environment Did Not Provide (2026-10-10 16:33 +03:00, Issue #227)
+- Found by the Pilot 2 runs of the two conda-only papers: `paper_006` failed to install because `jsonschema` needs `pyrsistent` and the environment's `pyrsistent==0.17.3` has no wheel (first attempts kept in `data/pilot2_runs/first_attempts/`); `paper_004` because `catboost` needs the PyPI `graphviz` package, which conda calls `python-graphviz`. After the per-pin downloads, one resolver pass over the exact pins (binary wheels only) now adds the missing dependencies and lists them as `gap_fill` in the bundle report; `python-graphviz` maps to `graphviz` and conda's own `graphviz` (a C tool) is skipped.
 
 ### Conda Conversion Keeps setuptools, wheel, and certifi (2026-10-10 15:24 +03:00, Issue #225)
 - Found by the Pilot 2 run of `paper_006` (first attempt kept in `data/pilot2_runs/first_attempts/paper_006_attempt1/`): `openml` and `liac-arff` were built in the sandbox, but the offline install failed with `Could not find a version that satisfies the requirement setuptools>=18.5 (from ipython)`. `src/sandbox/conda_env.py` skipped `setuptools`, `wheel`, and `certifi`, which other packages require. They are now converted when the environment pins them; `python`, `pip`, and system libraries are still skipped.
