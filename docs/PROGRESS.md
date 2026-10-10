@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 331 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 337 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Pilot 2 Driver Passes the Extra Requirements to the Install Phase (2026-10-10 15:17 +03:00, Issue #223)
+- Found by the Pilot 2 run of `paper_005` (first attempt kept in `data/pilot2_runs/first_attempts/paper_005_attempt1/`): the `fastsk` wheel was built in the sandbox and bundled, but never installed, so the run stopped with `ModuleNotFoundError: No module named 'fastsk'`. `run_paper(pilot2=True)` gave `extra_requirements` to the bundling step but not to `SandboxConfig`. It does now (also `paper_002`'s `nbconvert` and `ipykernel`).
 
 ### Report Numbers from a Script (2026-10-10 15:12 +03:00, Issue #221)
 - `scripts/report_numbers.py` renders the numbers of the final report from the stored files (blocks `pilot1`, `pilot2`, `extraction`); `--write` fills the `<!-- numbers:NAME:start/end -->` blocks of `docs/report/REPORT.md`, `--check` fails if one was edited by hand, and a test runs the check (AGENTS.md §6.5).

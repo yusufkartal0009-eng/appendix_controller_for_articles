@@ -210,7 +210,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
                                ("command", "working_dir", "writable_repo", "extra_requirements", "constraints", "build")}
         record["run_setup"]["decision"] = run_setup_of(entry)["decision"]
         record["run_setup"]["data_mounts"] = sorted(setup_options["data_mounts"])
-        config_extra = {k: setup_options[k] for k in ("working_dir", "writable_repo", "data_mounts", "writable_data")}
+        config_extra = {k: setup_options[k] for k in
+                        ("working_dir", "writable_repo", "data_mounts", "writable_data", "extra_requirements")}
         bundle_extra = {"extra_requirements": setup_options["extra_requirements"],
                         "constraints": setup_options["constraints"]}
         command = setup_options["command"]
