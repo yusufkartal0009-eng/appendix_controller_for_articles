@@ -393,3 +393,34 @@ def test_run_report_compares_requested_and_installed_versions(tmp_path, monkeypa
     assert rows["torch"]["installed"] == "2.7.1" and rows["torch"]["satisfied"] is True
     assert rows["numpy"]["satisfied"] is False
     assert {"name": "torch", "version": "2.7.1"} in report["installed_packages"]
+
+
+def test_remove_tree_deletes_read_only_files(tmp_path):
+    """#217: git's pack files are read-only, and shutil.rmtree fails on them on Windows."""
+    import os
+    import stat
+
+    from src.sandbox.stager import remove_tree
+
+    pack = tmp_path / "clone" / ".git" / "objects" / "pack"
+    pack.mkdir(parents=True)
+    for name in ("a.idx", "a.pack"):
+        (pack / name).write_text("x")
+        os.chmod(pack / name, stat.S_IREAD)
+    remove_tree(tmp_path / "clone")
+    assert not (tmp_path / "clone").exists()
+
+
+def test_stage_repository_replaces_an_earlier_read_only_clone(tmp_path):
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "run.py").write_text("print('x')\n")
+    stager = RepoStager(staging_root=tmp_path / "staging")
+    first = stager.stage_repository(paper_id="p", source=str(source))
+    import os
+    import stat
+    readonly = first.staged_path / "readonly.txt"
+    readonly.write_text("x")
+    os.chmod(readonly, stat.S_IREAD)
+    second = stager.stage_repository(paper_id="p", source=str(source))
+    assert (second.staged_path / "run.py").exists() and not (second.staged_path / "readonly.txt").exists()

@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 from dataclasses import dataclass, field
@@ -31,6 +33,18 @@ from src.sandbox.sdist import download_sdist
 logger = logging.getLogger(__name__)
 
 DOCKER_USER_ID = 1000  # the sandbox user (docker/Dockerfile.sandbox)
+
+
+def remove_tree(path: str | Path) -> None:
+    """Delete a directory tree, also on Windows, where git's pack files are read-only (#217).
+
+    `shutil.rmtree` stops with `[WinError 5] Access denied` on them; clearing the read-only bit and retrying fixes it.
+    """
+    def clear_and_retry(func, failed_path, _exc_info):
+        os.chmod(failed_path, stat.S_IWRITE)
+        func(failed_path)
+
+    shutil.rmtree(path, onerror=clear_and_retry)
 
 DEFAULT_STAGING_DIR = Path(".sandbox_staging")
 DEFAULT_CANDIDATE_SCRIPTS = [
@@ -121,7 +135,7 @@ class RepoStager:
         """Clone remote git repo or copy local directory into an isolated staging directory."""
         target_dir = self.staging_root / paper_id
         if clean and target_dir.exists():
-            shutil.rmtree(target_dir)
+            remove_tree(target_dir)
         target_dir.mkdir(parents=True, exist_ok=True)
 
         commit_hash = "unknown"
@@ -421,7 +435,7 @@ class RepoStager:
         """
         inputs = self.staging_root / f"{staged.paper_id}_build_inputs"
         if inputs.exists():
-            shutil.rmtree(inputs)
+            remove_tree(inputs)
         inputs.mkdir(parents=True)
         sdists = [download_sdist(req, inputs) for req in build.get("sdists", [])]
         build_requirements = list(build.get("build_requirements", []))
@@ -438,7 +452,7 @@ class RepoStager:
             staged.paper_id, staged.staged_path, inputs, targets, build_requirements, bool(build.get("from_repo")))
         built = self.staging_root / f"{staged.paper_id}_built"
         if built.exists():
-            shutil.rmtree(built)
+            remove_tree(built)
         built.mkdir(parents=True)
         for wheel in result["wheels"]:
             shutil.copy2(wheel, built / Path(wheel).name)

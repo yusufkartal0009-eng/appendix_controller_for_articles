@@ -40,7 +40,7 @@ if str(project_root) not in sys.path:
 from src.config import DATA_CACHE_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
 from src.sandbox.run_setup import run_setup_of, sandbox_options
 from src.sandbox.runner import DEFAULT_PYTHON_VERSION, SandboxConfig
-from src.sandbox.stager import RepoStager
+from src.sandbox.stager import RepoStager, remove_tree
 
 # docs/PILOT_2.md section 6: where a Pilot 2 run's files are collected (#207). The sandbox and stager are
 # shared with Pilot 1 and real-Docker CI and are not changed to write here directly.
@@ -153,6 +153,16 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     sandbox_dir = SANDBOX_RUNS_DIR / paper_id
     build_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
     record_dir = PILOT2_RUNS_DIR / paper_id if pilot2 else sandbox_dir
+    if pilot2:
+        # An earlier attempt is evidence (docs/PILOT_2.md section 9) and is never overwritten (#217); and the
+        # sandbox directories are cleared so that collected files can only come from this run.
+        if record_dir.exists() and any(record_dir.iterdir()):
+            raise FileExistsError(
+                f"{record_dir} already holds an earlier attempt; move it to {PILOT2_RUNS_DIR / 'first_attempts'} "
+                "(kept as evidence) before running again")
+        for stale in (sandbox_dir, build_dir):
+            if stale.exists():
+                remove_tree(stale)
     # Pilot 2 bundles inside the paper's sandbox image, so pip evaluates markers for Linux and the paper's Python (#215)
     stager = stager or RepoStager(staging_root=staging_dir, bundle_in_docker=pilot2)
     record: dict[str, Any] = {
