@@ -1,0 +1,239 @@
+Pilot 2 environment, recorded 2026-10-10T11:30:16+00:00 by scripts/record_pilot2_environment.py
+
+=== git rev-parse HEAD
+705e6506b046874ed63669f6320dea87d51329c6
+[exit code 0]
+
+=== git status --short
+A  scripts/record_pilot2_environment.py
+[exit code 0]
+
+=== docker version
+Client:
+ Version:           29.8.2
+ API version:       1.56
+ Go version:        go1.26.8
+ Git commit:        7fc2dff
+ Built:             Wed Sep 30 19:35:42 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.94.0 (241994)
+ Engine:
+  Version:          29.8.2
+  API version:      1.56 (minimum version 1.40)
+  Go version:       go1.26.8
+  Git commit:       8af9fe3
+  Built:            Wed Sep 30 19:32:25 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.3.6
+  GitCommit:        ee2735368117d2eb259779949d5e75cdafec9761
+ runc:
+  Version:          1.5.1
+  GitCommit:        v1.5.1-0-g8f2685a4
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+[exit code 0]
+
+=== docker info
+Client:
+ Version:    29.8.2
+ Context:    desktop-linux
+ Debug Mode: false
+ Plugins:
+  agent: Docker AI Agent Runner (Docker Inc.)
+    Version:  v1.144.0
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-agent.exe
+  ai: Docker AI Agent - Ask Gordon (Docker Inc.)
+    Version:  v1.31.0
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-ai.exe
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.37.2
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-buildx.exe
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.5.1
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-compose.exe
+  debug: Get a shell into any image or container (Docker Inc.)
+    Version:  0.0.47
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-debug.exe
+  desktop: Docker Desktop commands (Docker Inc.)
+    Version:  v0.4.4
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-desktop.exe
+  dhi: CLI for managing Docker Hardened Images (Docker Inc.)
+    Version:  v0.0.7
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-dhi.exe
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.31
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-extension.exe
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.4.0
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-init.exe
+  mcp: Docker MCP Plugin (Docker Inc.)
+    Version:  v0.44.1
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-mcp.exe
+  model: Docker Model Runner (Docker Inc.)
+    Version:  v1.2.6
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-model.exe
+  offload: Docker Offload (Docker Inc.)
+    Version:  v0.6.53
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-offload.exe
+  pass: Docker Pass Secrets Manager Plugin (beta) (Docker Inc.)
+    Version:  v0.2.4
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-pass.exe
+  sandbox: "docker sandbox" is deprecated, use Docker Sandboxes instead (Docker Inc.)
+    Version:  v0.13.0
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-sandbox.exe
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.25.0
+    Path:     C:\Users\USER\.docker\cli-plugins\docker-scout.exe
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 7
+ Server Version: 29.8.2
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: local
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Discovered Devices:
+  cdi: docker.com/gpu=webgpu
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 nvidia runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: ee2735368117d2eb259779949d5e75cdafec9761
+ runc version: v1.5.1-0-g8f2685a4
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.18.40.1-microsoft-standard-WSL2
+ Operating System: Docker Desktop (containerized)
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 12
+ Total Memory: 15.48GiB
+ Name: docker-desktop
+ ID: bd475756-1450-4726-bc3a-838fbc97c6bf
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ HTTP Proxy: http.docker.internal:3128
+ HTTPS Proxy: http.docker.internal:3128
+ No Proxy: hubproxy.docker.internal
+ Labels:
+  com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+ Experimental: false
+ Insecure Registries:
+  hubproxy.docker.internal:5555
+  127.0.0.0/8
+  ::1/128
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+[exit code 0]
+
+=== nvidia-smi
+Sat Oct 10 14:30:17 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 591.86                 Driver Version: 591.86         CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070      WDDM  |   00000000:01:00.0  On |                  N/A |
+|  0%   40C    P5             15W /  250W |    1607MiB /  12227MiB |      1%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            7140    C+G   ...t\Edge\Application\msedge.exe      N/A      |
+|    0   N/A  N/A            9612    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           10188    C+G   C:\Windows\explorer.exe               N/A      |
+|    0   N/A  N/A           10512    C+G   ...2txyewy\CrossDeviceResume.exe      N/A      |
+|    0   N/A  N/A           10968    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
+|    0   N/A  N/A           11284    C+G   ...y\StartMenuExperienceHost.exe      N/A      |
+|    0   N/A  N/A           12280    C+G   ...xyewy\ShellExperienceHost.exe      N/A      |
+|    0   N/A  N/A           12568    C+G   ...5n1h2txyewy\TextInputHost.exe      N/A      |
+|    0   N/A  N/A           13576    C+G   ...Lab\Kaspersky 21.26\avpui.exe      N/A      |
+|    0   N/A  N/A           13804    C+G   ....0.4258.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           15940    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           15952    C+G   ...zer Central\Razer Central.exe      N/A      |
+|    0   N/A  N/A           17004    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           17272    C+G   ...0.311.0.6\OverwolfBrowser.exe      N/A      |
+|    0   N/A  N/A           17468    C+G   ...\cef.win64\steamwebhelper.exe      N/A      |
+|    0   N/A  N/A           18128    C+G   ...A Desktop\EACefSubProcess.exe      N/A      |
+|    0   N/A  N/A           18644    C+G   ...6106\EA Desktop\EADesktop.exe      N/A      |
+|    0   N/A  N/A           20456    C+G   ...s\Win64\EpicGamesLauncher.exe      N/A      |
+|    0   N/A  N/A           21064    C+G   ...aude\app-2.31226.1\claude.exe      N/A      |
+|    0   N/A  N/A           21524    C+G   ...aries\Win64\EpicWebHelper.exe      N/A      |
+|    0   N/A  N/A           23516    C+G   ...ayRenderer-Win64-Shipping.exe      N/A      |
+|    0   N/A  N/A           23836    C+G   ...aude\app-2.31226.1\claude.exe      N/A      |
+|    0   N/A  N/A           24492    C+G   ...64__zpdnekdrzrea0\Spotify.exe      N/A      |
+|    0   N/A  N/A           24720    C+G   ....0.4258.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           25572    C+G   ...yb3d8bbwe\WindowsTerminal.exe      N/A      |
+|    0   N/A  N/A           26372    C+G   ...4__8wekyb3d8bbwe\ms-teams.exe      N/A      |
+|    0   N/A  N/A           26844    C+G   ...eForge Windows\CurseForge.exe      N/A      |
+|    0   N/A  N/A           27444    C+G   ...p\frontend\Docker Desktop.exe      N/A      |
+|    0   N/A  N/A           27852    C+G   ...erwolf\0.311.0.6\Overwolf.exe      N/A      |
+|    0   N/A  N/A           31444    C+G   ...t\Edge\Application\msedge.exe      N/A      |
+|    0   N/A  N/A           32052    C+G   ...1g1gvanyjgm\WhatsApp.Root.exe      N/A      |
+|    0   N/A  N/A           32988    C+G   ...L\wslsettings\wslsettings.exe      N/A      |
+|    0   N/A  N/A           33872    C+G   ....0.4258.62\msedgewebview2.exe      N/A      |
++-----------------------------------------------------------------------------------------+
+[exit code 0]
+
+=== python scripts/gpu_check.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --gpus all -e SANDBOX_GPUS_REQUESTED=1 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_WORKDIR=/workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v C:\Users\USER\AppData\Local\Temp\gpu_check_repo_pcqaqscs:/workspace/repo:ro -v C:\Users\USER\appendix_controller_for_articles\sandbox_runs\gpu_check:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_gpu.py
+==================================================
+Repro Radar: Isolated Sandbox Runtime Initiated
+Working Dir   : /workspace/repo
+Timeout Limit : 120s
+Security Mode : Unprivileged (UID: 1000)
+Network State : Isolated (--network none)
+Command       : python /workspace/repo/probe_gpu.py
+==================================================
+nvidia-smi: NVIDIA GeForce RTX 5070, 591.86, 12227 MiB
+uid=1000 gid=1000
+network: blocked (Network is unreachable)
+root filesystem: read-only (Read-only file system)
+==================================================
+Repro Radar: Execution Concluded
+Status        : COMPLETED (Exit Code: 0)
+Dependencies  : SKIPPED
+Duration      : 0.252s
+==================================================
+run report GPU summary: {"requested": "all", "available": true, "devices": [{"index": 0, "name": "NVIDIA GeForce RTX 5070", "driver": "591.86", "memory_total_mib": 12227, "memory_used_before_mib": 1607}], "peak_memory_used_mib": 1607, "used": false}
+GPU visible with isolation intact: YES
+[exit code 0]
+
+=== docker image ls repro-radar-sandbox
+IMAGE                             ID             DISK USAGE   CONTENT SIZE   EXTRA
+repro-radar-sandbox:build         930413cf1504       1.13GB          265MB        
+repro-radar-sandbox:latest        7a1da515568c        697MB          159MB        
+repro-radar-sandbox:py3.8         d9507fd5170a        629MB          145MB        
+repro-radar-sandbox:py3.8-build   dbe97eb1a4ca       1.07GB          251MB        
+repro-radar-sandbox:py3.9         ed5fdfb57517        676MB          155MB        
+repro-radar-sandbox:py3.9-build   e2a44bc651e5       1.14GB          270MB
+[exit code 0]
+
+=== disk usage of the drive holding the repository (shutil.disk_usage)
+total=999147171840 used=522017890304 free=477129281536

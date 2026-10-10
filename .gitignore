@@ -48,7 +48,6 @@ data/*.sqlite3
 # Repro Radar Sandboxes, Clones & Artifacts
 temp_clones/
 sandbox_runs/
-data/pilot2_runs/
 sandbox_deps/
 artifacts/
 benchmarks_cache/
