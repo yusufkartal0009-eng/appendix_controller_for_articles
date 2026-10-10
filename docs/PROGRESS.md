@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 341 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 354 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,24 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Pilot 2: Run, Evidence, and Report (2026-10-10 21:49 +03:00, Issue #171)
+- Pilot 2 ran on the owner's machine in real Docker (Docker Desktop, WSL2) per `docs/PILOT_2.md`, GPU off. Records and the earlier attempts are in `data/pilot2_runs/`; the report is section 12 of `docs/PILOT_2.md`, with every number a generated block (`scripts/report_numbers.py`, checked by a test). Result: install success 6 / 6 (Pilot 1: 1 / 6), run success 1 / 6 (0 / 6), pilot success 1 / 6 (0 / 6; `paper_006`). The other five stopped at their own obstacles: an undeclared dependency (`paper_002`), a cache written into a read-only mount (`paper_003`), the time limit (`paper_004`), the memory limit (`paper_005`), and unpublished split files (`paper_008`). The earlier attempts were stopped by defects in Repro Radar (#211, #215, #217, #223, #225, #229, #231, #233, #243), each fixed in its own PR.
+
+### Failure Categorizer Ignores Terminal Colors (2026-10-10 21:46 +03:00, Issue #243)
+- `scripts/categorize_pilot_failures.py` strips ANSI color codes from log lines before classifying and quoting them. `paper_002`'s Jupyter traceback ends with a colored `ModuleNotFoundError` line, which was filed under `OTHER` instead of `MISSING_DEPENDENCY` (`docs/PILOT_2.md` section 7). Pilot 1's committed categories are unchanged.
+
+### Report Block for the Pilot 2 Measurements Table (2026-10-10 21:03 +03:00, Issue #241)
+- `scripts/report_numbers.py` gained `pilot2measurements`: the rates and the per-paper table (times, peak memory, statuses) copied from `data/pilot2_runs/measurements.md`; a hand edit makes `--check` fail.
+
+### Report Number Blocks for the Pilot 2 Summary and Failures (2026-10-10 21:02 +03:00, Issue #239)
+- `scripts/report_numbers.py` gained `pilot2summary` (one sentence with the three rates of Pilot 2 next to Pilot 1's) and `pilot2failures` (per paper: category, phase, and the deciding log line from `failure_categories.json`); a hand edit of either makes `--check` fail.
+
+### Index of the Earlier Pilot 2 Attempts (2026-10-10 20:50 +03:00, Issue #237)
+- `scripts/pilot2_attempts.py` writes `data/pilot2_runs/first_attempts/index.json` and `README.md` from the stored `pilot_record.json` and `run_report.json` of each earlier attempt (commit, stage, build, install, run, exit code), with the reason each was superseded taken from a hand-written `reasons.json` (an explanation and an issue number, not a result).
+
+### Pilot Tools Name Their Own Directory and Tolerate a Missing Record (2026-10-10 18:33 +03:00, Issue #235)
+- `pilot_measurements.py` writes the directory it read into the `measurements.md` header (Pilot 1's committed file keeps its text), and `categorize_pilot_failures.py` reports a paper without a record as `OTHER` / `NOT_RUN` instead of failing.
 
 ### Conda faiss Maps to faiss-cpu (2026-10-10 18:01 +03:00, Issue #233)
 - Found by the Pilot 2 run of `paper_004` after its conda lock installed (1671 s): `import faiss` failed because the environment's CUDA build `faiss=1.7.2` was reported as conda-only. The CPU-only sandbox now gets PyPI `faiss-cpu` at the pinned version (`faiss-gpu` stays skipped). This is a substitution (CPU build for the CUDA build) and the report lists it.

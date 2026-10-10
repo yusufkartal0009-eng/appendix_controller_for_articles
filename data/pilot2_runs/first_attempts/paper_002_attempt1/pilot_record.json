@@ -1,0 +1,135 @@
+{
+  "paper_id": "paper_002",
+  "protocol": "docs/PILOT_2.md",
+  "repro_radar_commit": "ac3ba52418b3328051b0a2c220bd53eaf0878195",
+  "started_at": "2026-10-10T12:22:44+00:00",
+  "repo_url": "https://github.com/PriorLabs/TabPFN",
+  "pinned_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
+  "target_script": "tabpfn/scripts/tabular_baselines.py",
+  "container_command": "python -m nbconvert --to notebook --execute --output-dir /workspace/output /workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 28.789
+  },
+  "python_version": "3.8",
+  "run_setup": {
+    "command": [
+      "python",
+      "-m",
+      "nbconvert",
+      "--to",
+      "notebook",
+      "--execute",
+      "--output-dir",
+      "/workspace/output",
+      "/workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb"
+    ],
+    "working_dir": "tabpfn",
+    "writable_repo": true,
+    "extra_requirements": [
+      "nbconvert",
+      "ipykernel"
+    ],
+    "constraints": [],
+    "build": {
+      "sdists": [
+        "openml==0.12.2",
+        "liac-arff==2.5.0"
+      ],
+      "from_repo": false,
+      "build_requirements": [],
+      "source": "requirements.txt pins openml==0.12.2; it and its dependency liac-arff (2.5.0 is the newest release) exist on PyPI only as sdists (#193)"
+    },
+    "decision": "fix",
+    "data_mounts": [
+      "/workspace/home/.openml/cache"
+    ]
+  },
+  "build": {
+    "status": "BUILT",
+    "exit_code": 0,
+    "image": "repro-radar-sandbox:py3.8-build",
+    "targets": [
+      "/workspace/packages/openml-0.12.2.tar.gz",
+      "/workspace/packages/liac-arff-2.5.0.tar.gz"
+    ],
+    "build_requirements": [],
+    "wheels": [
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002.build\\built_wheels\\liac_arff-2.5.0-py3-none-any.whl",
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002.build\\built_wheels\\openml-0.12.2-py3-none-any.whl"
+    ],
+    "duration_seconds": 7.739,
+    "log_tail": "Looking in links: /workspace/packages\nProcessing /workspace/packages/openml-0.12.2.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nProcessing /workspace/packages/liac-arff-2.5.0.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nBuilding wheels for collected packages: openml, liac-arff\n  Building wheel for openml (setup.py): started\n  Building wheel for openml (setup.py): finished with status 'done'\n  Created wheel for openml: filename=openml-0.12.2-py3-none-any.whl size=137320 sha256=71a526bfa0ac119785e0164c7a8587c55828a5ae035e981b67c8822359858870\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-6oj01le6/wheels/f1/62/da/74958bd2ff962692b1857d3daa7a773481785f1d725956ad89\n  Building wheel for liac-arff (setup.py): started\n  Building wheel for liac-arff (setup.py): finished with status 'done'\n  Created wheel for liac-arff: filename=liac_arff-2.5.0-py3-none-any.whl size=11731 sha256=0bfb4a397565bf007cc5b7bd2c538644c2a43ac0154211de281214a5f91e2e94\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-6oj01le6/wheels/1b/e0/87/1886a1e3a038bf761cf3d29f6ed33c3107fbf4ae6d6b19ab03\nSuccessfully built openml liac-arff\n",
+    "sdists": [
+      "openml-0.12.2.tar.gz",
+      "liac-arff-2.5.0.tar.gz"
+    ],
+    "duration_seconds_total": 9.347
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.8",
+    "extra_requirements": [
+      "nbconvert",
+      "ipykernel"
+    ],
+    "constraints": [],
+    "built_wheels": [
+      "liac_arff-2.5.0-py3-none-any.whl",
+      "openml-0.12.2-py3-none-any.whl"
+    ],
+    "wheel_count": 101,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_002_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "",
+    "duration_seconds": 138.42
+  },
+  "sandbox_duration_seconds": 716.225,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 37.426,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 496447488
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 675.297,
+    "peak_memory_bytes": 92069888
+  },
+  "finished_at": "2026-10-10T12:37:37+00:00",
+  "collected_files": [
+    "build.log",
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

@@ -1,0 +1,17 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/certifi-2020.4.5.1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/joblib-0.14.1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/numpy-1.24.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/python_dateutil-2.8.1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/pytz-2019.3-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 6))
+Processing /workspace/packages/scikit_learn-0.24.2-cp38-cp38-manylinux2010_x86_64.whl (from -r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/scipy-1.6.3-cp38-cp38-manylinux1_x86_64.whl (from -r /workspace/repo/requirements.txt (line 8))
+Processing /workspace/packages/six-1.14.0-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 9))
+Processing /workspace/packages/tqdm-4.60.0-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 10))
+INFO: pip is looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+Processing /workspace/packages/pandas-1.2.4-cp38-cp38-manylinux1_x86_64.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/threadpoolctl-3.5.0-py3-none-any.whl (from scikit-learn->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/numpy-1.20.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (from -r /workspace/repo/requirements.txt (line 3))
+Installing collected packages: pytz, joblib, certifi, tqdm, threadpoolctl, six, numpy, scipy, python-dateutil, scikit-learn, pandas
+Successfully installed certifi-2020.4.5.1 joblib-0.14.1 numpy-1.20.3 pandas-1.2.4 python-dateutil-2.8.1 pytz-2019.3 scikit-learn-0.24.2 scipy-1.6.3 six-1.14.0 threadpoolctl-3.5.0 tqdm-4.60.0

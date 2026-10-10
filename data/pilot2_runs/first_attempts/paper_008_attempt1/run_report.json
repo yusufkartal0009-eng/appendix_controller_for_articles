@@ -1,0 +1,94 @@
+{
+  "paper_id": "paper_008",
+  "source": "https://github.com/WhatAShot/DANet",
+  "commit_hash": "b007c57121ec9082f6ef19ec7465d9df70767c26",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.674,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_008",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.164,
+    "timeout_limit_seconds": 3600,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 7688192,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch>=1.4.0",
+      "name": "torch",
+      "requested": ">=1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "category_encoders",
+      "name": "category_encoders",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "yacs",
+      "name": "yacs",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "tensorboard>=2.2.2",
+      "name": "tensorboard",
+      "requested": ">=2.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "qhoptim",
+      "name": "qhoptim",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py -c config/forest_cover_type.yaml -g \n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.164s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 1, in <module>\n    from DAN_Task import DANetClassifier, DANetRegressor\n  File \"/workspace/repo/DAN_Task.py\", line 1, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

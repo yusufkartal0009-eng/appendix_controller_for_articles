@@ -1,0 +1,82 @@
+{
+  "protocol": "docs/PILOT_2.md section 7",
+  "papers": [
+    {
+      "paper_id": "paper_002",
+      "category": "MISSING_DEPENDENCY",
+      "other_name": null,
+      "phase": "run",
+      "evidence": {
+        "file": "stderr.log",
+        "line_number": 91,
+        "line": "ModuleNotFoundError: No module named 'lightgbm'"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_003",
+      "category": "OTHER",
+      "other_name": "WRITE_TO_READ_ONLY_REPOSITORY",
+      "phase": "run",
+      "evidence": {
+        "file": "stderr.log",
+        "line_number": 8,
+        "line": "OSError: [Errno 30] Read-only file system: '/workspace/repo/data/california_housing/build_X__quantile__mean__new__indices__0.pickle'"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_004",
+      "category": "TIMEOUT",
+      "other_name": null,
+      "phase": "run",
+      "evidence": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: TIMEOUT"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_005",
+      "category": "OTHER",
+      "other_name": "OUT_OF_MEMORY",
+      "phase": "run",
+      "evidence": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OOM_KILLED"
+      },
+      "pilot_success": false
+    },
+    {
+      "paper_id": "paper_006",
+      "category": null,
+      "other_name": null,
+      "phase": null,
+      "evidence": null,
+      "pilot_success": true
+    },
+    {
+      "paper_id": "paper_008",
+      "category": "DATA_NOT_ACCESSIBLE",
+      "other_name": null,
+      "phase": "run",
+      "evidence": {
+        "file": "stderr.log",
+        "line_number": 26,
+        "line": "FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      },
+      "pilot_success": false
+    }
+  ],
+  "counts": {
+    "MISSING_DEPENDENCY": 1,
+    "DATA_NOT_ACCESSIBLE": 1,
+    "HARDWARE_GPU_REQUIRED": 0,
+    "TIMEOUT": 1,
+    "SCRIPT_NOT_FOUND": 0,
+    "LICENSE_BLOCKED": 0,
+    "OTHER": 2
+  }
+}

@@ -41,8 +41,14 @@ DATA_EXTENSIONS = (".csv", ".tsv", ".npy", ".npz", ".pkl", ".pickle", ".parquet"
                    ".zip", ".h5", ".hdf5", ".json", ".txt", ".svm", ".libsvm")
 
 
+ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")  # terminal colors, for example from a Jupyter traceback (#243)
+
+
 def _lines(path: Path) -> list[str]:
-    return path.read_text(encoding="utf-8", errors="replace").splitlines() if path.exists() else []
+    """The lines of a log file, without terminal color codes, so that they can be classified and quoted."""
+    if not path.exists():
+        return []
+    return [ANSI_RE.sub("", line) for line in path.read_text(encoding="utf-8", errors="replace").splitlines()]
 
 
 def _evidence(path: Path, line_no: int, line: str) -> dict[str, Any]:
@@ -86,11 +92,15 @@ def classify_exception(line: str) -> tuple[str, str | None]:
 
 def categorize_paper(paper_id: str, runs_dir: Path) -> dict[str, Any]:
     paper_dir = runs_dir / paper_id
+    result: dict[str, Any] = {"paper_id": paper_id, "category": None, "other_name": None, "phase": None,
+                              "evidence": None, "pilot_success": False}
+    if not (paper_dir / "pilot_record.json").is_file():
+        result.update(category="OTHER", other_name="NOT_RUN", phase="stage",
+                      evidence={"file": "pilot_record.json", "line_number": None, "line": "no pilot record exists for this paper"})
+        return result
     record = json.loads((paper_dir / "pilot_record.json").read_text(encoding="utf-8"))
     report_path = paper_dir / "run_report.json"
     report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else None
-    result: dict[str, Any] = {"paper_id": paper_id, "category": None, "other_name": None, "phase": None,
-                              "evidence": None, "pilot_success": False}
 
     stage = record.get("stage") or {}
     if stage.get("status") != "STAGED":

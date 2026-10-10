@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/workspace/repo/main.py", line 69, in <module>
+    X_train, y_train, X_valid, y_valid, X_test, y_test = get_data(train_config['dataset'])
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/data/dataset.py", line 214, in get_data
+    return forest_cover()
+           ^^^^^^^^^^^^^^
+  File "/workspace/repo/data/dataset.py", line 55, in forest_cover
+    data = pd.read_csv('./data/forest_cover_type/forest-cover-type.csv', header=None, names=feature)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 872, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 1643, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 1907, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/common.py", line 930, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'
