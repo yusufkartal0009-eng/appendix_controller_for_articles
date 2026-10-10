@@ -263,10 +263,13 @@ def test_pilot2_passes_the_command_extras_and_constraints(tmp_path, monkeypatch)
     run_pilot.run_paper("paper_002", tmp_path / "staging", stager=stager, pilot2=True,
                         data_cache=_cache_for(tmp_path, "paper_002"))
     assert stager.bundle_kwargs["extra_requirements"] == ["nbconvert", "ipykernel"]
+    # #223: the install phase gets them too, through the sandbox config (SANDBOX_EXTRA_REQUIREMENTS)
+    assert stager.executed[2].extra_requirements == ["nbconvert", "ipykernel"]
     assert stager.run_kwargs["command"][:4] == ["python", "-m", "nbconvert", "--to"]
     stager5 = Pilot2Stager(tmp_path / "p5")
     run_pilot.run_paper("paper_005", tmp_path / "staging5", stager=stager5, pilot2=True, data_cache=tmp_path)
     assert "pandas==1.2.4" in stager5.bundle_kwargs["constraints"]
+    assert stager5.executed[2].extra_requirements == ["fastsk==0.0.2"]  # #223: the built wheel is installed, not only bundled
     assert stager5.executed[2].working_dir == "results"
 
 

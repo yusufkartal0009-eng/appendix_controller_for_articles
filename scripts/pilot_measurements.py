@@ -29,7 +29,15 @@ def _load(path: Path) -> dict[str, Any] | None:
 
 
 def paper_measurement(paper_id: str, runs_dir: Path) -> dict[str, Any]:
-    """One paper's result under the protocol definitions (section 5)."""
+    """One paper's result under the protocol definitions (section 5). Pilot 2 records also carry `build_status`."""
+    result = _paper_measurement(paper_id, runs_dir)
+    build = (_load(runs_dir / paper_id / "pilot_record.json") or {}).get("build")
+    if build:  # only Pilot 2 has a build phase; Pilot 1's stored measurements stay byte for byte as they were
+        result["build_status"] = build.get("status")
+    return result
+
+
+def _paper_measurement(paper_id: str, runs_dir: Path) -> dict[str, Any]:
     paper_dir = runs_dir / paper_id
     record = _load(paper_dir / "pilot_record.json") or {}
     report = _load(paper_dir / "run_report.json")
@@ -86,7 +94,7 @@ def measure(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
         return {"count": count, "of": n, "rate": round(count / n, 3) if n else None}
 
     return {
-        "protocol": "docs/PILOT_WEEK2.md",
+        "protocol": "docs/PILOT_2.md" if "pilot2" in runs_dir.name else "docs/PILOT_WEEK2.md",
         "papers": papers,
         "valid_runs": rate("valid_run"),
         "install_success_rate": rate("install_success"),

@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 325 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 341 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,29 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Conda faiss Maps to faiss-cpu (2026-10-10 18:01 +03:00, Issue #233)
+- Found by the Pilot 2 run of `paper_004` after its conda lock installed (1671 s): `import faiss` failed because the environment's CUDA build `faiss=1.7.2` was reported as conda-only. The CPU-only sandbox now gets PyPI `faiss-cpu` at the pinned version (`faiss-gpu` stays skipped). This is a substitution (CPU build for the CUDA build) and the report lists it.
+
+### Writable Data Mounts Under the Sandbox Home Are Mounted Through Their Top-level Directory (2026-10-10 17:21 +03:00, Issue #231)
+- Found by the Pilot 2 run of `paper_006` after its install finally succeeded: `import openml` failed with `PermissionError: '/workspace/home/.openml/config'`. Docker created the missing parent `.openml` of the cache mount as root inside the home tmpfs, so the sandbox user could not create openml's config beside the cache. A writable data copy whose target is under `/workspace/home` is now placed at its nested path in a per-run directory that is mounted at `/workspace/home/<top>` (the paper's setting is unchanged). Acceptance check 19 also creates a file next to the data; 20/20 checks pass on the Python 3.11 image on this machine.
+
+### A Conda Lock Is Installed as Pinned, Not Resolved (2026-10-10 16:43 +03:00, Issue #229)
+- Correction of #227/#228: the resolver pass over the conda pins was a wrong diagnosis. Re-running `paper_006` showed `ResolutionImpossible` (conda's `mkl-random` has different dependency metadata than the same-named PyPI package) and, after removing it, the next gap (`promise`, source-only, needed by `wandb`). A conda environment file is a lock that pins every transitive dependency, so the install phase of a conda-only repository now runs `pip install --no-deps` over exactly the bundled pins; a pin without a wheel is simply absent. The `_fill_dependency_gaps` pass is removed; the `python-graphviz` mapping stays. Acceptance check 13 now pins `requests` without its dependencies; 20/20 checks pass on the Python 3.11 image on this machine.
+
+### Conda-only Bundles Get the Dependencies the Environment Did Not Provide (2026-10-10 16:33 +03:00, Issue #227)
+- Found by the Pilot 2 runs of the two conda-only papers: `paper_006` failed to install because `jsonschema` needs `pyrsistent` and the environment's `pyrsistent==0.17.3` has no wheel (first attempts kept in `data/pilot2_runs/first_attempts/`); `paper_004` because `catboost` needs the PyPI `graphviz` package, which conda calls `python-graphviz`. After the per-pin downloads, one resolver pass over the exact pins (binary wheels only) now adds the missing dependencies and lists them as `gap_fill` in the bundle report; `python-graphviz` maps to `graphviz` and conda's own `graphviz` (a C tool) is skipped.
+
+### Conda Conversion Keeps setuptools, wheel, and certifi (2026-10-10 15:24 +03:00, Issue #225)
+- Found by the Pilot 2 run of `paper_006` (first attempt kept in `data/pilot2_runs/first_attempts/paper_006_attempt1/`): `openml` and `liac-arff` were built in the sandbox, but the offline install failed with `Could not find a version that satisfies the requirement setuptools>=18.5 (from ipython)`. `src/sandbox/conda_env.py` skipped `setuptools`, `wheel`, and `certifi`, which other packages require. They are now converted when the environment pins them; `python`, `pip`, and system libraries are still skipped.
+
+### Pilot 2 Driver Passes the Extra Requirements to the Install Phase (2026-10-10 15:17 +03:00, Issue #223)
+- Found by the Pilot 2 run of `paper_005` (first attempt kept in `data/pilot2_runs/first_attempts/paper_005_attempt1/`): the `fastsk` wheel was built in the sandbox and bundled, but never installed, so the run stopped with `ModuleNotFoundError: No module named 'fastsk'`. `run_paper(pilot2=True)` gave `extra_requirements` to the bundling step but not to `SandboxConfig`. It does now (also `paper_002`'s `nbconvert` and `ipykernel`).
+
+### Report Numbers from a Script (2026-10-10 15:12 +03:00, Issue #221)
+- `scripts/report_numbers.py` renders the numbers of the final report from the stored files (blocks `pilot1`, `pilot2`, `extraction`); `--write` fills the `<!-- numbers:NAME:start/end -->` blocks of `docs/report/REPORT.md`, `--check` fails if one was edited by hand, and a test runs the check (AGENTS.md §6.5).
+### Pilot 2 Measurement Tools (2026-10-10 15:00 +03:00, Issue #219)
+- `scripts/categorize_pilot_failures.py` follows the Pilot 2 order build, install, run: a failed build is `MISSING_DEPENDENCY` in phase `build` with the deciding line from `build.log`; a missing run report is `NO_RUN_REPORT`. `scripts/pilot_measurements.py` adds `build_status` only to records that have a build, so Pilot 1's stored files are unchanged. New `scripts/pilot_compare.py` writes `data/pilot2_runs/comparison.{json,md}` with Pilot 1 and Pilot 2 side by side from their stored measurements.
 
 ### Re-staging on Windows and Stale Files in Pilot 2 Records (2026-10-10 14:53 +03:00, Issue #217)
 - Found when the Pilot 2 run of `paper_008` was started a second time: (1) `stage_repository` could not delete the old clone on Windows (`WinError 5`, git's read-only pack files); `remove_tree` clears the read-only bit and retries, and every directory the stager clears now uses it. (2) A failed Pilot 2 record listed `collected_files` copied from an older run. In `--pilot2` mode `sandbox_runs/<paper_id>` and `<paper_id>.build` are now cleared before the run, and the driver refuses to start if `data/pilot2_runs/<paper_id>/` already holds an earlier attempt (it is evidence; move it to `data/pilot2_runs/first_attempts/`).

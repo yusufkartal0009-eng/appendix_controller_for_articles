@@ -122,6 +122,8 @@ def repo_relative(path: str, what: str) -> str:
 GPUS_RE = re.compile(r"all|[1-9][0-9]?|device=[0-9]+(,[0-9]+)*")
 
 
+HOME_PREFIX = "/workspace/home/"  # the sandbox user's home: a tmpfs owned by uid 1000 (#231)
+
 # Container paths a data mount may target: inside the repository or the sandbox home (#166).
 DATA_MOUNT_ROOTS = ("/workspace/repo/", "/workspace/home/")
 
@@ -180,8 +182,10 @@ class DockerSandboxRunner:
 
     def __init__(self, config: SandboxConfig | None = None):
         self.config = config or SandboxConfig()
-        # Host directories that replace data mounts for the current run (writable per-run copies, #193)
-        self._run_data_hosts: dict[str, Path] = {}
+        # Writable per-run copies that replace data mounts for the current run (#193): data mount target ->
+        # (container path to mount, host directory). Under /workspace/home the mounted directory is the top-level
+        # one (#231), so that its parent exists and is writable.
+        self._run_data_hosts: dict[str, tuple[str, Path]] = {}
 
     @staticmethod
     def is_docker_available(attempts: int = DOCKER_DETECT_ATTEMPTS, timeout: int = DOCKER_DETECT_TIMEOUT,
@@ -291,9 +295,13 @@ class DockerSandboxRunner:
         if deps_dir:
             mode = "rw" if deps_writable else "ro"
             docker_cmd.extend(["-v", f"{Path(deps_dir).resolve()}:/workspace/deps:{mode}"])
+        mounted: set[str] = set()
         for target, host in sorted(self.config.data_mounts.items()):
             if target in self._run_data_hosts:
-                docker_cmd.extend(["-v", f"{self._run_data_hosts[target].resolve()}:{target}:rw"])
+                container_target, copy_dir = self._run_data_hosts[target]
+                if container_target not in mounted:  # several copies can share one top-level directory
+                    docker_cmd.extend(["-v", f"{copy_dir.resolve()}:{container_target}:rw"])
+                    mounted.add(container_target)
             else:
                 docker_cmd.extend(["-v", f"{Path(host).resolve()}:{target}:ro"])
 
@@ -441,11 +449,29 @@ class DockerSandboxRunner:
         """
         return _open_copy(Path(repo_dir), Path(output_dir) / "repo_copy", ignore=(".git",))
 
-    def _writable_data_copies(self, output_dir: Path) -> dict[str, Path]:
-        """Per-run writable copies of the data mounts listed in writable_data; the host cache is not changed (#193)."""
-        copies = {}
+    def _writable_data_copies(self, output_dir: Path) -> dict[str, tuple[str, Path]]:
+        """Per-run writable copies of the data mounts listed in writable_data; the host cache is not changed (#193).
+
+        A target under /workspace/home is mounted through its top-level directory (#231): Docker would otherwise
+        create the missing parent (for example `.openml` above `.openml/cache`) as root inside the home tmpfs, and
+        the sandbox user could not create files next to the data (openml writes its config there). The copy is
+        placed at the nested path inside a per-run directory that is mounted at `/workspace/home/<top>`.
+        """
+        copies: dict[str, tuple[str, Path]] = {}
         for i, target in enumerate(sorted(self.config.writable_data)):
-            copies[target] = _open_copy(Path(self.config.data_mounts[target]), Path(output_dir) / "data_copies" / str(i))
+            source = Path(self.config.data_mounts[target])
+            if target.startswith(HOME_PREFIX):
+                top, _, rest = target[len(HOME_PREFIX):].partition("/")
+                overlay = Path(output_dir) / "home_mounts" / top
+                overlay.mkdir(parents=True, exist_ok=True)
+                _open_copy(source, overlay / rest)
+                directory = overlay
+                for part in ["", *rest.split("/")[:-1]]:  # the top-level and intermediate directories of the nested path
+                    directory = directory / part if part else directory
+                    directory.chmod(0o777)
+                copies[target] = (HOME_PREFIX + top, overlay)
+            else:
+                copies[target] = (target, _open_copy(source, Path(output_dir) / "data_copies" / str(i)))
         return copies
 
     def build_wheels(

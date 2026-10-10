@@ -22,12 +22,16 @@ CONDA_TO_PIP = {
     "msgpack-python": "msgpack",
     "pytables": "tables",
     "faiss-cpu": "faiss-cpu",
+    "faiss": "faiss-cpu",  # conda's `faiss` is a CUDA build; the sandbox is CPU-only, so the CPU build at the same version (#233)
     "tensorflow-base": "tensorflow",
+    "python-graphviz": "graphviz",  # conda's own `graphviz` is the C tool, skipped below (#227)
 }
 
-# Conda packages that are never pip-installable (or must not be installed in the CPU sandbox).
-_SKIP_EXACT = {"python", "pip", "setuptools", "wheel", "cudatoolkit", "cudnn", "pytorch-cuda", "faiss-gpu", "mkl",
-               "blas", "libblas", "libcblas", "liblapack", "ca-certificates", "openssl", "certifi"}
+# Conda packages that are never pip-installable (or must not be installed in the CPU sandbox). `setuptools`,
+# `wheel`, and `certifi` are NOT skipped (#225): they are ordinary PyPI packages that other packages require
+# (ipython needs setuptools, requests needs certifi), and the install phase is offline with an empty target.
+_SKIP_EXACT = {"python", "pip", "graphviz", "cudatoolkit", "cudnn", "pytorch-cuda", "faiss-gpu", "mkl",
+               "blas", "libblas", "libcblas", "liblapack", "ca-certificates", "openssl"}
 _SKIP_PREFIXES = ("_", "lib", "cuda-", "nvidia-", "gcc", "gxx", "ld_impl", "xorg-", "font", "intel-openmp")
 
 
