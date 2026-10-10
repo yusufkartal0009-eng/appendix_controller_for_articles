@@ -30,6 +30,14 @@ def _load(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _relative(path: Path) -> str:
+    """A repository-relative POSIX path, so the stored file does not depend on the machine that generated it (#246)."""
+    try:
+        return path.resolve().relative_to(project_root).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
 def compare(pilot1_dir: Path = PILOT1_DIR, pilot2_dir: Path = PILOT2_DIR) -> dict[str, Any]:
     m1, m2 = _load(pilot1_dir / "measurements.json"), _load(pilot2_dir / "measurements.json")
     c1, c2 = _load(pilot1_dir / "failure_categories.json"), _load(pilot2_dir / "failure_categories.json")
@@ -47,8 +55,8 @@ def compare(pilot1_dir: Path = PILOT1_DIR, pilot2_dir: Path = PILOT2_DIR) -> dic
                        "phase": (cat2.get(paper_id) or {}).get("phase")},
         })
     return {
-        "sources": {"pilot1": [str(pilot1_dir / "measurements.json"), str(pilot1_dir / "failure_categories.json")],
-                    "pilot2": [str(pilot2_dir / "measurements.json"), str(pilot2_dir / "failure_categories.json")]},
+        "sources": {"pilot1": [_relative(pilot1_dir / "measurements.json"), _relative(pilot1_dir / "failure_categories.json")],
+                    "pilot2": [_relative(pilot2_dir / "measurements.json"), _relative(pilot2_dir / "failure_categories.json")]},
         "rates": {key: {"pilot1": m1[key], "pilot2": m2[key]} for key, _ in RATES},
         "failure_counts": {"pilot1": c1["counts"], "pilot2": c2["counts"]},
         "papers": papers,

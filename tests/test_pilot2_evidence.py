@@ -55,3 +55,10 @@ def test_an_earlier_attempt_is_never_a_counted_result():
         # A kept attempt is its own directory; the counted record of the paper is a different file
         assert counted[row["paper_id"]]["started_at"] != json.loads(
             (RUNS / "first_attempts" / row["attempt"] / "pilot_record.json").read_text(encoding="utf-8"))["started_at"]
+
+
+def test_the_stored_comparison_does_not_depend_on_the_machine_that_generated_it():
+    """#246: its source paths are repository-relative, and the evidence tests pass in any checkout."""
+    comparison = json.loads((RUNS / "comparison.json").read_text(encoding="utf-8"))
+    paths = [p for group in comparison["sources"].values() for p in group]
+    assert paths and all(p.startswith("data/") and ":" not in p for p in paths)
