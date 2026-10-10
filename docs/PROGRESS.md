@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 345 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 347 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Report Number Blocks for the Pilot 2 Summary and Failures (2026-10-10 21:02 +03:00, Issue #239)
+- `scripts/report_numbers.py` gained `pilot2summary` (one sentence with the three rates of Pilot 2 next to Pilot 1's) and `pilot2failures` (per paper: category, phase, and the deciding log line from `failure_categories.json`); a hand edit of either makes `--check` fail.
 
 ### Index of the Earlier Pilot 2 Attempts (2026-10-10 20:50 +03:00, Issue #237)
 - `scripts/pilot2_attempts.py` writes `data/pilot2_runs/first_attempts/index.json` and `README.md` from the stored `pilot_record.json` and `run_report.json` of each earlier attempt (commit, stage, build, install, run, exit code), with the reason each was superseded taken from a hand-written `reasons.json` (an explanation and an issue number, not a result).

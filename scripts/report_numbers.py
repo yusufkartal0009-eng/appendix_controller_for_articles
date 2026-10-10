@@ -9,6 +9,9 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 
 - `pilot1`: Pilot 1 rates and failure categories (`data/pilot_runs/measurements.json`, `failure_categories.json`)
 - `pilot2`: Pilot 1 and Pilot 2 side by side (`data/pilot2_runs/comparison.json`, from scripts/pilot_compare.py)
+- `pilot2summary`: one sentence with the three rates of Pilot 2 next to Pilot 1's (`data/pilot2_runs/comparison.json`)
+- `pilot2failures`: per paper of Pilot 2, the failure category, the phase, and the deciding log line
+  (`data/pilot2_runs/failure_categories.json`)
 - `extraction`: the claim extraction: quote guard, A/B agreement, the owner's review, and the gold set
   (`data/claims/guard_report.json`, `consistency.json`, `review_decisions.json`, `gold_score_pass_A.json`)
 
@@ -62,6 +65,31 @@ def pilot2_block(data: Path = DATA) -> str:
     return "\n".join([HEADER.format(sources="data/pilot2_runs/comparison.json (scripts/pilot_compare.py)"), "", body])
 
 
+def pilot2summary_block(data: Path = DATA) -> str:
+    rates = _load(data / "pilot2_runs" / "comparison.json")["rates"]
+
+    def pair(key: str) -> str:
+        return f"{_rate(rates[key]['pilot2'])} (Pilot 1: {_rate(rates[key]['pilot1'])})"
+    sentence = (f"Install success: {pair('install_success_rate')}. Run success: {pair('run_success_rate')}. "
+                f"Pilot success: {pair('pilot_success_rate')}.")
+    return "\n".join([HEADER.format(sources="data/pilot2_runs/comparison.json"), "", sentence])
+
+
+def pilot2failures_block(data: Path = DATA) -> str:
+    papers = _load(data / "pilot2_runs" / "failure_categories.json")["papers"]
+    lines = [HEADER.format(sources="data/pilot2_runs/failure_categories.json"), "",
+             "| Paper | Category | Phase | Deciding line |", "|---|---|---|---|"]
+    for p in papers:
+        category = p["category"] or p["other_name"] or "none"
+        if p["category"] == "OTHER" and p["other_name"]:
+            category = f"OTHER ({p['other_name']})"
+        evidence = p.get("evidence") or {}
+        line = str(evidence.get("line") or "").replace("|", "\\|").replace("`", "'").strip()
+        lines.append(f"| `{p['paper_id']}` | {'success' if p['pilot_success'] else category} | "
+                     f"{p['phase'] or 'n/a'} | {('`' + line[:240] + '`') if line and not p['pilot_success'] else 'n/a'} |")
+    return "\n".join(lines)
+
+
 def extraction_block(data: Path = DATA) -> str:
     guard = _load(data / "claims" / "guard_report.json")
     consistency = _load(data / "claims" / "consistency.json")
@@ -83,7 +111,8 @@ def extraction_block(data: Path = DATA) -> str:
     return "\n".join(lines)
 
 
-BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "extraction": extraction_block}
+BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2summary": pilot2summary_block,
+          "pilot2failures": pilot2failures_block, "extraction": extraction_block}
 BLOCK_RE = re.compile(r"(<!-- numbers:(?P<name>[a-z0-9]+):start -->\n)(?P<body>.*?)(\n<!-- numbers:(?P=name):end -->)", re.DOTALL)
 
 
