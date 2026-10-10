@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 325 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 331 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Pilot 2 Measurement Tools (2026-10-10 15:00 +03:00, Issue #219)
+- `scripts/categorize_pilot_failures.py` follows the Pilot 2 order build, install, run: a failed build is `MISSING_DEPENDENCY` in phase `build` with the deciding line from `build.log`; a missing run report is `NO_RUN_REPORT`. `scripts/pilot_measurements.py` adds `build_status` only to records that have a build, so Pilot 1's stored files are unchanged. New `scripts/pilot_compare.py` writes `data/pilot2_runs/comparison.{json,md}` with Pilot 1 and Pilot 2 side by side from their stored measurements.
 
 ### Re-staging on Windows and Stale Files in Pilot 2 Records (2026-10-10 14:53 +03:00, Issue #217)
 - Found when the Pilot 2 run of `paper_008` was started a second time: (1) `stage_repository` could not delete the old clone on Windows (`WinError 5`, git's read-only pack files); `remove_tree` clears the read-only bit and retries, and every directory the stager clears now uses it. (2) A failed Pilot 2 record listed `collected_files` copied from an older run. In `--pilot2` mode `sandbox_runs/<paper_id>` and `<paper_id>.build` are now cleared before the run, and the driver refuses to start if `data/pilot2_runs/<paper_id>/` already holds an earlier attempt (it is evidence; move it to `data/pilot2_runs/first_attempts/`).
