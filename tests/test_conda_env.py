@@ -92,3 +92,17 @@ def test_requirements_files_still_take_precedence(tmp_path, monkeypatch):
     monkeypatch.setattr("src.sandbox.stager.subprocess.run",
                         lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0, "", ""))
     assert "source" not in stager.bundle_dependencies(staged)
+
+
+def test_setuptools_wheel_and_certifi_are_converted_but_pip_and_python_are_not(tmp_path):
+    """#225: ipython needs setuptools and requests needs certifi; the install phase is offline with an empty target."""
+    env = tmp_path / "environment.yml"
+    env.write_text(
+        "name: demo\ndependencies:\n  - python=3.8.10=h49503c6_1_cpython\n  - pip=21.1.3=pyhd8ed1ab_0\n"
+        "  - setuptools=49.6.0=py38h578d9bd_3\n  - wheel=0.36.2=pyhd3deb0d_0\n  - certifi=2021.5.30=py38h578d9bd_0\n"
+        "  - openssl=1.1.1k=h7f98852_0\n  - ca-certificates=2021.5.30=ha878542_0\n", encoding="utf-8")
+    result = convert_env_file(env)
+    assert result.requirements == ["setuptools==49.6.0", "wheel==0.36.2", "certifi==2021.5.30"]
+    skipped = {s["package"].split("=")[0] for s in result.skipped}
+    assert {"pip", "openssl", "ca-certificates"} <= skipped
+    assert result.python_version == "3.8"  # python is not pip-installed; its minor version selects the sandbox image
