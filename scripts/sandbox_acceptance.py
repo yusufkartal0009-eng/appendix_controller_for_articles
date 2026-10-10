@@ -349,13 +349,15 @@ def main():
     )
 
     # 13. conda-only repository (#159): environment.yml converted to pinned wheels, bundled on the host with
-    # pip download --no-deps (binary only), installed offline in the install phase, imported in the run phase
+    # pip download --no-deps (binary only), installed offline in the install phase, imported in the run phase.
+    # `requests` is pinned without its dependencies (urllib3, idna, ...): a conda environment is a lock, so it must
+    # be installed as pinned, without dependency resolution (#229).
     conda_repo = Path(tempfile.mkdtemp(prefix="acceptance_conda_"))
     (conda_repo / "probe_conda.py").write_text(PROBES["probe_conda.py"])
     (conda_repo / "environment.yml").write_text(
         "name: acceptance\ndependencies:\n"
         f"  - python={args.python_version}\n  - _libgcc_mutex=0.1=conda_forge\n  - libgcc-ng=13.2.0\n"
-        "  - toolz=0.12.1=pyhd8ed1ab_0\n  - pip:\n    - ujson==5.10.0\n"
+        "  - toolz=0.12.1=pyhd8ed1ab_0\n  - requests=2.31.0=pyhd8ed1ab_0\n  - pip:\n    - ujson==5.10.0\n"
     )
     conda_repo.chmod(0o755)
     stager = RepoStager(staging_root=Path(tempfile.mkdtemp(prefix="acceptance_conda_staging_")))

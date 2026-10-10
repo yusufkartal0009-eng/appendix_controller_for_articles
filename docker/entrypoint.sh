@@ -94,6 +94,7 @@ if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   # Same files as the host-side bundling (RepoStager.analyze_dependencies): every *requirements*.txt
   # in the repository root; without any, install every bundled wheel.
   PIP_TARGETS=()
+  PIP_MODE_ARGS=()
   for req in /workspace/repo/*requirements*.txt; do
     if [ -f "${req}" ]; then
       PIP_TARGETS+=(-r "${req}")
@@ -101,6 +102,10 @@ if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   done
   if [ ${#PIP_TARGETS[@]} -eq 0 ]; then
     PIP_TARGETS=(/workspace/packages/*)
+    # A conda-only repository: its environment file is a lock, which already pins every transitive dependency.
+    # Install exactly the pinned set, without resolving dependencies (#229). A pin without a PyPI wheel is simply
+    # absent, which matters only if the paper imports it.
+    PIP_MODE_ARGS=(--no-deps)
   elif [ -n "${SANDBOX_EXTRA_REQUIREMENTS:-}" ]; then
     # Requirements of the paper's run setup that its requirement files do not name (#193); without requirement
     # files every bundled wheel is installed, extras included.
@@ -118,7 +123,7 @@ if [ "${SANDBOX_PHASE:-run}" = "install" ]; then
   set +e
   timeout --signal=SIGKILL "${TIMEOUT_SECONDS}" python -m pip install --no-index \
     --find-links=/workspace/packages --only-binary=:all: --no-cache-dir \
-    --target /workspace/deps "${PIP_TARGETS[@]}" > "${INSTALL_LOG}" 2>&1
+    --target /workspace/deps "${PIP_MODE_ARGS[@]}" "${PIP_TARGETS[@]}" > "${INSTALL_LOG}" 2>&1
   INSTALL_CODE=$?
   set -e
   INSTALL_DURATION=$(python3 -c "print(round($(date +%s.%N) - ${INSTALL_START}, 3))" 2>/dev/null || echo "0.0")

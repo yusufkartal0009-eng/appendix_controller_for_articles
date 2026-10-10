@@ -371,7 +371,6 @@ class RepoStager:
                 lines = [line for line in (res.stderr or "").splitlines() if line.strip()]
                 conda_only.append({"requirement": requirement,
                                    "reason": lines[-1] if lines else f"pip exited {res.returncode}"})
-        gap_fill = self._fill_dependency_gaps(bundle_dir, downloaded, timeout, python_version, options or [])
         self._copy_built_wheels(staged, bundle_dir)
         env_versions = sorted({c.python_version for c in conversions if c.python_version})
         status = "SUCCESS" if requirements and not conda_only else ("PARTIAL" if downloaded else "FAILED")
@@ -384,7 +383,6 @@ class RepoStager:
             "converted": len(requirements),
             "downloaded": downloaded,
             "conda_only": conda_only,
-            "gap_fill": gap_fill,
             "skipped": [s for c in conversions for s in c.skipped],
             "wheel_count": len(list(bundle_dir.glob("*.whl"))),
             "bundle_dir": str(bundle_dir),
@@ -461,29 +459,6 @@ class RepoStager:
         staged.built_dir = built
         result["sdists"] = [p.name for p in sdists]
         return result
-
-    def _fill_dependency_gaps(self, bundle_dir: Path, pins: list[str], timeout: int, python_version: str,
-                              options: list[str]) -> dict[str, Any]:
-        """Download the dependencies of the pinned wheels that the conda environment did not provide as wheels (#227).
-
-        The per-pin `--no-deps` download cannot guarantee that every dependency of a bundled wheel is in the bundle: a
-        conda pin without a PyPI wheel (pyrsistent 0.17.3 is source-only) leaves its dependents unresolvable in the
-        offline install phase. One resolver pass over the exact pins (binary wheels only) adds what is missing; the
-        pins themselves stay exact. The added wheels are listed in the bundle report; a failed pass adds nothing.
-        """
-        if not pins:
-            return {"status": "SKIPPED", "added": []}
-        before = {p.name for p in bundle_dir.glob("*.whl")}
-        cmd = self._pip_download_command(bundle_dir, python_version) + options + list(pins)
-        try:
-            res = self._run_pip(cmd, timeout)
-        except (subprocess.SubprocessError, OSError) as exc:
-            return {"status": "FAILED", "added": [], "error": str(exc)}
-        added = sorted({p.name for p in bundle_dir.glob("*.whl")} - before)
-        if res.returncode == 0:
-            return {"status": "SUCCESS", "added": added}
-        lines = [line for line in (res.stderr or "").splitlines() if line.strip()]
-        return {"status": "FAILED", "added": added, "error": lines[-1] if lines else f"pip exited {res.returncode}"}
 
     def _run_pip(self, cmd: list[str], timeout: int) -> subprocess.CompletedProcess:
         """Run a `pip download` command: on the host, or inside the paper's sandbox image (`bundle_in_docker`)."""
