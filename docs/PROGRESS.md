@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 342 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 345 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Index of the Earlier Pilot 2 Attempts (2026-10-10 20:50 +03:00, Issue #237)
+- `scripts/pilot2_attempts.py` writes `data/pilot2_runs/first_attempts/index.json` and `README.md` from the stored `pilot_record.json` and `run_report.json` of each earlier attempt (commit, stage, build, install, run, exit code), with the reason each was superseded taken from a hand-written `reasons.json` (an explanation and an issue number, not a result).
 
 ### Pilot Tools Name Their Own Directory and Tolerate a Missing Record (2026-10-10 18:33 +03:00, Issue #235)
 - `pilot_measurements.py` writes the directory it read into the `measurements.md` header (Pilot 1's committed file keeps its text), and `categorize_pilot_failures.py` reports a paper without a record as `OTHER` / `NOT_RUN` instead of failing.
