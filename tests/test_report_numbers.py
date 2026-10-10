@@ -59,3 +59,40 @@ def test_cli_check_and_write_round_trip(tmp_path):
     assert rn.main(["--check", "--report", str(report)]) == 1
     assert rn.main(["--write", "--report", str(report)]) == 0
     assert rn.main(["--check", "--report", str(report)]) == 0
+
+
+def _pilot2_files(data: Path) -> None:
+    runs = data / "pilot2_runs"
+    runs.mkdir(parents=True)
+
+    def rate(count):
+        return {"count": count, "of": 6, "rate": round(count / 6, 3)}
+    (runs / "comparison.json").write_text(json.dumps({"rates": {
+        "install_success_rate": {"pilot1": rate(1), "pilot2": rate(6)},
+        "run_success_rate": {"pilot1": rate(0), "pilot2": rate(2)},
+        "pilot_success_rate": {"pilot1": rate(0), "pilot2": rate(2)},
+        "valid_runs": {"pilot1": rate(6), "pilot2": rate(6)}}}))
+    (runs / "failure_categories.json").write_text(json.dumps({"papers": [
+        {"paper_id": "paper_002", "category": "MISSING_DEPENDENCY", "other_name": None, "phase": "run", "pilot_success": False,
+         "evidence": {"file": "stderr.log", "line_number": 9, "line": "ModuleNotFoundError: No module named 'lightgbm'"}},
+        {"paper_id": "paper_005", "category": "OTHER", "other_name": "OUT_OF_MEMORY", "phase": "run", "pilot_success": False,
+         "evidence": {"file": "run_report.json", "line_number": None, "line": "status: OOM_KILLED | with a pipe"}},
+        {"paper_id": "paper_006", "category": None, "other_name": None, "phase": None, "pilot_success": True, "evidence": None}]}))
+
+
+def test_pilot2_summary_and_failure_table_come_from_the_stored_files(tmp_path):
+    _pilot2_files(tmp_path)
+    summary = rn.render("pilot2summary", tmp_path)
+    assert ("Install success: 6 / 6 (1.0) (Pilot 1: 1 / 6 (0.167)). Run success: 2 / 6 (0.333) (Pilot 1: 0 / 6 (0.0)). "
+            "Pilot success: 2 / 6 (0.333) (Pilot 1: 0 / 6 (0.0)).") in summary
+    table = rn.render("pilot2failures", tmp_path)
+    assert "| `paper_002` | MISSING_DEPENDENCY | run | `ModuleNotFoundError: No module named 'lightgbm'` |" in table
+    assert "| `paper_005` | OTHER (OUT_OF_MEMORY) | run | `status: OOM_KILLED \\| with a pipe` |" in table
+    assert "| `paper_006` | success | n/a | n/a |" in table
+
+
+def test_a_hand_edit_of_the_pilot2_blocks_is_detected(tmp_path):
+    _pilot2_files(tmp_path)
+    text = rn.apply("<!-- numbers:pilot2summary:start -->\nx\n<!-- numbers:pilot2summary:end -->\n", tmp_path)
+    assert rn.mismatches(text, tmp_path) == []
+    assert rn.mismatches(text.replace("2 / 6 (0.333)", "6 / 6 (1.0)"), tmp_path) == ["pilot2summary"]
