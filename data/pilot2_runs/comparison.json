@@ -1,12 +1,12 @@
 {
   "sources": {
     "pilot1": [
-      "C:\\Users\\USER\\appendix_controller_for_articles\\data\\pilot_runs\\measurements.json",
-      "C:\\Users\\USER\\appendix_controller_for_articles\\data\\pilot_runs\\failure_categories.json"
+      "data/pilot_runs/measurements.json",
+      "data/pilot_runs/failure_categories.json"
     ],
     "pilot2": [
-      "C:\\Users\\USER\\appendix_controller_for_articles\\data\\pilot2_runs\\measurements.json",
-      "C:\\Users\\USER\\appendix_controller_for_articles\\data\\pilot2_runs\\failure_categories.json"
+      "data/pilot2_runs/measurements.json",
+      "data/pilot2_runs/failure_categories.json"
     ]
   },
   "rates": {
