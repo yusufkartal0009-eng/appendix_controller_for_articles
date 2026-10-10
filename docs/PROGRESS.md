@@ -37,8 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Pilot 2 Environment and the Real GPU Check (2026-10-10 14:30 +03:00, Issues #213 and #169)
+- `scripts/record_pilot2_environment.py` wrote `data/pilot2_runs/environment.txt` from command output (commit, `docker version` and `info`, `nvidia-smi`, `gpu_check.py`, images, disk). On this machine `gpu_check.py` showed the RTX 5070 (driver 591.86) inside the sandbox container with uid 1000, the network blocked, and a read-only root: `GPU visible with isolation intact: YES`. `data/pilot2_runs/` is no longer git-ignored, so the Pilot 2 evidence can be committed.
+
 ### Entrypoint Kept in LF; First Real-Docker Run on Windows (2026-10-10 14:29 +03:00, Issue #211)
-- On the owner's Windows machine (`core.autocrlf=true`) the container entrypoint was CRLF and every container failed with `env: 'bash': No such file or directory` (19 of 20 acceptance checks failed). `.gitattributes` now keeps `*.sh` and `docker/Dockerfile*` in LF, and a test fails on CRLF. After rebuilding the six images, the acceptance checks pass on this machine: 20/20 on Python 3.11, 3.9, and 3.8. GitHub Actions is disabled by the owner, so these local runs are the evidence.
+- On the owner's Windows machine (`core.autocrlf=true`) the container entrypoint was CRLF and every container failed with `env: 'bash
+': No such file or directory` (19 of 20 acceptance checks failed). `.gitattributes` now keeps `*.sh` and `docker/Dockerfile*` in LF, and a test fails on CRLF. After rebuilding the six images, the acceptance checks pass on this machine: 20/20 on Python 3.11, 3.9, and 3.8. GitHub Actions is disabled by the owner, so these local runs are the evidence.
 
 ### Report Sections Written: Introduction, Method, Experimental Setup (2026-10-07 19:47 +03:00, Issue #120)
 - `docs/report/REPORT.md` sections 2, 4, and 5 are written from evidence already in the repository: the
