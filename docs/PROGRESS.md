@@ -37,6 +37,8 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Report Numbers from a Script (2026-10-10 15:12 +03:00, Issue #221)
+- `scripts/report_numbers.py` renders the numbers of the final report from the stored files (blocks `pilot1`, `pilot2`, `extraction`); `--write` fills the `<!-- numbers:NAME:start/end -->` blocks of `docs/report/REPORT.md`, `--check` fails if one was edited by hand, and a test runs the check (AGENTS.md §6.5).
 ### Pilot 2 Measurement Tools (2026-10-10 15:00 +03:00, Issue #219)
 - `scripts/categorize_pilot_failures.py` follows the Pilot 2 order build, install, run: a failed build is `MISSING_DEPENDENCY` in phase `build` with the deciding line from `build.log`; a missing run report is `NO_RUN_REPORT`. `scripts/pilot_measurements.py` adds `build_status` only to records that have a build, so Pilot 1's stored files are unchanged. New `scripts/pilot_compare.py` writes `data/pilot2_runs/comparison.{json,md}` with Pilot 1 and Pilot 2 side by side from their stored measurements.
 
