@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/repo/train.py", line 5, in <module>
+    from data_openml import data_prep_openml,task_dset_ids,DataSetCatCon
+  File "/workspace/repo/data_openml.py", line 1, in <module>
+    import openml
+  File "/workspace/deps/openml/__init__.py", line 20, in <module>
+    from . import _api_calls
+  File "/workspace/deps/openml/_api_calls.py", line 10, in <module>
+    from . import config
+  File "/workspace/deps/openml/config.py", line 295, in <module>
+    _setup()
+  File "/workspace/deps/openml/config.py", line 194, in _setup
+    config = _parse_config()
+  File "/workspace/deps/openml/config.py", line 223, in _parse_config
+    fh = open(config_file, "w")
+PermissionError: [Errno 13] Permission denied: '/workspace/home/.openml/config'

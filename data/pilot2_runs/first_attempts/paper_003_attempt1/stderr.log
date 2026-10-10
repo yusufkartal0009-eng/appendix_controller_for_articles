@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/bin/ft_transformer.py", line 323, in <module>
+    X = D.build_X(
+  File "/workspace/repo/lib/data.py", line 150, in build_X
+    save_result(N)
+  File "/workspace/repo/lib/data.py", line 127, in save_result
+    with open(cache_path, 'wb') as f:
+OSError: [Errno 30] Read-only file system: '/workspace/repo/data/california_housing/build_X__quantile__mean__new__indices__0.pickle'

@@ -1,0 +1,2647 @@
+{
+  "paper_id": "paper_004",
+  "source": "https://github.com/yandex-research/tabular-dl-tabr",
+  "commit_hash": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+  "target_script": "bin/tabr.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": true,
+  "data_mounts": [
+    "/workspace/repo/data"
+  ],
+  "python_version": "3.9",
+  "image": "repro-radar-sandbox:py3.9",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.676,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_004",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.322,
+    "timeout_limit_seconds": 3600,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 14368768,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "catboost==1.1.1",
+      "name": "catboost",
+      "requested": "==1.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "category_encoders==2.6.0",
+      "name": "category_encoders",
+      "requested": "==2.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gpytorch==1.9.1",
+      "name": "gpytorch",
+      "requested": "==1.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.2.0",
+      "name": "joblib",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab==3.6.1",
+      "name": "jupyterlab",
+      "requested": "==3.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lightgbm==3.3.5",
+      "name": "lightgbm",
+      "requested": "==3.3.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "loguru==0.6.0",
+      "name": "loguru",
+      "requested": "==0.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.24.2",
+      "name": "numpy",
+      "requested": "==1.24.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "optuna==3.1.0",
+      "name": "optuna",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.5.3",
+      "name": "pandas",
+      "requested": "==1.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.13.1",
+      "name": "torch",
+      "requested": "==1.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytorch-mutex==1.0",
+      "name": "pytorch-mutex",
+      "requested": "==1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.2.2",
+      "name": "scikit-learn",
+      "requested": "==1.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.10.1",
+      "name": "scipy",
+      "requested": "==1.10.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard==2.12.0",
+      "name": "tensorboard",
+      "requested": "==2.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tomli==2.0.1",
+      "name": "tomli",
+      "requested": "==2.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tomli-w==1.0.0",
+      "name": "tomli-w",
+      "requested": "==1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.65.0",
+      "name": "tqdm",
+      "requested": "==4.65.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "delu==0.0.15",
+      "name": "delu",
+      "requested": "==0.0.15",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "einops==0.6.1",
+      "name": "einops",
+      "requested": "==0.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rtdl==0.0.13",
+      "name": "rtdl",
+      "requested": "==0.0.13",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xgboost==1.7.4",
+      "name": "xgboost",
+      "requested": "==1.7.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "absl-py==1.4.0",
+      "name": "absl-py",
+      "requested": "==1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aiofiles==22.1.0",
+      "name": "aiofiles",
+      "requested": "==22.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aiohttp==3.8.4",
+      "name": "aiohttp",
+      "requested": "==3.8.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aiosignal==1.3.1",
+      "name": "aiosignal",
+      "requested": "==1.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aiosqlite==0.18.0",
+      "name": "aiosqlite",
+      "requested": "==0.18.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "alembic==1.10.2",
+      "name": "alembic",
+      "requested": "==1.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "alsa-lib==1.2.8",
+      "name": "alsa-lib",
+      "requested": "==1.2.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "anyio==3.6.2",
+      "name": "anyio",
+      "requested": "==3.6.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "argon2-cffi==21.3.0",
+      "name": "argon2-cffi",
+      "requested": "==21.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "argon2-cffi-bindings==21.2.0",
+      "name": "argon2-cffi-bindings",
+      "requested": "==21.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "arrow-cpp==11.0.0",
+      "name": "arrow-cpp",
+      "requested": "==11.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "asttokens==2.2.1",
+      "name": "asttokens",
+      "requested": "==2.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "async-timeout==4.0.2",
+      "name": "async-timeout",
+      "requested": "==4.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "atk-1.0==2.38.0",
+      "name": "atk-1.0",
+      "requested": "==2.38.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "attr==2.5.1",
+      "name": "attr",
+      "requested": "==2.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "attrs==22.2.0",
+      "name": "attrs",
+      "requested": "==22.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-auth==0.6.26",
+      "name": "aws-c-auth",
+      "requested": "==0.6.26",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-cal==0.5.21",
+      "name": "aws-c-cal",
+      "requested": "==0.5.21",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-common==0.8.14",
+      "name": "aws-c-common",
+      "requested": "==0.8.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-compression==0.2.16",
+      "name": "aws-c-compression",
+      "requested": "==0.2.16",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-event-stream==0.2.20",
+      "name": "aws-c-event-stream",
+      "requested": "==0.2.20",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-http==0.7.6",
+      "name": "aws-c-http",
+      "requested": "==0.7.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-io==0.13.19",
+      "name": "aws-c-io",
+      "requested": "==0.13.19",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-mqtt==0.8.6",
+      "name": "aws-c-mqtt",
+      "requested": "==0.8.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-s3==0.2.7",
+      "name": "aws-c-s3",
+      "requested": "==0.2.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-c-sdkutils==0.1.8",
+      "name": "aws-c-sdkutils",
+      "requested": "==0.1.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-checksums==0.1.14",
+      "name": "aws-checksums",
+      "requested": "==0.1.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-crt-cpp==0.19.8",
+      "name": "aws-crt-cpp",
+      "requested": "==0.19.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aws-sdk-cpp==1.10.57",
+      "name": "aws-sdk-cpp",
+      "requested": "==1.10.57",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "babel==2.12.1",
+      "name": "babel",
+      "requested": "==2.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "backcall==0.2.0",
+      "name": "backcall",
+      "requested": "==0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "backports==1.0",
+      "name": "backports",
+      "requested": "==1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "backports.functools_lru_cache==1.6.4",
+      "name": "backports.functools_lru_cache",
+      "requested": "==1.6.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "beautifulsoup4==4.12.0",
+      "name": "beautifulsoup4",
+      "requested": "==4.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "black==23.1.0",
+      "name": "black",
+      "requested": "==23.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "blas-devel==3.9.0",
+      "name": "blas-devel",
+      "requested": "==3.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "bleach==6.0.0",
+      "name": "bleach",
+      "requested": "==6.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "blinker==1.5",
+      "name": "blinker",
+      "requested": "==1.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "bokeh==3.0.3",
+      "name": "bokeh",
+      "requested": "==3.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "brotli==1.0.9",
+      "name": "brotli",
+      "requested": "==1.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "brotli-bin==1.0.9",
+      "name": "brotli-bin",
+      "requested": "==1.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "brotlipy==0.7.0",
+      "name": "brotlipy",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "bzip2==1.0.8",
+      "name": "bzip2",
+      "requested": "==1.0.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "c-ares==1.18.1",
+      "name": "c-ares",
+      "requested": "==1.18.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cachetools==5.3.0",
+      "name": "cachetools",
+      "requested": "==5.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cairo==1.16.0",
+      "name": "cairo",
+      "requested": "==1.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "catboost==1.1.1",
+      "name": "catboost",
+      "requested": "==1.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "category_encoders==2.6.0",
+      "name": "category_encoders",
+      "requested": "==2.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2022.12.7",
+      "name": "certifi",
+      "requested": "==2022.12.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cffi==1.15.1",
+      "name": "cffi",
+      "requested": "==1.15.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==2.1.1",
+      "name": "charset-normalizer",
+      "requested": "==2.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "click==8.1.3",
+      "name": "click",
+      "requested": "==8.1.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cmaes==0.9.1",
+      "name": "cmaes",
+      "requested": "==0.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "colorama==0.4.6",
+      "name": "colorama",
+      "requested": "==0.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "colorcet==3.0.1",
+      "name": "colorcet",
+      "requested": "==3.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "colorlog==6.7.0",
+      "name": "colorlog",
+      "requested": "==6.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "comm==0.1.3",
+      "name": "comm",
+      "requested": "==0.1.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "contourpy==1.0.7",
+      "name": "contourpy",
+      "requested": "==1.0.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cryptography==40.0.1",
+      "name": "cryptography",
+      "requested": "==40.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cycler==0.11.0",
+      "name": "cycler",
+      "requested": "==0.11.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "dbus==1.13.6",
+      "name": "dbus",
+      "requested": "==1.13.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "debugpy==1.6.6",
+      "name": "debugpy",
+      "requested": "==1.6.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "decorator==5.1.1",
+      "name": "decorator",
+      "requested": "==5.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "defusedxml==0.7.1",
+      "name": "defusedxml",
+      "requested": "==0.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "entrypoints==0.4",
+      "name": "entrypoints",
+      "requested": "==0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "executing==1.2.0",
+      "name": "executing",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "expat==2.5.0",
+      "name": "expat",
+      "requested": "==2.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "faiss==1.7.2",
+      "name": "faiss",
+      "requested": "==1.7.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fftw==3.3.10",
+      "name": "fftw",
+      "requested": "==3.3.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "flake8==6.0.0",
+      "name": "flake8",
+      "requested": "==6.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "flit-core==3.8.0",
+      "name": "flit-core",
+      "requested": "==3.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "freetype==2.12.1",
+      "name": "freetype",
+      "requested": "==2.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fribidi==1.0.10",
+      "name": "fribidi",
+      "requested": "==1.0.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "frozenlist==1.3.3",
+      "name": "frozenlist",
+      "requested": "==1.3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gdk-pixbuf==2.42.10",
+      "name": "gdk-pixbuf",
+      "requested": "==2.42.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gettext==0.21.1",
+      "name": "gettext",
+      "requested": "==0.21.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gflags==2.2.2",
+      "name": "gflags",
+      "requested": "==2.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "giflib==5.2.1",
+      "name": "giflib",
+      "requested": "==5.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "glib==2.74.1",
+      "name": "glib",
+      "requested": "==2.74.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "glib-tools==2.74.1",
+      "name": "glib-tools",
+      "requested": "==2.74.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "glog==0.6.0",
+      "name": "glog",
+      "requested": "==0.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-auth==2.16.3",
+      "name": "google-auth",
+      "requested": "==2.16.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-auth-oauthlib==0.4.6",
+      "name": "google-auth-oauthlib",
+      "requested": "==0.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gpytorch==1.9.1",
+      "name": "gpytorch",
+      "requested": "==1.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "graphite2==1.3.13",
+      "name": "graphite2",
+      "requested": "==1.3.13",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "graphviz==7.1.0",
+      "name": "graphviz",
+      "requested": "==7.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "greenlet==2.0.2",
+      "name": "greenlet",
+      "requested": "==2.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "grpcio==1.52.1",
+      "name": "grpcio",
+      "requested": "==1.52.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gst-plugins-base==1.22.0",
+      "name": "gst-plugins-base",
+      "requested": "==1.22.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gstreamer==1.22.0",
+      "name": "gstreamer",
+      "requested": "==1.22.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gstreamer-orc==0.4.33",
+      "name": "gstreamer-orc",
+      "requested": "==0.4.33",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gtk2==2.24.33",
+      "name": "gtk2",
+      "requested": "==2.24.33",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gts==0.7.6",
+      "name": "gts",
+      "requested": "==0.7.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "harfbuzz==6.0.0",
+      "name": "harfbuzz",
+      "requested": "==6.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "holoviews==1.14.9",
+      "name": "holoviews",
+      "requested": "==1.14.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "icecream==2.1.3",
+      "name": "icecream",
+      "requested": "==2.1.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "icu==70.1",
+      "name": "icu",
+      "requested": "==70.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.4",
+      "name": "idna",
+      "requested": "==3.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib-metadata==6.1.0",
+      "name": "importlib-metadata",
+      "requested": "==6.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib-resources==5.12.0",
+      "name": "importlib-resources",
+      "requested": "==5.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib_metadata==6.1.0",
+      "name": "importlib_metadata",
+      "requested": "==6.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib_resources==5.12.0",
+      "name": "importlib_resources",
+      "requested": "==5.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipykernel==6.22.0",
+      "name": "ipykernel",
+      "requested": "==6.22.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipython==8.11.0",
+      "name": "ipython",
+      "requested": "==8.11.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipython_genutils==0.2.0",
+      "name": "ipython_genutils",
+      "requested": "==0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipywidgets==8.0.4",
+      "name": "ipywidgets",
+      "requested": "==8.0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "isort==5.12.0",
+      "name": "isort",
+      "requested": "==5.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jack==1.9.22",
+      "name": "jack",
+      "requested": "==1.9.22",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jedi==0.18.2",
+      "name": "jedi",
+      "requested": "==0.18.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jinja2==3.1.2",
+      "name": "jinja2",
+      "requested": "==3.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.2.0",
+      "name": "joblib",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jpeg==9e",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "json5==0.9.5",
+      "name": "json5",
+      "requested": "==0.9.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonschema==4.17.3",
+      "name": "jsonschema",
+      "requested": "==4.17.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_client==7.4.1",
+      "name": "jupyter_client",
+      "requested": "==7.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_core==5.3.0",
+      "name": "jupyter_core",
+      "requested": "==5.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_events==0.6.3",
+      "name": "jupyter_events",
+      "requested": "==0.6.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_server==1.23.6",
+      "name": "jupyter_server",
+      "requested": "==1.23.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_server_fileid==0.8.0",
+      "name": "jupyter_server_fileid",
+      "requested": "==0.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_server_ydoc==0.6.1",
+      "name": "jupyter_server_ydoc",
+      "requested": "==0.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_ydoc==0.2.3",
+      "name": "jupyter_ydoc",
+      "requested": "==0.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab==3.6.1",
+      "name": "jupyterlab",
+      "requested": "==3.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab_code_formatter==1.5.3",
+      "name": "jupyterlab_code_formatter",
+      "requested": "==1.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab_pygments==0.2.2",
+      "name": "jupyterlab_pygments",
+      "requested": "==0.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab_server==2.21.0",
+      "name": "jupyterlab_server",
+      "requested": "==2.21.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab_widgets==3.0.6",
+      "name": "jupyterlab_widgets",
+      "requested": "==3.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "keyutils==1.6.1",
+      "name": "keyutils",
+      "requested": "==1.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "kiwisolver==1.4.4",
+      "name": "kiwisolver",
+      "requested": "==1.4.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "krb5==1.20.1",
+      "name": "krb5",
+      "requested": "==1.20.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lame==3.100",
+      "name": "lame",
+      "requested": "==3.100",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lcms2==2.15",
+      "name": "lcms2",
+      "requested": "==2.15",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lerc==4.0.0",
+      "name": "lerc",
+      "requested": "==4.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lightgbm==3.3.5",
+      "name": "lightgbm",
+      "requested": "==3.3.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "linear_operator==0.3.0",
+      "name": "linear_operator",
+      "requested": "==0.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "llvm-openmp==16.0.0",
+      "name": "llvm-openmp",
+      "requested": "==16.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "loguru==0.6.0",
+      "name": "loguru",
+      "requested": "==0.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lz4-c==1.9.4",
+      "name": "lz4-c",
+      "requested": "==1.9.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mako==1.2.4",
+      "name": "mako",
+      "requested": "==1.2.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markdown==3.4.3",
+      "name": "markdown",
+      "requested": "==3.4.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markupsafe==2.1.2",
+      "name": "markupsafe",
+      "requested": "==2.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.7.1",
+      "name": "matplotlib",
+      "requested": "==3.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib-inline==0.1.6",
+      "name": "matplotlib-inline",
+      "requested": "==0.1.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mccabe==0.7.0",
+      "name": "mccabe",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mistune==2.0.5",
+      "name": "mistune",
+      "requested": "==2.0.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mkl-devel==2022.1.0",
+      "name": "mkl-devel",
+      "requested": "==2022.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mkl-include==2022.1.0",
+      "name": "mkl-include",
+      "requested": "==2022.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mpg123==1.31.3",
+      "name": "mpg123",
+      "requested": "==1.31.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "multidict==6.0.4",
+      "name": "multidict",
+      "requested": "==6.0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "munkres==1.1.4",
+      "name": "munkres",
+      "requested": "==1.1.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mypy_extensions==1.0.0",
+      "name": "mypy_extensions",
+      "requested": "==1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mysql-common==8.0.32",
+      "name": "mysql-common",
+      "requested": "==8.0.32",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mysql-libs==8.0.32",
+      "name": "mysql-libs",
+      "requested": "==8.0.32",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nbclassic==0.5.3",
+      "name": "nbclassic",
+      "requested": "==0.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nbclient==0.7.2",
+      "name": "nbclient",
+      "requested": "==0.7.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nbconvert==7.2.9",
+      "name": "nbconvert",
+      "requested": "==7.2.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nbconvert-core==7.2.9",
+      "name": "nbconvert-core",
+      "requested": "==7.2.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nbconvert-pandoc==7.2.9",
+      "name": "nbconvert-pandoc",
+      "requested": "==7.2.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nbformat==5.8.0",
+      "name": "nbformat",
+      "requested": "==5.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ncurses==6.3",
+      "name": "ncurses",
+      "requested": "==6.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nest-asyncio==1.5.6",
+      "name": "nest-asyncio",
+      "requested": "==1.5.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "notebook==6.5.3",
+      "name": "notebook",
+      "requested": "==6.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "notebook-shim==0.2.2",
+      "name": "notebook-shim",
+      "requested": "==0.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nspr==4.35",
+      "name": "nspr",
+      "requested": "==4.35",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nss==3.89",
+      "name": "nss",
+      "requested": "==3.89",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.24.2",
+      "name": "numpy",
+      "requested": "==1.24.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "oauthlib==3.2.2",
+      "name": "oauthlib",
+      "requested": "==3.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openjpeg==2.5.0",
+      "name": "openjpeg",
+      "requested": "==2.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "optuna==3.1.0",
+      "name": "optuna",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "orc==1.8.3",
+      "name": "orc",
+      "requested": "==1.8.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==23.0",
+      "name": "packaging",
+      "requested": "==23.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.5.3",
+      "name": "pandas",
+      "requested": "==1.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandoc==3.1.1",
+      "name": "pandoc",
+      "requested": "==3.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandocfilters==1.5.0",
+      "name": "pandocfilters",
+      "requested": "==1.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "panel==0.10.3",
+      "name": "panel",
+      "requested": "==0.10.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pango==1.50.14",
+      "name": "pango",
+      "requested": "==1.50.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "param==1.13.0",
+      "name": "param",
+      "requested": "==1.13.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "parquet-cpp==1.5.1",
+      "name": "parquet-cpp",
+      "requested": "==1.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "parso==0.8.3",
+      "name": "parso",
+      "requested": "==0.8.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pathspec==0.11.1",
+      "name": "pathspec",
+      "requested": "==0.11.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "patsy==0.5.3",
+      "name": "patsy",
+      "requested": "==0.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pcre2==10.40",
+      "name": "pcre2",
+      "requested": "==10.40",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pexpect==4.8.0",
+      "name": "pexpect",
+      "requested": "==4.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pickleshare==0.7.5",
+      "name": "pickleshare",
+      "requested": "==0.7.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==9.4.0",
+      "name": "pillow",
+      "requested": "==9.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pixman==0.40.0",
+      "name": "pixman",
+      "requested": "==0.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pkgutil-resolve-name==1.3.10",
+      "name": "pkgutil-resolve-name",
+      "requested": "==1.3.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "platformdirs==3.2.0",
+      "name": "platformdirs",
+      "requested": "==3.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "plotly==5.13.1",
+      "name": "plotly",
+      "requested": "==5.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ply==3.11",
+      "name": "ply",
+      "requested": "==3.11",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pooch==1.7.0",
+      "name": "pooch",
+      "requested": "==1.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "prometheus_client==0.16.0",
+      "name": "prometheus_client",
+      "requested": "==0.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "prompt-toolkit==3.0.38",
+      "name": "prompt-toolkit",
+      "requested": "==3.0.38",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "prompt_toolkit==3.0.38",
+      "name": "prompt_toolkit",
+      "requested": "==3.0.38",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==4.21.12",
+      "name": "protobuf",
+      "requested": "==4.21.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "psutil==5.9.4",
+      "name": "psutil",
+      "requested": "==5.9.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pthread-stubs==0.4",
+      "name": "pthread-stubs",
+      "requested": "==0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ptyprocess==0.7.0",
+      "name": "ptyprocess",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pulseaudio==16.1",
+      "name": "pulseaudio",
+      "requested": "==16.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pulseaudio-client==16.1",
+      "name": "pulseaudio-client",
+      "requested": "==16.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pulseaudio-daemon==16.1",
+      "name": "pulseaudio-daemon",
+      "requested": "==16.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pure_eval==0.2.2",
+      "name": "pure_eval",
+      "requested": "==0.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyarrow==11.0.0",
+      "name": "pyarrow",
+      "requested": "==11.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyasn1==0.4.8",
+      "name": "pyasn1",
+      "requested": "==0.4.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyasn1-modules==0.2.7",
+      "name": "pyasn1-modules",
+      "requested": "==0.2.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pycodestyle==2.10.0",
+      "name": "pycodestyle",
+      "requested": "==2.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pycparser==2.21",
+      "name": "pycparser",
+      "requested": "==2.21",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyct==0.4.6",
+      "name": "pyct",
+      "requested": "==0.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyct-core==0.4.6",
+      "name": "pyct-core",
+      "requested": "==0.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyflakes==3.0.1",
+      "name": "pyflakes",
+      "requested": "==3.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pygments==2.14.0",
+      "name": "pygments",
+      "requested": "==2.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyjwt==2.6.0",
+      "name": "pyjwt",
+      "requested": "==2.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyopenssl==23.1.0",
+      "name": "pyopenssl",
+      "requested": "==23.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.0.9",
+      "name": "pyparsing",
+      "requested": "==3.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyqt==5.15.7",
+      "name": "pyqt",
+      "requested": "==5.15.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyqt5-sip==12.11.0",
+      "name": "pyqt5-sip",
+      "requested": "==12.11.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyrsistent==0.19.3",
+      "name": "pyrsistent",
+      "requested": "==0.19.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pysocks==1.7.1",
+      "name": "pysocks",
+      "requested": "==1.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.8.2",
+      "name": "python-dateutil",
+      "requested": "==2.8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-fastjsonschema==2.16.3",
+      "name": "python-fastjsonschema",
+      "requested": "==2.16.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-graphviz==0.20.1",
+      "name": "python-graphviz",
+      "requested": "==0.20.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-json-logger==2.0.7",
+      "name": "python-json-logger",
+      "requested": "==2.0.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python_abi==3.9",
+      "name": "python_abi",
+      "requested": "==3.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.13.1",
+      "name": "torch",
+      "requested": "==1.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytorch-mutex==1.0",
+      "name": "pytorch-mutex",
+      "requested": "==1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2023.2",
+      "name": "pytz",
+      "requested": "==2023.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyu2f==0.1.5",
+      "name": "pyu2f",
+      "requested": "==0.1.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyviz_comms==2.2.1",
+      "name": "pyviz_comms",
+      "requested": "==2.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyyaml==6.0",
+      "name": "pyyaml",
+      "requested": "==6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyzmq==25.0.2",
+      "name": "pyzmq",
+      "requested": "==25.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "qt-main==5.15.8",
+      "name": "qt-main",
+      "requested": "==5.15.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "re2==2023.02.02",
+      "name": "re2",
+      "requested": "==2023.02.02",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "readline==8.2",
+      "name": "readline",
+      "requested": "==8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.28.2",
+      "name": "requests",
+      "requested": "==2.28.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-oauthlib==1.3.1",
+      "name": "requests-oauthlib",
+      "requested": "==1.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rfc3339-validator==0.1.4",
+      "name": "rfc3339-validator",
+      "requested": "==0.1.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rfc3986-validator==0.1.1",
+      "name": "rfc3986-validator",
+      "requested": "==0.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rsa==4.9",
+      "name": "rsa",
+      "requested": "==4.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "s2n==1.3.41",
+      "name": "s2n",
+      "requested": "==1.3.41",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.2.2",
+      "name": "scikit-learn",
+      "requested": "==1.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.10.1",
+      "name": "scipy",
+      "requested": "==1.10.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.12.2",
+      "name": "seaborn",
+      "requested": "==0.12.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn-base==0.12.2",
+      "name": "seaborn-base",
+      "requested": "==0.12.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "send2trash==1.8.0",
+      "name": "send2trash",
+      "requested": "==1.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "setuptools==67.6.0",
+      "name": "setuptools",
+      "requested": "==67.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sip==6.7.7",
+      "name": "sip",
+      "requested": "==6.7.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.16.0",
+      "name": "six",
+      "requested": "==1.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "snappy==1.1.10",
+      "name": "snappy",
+      "requested": "==1.1.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sniffio==1.3.0",
+      "name": "sniffio",
+      "requested": "==1.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "soupsieve==2.3.2.post1",
+      "name": "soupsieve",
+      "requested": "==2.3.2.post1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sqlalchemy==2.0.7",
+      "name": "sqlalchemy",
+      "requested": "==2.0.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "stack_data==0.6.2",
+      "name": "stack_data",
+      "requested": "==0.6.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "statsmodels==0.13.5",
+      "name": "statsmodels",
+      "requested": "==0.13.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tbb==2021.8.0",
+      "name": "tbb",
+      "requested": "==2021.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tenacity==8.2.2",
+      "name": "tenacity",
+      "requested": "==8.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard==2.12.0",
+      "name": "tensorboard",
+      "requested": "==2.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard-data-server==0.7.0",
+      "name": "tensorboard-data-server",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard-plugin-wit==1.8.1",
+      "name": "tensorboard-plugin-wit",
+      "requested": "==1.8.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "terminado==0.17.1",
+      "name": "terminado",
+      "requested": "==0.17.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==3.1.0",
+      "name": "threadpoolctl",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tinycss2==1.2.1",
+      "name": "tinycss2",
+      "requested": "==1.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tk==8.6.12",
+      "name": "tk",
+      "requested": "==8.6.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "toml==0.10.2",
+      "name": "toml",
+      "requested": "==0.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tomli==2.0.1",
+      "name": "tomli",
+      "requested": "==2.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tomli-w==1.0.0",
+      "name": "tomli-w",
+      "requested": "==1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchinfo==1.7.2",
+      "name": "torchinfo",
+      "requested": "==1.7.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tornado==6.2",
+      "name": "tornado",
+      "requested": "==6.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.65.0",
+      "name": "tqdm",
+      "requested": "==4.65.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "traitlets==5.9.0",
+      "name": "traitlets",
+      "requested": "==5.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing-extensions==4.5.0",
+      "name": "typing-extensions",
+      "requested": "==4.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.5.0",
+      "name": "typing_extensions",
+      "requested": "==4.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tzdata==2023b",
+      "name": "tzdata",
+      "requested": "==2023b",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ucx==1.14.0",
+      "name": "ucx",
+      "requested": "==1.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "unicodedata2==15.0.0",
+      "name": "unicodedata2",
+      "requested": "==15.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==1.26.15",
+      "name": "urllib3",
+      "requested": "==1.26.15",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "voila==0.4.0",
+      "name": "voila",
+      "requested": "==0.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wcwidth==0.2.6",
+      "name": "wcwidth",
+      "requested": "==0.2.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "webencodings==0.5.1",
+      "name": "webencodings",
+      "requested": "==0.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "websocket-client==1.5.1",
+      "name": "websocket-client",
+      "requested": "==1.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "websockets==10.4",
+      "name": "websockets",
+      "requested": "==10.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "werkzeug==2.2.3",
+      "name": "werkzeug",
+      "requested": "==2.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wheel==0.40.0",
+      "name": "wheel",
+      "requested": "==0.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "widgetsnbextension==4.0.6",
+      "name": "widgetsnbextension",
+      "requested": "==4.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xcb-util==0.4.0",
+      "name": "xcb-util",
+      "requested": "==0.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xcb-util-image==0.4.0",
+      "name": "xcb-util-image",
+      "requested": "==0.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xcb-util-keysyms==0.4.0",
+      "name": "xcb-util-keysyms",
+      "requested": "==0.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xcb-util-renderutil==0.3.9",
+      "name": "xcb-util-renderutil",
+      "requested": "==0.3.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xcb-util-wm==0.4.1",
+      "name": "xcb-util-wm",
+      "requested": "==0.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xkeyboard-config==2.38",
+      "name": "xkeyboard-config",
+      "requested": "==2.38",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xyzservices==2023.2.0",
+      "name": "xyzservices",
+      "requested": "==2023.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xz==5.2.6",
+      "name": "xz",
+      "requested": "==5.2.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "y-py==0.5.9",
+      "name": "y-py",
+      "requested": "==0.5.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "yaml==0.2.5",
+      "name": "yaml",
+      "requested": "==0.2.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "yarl==1.8.2",
+      "name": "yarl",
+      "requested": "==1.8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ypy-websocket==0.8.2",
+      "name": "ypy-websocket",
+      "requested": "==0.8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zeromq==4.3.4",
+      "name": "zeromq",
+      "requested": "==4.3.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zipp==3.15.0",
+      "name": "zipp",
+      "requested": "==3.15.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zlib==1.2.13",
+      "name": "zlib",
+      "requested": "==1.2.13",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zstd==1.5.2",
+      "name": "zstd",
+      "requested": "==1.5.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "delu==0.0.15",
+      "name": "delu",
+      "requested": "==0.0.15",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "einops==0.6.1",
+      "name": "einops",
+      "requested": "==0.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rtdl==0.0.13",
+      "name": "rtdl",
+      "requested": "==0.0.13",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xgboost==1.7.4",
+      "name": "xgboost",
+      "requested": "==1.7.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/bin/tabr.py exp/tabr/california/0-evaluation/0.toml --force\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.322s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/bin/tabr.py\", line 19, in <module>\n    import delu\nModuleNotFoundError: No module named 'delu'\n"
+}

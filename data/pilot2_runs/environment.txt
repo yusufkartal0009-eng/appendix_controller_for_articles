@@ -1,11 +1,22 @@
-Pilot 2 environment, recorded 2026-10-10T11:30:16+00:00 by scripts/record_pilot2_environment.py
+Pilot 2 environment, recorded 2026-10-10T18:47:00+00:00 by scripts/record_pilot2_environment.py
 
 === git rev-parse HEAD
-705e6506b046874ed63669f6320dea87d51329c6
+a98e1099f90d753bc8d19cbb3b729b83ee1940fe
 [exit code 0]
 
 === git status --short
-A  scripts/record_pilot2_environment.py
+ M data/pilot2_runs/environment.txt
+?? data/pilot2_runs/environment_at_start.txt
+?? data/pilot2_runs/failure_categories.json
+?? data/pilot2_runs/first_attempts/
+?? data/pilot2_runs/measurements.json
+?? data/pilot2_runs/measurements.md
+?? data/pilot2_runs/paper_002/
+?? data/pilot2_runs/paper_003/
+?? data/pilot2_runs/paper_004/
+?? data/pilot2_runs/paper_005/
+?? data/pilot2_runs/paper_006/
+?? data/pilot2_runs/paper_008/
 [exit code 0]
 
 === docker version
@@ -147,7 +158,7 @@ Server:
 [exit code 0]
 
 === nvidia-smi
-Sat Oct 10 14:30:17 2026       
+Sat Oct 10 21:47:01 2026       
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 591.86                 Driver Version: 591.86         CUDA Version: 13.1     |
 +-----------------------------------------+------------------------+----------------------+
@@ -156,7 +167,7 @@ Sat Oct 10 14:30:17 2026
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA GeForce RTX 5070      WDDM  |   00000000:01:00.0  On |                  N/A |
-|  0%   40C    P5             15W /  250W |    1607MiB /  12227MiB |      1%      Default |
+|  0%   45C    P0             25W /  250W |    1847MiB /  12227MiB |      6%      Default |
 |                                         |                        |                  N/A |
 +-----------------------------------------+------------------------+----------------------+
 
@@ -166,7 +177,8 @@ Sat Oct 10 14:30:17 2026
 |        ID   ID                                                               Usage      |
 |=========================================================================================|
 |    0   N/A  N/A            7140    C+G   ...t\Edge\Application\msedge.exe      N/A      |
-|    0   N/A  N/A            9612    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A            8076    C+G   ...64__zpdnekdrzrea0\Spotify.exe      N/A      |
+|    0   N/A  N/A            8576    C+G   ...indows\System32\ShellHost.exe      N/A      |
 |    0   N/A  N/A           10188    C+G   C:\Windows\explorer.exe               N/A      |
 |    0   N/A  N/A           10512    C+G   ...2txyewy\CrossDeviceResume.exe      N/A      |
 |    0   N/A  N/A           10968    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
@@ -185,9 +197,10 @@ Sat Oct 10 14:30:17 2026
 |    0   N/A  N/A           20456    C+G   ...s\Win64\EpicGamesLauncher.exe      N/A      |
 |    0   N/A  N/A           21064    C+G   ...aude\app-2.31226.1\claude.exe      N/A      |
 |    0   N/A  N/A           21524    C+G   ...aries\Win64\EpicWebHelper.exe      N/A      |
+|    0   N/A  N/A           22176    C+G   ....0.4258.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           22800    C+G   ...8wekyb3d8bbwe\M365Copilot.exe      N/A      |
 |    0   N/A  N/A           23516    C+G   ...ayRenderer-Win64-Shipping.exe      N/A      |
 |    0   N/A  N/A           23836    C+G   ...aude\app-2.31226.1\claude.exe      N/A      |
-|    0   N/A  N/A           24492    C+G   ...64__zpdnekdrzrea0\Spotify.exe      N/A      |
 |    0   N/A  N/A           24720    C+G   ....0.4258.62\msedgewebview2.exe      N/A      |
 |    0   N/A  N/A           25572    C+G   ...yb3d8bbwe\WindowsTerminal.exe      N/A      |
 |    0   N/A  N/A           26372    C+G   ...4__8wekyb3d8bbwe\ms-teams.exe      N/A      |
@@ -202,7 +215,7 @@ Sat Oct 10 14:30:17 2026
 [exit code 0]
 
 === python scripts/gpu_check.py
-$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --gpus all -e SANDBOX_GPUS_REQUESTED=1 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_WORKDIR=/workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v C:\Users\USER\AppData\Local\Temp\gpu_check_repo_pcqaqscs:/workspace/repo:ro -v C:\Users\USER\appendix_controller_for_articles\sandbox_runs\gpu_check:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_gpu.py
+$ docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --security-opt no-new-privileges:true --user 1000:1000 --gpus all -e SANDBOX_GPUS_REQUESTED=1 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_WORKDIR=/workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v C:\Users\USER\AppData\Local\Temp\gpu_check_repo_a04uuz3o:/workspace/repo:ro -v C:\Users\USER\appendix_controller_for_articles\sandbox_runs\gpu_check:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_gpu.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -219,21 +232,21 @@ root filesystem: read-only (Read-only file system)
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.252s
+Duration      : 0.24s
 ==================================================
-run report GPU summary: {"requested": "all", "available": true, "devices": [{"index": 0, "name": "NVIDIA GeForce RTX 5070", "driver": "591.86", "memory_total_mib": 12227, "memory_used_before_mib": 1607}], "peak_memory_used_mib": 1607, "used": false}
+run report GPU summary: {"requested": "all", "available": true, "devices": [{"index": 0, "name": "NVIDIA GeForce RTX 5070", "driver": "591.86", "memory_total_mib": 12227, "memory_used_before_mib": 1845}], "peak_memory_used_mib": 1845, "used": false}
 GPU visible with isolation intact: YES
 [exit code 0]
 
 === docker image ls repro-radar-sandbox
 IMAGE                             ID             DISK USAGE   CONTENT SIZE   EXTRA
-repro-radar-sandbox:build         930413cf1504       1.13GB          265MB        
-repro-radar-sandbox:latest        7a1da515568c        697MB          159MB        
-repro-radar-sandbox:py3.8         d9507fd5170a        629MB          145MB        
-repro-radar-sandbox:py3.8-build   dbe97eb1a4ca       1.07GB          251MB        
-repro-radar-sandbox:py3.9         ed5fdfb57517        676MB          155MB        
-repro-radar-sandbox:py3.9-build   e2a44bc651e5       1.14GB          270MB
+repro-radar-sandbox:build         02f403bde627       1.13GB          265MB        
+repro-radar-sandbox:latest        e09a4535f503        697MB          159MB        
+repro-radar-sandbox:py3.8         7a426a58d8fa        629MB          145MB        
+repro-radar-sandbox:py3.8-build   16d186027f2c       1.07GB          251MB        
+repro-radar-sandbox:py3.9         f9b816ef856a        676MB          155MB        
+repro-radar-sandbox:py3.9-build   6adb48def818       1.14GB          270MB
 [exit code 0]
 
 === disk usage of the drive holding the repository (shutil.disk_usage)
-total=999147171840 used=522017890304 free=477129281536
+total=999147171840 used=560948232192 free=438198939648

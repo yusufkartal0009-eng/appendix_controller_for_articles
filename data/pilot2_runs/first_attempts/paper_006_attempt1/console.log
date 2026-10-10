@@ -1,0 +1,865 @@
+Exception in thread Thread-23 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 191: character maps to <undefined>
+Exception in thread Thread-33 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 222: character maps to <undefined>
+Exception in thread Thread-45 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 240: character maps to <undefined>
+Exception in thread Thread-51 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 225: character maps to <undefined>
+Exception in thread Thread-101 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 192: character maps to <undefined>
+Exception in thread Thread-105 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 190: character maps to <undefined>
+Exception in thread Thread-123 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 200: character maps to <undefined>
+Exception in thread Thread-129 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 228: character maps to <undefined>
+Exception in thread Thread-141 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 229: character maps to <undefined>
+Exception in thread Thread-157 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 195: character maps to <undefined>
+Exception in thread Thread-169 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 192: character maps to <undefined>
+Exception in thread Thread-171 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 223: character maps to <undefined>
+Exception in thread Thread-199 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 216: character maps to <undefined>
+Exception in thread Thread-207 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 270: character maps to <undefined>
+Exception in thread Thread-215 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 225: character maps to <undefined>
+Exception in thread Thread-219 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 192: character maps to <undefined>
+Exception in thread Thread-237 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 214: character maps to <undefined>
+Exception in thread Thread-241 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 216: character maps to <undefined>
+Exception in thread Thread-243 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 222: character maps to <undefined>
+Exception in thread Thread-253 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 237: character maps to <undefined>
+Exception in thread Thread-255 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 214: character maps to <undefined>
+Exception in thread Thread-285 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 232: character maps to <undefined>
+Exception in thread Thread-295 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 197: character maps to <undefined>
+{
+  "paper_id": "paper_006",
+  "protocol": "docs/PILOT_2.md",
+  "repro_radar_commit": "51c7f313697b05eec50b1ee331c0c1f4137f98fa",
+  "started_at": "2026-10-10T12:16:34+00:00",
+  "repo_url": "https://github.com/somepago/saint",
+  "pinned_commit": "e288e84c77a54cfd2ffb55a53678fb7cbbb16630",
+  "target_script": "train.py",
+  "container_command": "python /workspace/repo/train.py --dset_id 1461 --task binary --savemodelroot /workspace/output/bestmodels",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "e288e84c77a54cfd2ffb55a53678fb7cbbb16630",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": true,
+    "duration_seconds": 0.978
+  },
+  "python_version": "3.8",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": {
+      "sdists": [
+        "openml==0.11.0",
+        "liac-arff==2.5.0"
+      ],
+      "from_repo": false,
+      "build_requirements": [],
+      "source": "saint_environment.yml pins openml=0.11.0 and liac-arff=2.5.0; both exist on PyPI only as sdists. The other sdist-only pins of the environment are not imported by the pilot command (wandb and its dependencies only with --active_log) (#193)"
+    },
+    "decision": "fix",
+    "data_mounts": [
+      "/workspace/home/.openml/cache"
+    ]
+  },
+  "build": {
+    "status": "BUILT",
+    "exit_code": 0,
+    "image": "repro-radar-sandbox:py3.8-build",
+    "targets": [
+      "/workspace/packages/openml-0.11.0.tar.gz",
+      "/workspace/packages/liac-arff-2.5.0.tar.gz"
+    ],
+    "build_requirements": [],
+    "wheels": [
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_006.build\\built_wheels\\liac_arff-2.5.0-py3-none-any.whl",
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_006.build\\built_wheels\\openml-0.11.0-py3-none-any.whl"
+    ],
+    "duration_seconds": 7.63,
+    "log_tail": "Looking in links: /workspace/packages\nProcessing /workspace/packages/openml-0.11.0.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nProcessing /workspace/packages/liac-arff-2.5.0.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nBuilding wheels for collected packages: openml, liac-arff\n  Building wheel for openml (setup.py): started\n  Building wheel for openml (setup.py): finished with status 'done'\n  Created wheel for openml: filename=openml-0.11.0-py3-none-any.whl size=127462 sha256=ad7c5bd030f8807ab980140270ec705bb1957f5969aa555f75df833d8c77fd0f\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-j5gml9nw/wheels/19/c2/99/c1c12c11151c162b64232d1d059ff2ae91ca6529c179779b6a\n  Building wheel for liac-arff (setup.py): started\n  Building wheel for liac-arff (setup.py): finished with status 'done'\n  Created wheel for liac-arff: filename=liac_arff-2.5.0-py3-none-any.whl size=11731 sha256=3bf64822b63d1deaf89db4fc5cdb0760c32a841f94f93c6ee956c5990905ed73\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-j5gml9nw/wheels/1b/e0/87/1886a1e3a038bf761cf3d29f6ed33c3107fbf4ae6d6b19ab03\nSuccessfully built openml liac-arff\n",
+    "sdists": [
+      "openml-0.11.0.tar.gz",
+      "liac-arff-2.5.0.tar.gz"
+    ],
+    "duration_seconds_total": 9.437
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "source": "conda_env",
+    "python_version": "3.8",
+    "env_python_versions": [
+      "3.8"
+    ],
+    "conda_env_files": [
+      "saint_environment.yml"
+    ],
+    "converted": 154,
+    "downloaded": [
+      "anyio==3.2.1",
+      "argh==0.26.2",
+      "argon2-cffi==20.1.0",
+      "async_generator==1.10",
+      "attrs==21.2.0",
+      "babel==2.9.1",
+      "backcall==0.2.0",
+      "backports.functools_lru_cache==1.6.4",
+      "bleach==3.3.1",
+      "brotlipy==0.7.0",
+      "cffi==1.14.5",
+      "chardet==4.0.0",
+      "click==8.0.1",
+      "configparser==5.0.2",
+      "cryptography==3.4.7",
+      "cycler==0.10.0",
+      "debugpy==1.3.0",
+      "decorator==5.0.9",
+      "defusedxml==0.7.1",
+      "docker-pycreds==0.4.0",
+      "einops==0.3.0",
+      "entrypoints==0.3",
+      "gitdb==4.0.7",
+      "gitpython==3.1.17",
+      "graphql-core==3.1.5",
+      "idna==2.10",
+      "importlib-metadata==4.6.1",
+      "ipykernel==6.0.2",
+      "ipython==7.25.0",
+      "ipython_genutils==0.2.0",
+      "jedi==0.18.0",
+      "jinja2==3.0.1",
+      "joblib==0.17.0",
+      "json5==0.9.5",
+      "jsonschema==3.2.0",
+      "jupyter_client==6.1.12",
+      "jupyter_core==4.7.1",
+      "jupyter_server==1.9.0",
+      "jupyterlab==3.0.16",
+      "jupyterlab_pygments==0.1.2",
+      "jupyterlab_server==2.6.1",
+      "kiwisolver==1.3.1",
+      "liac-arff==2.5.0",
+      "markupsafe==2.0.1",
+      "matplotlib==3.4.2",
+      "matplotlib-inline==0.1.2",
+      "mistune==0.8.4",
+      "mkl-service==2.4.0",
+      "mkl_fft==1.3.0",
+      "mkl_random==1.2.2",
+      "nbclassic==0.3.1",
+      "nbclient==0.5.3",
+      "nbconvert==6.1.0",
+      "nbformat==5.1.3",
+      "nest-asyncio==1.5.1",
+      "ninja==1.10.2",
+      "notebook==6.4.0",
+      "numpy==1.20.2",
+      "openml==0.11.0",
+      "packaging==21.0",
+      "pandas==1.2.4",
+      "parso==0.8.2",
+      "pexpect==4.8.0",
+      "pickleshare==0.7.5",
+      "pillow==8.2.0",
+      "prometheus_client==0.11.0",
+      "prompt-toolkit==3.0.19",
+      "protobuf==3.17.2",
+      "psutil==5.8.0",
+      "ptyprocess==0.7.0",
+      "xgboost==1.4.0",
+      "pycparser==2.20",
+      "pygments==2.9.0",
+      "pyopenssl==20.0.1",
+      "pyparsing==2.4.7",
+      "pysocks==1.7.1",
+      "python-dateutil==2.8.1",
+      "torch==1.8.1",
+      "pytz==2021.1",
+      "pyyaml==5.4.1",
+      "pyzmq==22.1.0",
+      "requests==2.25.1",
+      "requests-unixsocket==0.2.0",
+      "scikit-learn==0.23.2",
+      "scipy==1.6.2",
+      "seaborn==0.11.0",
+      "send2trash==1.7.1",
+      "sentry-sdk==1.1.0",
+      "shortuuid==1.0.1",
+      "six==1.16.0",
+      "smmap==3.0.5",
+      "sniffio==1.2.0",
+      "terminado==0.10.1",
+      "testpath==0.5.0",
+      "threadpoolctl==2.1.0",
+      "torchvision==0.9.1",
+      "tornado==6.1",
+      "traitlets==5.0.5",
+      "typing_extensions==3.7.4.3",
+      "urllib3==1.26.5",
+      "wandb==0.10.31",
+      "wcwidth==0.2.5",
+      "webencodings==0.5.1",
+      "websocket-client==0.57.0",
+      "xmltodict==0.12.0",
+      "zipp==3.5.0"
+    ],
+    "conda_only": [
+      {
+        "requirement": "backports==1.0",
+        "reason": "ERROR: No matching distribution found for backports==1.0"
+      },
+      {
+        "requirement": "bzip2==1.0.8",
+        "reason": "ERROR: No matching distribution found for bzip2==1.0.8"
+      },
+      {
+        "requirement": "dbus==1.13.18",
+        "reason": "ERROR: No matching distribution found for dbus==1.13.18"
+      },
+      {
+        "requirement": "expat==2.4.1",
+        "reason": "ERROR: No matching distribution found for expat==2.4.1"
+      },
+      {
+        "requirement": "ffmpeg==4.3",
+        "reason": "ERROR: No matching distribution found for ffmpeg==4.3"
+      },
+      {
+        "requirement": "freetype==2.10.4",
+        "reason": "ERROR: No matching distribution found for freetype==2.10.4"
+      },
+      {
+        "requirement": "gettext==0.19.8.1",
+        "reason": "ERROR: No matching distribution found for gettext==0.19.8.1"
+      },
+      {
+        "requirement": "glib==2.68.3",
+        "reason": "ERROR: No matching distribution found for glib==2.68.3"
+      },
+      {
+        "requirement": "glib-tools==2.68.3",
+        "reason": "ERROR: No matching distribution found for glib-tools==2.68.3"
+      },
+      {
+        "requirement": "gmp==6.2.1",
+        "reason": "ERROR: No matching distribution found for gmp==6.2.1"
+      },
+      {
+        "requirement": "gnutls==3.6.13",
+        "reason": "ERROR: No matching distribution found for gnutls==3.6.13"
+      },
+      {
+        "requirement": "gql==0.1.0",
+        "reason": "ERROR: No matching distribution found for gql==0.1.0"
+      },
+      {
+        "requirement": "gst-plugins-base==1.14.0",
+        "reason": "ERROR: No matching distribution found for gst-plugins-base==1.14.0"
+      },
+      {
+        "requirement": "gstreamer==1.14.0",
+        "reason": "ERROR: No matching distribution found for gstreamer==1.14.0"
+      },
+      {
+        "requirement": "icu==58.2",
+        "reason": "ERROR: No matching distribution found for icu==58.2"
+      },
+      {
+        "requirement": "ipdb==0.13.9",
+        "reason": "ERROR: No matching distribution found for ipdb==0.13.9"
+      },
+      {
+        "requirement": "jpeg==9b",
+        "reason": "ERROR: No matching distribution found for jpeg==9b"
+      },
+      {
+        "requirement": "lame==3.100",
+        "reason": "ERROR: No matching distribution found for lame==3.100"
+      },
+      {
+        "requirement": "lcms2==2.12",
+        "reason": "ERROR: No matching distribution found for lcms2==2.12"
+      },
+      {
+        "requirement": "lz4-c==1.9.3",
+        "reason": "ERROR: No matching distribution found for lz4-c==1.9.3"
+      },
+      {
+        "requirement": "ncurses==6.2",
+        "reason": "ERROR: No matching distribution found for ncurses==6.2"
+      },
+      {
+        "requirement": "nettle==3.6",
+        "reason": "ERROR: No matching distribution found for nettle==3.6"
+      },
+      {
+        "requirement": "numpy-base==1.20.2",
+        "reason": "ERROR: No matching distribution found for numpy-base==1.20.2"
+      },
+      {
+        "requirement": "olefile==0.46",
+        "reason": "ERROR: No matching distribution found for olefile==0.46"
+      },
+      {
+        "requirement": "openh264==2.1.1",
+        "reason": "ERROR: No matching distribution found for openh264==2.1.1"
+      },
+      {
+        "requirement": "pandoc==2.14.0.3",
+        "reason": "ERROR: No matching distribution found for pandoc==2.14.0.3"
+      },
+      {
+        "requirement": "pandocfilters==1.4.2",
+        "reason": "ERROR: No matching distribution found for pandocfilters==1.4.2"
+      },
+      {
+        "requirement": "pathtools==0.1.2",
+        "reason": "ERROR: No matching distribution found for pathtools==0.1.2"
+      },
+      {
+        "requirement": "pcre==8.45",
+        "reason": "ERROR: No matching distribution found for pcre==8.45"
+      },
+      {
+        "requirement": "promise==2.3",
+        "reason": "ERROR: No matching distribution found for promise==2.3"
+      },
+      {
+        "requirement": "pthread-stubs==0.4",
+        "reason": "ERROR: No matching distribution found for pthread-stubs==0.4"
+      },
+      {
+        "requirement": "pyqt==5.9.2",
+        "reason": "ERROR: No matching distribution found for pyqt==5.9.2"
+      },
+      {
+        "requirement": "pyrsistent==0.17.3",
+        "reason": "ERROR: No matching distribution found for pyrsistent==0.17.3"
+      },
+      {
+        "requirement": "python-wget==3.2",
+        "reason": "ERROR: No matching distribution found for python-wget==3.2"
+      },
+      {
+        "requirement": "python_abi==3.8",
+        "reason": "ERROR: No matching distribution found for python_abi==3.8"
+      },
+      {
+        "requirement": "qt==5.9.7",
+        "reason": "ERROR: No matching distribution found for qt==5.9.7"
+      },
+      {
+        "requirement": "readline==8.1",
+        "reason": "ERROR: No matching distribution found for readline==8.1"
+      },
+      {
+        "requirement": "sip==4.19.13",
+        "reason": "ERROR: No matching distribution found for sip==4.19.13"
+      },
+      {
+        "requirement": "sqlite==3.35.5",
+        "reason": "ERROR: No matching distribution found for sqlite==3.35.5"
+      },
+      {
+        "requirement": "subprocess32==3.5.4",
+        "reason": "ERROR: No matching distribution found for subprocess32==3.5.4"
+      },
+      {
+        "requirement": "tk==8.6.10",
+        "reason": "ERROR: No matching distribution found for tk==8.6.10"
+      },
+      {
+        "requirement": "watchdog==0.10.4",
+        "reason": "ERROR: No matching distribution found for watchdog==0.10.4"
+      },
+      {
+        "requirement": "wget==1.20.1",
+        "reason": "ERROR: No matching distribution found for wget==1.20.1"
+      },
+      {
+        "requirement": "xz==5.2.5",
+        "reason": "ERROR: No matching distribution found for xz==5.2.5"
+      },
+      {
+        "requirement": "yaml==0.2.5",
+        "reason": "ERROR: No matching distribution found for yaml==0.2.5"
+      },
+      {
+        "requirement": "zeromq==4.3.4",
+        "reason": "ERROR: No matching distribution found for zeromq==4.3.4"
+      },
+      {
+        "requirement": "zlib==1.2.11",
+        "reason": "ERROR: No matching distribution found for zlib==1.2.11"
+      },
+      {
+        "requirement": "zstd==1.4.9",
+        "reason": "ERROR: No matching distribution found for zstd==1.4.9"
+      }
+    ],
+    "skipped": [
+      {
+        "package": "_libgcc_mutex=0.1=conda_forge",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "_openmp_mutex=4.5=1_gnu",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "_py-xgboost-mutex=2.0=cpu_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "blas=1.0=mkl",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "ca-certificates=2021.5.30=ha878542_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "certifi=2021.5.30=py38h578d9bd_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cudatoolkit=11.1.1=h6406543_8",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "fontconfig=2.13.1=hba837de_1005",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "intel-openmp=2021.2.0=h06a4308_610",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "ld_impl_linux-64=2.35.1=hea4e1c9_2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libffi=3.3=h58526e2_2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgcc-ng=9.3.0=h2828fa1_19",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgfortran-ng=7.3.0=hdf63c60_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libglib=2.68.3=h3e27bee_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgomp=9.3.0=h2828fa1_19",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libiconv=1.16=h516909a_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libidn2=2.3.1=h7f98852_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libpng=1.6.37=h21135ba_2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libprotobuf=3.17.2=h780b84a_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libsodium=1.0.18=h36c2ea0_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libstdcxx-ng=9.3.0=h6de172a_19",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libtiff=4.2.0=h85742a9_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libunistring=0.9.10=h14c3975_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libuuid=2.32.1=h7f98852_1000",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libuv=1.41.0=h7f98852_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libwebp-base=1.2.0=h7f98852_2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libxcb=1.13=h7f98852_1003",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libxgboost=1.4.0=h9c3ff4c_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libxml2=2.9.12=h03d6c58_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "mkl=2021.2.0=h06a4308_296",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "nvidia-ml=7.352.0=py_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "openssl=1.1.1k=h7f98852_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "pip=21.1.2=pyhd8ed1ab_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "setuptools=49.6.0=py38h578d9bd_3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "wheel=0.36.2=pyhd3deb0d_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libxau=1.0.9=h7f98852_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libxdmcp=1.1.3=h7f98852_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      }
+    ],
+    "wheel_count": 106,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_006_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [],
+    "duration_seconds": 351.676
+  },
+  "sandbox_duration_seconds": 7.521,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.51,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 7999488
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 5.901,
+    "peak_memory_bytes": 45092864
+  },
+  "finished_at": "2026-10-10T12:22:44+00:00",
+  "collected_files": [
+    "build.log",
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

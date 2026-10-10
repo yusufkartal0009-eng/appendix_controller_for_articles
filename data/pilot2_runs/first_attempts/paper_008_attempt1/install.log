@@ -1,0 +1,16 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/torch-2.14.1-cp311-cp311-manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/category_encoders-2.11.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/yacs-0.1.8-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/tensorboard-2.21.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/qhoptim-1.1.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/filelock-4.1.0-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/typing_extensions-4.16.0-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/setuptools-84.0.0-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/sympy-1.14.0-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/networkx-3.6.1-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/jinja2-3.1.6-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/fsspec-2026.9.0-py3-none-any.whl (from torch>=1.4.0->-r /workspace/repo/requirements.txt (line 1))
+INFO: pip is looking at multiple versions of torch to determine which version is compatible with other requirements. This could take a while.
+ERROR: Could not find a version that satisfies the requirement cuda-toolkit==13.0.3; platform_system == "Linux" (from torch) (from versions: none)
+ERROR: No matching distribution found for cuda-toolkit==13.0.3; platform_system == "Linux"

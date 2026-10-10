@@ -1,0 +1,1144 @@
+{
+  "paper_id": "paper_004",
+  "protocol": "docs/PILOT_2.md",
+  "repro_radar_commit": "c10340badf71895b81cfeb0ac1f669f0d22b4311",
+  "started_at": "2026-10-10T16:07:20+00:00",
+  "repo_url": "https://github.com/yandex-research/tabular-dl-tabr",
+  "pinned_commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+  "target_script": "bin/tabr.py",
+  "container_command": "python /workspace/repo/bin/tabr.py exp/tabr/california/0-evaluation/0.toml --force",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": ""
+  },
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": true,
+    "duration_seconds": 46.459
+  },
+  "python_version": "3.9",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": true,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "fix",
+    "data_mounts": [
+      "data"
+    ]
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "source": "conda_env",
+    "python_version": "3.9",
+    "env_python_versions": [
+      "3.9"
+    ],
+    "conda_env_files": [
+      "environment-simple.yaml",
+      "environment.yaml"
+    ],
+    "converted": 301,
+    "downloaded": [
+      "catboost==1.1.1",
+      "category_encoders==2.6.0",
+      "gpytorch==1.9.1",
+      "joblib==1.2.0",
+      "jupyterlab==3.6.1",
+      "lightgbm==3.3.5",
+      "loguru==0.6.0",
+      "numpy==1.24.2",
+      "optuna==3.1.0",
+      "pandas==1.5.3",
+      "torch==1.13.1",
+      "scikit-learn==1.2.2",
+      "scipy==1.10.1",
+      "tensorboard==2.12.0",
+      "tomli==2.0.1",
+      "tomli-w==1.0.0",
+      "tqdm==4.65.0",
+      "delu==0.0.15",
+      "einops==0.6.1",
+      "rtdl==0.0.13",
+      "xgboost==1.7.4",
+      "absl-py==1.4.0",
+      "aiofiles==22.1.0",
+      "aiohttp==3.8.4",
+      "aiosignal==1.3.1",
+      "aiosqlite==0.18.0",
+      "alembic==1.10.2",
+      "anyio==3.6.2",
+      "argon2-cffi==21.3.0",
+      "argon2-cffi-bindings==21.2.0",
+      "asttokens==2.2.1",
+      "async-timeout==4.0.2",
+      "attrs==22.2.0",
+      "babel==2.12.1",
+      "backcall==0.2.0",
+      "backports.functools_lru_cache==1.6.4",
+      "beautifulsoup4==4.12.0",
+      "black==23.1.0",
+      "bleach==6.0.0",
+      "blinker==1.5",
+      "bokeh==3.0.3",
+      "brotli==1.0.9",
+      "brotlipy==0.7.0",
+      "cachetools==5.3.0",
+      "certifi==2022.12.7",
+      "cffi==1.15.1",
+      "charset-normalizer==2.1.1",
+      "click==8.1.3",
+      "cmaes==0.9.1",
+      "colorama==0.4.6",
+      "colorcet==3.0.1",
+      "colorlog==6.7.0",
+      "comm==0.1.3",
+      "contourpy==1.0.7",
+      "cryptography==40.0.1",
+      "cycler==0.11.0",
+      "debugpy==1.6.6",
+      "decorator==5.1.1",
+      "defusedxml==0.7.1",
+      "entrypoints==0.4",
+      "executing==1.2.0",
+      "faiss-cpu==1.7.2",
+      "flake8==6.0.0",
+      "flit-core==3.8.0",
+      "frozenlist==1.3.3",
+      "google-auth==2.16.3",
+      "google-auth-oauthlib==0.4.6",
+      "greenlet==2.0.2",
+      "holoviews==1.14.9",
+      "icecream==2.1.3",
+      "idna==3.4",
+      "importlib-metadata==6.1.0",
+      "importlib-resources==5.12.0",
+      "importlib_metadata==6.1.0",
+      "importlib_resources==5.12.0",
+      "ipykernel==6.22.0",
+      "ipython==8.11.0",
+      "ipython_genutils==0.2.0",
+      "ipywidgets==8.0.4",
+      "isort==5.12.0",
+      "jedi==0.18.2",
+      "jinja2==3.1.2",
+      "json5==0.9.5",
+      "jsonschema==4.17.3",
+      "jupyter_client==7.4.1",
+      "jupyter_core==5.3.0",
+      "jupyter_events==0.6.3",
+      "jupyter_server==1.23.6",
+      "jupyter_server_fileid==0.8.0",
+      "jupyter_server_ydoc==0.6.1",
+      "jupyter_ydoc==0.2.3",
+      "jupyterlab_code_formatter==1.5.3",
+      "jupyterlab_pygments==0.2.2",
+      "jupyterlab_server==2.21.0",
+      "jupyterlab_widgets==3.0.6",
+      "kiwisolver==1.4.4",
+      "linear_operator==0.3.0",
+      "mako==1.2.4",
+      "markdown==3.4.3",
+      "markupsafe==2.1.2",
+      "matplotlib==3.7.1",
+      "matplotlib-inline==0.1.6",
+      "mccabe==0.7.0",
+      "mistune==2.0.5",
+      "mkl-devel==2022.1.0",
+      "mkl-include==2022.1.0",
+      "multidict==6.0.4",
+      "munkres==1.1.4",
+      "mypy_extensions==1.0.0",
+      "nbclassic==0.5.3",
+      "nbclient==0.7.2",
+      "nbconvert==7.2.9",
+      "nbformat==5.8.0",
+      "nest-asyncio==1.5.6",
+      "notebook==6.5.3",
+      "notebook-shim==0.2.2",
+      "oauthlib==3.2.2",
+      "packaging==23.0",
+      "pandocfilters==1.5.0",
+      "panel==0.10.3",
+      "param==1.13.0",
+      "parso==0.8.3",
+      "pathspec==0.11.1",
+      "patsy==0.5.3",
+      "pexpect==4.8.0",
+      "pickleshare==0.7.5",
+      "pillow==9.4.0",
+      "pkgutil-resolve-name==1.3.10",
+      "platformdirs==3.2.0",
+      "plotly==5.13.1",
+      "ply==3.11",
+      "pooch==1.7.0",
+      "prometheus_client==0.16.0",
+      "prompt-toolkit==3.0.38",
+      "prompt_toolkit==3.0.38",
+      "protobuf==4.21.12",
+      "psutil==5.9.4",
+      "ptyprocess==0.7.0",
+      "pure_eval==0.2.2",
+      "pyarrow==11.0.0",
+      "pyasn1==0.4.8",
+      "pyasn1-modules==0.2.7",
+      "pycodestyle==2.10.0",
+      "pycparser==2.21",
+      "pyct==0.4.6",
+      "pyflakes==3.0.1",
+      "pygments==2.14.0",
+      "pyjwt==2.6.0",
+      "pyopenssl==23.1.0",
+      "pyparsing==3.0.9",
+      "pyqt5-sip==12.11.0",
+      "pyrsistent==0.19.3",
+      "pysocks==1.7.1",
+      "python-dateutil==2.8.2",
+      "graphviz==0.20.1",
+      "python-json-logger==2.0.7",
+      "pytz==2023.2",
+      "pyviz_comms==2.2.1",
+      "pyyaml==6.0",
+      "pyzmq==25.0.2",
+      "requests==2.28.2",
+      "requests-oauthlib==1.3.1",
+      "rfc3339-validator==0.1.4",
+      "rfc3986-validator==0.1.1",
+      "rsa==4.9",
+      "seaborn==0.12.2",
+      "send2trash==1.8.0",
+      "setuptools==67.6.0",
+      "sip==6.7.7",
+      "six==1.16.0",
+      "sniffio==1.3.0",
+      "soupsieve==2.3.2.post1",
+      "sqlalchemy==2.0.7",
+      "stack_data==0.6.2",
+      "statsmodels==0.13.5",
+      "tbb==2021.8.0",
+      "tenacity==8.2.2",
+      "tensorboard-data-server==0.7.0",
+      "tensorboard-plugin-wit==1.8.1",
+      "terminado==0.17.1",
+      "threadpoolctl==3.1.0",
+      "tinycss2==1.2.1",
+      "toml==0.10.2",
+      "torchinfo==1.7.2",
+      "tornado==6.2",
+      "traitlets==5.9.0",
+      "typing-extensions==4.5.0",
+      "typing_extensions==4.5.0",
+      "unicodedata2==15.0.0",
+      "urllib3==1.26.15",
+      "voila==0.4.0",
+      "wcwidth==0.2.6",
+      "webencodings==0.5.1",
+      "websocket-client==1.5.1",
+      "websockets==10.4",
+      "werkzeug==2.2.3",
+      "wheel==0.40.0",
+      "widgetsnbextension==4.0.6",
+      "xyzservices==2023.2.0",
+      "y-py==0.5.9",
+      "yarl==1.8.2",
+      "ypy-websocket==0.8.2",
+      "zipp==3.15.0"
+    ],
+    "conda_only": [
+      {
+        "requirement": "pytorch-mutex==1.0",
+        "reason": "ERROR: No matching distribution found for pytorch-mutex==1.0"
+      },
+      {
+        "requirement": "alsa-lib==1.2.8",
+        "reason": "ERROR: No matching distribution found for alsa-lib==1.2.8"
+      },
+      {
+        "requirement": "arrow-cpp==11.0.0",
+        "reason": "ERROR: No matching distribution found for arrow-cpp==11.0.0"
+      },
+      {
+        "requirement": "atk-1.0==2.38.0",
+        "reason": "ERROR: No matching distribution found for atk-1.0==2.38.0"
+      },
+      {
+        "requirement": "attr==2.5.1",
+        "reason": "ERROR: No matching distribution found for attr==2.5.1"
+      },
+      {
+        "requirement": "aws-c-auth==0.6.26",
+        "reason": "ERROR: No matching distribution found for aws-c-auth==0.6.26"
+      },
+      {
+        "requirement": "aws-c-cal==0.5.21",
+        "reason": "ERROR: No matching distribution found for aws-c-cal==0.5.21"
+      },
+      {
+        "requirement": "aws-c-common==0.8.14",
+        "reason": "ERROR: No matching distribution found for aws-c-common==0.8.14"
+      },
+      {
+        "requirement": "aws-c-compression==0.2.16",
+        "reason": "ERROR: No matching distribution found for aws-c-compression==0.2.16"
+      },
+      {
+        "requirement": "aws-c-event-stream==0.2.20",
+        "reason": "ERROR: No matching distribution found for aws-c-event-stream==0.2.20"
+      },
+      {
+        "requirement": "aws-c-http==0.7.6",
+        "reason": "ERROR: No matching distribution found for aws-c-http==0.7.6"
+      },
+      {
+        "requirement": "aws-c-io==0.13.19",
+        "reason": "ERROR: No matching distribution found for aws-c-io==0.13.19"
+      },
+      {
+        "requirement": "aws-c-mqtt==0.8.6",
+        "reason": "ERROR: No matching distribution found for aws-c-mqtt==0.8.6"
+      },
+      {
+        "requirement": "aws-c-s3==0.2.7",
+        "reason": "ERROR: No matching distribution found for aws-c-s3==0.2.7"
+      },
+      {
+        "requirement": "aws-c-sdkutils==0.1.8",
+        "reason": "ERROR: No matching distribution found for aws-c-sdkutils==0.1.8"
+      },
+      {
+        "requirement": "aws-checksums==0.1.14",
+        "reason": "ERROR: No matching distribution found for aws-checksums==0.1.14"
+      },
+      {
+        "requirement": "aws-crt-cpp==0.19.8",
+        "reason": "ERROR: No matching distribution found for aws-crt-cpp==0.19.8"
+      },
+      {
+        "requirement": "aws-sdk-cpp==1.10.57",
+        "reason": "ERROR: No matching distribution found for aws-sdk-cpp==1.10.57"
+      },
+      {
+        "requirement": "backports==1.0",
+        "reason": "ERROR: No matching distribution found for backports==1.0"
+      },
+      {
+        "requirement": "blas-devel==3.9.0",
+        "reason": "ERROR: No matching distribution found for blas-devel==3.9.0"
+      },
+      {
+        "requirement": "brotli-bin==1.0.9",
+        "reason": "ERROR: No matching distribution found for brotli-bin==1.0.9"
+      },
+      {
+        "requirement": "bzip2==1.0.8",
+        "reason": "ERROR: No matching distribution found for bzip2==1.0.8"
+      },
+      {
+        "requirement": "c-ares==1.18.1",
+        "reason": "ERROR: No matching distribution found for c-ares==1.18.1"
+      },
+      {
+        "requirement": "cairo==1.16.0",
+        "reason": "ERROR: No matching distribution found for cairo==1.16.0"
+      },
+      {
+        "requirement": "dbus==1.13.6",
+        "reason": "ERROR: No matching distribution found for dbus==1.13.6"
+      },
+      {
+        "requirement": "expat==2.5.0",
+        "reason": "ERROR: No matching distribution found for expat==2.5.0"
+      },
+      {
+        "requirement": "fftw==3.3.10",
+        "reason": "ERROR: No matching distribution found for fftw==3.3.10"
+      },
+      {
+        "requirement": "freetype==2.12.1",
+        "reason": "ERROR: No matching distribution found for freetype==2.12.1"
+      },
+      {
+        "requirement": "fribidi==1.0.10",
+        "reason": "ERROR: No matching distribution found for fribidi==1.0.10"
+      },
+      {
+        "requirement": "gdk-pixbuf==2.42.10",
+        "reason": "ERROR: No matching distribution found for gdk-pixbuf==2.42.10"
+      },
+      {
+        "requirement": "gettext==0.21.1",
+        "reason": "ERROR: No matching distribution found for gettext==0.21.1"
+      },
+      {
+        "requirement": "gflags==2.2.2",
+        "reason": "ERROR: No matching distribution found for gflags==2.2.2"
+      },
+      {
+        "requirement": "giflib==5.2.1",
+        "reason": "ERROR: No matching distribution found for giflib==5.2.1"
+      },
+      {
+        "requirement": "glib==2.74.1",
+        "reason": "ERROR: No matching distribution found for glib==2.74.1"
+      },
+      {
+        "requirement": "glib-tools==2.74.1",
+        "reason": "ERROR: No matching distribution found for glib-tools==2.74.1"
+      },
+      {
+        "requirement": "glog==0.6.0",
+        "reason": "ERROR: No matching distribution found for glog==0.6.0"
+      },
+      {
+        "requirement": "graphite2==1.3.13",
+        "reason": "ERROR: No matching distribution found for graphite2==1.3.13"
+      },
+      {
+        "requirement": "grpcio==1.52.1",
+        "reason": "ERROR: No matching distribution found for grpcio==1.52.1"
+      },
+      {
+        "requirement": "gst-plugins-base==1.22.0",
+        "reason": "ERROR: No matching distribution found for gst-plugins-base==1.22.0"
+      },
+      {
+        "requirement": "gstreamer==1.22.0",
+        "reason": "ERROR: No matching distribution found for gstreamer==1.22.0"
+      },
+      {
+        "requirement": "gstreamer-orc==0.4.33",
+        "reason": "ERROR: No matching distribution found for gstreamer-orc==0.4.33"
+      },
+      {
+        "requirement": "gtk2==2.24.33",
+        "reason": "ERROR: No matching distribution found for gtk2==2.24.33"
+      },
+      {
+        "requirement": "gts==0.7.6",
+        "reason": "ERROR: No matching distribution found for gts==0.7.6"
+      },
+      {
+        "requirement": "harfbuzz==6.0.0",
+        "reason": "ERROR: No matching distribution found for harfbuzz==6.0.0"
+      },
+      {
+        "requirement": "icu==70.1",
+        "reason": "ERROR: No matching distribution found for icu==70.1"
+      },
+      {
+        "requirement": "jack==1.9.22",
+        "reason": "ERROR: No matching distribution found for jack==1.9.22"
+      },
+      {
+        "requirement": "jpeg==9e",
+        "reason": "        ~~~^"
+      },
+      {
+        "requirement": "keyutils==1.6.1",
+        "reason": "ERROR: No matching distribution found for keyutils==1.6.1"
+      },
+      {
+        "requirement": "krb5==1.20.1",
+        "reason": "ERROR: No matching distribution found for krb5==1.20.1"
+      },
+      {
+        "requirement": "lame==3.100",
+        "reason": "ERROR: No matching distribution found for lame==3.100"
+      },
+      {
+        "requirement": "lcms2==2.15",
+        "reason": "ERROR: No matching distribution found for lcms2==2.15"
+      },
+      {
+        "requirement": "lerc==4.0.0",
+        "reason": "ERROR: No matching distribution found for lerc==4.0.0"
+      },
+      {
+        "requirement": "llvm-openmp==16.0.0",
+        "reason": "ERROR: No matching distribution found for llvm-openmp==16.0.0"
+      },
+      {
+        "requirement": "lz4-c==1.9.4",
+        "reason": "ERROR: No matching distribution found for lz4-c==1.9.4"
+      },
+      {
+        "requirement": "mpg123==1.31.3",
+        "reason": "ERROR: No matching distribution found for mpg123==1.31.3"
+      },
+      {
+        "requirement": "mysql-common==8.0.32",
+        "reason": "ERROR: No matching distribution found for mysql-common==8.0.32"
+      },
+      {
+        "requirement": "mysql-libs==8.0.32",
+        "reason": "ERROR: No matching distribution found for mysql-libs==8.0.32"
+      },
+      {
+        "requirement": "nbconvert-core==7.2.9",
+        "reason": "ERROR: No matching distribution found for nbconvert-core==7.2.9"
+      },
+      {
+        "requirement": "nbconvert-pandoc==7.2.9",
+        "reason": "ERROR: No matching distribution found for nbconvert-pandoc==7.2.9"
+      },
+      {
+        "requirement": "ncurses==6.3",
+        "reason": "ERROR: No matching distribution found for ncurses==6.3"
+      },
+      {
+        "requirement": "nspr==4.35",
+        "reason": "ERROR: No matching distribution found for nspr==4.35"
+      },
+      {
+        "requirement": "nss==3.89",
+        "reason": "ERROR: No matching distribution found for nss==3.89"
+      },
+      {
+        "requirement": "openjpeg==2.5.0",
+        "reason": "ERROR: No matching distribution found for openjpeg==2.5.0"
+      },
+      {
+        "requirement": "orc==1.8.3",
+        "reason": "ERROR: No matching distribution found for orc==1.8.3"
+      },
+      {
+        "requirement": "pandoc==3.1.1",
+        "reason": "ERROR: No matching distribution found for pandoc==3.1.1"
+      },
+      {
+        "requirement": "pango==1.50.14",
+        "reason": "ERROR: No matching distribution found for pango==1.50.14"
+      },
+      {
+        "requirement": "parquet-cpp==1.5.1",
+        "reason": "ERROR: No matching distribution found for parquet-cpp==1.5.1"
+      },
+      {
+        "requirement": "pcre2==10.40",
+        "reason": "ERROR: No matching distribution found for pcre2==10.40"
+      },
+      {
+        "requirement": "pixman==0.40.0",
+        "reason": "ERROR: No matching distribution found for pixman==0.40.0"
+      },
+      {
+        "requirement": "pthread-stubs==0.4",
+        "reason": "ERROR: No matching distribution found for pthread-stubs==0.4"
+      },
+      {
+        "requirement": "pulseaudio==16.1",
+        "reason": "ERROR: No matching distribution found for pulseaudio==16.1"
+      },
+      {
+        "requirement": "pulseaudio-client==16.1",
+        "reason": "ERROR: No matching distribution found for pulseaudio-client==16.1"
+      },
+      {
+        "requirement": "pulseaudio-daemon==16.1",
+        "reason": "ERROR: No matching distribution found for pulseaudio-daemon==16.1"
+      },
+      {
+        "requirement": "pyct-core==0.4.6",
+        "reason": "ERROR: No matching distribution found for pyct-core==0.4.6"
+      },
+      {
+        "requirement": "pyqt==5.15.7",
+        "reason": "ERROR: No matching distribution found for pyqt==5.15.7"
+      },
+      {
+        "requirement": "python-fastjsonschema==2.16.3",
+        "reason": "ERROR: No matching distribution found for python-fastjsonschema==2.16.3"
+      },
+      {
+        "requirement": "python_abi==3.9",
+        "reason": "ERROR: No matching distribution found for python_abi==3.9"
+      },
+      {
+        "requirement": "pyu2f==0.1.5",
+        "reason": "ERROR: No matching distribution found for pyu2f==0.1.5"
+      },
+      {
+        "requirement": "qt-main==5.15.8",
+        "reason": "ERROR: No matching distribution found for qt-main==5.15.8"
+      },
+      {
+        "requirement": "re2==2023.02.02",
+        "reason": "ERROR: No matching distribution found for re2==2023.02.02"
+      },
+      {
+        "requirement": "readline==8.2",
+        "reason": "ERROR: No matching distribution found for readline==8.2"
+      },
+      {
+        "requirement": "s2n==1.3.41",
+        "reason": "ERROR: No matching distribution found for s2n==1.3.41"
+      },
+      {
+        "requirement": "seaborn-base==0.12.2",
+        "reason": "ERROR: No matching distribution found for seaborn-base==0.12.2"
+      },
+      {
+        "requirement": "snappy==1.1.10",
+        "reason": "ERROR: No matching distribution found for snappy==1.1.10"
+      },
+      {
+        "requirement": "tk==8.6.12",
+        "reason": "ERROR: No matching distribution found for tk==8.6.12"
+      },
+      {
+        "requirement": "tzdata==2023b",
+        "reason": "ERROR: No matching distribution found for tzdata==2023b"
+      },
+      {
+        "requirement": "ucx==1.14.0",
+        "reason": "ERROR: No matching distribution found for ucx==1.14.0"
+      },
+      {
+        "requirement": "xcb-util==0.4.0",
+        "reason": "ERROR: No matching distribution found for xcb-util==0.4.0"
+      },
+      {
+        "requirement": "xcb-util-image==0.4.0",
+        "reason": "ERROR: No matching distribution found for xcb-util-image==0.4.0"
+      },
+      {
+        "requirement": "xcb-util-keysyms==0.4.0",
+        "reason": "ERROR: No matching distribution found for xcb-util-keysyms==0.4.0"
+      },
+      {
+        "requirement": "xcb-util-renderutil==0.3.9",
+        "reason": "ERROR: No matching distribution found for xcb-util-renderutil==0.3.9"
+      },
+      {
+        "requirement": "xcb-util-wm==0.4.1",
+        "reason": "ERROR: No matching distribution found for xcb-util-wm==0.4.1"
+      },
+      {
+        "requirement": "xkeyboard-config==2.38",
+        "reason": "ERROR: No matching distribution found for xkeyboard-config==2.38"
+      },
+      {
+        "requirement": "xz==5.2.6",
+        "reason": "ERROR: No matching distribution found for xz==5.2.6"
+      },
+      {
+        "requirement": "yaml==0.2.5",
+        "reason": "ERROR: No matching distribution found for yaml==0.2.5"
+      },
+      {
+        "requirement": "zeromq==4.3.4",
+        "reason": "ERROR: No matching distribution found for zeromq==4.3.4"
+      },
+      {
+        "requirement": "zlib==1.2.13",
+        "reason": "ERROR: No matching distribution found for zlib==1.2.13"
+      },
+      {
+        "requirement": "zstd==1.5.2",
+        "reason": "ERROR: No matching distribution found for zstd==1.5.2"
+      }
+    ],
+    "skipped": [
+      {
+        "package": "faiss-gpu=1.7.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "pytorch::pytorch-cuda=11.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "_libgcc_mutex=0.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "_openmp_mutex=4.5",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "blas=2.116",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "ca-certificates=2022.12.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-cudart=11.7.99",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-cupti=11.7.101",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-libraries=11.7.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-nvrtc=11.7.99",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-nvtx=11.7.91",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-runtime=11.7.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cudatoolkit=11.8.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "faiss-gpu=1.7.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "font-ttf-dejavu-sans-mono=2.37",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "font-ttf-inconsolata=3.000",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "font-ttf-source-code-pro=2.038",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "font-ttf-ubuntu=0.83",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "fontconfig=2.14.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "fonts-conda-ecosystem=1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "fonts-conda-forge=1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "fonttools=4.39.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "graphviz=7.1.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "ld_impl_linux-64=2.40",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libabseil=20230125.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libarrow=11.0.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libblas=3.9.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libbrotlicommon=1.0.9",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libbrotlidec=1.0.9",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libbrotlienc=1.0.9",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcap=2.67",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcblas=3.9.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libclang=15.0.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libclang13=15.0.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcrc32c=1.1.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcublas=11.10.3.66",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcufft=10.7.2.124",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcufile=1.6.0.25",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcups=2.3.3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcurand=10.3.2.56",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcurl=7.88.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcusolver=11.4.0.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcusparse=11.7.4.91",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libdb=6.2.32",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libdeflate=1.17",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libedit=3.1.20191231",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libev=4.33",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libevent=2.1.10",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libfaiss=1.7.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libfaiss-avx2=1.7.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libffi=3.4.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libflac=1.4.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgcc-ng=12.2.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgcrypt=1.10.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgd=2.3.3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgfortran-ng=12.2.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgfortran5=12.2.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libglib=2.74.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgomp=12.2.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgoogle-cloud=2.8.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgpg-error=1.46",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgrpc=1.52.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libhwloc=2.9.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libiconv=1.17",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libjpeg-turbo=2.1.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "liblapack=3.9.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "liblapacke=3.9.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libllvm15=15.0.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnghttp2=1.52.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnpp=11.7.4.75",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnsl=2.0.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnuma=2.0.16",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnvjpeg=11.8.0.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libogg=1.3.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libopus=1.3.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libpng=1.6.39",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libpq=15.2",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libprotobuf=3.21.12",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "librsvg=2.54.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libsndfile=1.2.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libsodium=1.0.18",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libsqlite=3.40.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libssh2=1.10.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libstdcxx-ng=12.2.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libsystemd0=253",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libthrift=0.18.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libtiff=4.5.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libtool=2.4.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libudev1=253",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libutf8proc=2.8.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libuuid=2.32.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libvorbis=1.3.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libwebp=1.2.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libwebp-base=1.2.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libxcb=1.13",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libxkbcommon=1.5.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libxml2=2.10.3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libzlib=1.2.13",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "mkl=2022.1.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "openssl=3.1.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "pip=23.0.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "pytorch::pytorch-cuda=11.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-kbproto=1.0.7",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libice=1.0.10",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libsm=1.2.3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libx11=1.8.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libxau=1.0.9",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libxdmcp=1.1.3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libxext=1.3.4",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-libxrender=0.9.10",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-renderproto=0.11.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-xextproto=7.3.0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-xf86vidmodeproto=2.3.1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "xorg-xproto=7.0.31",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      }
+    ],
+    "wheel_count": 215,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_004_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [],
+    "duration_seconds": 418.639
+  },
+  "sandbox_duration_seconds": 5568.412,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "TIMEOUT",
+    "exit_code": 137,
+    "duration_seconds": 3600.761,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 4145025024
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 1663.447,
+    "peak_memory_bytes": 199348224
+  },
+  "finished_at": "2026-10-10T17:47:54+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
