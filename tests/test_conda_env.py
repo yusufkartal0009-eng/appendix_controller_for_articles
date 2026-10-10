@@ -115,3 +115,13 @@ def test_python_graphviz_is_pypi_graphviz_and_the_conda_c_tool_is_skipped(tmp_pa
     result = convert_env_file(env)
     assert result.requirements == ["graphviz==0.20.1"]
     assert any(item["package"].startswith("graphviz=7.1.0") for item in result.skipped)
+
+
+def test_conda_faiss_maps_to_the_cpu_build_and_faiss_gpu_stays_skipped(tmp_path):
+    """#233: TabR's environment pins the CUDA build `faiss=1.7.2`; the CPU-only sandbox gets `faiss-cpu` at that version."""
+    env = tmp_path / "environment.yml"
+    env.write_text("name: d\ndependencies:\n  - faiss=1.7.2=py39cuda112h0f2d3a1_0\n  - faiss-gpu=1.7.2=h2e5815a_0\n",
+                   encoding="utf-8")
+    result = convert_env_file(env)
+    assert result.requirements == ["faiss-cpu==1.7.2"]
+    assert any(item["package"].startswith("faiss-gpu") for item in result.skipped)
