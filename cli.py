@@ -4,6 +4,7 @@ import argparse
 import os
 import sys
 import uuid
+from pathlib import Path
 
 from tabulate import tabulate
 
@@ -13,7 +14,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
-from src.claim_review import review_claims
+from src.claim_review import claims_for_scoring, review_claims
 from src.claim_store import get_extracted_claims
 from src.config import DATA_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
 from src.database import (
@@ -88,15 +89,78 @@ def cmd_inspect_paper(args):
     print("==================================================")
 
 
+SIMULATION_BANNER = "SIMULATION FOR TESTING: the reproduced numbers below are made up from the claimed ones; this is not a result"
+
+
+def print_breakdown(bd, simulated: bool = False):
+    print("\n----------------- SCORING BREAKDOWN -----------------")
+    if simulated:
+        print(f"*** {SIMULATION_BANNER} ***")
+    print(f"Tier 1 (Build & Environment)  : {bd.tier1_build:>5.1f} / 100 (Weight: 35%)")
+    print(f"Tier 2 (Metrics Alignment)    : {bd.tier2_metrics:>5.1f} / 100 (Weight: 35%)")
+    print(f"Tier 3 (Seed Stability)       : {bd.tier3_stability:>5.1f} / 100 (Weight: 15%)")
+    print(f"Tier 4 (Artifacts & License)  : {bd.tier4_artifacts:>5.1f} / 100 (Weight: 15%)")
+    print("-----------------------------------------------------")
+    print(f"TOTAL COMPOSITE SCORE         : {bd.total_score:>5.1f} / 100")
+    print(f"STATUS CLASSIFICATION         : [{bd.status_label}]")
+    print(f"SUMMARY / AI RATIONALE        : {bd.summary}")
+    print("-----------------------------------------------------\n")
+
+
 def cmd_score_paper(args):
-    """Simulate execution output and calculate 4-tier reproducibility score."""
-    paper = get_paper_by_id(args.paper_id)
+    """Score a paper from a real sandbox run and its accepted claims (#136). The --simulate-* flags are a test aid."""
+    session = get_session(get_engine(args.db_url) if args.db_url else get_engine())
+    paper = get_paper_by_id(args.paper_id, session=session)
     if not paper:
         print(f"Paper with ID '{args.paper_id}' not found.")
         sys.exit(1)
+    if any((args.simulate, args.simulate_failure, args.simulate_divergence, args.simulate_build_error, args.simulate_clone_error,
+            args.simulate_deps_error)):
+        return cmd_score_simulated(args, paper)
 
+    from scripts import run_pilot
+    from src.config import DATA_CACHE_DIR
+    from src.score_run import load_run, score_run
+
+    print(f"\nEvaluating reproducibility for: [{paper.paper_id}] {paper.title}")
+    if args.from_run:
+        run_dir = Path(args.from_run)
+        print(f"Scoring the stored run in {run_dir} (no new run).")
+    else:
+        run_root = SANDBOX_RUNS_DIR / "score"
+        print(f"Running the paper in the Docker sandbox with its run setup (records in {run_root / paper.paper_id}) ...")
+        run_pilot.run_paper(paper.paper_id, Path(args.staging_dir), pilot2=True, data_cache=Path(args.data_cache or DATA_CACHE_DIR),
+                            record_root=run_root)
+        run_dir = run_root / paper.paper_id
+    record, report = load_run(run_dir)
+
+    claims = claims_for_scoring(session, paper.paper_id)
+    print(f"Accepted claims of this paper (accepted by a person): {len(claims)}")
+    repo_dir = Path(args.staging_dir) / paper.paper_id
+    result = score_run(paper.paper_id, paper.license, claims, record, report, run_dir, repo_dir if repo_dir.is_dir() else None)
+
+    bd = result["breakdown"]
+    run = record.get("run") or {}
+    print(f"Run: stage={record.get('stage', {}).get('status')} build={(record.get('build') or {}).get('status', 'none')} "
+          f"install={report.get('dependency_install_status', 'n/a')} run={run.get('status', 'not started')} "
+          f"exit_code={run.get('exit_code')}")
+    for tier in ("tier1_notes", "tier2_notes", "tier3_notes", "tier4_notes"):
+        for note in result["diagnostics"][tier]:
+            print(f"  [{tier[:5]}] {note}")
+    save_score({
+        "score_id": str(uuid.uuid4()), "paper_id": paper.paper_id, "tier1_build": bd.tier1_build,
+        "tier2_metrics": bd.tier2_metrics, "tier3_stability": bd.tier3_stability, "tier4_artifacts": bd.tier4_artifacts,
+        "total_score": bd.total_score, "status_label": bd.status_label, "summary": bd.summary,
+    }, session=session)
+    session.close()
+    print_breakdown(bd)
+
+
+def cmd_score_simulated(args, paper):
+    """Simulate execution output and calculate 4-tier reproducibility score. FOR TESTING ONLY, never saved."""
     expected_claims = paper.get_expected_claims_dict()
     print(f"\nEvaluating reproducibility for: [{paper.paper_id}] {paper.title}")
+    print(f"*** {SIMULATION_BANNER} ***")
 
     # Simulated realistic output matching expected claims closely (reproduced within ~1-3% error)
     simulated_reproduced = {}
@@ -160,31 +224,8 @@ def cmd_score_paper(args):
     )
 
     bd = eval_result["breakdown"]
-
-    # Save to database
-    score_record = {
-        "score_id": str(uuid.uuid4()),
-        "paper_id": paper.paper_id,
-        "tier1_build": bd.tier1_build,
-        "tier2_metrics": bd.tier2_metrics,
-        "tier3_stability": bd.tier3_stability,
-        "tier4_artifacts": bd.tier4_artifacts,
-        "total_score": bd.total_score,
-        "status_label": bd.status_label,
-        "summary": bd.summary,
-    }
-    save_score(score_record)
-
-    print("\n----------------- SCORING BREAKDOWN -----------------")
-    print(f"Tier 1 (Build & Environment)  : {bd.tier1_build:>5.1f} / 100 (Weight: 35%)")
-    print(f"Tier 2 (Metrics Alignment)    : {bd.tier2_metrics:>5.1f} / 100 (Weight: 35%)")
-    print(f"Tier 3 (Seed Stability)       : {bd.tier3_stability:>5.1f} / 100 (Weight: 15%)")
-    print(f"Tier 4 (Artifacts & License)  : {bd.tier4_artifacts:>5.1f} / 100 (Weight: 15%)")
-    print("-----------------------------------------------------")
-    print(f"TOTAL COMPOSITE SCORE         : {bd.total_score:>5.1f} / 100")
-    print(f"STATUS CLASSIFICATION         : [{bd.status_label}]")
-    print(f"SUMMARY / AI RATIONALE        : {bd.summary}")
-    print("-----------------------------------------------------\n")
+    print("(The simulated score is not saved to the database.)")
+    print_breakdown(bd, simulated=True)
 
 
 def cmd_review_claims(args):
@@ -223,13 +264,18 @@ def main():
     p_inspect.set_defaults(func=cmd_inspect_paper)
 
     # score
-    p_score = subparsers.add_parser("score", help="Evaluate and score a paper")
+    p_score = subparsers.add_parser("score", help="Score a paper from a real sandbox run and its accepted claims")
     p_score.add_argument("paper_id", help="Paper ID (e.g. paper_001)")
-    p_score.add_argument("--simulate-failure", action="store_true", help="Simulate failed metric reproduction")
-    p_score.add_argument("--simulate-divergence", action="store_true", help="Simulate divergent metric reproduction")
-    p_score.add_argument("--simulate-build-error", action="store_true", help="Simulate execution build error")
-    p_score.add_argument("--simulate-clone-error", action="store_true", help="Simulate clone failure")
-    p_score.add_argument("--simulate-deps-error", action="store_true", help="Simulate dependency failure")
+    p_score.add_argument("--from-run", default=None, help="Score a stored run directory (pilot_record.json, run_report.json) instead of running")
+    p_score.add_argument("--staging-dir", default=".sandbox_staging", help="Where repositories are cloned for a real run")
+    p_score.add_argument("--data-cache", default=None, help="Host data cache of the run setups (scripts/fetch_data.py)")
+    p_score.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
+    p_score.add_argument("--simulate", action="store_true", help="SIMULATION FOR TESTING: successful run with made-up numbers")
+    p_score.add_argument("--simulate-failure", action="store_true", help="SIMULATION FOR TESTING: failed metric reproduction")
+    p_score.add_argument("--simulate-divergence", action="store_true", help="SIMULATION FOR TESTING: divergent metric reproduction")
+    p_score.add_argument("--simulate-build-error", action="store_true", help="SIMULATION FOR TESTING: execution build error")
+    p_score.add_argument("--simulate-clone-error", action="store_true", help="SIMULATION FOR TESTING: clone failure")
+    p_score.add_argument("--simulate-deps-error", action="store_true", help="SIMULATION FOR TESTING: dependency failure")
     p_score.set_defaults(func=cmd_score_paper)
 
     # review-claims

@@ -139,7 +139,7 @@ def _collect_pilot2_files(sandbox_dir: Path, build_dir: Path, target_dir: Path) 
 
 
 def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
-              data_cache: Path | None = None) -> dict[str, Any]:
+              data_cache: Path | None = None, record_root: Path | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
     setup_options: dict[str, Any] | None = None
     if pilot2:
@@ -152,13 +152,13 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     # pilot record and the protocol's named files are additionally collected into `record_dir` below (#207).
     sandbox_dir = SANDBOX_RUNS_DIR / paper_id
     build_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
-    record_dir = PILOT2_RUNS_DIR / paper_id if pilot2 else sandbox_dir
+    record_dir = (record_root or PILOT2_RUNS_DIR) / paper_id if pilot2 else sandbox_dir
     if pilot2:
         # An earlier attempt is evidence (docs/PILOT_2.md section 9) and is never overwritten (#217); and the
         # sandbox directories are cleared so that collected files can only come from this run.
         if record_dir.exists() and any(record_dir.iterdir()):
             raise FileExistsError(
-                f"{record_dir} already holds an earlier attempt; move it to {PILOT2_RUNS_DIR / 'first_attempts'} "
+                f"{record_dir} already holds an earlier attempt; move it to {record_dir.parent / 'first_attempts'} "
                 "(kept as evidence) before running again")
         for stale in (sandbox_dir, build_dir):
             if stale.exists():
