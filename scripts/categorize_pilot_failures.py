@@ -41,8 +41,14 @@ DATA_EXTENSIONS = (".csv", ".tsv", ".npy", ".npz", ".pkl", ".pickle", ".parquet"
                    ".zip", ".h5", ".hdf5", ".json", ".txt", ".svm", ".libsvm")
 
 
+ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")  # terminal colors, for example from a Jupyter traceback (#243)
+
+
 def _lines(path: Path) -> list[str]:
-    return path.read_text(encoding="utf-8", errors="replace").splitlines() if path.exists() else []
+    """The lines of a log file, without terminal color codes, so that they can be classified and quoted."""
+    if not path.exists():
+        return []
+    return [ANSI_RE.sub("", line) for line in path.read_text(encoding="utf-8", errors="replace").splitlines()]
 
 
 def _evidence(path: Path, line_no: int, line: str) -> dict[str, Any]:

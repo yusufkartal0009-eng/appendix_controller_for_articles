@@ -103,3 +103,14 @@ def test_a_paper_without_a_record_is_not_run_and_the_header_names_its_directory(
     write_run(runs, "paper_005", build="FAILED")
     assert "from data/pilot2_runs/;" in pm.to_markdown(pm.measure(runs))
     assert "from data/pilot_runs/;" in pm.to_markdown(pm.measure(tmp_path))
+
+
+def test_terminal_colors_do_not_hide_a_missing_dependency(tmp_path):
+    """#243: a Jupyter traceback prints its last line with color codes."""
+    esc = chr(27)
+    write_run(tmp_path, "paper_002", report={"dependency_install_status": "INSTALLED", "docker_used": True, "isolated": True,
+                                              "exit_code": 1, "status": "FAILED"},
+              stderr=f"Traceback\n{esc}[0;31mModuleNotFoundError{esc}[0m: No module named 'lightgbm'\n")
+    result = cat.categorize_paper("paper_002", tmp_path)
+    assert (result["category"], result["phase"]) == ("MISSING_DEPENDENCY", "run")
+    assert result["evidence"]["line"] == "ModuleNotFoundError: No module named 'lightgbm'"
