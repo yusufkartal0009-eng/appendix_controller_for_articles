@@ -93,9 +93,25 @@ def categorize_paper(paper_id: str, runs_dir: Path) -> dict[str, Any]:
                               "evidence": None, "pilot_success": False}
 
     stage = record.get("stage") or {}
-    if stage.get("status") != "STAGED" or report is None:
+    if stage.get("status") != "STAGED":
         result.update(category="OTHER", other_name="STAGING_FAILED", phase="stage",
                       evidence={"file": "pilot_record.json", "line_number": None, "line": stage.get("error", "")})
+        return result
+    build = record.get("build")
+    if build and build.get("status") != "BUILT":
+        # Pilot 2 (docs/PILOT_2.md section 7): the first failure decides, in the order build, install, run. A failed
+        # build means the paper's dependencies could not be installed.
+        build_log = paper_dir / "build.log"
+        hit = _first_matching(build_log, lambda s: s.startswith("ERROR") or "error:" in s.lower()) or _last_nonempty(build_log)
+        if hit is None and build.get("error"):
+            evidence = {"file": "pilot_record.json", "line_number": None, "line": str(build["error"])[:300]}
+        else:
+            evidence = _evidence(build_log, *hit) if hit else None
+        result.update(category="MISSING_DEPENDENCY", phase="build", evidence=evidence)
+        return result
+    if report is None:
+        result.update(category="OTHER", other_name="NO_RUN_REPORT", phase="run",
+                      evidence={"file": "pilot_record.json", "line_number": None, "line": "no run_report.json was written"})
         return result
     if not stage.get("target_script_exists", True):
         result.update(category="SCRIPT_NOT_FOUND", phase="stage",
@@ -144,7 +160,8 @@ def categorize(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
     for p in papers:
         if p["category"]:
             counts[p["category"]] += 1
-    return {"protocol": "docs/PILOT_WEEK2.md section 7", "papers": papers, "counts": counts}
+    protocol = "docs/PILOT_2.md section 7" if "pilot2" in runs_dir.name else "docs/PILOT_WEEK2.md section 7"
+    return {"protocol": protocol, "papers": papers, "counts": counts}
 
 
 def main(argv: list[str] | None = None) -> int:
