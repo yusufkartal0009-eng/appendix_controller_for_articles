@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 356 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 364 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### cli.py score Scores Real Runs and Accepted Claims (stage 3) (2026-10-10 22:07 +03:00, Issue #136)
+- `python cli.py score <paper>` now runs the paper in the Docker sandbox with its run setup (the Pilot 2 flow of `scripts/run_pilot.py`) and scores the stored record and run report against the claims a person accepted; `--from-run <dir>` scores a stored run without Docker. No reproduced number is made up: a claim is matched by its question ID and is 'not found' otherwise, and a paper with no accepted claim gets the scorer's neutral Tier 2 baseline with an explicit note. The `--simulate*` flags are labeled `SIMULATION FOR TESTING` and never saved. End to end: a live `cli.py score paper_005` run (OOM_KILLED at the memory limit, scored) and the six stored Pilot 2 runs.
 
 ### Container Output Is Decoded as UTF-8 (2026-10-10 21:58 +03:00, Issue #248)
 - `subprocess.run(text=True)` in the runner and stager decoded the output of `docker run` and `pip` with the Windows code page (cp1254), so a progress bar in a paper's output broke the capture (`UnicodeDecodeError` in the console logs of `paper_004` and `paper_005`; empty `stdout_preview` and `stderr_preview`). They now decode as UTF-8 with replacement. Status, exit codes, and the complete `stdout.log` and `stderr.log` of the Pilot 2 runs were not affected; the Limits of `docs/PILOT_2.md` say so.

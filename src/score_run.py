@@ -46,10 +46,11 @@ def run_facts(record: dict[str, Any], report: dict[str, Any], run_dir: Path, rep
     build_ok = build is None or build.get("status") == "BUILT"
     deps_installed = bool(build_ok and run and report.get("dependency_install_status", run.get("dependency_install_status")) == "INSTALLED")
     has_env, has_readme, has_artifacts = Tier4ArtifactsEvaluator.detect_filesystem_artifacts(repo_dir=repo_dir, run_dir=run_dir)
+    # The staging record knows the repository's requirement files and conda environment files (for example
+    # `saint_environment.yml`, which the filename search of the Tier 4 helper does not look for)
+    has_env = has_env or bool(stage.get("requirements_files") or stage.get("has_conda_env"))
     if repo_dir is None or not Path(repo_dir).is_dir():
-        # The staged repository is not available: take the environment file from the record, README is unknown (False)
-        has_env = bool(stage.get("requirements_files") or stage.get("has_conda_env"))
-        has_readme = False
+        has_readme = False  # the staged repository is not available: the README is unknown, counted as absent
     metrics = {k: float(v) for k, v in (report.get("metrics") or {}).items() if isinstance(v, (int, float))}
     return {
         "clone_success": clone_success,

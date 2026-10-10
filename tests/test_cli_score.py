@@ -133,3 +133,14 @@ def test_unknown_paper_exits(db, monkeypatch):
     url, _ = db
     with pytest.raises(SystemExit):
         score(monkeypatch, url, "paper_999")
+
+
+def test_a_conda_environment_file_with_another_name_still_counts_as_an_environment_definition(db, tmp_path, monkeypatch, capsys):
+    """The staging record knows about saint_environment.yml; the filename search of the Tier 4 helper does not."""
+    url, _ = db
+    run_dir = make_run(tmp_path)
+    record = json.loads((run_dir / "pilot_record.json").read_text())
+    record["stage"] = {"status": "STAGED", "requirements_files": [], "has_conda_env": True}
+    (run_dir / "pilot_record.json").write_text(json.dumps(record))
+    score(monkeypatch, url, "paper_003", "--from-run", str(run_dir))
+    assert "Environment definition present" in capsys.readouterr().out
