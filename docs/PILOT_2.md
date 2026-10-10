@@ -362,3 +362,7 @@ lists every attempt with its commit, how it ended, and why it was superseded). E
 - The runs are on one machine (Windows, Docker Desktop, WSL2); Pilot 1 ran on GitHub's Linux runners.
 - Defects were fixed during the pilot, so the attempts ran at several Repro Radar commits; the counted attempts are at
   the commits shown in their records.
+- On this Windows machine the capture of a container's output used the system code page, so for runs whose output held
+  non-ASCII bytes (progress bars: `paper_004`, `paper_005`) the `stdout_preview` and `stderr_preview` fields of
+  `run_report.json` are empty and their `console.log` shows a `UnicodeDecodeError` (#248). Status, exit code, and
+  the complete `stdout.log` and `stderr.log` (written by the container itself) are not affected.

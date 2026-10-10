@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 355 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 356 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Container Output Is Decoded as UTF-8 (2026-10-10 21:58 +03:00, Issue #248)
+- `subprocess.run(text=True)` in the runner and stager decoded the output of `docker run` and `pip` with the Windows code page (cp1254), so a progress bar in a paper's output broke the capture (`UnicodeDecodeError` in the console logs of `paper_004` and `paper_005`; empty `stdout_preview` and `stderr_preview`). They now decode as UTF-8 with replacement. Status, exit codes, and the complete `stdout.log` and `stderr.log` of the Pilot 2 runs were not affected; the Limits of `docs/PILOT_2.md` say so.
 
 ### Pilot Comparison Stores Repository-relative Paths (2026-10-10 21:54 +03:00, Issue #246)
 - `scripts/pilot_compare.py` wrote the absolute paths of its source files into `data/pilot2_runs/comparison.json`, so the committed file differed when regenerated in another checkout (and carried a local path). It now stores repository-relative POSIX paths; the file is regenerated and a test checks it.

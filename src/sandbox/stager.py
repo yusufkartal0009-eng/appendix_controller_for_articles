@@ -148,7 +148,7 @@ class RepoStager:
             clone_cmd.extend([source, str(target_dir)])
 
             try:
-                subprocess.run(clone_cmd, check=True, capture_output=True, text=True, timeout=120)
+                subprocess.run(clone_cmd, check=True, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
             except (subprocess.SubprocessError, OSError) as exc:
                 raise RuntimeError(f"Failed to clone repository from '{source}': {exc}") from exc
 
@@ -159,7 +159,7 @@ class RepoStager:
                         cwd=str(target_dir),
                         check=True,
                         capture_output=True,
-                        text=True,
+                        text=True, encoding="utf-8", errors="replace",
                         timeout=30,
                     )
                 except (subprocess.SubprocessError, OSError) as exc:
@@ -171,7 +171,7 @@ class RepoStager:
                     ["git", "rev-parse", "HEAD"],
                     cwd=str(target_dir),
                     capture_output=True,
-                    text=True,
+                    text=True, encoding="utf-8", errors="replace",
                     timeout=10, check=False,
                 )
                 if res.returncode == 0:
@@ -199,7 +199,7 @@ class RepoStager:
                     ["git", "rev-parse", "HEAD"],
                     cwd=str(source_path),
                     capture_output=True,
-                    text=True,
+                    text=True, encoding="utf-8", errors="replace",
                     timeout=10, check=False,
                 )
                 if res.returncode == 0:
@@ -464,7 +464,7 @@ class RepoStager:
         """Run a `pip download` command: on the host, or inside the paper's sandbox image (`bundle_in_docker`)."""
         if self.bundle_in_docker:
             cmd = self._docker_pip_command(cmd)
-        return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+        return subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout, check=False)
 
     def _docker_pip_command(self, cmd: list[str]) -> list[str]:
         """Rewrite a host `pip download` command to run inside the sandbox image of its Python version (#215).
