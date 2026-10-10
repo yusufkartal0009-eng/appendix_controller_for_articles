@@ -22,6 +22,7 @@ CONDA_TO_PIP = {
     "msgpack-python": "msgpack",
     "pytables": "tables",
     "faiss-cpu": "faiss-cpu",
+    "faiss": "faiss-cpu",  # conda's `faiss` is a CUDA build; the sandbox is CPU-only, so the CPU build at the same version (#233)
     "tensorflow-base": "tensorflow",
     "python-graphviz": "graphviz",  # conda's own `graphviz` is the C tool, skipped below (#227)
 }

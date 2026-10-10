@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 340 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 341 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Conda faiss Maps to faiss-cpu (2026-10-10 18:01 +03:00, Issue #233)
+- Found by the Pilot 2 run of `paper_004` after its conda lock installed (1671 s): `import faiss` failed because the environment's CUDA build `faiss=1.7.2` was reported as conda-only. The CPU-only sandbox now gets PyPI `faiss-cpu` at the pinned version (`faiss-gpu` stays skipped). This is a substitution (CPU build for the CUDA build) and the report lists it.
 
 ### Writable Data Mounts Under the Sandbox Home Are Mounted Through Their Top-level Directory (2026-10-10 17:21 +03:00, Issue #231)
 - Found by the Pilot 2 run of `paper_006` after its install finally succeeded: `import openml` failed with `PermissionError: '/workspace/home/.openml/config'`. Docker created the missing parent `.openml` of the cache mount as root inside the home tmpfs, so the sandbox user could not create openml's config beside the cache. A writable data copy whose target is under `/workspace/home` is now placed at its nested path in a per-run directory that is mounted at `/workspace/home/<top>` (the paper's setting is unchanged). Acceptance check 19 also creates a file next to the data; 20/20 checks pass on the Python 3.11 image on this machine.
