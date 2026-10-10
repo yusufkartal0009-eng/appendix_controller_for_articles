@@ -194,20 +194,32 @@ def test_pilot2_runs_with_the_run_setup(tmp_path, monkeypatch):
     assert not (tmp_path / "runs" / "paper_006" / "pilot_record.json").exists()
 
 
+class WritingStager(Pilot2Stager):
+    """Pilot2Stager that writes its files under sandbox_runs/ the way the real sandbox does."""
+
+    def __init__(self, tmp_path, runs_dir):
+        super().__init__(tmp_path)
+        self.runs_dir = runs_dir
+
+    def build_from_source(self, staged, build, config):
+        (self.runs_dir / "paper_006.build").mkdir(parents=True, exist_ok=True)
+        (self.runs_dir / "paper_006.build" / "build.log").write_text("building\n")
+        return super().build_from_source(staged, build, config)
+
+    def execute_staged(self, staged, target_script, script_args, config, **kwargs):
+        run_dir = self.runs_dir / "paper_006"
+        run_dir.mkdir(parents=True, exist_ok=True)
+        (run_dir / "run_report.json").write_text("{}")
+        (run_dir / "stdout.log").write_text("hi\n")
+        (run_dir / "a_file_the_protocol_does_not_name.txt").write_text("skip me")
+        return super().execute_staged(staged, target_script, script_args, config, **kwargs)
+
+
 def test_pilot2_collects_the_protocol_files_into_pilot2_runs(tmp_path, monkeypatch):
     """The sandbox/stager still write under sandbox_runs/ (unchanged); #207 copies the named files from there."""
     monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
     monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
-    run_dir = tmp_path / "runs" / "paper_006"
-    build_dir = tmp_path / "runs" / "paper_006.build"
-    run_dir.mkdir(parents=True)
-    build_dir.mkdir(parents=True)
-    (run_dir / "run_report.json").write_text("{}")
-    (run_dir / "stdout.log").write_text("hi\n")
-    (run_dir / "a_file_the_protocol_does_not_name.txt").write_text("skip me")
-    (build_dir / "build.log").write_text("building\n")
-
-    stager = Pilot2Stager(tmp_path)
+    stager = WritingStager(tmp_path, tmp_path / "runs")
     record = run_pilot.run_paper("paper_006", tmp_path / "staging", stager=stager, pilot2=True,
                                  data_cache=_cache_for(tmp_path, "paper_006"))
 
@@ -217,6 +229,31 @@ def test_pilot2_collects_the_protocol_files_into_pilot2_runs(tmp_path, monkeypat
     assert (dest / "build.log").read_text() == "building\n"
     assert not (dest / "a_file_the_protocol_does_not_name.txt").exists()
     assert sorted(record["collected_files"]) == ["build.log", "run_report.json", "stdout.log"]
+
+
+def test_pilot2_never_collects_files_of_an_older_run(tmp_path, monkeypatch):
+    """#217: a failed attempt must not list the files of an earlier run as its own."""
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
+    stale = tmp_path / "runs" / "paper_004"
+    stale.mkdir(parents=True)
+    (stale / "run_report.json").write_text('{"from": "an older run"}')
+    record = run_pilot.run_paper("paper_004", tmp_path / "staging", stager=FakeStager(tmp_path, fail_stage=True),
+                                 pilot2=True, data_cache=_cache_for(tmp_path, "paper_004"))
+    assert record["stage"]["status"] == "FAILED" and record["collected_files"] == []
+    assert not (tmp_path / "pilot2" / "paper_004" / "run_report.json").exists()
+
+
+def test_pilot2_never_overwrites_an_earlier_attempt(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
+    earlier = tmp_path / "pilot2" / "paper_004"
+    earlier.mkdir(parents=True)
+    (earlier / "pilot_record.json").write_text("first attempt")
+    with pytest.raises(FileExistsError, match="first_attempts"):
+        run_pilot.run_paper("paper_004", tmp_path / "staging", stager=Pilot2Stager(tmp_path), pilot2=True,
+                            data_cache=_cache_for(tmp_path, "paper_004"))
+    assert (earlier / "pilot_record.json").read_text() == "first attempt"
 
 
 def test_pilot2_passes_the_command_extras_and_constraints(tmp_path, monkeypatch):

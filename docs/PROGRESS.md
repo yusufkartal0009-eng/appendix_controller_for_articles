@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 321 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 325 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Re-staging on Windows and Stale Files in Pilot 2 Records (2026-10-10 14:53 +03:00, Issue #217)
+- Found when the Pilot 2 run of `paper_008` was started a second time: (1) `stage_repository` could not delete the old clone on Windows (`WinError 5`, git's read-only pack files); `remove_tree` clears the read-only bit and retries, and every directory the stager clears now uses it. (2) A failed Pilot 2 record listed `collected_files` copied from an older run. In `--pilot2` mode `sandbox_runs/<paper_id>` and `<paper_id>.build` are now cleared before the run, and the driver refuses to start if `data/pilot2_runs/<paper_id>/` already holds an earlier attempt (it is evidence; move it to `data/pilot2_runs/first_attempts/`).
 
 ### Bundling Inside the Sandbox Image (found by the first Pilot 2 attempt) (2026-10-10 14:49 +03:00, Issue #215)
 - First Pilot 2 attempt on the owner's Windows machine (`paper_008`, kept in `data/pilot2_runs/first_attempts/paper_008_attempt1/`): the install phase failed with `Could not find a version that satisfies the requirement cuda-toolkit==13.0.3; platform_system == "Linux"`. Host-side `pip download` evaluated environment markers for Windows and the host's Python, not the sandbox's. With `RepoStager(bundle_in_docker=True)` (used by `run_pilot.py --pilot2`) the download runs inside the paper's sandbox image (binary wheels only), and the bundle for `paper_008` went from 34 to 52 wheels, now including `cuda_toolkit-13.0.3.0`. Pilot 1's mode and the host path are unchanged. `.sandbox_staging/` is git-ignored.
