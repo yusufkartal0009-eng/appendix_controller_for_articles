@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 339 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 340 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Writable Data Mounts Under the Sandbox Home Are Mounted Through Their Top-level Directory (2026-10-10 17:21 +03:00, Issue #231)
+- Found by the Pilot 2 run of `paper_006` after its install finally succeeded: `import openml` failed with `PermissionError: '/workspace/home/.openml/config'`. Docker created the missing parent `.openml` of the cache mount as root inside the home tmpfs, so the sandbox user could not create openml's config beside the cache. A writable data copy whose target is under `/workspace/home` is now placed at its nested path in a per-run directory that is mounted at `/workspace/home/<top>` (the paper's setting is unchanged). Acceptance check 19 also creates a file next to the data; 20/20 checks pass on the Python 3.11 image on this machine.
 
 ### A Conda Lock Is Installed as Pinned, Not Resolved (2026-10-10 16:43 +03:00, Issue #229)
 - Correction of #227/#228: the resolver pass over the conda pins was a wrong diagnosis. Re-running `paper_006` showed `ResolutionImpossible` (conda's `mkl-random` has different dependency metadata than the same-named PyPI package) and, after removing it, the next gap (`promise`, source-only, needed by `wandb`). A conda environment file is a lock that pins every transitive dependency, so the install phase of a conda-only repository now runs `pip install --no-deps` over exactly the bundled pins; a pin without a wheel is simply absent. The `_fill_dependency_gaps` pass is removed; the `python-graphviz` mapping stays. Acceptance check 13 now pins `requests` without its dependencies; 20/20 checks pass on the Python 3.11 image on this machine.

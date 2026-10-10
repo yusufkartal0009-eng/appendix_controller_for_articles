@@ -508,7 +508,9 @@ def main():
         and "compiler in the run image: None" in r.stdout
     )
 
-    # 19. writable data copy (#193): the run writes into its copy of the data; the host cache stays unchanged
+    # 19. writable data copy (#193): the run writes into its copy of the data; the host cache stays unchanged.
+    # The target is nested under /workspace/home: the run must also be able to create a file NEXT TO the data
+    # (openml writes its config beside its cache), which fails when Docker creates the parent as root (#231).
     cache_dir = Path(tempfile.mkdtemp(prefix="acceptance_writable_cache_"))
     (cache_dir / "description.xml").write_text("<cached/>\n")
     cache_dir.chmod(0o755)
@@ -518,18 +520,20 @@ def main():
         "base = '/workspace/home/.cache/lib'\n"
         "print('read: ' + open(base + '/description.xml').read().strip())\n"
         "open(base + '/parsed.pkl', 'w').write('parsed')\n"
-        "print('wrote parsed.pkl: ' + str(os.path.exists(base + '/parsed.pkl')))\n")
+        "print('wrote parsed.pkl: ' + str(os.path.exists(base + '/parsed.pkl')))\n"
+        "open('/workspace/home/.cache/sibling_config', 'w').write('config')\n"
+        "print('wrote a file next to the data: ' + str(os.path.exists('/workspace/home/.cache/sibling_config')))\n")
     copy_runner = DockerSandboxRunner(SandboxConfig(
         timeout_seconds=120, python_version=args.python_version,
         data_mounts={"/workspace/home/.cache/lib": str(cache_dir)}, writable_data=["/workspace/home/.cache/lib"]))
     r, meta = run_probe(copy_runner, repo, "probe_datacopy.py", "acceptance_datacopy")
-    copied = SANDBOX_RUNS_DIR / "acceptance_datacopy" / "data_copies" / "0" / "parsed.pkl"
+    copied = SANDBOX_RUNS_DIR / "acceptance_datacopy" / "home_mounts" / ".cache" / "lib" / "parsed.pkl"
     show("19. Writable data copy", r.command_executed,
          "\n".join([r.stdout.strip(), *summary(r, meta), f"file in the per-run copy: {copied.exists()}",
                     f"host cache files: {sorted(p.name for p in cache_dir.iterdir())}"]))
     results["19 writable data copy"] = (
         r.status == "COMPLETED" and "read: <cached/>" in r.stdout and "wrote parsed.pkl: True" in r.stdout
-        and copied.exists() and sorted(p.name for p in cache_dir.iterdir()) == ["description.xml"]
+        and "wrote a file next to the data: True" in r.stdout and copied.exists() and sorted(p.name for p in cache_dir.iterdir()) == ["description.xml"]
     )
 
     # 20. GPU is opt-in (#169): the default run of check 1 asked for no GPU and saw none

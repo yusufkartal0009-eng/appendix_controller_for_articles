@@ -45,10 +45,13 @@ def test_writable_data_needs_a_mount_and_gets_a_rw_copy(tmp_path):
                                                writable_data=["/workspace/home/.openml/cache"]))
     runner._run_data_hosts = runner._writable_data_copies(tmp_path / "out")
     cmd = runner.build_docker_command(tmp_path / "repo", tmp_path / "out", ["x"])
-    copy = (tmp_path / "out" / "data_copies" / "0").resolve()
-    assert f"{copy}:/workspace/home/.openml/cache:rw" in cmd
+    # #231: mounted through its top-level directory, so the parent `.openml` exists and is writable by uid 1000
+    overlay = (tmp_path / "out" / "home_mounts" / ".openml").resolve()
+    assert f"{overlay}:/workspace/home/.openml:rw" in cmd
+    assert not any(a.endswith(":/workspace/home/.openml/cache:rw") for a in cmd)
     assert f"{cache.resolve()}:/workspace/repo/data:ro" in cmd  # not listed as writable: stays read-only
-    assert (copy / "description.xml").read_text() == "<x/>"
+    assert (overlay / "cache" / "description.xml").read_text() == "<x/>"
+    (overlay / "config").write_text("a sibling of the cache can be created")
 
 
 def test_build_wheels_refuses_without_docker(tmp_path, monkeypatch):
@@ -211,3 +214,18 @@ def test_host_bundling_stays_the_default(tmp_path, monkeypatch):
     monkeypatch.setattr(stager_module.subprocess, "run", lambda cmd, **k: seen.append(cmd) or SimpleNamespace(returncode=0, stdout="", stderr=""))
     stager._run_pip(stager._pip_download_command(tmp_path, "3.8"), 10)
     assert seen[0][1:4] == ["-m", "pip", "download"] and "--platform" in seen[0]
+
+
+def test_two_writable_copies_under_one_top_level_directory_share_one_mount(tmp_path):
+    a, b = tmp_path / "a", tmp_path / "b"
+    for d in (a, b):
+        d.mkdir()
+        (d / "f.txt").write_text(d.name)
+    runner = DockerSandboxRunner(SandboxConfig(
+        data_mounts={"/workspace/home/.x/one": str(a), "/workspace/home/.x/two": str(b)},
+        writable_data=["/workspace/home/.x/one", "/workspace/home/.x/two"]))
+    runner._run_data_hosts = runner._writable_data_copies(tmp_path / "out")
+    cmd = runner.build_docker_command(tmp_path / "repo", tmp_path / "out", ["x"])
+    assert sum(arg.endswith(":/workspace/home/.x:rw") for arg in cmd) == 1
+    overlay = tmp_path / "out" / "home_mounts" / ".x"
+    assert (overlay / "one" / "f.txt").read_text() == "a" and (overlay / "two" / "f.txt").read_text() == "b"
