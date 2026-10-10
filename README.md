@@ -108,13 +108,15 @@ python cli.py list-papers
 python cli.py inspect paper_001
 ```
 
-### 6. Run Simulated Reproducibility Evaluation
+### 6. Score a Paper from a Real Run
 ```bash
-python cli.py score paper_001
+python cli.py score paper_008                                  # runs the paper in the Docker sandbox, then scores it
+python cli.py score paper_008 --from-run data/pilot2_runs/paper_008   # scores a stored run, no Docker
 ```
 
-> **IMPORTANT NOTE ON SIMULATION STATUS:**  
-> **`cli.py score` still scores simulated outputs derived from each paper's claimed values; it does not execute the paper's code.** Real isolated execution is available through `scripts/stage_and_bundle_repo.py` (see [Quick Sandbox Execution CLI](#quick-sandbox-execution-cli)); wiring it into `cli.py score` is tracked as GA-2 in [the gap analysis](docs/gap_analysis.md).
+`cli.py score` runs the paper with its run setup (`run_setup` in `data/seed_papers.json`, the Pilot 2 flow of `scripts/run_pilot.py`), then scores the stored record and run report against the claims a person **accepted** (`python cli.py review-claims`). Datasets must already be in the cache (`scripts/fetch_data.py`). A claim is matched to the run's output by its question ID and is never guessed. A paper with no accepted claim gets the scorer's neutral Tier 2 baseline, and the output says so.
+
+> **The `--simulate`, `--simulate-failure`, `--simulate-divergence`, `--simulate-build-error`, `--simulate-clone-error`, and `--simulate-deps-error` flags are a test aid.** They print `SIMULATION FOR TESTING`, make up the reproduced numbers from the claimed ones, and are never saved to the database.
 
 ### 7. Lint & Run Test Suite
 ```bash
