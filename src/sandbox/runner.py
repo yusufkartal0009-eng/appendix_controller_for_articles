@@ -200,7 +200,7 @@ class DockerSandboxRunner:
             return False
         for attempt in range(attempts):
             try:
-                res = subprocess.run(["docker", "info"], capture_output=True, text=True, timeout=timeout, check=False)
+                res = subprocess.run(["docker", "info"], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout, check=False)
                 if res.returncode == 0:
                     return True
             except (subprocess.SubprocessError, OSError):
@@ -369,7 +369,7 @@ class DockerSandboxRunner:
                        "SANDBOX_EXTRA_REQUIREMENTS": " ".join(self.config.extra_requirements)},
         )
         try:
-            subprocess.run(install_cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10, check=False)
+            subprocess.run(install_cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=self.config.timeout_seconds + 10, check=False)
         except (subprocess.SubprocessError, OSError) as exc:
             logger.warning("Dependency install phase could not run: %s", exc)
             return deps_dir, "FAILED"
@@ -510,7 +510,7 @@ class DockerSandboxRunner:
                            "SANDBOX_BUILD_REQUIREMENTS": " ".join(build_requirements or [])},
             )
             try:
-                res = subprocess.run(cmd, capture_output=True, text=True, timeout=self.config.timeout_seconds + 10, check=False)
+                res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=self.config.timeout_seconds + 10, check=False)
                 exit_code = res.returncode
             except subprocess.TimeoutExpired:
                 exit_code = 124
@@ -569,7 +569,7 @@ class DockerSandboxRunner:
             res = subprocess.run(
                 docker_cmd,
                 capture_output=True,
-                text=True,
+                text=True, encoding="utf-8", errors="replace",
                 timeout=self.config.timeout_seconds + 10, check=False,  # Buffer for container teardown
             )
             duration = time.time() - start_time
@@ -676,7 +676,7 @@ class ProcessSandboxRunner:
                 run_cmd,
                 cwd=str(repo_dir),
                 capture_output=True,
-                text=True,
+                text=True, encoding="utf-8", errors="replace",
                 timeout=self.timeout_seconds,
                 env=env, check=False,
             )

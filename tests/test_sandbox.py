@@ -374,3 +374,17 @@ def test_container_scripts_keep_lf_line_endings():
     for name in ("docker/entrypoint.sh", "docker/Dockerfile.sandbox"):
         assert b"\r\n" not in (PROJECT_ROOT / name).read_bytes(), f"{name} has CRLF line endings"
     assert "*.sh text eol=lf" in (PROJECT_ROOT / ".gitattributes").read_text(encoding="utf-8")
+
+
+def test_captured_subprocess_output_is_decoded_as_utf8_not_the_system_code_page(monkeypatch):
+    """#248: cp1254 cannot decode byte 0x81, so a progress bar in a paper's output used to break the capture."""
+    import locale
+    import sys
+
+    monkeypatch.setattr(locale, "getpreferredencoding", lambda *a, **k: "cp1254")
+    code = "import sys; sys.stdout.buffer.write(bytes([0x81, 0xe2, 0x96, 0x88, 0x0a]))"
+    res = runner_module.subprocess.run([sys.executable, "-c", code], capture_output=True, text=True,
+                                       encoding="utf-8", errors="replace", check=False)
+    assert res.stdout.endswith("█\n")  # the full block of a progress bar survives
+    source = (Path(runner_module.__file__)).read_text(encoding="utf-8")
+    assert source.count("text=True") == source.count('text=True, encoding="utf-8", errors="replace"')
