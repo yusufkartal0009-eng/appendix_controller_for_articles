@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-12T00:53+03:00",
+  "run_at": "2026-10-12T00:56+03:00",
   "image": "repro-radar-sandbox:latest",
   "docker": "29.8.2",
   "host_os": "nt",
@@ -25,8 +25,8 @@
       "area": "privilege",
       "title": "Capability bounding set is empty (drop all)",
       "expect": "CapBnd is 0",
-      "observed": "CapBnd=00000000a80425fb ['chown', 'dac_override', 'fowner', 'fsetid', 'kill', 'setgid', 'setuid', 'setpcap', 'net_bind_service', 'net_raw', 'sys_chroot', 'mknod', 'audit_write', 'setfcap']",
-      "verdict": "FAIL"
+      "observed": "CapBnd=0000000000000000 []",
+      "verdict": "PASS"
     },
     {
       "id": "no_new_privs",
@@ -313,7 +313,7 @@
       "area": "resource",
       "title": "Allocate 8 GiB under a 256 MiB limit (no swap)",
       "expect": "killed by the memory limit (OOM_KILLED), quickly",
-      "observed": "status=OOM_KILLED exit_code=137 duration=0.7s peak_memory_bytes=268435456",
+      "observed": "status=OOM_KILLED exit_code=137 duration=0.6s peak_memory_bytes=268435456",
       "verdict": "PASS"
     },
     {
@@ -321,7 +321,7 @@
       "area": "resource",
       "title": "Sleep 120 s under a 5 s timeout",
       "expect": "TIMEOUT shortly after the limit",
-      "observed": "status=TIMEOUT exit_code=137 duration=5.5s",
+      "observed": "status=TIMEOUT exit_code=137 duration=5.4s",
       "verdict": "PASS"
     },
     {

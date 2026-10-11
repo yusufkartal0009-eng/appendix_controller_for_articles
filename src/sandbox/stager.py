@@ -497,7 +497,7 @@ class RepoStager:
         self.staging_root.chmod(0o777)  # written by the sandbox user (uid 1000) on hosts with another uid
         return [
             "docker", "run", "--rm", "--user", f"{DOCKER_USER_ID}:{DOCKER_USER_ID}",
-            "--security-opt", "no-new-privileges:true",
+            "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true",
             "-v", f"{self.staging_root}:/staging", "-w", "/staging",
             "-e", "PIP_CACHE_DIR=/staging/.pip-cache", "-e", "PIP_DISABLE_PIP_VERSION_CHECK=1",
             "--entrypoint", "python", image_for(python_version), "-m", "pip", "download", *args,
