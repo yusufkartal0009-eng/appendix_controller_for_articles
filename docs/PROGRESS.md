@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 398 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 407 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Tests for the Claim Scripts (2026-10-12 01:16 +03:00, Issue #272)
+- Added 9 tests: apply_accepted_claims.py went from 0% to 97% coverage and import_pass.py from 66% to 97%. Tests only.
 
 ### Artifact Checksums and Reproducibility Summary (2026-10-12 01:09 +03:00, Issue #29)
 - Added src/artifact_hash.py (manifest, verify, compare), scripts/hash_run.py, runs.artifact_manifest_sha256 and runs.outputs_sha256 (migration 5). Symbolic links and unreadable files are skipped and listed. The runner does not call it yet.

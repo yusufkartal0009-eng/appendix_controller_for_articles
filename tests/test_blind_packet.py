@@ -93,3 +93,36 @@ def test_import_checks(fake_corpus, answer, problem):
 
 def test_import_needs_every_question(fake_corpus):
     assert "questions" in ip.check_answers({"paper_006": {}}, pdf_dir=fake_corpus)[0]
+
+
+def _packet(fake_corpus, answer):
+    claims = fake_corpus / "claims"
+    claims.mkdir(exist_ok=True)
+    (claims / "paper_006.json").write_text(json.dumps(
+        {"paper_id": "paper_006", "extractions": {"A": {"answers": {}}}}), encoding="utf-8")
+    packet = fake_corpus / "filled"
+    packet.mkdir(exist_ok=True)
+    (packet / "answers.json").write_text(json.dumps({"paper_006": {"arcene_auroc": answer}}), encoding="utf-8")
+    return packet, claims / "paper_006.json"
+
+
+def test_import_writes_pass_b_next_to_pass_a_with_the_value_computed(fake_corpus, monkeypatch, capsys):
+    packet, record_path = _packet(fake_corpus, _found())
+    monkeypatch.setattr(ip, "CLAIMS_DIR", record_path.parent)
+    assert ip.main([str(packet)]) == 0
+    assert "Imported as pass B" in capsys.readouterr().out
+    record = json.loads(record_path.read_text(encoding="utf-8"))
+    assert set(record["extractions"]) == {"A", "B"}
+    b = record["extractions"]["B"]
+    assert b["method"] == ip.METHOD and b["made_at"]
+    assert b["answers"]["arcene_auroc"]["claim"]["value_normalized"] == 0.9104  # 91.04 percent, computed not typed
+
+
+def test_a_packet_with_a_problem_changes_nothing(fake_corpus, monkeypatch, capsys):
+    packet, record_path = _packet(fake_corpus, _found(quote="SAINT 93.3 91.05", value="91.05"))
+    monkeypatch.setattr(ip, "CLAIMS_DIR", record_path.parent)
+    before = record_path.read_text(encoding="utf-8")
+    assert ip.main([str(packet)]) == 1
+    out = capsys.readouterr().out
+    assert "NOT IMPORTED" in out and "not on page 2" in out
+    assert record_path.read_text(encoding="utf-8") == before
