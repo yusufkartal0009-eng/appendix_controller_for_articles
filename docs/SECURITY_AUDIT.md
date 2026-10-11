@@ -20,13 +20,13 @@ The first run, before any fix, is kept in `data/security_audit/results_before_fi
 ## 2. Results
 
 <!-- audit:table:start -->
-Run on 2026-10-12T00:53+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.2, by `scripts/security_audit.py` (source: `data/security_audit/results.json`).
+Run on 2026-10-12T00:56+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.2, by `scripts/security_audit.py` (source: `data/security_audit/results.json`).
 
 | # | Area | Attempt | Expected | Observed | Verdict |
 |---|---|---|---|---|---|
 | 1 | privilege | Process runs as a non-root user | uid and gid are not 0 | uid=1000 gid=1000 | **PASS** |
 | 2 | privilege | No effective capabilities | CapEff is 0 | CapEff=0000000000000000 [] | **PASS** |
-| 3 | privilege | Capability bounding set is empty (drop all) | CapBnd is 0 | CapBnd=00000000a80425fb ['chown', 'dac_override', 'fowner', 'fsetid', 'kill', 'setgid', 'setuid', 'setpcap', 'net_bind_service', 'net_raw', 'sys_chroot', 'mknod', 'audit_write', 'setfcap'] | **FAIL** |
+| 3 | privilege | Capability bounding set is empty (drop all) | CapBnd is 0 | CapBnd=0000000000000000 [] | **PASS** |
 | 4 | privilege | no-new-privileges is set | NoNewPrivs is 1 | NoNewPrivs=1 | **PASS** |
 | 5 | privilege | A seccomp filter is active | Seccomp is 2 (filter) | Seccomp=2 | **PASS** |
 | 6 | privilege | setuid(0) is refused | PermissionError | PermissionError: [Errno 1] Operation not permitted | **PASS** |
@@ -62,23 +62,23 @@ Run on 2026-10-12T00:53+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.
 | 36 | privilege | chown to root | PermissionError | PermissionError: [Errno 1] Operation not permitted: '/tmp' | **PASS** |
 | 37 | escape | No secret-looking environment variables in the container (the image's public GPG_KEY is ignored) | none | [] | **PASS** |
 | 38 | resource | Thread bomb is limited by --pids-limit=100 | fewer than 300 of 300 threads start | started 95 of 300 threads | **PASS** |
-| 39 | resource | Allocate 8 GiB under a 256 MiB limit (no swap) | killed by the memory limit (OOM_KILLED), quickly | status=OOM_KILLED exit_code=137 duration=0.7s peak_memory_bytes=268435456 | **PASS** |
-| 40 | resource | Sleep 120 s under a 5 s timeout | TIMEOUT shortly after the limit | status=TIMEOUT exit_code=137 duration=5.5s | **PASS** |
+| 39 | resource | Allocate 8 GiB under a 256 MiB limit (no swap) | killed by the memory limit (OOM_KILLED), quickly | status=OOM_KILLED exit_code=137 duration=0.6s peak_memory_bytes=268435456 | **PASS** |
+| 40 | resource | Sleep 120 s under a 5 s timeout | TIMEOUT shortly after the limit | status=TIMEOUT exit_code=137 duration=5.4s | **PASS** |
 | 41 | resource | Paper code kills its own watchdog (the parent `timeout` process), limit 5 s | the run ends within 15 s and is not reported as a timeout before the limit | status=TIMEOUT exit_code=137 duration=0.5s; parent pid 13 timeout --signal=SIGKILL 5 python /workspace/repo/probe.py  / killed the parent | **FAIL** |
 | 42 | resource | Write 512 MiB into the output directory (a bind mount of a host folder) | limited by a disk quota | status=COMPLETED; wrote 512 MiB into /workspace/output; 512 MiB landed on the host disk; no quota stops it | **FAIL** |
 | 43 | escape | Create symbolic links inside the output directory | recorded (host code must not follow them) | created link_abs.txt -> /etc/passwd / created link_rel.txt -> ../../../../etc/hosts; on the host: {'link_abs.txt': {'is_symlink': False, 'outcome': 'host read failed: OSError errno 22'}, 'link_rel.txt': {'is_symlink': False, 'outcome': 'host read failed: OSError errno 22'}} | **INFO** |
 
-**Totals: 38 PASS, 3 FAIL, 2 INFO.**
+**Totals: 39 PASS, 2 FAIL, 2 INFO.**
 <!-- audit:table:end -->
 
 ## 3. Findings
 
 | ID | Finding | Severity | Status |
 |---|---|---|---|
-| F-1 | The capability bounding set still holds Docker's 14 default capabilities (`--cap-drop ALL` is missing). Not usable today: the process is uid 1000 with no effective capabilities, `no-new-privileges` is set, and the `chroot`, `mknod`, raw socket, `mount`, and `setuid` attempts were all refused. | Low (defense in depth) | Issue #260 |
+| F-1 | The capability bounding set still holds Docker's 14 default capabilities (`--cap-drop ALL` is missing). Not usable today: the process is uid 1000 with no effective capabilities, `no-new-privileges` is set, and the `chroot`, `mknod`, raw socket, `mount`, and `setuid` attempts were all refused. | Low (defense in depth) | **Fixed** in #260: `--cap-drop ALL` is in the run command, the bundling command, and the compose file. After the fix the audit shows `CapBnd=0` (row 3); the 20 sandbox acceptance checks pass again (3.11 image) and `scripts/gpu_check.py` still sees the GPU. |
 | F-2 | The output directory is a bind mount of a host folder without a quota: 512 MiB written by a run landed on the host disk. | Medium (a runaway or hostile paper can fill the host disk within its time limit) | Issue #261, needs an owner decision (options in the issue) |
 | F-3 | A paper can kill its own watchdog (`timeout`, same uid); the container then ends at once and the run is reported as `TIMEOUT` although the limit was not reached. Still bounded; wrong label only. | Low | Issue #262, not started |
-| F-4 | The bundling container (`RepoStager._docker_pip_command`, `pip download`) has the network on by design and runs binary-only downloads, so no package code runs; it also lacks `--cap-drop ALL`, `--read-only`, and memory and process limits. **Read from the code, not probed at run time.** | Low | Capability drop is part of #260; the other flags are not done |
+| F-4 | The bundling container (`RepoStager._docker_pip_command`, `pip download`) has the network on by design and runs binary-only downloads, so no package code runs; it also lacks `--cap-drop ALL`, `--read-only`, and memory and process limits. **Read from the code, not probed at run time.** | Low | Capability drop done in #260 (checked by a direct run with the real command: `CapBnd=0`, and `pip download` of a wheel still works); `--read-only` and memory and process limits are not done |
 
 Observations that are not findings:
 

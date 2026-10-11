@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Sandbox Containers Drop All Capabilities (2026-10-12 00:56 +03:00, Issue #260)
+- Added --cap-drop ALL to the run/install/build command, the bundling container and the compose file. Audit: CapBnd 0; 20/20 acceptance checks (3.11) and the GPU check still pass.
+
 ### Container Security Audit Against Real Docker (2026-10-12 00:53 +03:00, Issue #46)
 - scripts/security_audit.py runs 43 hostile probes through the real sandbox runner (38 PASS, 3 FAIL, 2 INFO); evidence in data/security_audit/ and docs/SECURITY_AUDIT.md. Findings: missing --cap-drop ALL (#260), no output-directory quota (#261, needs a decision), watchdog can be killed by the paper (#262).
 

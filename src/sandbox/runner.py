@@ -251,6 +251,7 @@ class DockerSandboxRunner:
 
         # 3. Privilege Drop
         docker_cmd.extend([
+            "--cap-drop", "ALL",  # no Linux capability is needed to run Python code (#260)
             "--security-opt", "no-new-privileges:true",
             "--user", f"{self.config.user_id}:{self.config.group_id}",
         ])

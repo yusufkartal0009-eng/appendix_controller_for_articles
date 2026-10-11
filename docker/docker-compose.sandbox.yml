@@ -24,7 +24,9 @@ services:
       - /tmp:rw,noexec,nosuid,size=64m
       - /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000
 
-    # Privilege Escalation Prevention
+    # Privilege Escalation Prevention (all Linux capabilities dropped, #260)
+    cap_drop:
+      - ALL
     security_opt:
       - no-new-privileges:true
 

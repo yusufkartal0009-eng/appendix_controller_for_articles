@@ -66,7 +66,7 @@ Built as `repro-radar-sandbox:latest` (the default `SandboxConfig.image_name`).
 | Entrypoint | `docker/entrypoint.sh` (offline wheel install, timeout guard, log capture, `execution_meta.json`) |
 
 Container limits (from `docker/docker-compose.sandbox.yml` and `SandboxConfig`): 2 CPUs, 8 GB RAM,
-100 PIDs, `--network none`, read-only root filesystem, `no-new-privileges`.
+100 PIDs, `--network none`, read-only root filesystem, `no-new-privileges`, all capabilities dropped (`--cap-drop ALL`).
 
 Build it once Docker is installed (`.dockerignore` keeps the build context to `docker/entrypoint.sh`):
 
