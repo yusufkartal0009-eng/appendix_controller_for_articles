@@ -259,10 +259,35 @@ def _v3_extracted_claims(conn: sqlite3.Connection) -> None:
     run_script(conn, EXTRACTED_CLAIMS_SQL)
 
 
+# runs.status with the status the sandbox reports when the kernel kills a run for memory (#267).
+RUNS_WITH_OOM_STATUS_SQL = """
+CREATE TABLE {name} (
+    run_id TEXT PRIMARY KEY,
+    paper_id TEXT NOT NULL,
+    status TEXT NOT NULL CHECK(status IN ('PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED')),
+    execution_time REAL, -- in seconds
+    exit_code INTEGER,
+    stdout TEXT,
+    stderr TEXT,
+    seed INTEGER DEFAULT 42,
+    failure_category TEXT, -- pilot failure category (docs/PILOT_WEEK2.md section 7), NULL if not categorized
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
+)
+"""
+
+
+def _v4_runs_oom_status(conn: sqlite3.Connection) -> None:
+    row = conn.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'runs'").fetchone()
+    if row is not None and "OOM_KILLED" not in row[0]:
+        rebuild_table(conn, "runs", RUNS_WITH_OOM_STATUS_SQL)
+
+
 MIGRATIONS: list[Migration] = [
     Migration(1, "baseline tables (papers, runs, claims, scores)", _v1_baseline),
     Migration(2, "runs.failure_category and idx_claims_run_id", _v2_failure_category),
     Migration(3, "extracted_claims table", _v3_extracted_claims),
+    Migration(4, "runs.status accepts OOM_KILLED", _v4_runs_oom_status),
 ]
 
 
