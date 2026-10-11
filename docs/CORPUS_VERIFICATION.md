@@ -1,7 +1,7 @@
 # Repro Radar — Corpus Verification
 
 > What has been checked about each entry in `data/seed_papers.json`, and what has not.
-> Anything not checked is marked **UNVERIFIED**. Last updated 2026-09-27.
+> Anything not checked is marked **UNVERIFIED**. Last updated 2026-10-12.
 >
 > **No entry is verified as a whole:** an entry counts as verified only when every row below is complete, and every entry still has at least one `UNVERIFIED` claim and unchecked runnability.
 
@@ -67,7 +67,7 @@ Method: each paper's PDF (latest arXiv version, or the bioRxiv preprint for Fast
 | `paper_008` (arXiv v4) | `forest_covertype_accuracy` | 0.971 (Table 2) | not found ("Forest" occurs 17 times) | UNVERIFIED, **SUSPECT** |
 | `paper_008` | `higgs_auroc` | 0.849 (Table 2) | not found; "HIGGS"/"Higgs" does not occur in the paper | UNVERIFIED, **SUSPECT** |
 
-**Summary: 2 of 16 claims found in their papers** (both `paper_003`). One value exists but belongs to another method (`paper_002`), and two entries cite datasets their papers do not use (`paper_005` "EP3602", `paper_008` HIGGS). Before the pilot, the unverified claims must be replaced with values copied from the papers, or dropped; that is the claim-extraction work (W1-W7), not done here.
+**Summary (2026-09-27, before claim extraction; the current count is in section 6): 2 of 16 claims found in their papers** (both `paper_003`). One value exists but belongs to another method (`paper_002`), and two entries cite datasets their papers do not use (`paper_005` "EP3602", `paper_008` HIGGS). Before the pilot, the unverified claims must be replaced with values copied from the papers, or dropped; that is the claim-extraction work (W1-W7), not done here.
 
 Entries flagged **SUSPECT** had wrong metadata originally, so their claims may not come from the paper at all:
 
