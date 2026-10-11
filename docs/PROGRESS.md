@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### Contribution Guide and Paper Onboarding Specification (2026-10-12 00:59 +03:00, Issue #44)
+- Added CONTRIBUTING.md and docs/PAPER_ONBOARDING.md (eligibility, entry template, steps, review criteria), checked against the scripts and tests; not rehearsed end to end.
+
 ### Sandbox Containers Drop All Capabilities (2026-10-12 00:56 +03:00, Issue #260)
 - Added --cap-drop ALL to the run/install/build command, the bundling container and the compose file. Audit: CapBnd 0; 20/20 acceptance checks (3.11) and the GPU check still pass.
 
