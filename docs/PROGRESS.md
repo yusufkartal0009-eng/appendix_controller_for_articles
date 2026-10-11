@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 366 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 382 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Versioned Database Migrations (2026-10-12 01:04 +03:00, Issue #12)
+- Added src/migrations.py (versioned, transactional, backed up, idempotent, table-rebuild helper) and scripts/migrate.py; init_db upgrades through it. Tested on temp databases and on a copy of the real local database; schema equals data/schema.sql.
 
 ### Contribution Guide and Paper Onboarding Specification (2026-10-12 00:59 +03:00, Issue #44)
 - Added CONTRIBUTING.md and docs/PAPER_ONBOARDING.md (eligibility, entry template, steps, review criteria), checked against the scripts and tests; not rehearsed end to end.

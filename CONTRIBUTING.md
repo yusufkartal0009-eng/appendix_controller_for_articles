@@ -53,6 +53,7 @@ Build the sandbox image once with `docker build -f docker/Dockerfile.sandbox -t 
 - **Simulated data is labeled** as a simulation wherever it appears, and is never stored as a result.
 - **No secrets.** API keys are read from environment variables and never committed. Nothing that identifies a person is committed.
 - **Claims are accepted by a person.** A claim extracted from a paper by an AI model or a script reaches scoring only after the maintainer has reviewed it one by one ([`docs/CLAIM_SCHEMA.md`](docs/CLAIM_SCHEMA.md), [`docs/AGENT_EXTRACTION.md`](docs/AGENT_EXTRACTION.md)). Never edit `expected_claims` in `data/seed_papers.json` by hand to make a number match.
+- **A schema change needs a migration.** Edit `data/schema.sql` and add a migration in `src/migrations.py` that does the same to an existing database; `tests/test_migrations.py` fails when the two differ. Never edit a merged migration.
 - **Do not change a paper's run settings to make it pass.** After a pilot starts, the per-paper settings are frozen; only defects in Repro Radar's own code are fixed ([`docs/PILOT_2.md`](docs/PILOT_2.md), section 9).
 - **UI decisions belong to the maintainer** (layout, colors, fonts, badge design, report layout): ask with two or three options and a preview before building.
 
