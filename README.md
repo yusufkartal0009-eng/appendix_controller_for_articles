@@ -175,6 +175,7 @@ repro-radar/
 │   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
 │   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
 │   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run in CI)
+│   ├── hash_run.py                     # SHA-256 manifest of a run directory; verify and compare runs (#29)
 │   ├── generate_academic_introduction_doc.py # Builds the introduction draft (.docx, not committed)
 │   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
 │   ├── setup_7week_board.py            # Provisions the weekly tracking board
@@ -182,6 +183,7 @@ repro-radar/
 ├── src/
 │   ├── __init__.py          # Package init
 │   ├── config.py            # Paths, tier weights, and tolerances
+│   ├── artifact_hash.py     # SHA-256 manifests of run directories (integrity and reproducibility hashes)
 │   ├── database.py          # SQLite engine, sessions, init, and seeding
 │   ├── migrations.py        # Versioned schema migrations for existing databases (#12)
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas

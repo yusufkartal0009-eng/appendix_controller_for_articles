@@ -283,11 +283,19 @@ def _v4_runs_oom_status(conn: sqlite3.Connection) -> None:
         rebuild_table(conn, "runs", RUNS_WITH_OOM_STATUS_SQL)
 
 
+def _v5_run_hashes(conn: sqlite3.Connection) -> None:
+    """File manifest hashes of a run directory (#29)."""
+    if table_exists(conn, "runs"):
+        add_column_if_missing(conn, "runs", "artifact_manifest_sha256", "TEXT")
+        add_column_if_missing(conn, "runs", "outputs_sha256", "TEXT")
+
+
 MIGRATIONS: list[Migration] = [
     Migration(1, "baseline tables (papers, runs, claims, scores)", _v1_baseline),
     Migration(2, "runs.failure_category and idx_claims_run_id", _v2_failure_category),
     Migration(3, "extracted_claims table", _v3_extracted_claims),
     Migration(4, "runs.status accepts OOM_KILLED", _v4_runs_oom_status),
+    Migration(5, "runs.artifact_manifest_sha256 and runs.outputs_sha256", _v5_run_hashes),
 ]
 
 

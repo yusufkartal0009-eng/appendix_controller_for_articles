@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS runs (
     stderr TEXT,
     seed INTEGER DEFAULT 42,
     failure_category TEXT, -- pilot failure category (docs/PILOT_WEEK2.md section 7), NULL if not categorized
+    artifact_manifest_sha256 TEXT, -- SHA-256 of the run directory's file manifest (src/artifact_hash.py, #29)
+    outputs_sha256 TEXT, -- SHA-256 of the files the paper wrote (not logs or sandbox metadata), NULL if none
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
 );
