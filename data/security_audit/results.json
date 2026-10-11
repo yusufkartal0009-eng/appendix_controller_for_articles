@@ -1,0 +1,352 @@
+{
+  "run_at": "2026-10-12T00:53+03:00",
+  "image": "repro-radar-sandbox:latest",
+  "docker": "29.8.2",
+  "host_os": "nt",
+  "rows": [
+    {
+      "id": "user",
+      "area": "privilege",
+      "title": "Process runs as a non-root user",
+      "expect": "uid and gid are not 0",
+      "observed": "uid=1000 gid=1000",
+      "verdict": "PASS"
+    },
+    {
+      "id": "cap_eff",
+      "area": "privilege",
+      "title": "No effective capabilities",
+      "expect": "CapEff is 0",
+      "observed": "CapEff=0000000000000000 []",
+      "verdict": "PASS"
+    },
+    {
+      "id": "cap_bnd",
+      "area": "privilege",
+      "title": "Capability bounding set is empty (drop all)",
+      "expect": "CapBnd is 0",
+      "observed": "CapBnd=00000000a80425fb ['chown', 'dac_override', 'fowner', 'fsetid', 'kill', 'setgid', 'setuid', 'setpcap', 'net_bind_service', 'net_raw', 'sys_chroot', 'mknod', 'audit_write', 'setfcap']",
+      "verdict": "FAIL"
+    },
+    {
+      "id": "no_new_privs",
+      "area": "privilege",
+      "title": "no-new-privileges is set",
+      "expect": "NoNewPrivs is 1",
+      "observed": "NoNewPrivs=1",
+      "verdict": "PASS"
+    },
+    {
+      "id": "seccomp",
+      "area": "privilege",
+      "title": "A seccomp filter is active",
+      "expect": "Seccomp is 2 (filter)",
+      "observed": "Seccomp=2",
+      "verdict": "PASS"
+    },
+    {
+      "id": "setuid0",
+      "area": "privilege",
+      "title": "setuid(0) is refused",
+      "expect": "PermissionError",
+      "observed": "PermissionError: [Errno 1] Operation not permitted",
+      "verdict": "PASS"
+    },
+    {
+      "id": "su_root",
+      "area": "privilege",
+      "title": "su to root does not work",
+      "expect": "command fails",
+      "observed": "CalledProcessError: Command '['su', '-c', 'id', 'root']' returned non-zero exit status 1.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "net_tcp",
+      "area": "network",
+      "title": "TCP to the internet (1.1.1.1:443)",
+      "expect": "connection fails",
+      "observed": "OSError: [Errno 101] Network is unreachable",
+      "verdict": "PASS"
+    },
+    {
+      "id": "net_dns",
+      "area": "network",
+      "title": "DNS resolution",
+      "expect": "resolution fails",
+      "observed": "gaierror: [Errno -3] Temporary failure in name resolution",
+      "verdict": "PASS"
+    },
+    {
+      "id": "net_gateway",
+      "area": "network",
+      "title": "TCP to the Docker bridge gateway (172.17.0.1:80)",
+      "expect": "connection fails",
+      "observed": "OSError: [Errno 101] Network is unreachable",
+      "verdict": "PASS"
+    },
+    {
+      "id": "net_ifaces",
+      "area": "network",
+      "title": "Only the loopback interface exists",
+      "expect": "interfaces == ['lo']",
+      "observed": "['lo']",
+      "verdict": "PASS"
+    },
+    {
+      "id": "net_raw",
+      "area": "network",
+      "title": "Raw (ICMP) socket",
+      "expect": "PermissionError",
+      "observed": "PermissionError: [Errno 1] Operation not permitted",
+      "verdict": "PASS"
+    },
+    {
+      "id": "docker_sock",
+      "area": "escape",
+      "title": "Docker socket is not mounted",
+      "expect": "no /var/run/docker.sock",
+      "observed": "False",
+      "verdict": "PASS"
+    },
+    {
+      "id": "fs_root",
+      "area": "filesystem",
+      "title": "Write to /probe_file",
+      "expect": "read-only file system",
+      "observed": "OSError: [Errno 30] Read-only file system: '/probe_file'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "fs_etc",
+      "area": "filesystem",
+      "title": "Write to /etc/passwd",
+      "expect": "read-only file system",
+      "observed": "PermissionError: [Errno 13] Permission denied: '/etc/passwd'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "fs_usr",
+      "area": "filesystem",
+      "title": "Write to /usr/local/probe_file",
+      "expect": "read-only file system",
+      "observed": "OSError: [Errno 30] Read-only file system: '/usr/local/probe_file'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "fs_repo",
+      "area": "filesystem",
+      "title": "Write to /workspace/repo/probe_file",
+      "expect": "read-only file system",
+      "observed": "OSError: [Errno 30] Read-only file system: '/workspace/repo/probe_file'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "fs_output",
+      "area": "filesystem",
+      "title": "Write to /workspace/output (intended)",
+      "expect": "allowed",
+      "observed": "written",
+      "verdict": "INFO"
+    },
+    {
+      "id": "exec_tmp",
+      "area": "filesystem",
+      "title": "Execute a binary written to /tmp",
+      "expect": "noexec: PermissionError",
+      "observed": "PermissionError: [Errno 13] Permission denied: '/tmp/true_copy'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "exec_home",
+      "area": "filesystem",
+      "title": "Execute a binary written to /workspace/home",
+      "expect": "noexec: PermissionError",
+      "observed": "PermissionError: [Errno 13] Permission denied: '/workspace/home/true_copy'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "tmp_size",
+      "area": "resource",
+      "title": "Fill /tmp beyond its 64 MiB tmpfs limit",
+      "expect": "ENOSPC",
+      "observed": "OSError: [Errno 28] No space left on device",
+      "verdict": "PASS"
+    },
+    {
+      "id": "shm_size",
+      "area": "resource",
+      "title": "Fill /dev/shm beyond its 64 MiB limit",
+      "expect": "ENOSPC",
+      "observed": "OSError: [Errno 28] No space left on device",
+      "verdict": "PASS"
+    },
+    {
+      "id": "mounts",
+      "area": "escape",
+      "title": "No unexpected mounts (no host directories, no sockets)",
+      "expect": "only the mounts the runner sets",
+      "observed": "unexpected=[] (27 mount points checked)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "host_dirs",
+      "area": "escape",
+      "title": "No host directories visible by their usual names",
+      "expect": "none exist",
+      "observed": "[]",
+      "verdict": "PASS"
+    },
+    {
+      "id": "mount",
+      "area": "escape",
+      "title": "mount(2) of a filesystem",
+      "expect": "EPERM",
+      "observed": "PermissionError: [Errno 1] Operation not permitted",
+      "verdict": "PASS"
+    },
+    {
+      "id": "unshare_user",
+      "area": "escape",
+      "title": "Create a user namespace (unshare CLONE_NEWUSER)",
+      "expect": "EPERM",
+      "observed": "PermissionError: [Errno 1] Operation not permitted",
+      "verdict": "PASS"
+    },
+    {
+      "id": "chroot",
+      "area": "escape",
+      "title": "chroot(2)",
+      "expect": "PermissionError",
+      "observed": "PermissionError: [Errno 1] Operation not permitted: '/tmp'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "mknod",
+      "area": "escape",
+      "title": "Create a device node",
+      "expect": "PermissionError",
+      "observed": "PermissionError: [Errno 1] Operation not permitted",
+      "verdict": "PASS"
+    },
+    {
+      "id": "bpf",
+      "area": "escape",
+      "title": "bpf(2) syscall",
+      "expect": "EPERM",
+      "observed": "PermissionError: [Errno 1] Operation not permitted",
+      "verdict": "PASS"
+    },
+    {
+      "id": "proc_sys",
+      "area": "escape",
+      "title": "Write to /proc/sys/kernel/hostname",
+      "expect": "read-only or refused",
+      "observed": "OSError: [Errno 30] Read-only file system: '/proc/sys/kernel/hostname'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "proc_sysrq",
+      "area": "escape",
+      "title": "Write to /proc/sysrq-trigger",
+      "expect": "read-only or refused",
+      "observed": "OSError: [Errno 30] Read-only file system: '/proc/sysrq-trigger'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "cgroup_write",
+      "area": "escape",
+      "title": "Write to /sys/fs/cgroup/cgroup.procs",
+      "expect": "read-only or refused",
+      "observed": "OSError: [Errno 30] Read-only file system: '/sys/fs/cgroup/cgroup.procs'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "kcore",
+      "area": "escape",
+      "title": "Read /proc/kcore",
+      "expect": "refused, absent, or masked (empty)",
+      "observed": "read 0 bytes (an empty read means Docker masked the file with /dev/null)",
+      "verdict": "PASS"
+    },
+    {
+      "id": "dev_mem",
+      "area": "escape",
+      "title": "Read /dev/mem",
+      "expect": "refused, absent, or masked (empty)",
+      "observed": "FileNotFoundError: [Errno 2] No such file or directory: '/dev/mem'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "dev_kmsg",
+      "area": "escape",
+      "title": "Read /dev/kmsg",
+      "expect": "refused, absent, or masked (empty)",
+      "observed": "FileNotFoundError: [Errno 2] No such file or directory: '/dev/kmsg'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "chown",
+      "area": "privilege",
+      "title": "chown to root",
+      "expect": "PermissionError",
+      "observed": "PermissionError: [Errno 1] Operation not permitted: '/tmp'",
+      "verdict": "PASS"
+    },
+    {
+      "id": "env_secrets",
+      "area": "escape",
+      "title": "No secret-looking environment variables in the container (the image's public GPG_KEY is ignored)",
+      "expect": "none",
+      "observed": "[]",
+      "verdict": "PASS"
+    },
+    {
+      "id": "pids",
+      "area": "resource",
+      "title": "Thread bomb is limited by --pids-limit=100",
+      "expect": "fewer than 300 of 300 threads start",
+      "observed": "started 95 of 300 threads",
+      "verdict": "PASS"
+    },
+    {
+      "id": "memory",
+      "area": "resource",
+      "title": "Allocate 8 GiB under a 256 MiB limit (no swap)",
+      "expect": "killed by the memory limit (OOM_KILLED), quickly",
+      "observed": "status=OOM_KILLED exit_code=137 duration=0.7s peak_memory_bytes=268435456",
+      "verdict": "PASS"
+    },
+    {
+      "id": "timeout",
+      "area": "resource",
+      "title": "Sleep 120 s under a 5 s timeout",
+      "expect": "TIMEOUT shortly after the limit",
+      "observed": "status=TIMEOUT exit_code=137 duration=5.5s",
+      "verdict": "PASS"
+    },
+    {
+      "id": "kill_parent",
+      "area": "resource",
+      "title": "Paper code kills its own watchdog (the parent `timeout` process), limit 5 s",
+      "expect": "the run ends within 15 s and is not reported as a timeout before the limit",
+      "observed": "status=TIMEOUT exit_code=137 duration=0.5s; parent pid 13 timeout --signal=SIGKILL 5 python /workspace/repo/probe.py  | killed the parent",
+      "verdict": "FAIL"
+    },
+    {
+      "id": "output_disk",
+      "area": "resource",
+      "title": "Write 512 MiB into the output directory (a bind mount of a host folder)",
+      "expect": "limited by a disk quota",
+      "observed": "status=COMPLETED; wrote 512 MiB into /workspace/output; 512 MiB landed on the host disk; no quota stops it",
+      "verdict": "FAIL"
+    },
+    {
+      "id": "output_symlink",
+      "area": "escape",
+      "title": "Create symbolic links inside the output directory",
+      "expect": "recorded (host code must not follow them)",
+      "observed": "created link_abs.txt -> /etc/passwd | created link_rel.txt -> ../../../../etc/hosts; on the host: {'link_abs.txt': {'is_symlink': False, 'outcome': 'host read failed: OSError errno 22'}, 'link_rel.txt': {'is_symlink': False, 'outcome': 'host read failed: OSError errno 22'}}",
+      "verdict": "INFO"
+    }
+  ]
+}
