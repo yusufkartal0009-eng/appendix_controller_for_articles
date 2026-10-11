@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 361 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 366 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Container Security Audit Against Real Docker (2026-10-12 00:53 +03:00, Issue #46)
+- scripts/security_audit.py runs 43 hostile probes through the real sandbox runner (38 PASS, 3 FAIL, 2 INFO); evidence in data/security_audit/ and docs/SECURITY_AUDIT.md. Findings: missing --cap-drop ALL (#260), no output-directory quota (#261, needs a decision), watchdog can be killed by the paper (#262).
 
 ### paper_005 EP300 Speedup Question (Pass A Only) (2026-10-12 00:47 +03:00, Issue #258)
 - Added followup question ep300_avg_kernel_speedup; pass A found 16 (Table 1, p. 10) and the quote guard matched it. Not accepted, seed file untouched, no pass B.
