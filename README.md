@@ -186,7 +186,6 @@ repro-radar/
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
 │   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
 │   ├── metric_extractor.py  # Metric parsing from logs, JSON, and sklearn reports
-│   ├── validation_rubric.py # Metric tolerances & multi-seed stability analysis
 │   └── sandbox/
 │       ├── __init__.py      # Sandbox package exports
 │       ├── runner.py        # DockerSandboxRunner; opt-in unisolated ProcessSandboxRunner
@@ -201,7 +200,6 @@ repro-radar/
 │   ├── STACK.md             # Technology stack and security boundaries
 │   ├── ENVIRONMENT.md       # System tools, dependencies & fresh-machine setup
 │   ├── SANDBOX_GUIDE.md     # Sandbox architecture, security specs & CLI guide
-│   ├── VALIDATION_RUBRIC.md # Metric validation rubric and tolerances
 │   ├── gap_analysis.md      # Known gaps, evidence, and remediation status
 │   ├── CORPUS_VERIFICATION.md # Per-entry corpus checks and what remains unverified
 │   ├── SANDBOX_ACCEPTANCE.md  # Real-Docker evidence of sandbox isolation
@@ -220,7 +218,6 @@ repro-radar/
     ├── test_seed.py                # Seed dataset completeness tests
     ├── test_setup_github_backlog.py # Backlog script command-safety tests
     ├── test_stager.py              # Staging, dependency analysis & execution report tests
-    ├── test_validation_rubric.py   # Tolerance and stability analyzer tests
     └── test_verify_corpus.py       # Corpus verifier tests (offline, fake HTTP)
 ```
 

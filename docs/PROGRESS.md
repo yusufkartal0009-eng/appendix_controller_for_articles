@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 365 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 358 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Removed the Unused validation_rubric Module (2026-10-12 00:43 +03:00, Issue #254)
+- Deleted src/validation_rubric.py, docs/VALIDATION_RUBRIC.md and tests/test_validation_rubric.py (nothing imported them); the report now describes the tolerance rules scoring.py really applies. Coverage of src/ went from 2267 statements / 232 missed to 2076 / 201 (90% both).
 
 ### Python 3.11.4 Floor for fetch_data.py (2026-10-12 00:42 +03:00, Issue #252)
 - Added requires-python >=3.11.4 and an early, clear stop in scripts/fetch_data.py when tar extraction filters are missing; the Pilot 2 environment record now includes python --version. Not verified on a real older Python.
