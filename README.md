@@ -96,7 +96,7 @@ pip install -r requirements-dev.txt
 ```bash
 python cli.py init-db
 ```
-This executes `data/schema.sql` to initialize `data/repro_radar.db` and loads the seed papers from `data/seed_papers.json` (see [Corpus Verification](docs/CORPUS_VERIFICATION.md) for what has and has not been checked).
+This brings an existing database to the current schema (versioned migrations that keep its data; a copy of the file is made first, see `python scripts/migrate.py status`), executes `data/schema.sql` to initialize `data/repro_radar.db`, and loads the seed papers from `data/seed_papers.json` (see [Corpus Verification](docs/CORPUS_VERIFICATION.md) for what has and has not been checked).
 
 ### 4. List Curated Papers
 ```bash
@@ -183,6 +183,7 @@ repro-radar/
 │   ├── __init__.py          # Package init
 │   ├── config.py            # Paths, tier weights, and tolerances
 │   ├── database.py          # SQLite engine, sessions, init, and seeding
+│   ├── migrations.py        # Versioned schema migrations for existing databases (#12)
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
 │   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
 │   ├── metric_extractor.py  # Metric parsing from logs, JSON, and sklearn reports
