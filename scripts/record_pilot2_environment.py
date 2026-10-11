@@ -21,6 +21,7 @@ project_root = Path(__file__).resolve().parent.parent
 OUT = project_root / "data" / "pilot2_runs" / "environment.txt"
 
 COMMANDS: list[tuple[str, list[str]]] = [
+    ("python --version", [sys.executable, "--version"]),
     ("git rev-parse HEAD", ["git", "rev-parse", "HEAD"]),
     ("git status --short", ["git", "status", "--short"]),
     ("docker version", ["docker", "version"]),

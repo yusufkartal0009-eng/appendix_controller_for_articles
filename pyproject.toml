@@ -1,3 +1,9 @@
+[project]
+name = "repro-radar"
+dynamic = ["version"]
+# scripts/fetch_data.py unpacks tar archives with extractall(filter="data"), which exists from 3.11.4 (#252).
+requires-python = ">=3.11.4"
+
 [tool.ruff]
 target-version = "py311"
 

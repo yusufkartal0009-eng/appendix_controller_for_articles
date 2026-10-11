@@ -62,6 +62,19 @@ def unpack(archive: Path, fmt: str, target: Path) -> None:
         shutil.copy2(archive, target / archive.name)
 
 
+def require_tar_filters() -> None:
+    """Stop with a clear message when this Python cannot extract tar archives safely (#252).
+
+    `tarfile.extractall(filter=...)` exists from Python 3.11.4. On an older patch release it fails in the middle of a
+    download with an AttributeError that does not say what is wrong.
+    """
+    if not hasattr(tarfile, "data_filter"):
+        raise SystemExit(
+            f"fetch_data.py needs Python 3.11.4 or newer (this is {sys.version.split()[0]}): older releases cannot "
+            "extract tar archives safely. Install a newer Python and run it again."
+        )
+
+
 def fetch_openml_dataset(dataset_id: int, cache_dir: Path, api: str = OPENML_API) -> int:
     """Write one dataset into an openml-python cache layout; returns the bytes written."""
     did_dir = cache_dir / "org" / "openml" / "www" / "datasets" / str(dataset_id)
@@ -118,6 +131,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.paper_id not in entries:
         print(f"unknown paper: {args.paper_id}", file=sys.stderr)
         return 2
+    if not args.dry_run:
+        require_tar_filters()
     items = run_setup_of(entries[args.paper_id]).get("data", [])
     if not items:
         print(f"{args.paper_id}: no data items")
