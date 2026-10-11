@@ -1,0 +1,14 @@
+{
+  "note": "Input of scripts/verify_sources.py. Existing references [6] and [7] are those of docs/INTRODUCTION_SOURCES.md and are looked up again here; [8] onward are new in section 3. `expected_*` is what the report will say the source is.",
+  "sources": [
+    {"ref": "[6]", "expected_title": "Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)", "first_author_family": "Pineau", "year": 2020, "arxiv_id": "2003.12206", "arxiv_year_tolerance": 1},
+    {"ref": "[7]", "expected_title": "Deep Reinforcement Learning that Matters", "first_author_family": "Henderson", "year": 2018, "doi": "10.1609/aaai.v32i1.11694", "arxiv_id": "1709.06560"},
+    {"ref": "[8]", "expected_title": "State of the Art: Reproducibility in Artificial Intelligence", "first_author_family": "Gundersen", "year": 2018, "doi": "10.1609/aaai.v32i1.11503"},
+    {"ref": "[9]", "expected_title": "A Step Toward Quantifying Independently Reproducible Machine Learning Research", "first_author_family": "Raff", "year": 2019, "arxiv_id": "1909.06674"},
+    {"ref": "[10]", "expected_title": "Repeatability in computer systems research", "first_author_family": "Collberg", "year": 2016, "doi": "10.1145/2812803"},
+    {"ref": "[11]", "expected_title": "A Large-Scale Study About Quality and Reproducibility of Jupyter Notebooks", "first_author_family": "Pimentel", "year": 2019, "doi": "10.1109/MSR.2019.00077"},
+    {"ref": "[12]", "expected_title": "A large-scale study on research code quality and execution", "first_author_family": "Trisovic", "year": 2022, "doi": "10.1038/s41597-022-01143-6"},
+    {"ref": "[13]", "expected_title": "An introduction to Docker for reproducible research", "first_author_family": "Boettiger", "year": 2015, "doi": "10.1145/2723872.2723882", "arxiv_id": "1410.0846", "arxiv_expected_title": "An introduction to Docker for reproducible research, with examples from the R environment"},
+    {"ref": "[14]", "expected_title": "Accounting for Variance in Machine Learning Benchmarks", "first_author_family": "Bouthillier", "year": 2021, "arxiv_id": "2103.03098"}
+  ]
+}
