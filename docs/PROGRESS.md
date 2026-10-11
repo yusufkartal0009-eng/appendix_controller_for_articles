@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 358 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 361 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### paper_005 EP300 Speedup Question (Pass A Only) (2026-10-12 00:47 +03:00, Issue #258)
+- Added followup question ep300_avg_kernel_speedup; pass A found 16 (Table 1, p. 10) and the quote guard matched it. Not accepted, seed file untouched, no pass B.
 
 ### README Claim Count and Corpus Verification Date (2026-10-12 00:44 +03:00, Issue #256)
 - README now states the 12 accepted claims in 5 of 6 papers and points to Pilot 2 for runnability; CORPUS_VERIFICATION.md has the current date and marks the 2 of 16 count as the 2026-09-27 history.
