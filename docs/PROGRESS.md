@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### README Claim Count and Corpus Verification Date (2026-10-12 00:44 +03:00, Issue #256)
+- README now states the 12 accepted claims in 5 of 6 papers and points to Pilot 2 for runnability; CORPUS_VERIFICATION.md has the current date and marks the 2 of 16 count as the 2026-09-27 history.
+
 ### Removed the Unused validation_rubric Module (2026-10-12 00:43 +03:00, Issue #254)
 - Deleted src/validation_rubric.py, docs/VALIDATION_RUBRIC.md and tests/test_validation_rubric.py (nothing imported them); the report now describes the tolerance rules scoring.py really applies. Coverage of src/ went from 2267 statements / 232 missed to 2076 / 201 (90% both).
 
