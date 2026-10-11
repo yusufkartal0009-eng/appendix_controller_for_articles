@@ -149,3 +149,12 @@ def test_fetch_refuses_unsafe_archive_paths(tmp_path):
         tar.addfile(info, io.BytesIO(b""))
     with pytest.raises(tarfile.FilterError):
         fetch_data.unpack(bad_tar, "tar", tmp_path / "out")
+
+
+def test_fetch_data_stops_early_without_tar_filters(monkeypatch, capsys):
+    monkeypatch.delattr(fetch_data.tarfile, "data_filter", raising=False)
+    with pytest.raises(SystemExit) as stopped:
+        fetch_data.main(["paper_003", "--cache", "unused"])
+    assert "3.11.4" in str(stopped.value)
+    # a dry run downloads and unpacks nothing, so it does not need the filters
+    assert fetch_data.main(["paper_003", "--dry-run"]) == 0

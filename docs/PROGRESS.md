@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 364 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 365 passed, 8 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Python 3.11.4 Floor for fetch_data.py (2026-10-12 00:42 +03:00, Issue #252)
+- Added requires-python >=3.11.4 and an early, clear stop in scripts/fetch_data.py when tar extraction filters are missing; the Pilot 2 environment record now includes python --version. Not verified on a real older Python.
 
 ### cli.py score Scores Real Runs and Accepted Claims (stage 3) (2026-10-10 22:07 +03:00, Issue #136)
 - `python cli.py score <paper>` now runs the paper in the Docker sandbox with its run setup (the Pilot 2 flow of `scripts/run_pilot.py`) and scores the stored record and run report against the claims a person accepted; `--from-run <dir>` scores a stored run without Docker. No reproduced number is made up: a claim is matched by its question ID and is 'not found' otherwise, and a paper with no accepted claim gets the scorer's neutral Tier 2 baseline with an explicit note. The `--simulate*` flags are labeled `SIMULATION FOR TESTING` and never saved. End to end: a live `cli.py score paper_005` run (OOM_KILLED at the memory limit, scored) and the six stored Pilot 2 runs.
