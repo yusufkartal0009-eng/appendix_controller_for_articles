@@ -6,6 +6,9 @@ questions, and nothing from the existing extractions: the questions, the rules, 
 values, each pinned PDF's page text, an answer template, and a README with the prompt. After the new session fills
 `answers.json`, `scripts/import_pass.py` checks it and stores it as pass B.
 
+A paper's `followup_queries` (questions added after the gold set, #258) go into the packet too, under their own key
+in the question file and in the same answer template; the importer keeps their answers apart from the gold set.
+
 usage: python scripts/make_blind_packet.py C:\\path\\outside\\the\\repository
 """
 
@@ -90,7 +93,8 @@ This folder is self-contained. Work only with the files in this folder.
 
 ## Prompt for the new session
 
-    Read README.md, RULES.md, and SCHEMA.md in this folder. Answer every question in questions/*.json using only
+    Read README.md, RULES.md, and SCHEMA.md in this folder. Answer every question in questions/*.json (the "queries"
+    and, where a file has them, the "followup_queries") using only
     the page text in papers/<paper_id>.txt, following RULES.md exactly, and write the answers into answers.json in
     the format of SCHEMA.md (start from the template that is already there; keep every paper_id and query_id).
     Work only inside this folder: do not read, search, or open any other folder, repository, website, or earlier
@@ -101,7 +105,7 @@ This folder is self-contained. Work only with the files in this folder.
 ## Contents
 
 - RULES.md, SCHEMA.md: how to answer
-- questions/<paper_id>.json: the questions ({n_questions} in total)
+- questions/<paper_id>.json: the questions ({n_questions} in total; `queries`, and `followup_queries` where a paper has them)
 - papers/<paper_id>.txt: page text of the pinned PDF (sha256 in manifest.json)
 - answers.json: template to fill
 """
@@ -120,14 +124,17 @@ def make_packet(out_dir: Path) -> dict[str, int]:
         spec = json.loads(qfile.read_text(encoding="utf-8"))
         paper_id = spec["paper_id"]
         questions = [{"query_id": q["query_id"], "question": q["question"]} for q in spec["queries"]]
-        (out_dir / "questions" / f"{paper_id}.json").write_text(
-            json.dumps({"paper_id": paper_id, "queries": questions}, indent=2) + "\n", encoding="utf-8")
+        followups = [{"query_id": q["query_id"], "question": q["question"]} for q in spec.get("followup_queries", [])]
+        content: dict[str, object] = {"paper_id": paper_id, "queries": questions}
+        if followups:
+            content["followup_queries"] = followups
+        (out_dir / "questions" / f"{paper_id}.json").write_text(json.dumps(content, indent=2) + "\n", encoding="utf-8")
         pdf = extract_pdf_text(PDF_DIR / f"{paper_id}.pdf")
         text = "\n".join(f"=== PAGE {n} ===\n{page}" for n, page in enumerate(pdf.pages, start=1))
         (out_dir / "papers" / f"{paper_id}.txt").write_text(text, encoding="utf-8")
         manifest[paper_id] = {"pdf_url": spec["pdf_url"], "pdf_sha256": pdf.sha256, "pages": len(pdf.pages)}
-        template[paper_id] = {q["query_id"]: {"status": None, "reason": "", "claim": None} for q in questions}
-        n_questions += len(questions)
+        template[paper_id] = {q["query_id"]: {"status": None, "reason": "", "claim": None} for q in questions + followups}
+        n_questions += len(questions) + len(followups)
     (out_dir / "RULES.md").write_text(RULES, encoding="utf-8")
     (out_dir / "SCHEMA.md").write_text(SCHEMA, encoding="utf-8")
     (out_dir / "README.md").write_text(README.format(folder=out_dir, n_questions=n_questions), encoding="utf-8")
@@ -135,6 +142,16 @@ def make_packet(out_dir: Path) -> dict[str, int]:
     answers = out_dir / "answers.json"
     if not answers.exists():  # never overwrite answers already filled in
         answers.write_text(json.dumps(template, indent=2) + "\n", encoding="utf-8")
+    else:  # an older packet: add empty slots for questions it lacks (follow-ups), keep every existing entry as it is
+        existing = json.loads(answers.read_text(encoding="utf-8"))
+        added = False
+        for paper_id, slots in template.items():
+            for query_id, empty in slots.items():
+                if query_id not in existing.setdefault(paper_id, {}):
+                    existing[paper_id][query_id] = empty
+                    added = True
+        if added:
+            answers.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
     return {"papers": len(manifest), "questions": n_questions}
 
 

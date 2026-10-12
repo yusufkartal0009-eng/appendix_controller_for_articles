@@ -64,7 +64,74 @@ def test_existing_answers_are_not_overwritten(fake_corpus):
     mbp.make_packet(out)
     (out / "answers.json").write_text('{"filled": true}')
     mbp.make_packet(out)
-    assert json.loads((out / "answers.json").read_text()) == {"filled": True}
+    assert json.loads((out / "answers.json").read_text())["filled"] is True  # kept; only empty slots are added
+
+
+FOLLOWUP = {"query_id": "extra_value", "question": "Another value from the paper."}
+
+
+@pytest.fixture
+def followup_corpus(fake_corpus, monkeypatch):
+    """The fake corpus with one follow-up question (#283) and a follow-up record holding pass A."""
+    queries = fake_corpus / "queries"
+    spec = json.loads((queries / "paper_006.json").read_text())
+    spec["followup_queries"] = [FOLLOWUP]
+    (queries / "paper_006.json").write_text(json.dumps(spec))
+    followup = fake_corpus / "followup"
+    followup.mkdir()
+    (followup / "paper_006.json").write_text(json.dumps(
+        {"paper_id": "paper_006", "status": "PASS A ONLY.", "extractions": {"A": {"answers": {"extra_value": {}}}}}))
+    monkeypatch.setattr(ip, "FOLLOWUP_DIR", followup)
+    return fake_corpus
+
+
+def test_the_packet_asks_the_follow_up_questions_too(followup_corpus):
+    out = followup_corpus / "packet"
+    assert mbp.make_packet(out) == {"papers": 1, "questions": 2}
+    questions = json.loads((out / "questions" / "paper_006.json").read_text())
+    assert [q["query_id"] for q in questions["queries"]] == ["arcene_auroc"]
+    assert questions["followup_queries"] == [FOLLOWUP]
+    assert set(json.loads((out / "answers.json").read_text())["paper_006"]) == {"arcene_auroc", "extra_value"}
+
+
+def test_a_packet_without_follow_ups_has_no_followup_key(fake_corpus):
+    out = fake_corpus / "packet"
+    mbp.make_packet(out)
+    assert "followup_queries" not in json.loads((out / "questions" / "paper_006.json").read_text())
+
+
+def test_an_older_answers_file_gets_the_missing_slots_and_keeps_its_answers(followup_corpus):
+    out = followup_corpus / "packet"
+    out.mkdir()
+    old = {"paper_006": {"arcene_auroc": {"status": "not_found", "reason": "kept", "claim": None}}}
+    (out / "answers.json").write_text(json.dumps(old))
+    mbp.make_packet(out)
+    merged = json.loads((out / "answers.json").read_text())["paper_006"]
+    assert merged["arcene_auroc"]["reason"] == "kept" and merged["extra_value"]["status"] is None
+
+
+def test_import_needs_the_follow_up_answers_too(followup_corpus):
+    problems = ip.check_answers({"paper_006": {"arcene_auroc": {"status": "not_found", "reason": "r", "claim": None}}},
+                                pdf_dir=followup_corpus)
+    assert "extra_value" in problems[0]
+
+
+def test_import_stores_follow_up_answers_apart_from_the_gold_set_and_accepts_nothing(followup_corpus, monkeypatch):
+    claims = followup_corpus / "claims"
+    claims.mkdir()
+    (claims / "paper_006.json").write_text(json.dumps({"paper_id": "paper_006", "extractions": {"A": {"answers": {}}}}))
+    packet = followup_corpus / "filled"
+    packet.mkdir()
+    (packet / "answers.json").write_text(json.dumps({"paper_006": {
+        "arcene_auroc": _found(), "extra_value": _found(quote="SAINT 93.3 91.04", value="93.3")}}))
+    monkeypatch.setattr(ip, "CLAIMS_DIR", claims)
+    assert ip.import_pass(packet) == []
+    gold = json.loads((claims / "paper_006.json").read_text())
+    assert set(gold["extractions"]["B"]["answers"]) == {"arcene_auroc"}  # the follow-up is not in the gold-set pass B
+    follow = json.loads((followup_corpus / "followup" / "paper_006.json").read_text())
+    assert set(follow["extractions"]) == {"A", "B"} and set(follow["extractions"]["B"]["answers"]) == {"extra_value"}
+    assert follow["extractions"]["B"]["answers"]["extra_value"]["claim"]["value_normalized"] == 0.933  # 93.3 percent
+    assert "NOT COMPARED" in follow["status"] and "accepted" in follow["status"]
 
 
 def _found(quote="SAINT 93.3 91.04", page=2, value="91.04"):
