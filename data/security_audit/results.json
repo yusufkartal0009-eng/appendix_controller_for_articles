@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-13T01:17+03:00",
+  "run_at": "2026-10-13T01:23+03:00",
   "image": "repro-radar-sandbox:latest",
   "docker": "29.8.2",
   "host_os": "nt",
@@ -321,7 +321,7 @@
       "area": "resource",
       "title": "Sleep 120 s under a 5 s timeout",
       "expect": "TIMEOUT shortly after the limit",
-      "observed": "status=TIMEOUT exit_code=137 duration=5.4s",
+      "observed": "status=TIMEOUT exit_code=137 duration=5.5s",
       "verdict": "PASS"
     },
     {
@@ -329,15 +329,15 @@
       "area": "resource",
       "title": "Paper code kills its own watchdog (the parent `timeout` process), limit 5 s",
       "expect": "the run ends within 15 s and is not reported as a timeout before the limit",
-      "observed": "status=TIMEOUT exit_code=137 duration=0.5s; parent pid 13 timeout --signal=SIGKILL 5 python /workspace/repo/probe.py  | killed the parent",
-      "verdict": "FAIL"
+      "observed": "status=FAILED exit_code=137 duration=0.5s; parent pid 13 timeout --signal=SIGKILL 5 python /workspace/repo/probe.py  | killed the parent",
+      "verdict": "PASS"
     },
     {
       "id": "output_disk",
       "area": "resource",
       "title": "Write up to 4096 MiB into the output directory (a bind mount of a host folder)",
       "expect": "stopped at the output limit (1024 MiB, status OUTPUT_LIMIT_EXCEEDED); the host disk receives at most 1536 MiB",
-      "observed": "status=OUTPUT_LIMIT_EXCEEDED duration=5.2s; 1053 MiB landed on the host disk before the container was killed",
+      "observed": "status=OUTPUT_LIMIT_EXCEEDED duration=5.2s; 1050 MiB landed on the host disk before the container was killed",
       "verdict": "PASS"
     },
     {

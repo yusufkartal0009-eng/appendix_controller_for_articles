@@ -218,13 +218,22 @@ fi
 # Calculate duration using Python for precision and zero external tool dependency
 DURATION=$(python3 -c "print(round(${END_TIME} - ${START_TIME}, 3))" 2>/dev/null || echo "0.0")
 
-# Classify exit status
+# Classify exit status. Exit 137 or 124 is a timeout only when the time limit was really reached (within one second).
+# Paper code runs as the same user as the `timeout` watchdog and can kill it (#262); the run then ends early with
+# exit 137, which is recorded as FAILED with killed_before_timeout true, not as a timeout.
 OOM_KILLS_AFTER=$(oom_kill_count)
+LIMIT_REACHED=$(python3 -c "print(1 if ${END_TIME} - ${START_TIME} >= ${TIMEOUT_SECONDS} - 1 else 0)" 2>/dev/null || echo 1)
+KILLED_BEFORE_TIMEOUT=false
 STATUS="COMPLETED"
 if [ ${EXIT_CODE} -ne 0 ] && [ "${OOM_KILLS_AFTER}" -gt "${OOM_KILLS_BEFORE}" ]; then
   STATUS="OOM_KILLED"
 elif [ ${EXIT_CODE} -eq 137 ] || [ ${EXIT_CODE} -eq 124 ]; then
-  STATUS="TIMEOUT"
+  if [ "${LIMIT_REACHED}" = "1" ]; then
+    STATUS="TIMEOUT"
+  else
+    STATUS="FAILED"
+    KILLED_BEFORE_TIMEOUT=true
+  fi
 elif [ ${EXIT_CODE} -ne 0 ]; then
   STATUS="FAILED"
 fi
@@ -236,6 +245,7 @@ cat <<EOF > "${META_JSON}"
   "exit_code": ${EXIT_CODE},
   "duration_seconds": ${DURATION},
   "timeout_limit_seconds": ${TIMEOUT_SECONDS},
+  "killed_before_timeout": ${KILLED_BEFORE_TIMEOUT},
   "dependency_install_status": "${DEPENDENCY_STATUS}",
   "peak_memory_bytes": $(peak_memory_bytes),
   "gpu_requested": $([ -n "${SANDBOX_GPUS_REQUESTED:-}" ] && echo true || echo false),

@@ -20,7 +20,7 @@ The first run, before any fix, is kept in `data/security_audit/results_before_fi
 ## 2. Results
 
 <!-- audit:table:start -->
-Run on 2026-10-13T01:17+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.2, by `scripts/security_audit.py` (source: `data/security_audit/results.json`).
+Run on 2026-10-13T01:23+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.2, by `scripts/security_audit.py` (source: `data/security_audit/results.json`).
 
 | # | Area | Attempt | Expected | Observed | Verdict |
 |---|---|---|---|---|---|
@@ -63,12 +63,12 @@ Run on 2026-10-13T01:17+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.
 | 37 | escape | No secret-looking environment variables in the container (the image's public GPG_KEY is ignored) | none | [] | **PASS** |
 | 38 | resource | Thread bomb is limited by --pids-limit=100 | fewer than 300 of 300 threads start | started 95 of 300 threads | **PASS** |
 | 39 | resource | Allocate 8 GiB under a 256 MiB limit (no swap) | killed by the memory limit (OOM_KILLED), quickly | status=OOM_KILLED exit_code=137 duration=0.7s peak_memory_bytes=268435456 | **PASS** |
-| 40 | resource | Sleep 120 s under a 5 s timeout | TIMEOUT shortly after the limit | status=TIMEOUT exit_code=137 duration=5.4s | **PASS** |
-| 41 | resource | Paper code kills its own watchdog (the parent `timeout` process), limit 5 s | the run ends within 15 s and is not reported as a timeout before the limit | status=TIMEOUT exit_code=137 duration=0.5s; parent pid 13 timeout --signal=SIGKILL 5 python /workspace/repo/probe.py  / killed the parent | **FAIL** |
-| 42 | resource | Write up to 4096 MiB into the output directory (a bind mount of a host folder) | stopped at the output limit (1024 MiB, status OUTPUT_LIMIT_EXCEEDED); the host disk receives at most 1536 MiB | status=OUTPUT_LIMIT_EXCEEDED duration=5.2s; 1053 MiB landed on the host disk before the container was killed | **PASS** |
+| 40 | resource | Sleep 120 s under a 5 s timeout | TIMEOUT shortly after the limit | status=TIMEOUT exit_code=137 duration=5.5s | **PASS** |
+| 41 | resource | Paper code kills its own watchdog (the parent `timeout` process), limit 5 s | the run ends within 15 s and is not reported as a timeout before the limit | status=FAILED exit_code=137 duration=0.5s; parent pid 13 timeout --signal=SIGKILL 5 python /workspace/repo/probe.py  / killed the parent | **PASS** |
+| 42 | resource | Write up to 4096 MiB into the output directory (a bind mount of a host folder) | stopped at the output limit (1024 MiB, status OUTPUT_LIMIT_EXCEEDED); the host disk receives at most 1536 MiB | status=OUTPUT_LIMIT_EXCEEDED duration=5.2s; 1050 MiB landed on the host disk before the container was killed | **PASS** |
 | 43 | escape | Create symbolic links inside the output directory | recorded (host code must not follow them) | created link_abs.txt -> /etc/passwd / created link_rel.txt -> ../../../../etc/hosts; on the host: {'link_abs.txt': {'is_symlink': False, 'outcome': 'host read failed: OSError errno 22'}, 'link_rel.txt': {'is_symlink': False, 'outcome': 'host read failed: OSError errno 22'}} | **INFO** |
 
-**Totals: 40 PASS, 1 FAIL, 2 INFO.**
+**Totals: 41 PASS, 0 FAIL, 2 INFO.**
 <!-- audit:table:end -->
 
 ## 3. Findings
@@ -77,7 +77,7 @@ Run on 2026-10-13T01:17+03:00 against `repro-radar-sandbox:latest`, Docker 29.8.
 |---|---|---|---|
 | F-1 | The capability bounding set still holds Docker's 14 default capabilities (`--cap-drop ALL` is missing). Not usable today: the process is uid 1000 with no effective capabilities, `no-new-privileges` is set, and the `chroot`, `mknod`, raw socket, `mount`, and `setuid` attempts were all refused. | Low (defense in depth) | **Fixed** in #260: `--cap-drop ALL` is in the run command, the bundling command, and the compose file. After the fix the audit shows `CapBnd=0` (row 3); the 20 sandbox acceptance checks pass again (3.11 image) and `scripts/gpu_check.py` still sees the GPU. |
 | F-2 | The output directory is a bind mount of a host folder without a quota: 512 MiB written by a run landed on the host disk. | Medium (a runaway or hostile paper can fill the host disk within its time limit) | **Fixed** in #261 (option 2 of the issue): the runner measures the output directory every 0.5 s and kills the container above `SandboxConfig.output_limit_mb` (default 1024 MiB, 0 = off); the run gets the status `OUTPUT_LIMIT_EXCEEDED`. Not a hard bound: a fast writer gets past the limit before the kill. Measured on the real runner with a 4096 MiB writer, 3 runs each: limit 64 MiB left 149 to 186 MiB on the host disk, limit 256 MiB left 274 to 295 MiB, limit 1024 MiB left 1053 to 1056 MiB (18 to 122 MiB over). The audit row 42 allows 512 MiB over. The kill is by the host, so the paper cannot stop it. A sparse file counts with its apparent size. |
-| F-3 | A paper can kill its own watchdog (`timeout`, same uid); the container then ends at once and the run is reported as `TIMEOUT` although the limit was not reached. Still bounded; wrong label only. | Low | Issue #262, not started |
+| F-3 | A paper can kill its own watchdog (`timeout`, same uid); the container then ends at once and the run is reported as `TIMEOUT` although the limit was not reached. Still bounded; wrong label only. | Low | **Fixed** in #262: the entrypoint reports `TIMEOUT` only when the elapsed time reached the limit (within 1 s); an earlier exit 137 is `FAILED` with `killed_before_timeout: true` in `execution_meta.json`. The paper can still kill its watchdog (same uid, the run still ends at once); only the label is fixed. After the fix the audit row `kill_parent` shows `status=FAILED exit_code=137 duration=0.5s`, and acceptance check 21 covers it. |
 | F-4 | The bundling container (`RepoStager._docker_pip_command`, `pip download`) has the network on by design and runs binary-only downloads, so no package code runs; it also lacks `--cap-drop ALL`, `--read-only`, and memory and process limits. **Read from the code, not probed at run time.** | Low | Capability drop done in #260 (checked by a direct run with the real command: `CapBnd=0`, and `pip download` of a wheel still works); `--read-only` and memory and process limits are not done |
 
 Observations that are not findings:
