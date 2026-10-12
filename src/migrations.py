@@ -290,12 +290,39 @@ def _v5_run_hashes(conn: sqlite3.Connection) -> None:
         add_column_if_missing(conn, "runs", "outputs_sha256", "TEXT")
 
 
+# runs.status with the status the runner reports when a run fills its output directory past the limit (#261).
+RUNS_WITH_OUTPUT_LIMIT_STATUS_SQL = """
+CREATE TABLE {name} (
+    run_id TEXT PRIMARY KEY,
+    paper_id TEXT NOT NULL,
+    status TEXT NOT NULL CHECK(status IN ('PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED', 'OUTPUT_LIMIT_EXCEEDED')),
+    execution_time REAL, -- in seconds
+    exit_code INTEGER,
+    stdout TEXT,
+    stderr TEXT,
+    seed INTEGER DEFAULT 42,
+    failure_category TEXT, -- pilot failure category (docs/PILOT_WEEK2.md section 7), NULL if not categorized
+    artifact_manifest_sha256 TEXT, -- SHA-256 of the run directory's file manifest (src/artifact_hash.py, #29)
+    outputs_sha256 TEXT, -- SHA-256 of the files the paper wrote (not logs or sandbox metadata), NULL if none
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
+)
+"""
+
+
+def _v6_runs_output_limit_status(conn: sqlite3.Connection) -> None:
+    row = conn.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'runs'").fetchone()
+    if row is not None and "OUTPUT_LIMIT_EXCEEDED" not in row[0]:
+        rebuild_table(conn, "runs", RUNS_WITH_OUTPUT_LIMIT_STATUS_SQL)
+
+
 MIGRATIONS: list[Migration] = [
     Migration(1, "baseline tables (papers, runs, claims, scores)", _v1_baseline),
     Migration(2, "runs.failure_category and idx_claims_run_id", _v2_failure_category),
     Migration(3, "extracted_claims table", _v3_extracted_claims),
     Migration(4, "runs.status accepts OOM_KILLED", _v4_runs_oom_status),
     Migration(5, "runs.artifact_manifest_sha256 and runs.outputs_sha256", _v5_run_hashes),
+    Migration(6, "runs.status accepts OUTPUT_LIMIT_EXCEEDED", _v6_runs_output_limit_status),
 ]
 
 

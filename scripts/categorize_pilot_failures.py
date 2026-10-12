@@ -151,6 +151,10 @@ def categorize_paper(paper_id: str, runs_dir: Path) -> dict[str, Any]:
         result.update(category="OTHER", other_name="OUT_OF_MEMORY", phase="run",
                       evidence={"file": "run_report.json", "line_number": None, "line": "status: OOM_KILLED"})
         return result
+    if status == "OUTPUT_LIMIT_EXCEEDED":
+        result.update(category="OTHER", other_name="OUTPUT_LIMIT_EXCEEDED", phase="run",
+                      evidence={"file": "run_report.json", "line_number": None, "line": "status: OUTPUT_LIMIT_EXCEEDED"})
+        return result
     if run_ok:
         # Ran with exit code 0 but nothing was installed (SKIPPED): no failure, no pilot success (section 7).
         result.update(category=None, other_name="RAN_WITHOUT_INSTALLED_DEPENDENCIES", phase="install")

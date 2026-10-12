@@ -74,7 +74,7 @@ class RunORM(Base):
 
     run_id = Column(String, primary_key=True)
     paper_id = Column(String, ForeignKey("papers.paper_id", ondelete="CASCADE"), nullable=False)
-    status = Column(String, nullable=False)  # PENDING, RUNNING, COMPLETED, FAILED, TIMEOUT, OOM_KILLED
+    status = Column(String, nullable=False)  # PENDING, RUNNING, COMPLETED, FAILED, TIMEOUT, OOM_KILLED, OUTPUT_LIMIT_EXCEEDED
     execution_time = Column(Float, nullable=True)
     exit_code = Column(Integer, nullable=True)
     stdout = Column(Text, nullable=True)

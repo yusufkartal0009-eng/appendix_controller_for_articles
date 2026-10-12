@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS papers (
 CREATE TABLE IF NOT EXISTS runs (
     run_id TEXT PRIMARY KEY,
     paper_id TEXT NOT NULL,
-    status TEXT NOT NULL CHECK(status IN ('PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED')),
+    status TEXT NOT NULL CHECK(status IN ('PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED', 'OUTPUT_LIMIT_EXCEEDED')),
     execution_time REAL, -- in seconds
     exit_code INTEGER,
     stdout TEXT,

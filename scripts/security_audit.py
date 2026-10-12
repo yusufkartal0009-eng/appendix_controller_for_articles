@@ -37,6 +37,9 @@ RESULTS_PATH = project_root / "data" / "security_audit" / "results.json"
 DOC_PATH = project_root / "docs" / "SECURITY_AUDIT.md"
 MARKER_START = "<!-- audit:table:start -->"
 MARKER_END = "<!-- audit:table:end -->"
+# The runner polls the output directory every 0.5 s and then kills the container, so a fast writer gets a little past
+# the limit. In 9 measured runs (#261) it was 18 to 122 MiB; the audit allows 512 MiB before it reports a failure.
+OUTPUT_OVERSHOOT_ALLOWANCE_MIB = 512
 
 # Probes that run inside the container (Python standard library only). Each prints one line "PROBE <json>".
 PROBES_MAIN = r'''
@@ -246,9 +249,10 @@ time.sleep(120)
 
 PROBE_BIG_OUTPUT = r'''
 with open("/workspace/output/big.bin", "wb") as f:
-    for _ in range(512):
+    for _ in range(4096):
         f.write(b"x" * 1048576)
-print("AUDIT wrote 512 MiB into /workspace/output", flush=True)
+        f.flush()
+print("AUDIT wrote 4096 MiB into /workspace/output without being stopped", flush=True)
 '''
 
 PROBE_SYMLINK = r'''
@@ -328,15 +332,18 @@ def scenario_rows() -> list[dict[str, Any]]:
                              f"{audit}",
                  "verdict": "FAIL" if misclassified or result.duration_seconds >= limit + 12 else "PASS"})
 
-    result, meta = run_scenario("security_audit_bigoutput", PROBE_BIG_OUTPUT, SandboxConfig(timeout_seconds=120))
+    disk = SandboxConfig(timeout_seconds=120)
+    result, meta = run_scenario("security_audit_bigoutput", PROBE_BIG_OUTPUT, disk)
     big = SANDBOX_RUNS_DIR / "security_audit_bigoutput" / "big.bin"
     size_mib = big.stat().st_size // 1048576 if big.exists() else 0
+    allowed = disk.output_limit_mb + OUTPUT_OVERSHOOT_ALLOWANCE_MIB
     rows.append({"id": "output_disk", "area": "resource",
-                 "title": "Write 512 MiB into the output directory (a bind mount of a host folder)",
-                 "expect": "limited by a disk quota",
-                 "observed": f"status={result.status}; {' | '.join(audit_lines(result.stdout))}; {size_mib} MiB landed on "
-                             "the host disk; no quota stops it",
-                 "verdict": "FAIL" if size_mib >= 512 else "PASS"})
+                 "title": "Write up to 4096 MiB into the output directory (a bind mount of a host folder)",
+                 "expect": (f"stopped at the output limit ({disk.output_limit_mb} MiB, status OUTPUT_LIMIT_EXCEEDED); "
+                            f"the host disk receives at most {allowed} MiB"),
+                 "observed": f"status={result.status} duration={result.duration_seconds:.1f}s; {size_mib} MiB landed on "
+                             "the host disk before the container was killed",
+                 "verdict": "PASS" if result.status == "OUTPUT_LIMIT_EXCEEDED" and size_mib <= allowed else "FAIL"})
 
     result, meta = run_scenario("security_audit_symlink", PROBE_SYMLINK, SandboxConfig(timeout_seconds=60))
     out_dir = SANDBOX_RUNS_DIR / "security_audit_symlink"
