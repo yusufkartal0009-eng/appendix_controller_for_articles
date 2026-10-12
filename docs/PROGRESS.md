@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 474 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 479 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### feat(extraction): follow-up questions in the blind packet (2026-10-13 01:28 +03:00, Issue #283)
+- make_blind_packet.py writes followup_queries into the packet and import_pass.py stores their answers as pass B in data/claims/followup/<paper_id>.json, apart from the gold set. No pass B was run and nothing is accepted. An older partly filled answers.json only gets empty slots. Real packet: 6 papers, 19 questions.
 
 ### fix(sandbox): watchdog killed by the paper is not a timeout (security audit F-3) (2026-10-13 01:24 +03:00, Issue #262)
 - The entrypoint reports TIMEOUT only when the elapsed time reached the limit (within 1 s); an earlier exit 137 is FAILED with killed_before_timeout true in execution_meta.json. New acceptance check 21. Real Docker: acceptance 21 of 21, audit kill_parent PASS (41 PASS, 0 FAIL, 2 INFO). The paper can still kill its watchdog; only the label is fixed.

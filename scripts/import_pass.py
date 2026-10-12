@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Check a filled blind packet's answers and store them as pass B (#186).
 
-Every answer must cover the packet's questions; every found claim must follow the W1 schema and have its quote on
+Every answer must cover the packet's questions (the gold-set questions and a paper's follow-up questions); every found claim must follow the W1 schema and have its quote on
 the cited page of the pinned PDF (the same checks as the quote guard's quote rule). Nothing is written unless every
 answer passes. The new pass B replaces the earlier, dependent pass B and records that it came from an independent
-session.
+session. Answers to follow-up questions (#258) are stored as pass B in `data/claims/followup/<paper_id>.json`, next to
+the pass A answers there; they are not compared, scored, or accepted by this script.
 
 usage: python scripts/import_pass.py C:\\path\\to\\packet
 """
@@ -30,6 +31,7 @@ from src.pdf_text import extract_pdf_text
 from src.quote_guard import find_on_page
 
 CLAIMS_DIR = DATA_DIR / "claims"
+FOLLOWUP_DIR = CLAIMS_DIR / "followup"
 QUERIES_DIR = DATA_DIR / "claim_queries"
 PDF_DIR = DATA_DIR / "pdfs"
 
@@ -43,7 +45,7 @@ def check_answers(answers: dict[str, Any], pdf_dir: Path = PDF_DIR) -> list[str]
     for qfile in sorted(QUERIES_DIR.glob("paper_*.json")):
         spec = json.loads(qfile.read_text(encoding="utf-8"))
         paper_id = spec["paper_id"]
-        expected = {q["query_id"] for q in spec["queries"]}
+        expected = {q["query_id"] for q in spec["queries"]} | {q["query_id"] for q in spec.get("followup_queries", [])}
         given = answers.get(paper_id, {})
         if set(given) != expected:
             problems.append(f"{paper_id}: answers {sorted(given)} != questions {sorted(expected)}")
@@ -81,11 +83,27 @@ def import_pass(packet: Path, label: str = "B") -> list[str]:
             if answer["status"] == "found":
                 claim = ExtractedClaim(**{k: v for k, v in answer["claim"].items() if k != "value_normalized"})
                 answer["claim"]["value_normalized"] = claim.value_normalized
+        spec = json.loads((QUERIES_DIR / f"{paper_id}.json").read_text(encoding="utf-8"))
+        followup_ids = {q["query_id"] for q in spec.get("followup_queries", [])}
+        gold = {qid: a for qid, a in given.items() if qid not in followup_ids}
+        followup = {qid: a for qid, a in given.items() if qid in followup_ids}
         path = CLAIMS_DIR / f"{paper_id}.json"
         record = json.loads(path.read_text(encoding="utf-8"))
-        record["extractions"][label] = {"method": METHOD, "made_at": made_at, "answers": given}
+        record["extractions"][label] = {"method": METHOD, "made_at": made_at, "answers": gold}
         path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        if followup:
+            _store_followup(paper_id, label, followup, made_at)
     return []
+
+
+def _store_followup(paper_id: str, label: str, answers: dict[str, Any], made_at: str) -> None:
+    """Follow-up answers of a pass go next to pass A in data/claims/followup/<paper_id>.json; nothing is accepted."""
+    path = FOLLOWUP_DIR / f"{paper_id}.json"
+    record = json.loads(path.read_text(encoding="utf-8"))
+    record["extractions"][label] = {"method": METHOD, "made_at": made_at, "answers": answers}
+    record["status"] = ("PASS A AND PASS B IMPORTED, NOT COMPARED. Not in the gold set, not reviewed or accepted by the "
+                        "owner. Do not use in scoring or in data/seed_papers.json (#258).")
+    path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def main(argv: list[str] | None = None) -> int:
