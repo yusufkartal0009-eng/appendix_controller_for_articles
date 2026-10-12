@@ -44,7 +44,8 @@ DOCKER_DETECT_TIMEOUT = 15
 DOCKER_DETECT_WAIT_SECONDS = 2.0
 
 # Output directory quota (#261): the run container may write into /workspace/output, a bind mount of a host folder.
-# The runner measures that folder while the container lives and kills the container above the limit.
+# The runner measures the growth of that folder since the container started (the folder also holds the runner's own
+# deps, repository copy, and data copies, #290) and kills the container above the limit.
 OUTPUT_POLL_SECONDS = 0.5
 BYTES_PER_MIB = 1024 * 1024
 OUTPUT_LIMIT_STATUS = "OUTPUT_LIMIT_EXCEEDED"
@@ -364,13 +365,16 @@ class DockerSandboxRunner:
             return None
         return status if status in ("COMPLETED", "FAILED", "TIMEOUT", "OOM_KILLED") else None
 
-    def _watch_output(self, output_dir: Path, container_name: str, stop: threading.Event, exceeded: list[int]) -> None:
-        """Kill the run container when its output directory grows past the limit (#261). Runs in a thread."""
+    def _watch_output(self, output_dir: Path, container_name: str, stop: threading.Event, exceeded: list[int],
+                      baseline: int = 0) -> None:
+        """Kill the run container when its output directory grows past the limit (#261). Runs in a thread.
+
+        `baseline` is the size before the container started: the runner's own files in the folder do not count (#290)."""
         limit = self.config.output_limit_mb * BYTES_PER_MIB
         while not stop.wait(OUTPUT_POLL_SECONDS):
-            size = directory_size(output_dir)
-            if size > limit:
-                exceeded.append(size)
+            growth = directory_size(output_dir) - baseline
+            if growth > limit:
+                exceeded.append(growth)
                 try:
                     subprocess.run(["docker", "kill", container_name], capture_output=True, timeout=30, check=False)
                 except (subprocess.SubprocessError, OSError) as exc:
@@ -629,8 +633,9 @@ class DockerSandboxRunner:
         exceeded: list[int] = []
         watcher = None
         if self.config.output_limit_mb > 0:
-            watcher = threading.Thread(target=self._watch_output, args=(output_dir, container_name, stop_watch, exceeded),
-                                       daemon=True)
+            watcher = threading.Thread(
+                target=self._watch_output,
+                args=(output_dir, container_name, stop_watch, exceeded, directory_size(output_dir)), daemon=True)
             watcher.start()
         start_time = time.time()
         try:
@@ -651,7 +656,7 @@ class DockerSandboxRunner:
             error_message = None
             if exceeded:  # the watcher killed the container: this wins over the TIMEOUT that exit 137 would suggest
                 status = OUTPUT_LIMIT_STATUS
-                error_message = (f"The output directory reached {exceeded[0] // BYTES_PER_MIB} MiB; the limit is "
+                error_message = (f"The output directory grew by {exceeded[0] // BYTES_PER_MIB} MiB during the run; the limit is "
                                  f"{self.config.output_limit_mb} MiB (SandboxConfig.output_limit_mb).")
 
             self._write_host_logs(output_dir, res.stdout, res.stderr)

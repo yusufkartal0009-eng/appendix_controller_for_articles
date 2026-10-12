@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 491 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 492 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### fix(sandbox): output limit counts growth, not the runner's copies (2026-10-13 02:00 +03:00, Issue #290)
+- Found by the first Pilot 3 run: paper_002 was killed at start because deps, repository copy and data copies in the output directory were over the limit. The limit now applies to growth since the container started. Real Docker: 3 of 3 writers still killed.
 
 ### feat(corpus): Pilot 3 harness (2026-10-13 01:40 +03:00, Issue #287)
 - run_pilot.py --pilot3 reads data/pilot3_settings.json (overlay, seed_papers.json not edited) and writes data/pilot3_runs/; SandboxConfig.run_timeout_seconds keeps build and install at 3600 s while paper_004's run phase gets 14400 s; tool labels. Real Docker: run timeout 6 s of a 3600 s config ended TIMEOUT at 6.1 s. No paper run yet.

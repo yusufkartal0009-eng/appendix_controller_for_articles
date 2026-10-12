@@ -79,9 +79,25 @@ def test_a_run_that_fills_the_output_directory_is_killed_and_labelled(run_with):
 
     result, kills = run_with(container, limit_mb=1)
     assert result.status == "OUTPUT_LIMIT_EXCEEDED" and result.exit_code == 137
-    assert "limit is 1 MiB" in result.error_message and "3 MiB" in result.error_message
+    assert "limit is 1 MiB" in result.error_message and "grew by 3 MiB" in result.error_message
     assert len(kills) == 1 and kills[0].startswith("repro-radar-run-")
     assert result.command_executed[result.command_executed.index("--name") + 1] == kills[0]
+
+
+def test_files_the_runner_put_there_before_the_run_do_not_count(run_with, tmp_path):
+    out = tmp_path / "runs" / "quota"
+    out.mkdir(parents=True)
+    with open(out / "deps_and_copies.bin", "wb") as f:  # 3 MiB already there when the container starts, limit 1 MiB
+        f.truncate(3 * 1024 * 1024)
+
+    def container(cmd, out_dir, killed):
+        assert not killed.wait(0.3), "the runner's own files were counted"
+        with open(out_dir / "small.bin", "wb") as f:
+            f.truncate(100 * 1024)
+        return subprocess.CompletedProcess(cmd, 0, "", "")
+
+    result, kills = run_with(container, limit_mb=1)
+    assert result.status == "COMPLETED" and kills == []
 
 
 def test_a_run_under_the_limit_is_left_alone(run_with):
