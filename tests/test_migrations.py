@@ -77,10 +77,10 @@ def _signature(path):
 
 def test_new_database_gets_every_migration_once(tmp_path):
     engine = _engine(tmp_path / "new.db")
-    assert upgrade(engine).applied == [1, 2, 3, 4, 5]
+    assert upgrade(engine).applied == [1, 2, 3, 4, 5, 6]
     again = upgrade(engine)
     assert again.applied == [] and again.backup_path is None
-    assert [m["version"] for m in status(engine)["applied"]] == [1, 2, 3, 4, 5] and status(engine)["pending"] == []
+    assert [m["version"] for m in status(engine)["applied"]] == [1, 2, 3, 4, 5, 6] and status(engine)["pending"] == []
 
 
 def test_migrated_schema_equals_schema_sql(tmp_path):
@@ -96,7 +96,7 @@ def test_old_database_keeps_its_rows_and_gets_the_new_schema(tmp_path):
     path = tmp_path / "old.db"
     _baseline_db(path)
     result = upgrade(_engine(path))
-    assert result.applied == [1, 2, 3, 4, 5]
+    assert result.applied == [1, 2, 3, 4, 5, 6]
     conn = sqlite3.connect(path)
     assert conn.execute("SELECT paper_id, expected_claims FROM papers").fetchall() == [("paper_001", '{"acc": 0.9}')]
     assert conn.execute("SELECT run_id, status, exit_code, failure_category FROM runs").fetchall() == [
@@ -141,7 +141,7 @@ def test_dry_run_changes_nothing(tmp_path):
     path = tmp_path / "old.db"
     _baseline_db(path)
     result = upgrade(_engine(path), dry_run=True)
-    assert result.pending == [1, 2, 3, 4, 5] and result.applied == []
+    assert result.pending == [1, 2, 3, 4, 5, 6] and result.applied == []
     conn = sqlite3.connect(path)
     assert not table_exists(conn, "schema_migrations") and not table_exists(conn, "extracted_claims")
     conn.close()
@@ -154,17 +154,17 @@ def test_a_failing_migration_is_rolled_back_and_the_earlier_ones_stay(tmp_path):
 
     path = tmp_path / "old.db"
     _baseline_db(path)
-    plan = [*MIGRATIONS, Migration(6, "broken step", broken)]
-    with pytest.raises(MigrationError, match="migration 6 .* rolled back"):
+    plan = [*MIGRATIONS, Migration(7, "broken step", broken)]
+    with pytest.raises(MigrationError, match="migration 7 .* rolled back"):
         upgrade(_engine(path), migrations=plan)
     conn = sqlite3.connect(path)
     assert not table_exists(conn, "half_done")
-    assert [r[0] for r in conn.execute("SELECT version FROM schema_migrations ORDER BY version")] == [1, 2, 3, 4, 5]
+    assert [r[0] for r in conn.execute("SELECT version FROM schema_migrations ORDER BY version")] == [1, 2, 3, 4, 5, 6]
     assert conn.execute("SELECT COUNT(*) FROM papers").fetchone()[0] == 1
     conn.close()
     # fixed code applies the step on the next run
-    fixed = [*MIGRATIONS, Migration(6, "broken step", lambda c: c.execute("CREATE TABLE half_done (x INTEGER)"))]
-    assert upgrade(_engine(path), migrations=fixed).applied == [6]
+    fixed = [*MIGRATIONS, Migration(7, "broken step", lambda c: c.execute("CREATE TABLE half_done (x INTEGER)"))]
+    assert upgrade(_engine(path), migrations=fixed).applied == [7]
 
 
 def test_foreign_key_violation_rolls_the_migration_back(tmp_path):
@@ -174,7 +174,7 @@ def test_foreign_key_violation_rolls_the_migration_back(tmp_path):
     engine = _engine(tmp_path / "new.db")
     upgrade(engine)
     with pytest.raises(MigrationError, match="foreign key"):
-        upgrade(engine, migrations=[*MIGRATIONS, Migration(6, "orphan", orphan)])
+        upgrade(engine, migrations=[*MIGRATIONS, Migration(7, "orphan", orphan)])
     conn = sqlite3.connect(tmp_path / "new.db")
     assert conn.execute("SELECT COUNT(*) FROM runs").fetchone()[0] == 0
     conn.close()
@@ -246,7 +246,7 @@ def test_init_db_upgrades_an_old_database_and_keeps_its_data(tmp_path):
     conn = sqlite3.connect(path)
     assert conn.execute("SELECT title FROM papers").fetchall() == [("T",)]
     assert "failure_category" in [r[1] for r in conn.execute("PRAGMA table_info(runs)")]
-    assert [r[0] for r in conn.execute("SELECT version FROM schema_migrations")] == [1, 2, 3, 4, 5]
+    assert [r[0] for r in conn.execute("SELECT version FROM schema_migrations")] == [1, 2, 3, 4, 5, 6]
     conn.close()
     assert len(list(tmp_path.glob("old.db.bak-*"))) == 1
     init_db(engine)  # again: no second copy, nothing changes
@@ -256,11 +256,11 @@ def test_init_db_upgrades_an_old_database_and_keeps_its_data(tmp_path):
 def test_command_line_status_and_up(tmp_path, capsys):
     url = f"sqlite:///{tmp_path / 'cli.db'}"
     assert migrate.main(["--db-url", url, "status"]) == 0
-    assert [m["version"] for m in json.loads(capsys.readouterr().out)["pending"]] == [1, 2, 3, 4, 5]
+    assert [m["version"] for m in json.loads(capsys.readouterr().out)["pending"]] == [1, 2, 3, 4, 5, 6]
     assert migrate.main(["--db-url", url, "up", "--dry-run"]) == 0
-    assert json.loads(capsys.readouterr().out)["pending"] == [1, 2, 3, 4, 5]
+    assert json.loads(capsys.readouterr().out)["pending"] == [1, 2, 3, 4, 5, 6]
     assert migrate.main(["--db-url", url, "up"]) == 0
-    assert json.loads(capsys.readouterr().out)["applied"] == [1, 2, 3, 4, 5]
+    assert json.loads(capsys.readouterr().out)["applied"] == [1, 2, 3, 4, 5, 6]
     assert migrate.main(["--db-url", url, "up"]) == 0
     assert json.loads(capsys.readouterr().out)["applied"] == []
 

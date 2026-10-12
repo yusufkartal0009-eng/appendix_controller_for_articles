@@ -58,6 +58,7 @@ graph TD
 | **CPU Quota** | `--cpus 2.0` | Caps container execution to 2 CPU cores, preserving host responsiveness. |
 | **Memory Ceiling** | `--memory 8g --memory-swap 8g` | Hard ceiling of 8 GB RAM; disabling swap expansion prevents host swap exhaustion. |
 | **Process Quota** | `--pids-limit 100` | Prevents fork-bomb vulnerabilities and uncontrolled thread spawning. |
+| **Output Quota** | `SandboxConfig.output_limit_mb` (default 1024, 0 = off) | The output directory is a bind mount of a host folder. The runner measures it every 0.5 s while the run container lives and kills the container above the limit; the run gets the status `OUTPUT_LIMIT_EXCEEDED` (#261). A fast writer gets a little past the limit before the kill (18 to 122 MiB in the measurements of `docs/SECURITY_AUDIT.md`). |
 | **Hard Timeout** | `timeout --signal=SIGKILL <N>` in `entrypoint.sh` | Enforces termination if code hangs or loops; the run is recorded as `TIMEOUT` (default 600 s in `SandboxConfig`, 300 s in `scripts/stage_and_bundle_repo.py`). |
 
 Real-Docker evidence for the non-root user, network isolation, read-only root, timeout, offline install, and refusal without Docker, plus the CPU/memory/PID limits and the `noexec` home mount, is recorded in [SANDBOX_ACCEPTANCE.md](SANDBOX_ACCEPTANCE.md) and re-checked by CI on every change. Why `/workspace/home` is `noexec` and dependencies are mounted read-only is recorded in [DECISIONS.md](DECISIONS.md) (D-001, D-002).

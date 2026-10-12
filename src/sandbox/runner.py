@@ -21,7 +21,9 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
+import uuid
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
@@ -40,6 +42,35 @@ class SandboxUnavailableError(RuntimeError):
 DOCKER_DETECT_ATTEMPTS = 3
 DOCKER_DETECT_TIMEOUT = 15
 DOCKER_DETECT_WAIT_SECONDS = 2.0
+
+# Output directory quota (#261): the run container may write into /workspace/output, a bind mount of a host folder.
+# The runner measures that folder while the container lives and kills the container above the limit.
+OUTPUT_POLL_SECONDS = 0.5
+BYTES_PER_MIB = 1024 * 1024
+OUTPUT_LIMIT_STATUS = "OUTPUT_LIMIT_EXCEEDED"
+
+
+def directory_size(path: str | Path) -> int:
+    """Total size in bytes of the files under a directory. Symlinks are not followed; a file that vanishes is skipped."""
+    total = 0
+    stack = [str(path)]
+    while stack:
+        try:
+            with os.scandir(stack.pop()) as entries:
+                for entry in entries:
+                    try:
+                        if entry.is_symlink():
+                            continue
+                        if entry.is_dir(follow_symlinks=False):
+                            stack.append(entry.path)
+                        else:
+                            total += entry.stat(follow_symlinks=False).st_size
+                    except OSError:
+                        continue
+        except OSError:
+            continue
+    return total
+
 
 # Python versions with a sandbox image (docker/Dockerfile.sandbox, build arg PYTHON_VERSION; #158).
 SUPPORTED_PYTHON_VERSIONS = ("3.8", "3.9", "3.11")
@@ -73,6 +104,8 @@ class SandboxConfig:
     read_only_root: bool = True
     tmpfs_tmp_size: str = "64m"
     tmpfs_home_size: str = "2048m"
+    # Size limit of the output directory in MiB (#261); the run is killed above it. 0 switches the limit off.
+    output_limit_mb: int = 1024
     user_id: int = 1000
     group_id: int = 1000
     env_vars: dict[str, str] = field(default_factory=dict)
@@ -99,6 +132,8 @@ class SandboxConfig:
         if not self.image_name:
             self.image_name = image
         self.working_dir = repo_relative(self.working_dir, "working_dir")
+        if self.output_limit_mb < 0:
+            raise ValueError(f"output_limit_mb must be 0 or more: {self.output_limit_mb!r}")
         if self.gpus and not GPUS_RE.fullmatch(self.gpus):
             raise ValueError(f"gpus must be 'all', a count, or 'device=<ids>': {self.gpus!r}")
         self.data_mounts = {container_data_path(target): host for target, host in self.data_mounts.items()}
@@ -152,7 +187,7 @@ def _open_copy(source: Path, dest: Path, ignore: tuple[str, ...] = ()) -> Path:
 @dataclass
 class SandboxExecutionResult:
     """Structured outcome from a sandbox execution run."""
-    status: str  # 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED', 'SKIPPED'
+    status: str  # 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED', 'OUTPUT_LIMIT_EXCEEDED', 'SKIPPED'
     exit_code: int
     stdout: str
     stderr: str
@@ -218,6 +253,7 @@ class DockerSandboxRunner:
         deps_dir: str | Path | None = None,
         deps_writable: bool = False,
         extra_env: dict[str, str] | None = None,
+        container_name: str | None = None,
     ) -> list[str]:
         """Construct the security-hardened `docker run` command with all isolation flags.
 
@@ -230,6 +266,8 @@ class DockerSandboxRunner:
         docker_cmd = [
             "docker", "run", "--rm",
         ]
+        if container_name:  # lets the output watcher find the container to kill (#261)
+            docker_cmd.extend(["--name", container_name])
 
         # 1. Network Isolation
         if self.config.network_isolated:
@@ -320,6 +358,19 @@ class DockerSandboxRunner:
         except (OSError, ValueError):
             return None
         return status if status in ("COMPLETED", "FAILED", "TIMEOUT", "OOM_KILLED") else None
+
+    def _watch_output(self, output_dir: Path, container_name: str, stop: threading.Event, exceeded: list[int]) -> None:
+        """Kill the run container when its output directory grows past the limit (#261). Runs in a thread."""
+        limit = self.config.output_limit_mb * BYTES_PER_MIB
+        while not stop.wait(OUTPUT_POLL_SECONDS):
+            size = directory_size(output_dir)
+            if size > limit:
+                exceeded.append(size)
+                try:
+                    subprocess.run(["docker", "kill", container_name], capture_output=True, timeout=30, check=False)
+                except (subprocess.SubprocessError, OSError) as exc:
+                    logger.warning("docker kill %s failed: %s", container_name, exc)
+                return
 
     @staticmethod
     def _write_host_logs(output_dir: Path, stdout: str, stderr: str) -> None:
@@ -552,6 +603,7 @@ class DockerSandboxRunner:
         packages_dir: str | Path | None,
     ) -> SandboxExecutionResult:
         """Optional install phase, then the paper run, both in the Docker sandbox."""
+        container_name = f"repro-radar-run-{uuid.uuid4().hex[:12]}"
         deps_dir = None
         dependency_status = None
         if packages_dir and Path(packages_dir).is_dir() and any(Path(packages_dir).iterdir()):
@@ -563,8 +615,16 @@ class DockerSandboxRunner:
             command=target_cmd,
             deps_dir=deps_dir,
             extra_env={"SANDBOX_DEPENDENCY_STATUS": dependency_status} if dependency_status else None,
+            container_name=container_name,
         )
 
+        stop_watch = threading.Event()
+        exceeded: list[int] = []
+        watcher = None
+        if self.config.output_limit_mb > 0:
+            watcher = threading.Thread(target=self._watch_output, args=(output_dir, container_name, stop_watch, exceeded),
+                                       daemon=True)
+            watcher.start()
         start_time = time.time()
         try:
             res = subprocess.run(
@@ -581,6 +641,11 @@ class DockerSandboxRunner:
             # Exit 137 means SIGKILL from either the timeout watchdog or the kernel OOM killer; the
             # entrypoint tells them apart (cgroup oom_kill counter), so its status wins when present.
             status = self._status_from_meta(output_dir) or status
+            error_message = None
+            if exceeded:  # the watcher killed the container: this wins over the TIMEOUT that exit 137 would suggest
+                status = OUTPUT_LIMIT_STATUS
+                error_message = (f"The output directory reached {exceeded[0] // BYTES_PER_MIB} MiB; the limit is "
+                                 f"{self.config.output_limit_mb} MiB (SandboxConfig.output_limit_mb).")
 
             self._write_host_logs(output_dir, res.stdout, res.stderr)
 
@@ -593,6 +658,7 @@ class DockerSandboxRunner:
                 command_executed=docker_cmd,
                 docker_used=True,
                 output_dir=output_dir,
+                error_message=error_message,
                 isolated=True,
             )
         except subprocess.TimeoutExpired as exc:
@@ -623,6 +689,10 @@ class DockerSandboxRunner:
                 error_message=str(err),
                 isolated=True,
             )
+        finally:
+            stop_watch.set()
+            if watcher is not None:
+                watcher.join(timeout=35)  # a `docker kill` in flight
 
 
 class ProcessSandboxRunner:

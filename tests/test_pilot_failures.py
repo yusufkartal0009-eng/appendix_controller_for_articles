@@ -55,6 +55,7 @@ def test_install_failure_decides_first_and_quotes_the_first_error(tmp_path):
 @pytest.mark.parametrize("report, expected", [
     ({"status": "TIMEOUT", "exit_code": 137}, ("TIMEOUT", None)),
     ({"status": "OOM_KILLED", "exit_code": 137}, ("OTHER", "OUT_OF_MEMORY")),
+    ({"status": "OUTPUT_LIMIT_EXCEEDED", "exit_code": 137}, ("OTHER", "OUTPUT_LIMIT_EXCEEDED")),
     ({"dependency_install_status": "SKIPPED", "status": "COMPLETED", "exit_code": 0},
      (None, "RAN_WITHOUT_INSTALLED_DEPENDENCIES")),
 ])

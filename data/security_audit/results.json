@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-12T00:56+03:00",
+  "run_at": "2026-10-13T01:17+03:00",
   "image": "repro-radar-sandbox:latest",
   "docker": "29.8.2",
   "host_os": "nt",
@@ -313,7 +313,7 @@
       "area": "resource",
       "title": "Allocate 8 GiB under a 256 MiB limit (no swap)",
       "expect": "killed by the memory limit (OOM_KILLED), quickly",
-      "observed": "status=OOM_KILLED exit_code=137 duration=0.6s peak_memory_bytes=268435456",
+      "observed": "status=OOM_KILLED exit_code=137 duration=0.7s peak_memory_bytes=268435456",
       "verdict": "PASS"
     },
     {
@@ -335,10 +335,10 @@
     {
       "id": "output_disk",
       "area": "resource",
-      "title": "Write 512 MiB into the output directory (a bind mount of a host folder)",
-      "expect": "limited by a disk quota",
-      "observed": "status=COMPLETED; wrote 512 MiB into /workspace/output; 512 MiB landed on the host disk; no quota stops it",
-      "verdict": "FAIL"
+      "title": "Write up to 4096 MiB into the output directory (a bind mount of a host folder)",
+      "expect": "stopped at the output limit (1024 MiB, status OUTPUT_LIMIT_EXCEEDED); the host disk receives at most 1536 MiB",
+      "observed": "status=OUTPUT_LIMIT_EXCEEDED duration=5.2s; 1053 MiB landed on the host disk before the container was killed",
+      "verdict": "PASS"
     },
     {
       "id": "output_symlink",

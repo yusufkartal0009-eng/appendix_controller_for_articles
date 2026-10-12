@@ -110,7 +110,7 @@ table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #d0d7
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #eaeef2;font-size:14px;vertical-align:top}
 th{background:#f6f8fa;font-weight:600;color:#57606a}
 .badge{padding:2px 8px;border-radius:12px;font-size:12px;font-weight:600;background:#eaeef2;color:#57606a}
-.badge.FAILED,.badge.TIMEOUT,.badge.OOM_KILLED{background:#ffebe9;color:#cf222e}
+.badge.FAILED,.badge.TIMEOUT,.badge.OOM_KILLED,.badge.OUTPUT_LIMIT_EXCEEDED{background:#ffebe9;color:#cf222e}
 .badge.COMPLETED{background:#dafbe1;color:#1a7f37}
 .cat{display:block;margin-top:4px;color:#57606a;font-size:12px}
 .empty{background:#fff;border:1px dashed #d0d7de;border-radius:6px;padding:48px;text-align:center;color:#57606a}

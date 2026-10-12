@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 465 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 474 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### fix(sandbox): output directory limit (security audit F-2) (2026-10-13 01:19 +03:00, Issue #261)
+- The runner watches the size of the output directory every 0.5 s during the run container and kills the container above SandboxConfig.output_limit_mb (default 1024 MiB, 0 = off). New run status OUTPUT_LIMIT_EXCEEDED (schema CHECK, migration 6, badge, categorizer). Real Docker: a 4096 MiB writer was stopped in 9 of 9 runs, 18 to 122 MiB past the limit. Audit row output_disk now PASS. Not a hard bound.
 
 ### Report Section 3: Related Work Draft (2026-10-12 01:14 +03:00, Issue #270)
 - Drafted section 3 from 9 sources looked up in Crossref and arXiv (scripts/verify_sources.py, 9 of 9 verified; abstracts only, no full text); claim-to-source table in docs/report/RELATED_WORK_SOURCES.md. PR left unmerged for the owner's review.
