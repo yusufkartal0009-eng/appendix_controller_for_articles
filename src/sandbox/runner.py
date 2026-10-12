@@ -100,6 +100,9 @@ class SandboxConfig:
     memory_swap: str = "8g"
     pids_limit: int = 100
     timeout_seconds: int = DEFAULT_TIMEOUT_SECONDS
+    # Time limit of the run phase alone, in seconds (Pilot 3, docs/PILOT_3.md); 0 means timeout_seconds. The build and
+    # install phases always use timeout_seconds.
+    run_timeout_seconds: int = 0
     network_isolated: bool = True
     read_only_root: bool = True
     tmpfs_tmp_size: str = "64m"
@@ -132,6 +135,8 @@ class SandboxConfig:
         if not self.image_name:
             self.image_name = image
         self.working_dir = repo_relative(self.working_dir, "working_dir")
+        if self.run_timeout_seconds < 0:
+            raise ValueError(f"run_timeout_seconds must be 0 or more: {self.run_timeout_seconds!r}")
         if self.output_limit_mb < 0:
             raise ValueError(f"output_limit_mb must be 0 or more: {self.output_limit_mb!r}")
         if self.gpus and not GPUS_RE.fullmatch(self.gpus):
@@ -312,7 +317,7 @@ class DockerSandboxRunner:
         docker_cmd.extend([
             "-w", workdir,
             "-e", f"SANDBOX_WORKDIR={workdir}",
-            "-e", f"SANDBOX_TIMEOUT={self.config.timeout_seconds}",
+            *([] if "SANDBOX_TIMEOUT" in (extra_env or {}) else ["-e", f"SANDBOX_TIMEOUT={self.config.timeout_seconds}"]),
             "-e", "PYTHONUNBUFFERED=1",
             "-e", "PYTHONDONTWRITEBYTECODE=1",
             "-e", "PYTHONUSERBASE=/workspace/home/.local",
@@ -604,6 +609,7 @@ class DockerSandboxRunner:
     ) -> SandboxExecutionResult:
         """Optional install phase, then the paper run, both in the Docker sandbox."""
         container_name = f"repro-radar-run-{uuid.uuid4().hex[:12]}"
+        run_timeout = self.config.run_timeout_seconds or self.config.timeout_seconds
         deps_dir = None
         dependency_status = None
         if packages_dir and Path(packages_dir).is_dir() and any(Path(packages_dir).iterdir()):
@@ -614,7 +620,8 @@ class DockerSandboxRunner:
             output_dir=output_dir,
             command=target_cmd,
             deps_dir=deps_dir,
-            extra_env={"SANDBOX_DEPENDENCY_STATUS": dependency_status} if dependency_status else None,
+            extra_env={**({"SANDBOX_DEPENDENCY_STATUS": dependency_status} if dependency_status else {}),
+                       **({"SANDBOX_TIMEOUT": str(run_timeout)} if self.config.run_timeout_seconds else {})} or None,
             container_name=container_name,
         )
 
@@ -631,7 +638,7 @@ class DockerSandboxRunner:
                 docker_cmd,
                 capture_output=True,
                 text=True, encoding="utf-8", errors="replace",
-                timeout=self.config.timeout_seconds + 10, check=False,  # Buffer for container teardown
+                timeout=run_timeout + 10, check=False,  # Buffer for container teardown
             )
             duration = time.time() - start_time
             exit_code = res.returncode
@@ -672,7 +679,7 @@ class DockerSandboxRunner:
                 command_executed=docker_cmd,
                 docker_used=True,
                 output_dir=output_dir,
-                error_message=f"Timeout of {self.config.timeout_seconds}s exceeded.",
+                error_message=f"Timeout of {run_timeout}s exceeded.",
                 isolated=True,
             )
         except Exception as err:  # noqa: BLE001 - any runner error becomes a FAILED result, never a crash

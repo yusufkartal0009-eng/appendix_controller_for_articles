@@ -1,0 +1,27 @@
+{
+  "protocol": "docs/PILOT_3.md",
+  "note": "The four per-paper changes of Pilot 3, applied on top of the run setups of data/seed_papers.json (which are not edited). These settings were chosen after Pilot 2's failures were seen, so Pilot 3 measures the settings, not the papers (docs/PILOT_3.md section 1). A paper that is not listed runs exactly as in Pilot 2.",
+  "papers": {
+    "paper_002": {
+      "extra_requirements_add": ["lightgbm"],
+      "reason": "The notebook imports lightgbm, which the repository's requirements.txt does not list. Unpinned: pip picks the newest release with a wheel for Python 3.8; the installed version is recorded in the run report.",
+      "pilot2_evidence": "data/pilot2_runs/failure_categories.json: ModuleNotFoundError: No module named 'lightgbm'"
+    },
+    "paper_003": {
+      "data_writable": ["revisiting_models_data"],
+      "reason": "The paper's own code caches a preprocessed file inside its data directory (data/california_housing/). A writable per-run copy of the data lets it write there without touching the host cache.",
+      "pilot2_evidence": "data/pilot2_runs/failure_categories.json: OSError: [Errno 30] Read-only file system: '/workspace/repo/data/california_housing/build_X__quantile__mean__new__indices__0.pickle'"
+    },
+    "paper_004": {
+      "run_timeout_seconds": 14400,
+      "reason": "The run was still finding new best epochs (about 107 s per epoch) when the 3600 s limit of the run phase ended it; the config trains until 16 epochs without improvement (patience = 16, n_epochs = inf). Four hours is a choice, not an estimate of the needed time. The build and install phases keep 3600 s.",
+      "pilot2_evidence": "data/pilot2_runs/paper_004/execution_meta.json: status TIMEOUT; data/pilot2_runs/paper_004/stdout.log"
+    },
+    "paper_005": {
+      "memory_limit": "12g",
+      "memory_swap": "12g",
+      "reason": "The run was killed by the 6 GiB memory limit at 76 of 540 grid-search steps. 12 GiB fits in the 15.5 GiB that Docker Desktop has on the owner's machine. It is a choice, not a measured need.",
+      "pilot2_evidence": "data/pilot2_runs/paper_005/execution_meta.json: status OOM_KILLED, peak 6144 MiB (data/pilot2_runs/measurements.md)"
+    }
+  }
+}
