@@ -66,7 +66,7 @@ AI coding assistants are allowed. Say in the pull request which parts they wrote
 A pull request is ready to merge when:
 
 1. It is **one topic** and matches its issue; files unrelated to the issue are not touched.
-2. `ruff check .` is clean and the full suite passes. The output is in the pull request, since CI is off.
+2. `ruff check .` is clean and the full suite passes. CI (`.github/workflows/ci.yml`) runs the same checks, and you also run them locally before you push.
 3. New behavior has a test that would fail without the change.
 4. Documents and `docs/PROGRESS.md` agree with the code, and each claim of success has evidence next to it.
 5. The "What I did NOT verify" section is specific, not "nothing".

@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: CI is on again; README and CONTRIBUTING say what CI really runs (2026-10-13 00:53 +03:00, Issue #277)
+- CI re-enabled by the owner (the Pilot workflow stays disabled). README no longer claims CI enforces the corpus check in the abstract; it names the corpus job. CONTRIBUTING no longer says CI is off.
+
 ### fix(ci): executable bit for 5 scripts with a shebang (2026-10-13 00:56 +03:00, Issue #279)
 - The first CI run after re-enabling found ruff EXE001 on Linux for scripts/apply_accepted_claims.py, hash_run.py, migrate.py, report_numbers.py and security_audit.py (shebang, but mode 100644). Mode set to 100755 in git; no content change.
 
