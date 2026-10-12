@@ -1,0 +1,317 @@
+{
+  "checked_at": "2026-10-12T01:12:55+03:00",
+  "tool": "scripts/verify_sources.py",
+  "what_was_read": "metadata (Crossref, arXiv API) and the arXiv abstract; no full text",
+  "sources": [
+    {
+      "ref": "[6]",
+      "expected": {
+        "expected_title": "Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)",
+        "first_author_family": "Pineau",
+        "year": 2020
+      },
+      "lookups": {
+        "arxiv": {
+          "arxiv_id": "2003.12206",
+          "found": true,
+          "title": "Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)",
+          "first_author_family": "Pineau",
+          "authors": [
+            "Joelle Pineau",
+            "Philippe Vincent-Lamarre",
+            "Koustuv Sinha",
+            "Vincent Larivière",
+            "Alina Beygelzimer",
+            "Florence d'Alché-Buc",
+            "Emily Fox",
+            "Hugo Larochelle"
+          ],
+          "year": 2020,
+          "venue": "arXiv 2003.12206",
+          "abstract": "One of the challenges in machine learning research is to ensure that presented and published results are sound and reliable. Reproducibility, that is obtaining similar results as presented in a paper or talk, using the same code and data (when available), is a necessary step to verify the reliability of research findings. Reproducibility is also an important step to promote open and accessible research, thereby allowing the scientific community to quickly integrate new findings and convert ideas to practice. Reproducibility also promotes the use of robust experimental workflows, which potentially reduce unintentional errors. In 2019, the Neural Information Processing Systems (NeurIPS) conference, the premier international conference for research in machine learning, introduced a reproducibility program, designed to improve the standards across the community for how we conduct, communicate, and evaluate machine learning research. The program contained three components: a code submission policy, a community-wide reproducibility challenge, and the inclusion of the Machine Learning Reproducibility checklist as part of the paper submission process. In this paper, we describe each of these components, how it was deployed, as well as what we were able to learn from this initiative.",
+          "url": "http://arxiv.org/abs/2003.12206v4"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[7]",
+      "expected": {
+        "expected_title": "Deep Reinforcement Learning that Matters",
+        "first_author_family": "Henderson",
+        "year": 2018
+      },
+      "lookups": {
+        "crossref": {
+          "doi": "10.1609/aaai.v32i1.11694",
+          "found": true,
+          "title": "Deep Reinforcement Learning That Matters",
+          "first_author_family": "Henderson",
+          "authors": [
+            "Peter Henderson",
+            "Riashat Islam",
+            "Philip Bachman",
+            "Joelle Pineau",
+            "Doina Precup",
+            "David Meger"
+          ],
+          "year": 2018,
+          "volume": "32",
+          "issue": "1",
+          "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+          "pages_or_article": "",
+          "abstract": "In recent years, significant progress has been made in solving challenging problems across various domains using deep reinforcement learning (RL). Reproducing existing work and accurately judging the improvements offered by novel methods is vital to sustaining this progress. Unfortunately, reproducing results for state-of-the-art deep RL methods is seldom straightforward. In particular, non-determinism in standard benchmark environments, combined with variance intrinsic to the methods, can make reported results tough to interpret. Without significance metrics and tighter standardization of experimental reporting, it is difficult to determine whether improvements over the prior state-of-the-art are meaningful. In this paper, we investigate challenges posed by reproducibility, proper experimental techniques, and reporting procedures. We illustrate the variability in reported metrics and results when comparing against common baselines and suggest guidelines to make future results in deep RL more reproducible. We aim to spur discussion about how to ensure continued progress in the field by minimizing wasted effort stemming from results that are non-reproducible and easily misinterpreted.",
+          "url": "https://doi.org/10.1609/aaai.v32i1.11694"
+        },
+        "arxiv": {
+          "arxiv_id": "1709.06560",
+          "found": true,
+          "title": "Deep Reinforcement Learning that Matters",
+          "first_author_family": "Henderson",
+          "authors": [
+            "Peter Henderson",
+            "Riashat Islam",
+            "Philip Bachman",
+            "Joelle Pineau",
+            "Doina Precup",
+            "David Meger"
+          ],
+          "year": 2017,
+          "venue": "arXiv 1709.06560",
+          "abstract": "In recent years, significant progress has been made in solving challenging problems across various domains using deep reinforcement learning (RL). Reproducing existing work and accurately judging the improvements offered by novel methods is vital to sustaining this progress. Unfortunately, reproducing results for state-of-the-art deep RL methods is seldom straightforward. In particular, non-determinism in standard benchmark environments, combined with variance intrinsic to the methods, can make reported results tough to interpret. Without significance metrics and tighter standardization of experimental reporting, it is difficult to determine whether improvements over the prior state-of-the-art are meaningful. In this paper, we investigate challenges posed by reproducibility, proper experimental techniques, and reporting procedures. We illustrate the variability in reported metrics and results when comparing against common baselines and suggest guidelines to make future results in deep RL more reproducible. We aim to spur discussion about how to ensure continued progress in the field by minimizing wasted effort stemming from results that are non-reproducible and easily misinterpreted.",
+          "url": "http://arxiv.org/abs/1709.06560v3"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[8]",
+      "expected": {
+        "expected_title": "State of the Art: Reproducibility in Artificial Intelligence",
+        "first_author_family": "Gundersen",
+        "year": 2018
+      },
+      "lookups": {
+        "crossref": {
+          "doi": "10.1609/aaai.v32i1.11503",
+          "found": true,
+          "title": "State of the Art: Reproducibility in Artificial Intelligence",
+          "first_author_family": "Gundersen",
+          "authors": [
+            "Odd Erik Gundersen",
+            "Sigbjørn Kjensmo"
+          ],
+          "year": 2018,
+          "volume": "32",
+          "issue": "1",
+          "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+          "pages_or_article": "",
+          "abstract": "Background: Research results in artificial intelligence (AI) are criticized for not being reproducible. Objective: To quantify the state of reproducibility of empirical AI research using six reproducibility metrics measuring three different degrees of reproducibility. Hypotheses: 1) AI research is not documented well enough to reproduce the reported results. 2) Documentation practices have improved over time. Method: The literature is reviewed and a set of variables that should be documented to enable reproducibility are grouped into three factors: Experiment, Data and Method. The metrics describe how well the factors have been documented for a paper. A total of 400 research papers from the conference series IJCAI and AAAI have been surveyed using the metrics. Findings: None of the papers document all of the variables. The metrics show that between 20% and 30% of the variables for each factor are documented. One of the metrics show statistically significant increase over time while the others show no change. Interpretation: The reproducibility scores decrease with in- creased documentation requirements. Improvement over time is found. Conclusion: Both hypotheses are supported.",
+          "url": "https://doi.org/10.1609/aaai.v32i1.11503"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[9]",
+      "expected": {
+        "expected_title": "A Step Toward Quantifying Independently Reproducible Machine Learning Research",
+        "first_author_family": "Raff",
+        "year": 2019
+      },
+      "lookups": {
+        "arxiv": {
+          "arxiv_id": "1909.06674",
+          "found": true,
+          "title": "A Step Toward Quantifying Independently Reproducible Machine Learning Research",
+          "first_author_family": "Raff",
+          "authors": [
+            "Edward Raff"
+          ],
+          "year": 2019,
+          "venue": "arXiv 1909.06674",
+          "abstract": "What makes a paper independently reproducible? Debates on reproducibility center around intuition or assumptions but lack empirical results. Our field focuses on releasing code, which is important, but is not sufficient for determining reproducibility. We take the first step toward a quantifiable answer by manually attempting to implement 255 papers published from 1984 until 2017, recording features of each paper, and performing statistical analysis of the results. For each paper, we did not look at the authors code, if released, in order to prevent bias toward discrepancies between code and paper.",
+          "url": "http://arxiv.org/abs/1909.06674v1"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[10]",
+      "expected": {
+        "expected_title": "Repeatability in computer systems research",
+        "first_author_family": "Collberg",
+        "year": 2016
+      },
+      "lookups": {
+        "crossref": {
+          "doi": "10.1145/2812803",
+          "found": true,
+          "title": "Repeatability in computer systems research",
+          "first_author_family": "Collberg",
+          "authors": [
+            "Christian Collberg",
+            "Todd A. Proebsting"
+          ],
+          "year": 2016,
+          "volume": "59",
+          "issue": "3",
+          "venue": "Communications of the ACM",
+          "pages_or_article": "62-69",
+          "abstract": "To encourage repeatable research, fund repeatability engineering and reward commitments to sharing research artifacts.",
+          "url": "https://doi.org/10.1145/2812803"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[11]",
+      "expected": {
+        "expected_title": "A Large-Scale Study About Quality and Reproducibility of Jupyter Notebooks",
+        "first_author_family": "Pimentel",
+        "year": 2019
+      },
+      "lookups": {
+        "crossref": {
+          "doi": "10.1109/MSR.2019.00077",
+          "found": true,
+          "title": "A Large-Scale Study About Quality and Reproducibility of Jupyter Notebooks",
+          "first_author_family": "Pimentel",
+          "authors": [
+            "Joao Felipe Pimentel",
+            "Leonardo Murta",
+            "Vanessa Braganholo",
+            "Juliana Freire"
+          ],
+          "year": 2019,
+          "volume": null,
+          "issue": null,
+          "venue": "2019 IEEE/ACM 16th International Conference on Mining Software Repositories (MSR)",
+          "pages_or_article": "507-517",
+          "abstract": null,
+          "url": "https://doi.org/10.1109/msr.2019.00077"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[12]",
+      "expected": {
+        "expected_title": "A large-scale study on research code quality and execution",
+        "first_author_family": "Trisovic",
+        "year": 2022
+      },
+      "lookups": {
+        "crossref": {
+          "doi": "10.1038/s41597-022-01143-6",
+          "found": true,
+          "title": "A large-scale study on research code quality and execution",
+          "first_author_family": "Trisovic",
+          "authors": [
+            "Ana Trisovic",
+            "Matthew K. Lau",
+            "Thomas Pasquier",
+            "Mercè Crosas"
+          ],
+          "year": 2022,
+          "volume": "9",
+          "issue": "1",
+          "venue": "Scientific Data",
+          "pages_or_article": "60",
+          "abstract": "Abstract This article presents a study on the quality and execution of research code from publicly-available replication datasets at the Harvard Dataverse repository. Research code is typically created by a group of scientists and published together with academic papers to facilitate research transparency and reproducibility. For this study, we define ten questions to address aspects impacting research reproducibility and reuse. First, we retrieve and analyze more than 2000 replication datasets with over 9000 unique R files published from 2010 to 2020. Second, we execute the code in a clean runtime environment to assess its ease of reuse. Common coding errors were identified, and some of them were solved with automatic code cleaning to aid code execution. We find that 74% of R files failed to complete without error in the initial execution, while 56% failed when code cleaning was applied, showing that many errors can be prevented with good coding practices. We also analyze the replication datasets from journals’ collections and discuss the impact of the journal policy strictness on the code re-execution rate. Finally, based on our results, we propose a set of recommendations for code dissemination aimed at researchers, journals, and repositories.",
+          "url": "https://doi.org/10.1038/s41597-022-01143-6"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[13]",
+      "expected": {
+        "expected_title": "An introduction to Docker for reproducible research",
+        "first_author_family": "Boettiger",
+        "year": 2015
+      },
+      "lookups": {
+        "crossref": {
+          "doi": "10.1145/2723872.2723882",
+          "found": true,
+          "title": "An introduction to Docker for reproducible research",
+          "first_author_family": "Boettiger",
+          "authors": [
+            "Carl Boettiger"
+          ],
+          "year": 2015,
+          "volume": "49",
+          "issue": "1",
+          "venue": "ACM SIGOPS Operating Systems Review",
+          "pages_or_article": "71-79",
+          "abstract": "As computational work becomes more and more integral to many aspects of scientific research, computational reproducibility has become an issue of increasing importance to computer systems researchers and domain scientists alike. Though computational reproducibility seems more straight forward than replicating physical experiments, the complex and rapidly changing nature of computer environments makes being able to reproduce and extend such work a serious challenge. In this paper, I explore common reasons that code developed for one research project cannot be successfully executed or extended by subsequent researchers. I review current approaches to these issues, including virtual machines and workflow systems, and their limitations. I then examine how the popular emerging technology Docker combines several areas from systems research - such as operating system virtualization, cross-platform portability, modular re-usable elements, versioning, and a 'DevOps' philosophy, to address these challenges. I illustrate this with several examples of Docker use with a focus on the R statistical environment.",
+          "url": "https://doi.org/10.1145/2723872.2723882"
+        },
+        "arxiv": {
+          "arxiv_id": "1410.0846",
+          "found": true,
+          "title": "An introduction to Docker for reproducible research, with examples from the R environment",
+          "first_author_family": "Boettiger",
+          "authors": [
+            "Carl Boettiger"
+          ],
+          "year": 2014,
+          "venue": "arXiv 1410.0846",
+          "abstract": "As computational work becomes more and more integral to many aspects of scientific research, computational reproducibility has become an issue of increasing importance to computer systems researchers and domain scientists alike. Though computational reproducibility seems more straight forward than replicating physical experiments, the complex and rapidly changing nature of computer environments makes being able to reproduce and extend such work a serious challenge. In this paper, I explore common reasons that code developed for one research project cannot be successfully executed or extended by subsequent researchers. I review current approaches to these issues, including virtual machines and workflow systems, and their limitations. I then examine how the popular emerging technology Docker combines several areas from systems research - such as operating system virtualization, cross-platform portability, modular re-usable elements, versioning, and a `DevOps' philosophy, to address these challenges. I illustrate this with several examples of Docker use with a focus on the R statistical environment.",
+          "url": "http://arxiv.org/abs/1410.0846v1"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    },
+    {
+      "ref": "[14]",
+      "expected": {
+        "expected_title": "Accounting for Variance in Machine Learning Benchmarks",
+        "first_author_family": "Bouthillier",
+        "year": 2021
+      },
+      "lookups": {
+        "arxiv": {
+          "arxiv_id": "2103.03098",
+          "found": true,
+          "title": "Accounting for Variance in Machine Learning Benchmarks",
+          "first_author_family": "Bouthillier",
+          "authors": [
+            "Xavier Bouthillier",
+            "Pierre Delaunay",
+            "Mirko Bronzi",
+            "Assya Trofimov",
+            "Brennan Nichyporuk",
+            "Justin Szeto",
+            "Naz Sepah",
+            "Edward Raff",
+            "Kanika Madan",
+            "Vikram Voleti",
+            "Samira Ebrahimi Kahou",
+            "Vincent Michalski",
+            "Dmitriy Serdyuk",
+            "Tal Arbel",
+            "Chris Pal",
+            "Gaël Varoquaux",
+            "Pascal Vincent"
+          ],
+          "year": 2021,
+          "venue": "arXiv 2103.03098",
+          "abstract": "Strong empirical evidence that one machine-learning algorithm A outperforms another one B ideally calls for multiple trials optimizing the learning pipeline over sources of variation such as data sampling, data augmentation, parameter initialization, and hyperparameters choices. This is prohibitively expensive, and corners are cut to reach conclusions. We model the whole benchmarking process, revealing that variance due to data sampling, parameter initialization and hyperparameter choice impact markedly the results. We analyze the predominant comparison methods used today in the light of this variance. We show a counter-intuitive result that adding more sources of variation to an imperfect estimator approaches better the ideal estimator at a 51 times reduction in compute cost. Building on these results, we study the error rate of detecting improvements, on five different deep-learning tasks/architectures. This study leads us to propose recommendations for performance comparisons.",
+          "url": "http://arxiv.org/abs/2103.03098v1"
+        }
+      },
+      "reasons": [],
+      "status": "VERIFIED"
+    }
+  ]
+}

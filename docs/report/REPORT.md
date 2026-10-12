@@ -55,10 +55,47 @@ ML benchmarks only; other scientific fields are out of scope for this project.
 
 ## 3. Related work
 
-**Purpose:** place Repro Radar among existing reproducibility efforts and tools, and say how it differs.
+Work on reproducibility in machine learning can be grouped by what it measures: how well papers document their
+experiments, whether independent re-implementation works, whether released code runs, and how much results vary
+from run to run.
 
-- **Needs:** 5–10 sources, each checked against the original.
-- **Status:** not started (no verified source list yet).
+**Documentation and re-implementation.** Gundersen and Kjensmo surveyed 400 papers from IJCAI and AAAI with six
+reproducibility metrics; none of the papers documented all the variables needed to reproduce its results, and between
+20% and 30% of the variables for each factor were documented [8]. Raff attempted to implement 255 papers published
+between 1984 and 2017, without looking at the authors' code, and analyzed the recorded features of each paper
+statistically, on the argument that releasing code is important but not sufficient for determining reproducibility [9].
+At the level of a community, the NeurIPS 2019 reproducibility program combined a code submission policy, a
+reproducibility challenge, and a reproducibility checklist in the submission process [6]. Collberg and Proebsting argue,
+for computer systems research, for funding repeatability engineering and rewarding the sharing of research
+artifacts [10].
+
+**Executing released code.** The studies closest to Repro Radar's question run code that authors have released.
+Trisovic et al. executed R code from more than 2,000 replication datasets in a clean runtime environment: 74% of the R
+files failed to complete without error in the first execution, and 56% still failed after automatic code cleaning [12].
+Pimentel et al. report a large-scale study of the quality and reproducibility of Jupyter notebooks [11]. Boettiger
+examines why code written for one research project often cannot be run or extended by later researchers, and
+presents Docker as one way to address this [13]. Repro Radar also uses containers, but as an isolation boundary for
+code it does not trust as well as for repeatability (section 4.1).
+
+**Variance.** Henderson et al. show, for deep reinforcement learning, that non-determinism in benchmark environments
+together with variance intrinsic to the methods can make reported results hard to interpret [7]. Bouthillier et al.
+model the benchmarking process and find that data sampling, parameter initialization, and hyperparameter choice each
+affect results markedly [14]. These results motivate Tier 3 of the score, stability across seeds (section 4.2); the
+pilots used one counted run per paper, so that tier has not been exercised on real results.
+
+**Where Repro Radar sits.** Compared with the large studies above, Repro Radar is small and deep: six tabular machine
+learning papers chosen by the project, not sampled, each at a pinned commit, run in an isolated sandbox with a setup
+written by the project, and judged against numbers that a person accepted after a verbatim-quote check. It does not
+estimate how reproducible a field is, and its counts are not comparable with those of [12]: other language, other
+selection, far smaller n. What it contributes is a method and a measured list of what stops a paper from installing
+and running (section 6).
+
+- **Sources:** [6]–[14]. [6] and [7] were verified earlier (`docs/INTRODUCTION_SOURCES.md`); every source and every
+  statement in this section is listed with its evidence in `docs/report/RELATED_WORK_SOURCES.md`. Each source was
+  looked up by `scripts/verify_sources.py` in Crossref or the arXiv API (`docs/report/related_work_verification.json`);
+  **only bibliographic data and abstracts were read, not full texts**, and for [11] only the title and bibliographic
+  data (no abstract was returned).
+- **Status:** drafted, for the owner's review; not merged.
 
 ## 4. Method
 
