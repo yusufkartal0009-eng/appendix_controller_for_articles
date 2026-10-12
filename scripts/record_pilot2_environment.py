@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Record the Pilot 2 environment from command output only (docs/PILOT_2.md section 2).
 
-    python scripts/record_pilot2_environment.py
+    python scripts/record_pilot2_environment.py            # Pilot 2
+    python scripts/record_pilot2_environment.py --pilot3   # Pilot 3 (docs/PILOT_3.md section 7): data/pilot3_runs/
 
 Writes data/pilot2_runs/environment.txt: the Repro Radar commit and `git status`, `docker version` and `docker info`,
 `nvidia-smi` on the host, the output of scripts/gpu_check.py (the GPU inside the sandbox, #169), and the free disk
@@ -10,6 +11,7 @@ space. Each block names the command it came from; a command that fails is record
 
 from __future__ import annotations
 
+import argparse
 import os
 import shutil
 import subprocess
@@ -19,6 +21,7 @@ from pathlib import Path
 
 project_root = Path(__file__).resolve().parent.parent
 OUT = project_root / "data" / "pilot2_runs" / "environment.txt"
+OUT_PILOT3 = project_root / "data" / "pilot3_runs" / "environment.txt"
 
 COMMANDS: list[tuple[str, list[str]]] = [
     ("python --version", [sys.executable, "--version"]),
@@ -43,19 +46,23 @@ def run(command: list[str]) -> str:
     return f"{text.rstrip()}\n[exit code {res.returncode}]"
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Record the pilot environment from command output.")
+    parser.add_argument("--pilot3", action="store_true", help="Write the Pilot 3 record instead of Pilot 2's.")
+    args = parser.parse_args([] if argv is None else argv)
+    out = OUT_PILOT3 if args.pilot3 else OUT
     stamp = datetime.now(UTC).isoformat(timespec="seconds")
-    blocks = [f"Pilot 2 environment, recorded {stamp} by scripts/record_pilot2_environment.py"]
+    blocks = [f"Pilot {3 if args.pilot3 else 2} environment, recorded {stamp} by scripts/record_pilot2_environment.py"]
     for title, command in COMMANDS:
         blocks.append(f"=== {title}\n{run(command)}")
     usage = shutil.disk_usage(project_root)
     blocks.append(f"=== disk usage of the drive holding the repository (shutil.disk_usage)\n"
                   f"total={usage.total} used={usage.used} free={usage.free}")
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text("\n\n".join(blocks) + "\n", encoding="utf-8")
-    print(f"wrote {OUT}")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n\n".join(blocks) + "\n", encoding="utf-8")
+    print(f"wrote {out}")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

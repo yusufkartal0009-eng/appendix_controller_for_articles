@@ -10,6 +10,9 @@ Pilot 1's mode (the default) runs the frozen commands of docs/PILOT_WEEK2.md. `-
 constraints, working directory, writable copy, data mounts, and command. The data must already be in the cache
 (`scripts/fetch_data.py`).
 
+`--pilot3` is Pilot 2 with the four changes of docs/PILOT_3.md, read from `data/pilot3_settings.json` (an overlay: the
+run setups of data/seed_papers.json are not edited); its files land in `data/pilot3_runs/<paper_id>/` (#287).
+
 Pilot 2's files land in `data/pilot2_runs/<paper_id>/`, not `sandbox_runs/<paper_id>/` (docs/PILOT_2.md section 6;
 #207): the sandbox and stager still write under `sandbox_runs/` (shared with Pilot 1 and real-Docker CI, left
 untouched), and `_collect_pilot2_files` copies the protocol's named files from there afterwards, next to
@@ -23,6 +26,7 @@ CI job always means Repro Radar did not run the paper as specified.
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import shutil
@@ -45,6 +49,13 @@ from src.sandbox.stager import RepoStager, remove_tree
 # docs/PILOT_2.md section 6: where a Pilot 2 run's files are collected (#207). The sandbox and stager are
 # shared with Pilot 1 and real-Docker CI and are not changed to write here directly.
 PILOT2_RUNS_DIR = PROJECT_ROOT / "data" / "pilot2_runs"
+PILOT3_RUNS_DIR = PROJECT_ROOT / "data" / "pilot3_runs"
+PILOT3_SETTINGS_PATH = PROJECT_ROOT / "data" / "pilot3_settings.json"
+
+# What a Pilot 3 overlay entry may contain (docs/PILOT_3.md section 2): limits that replace Pilot 2's, and two changes of
+# the run setup. `reason` and `pilot2_evidence` are documentation. Anything else is a typo and an error.
+PILOT3_LIMIT_KEYS = ("memory_limit", "memory_swap", "timeout_seconds", "run_timeout_seconds")
+PILOT3_KEYS = (*PILOT3_LIMIT_KEYS, "extra_requirements_add", "data_writable", "reason", "pilot2_evidence")
 
 # Files docs/PILOT_2.md section 6 names, other than pilot_record.json (written directly into the target
 # directory, not copied). "build.log" comes from the build phase's own output directory; the rest from the
@@ -89,6 +100,35 @@ def load_entry(paper_id: str) -> dict[str, Any]:
         if entry["paper_id"] == paper_id:
             return entry
     raise KeyError(f"{paper_id} is not in {SEED_PAPERS_PATH.name}")
+
+
+def load_pilot3_change(paper_id: str, settings_path: Path | None = None) -> dict[str, Any]:
+    """The Pilot 3 change of one paper from the overlay file; {} for a paper that runs as in Pilot 2."""
+    path = settings_path or PILOT3_SETTINGS_PATH
+    papers = json.loads(path.read_text(encoding="utf-8"))["papers"]
+    change = papers.get(paper_id, {})
+    unknown = sorted(set(change) - set(PILOT3_KEYS))
+    if unknown:
+        raise ValueError(f"{paper_id}: unknown keys in {path.name}: {unknown}")
+    if change and not (change.get("reason") and change.get("pilot2_evidence")):
+        raise ValueError(f"{paper_id}: a Pilot 3 change needs a reason and the Pilot 2 evidence")
+    return change
+
+
+def apply_pilot3_change(entry: dict[str, Any], change: dict[str, Any]) -> dict[str, Any]:
+    """A copy of the seed entry with the run-setup changes of the overlay; the entry itself is not modified."""
+    result = copy.deepcopy(entry)
+    setup = result["run_setup"]
+    for name in change.get("data_writable", []):
+        items = [item for item in setup.get("data", []) if item["name"] == name]
+        if not items:
+            raise ValueError(f"{entry['paper_id']}: data_writable names {name!r}, which is not a data item of its run setup")
+        items[0]["writable"] = True
+    for requirement in change.get("extra_requirements_add", []):
+        extras = setup.setdefault("extra_requirements", [])
+        if requirement not in extras:
+            extras.append(requirement)
+    return result
 
 
 def container_command(paper_id: str, target_script: str) -> str:
@@ -139,8 +179,16 @@ def _collect_pilot2_files(sandbox_dir: Path, build_dir: Path, target_dir: Path) 
 
 
 def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
-              data_cache: Path | None = None, record_root: Path | None = None) -> dict[str, Any]:
+              data_cache: Path | None = None, record_root: Path | None = None, pilot3: bool = False,
+              settings_path: Path | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
+    pilot3_change: dict[str, Any] = {}
+    limits = dict(PILOT_LIMITS)
+    if pilot3:
+        pilot2 = True  # Pilot 3 is Pilot 2 with the overlay
+        pilot3_change = load_pilot3_change(paper_id, settings_path)
+        entry = apply_pilot3_change(entry, pilot3_change)
+        limits.update({k: pilot3_change[k] for k in PILOT3_LIMIT_KEYS if k in pilot3_change})
     setup_options: dict[str, Any] | None = None
     if pilot2:
         # Harness error (raised, exit 1) when the setup is malformed or its data is not in the cache
@@ -152,7 +200,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     # pilot record and the protocol's named files are additionally collected into `record_dir` below (#207).
     sandbox_dir = SANDBOX_RUNS_DIR / paper_id
     build_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
-    record_dir = (record_root or PILOT2_RUNS_DIR) / paper_id if pilot2 else sandbox_dir
+    default_root = PILOT3_RUNS_DIR if pilot3 else PILOT2_RUNS_DIR
+    record_dir = (record_root or default_root) / paper_id if pilot2 else sandbox_dir
     if pilot2:
         # An earlier attempt is evidence (docs/PILOT_2.md section 9) and is never overwritten (#217); and the
         # sandbox directories are cleared so that collected files can only come from this run.
@@ -167,7 +216,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     stager = stager or RepoStager(staging_root=staging_dir, bundle_in_docker=pilot2)
     record: dict[str, Any] = {
         "paper_id": paper_id,
-        "protocol": "docs/PILOT_2.md" if pilot2 else "docs/PILOT_WEEK2.md",
+        "protocol": "docs/PILOT_3.md" if pilot3 else "docs/PILOT_2.md" if pilot2 else "docs/PILOT_WEEK2.md",
         "repro_radar_commit": repro_radar_commit(),
         "started_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "repo_url": entry["repo_url"],
@@ -176,8 +225,10 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         "container_command": (" ".join(setup_options["command"]) if setup_options and setup_options["command"]
                               else container_command_for(entry["target_script"], spec["args"])),
         "environment": spec["env"],
-        "limits": PILOT_LIMITS,
+        "limits": limits,
     }
+    if pilot3:
+        record["pilot3_change"] = pilot3_change
 
     start = time.time()
     try:
@@ -215,7 +266,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         bundle_extra = {"extra_requirements": setup_options["extra_requirements"],
                         "constraints": setup_options["constraints"]}
         command = setup_options["command"]
-    config = SandboxConfig(**PILOT_LIMITS, env_vars=dict(spec["env"]), python_version=python_version, **config_extra)
+    config = SandboxConfig(**limits, env_vars=dict(spec["env"]), python_version=python_version, **config_extra)
 
     if setup_options and setup_options["build"]:
         build_start = time.time()
@@ -261,10 +312,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("paper_id", choices=sorted(PILOT_SPECS))
     parser.add_argument("--staging-dir", default=".sandbox_staging", help="Where repositories are cloned.")
     parser.add_argument("--pilot2", action="store_true", help="Run with the paper's run_setup (docs/PILOT_2.md).")
+    parser.add_argument("--pilot3", action="store_true",
+                        help="Pilot 2 plus the four changes of docs/PILOT_3.md (data/pilot3_settings.json); "
+                             "files go to data/pilot3_runs/.")
     parser.add_argument("--data-cache", default=str(DATA_CACHE_DIR), help="Host data cache (scripts/fetch_data.py).")
     args = parser.parse_args(argv)
     try:
-        record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache))
+        record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache),
+                           pilot3=args.pilot3)
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1

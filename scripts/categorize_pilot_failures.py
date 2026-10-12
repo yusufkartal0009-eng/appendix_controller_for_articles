@@ -174,7 +174,8 @@ def categorize(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
     for p in papers:
         if p["category"]:
             counts[p["category"]] += 1
-    protocol = "docs/PILOT_2.md section 7" if "pilot2" in runs_dir.name else "docs/PILOT_WEEK2.md section 7"
+    protocol = ("docs/PILOT_3.md section 5" if "pilot3" in runs_dir.name else "docs/PILOT_2.md section 7" if "pilot2" in runs_dir.name
+                else "docs/PILOT_WEEK2.md section 7")
     return {"protocol": protocol, "papers": papers, "counts": counts}
 
 
