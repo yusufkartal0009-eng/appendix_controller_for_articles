@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(ci): executable bit for 5 scripts with a shebang (2026-10-13 00:56 +03:00, Issue #279)
+- The first CI run after re-enabling found ruff EXE001 on Linux for scripts/apply_accepted_claims.py, hash_run.py, migrate.py, report_numbers.py and security_audit.py (shebang, but mode 100644). Mode set to 100755 in git; no content change.
+
 ### Tests for the Small Tool Scripts (2026-10-12 01:21 +03:00, Issue #272)
 - Added 9 tests: record_pilot2_environment.py 0% to 97%, extract_claims.py 0% to 96% (no API call), src/web/__main__.py 0% to 100%. Whole project src+scripts 81% to 87% after the four test PRs of #272.
 
