@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): Pilot 3 protocol (2026-10-13 01:33 +03:00, Issue #285)
+- docs/PILOT_3.md: four per-paper settings (paper_003 writable data copy, paper_005 12 GiB memory, paper_004 4-hour run timeout, paper_002 lightgbm), all six papers re-run. States that these are settings chosen after the failures, not a better result about the papers. Pilot 1 and 2 stay as they are. Written before any run.
+
 ### feat(extraction): follow-up questions in the blind packet (2026-10-13 01:28 +03:00, Issue #283)
 - make_blind_packet.py writes followup_queries into the packet and import_pass.py stores their answers as pass B in data/claims/followup/<paper_id>.json, apart from the gold set. No pass B was run and nothing is accepted. An older partly filled answers.json only gets empty slots. Real packet: 6 papers, 19 questions.
 
