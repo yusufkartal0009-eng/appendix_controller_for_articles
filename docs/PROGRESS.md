@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: CI is on again; README and CONTRIBUTING say what CI really runs (2026-10-13 00:53 +03:00, Issue #277)
+- CI re-enabled by the owner (the Pilot workflow stays disabled). README no longer claims CI enforces the corpus check in the abstract; it names the corpus job. CONTRIBUTING no longer says CI is off.
+
 ### Tests for the Small Tool Scripts (2026-10-12 01:21 +03:00, Issue #272)
 - Added 9 tests: record_pilot2_environment.py 0% to 97%, extract_claims.py 0% to 96% (no API call), src/web/__main__.py 0% to 100%. Whole project src+scripts 81% to 87% after the four test PRs of #272.
 
