@@ -1,0 +1,49 @@
+{
+  "paper_id": "paper_005",
+  "pdf_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v2.full.pdf",
+  "pdf_sha256": "5101ef5605b03237c8e677a102ee8541f0599e4afb14a8fe43442df2cc4dd6fd",
+  "pdf_text_extractor": "pypdf 6.19.0",
+  "questions": "data/claim_queries/paper_005.json (followup_queries)",
+  "protocol": "docs/AGENT_EXTRACTION.md",
+  "status": "PASS A ONLY. Not compared with a pass B, not in the gold set, not reviewed or accepted by the owner. Do not use in scoring or in data/seed_papers.json (#258).",
+  "extractions": {
+    "A": {
+      "method": "Claude Code agent, pass A: searched the page text of the paper for the question's dataset and metric terms and read the matching table row (docs/AGENT_EXTRACTION.md). The question was added after an audit pointed at Table 1, so this pass was not blind to where the value is.",
+      "made_at": "2026-10-12T00:46:33+03:00",
+      "answers": {
+        "ep300_avg_kernel_speedup": {
+          "status": "found",
+          "reason": "Table 1 (10 DNA datasets), row EP300, column 'Avg Speedup x': 16; the next column, 'Max Speedup x', is 92. Other values: Figure 7(a) repeats the average speedups with one decimal, but its bar labels are not tied to dataset names in the extracted text, so no decimal value is claimed; the text also gives overall averages of 94.7x (GaKCo) and 15.0x (Blended Spectrum) for the protein and NLP datasets, which are other datasets.",
+          "claim": {
+            "metric_name": "avg_kernel_speedup_factor",
+            "value_as_printed": "16",
+            "unit": "none",
+            "dataset": "EP300",
+            "model_variant": "FastSK",
+            "split": "not_stated",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 10,
+            "source_quote": "EP300 2000 2000 4000 16 92",
+            "confidence": 0.8,
+            "value_normalized": 16.0
+          }
+        }
+      }
+    }
+  },
+  "guard": {
+    "tool": "src/quote_guard.py verify_claim",
+    "status": "AUTO_QUOTE_MATCH",
+    "checks": {
+      "same_pdf": true,
+      "page_exists": true,
+      "from_table": true,
+      "quote_match": "whitespace_normalized",
+      "value_match": "exact",
+      "dataset_in_paper": true,
+      "model_variant_in_paper": true
+    },
+    "ran_at": "2026-10-12T00:46:33+03:00"
+  }
+}

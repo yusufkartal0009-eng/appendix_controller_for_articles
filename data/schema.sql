@@ -22,13 +22,15 @@ CREATE TABLE IF NOT EXISTS papers (
 CREATE TABLE IF NOT EXISTS runs (
     run_id TEXT PRIMARY KEY,
     paper_id TEXT NOT NULL,
-    status TEXT NOT NULL CHECK(status IN ('PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'TIMEOUT')),
+    status TEXT NOT NULL CHECK(status IN ('PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'TIMEOUT', 'OOM_KILLED')),
     execution_time REAL, -- in seconds
     exit_code INTEGER,
     stdout TEXT,
     stderr TEXT,
     seed INTEGER DEFAULT 42,
     failure_category TEXT, -- pilot failure category (docs/PILOT_WEEK2.md section 7), NULL if not categorized
+    artifact_manifest_sha256 TEXT, -- SHA-256 of the run directory's file manifest (src/artifact_hash.py, #29)
+    outputs_sha256 TEXT, -- SHA-256 of the files the paper wrote (not logs or sandbox metadata), NULL if none
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
 );

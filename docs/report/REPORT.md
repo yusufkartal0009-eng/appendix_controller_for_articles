@@ -89,13 +89,14 @@ repeated runs with different seeds, 15%; **Tier 4**, documentation and license c
 score classifies a paper as `Verified` (≥ 85), `Partially Verified` (60–84), or lower tiers below that
 (`src/scoring.py`).
 
-Tier 2 does not use one fixed tolerance for every metric. `src/validation_rubric.py` categorizes each metric —
-a bounded rate such as accuracy or AUROC, an unbounded loss such as RMSE where lower is better, a
-hardware-sensitive runtime measurement, or a correlation — and applies a tolerance suited to that category: for
-example accuracy is allowed 5% relative or 0.02 absolute error, AUROC a tighter 4% or 0.015 (bounded metrics
-near 1.0 can move only a little in absolute terms), and runtime or latency a much wider 30%, with a note that
-the difference may be hardware rather than a real divergence, since wall-clock time depends on the machine it
-was measured on. Tier 3's stability check uses the coefficient of variation (CV) across seeds: CV ≤ 2% is
+Tier 2 compares each claimed metric with the reproduced one using a single default tolerance of 5%
+(`DEFAULT_TOLERANCE`, `src/config.py`), applied in `src/scoring.py`: a reproduced value within 5% relative
+error earns full points; for a metric claimed inside [0, 1] (accuracy, AUROC, F1) an absolute difference of up
+to 0.05 also counts; within twice the tolerance earns half the points; beyond that, none. Runtime and latency
+metrics, recognized by name, are judged by relative error only, because an absolute bound would let 0.02 s
+become 0.06 s, a 200% error, and still pass. The scorer has no per-category tolerance (for example a tighter
+bound for AUROC than for accuracy) and does not separate a hardware difference from a real divergence; a module
+that was meant to do this was never connected to the scorer and was removed (#254). Tier 3's stability check uses the coefficient of variation (CV) across seeds: CV ≤ 2% is
 scored as deterministic, ≤ 5% as stable, with the score falling as the variance grows.
 
 ### 4.3 Claim extraction
@@ -119,8 +120,8 @@ do not occur in their papers at all, both correctly answered `not_found`.
 
 - **Sources:** `docs/SANDBOX_ACCEPTANCE.md` (all numbered checks cited above are its own verbatim evidence,
   re-run against a real Docker daemon in CI); `docs/DECISIONS.md` (D-004, D-005, and the home-directory
-  `noexec` decision); `src/config.py`, `src/scoring.py`, `src/validation_rubric.py` (weights, thresholds,
-  category tolerances, CV bands — read directly from the code, not retyped by hand); `docs/CLAIM_SCHEMA.md`,
+  `noexec` decision); `src/config.py`, `src/scoring.py` (weights, thresholds,
+  tolerance rules, CV bands — read directly from the code, not retyped by hand); `docs/CLAIM_SCHEMA.md`,
   `docs/PDF_TEXT_EXTRACTION.md`, `docs/AGENT_EXTRACTION.md`; `data/claims/gold_score_pass_A.json` (the
   precision/recall numbers and the two regression cases).
 - **Status:** written. This section describes the design and is not a results claim: `cli.py score` can score a

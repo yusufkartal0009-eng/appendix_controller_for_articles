@@ -9,6 +9,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from src.config import DB_URL, DEFAULT_DB_PATH, SCHEMA_PATH, SEED_PAPERS_PATH
+from src.migrations import upgrade
 from src.models import Base, PaperCreate, PaperORM, ScoreORM
 
 # Global engine and sessionmaker instances
@@ -47,6 +48,11 @@ def init_db(engine: Engine | None = None, schema_file: Path | None = None, drop_
     if drop_existing:
         Base.metadata.drop_all(bind=eng)
 
+    # A database made by an older version is brought to the current schema first (versioned migrations, #12),
+    # with a copy of the file kept beside it; a new database gets everything from the migrations and schema.sql.
+    if eng.dialect.name == "sqlite":
+        upgrade(eng)
+
     if schema_path.exists():
         with open(schema_path, "r", encoding="utf-8") as f:
             sql_script = f.read()
@@ -62,14 +68,13 @@ def init_db(engine: Engine | None = None, schema_file: Path | None = None, drop_
         # Fallback to ORM metadata creation if schema.sql is absent
         Base.metadata.create_all(bind=eng)
 
-    ensure_failure_category_column(eng)
-
 
 def ensure_failure_category_column(engine: Engine) -> bool:
     """Add runs.failure_category to SQLite databases created before the column existed.
 
     `CREATE TABLE IF NOT EXISTS` leaves existing tables unchanged, so older local databases need this
-    one-column upgrade. Returns True when the column was added.
+    one-column upgrade. Returns True when the column was added. `init_db` now upgrades through the versioned
+    migrations (`src/migrations.py`, migration 2 does the same); this function is kept for direct callers.
     """
     if engine.dialect.name != "sqlite":
         return False

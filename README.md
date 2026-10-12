@@ -96,7 +96,7 @@ pip install -r requirements-dev.txt
 ```bash
 python cli.py init-db
 ```
-This executes `data/schema.sql` to initialize `data/repro_radar.db` and loads the seed papers from `data/seed_papers.json` (see [Corpus Verification](docs/CORPUS_VERIFICATION.md) for what has and has not been checked).
+This brings an existing database to the current schema (versioned migrations that keep its data; a copy of the file is made first, see `python scripts/migrate.py status`), executes `data/schema.sql` to initialize `data/repro_radar.db`, and loads the seed papers from `data/seed_papers.json` (see [Corpus Verification](docs/CORPUS_VERIFICATION.md) for what has and has not been checked).
 
 ### 4. List Curated Papers
 ```bash
@@ -130,7 +130,7 @@ pytest tests/ -v
 
 The seed domain is **"Tabular Machine Learning & Light NLP Benchmarks"**:
 - **Frameworks:** TabPFN, FT-Transformer, TabR, FastSK, SAINT, DANets.
-- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); CI enforces this on every change. Runnability (hardware, data downloads, script arguments) is **not yet verified**, and only **2 of 16** numeric claims were found in their papers; see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
+- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); the `corpus` job of the CI workflow runs it on every push to main and every pull request. Whether the papers install and run was measured in Pilot 2 (`docs/PILOT_2.md`), and the numeric claims are the **12 claims** that were extracted from the papers' text and accepted one by one by the owner, in 5 of the 6 papers (`paper_005` has none); see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
 
 ---
 
@@ -175,6 +175,7 @@ repro-radar/
 │   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
 │   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
 │   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run in CI)
+│   ├── hash_run.py                     # SHA-256 manifest of a run directory; verify and compare runs (#29)
 │   ├── generate_academic_introduction_doc.py # Builds the introduction draft (.docx, not committed)
 │   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
 │   ├── setup_7week_board.py            # Provisions the weekly tracking board
@@ -182,11 +183,12 @@ repro-radar/
 ├── src/
 │   ├── __init__.py          # Package init
 │   ├── config.py            # Paths, tier weights, and tolerances
+│   ├── artifact_hash.py     # SHA-256 manifests of run directories (integrity and reproducibility hashes)
 │   ├── database.py          # SQLite engine, sessions, init, and seeding
+│   ├── migrations.py        # Versioned schema migrations for existing databases (#12)
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
 │   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
 │   ├── metric_extractor.py  # Metric parsing from logs, JSON, and sklearn reports
-│   ├── validation_rubric.py # Metric tolerances & multi-seed stability analysis
 │   └── sandbox/
 │       ├── __init__.py      # Sandbox package exports
 │       ├── runner.py        # DockerSandboxRunner; opt-in unisolated ProcessSandboxRunner
@@ -201,7 +203,6 @@ repro-radar/
 │   ├── STACK.md             # Technology stack and security boundaries
 │   ├── ENVIRONMENT.md       # System tools, dependencies & fresh-machine setup
 │   ├── SANDBOX_GUIDE.md     # Sandbox architecture, security specs & CLI guide
-│   ├── VALIDATION_RUBRIC.md # Metric validation rubric and tolerances
 │   ├── gap_analysis.md      # Known gaps, evidence, and remediation status
 │   ├── CORPUS_VERIFICATION.md # Per-entry corpus checks and what remains unverified
 │   ├── SANDBOX_ACCEPTANCE.md  # Real-Docker evidence of sandbox isolation
@@ -220,7 +221,6 @@ repro-radar/
     ├── test_seed.py                # Seed dataset completeness tests
     ├── test_setup_github_backlog.py # Backlog script command-safety tests
     ├── test_stager.py              # Staging, dependency analysis & execution report tests
-    ├── test_validation_rubric.py   # Tolerance and stability analyzer tests
     └── test_verify_corpus.py       # Corpus verifier tests (offline, fake HTTP)
 ```
 

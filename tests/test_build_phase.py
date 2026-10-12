@@ -198,6 +198,7 @@ def test_bundling_in_docker_runs_pip_in_the_target_image(tmp_path, monkeypatch):
     for dropped in ("--platform", "--python-version", "--implementation", "manylinux2014_x86_64", "cp"):
         assert dropped not in cmd
     assert f"{stager.staging_root}:/staging" in cmd and "no-new-privileges:true" in cmd
+    assert cmd[cmd.index("--cap-drop") + 1] == "ALL"  # #260
     assert cmd[cmd.index("--user") + 1] == "1000:1000"
     assert "--network" not in cmd  # the network is on for this one step (wheels only)
 

@@ -82,6 +82,9 @@ class RunORM(Base):
     seed = Column(Integer, default=42)
     # Pilot failure category (docs/PILOT_WEEK2.md section 7); NULL for runs that were not categorized
     failure_category = Column(String, nullable=True)
+    # SHA-256 of the run directory's file manifest and of the paper's own output files (src/artifact_hash.py, #29)
+    artifact_manifest_sha256 = Column(String, nullable=True)
+    outputs_sha256 = Column(String, nullable=True)
     timestamp = Column(DateTime, default=func.now())
 
     # Relationships

@@ -6,5 +6,9 @@
     {"query_id": "ep3602_auroc", "question": "Test AUROC of FastSK on the EP3602 dataset."},
     {"query_id": "ep3602_accuracy", "question": "Test accuracy of FastSK on the EP3602 dataset."},
     {"query_id": "kernel_speedup_factor", "question": "Kernel computation speedup factor of FastSK shown in Figure 4."}
+  ],
+  "followup_queries_note": "Added on 2026-10-12 (#258) after the paper was read again: the paper reports speedups in Table 1, under the dataset name EP300 (not EP3602). These are NOT part of the 18 questions of the gold set, are answered in pass A only (data/claims/followup/paper_005.json), and nothing here is accepted.",
+  "followup_queries": [
+    {"query_id": "ep300_avg_kernel_speedup", "question": "Average kernel computation speedup factor of FastSK over gkmSVM-2.0 on the EP300 dataset (the average speedup column of the DNA dataset table)."}
   ]
 }

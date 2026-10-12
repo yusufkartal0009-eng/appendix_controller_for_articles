@@ -62,6 +62,7 @@ def test_build_docker_command_security_flags():
     # 3. Privilege escalation prevention & non-root user
     assert "--security-opt" in cmd
     assert "no-new-privileges:true" in cmd
+    assert cmd[cmd.index("--cap-drop") + 1] == "ALL"  # #260
     assert "--user" in cmd
     user_idx = cmd.index("--user")
     assert cmd[user_idx + 1] == "1000:1000"

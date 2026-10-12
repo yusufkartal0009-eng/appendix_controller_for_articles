@@ -53,6 +53,11 @@
   So the A/B comparison (step 1.2) catches copying, transcription, and normalization errors, but **not** a
   misunderstanding that both passes share. Shared misunderstandings are caught only by the quote guard (W4), the
   owner's gold set (W5, Y3), and the owner's approval (W7).
+- **Follow-up questions (#258):** a question added after the 18 gold-set questions is listed under
+  `followup_queries` in its question file and answered in pass A only, in `data/claims/followup/<paper_id>.json`
+  (with the quote guard's result). It is not part of the passes A and B comparison, the gold set, the database import,
+  or `data/seed_papers.json`. It becomes a claim only after a blind pass B (#186) and the owner's review (W7).
+  Today there is one: `paper_005`, the average kernel speedup on EP300 (Table 1).
 - Step 1.2 compares them by normalized value (D-005). Every disagreement goes to the owner in W7 (#134); neither
   extraction is "right" by default.
 - Neither extraction is approved by being extracted. Approval comes only from the quote guard (W4) and the owner (W7).
