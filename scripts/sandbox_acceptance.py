@@ -32,6 +32,8 @@ paper runs) and prints the command evidence for each check:
   19. data copy - a writable data mount is a per-run copy: the run writes into it, the host cache is unchanged
   20. gpu off  - the GPU is opt-in (#169): a default run has no --gpus flag and records gpu_requested false and
                  no GPU devices (a run with the GPU needs an NVIDIA host: scripts/gpu_check.py)
+  21. watchdog - a paper that kills the `timeout` watchdog is reported as FAILED (killed_before_timeout), not
+                 as TIMEOUT, because the time limit was not reached (#262)
 Informational (not pass/fail): resource limits seen inside the container, and whether the
 /workspace/home tmpfs allows executing files written there.
 
@@ -100,6 +102,11 @@ PROBES = {
         "        print(f'{path}: {errno.errorcode.get(exc.errno, exc.errno)} ({exc.strerror})')\n"
         "raise SystemExit(0 if ok else 1)\n"
     ),
+    "probe_kill_watchdog.py": (
+        "import os, signal, time\n"
+        "os.kill(os.getppid(), signal.SIGKILL)\n"
+        "print('killed the watchdog', flush=True)\n"
+        "time.sleep(60)\n"),
     "probe_sleep.py": "import time\nprint('sleeping 60s', flush=True)\ntime.sleep(60)\n",
     "probe_import.py": (
         "import toolz\n"
@@ -271,6 +278,15 @@ def main():
     r, meta = run_probe(short, repo, "probe_sleep.py", "acceptance_timeout")
     show("4. Timeout (limit 5 s, script sleeps 60 s)", r.command_executed, "\n".join([r.stdout.strip(), *summary(r, meta)]))
     results["4 timeout"] = r.status == "TIMEOUT" and meta.get("status") == "TIMEOUT" and meta.get("duration_seconds", 0) > 0
+
+    # 21. a paper that kills its own watchdog (#262) is not labelled TIMEOUT: the limit was not reached
+    r, meta = run_probe(short, repo, "probe_kill_watchdog.py", "acceptance_kill_watchdog")
+    show("21. Paper kills the `timeout` watchdog (limit 5 s)", r.command_executed,
+         "\n".join([r.stdout.strip(), *summary(r, meta), f"killed_before_timeout={meta.get('killed_before_timeout')}"]))
+    results["21 killed watchdog is not a timeout"] = (
+        r.status == "FAILED" and meta.get("status") == "FAILED" and meta.get("killed_before_timeout") is True
+        and meta.get("duration_seconds", 99) < 4
+    )
 
     # 5. offline install
     wheels = sorted(Path(args.wheel_dir).glob("toolz-*.whl"))

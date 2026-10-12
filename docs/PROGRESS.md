@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(sandbox): watchdog killed by the paper is not a timeout (security audit F-3) (2026-10-13 01:24 +03:00, Issue #262)
+- The entrypoint reports TIMEOUT only when the elapsed time reached the limit (within 1 s); an earlier exit 137 is FAILED with killed_before_timeout true in execution_meta.json. New acceptance check 21. Real Docker: acceptance 21 of 21, audit kill_parent PASS (41 PASS, 0 FAIL, 2 INFO). The paper can still kill its watchdog; only the label is fixed.
+
 ### fix(sandbox): output directory limit (security audit F-2) (2026-10-13 01:19 +03:00, Issue #261)
 - The runner watches the size of the output directory every 0.5 s during the run container and kills the container above SandboxConfig.output_limit_mb (default 1024 MiB, 0 = off). New run status OUTPUT_LIMIT_EXCEEDED (schema CHECK, migration 6, badge, categorizer). Real Docker: a 4096 MiB writer was stopped in 9 of 9 runs, 18 to 122 MiB past the limit. Audit row output_disk now PASS. Not a hard bound.
 
