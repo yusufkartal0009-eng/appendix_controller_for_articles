@@ -12,7 +12,7 @@
 - **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
 - **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
 - **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 492 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Tests:** 496 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
 
 ---
 
@@ -36,6 +36,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### Pilot 3 Results: Three Pilots Side by Side (2026-10-13 08:08 +03:00, Issue #293)
+- pilot_compare.py --pilot3-dir and four report_numbers blocks (pilot3, pilot3measurements, pilot3summary, pilot3failures); docs/PILOT_3.md results and docs/report/REPORT.md section 6.1a, all numbers generated. Pilot 3: install 6/6, run 2/6, pilot success 2/6. The text says the four settings were chosen after Pilot 2's failures, so the rates measure the settings, not the papers.
 
 ### data(pilot3): Pilot 3 records (2026-10-13 08:04 +03:00, Issue #289)
 - Six papers run once each in real Docker (2026-10-13). Install 6/6, run 2/6 (paper_003, paper_006), pilot success 2/6. paper_004 and paper_005 ended OOM_KILLED at the pre-set values (6 GiB, 12 GiB); paper_002 stopped at an OpenML network request. The first paper_002 attempt (killed by my own output-limit defect, #290) is kept in first_attempts.

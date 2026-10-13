@@ -11,6 +11,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 - `pilot2`: Pilot 1 and Pilot 2 side by side (`data/pilot2_runs/comparison.json`, from scripts/pilot_compare.py)
 - `pilot2measurements`: the rates and the per-paper table of Pilot 2 (`data/pilot2_runs/measurements.md`)
 - `pilot2summary`: one sentence with the three rates of Pilot 2 next to Pilot 1's (`data/pilot2_runs/comparison.json`)
+- `pilot3`, `pilot3measurements`, `pilot3summary`, `pilot3failures`: the same for Pilot 3, with all three pilots side by
+  side (`data/pilot3_runs/`, #292)
 - `pilot2failures`: per paper of Pilot 2, the failure category, the phase, and the deciding log line
   (`data/pilot2_runs/failure_categories.json`)
 - `extraction`: the claim extraction: quote guard, A/B agreement, the owner's review, and the gold set
@@ -85,9 +87,9 @@ def pilot2summary_block(data: Path = DATA) -> str:
     return "\n".join([HEADER.format(sources="data/pilot2_runs/comparison.json"), "", sentence])
 
 
-def pilot2failures_block(data: Path = DATA) -> str:
-    papers = _load(data / "pilot2_runs" / "failure_categories.json")["papers"]
-    lines = [HEADER.format(sources="data/pilot2_runs/failure_categories.json"), "",
+def pilot2failures_block(data: Path = DATA, runs: str = "pilot2_runs") -> str:
+    papers = _load(data / runs / "failure_categories.json")["papers"]
+    lines = [HEADER.format(sources=f"data/{runs}/failure_categories.json"), "",
              "| Paper | Category | Phase | Deciding line |", "|---|---|---|---|"]
     for p in papers:
         category = p["category"] or p["other_name"] or "none"
@@ -98,6 +100,37 @@ def pilot2failures_block(data: Path = DATA) -> str:
         lines.append(f"| `{p['paper_id']}` | {'success' if p['pilot_success'] else category} | "
                      f"{p['phase'] or 'n/a'} | {('`' + line[:240] + '`') if line and not p['pilot_success'] else 'n/a'} |")
     return "\n".join(lines)
+
+
+def pilot3_block(data: Path = DATA) -> str:
+    comparison = _load(data / "pilot3_runs" / "comparison.json")
+    body = (data / "pilot3_runs" / "comparison.md").read_text(encoding="utf-8")
+    body = "\n".join(line for line in body.splitlines() if not line.startswith("<!--")).strip()
+    assert comparison["rates"], "empty comparison"
+    return "\n".join([HEADER.format(sources="data/pilot3_runs/comparison.json (scripts/pilot_compare.py --pilot3-dir)"), "", body])
+
+
+def pilot3measurements_block(data: Path = DATA) -> str:
+    source = data / "pilot3_runs" / "measurements.md"
+    if not source.is_file():
+        raise FileNotFoundError(f"{source} not found")
+    lines = [line for line in source.read_text(encoding="utf-8").splitlines() if not line.startswith("<!--")]
+    header = HEADER.format(sources="data/pilot3_runs/measurements.md (scripts/pilot_measurements.py)")
+    return "\n".join([header, "", "\n".join(lines).strip()])
+
+
+def pilot3summary_block(data: Path = DATA) -> str:
+    rates = _load(data / "pilot3_runs" / "comparison.json")["rates"]
+
+    def triple(key: str) -> str:
+        return f"{_rate(rates[key]['pilot3'])} (Pilot 1: {_rate(rates[key]['pilot1'])}; Pilot 2: {_rate(rates[key]['pilot2'])})"
+    sentence = (f"Install success: {triple('install_success_rate')}. Run success: {triple('run_success_rate')}. "
+                f"Pilot success: {triple('pilot_success_rate')}.")
+    return "\n".join([HEADER.format(sources="data/pilot3_runs/comparison.json"), "", sentence])
+
+
+def pilot3failures_block(data: Path = DATA) -> str:
+    return pilot2failures_block(data, "pilot3_runs")
 
 
 def extraction_block(data: Path = DATA) -> str:
@@ -123,7 +156,9 @@ def extraction_block(data: Path = DATA) -> str:
 
 BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
-          "pilot2failures": pilot2failures_block, "extraction": extraction_block}
+          "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
+          "pilot3measurements": pilot3measurements_block, "pilot3summary": pilot3summary_block,
+          "pilot3failures": pilot3failures_block, "extraction": extraction_block}
 BLOCK_RE = re.compile(r"(<!-- numbers:(?P<name>[a-z0-9]+):start -->\n)(?P<body>.*?)(\n<!-- numbers:(?P=name):end -->)", re.DOTALL)
 
 
