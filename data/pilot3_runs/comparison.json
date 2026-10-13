@@ -1,0 +1,225 @@
+{
+  "sources": {
+    "pilot1": [
+      "data/pilot_runs/measurements.json",
+      "data/pilot_runs/failure_categories.json"
+    ],
+    "pilot2": [
+      "data/pilot2_runs/measurements.json",
+      "data/pilot2_runs/failure_categories.json"
+    ],
+    "pilot3": [
+      "data/pilot3_runs/measurements.json",
+      "data/pilot3_runs/failure_categories.json"
+    ]
+  },
+  "rates": {
+    "install_success_rate": {
+      "pilot1": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      },
+      "pilot2": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      },
+      "pilot3": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      }
+    },
+    "run_success_rate": {
+      "pilot1": {
+        "count": 0,
+        "of": 6,
+        "rate": 0.0
+      },
+      "pilot2": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      },
+      "pilot3": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      }
+    },
+    "pilot_success_rate": {
+      "pilot1": {
+        "count": 0,
+        "of": 6,
+        "rate": 0.0
+      },
+      "pilot2": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      },
+      "pilot3": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      }
+    },
+    "valid_runs": {
+      "pilot1": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      },
+      "pilot2": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      },
+      "pilot3": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      }
+    }
+  },
+  "failure_counts": {
+    "pilot1": {
+      "MISSING_DEPENDENCY": 5,
+      "DATA_NOT_ACCESSIBLE": 1,
+      "HARDWARE_GPU_REQUIRED": 0,
+      "TIMEOUT": 0,
+      "SCRIPT_NOT_FOUND": 0,
+      "LICENSE_BLOCKED": 0,
+      "OTHER": 0
+    },
+    "pilot2": {
+      "MISSING_DEPENDENCY": 1,
+      "DATA_NOT_ACCESSIBLE": 1,
+      "HARDWARE_GPU_REQUIRED": 0,
+      "TIMEOUT": 1,
+      "SCRIPT_NOT_FOUND": 0,
+      "LICENSE_BLOCKED": 0,
+      "OTHER": 2
+    },
+    "pilot3": {
+      "MISSING_DEPENDENCY": 0,
+      "DATA_NOT_ACCESSIBLE": 2,
+      "HARDWARE_GPU_REQUIRED": 0,
+      "TIMEOUT": 0,
+      "SCRIPT_NOT_FOUND": 0,
+      "LICENSE_BLOCKED": 0,
+      "OTHER": 2
+    }
+  },
+  "papers": [
+    {
+      "paper_id": "paper_002",
+      "pilot1": {
+        "pilot_success": false,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install"
+      },
+      "pilot2": {
+        "pilot_success": false,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "run"
+      },
+      "pilot3": {
+        "pilot_success": false,
+        "category": "DATA_NOT_ACCESSIBLE",
+        "phase": "run"
+      }
+    },
+    {
+      "paper_id": "paper_003",
+      "pilot1": {
+        "pilot_success": false,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install"
+      },
+      "pilot2": {
+        "pilot_success": false,
+        "category": "OTHER",
+        "phase": "run"
+      },
+      "pilot3": {
+        "pilot_success": true,
+        "category": null,
+        "phase": null
+      }
+    },
+    {
+      "paper_id": "paper_004",
+      "pilot1": {
+        "pilot_success": false,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "run"
+      },
+      "pilot2": {
+        "pilot_success": false,
+        "category": "TIMEOUT",
+        "phase": "run"
+      },
+      "pilot3": {
+        "pilot_success": false,
+        "category": "OTHER",
+        "phase": "run"
+      }
+    },
+    {
+      "paper_id": "paper_005",
+      "pilot1": {
+        "pilot_success": false,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install"
+      },
+      "pilot2": {
+        "pilot_success": false,
+        "category": "OTHER",
+        "phase": "run"
+      },
+      "pilot3": {
+        "pilot_success": false,
+        "category": "OTHER",
+        "phase": "run"
+      }
+    },
+    {
+      "paper_id": "paper_006",
+      "pilot1": {
+        "pilot_success": false,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "run"
+      },
+      "pilot2": {
+        "pilot_success": true,
+        "category": null,
+        "phase": null
+      },
+      "pilot3": {
+        "pilot_success": true,
+        "category": null,
+        "phase": null
+      }
+    },
+    {
+      "paper_id": "paper_008",
+      "pilot1": {
+        "pilot_success": false,
+        "category": "DATA_NOT_ACCESSIBLE",
+        "phase": "run"
+      },
+      "pilot2": {
+        "pilot_success": false,
+        "category": "DATA_NOT_ACCESSIBLE",
+        "phase": "run"
+      },
+      "pilot3": {
+        "pilot_success": false,
+        "category": "DATA_NOT_ACCESSIBLE",
+        "phase": "run"
+      }
+    }
+  ]
+}

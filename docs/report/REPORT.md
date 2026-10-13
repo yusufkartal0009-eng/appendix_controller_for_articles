@@ -299,6 +299,30 @@ whose parent directory was owned by root, and others. Each was fixed in its own 
 every earlier attempt is kept with its reason (`data/pilot2_runs/first_attempts/README.md`, generated from the stored
 records; the list is in `docs/PILOT_2.md` section 12).
 
+### 6.1a Pilot 3: the same papers with four settings changed
+
+Pilot 3 (`docs/PILOT_3.md`, 2026-10-13) repeated Pilot 2 with four per-paper settings changed: a writable copy of the data
+for `paper_003`, 12 GiB of memory for `paper_005`, four hours for the run phase of `paper_004`, and `lightgbm` among the
+requirements of `paper_002`. **These settings were chosen after Pilot 2's failures were seen, so the change in the rates
+measures the effect of the settings, not an improvement of the papers.** Pilot 1 and Pilot 2 are unchanged.
+
+<!-- numbers:pilot3summary:start -->
+<!-- numbers:pilot3summary:end -->
+
+<!-- numbers:pilot3:start -->
+<!-- numbers:pilot3:end -->
+
+What each Pilot 3 paper stopped at, with the log line that decided it:
+
+<!-- numbers:pilot3failures:start -->
+<!-- numbers:pilot3failures:end -->
+
+One of the four changes removed its obstacle and led to a completed run (`paper_003`); the others exposed the next stop
+(`paper_002`: a request to the OpenML API with the network off; `paper_004`: the memory limit after the longer run phase;
+`paper_005`: the memory limit again, further into its grid search). The two papers whose settings did not change gave the
+same result as in Pilot 2. The first Pilot 3 attempt of `paper_002` was stopped by a defect in Repro Radar's own output
+limit and is kept with its reason (`data/pilot3_runs/first_attempts/README.md`).
+
 ### 6.2 Can the numbers be checked? Claim extraction
 
 <!-- numbers:extraction:start -->

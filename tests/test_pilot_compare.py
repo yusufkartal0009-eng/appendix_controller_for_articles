@@ -114,3 +114,18 @@ def test_terminal_colors_do_not_hide_a_missing_dependency(tmp_path):
     result = cat.categorize_paper("paper_002", tmp_path)
     assert (result["category"], result["phase"]) == ("MISSING_DEPENDENCY", "run")
     assert result["evidence"]["line"] == "ModuleNotFoundError: No module named 'lightgbm'"
+
+
+def test_three_pilots_side_by_side_and_pilot_2_files_untouched(tmp_path):
+    _stored(tmp_path / "p1", set())
+    _stored(tmp_path / "p2", {PAPERS[0]})
+    _stored(tmp_path / "p3", {PAPERS[0], PAPERS[1], PAPERS[2]})
+    (tmp_path / "p2" / "comparison.json").write_text("pilot 2 as it was", encoding="utf-8")
+    argv = ["--pilot1-dir", str(tmp_path / "p1"), "--pilot2-dir", str(tmp_path / "p2"), "--pilot3-dir", str(tmp_path / "p3")]
+    assert pilot_compare.main(argv) == 0
+    result = json.loads((tmp_path / "p3" / "comparison.json").read_text(encoding="utf-8"))
+    assert [result["rates"]["pilot_success_rate"][k]["count"] for k in ("pilot1", "pilot2", "pilot3")] == [0, 1, 3]
+    md = (tmp_path / "p3" / "comparison.md").read_text(encoding="utf-8")
+    assert "| Pilot success | 0 / 6 (0.0) | 1 / 6 (0.167) | 3 / 6 (0.5) |" in md
+    assert f"| `{PAPERS[1]}` | MISSING_DEPENDENCY (install) | MISSING_DEPENDENCY (install) | success |" in md
+    assert (tmp_path / "p2" / "comparison.json").read_text(encoding="utf-8") == "pilot 2 as it was"  # not rewritten

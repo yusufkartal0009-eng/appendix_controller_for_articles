@@ -1,8 +1,9 @@
 # Repro Radar — Pilot 3: Protocol
 
-> **Status: protocol written, not yet run.** This protocol was written on 2026-10-13 for issue #285, **before any
-> Pilot 3 run**, and is frozen when it is merged. The results are added below it afterwards (section 11 onward), the
-> same way as for Pilot 1 (`docs/PILOT_WEEK2.md`) and Pilot 2 (`docs/PILOT_2.md`).
+> **Status: run and reported.** This protocol was written on 2026-10-13 for issue #285, **before any Pilot 3 run**,
+> and was frozen when it was merged (#286). Pilot 3 ran later the same day; the results are added below it, after the
+> protocol (`# Results`), the same way as for Pilot 1 (`docs/PILOT_WEEK2.md`) and Pilot 2 (`docs/PILOT_2.md`).
+> *This status note was updated on 2026-10-13; it is the only change above the results.*
 >
 > Pilot 1 (run on 2026-09-30): pilot success 0 / 6. Pilot 2 (run on 2026-10-10): pilot success 1 / 6. Their results,
 > files, and reports stay exactly as they are; Pilot 3 never edits them. The three pilots are shown side by side.
@@ -156,3 +157,63 @@ generated blocks. The text must say, next to the numbers, that the four settings
 - Repro Radar's own code differs from Pilot 2's (section 3), on one machine (Windows, Docker Desktop, WSL2).
 - CPU only, network off, unpinned packages at the newest version that fits (`lightgbm` included).
 - No accepted claim is scored, so Pilot 3 says nothing about numerical reproducibility (Tier 2).
+
+
+---
+
+# Results (written after the runs)
+
+Pilot 3 ran on 2026-10-13 on the owner's machine (Docker Desktop with WSL2), one paper at a time, at the Repro Radar
+code of commit `1d4af4b`. The protocol above was not changed. The raw files are in `data/pilot3_runs/`; the one earlier
+attempt (a defect of Repro Radar's own output limit, found by this pilot and fixed in #290) is in
+`data/pilot3_runs/first_attempts/`. Every number below is a generated block (`scripts/report_numbers.py --report
+docs/PILOT_3.md`; `--check` and a test fail if one is edited by hand).
+
+**How to read these numbers.** The four settings of section 2 were chosen after Pilot 2's failures were seen. The
+change between Pilot 2 and Pilot 3 therefore measures the effect of those settings, not an improvement of the papers.
+
+<!-- numbers:pilot3summary:start -->
+<!-- numbers:pilot3summary:end -->
+
+<!-- numbers:pilot3measurements:start -->
+<!-- numbers:pilot3measurements:end -->
+
+### The three pilots side by side
+
+<!-- numbers:pilot3:start -->
+<!-- numbers:pilot3:end -->
+
+### Failure categories of Pilot 3
+
+<!-- numbers:pilot3failures:start -->
+<!-- numbers:pilot3failures:end -->
+
+### What each changed paper did
+
+- **`paper_003` (FT-Transformer): the change removed its obstacle.** With a writable per-run copy of its data, the run no
+  longer stopped at the cache file; it trained, printed its train, validation, and test scores, and exited with code 0
+  (`data/pilot3_runs/paper_003/stdout.log`). It is now a pilot success.
+- **`paper_002` (TabPFN): `lightgbm` was found, and the next obstacle appeared.** The notebook ran further and stopped at
+  its request to the OpenML API (`openml.datasets.list_datasets`), which needs the network. This is the open item named in
+  section 2, not a new finding: the network stays off.
+- **`paper_004` (TabR): no longer a timeout, but out of memory.** With four hours for the run phase it kept training
+  well beyond the old limit and was then killed by the 6 GiB memory limit (`OOM_KILLED`). The memory limit of this paper
+  was not part of the changes and is not changed now (section 8).
+- **`paper_005` (FastSK): more memory was not enough.** At 12 GiB the grid search got further than at 6 GiB and was killed
+  by the memory limit again; the peak memory of the run is the limit itself (`data/pilot3_runs/measurements.md`).
+- **`paper_006` and `paper_008`, settings unchanged:** the same outcome as in Pilot 2 (success, and the decided-in-advance
+  `DATA_NOT_ACCESSIBLE`), after the sandbox changes of section 3.
+
+### What was surprising
+
+- **My own tool stopped the first attempt.** The output-directory limit added to the sandbox after Pilot 2 (#261) counted
+  the runner's own copies of the data and the repository, and killed `paper_002` before the paper started. The pilot
+  found it on its first run; it was fixed (#290) and the attempt is kept.
+- **Each removed obstacle exposed the next one.** Three of the four changes moved the paper to a different stop (an
+  OpenML request, the memory limit, the memory limit again); only one led to a completed run.
+
+### Limits
+
+Section 10 applies. In addition: `paper_004` and `paper_005` need more than the values chosen in advance, and how much
+more is not known from this pilot; the output of the completed `paper_003` and `paper_006` runs was not scored against
+any accepted claim (Tier 1 only).

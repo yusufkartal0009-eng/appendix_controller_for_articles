@@ -107,3 +107,47 @@ def test_pilot2_measurements_block_copies_the_stored_table(tmp_path):
     assert "| Pilot success | 1 / 6 | 0.167 |" in block and block.count("<!--") == 1
     with pytest.raises(FileNotFoundError):
         rn.render("pilot2measurements", tmp_path / "nowhere")
+
+
+def _pilot3_files(data: Path) -> None:
+    runs = data / "pilot3_runs"
+    runs.mkdir(parents=True)
+
+    def rate(c):
+        return {"count": c, "of": 6, "rate": round(c / 6, 3)}
+    (runs / "comparison.json").write_text(json.dumps({"rates": {
+        "install_success_rate": {"pilot1": rate(1), "pilot2": rate(6), "pilot3": rate(6)},
+        "run_success_rate": {"pilot1": rate(0), "pilot2": rate(1), "pilot3": rate(2)},
+        "pilot_success_rate": {"pilot1": rate(0), "pilot2": rate(1), "pilot3": rate(2)},
+        "valid_runs": {"pilot1": rate(6), "pilot2": rate(6), "pilot3": rate(6)}}}))
+    (runs / "comparison.md").write_text("<!-- generated -->\n\n| a | b | c |\n|---|---|---|\n| 1 | 2 | 3 |\n")
+    (runs / "measurements.md").write_text("<!-- generated -->\n\n| Measure | Count |\n|---|---|\n| Pilot success | 2 / 6 |\n")
+    (runs / "failure_categories.json").write_text(json.dumps({"papers": [
+        {"paper_id": "paper_004", "category": "OTHER", "other_name": "OUT_OF_MEMORY", "phase": "run", "pilot_success": False,
+         "evidence": {"line": "status: OOM_KILLED"}},
+        {"paper_id": "paper_003", "category": None, "other_name": None, "phase": None, "pilot_success": True, "evidence": None}]}))
+
+
+def test_pilot3_blocks_come_from_the_stored_files_and_name_all_three_pilots(tmp_path):
+    _pilot3_files(tmp_path)
+    assert "data/pilot3_runs/comparison.json" in rn.render("pilot3", tmp_path) and "| 1 | 2 | 3 |" in rn.render("pilot3", tmp_path)
+    summary = rn.render("pilot3summary", tmp_path)
+    assert "Pilot success: 2 / 6 (0.333) (Pilot 1: 0 / 6 (0.0); Pilot 2: 1 / 6 (0.167))" in summary
+    assert "| Pilot success | 2 / 6 |" in rn.render("pilot3measurements", tmp_path)
+    failures = rn.render("pilot3failures", tmp_path)
+    assert "data/pilot3_runs/failure_categories.json" in failures
+    assert "| `paper_004` | OTHER (OUT_OF_MEMORY) | run | `status: OOM_KILLED` |" in failures
+    assert "| `paper_003` | success | n/a | n/a |" in failures
+
+
+def test_a_hand_edit_of_a_pilot3_block_is_detected(tmp_path):
+    _pilot3_files(tmp_path)
+    text = rn.apply("<!-- numbers:pilot3summary:start -->\nx\n<!-- numbers:pilot3summary:end -->\n", tmp_path)
+    assert rn.mismatches(text, tmp_path) == []
+    assert rn.mismatches(text.replace("2 / 6 (0.333)", "6 / 6 (1.0)"), tmp_path) == ["pilot3summary"]
+
+
+def test_the_pilot3_document_and_the_report_are_in_sync_with_the_stored_files():
+    from src.config import PROJECT_ROOT
+    for path in (PROJECT_ROOT / "docs" / "PILOT_3.md", PROJECT_ROOT / "docs" / "report" / "REPORT.md"):
+        assert rn.mismatches(path.read_text(encoding="utf-8").replace("\r\n", "\n")) == [], path
