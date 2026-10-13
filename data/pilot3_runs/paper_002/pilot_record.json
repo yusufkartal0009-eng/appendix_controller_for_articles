@@ -1,0 +1,144 @@
+{
+  "paper_id": "paper_002",
+  "protocol": "docs/PILOT_3.md",
+  "repro_radar_commit": "602a3224b3c6a33647a7e6af472bbf1f2004eaeb",
+  "started_at": "2026-10-12T23:03:27+00:00",
+  "repo_url": "https://github.com/PriorLabs/TabPFN",
+  "pinned_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
+  "target_script": "tabpfn/scripts/tabular_baselines.py",
+  "container_command": "python -m nbconvert --to notebook --execute --output-dir /workspace/output /workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "pilot3_change": {
+    "extra_requirements_add": [
+      "lightgbm"
+    ],
+    "reason": "The notebook imports lightgbm, which the repository's requirements.txt does not list. Unpinned: pip picks the newest release with a wheel for Python 3.8; the installed version is recorded in the run report.",
+    "pilot2_evidence": "data/pilot2_runs/failure_categories.json: ModuleNotFoundError: No module named 'lightgbm'"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 29.31
+  },
+  "python_version": "3.8",
+  "run_setup": {
+    "command": [
+      "python",
+      "-m",
+      "nbconvert",
+      "--to",
+      "notebook",
+      "--execute",
+      "--output-dir",
+      "/workspace/output",
+      "/workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb"
+    ],
+    "working_dir": "tabpfn",
+    "writable_repo": true,
+    "extra_requirements": [
+      "nbconvert",
+      "ipykernel",
+      "lightgbm"
+    ],
+    "constraints": [],
+    "build": {
+      "sdists": [
+        "openml==0.12.2",
+        "liac-arff==2.5.0"
+      ],
+      "from_repo": false,
+      "build_requirements": [],
+      "source": "requirements.txt pins openml==0.12.2; it and its dependency liac-arff (2.5.0 is the newest release) exist on PyPI only as sdists (#193)"
+    },
+    "decision": "fix",
+    "data_mounts": [
+      "/workspace/home/.openml/cache"
+    ]
+  },
+  "build": {
+    "status": "BUILT",
+    "exit_code": 0,
+    "image": "repro-radar-sandbox:py3.8-build",
+    "targets": [
+      "/workspace/packages/openml-0.12.2.tar.gz",
+      "/workspace/packages/liac-arff-2.5.0.tar.gz"
+    ],
+    "build_requirements": [],
+    "wheels": [
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002.build\\built_wheels\\liac_arff-2.5.0-py3-none-any.whl",
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002.build\\built_wheels\\openml-0.12.2-py3-none-any.whl"
+    ],
+    "duration_seconds": 8.516,
+    "log_tail": "Looking in links: /workspace/packages\nProcessing /workspace/packages/openml-0.12.2.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nProcessing /workspace/packages/liac-arff-2.5.0.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nBuilding wheels for collected packages: openml, liac-arff\n  Building wheel for openml (setup.py): started\n  Building wheel for openml (setup.py): finished with status 'done'\n  Created wheel for openml: filename=openml-0.12.2-py3-none-any.whl size=137320 sha256=bf9eb53d580fb14bdfacd15200adba22de43bba5e22c2ba50e1198219fbcce81\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-huzmiqeu/wheels/f1/62/da/74958bd2ff962692b1857d3daa7a773481785f1d725956ad89\n  Building wheel for liac-arff (setup.py): started\n  Building wheel for liac-arff (setup.py): finished with status 'done'\n  Created wheel for liac-arff: filename=liac_arff-2.5.0-py3-none-any.whl size=11731 sha256=0580f706a579100209779a58e3e40746f658f2355db1f682aed4341fe8f867af\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-huzmiqeu/wheels/1b/e0/87/1886a1e3a038bf761cf3d29f6ed33c3107fbf4ae6d6b19ab03\nSuccessfully built openml liac-arff\n",
+    "sdists": [
+      "openml-0.12.2.tar.gz",
+      "liac-arff-2.5.0.tar.gz"
+    ],
+    "duration_seconds_total": 10.067
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.8",
+    "extra_requirements": [
+      "nbconvert",
+      "ipykernel",
+      "lightgbm"
+    ],
+    "constraints": [],
+    "built_wheels": [
+      "liac_arff-2.5.0-py3-none-any.whl",
+      "openml-0.12.2-py3-none-any.whl"
+    ],
+    "wheel_count": 104,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_002_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "eaborn xgboost tqdm numpy openml catboost hyperopt configspace nbconvert ipykernel lightgbm bleach comm debugpy importlib-metadata ipython jinja2 joblib jupyter-client jupyter-core liac-arff markupsafe matplotlib matplotlib-inline mistune nbclient nbformat networkx packaging pandas pandocfilters pygments pyparsing python-dateutil pyzmq scipy six threadpoolctl tornado traitlets beautifulsoup4 typing-extensions cloudpickle cython defusedxml future graphviz jupyterlab-pygments minio nest-asyncio plotly psutil pyarrow requests xmltodict certifi charset_normalizer contourpy cycler fastjsonschema fonttools idna importlib-resources jedi jsonschema kiwisolver narwhals pexpect pillow platformdirs prompt-toolkit pytz soupsieve tinycss2 tzdata urllib3 webencodings zipp argon2-cffi backcall decorator pickleshare pycryptodome stack-data asttokens attrs executing jsonschema-specifications parso pkgutil-resolve-name ptyprocess referencing rpds-py argon2-cffi-bindings pure-eval wcwidth cffi pycparser\n",
+    "stderr": "",
+    "duration_seconds": 26.798
+  },
+  "sandbox_duration_seconds": 822.286,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 62.226,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 525852672
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 756.757,
+    "peak_memory_bytes": 92164096
+  },
+  "finished_at": "2026-10-12T23:18:15+00:00",
+  "collected_files": [
+    "build.log",
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
