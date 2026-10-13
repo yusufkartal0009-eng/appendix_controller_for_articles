@@ -21,21 +21,22 @@
   ],
   "python_version": "3.8",
   "image": "repro-radar-sandbox:py3.8",
-  "status": "OUTPUT_LIMIT_EXCEEDED",
-  "exit_code": 137,
-  "duration_seconds": 0.867,
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 62.226,
   "docker_used": true,
   "isolated": true,
-  "error_message": "The output directory reached 3202 MiB; the limit is 1024 MiB (SandboxConfig.output_limit_mb).",
+  "error_message": null,
   "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002",
   "generated_files": [
+    "execution_meta.json",
     "install.log",
     "installed_packages.json",
     "install_meta.json",
     "stderr.log",
     "stdout.log"
   ],
-  "dependency_install_status": "UNKNOWN",
+  "dependency_install_status": "INSTALLED",
   "gpu": {
     "requested": null,
     "available": false,
@@ -44,7 +45,20 @@
     "used": null
   },
   "dependency_conflicts": [],
-  "meta": {},
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 61.804,
+    "timeout_limit_seconds": 3600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 525852672,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
   "installed_packages": [
     {
       "name": "argon2-cffi",
@@ -553,6 +567,6 @@
       "pinned": true
     }
   ],
-  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo/tabpfn\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python -m nbconvert --to notebook --execute --output-dir /workspace/output /workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb\n==================================================\n",
-  "stderr_preview": ""
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo/tabpfn\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python -m nbconvert --to notebook --execute --output-dir /workspace/output /workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 61.804s\n==================================================\n",
+  "stderr_preview": "[NbConvertApp] Converting notebook /workspace/repo/tabpfn/RunFullDatasetAnalyses.ipynb to notebook\nTraceback (most recent call last):\n  File \"/workspace/deps/jupyter_core/utils/__init__.py\", line 154, in wrapped\n    asyncio.get_running_loop()\nRuntimeError: no running event loop\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.8/runpy.py\", line 194, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"/usr/local/lib/python3.8/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/workspace/deps/nbconvert/__main__.py\", line 5, in <module>\n    main()\n  File \"/workspace/deps/jupyter_core/application.py\", line 284, in launch_instance\n    super().launch_instance(argv=argv, **kwargs)\n  File \"/workspace/deps/traitlets/config/application.py\", line 1075, in launch_instance\n    app.start()\n  File \"/workspace/deps/nbconvert/nbconvertapp.py\", line 420, in start\n    self.convert_notebooks()\n  File \"/workspace/deps/nbconvert/nbconvertapp.py\", line 597, in convert_notebooks\n    self.convert_single_notebook(notebook_filename)\n  File \"/workspace/deps/nbconvert/nbconvertapp.py\", line 563, in convert_single_notebook\n    output, resources = self.export_single_notebook(\n  File \"/workspace/deps/nbconvert/nbconvertapp.py\", line 487, in export_single_notebook\n    output, resources = self.exporter.from_filename(\n  File \"/workspace/deps/nbconvert/exporters/exporter.py\", line 201, in from_filename\n    return self.from_file(f, resources=resources, **kw)\n  File \"/workspace/deps/nbconvert/exporters/exporter.py\", line 220, in from_file\n    return self.from_notebook_node(\n  File \"/workspace/deps/nbconvert/exporters/notebook.py\", line 36, in from_notebook_node\n    nb_copy, resources = super().from_notebook_node(nb, resources, **kw)\n  File \"/workspace/deps/nbconvert/exporters/exporter.py\", line 154, in from_notebook_node\n    nb_copy, resources = self._preprocess(nb_copy, reso"
 }

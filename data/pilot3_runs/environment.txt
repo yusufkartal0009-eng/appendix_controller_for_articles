@@ -1,11 +1,11 @@
-Pilot 3 environment, recorded 2026-10-12T22:45:04+00:00 by scripts/record_pilot2_environment.py
+Pilot 3 environment, recorded 2026-10-12T23:03:13+00:00 by scripts/record_pilot2_environment.py
 
 === python --version
 Python 3.11.9
 [exit code 0]
 
 === git rev-parse HEAD
-cb9fe9b9dceffdd57ed88034c2fd952eb57c0b70
+a8fe743fdc11520c7f62f97c6d59a813ec990112
 [exit code 0]
 
 === git status --short
@@ -151,7 +151,7 @@ Server:
 [exit code 0]
 
 === nvidia-smi
-Tue Oct 13 01:45:04 2026       
+Tue Oct 13 02:03:13 2026       
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 591.86                 Driver Version: 591.86         CUDA Version: 13.1     |
 +-----------------------------------------+------------------------+----------------------+
@@ -160,7 +160,7 @@ Tue Oct 13 01:45:04 2026
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA GeForce RTX 5070      WDDM  |   00000000:01:00.0  On |                  N/A |
-|  0%   36C    P3             15W /  250W |    1639MiB /  12227MiB |      0%      Default |
+|  0%   36C    P8              7W /  250W |    1640MiB /  12227MiB |      1%      Default |
 |                                         |                        |                  N/A |
 +-----------------------------------------+------------------------+----------------------+
 
@@ -197,7 +197,7 @@ Tue Oct 13 01:45:04 2026
 [exit code 0]
 
 === python scripts/gpu_check.py
-$ docker run --rm --name repro-radar-run-d98c20477b54 --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --cap-drop ALL --security-opt no-new-privileges:true --user 1000:1000 --gpus all -e SANDBOX_GPUS_REQUESTED=1 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_WORKDIR=/workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v C:\Users\USER\AppData\Local\Temp\gpu_check_repo_gsf9vyjp:/workspace/repo:ro -v C:\Users\USER\appendix_controller_for_articles\sandbox_runs\gpu_check:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_gpu.py
+$ docker run --rm --name repro-radar-run-d4746adefb2e --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --tmpfs /workspace/home:rw,noexec,nosuid,size=2048m,uid=1000,gid=1000 --cap-drop ALL --security-opt no-new-privileges:true --user 1000:1000 --gpus all -e SANDBOX_GPUS_REQUESTED=1 --cpus=2.0 --memory=8g --memory-swap=8g --pids-limit=100 -w /workspace/repo -e SANDBOX_WORKDIR=/workspace/repo -e SANDBOX_TIMEOUT=120 -e PYTHONUNBUFFERED=1 -e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUSERBASE=/workspace/home/.local -e PYTHONPATH=/workspace/repo:/workspace/deps:/workspace/home/.local/lib/python3.11/site-packages -v C:\Users\USER\AppData\Local\Temp\gpu_check_repo_8s8juq4v:/workspace/repo:ro -v C:\Users\USER\appendix_controller_for_articles\sandbox_runs\gpu_check:/workspace/output:rw repro-radar-sandbox:latest python /workspace/repo/probe_gpu.py
 ==================================================
 Repro Radar: Isolated Sandbox Runtime Initiated
 Working Dir   : /workspace/repo
@@ -214,9 +214,9 @@ root filesystem: read-only (Read-only file system)
 Repro Radar: Execution Concluded
 Status        : COMPLETED (Exit Code: 0)
 Dependencies  : SKIPPED
-Duration      : 0.247s
+Duration      : 0.269s
 ==================================================
-run report GPU summary: {"requested": "all", "available": true, "devices": [{"index": 0, "name": "NVIDIA GeForce RTX 5070", "driver": "591.86", "memory_total_mib": 12227, "memory_used_before_mib": 1639}], "peak_memory_used_mib": 1639, "used": false}
+run report GPU summary: {"requested": "all", "available": true, "devices": [{"index": 0, "name": "NVIDIA GeForce RTX 5070", "driver": "591.86", "memory_total_mib": 12227, "memory_used_before_mib": 1640}], "peak_memory_used_mib": 1640, "used": false}
 GPU visible with isolation intact: YES
 [exit code 0]
 
@@ -231,4 +231,4 @@ repro-radar-sandbox:py3.9-build   3d1500330533       1.14GB          270MB
 [exit code 0]
 
 === disk usage of the drive holding the repository (shutil.disk_usage)
-total=999147171840 used=568735899648 free=430411272192
+total=999147171840 used=564053368832 free=435093803008

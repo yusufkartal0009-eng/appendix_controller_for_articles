@@ -1,8 +1,8 @@
 {
   "paper_id": "paper_002",
   "protocol": "docs/PILOT_3.md",
-  "repro_radar_commit": "cb9fe9b9dceffdd57ed88034c2fd952eb57c0b70",
-  "started_at": "2026-10-12T22:45:22+00:00",
+  "repro_radar_commit": "602a3224b3c6a33647a7e6af472bbf1f2004eaeb",
+  "started_at": "2026-10-12T23:03:27+00:00",
   "repo_url": "https://github.com/PriorLabs/TabPFN",
   "pinned_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
   "target_script": "tabpfn/scripts/tabular_baselines.py",
@@ -31,7 +31,7 @@
       "requirements.txt"
     ],
     "has_conda_env": false,
-    "duration_seconds": 28.164
+    "duration_seconds": 29.31
   },
   "python_version": "3.8",
   "run_setup": {
@@ -81,13 +81,13 @@
       "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002.build\\built_wheels\\liac_arff-2.5.0-py3-none-any.whl",
       "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_002.build\\built_wheels\\openml-0.12.2-py3-none-any.whl"
     ],
-    "duration_seconds": 8.77,
-    "log_tail": "Looking in links: /workspace/packages\nProcessing /workspace/packages/openml-0.12.2.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nProcessing /workspace/packages/liac-arff-2.5.0.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nBuilding wheels for collected packages: openml, liac-arff\n  Building wheel for openml (setup.py): started\n  Building wheel for openml (setup.py): finished with status 'done'\n  Created wheel for openml: filename=openml-0.12.2-py3-none-any.whl size=137320 sha256=1b0824345a948c8d5b3866681818c987d6a65915b8b67ca88a85b385e4c4f227\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-7lu7rwvz/wheels/f1/62/da/74958bd2ff962692b1857d3daa7a773481785f1d725956ad89\n  Building wheel for liac-arff (setup.py): started\n  Building wheel for liac-arff (setup.py): finished with status 'done'\n  Created wheel for liac-arff: filename=liac_arff-2.5.0-py3-none-any.whl size=11731 sha256=e6f50a9a6dbde5a0a6a1827f131747ad582e4de34e6a2747d237b72b360b0fbd\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-7lu7rwvz/wheels/1b/e0/87/1886a1e3a038bf761cf3d29f6ed33c3107fbf4ae6d6b19ab03\nSuccessfully built openml liac-arff\n",
+    "duration_seconds": 8.516,
+    "log_tail": "Looking in links: /workspace/packages\nProcessing /workspace/packages/openml-0.12.2.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nProcessing /workspace/packages/liac-arff-2.5.0.tar.gz\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nBuilding wheels for collected packages: openml, liac-arff\n  Building wheel for openml (setup.py): started\n  Building wheel for openml (setup.py): finished with status 'done'\n  Created wheel for openml: filename=openml-0.12.2-py3-none-any.whl size=137320 sha256=bf9eb53d580fb14bdfacd15200adba22de43bba5e22c2ba50e1198219fbcce81\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-huzmiqeu/wheels/f1/62/da/74958bd2ff962692b1857d3daa7a773481785f1d725956ad89\n  Building wheel for liac-arff (setup.py): started\n  Building wheel for liac-arff (setup.py): finished with status 'done'\n  Created wheel for liac-arff: filename=liac_arff-2.5.0-py3-none-any.whl size=11731 sha256=0580f706a579100209779a58e3e40746f658f2355db1f682aed4341fe8f867af\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-huzmiqeu/wheels/1b/e0/87/1886a1e3a038bf761cf3d29f6ed33c3107fbf4ae6d6b19ab03\nSuccessfully built openml liac-arff\n",
     "sdists": [
       "openml-0.12.2.tar.gz",
       "liac-arff-2.5.0.tar.gz"
     ],
-    "duration_seconds_total": 10.601
+    "duration_seconds_total": 10.067
   },
   "bundle": {
     "status": "SUCCESS",
@@ -111,30 +111,31 @@
     "dependency_conflicts": [],
     "stdout": "eaborn xgboost tqdm numpy openml catboost hyperopt configspace nbconvert ipykernel lightgbm bleach comm debugpy importlib-metadata ipython jinja2 joblib jupyter-client jupyter-core liac-arff markupsafe matplotlib matplotlib-inline mistune nbclient nbformat networkx packaging pandas pandocfilters pygments pyparsing python-dateutil pyzmq scipy six threadpoolctl tornado traitlets beautifulsoup4 typing-extensions cloudpickle cython defusedxml future graphviz jupyterlab-pygments minio nest-asyncio plotly psutil pyarrow requests xmltodict certifi charset_normalizer contourpy cycler fastjsonschema fonttools idna importlib-resources jedi jsonschema kiwisolver narwhals pexpect pillow platformdirs prompt-toolkit pytz soupsieve tinycss2 tzdata urllib3 webencodings zipp argon2-cffi backcall decorator pickleshare pycryptodome stack-data asttokens attrs executing jsonschema-specifications parso pkgutil-resolve-name ptyprocess referencing rpds-py argon2-cffi-bindings pure-eval wcwidth cffi pycparser\n",
     "stderr": "",
-    "duration_seconds": 31.554
+    "duration_seconds": 26.798
   },
-  "sandbox_duration_seconds": 756.681,
+  "sandbox_duration_seconds": 822.286,
   "run_report": "run_report.json",
   "run": {
-    "status": "OUTPUT_LIMIT_EXCEEDED",
-    "exit_code": 137,
-    "duration_seconds": 0.867,
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 62.226,
     "docker_used": true,
     "isolated": true,
-    "dependency_install_status": "UNKNOWN",
-    "peak_memory_bytes": null
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 525852672
   },
   "install_meta": {
     "phase": "install",
     "status": "INSTALLED",
     "exit_code": 0,
-    "duration_seconds": 752.016,
-    "peak_memory_bytes": 91963392
+    "duration_seconds": 756.757,
+    "peak_memory_bytes": 92164096
   },
-  "finished_at": "2026-10-12T22:59:09+00:00",
+  "finished_at": "2026-10-12T23:18:15+00:00",
   "collected_files": [
     "build.log",
     "run_report.json",
+    "execution_meta.json",
     "install.log",
     "install_meta.json",
     "stdout.log",

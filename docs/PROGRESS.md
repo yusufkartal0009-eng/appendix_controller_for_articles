@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(pilot3): Pilot 3 records (2026-10-13 08:04 +03:00, Issue #289)
+- Six papers run once each in real Docker (2026-10-13). Install 6/6, run 2/6 (paper_003, paper_006), pilot success 2/6. paper_004 and paper_005 ended OOM_KILLED at the pre-set values (6 GiB, 12 GiB); paper_002 stopped at an OpenML network request. The first paper_002 attempt (killed by my own output-limit defect, #290) is kept in first_attempts.
+
 ### fix(sandbox): output limit counts growth, not the runner's copies (2026-10-13 02:00 +03:00, Issue #290)
 - Found by the first Pilot 3 run: paper_002 was killed at start because deps, repository copy and data copies in the output directory were over the limit. The limit now applies to growth since the container started. Real Docker: 3 of 3 writers still killed.
 
