@@ -64,7 +64,7 @@
   `followup_queries` in its question file and answered in pass A and, since 2026-10-15, in the blind pass B, in
   `data/claims/followup/<paper_id>.json` (with the quote guard's result). It is not part of the passes A and B
   comparison, the gold set, the database import, or `data/seed_papers.json`. It becomes a claim only after the owner's
-  review (W7). Both passes found `16` (EP300 average speedup, Table 1, page 10); it is **not accepted**.
+  review (W7). Both passes found `16` (EP300 average speedup, Table 1, page 10); the owner accepted it on 2026-10-15.
   Today there is one: `paper_005`, the average kernel speedup on EP300 (Table 1). The blind packet of #186 asks the
   follow-up questions too (#283), and `scripts/import_pass.py` stores their answers as pass B in the same follow-up
   file, apart from the gold set; nothing compares, scores, or accepts them. The question names the table, so pass B is
