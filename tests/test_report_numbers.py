@@ -19,7 +19,7 @@ def test_stored_pilot_1_and_extraction_numbers_are_rendered():
     assert "| `MISSING_DEPENDENCY` | 5 |" in pilot1 and "| `DATA_NOT_ACCESSIBLE` | 1 |" in pilot1
     extraction = rn.render("extraction")
     assert "| Passes A and B agree | 18 / 18 (disagreements: 0) |" in extraction
-    assert "| Reviewed by the owner | accepted 12, rejected 0, pending 0 |" in extraction
+    assert "| Reviewed by the owner | accepted 13, rejected 0, pending 0 |" in extraction
     assert "| Precision / recall | 1.0 / 1.0 |" in extraction and "12 / 0 / 0 / 6" in extraction
     assert "`paper_008:higgs_auroc`: TN" in extraction
 

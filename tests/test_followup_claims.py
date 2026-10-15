@@ -33,8 +33,11 @@ def test_followup_answers_have_both_passes_and_follow_the_schema():
     assert record["guard"]["status"] == "AUTO_QUOTE_MATCH"
 
 
-def test_followup_claim_is_not_accepted_anywhere():
+def test_followup_claim_is_accepted_by_the_owner_and_only_that_one():
     seed = {e["paper_id"]: e for e in json.loads((DATA_DIR / "seed_papers.json").read_text(encoding="utf-8"))}
-    assert seed["paper_005"]["expected_claims"] == {}
-    decisions = (DATA_DIR / "claims" / "review_decisions.json").read_text(encoding="utf-8")
-    assert "ep300_avg_kernel_speedup" not in decisions
+    assert seed["paper_005"]["expected_claims"] == {"ep300_avg_kernel_speedup": 16.0}
+    decisions = json.loads((DATA_DIR / "claims" / "review_decisions.json").read_text(encoding="utf-8"))
+    entries = [c for c in decisions["claims"] if c["query_id"] == "ep300_avg_kernel_speedup"]
+    assert len(entries) == 1
+    assert entries[0]["review_status"] == "accepted" and entries[0]["verified_by"] == "human"
+    assert entries[0]["value"] == 16.0 and entries[0]["page"] == 10

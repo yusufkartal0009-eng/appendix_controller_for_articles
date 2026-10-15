@@ -351,7 +351,7 @@ limit and is kept with its reason (`data/pilot3_runs/first_attempts/README.md`).
 | Claims found | 24 (all from a table: 24) |
 | Quote guard: quote and value found in the paper text | 17 / 24 (unverified: 7) |
 | Passes A and B agree | 18 / 18 (disagreements: 0) |
-| Reviewed by the owner | accepted 12, rejected 0, pending 0 |
+| Reviewed by the owner | accepted 13, rejected 0, pending 0 |
 | Gold set (pass A), scored questions | 18 |
 | True positives / false positives / false negatives / true negatives | 12 / 0 / 0 / 6 |
 | Precision / recall | 1.0 / 1.0 |
@@ -408,7 +408,7 @@ install and run, not whether their numbers reproduce.
   numbers) and Tier 3 (stability across seeds, not implemented, #48) were never exercised on real results.
 - **Extraction.** It is agent-assisted; the two passes are the same model, although pass B was made blind; the gold set was built from candidates listed
   by the same agent; and the quote guard proves that a quote occurs in the page text, not that the number means what the
-  question asks (`docs/AGENT_EXTRACTION.md`). One paper, `paper_005`, ended with no accepted claim at all.
+  question asks (`docs/AGENT_EXTRACTION.md`). `paper_005`'s only accepted claim (EP300 average kernel speedup, 16) is a follow-up question that is not among the 18 gold-set questions, so it is not part of the precision and recall figures.
 - **Conclusion bounds.** From these results one can say that the sandbox and the run setups made the papers installable
   and exposed what blocks each of them; one cannot say how reproducible tabular machine learning is in general.
 

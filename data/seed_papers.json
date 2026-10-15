@@ -241,8 +241,12 @@
     "paper_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v1",
     "license": "Apache-2.0",
     "target_script": "results/run_gridsearch.py",
-    "expected_claims": {},
-    "source_table_or_section": {},
+    "expected_claims": {
+      "ep300_avg_kernel_speedup": 16.0
+    },
+    "source_table_or_section": {
+      "ep300_avg_kernel_speedup": "Table 1, p. 10: 16 (quote-matched, accepted by a person)"
+    },
     "run_setup": {
       "decision": "fix",
       "reason": "The README runs `cd results/ && python run_gridsearch.py`; the script opens spreadsheets/datasets_to_use.csv relative to its working directory. The datasets are in the repository.",

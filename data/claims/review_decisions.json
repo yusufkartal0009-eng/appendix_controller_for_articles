@@ -1,7 +1,7 @@
 {
   "source": "extracted_claims table, exported by scripts/apply_accepted_claims.py",
   "summary": {
-    "accepted": 12
+    "accepted": 13
   },
   "claims": [
     {
@@ -155,6 +155,25 @@
       "review_status": "accepted",
       "review_note": null,
       "reviewed_at": "2026-10-05T18:09:32"
+    },
+    {
+      "extracted_claim_id": "paper_005:ep300_avg_kernel_speedup",
+      "paper_id": "paper_005",
+      "query_id": "ep300_avg_kernel_speedup",
+      "metric_name": "avg_kernel_speedup_factor",
+      "dataset": "EP300",
+      "model_variant": "FastSK",
+      "value": 16.0,
+      "value_as_printed": "16",
+      "page": 10,
+      "table_or_section": "Table 1",
+      "quote": "EP300 2000 2000 4000 16 92",
+      "source_file": "data/claims/followup/paper_005.json",
+      "extractor_version": "docs/AGENT_EXTRACTION.md pass A and blind pass B; pypdf 6.19.0",
+      "verified_by": "human",
+      "review_status": "accepted",
+      "review_note": "Owner accepted on 2026-10-15 after both passes (A and blind B) found 16 and the owner's decision; Table 1 row EP300, page 10 (Avg Speedup 16, Max Speedup 92), checked in the PDF text.",
+      "reviewed_at": "2026-10-15T18:30:08"
     },
     {
       "extracted_claim_id": "paper_006:arcene_auroc",

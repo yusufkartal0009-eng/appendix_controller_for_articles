@@ -650,3 +650,8 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - **Quote guard on pass B (`scripts/check_claims.py`):** 7 of pass B's 12 found claims are UNVERIFIED, only because the dataset or model **labels** pass B wrote (for example "California Housing (CA)", "TabPFN (GPU)") do not occur verbatim in the paper. Their values and quotes match exactly. Pass A's accepted claims are unchanged.
 - **Limits:** both passes are the same model. The packet was started by the main session, which knew pass A, not by the owner in a separate terminal. A gold-set precision/recall was not re-run for pass B.
 - `tests/test_followup_claims.py` updated for two passes; `docs/report/REPORT.md` numbers regenerated and its statements about independence corrected; `docs/AGENT_EXTRACTION.md` section 3 rewritten.
+
+### 2026-10-15 21:30 +03:00: paper_005 follow-up claim accepted (EP300 average speedup)
+- The owner accepted the follow-up claim of `paper_005`: EP300 average kernel speedup `16` (Table 1, page 10, row `EP300 2000 2000 4000 16 92`). Both passes (A, and the blind pass B) found it and the quote guard matched it; the value was also checked in the PDF text. Stored through `claim_store` as `verified_by: human`, exported with `scripts/apply_accepted_claims.py export`, applied to `data/seed_papers.json` (`apply`; `check`: consistent).
+- It is not one of the 18 gold-set questions, so precision and recall (12 / 0 / 0 / 6) are unchanged. 13 claims are accepted in total.
+- Not verified: no run has reproduced this value; the `paper_005` run stopped at the memory limit in Pilot 2 and Pilot 3. Its Tier 2 score still needs a run that produces the speedup.

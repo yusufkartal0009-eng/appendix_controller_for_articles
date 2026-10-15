@@ -156,8 +156,9 @@ disagrees with the decisions.
 | `paper_006` | `arcene_auroc` 0.9104 and `xgboost_arcene_auroc` 0.8141 (Table 2, p. 7); `bank_marketing_accuracy`: not in the paper (the table gives AUROC) | UNVERIFIED | verified, 2 claims |
 | `paper_008` | `forest_covertype_accuracy__danet_20` 0.9723 and `__danet_32` 0.9727 (Table 2, p. 6); `higgs_auroc`: not in the paper | UNVERIFIED, **SUSPECT** | verified, 2 claims |
 
-**Summary: 12 claims accepted in 5 of 6 papers.** `paper_005` has none. A follow-up question (#258) found a
-candidate in Table 1 of the paper (EP300, average kernel speedup, value 16); it is pass A only, passed the quote
-guard, and is **not accepted** until a blind pass B and the owner's review. No paper was replaced (plan decision, #166): its
-metadata errors were fixed earlier (section 4), and the paper stays in the corpus with no claim to score.
+**Summary: 13 claims accepted in 6 of 6 papers.** 12 answer the gold-set questions (5 papers). `paper_005` has one,
+from a follow-up question (#258): EP300, average kernel speedup, value 16 (Table 1, p. 10, row `EP300 ... 16 92`). Both
+passes (A, and the blind pass B of 2026-10-15) found it, it passed the quote guard, and the owner accepted it on
+2026-10-15 after the value was checked in the PDF text. It is **not among the 18 gold-set questions**, so it is outside
+the precision and recall figures. No paper was replaced (plan decision, #166).
 
