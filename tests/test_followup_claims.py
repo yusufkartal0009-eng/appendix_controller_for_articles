@@ -18,14 +18,18 @@ def test_followup_questions_are_not_among_the_gold_set_questions():
     assert "ep300_avg_kernel_speedup" not in {q["query_id"] for q in questions["queries"]}
 
 
-def test_followup_answer_is_pass_a_only_and_follows_the_schema():
+def test_followup_answers_have_both_passes_and_follow_the_schema():
     record = _load("paper_005.json")
-    assert set(record["extractions"]) == {"A"}
-    assert record["status"].startswith("PASS A ONLY")
-    answer = record["extractions"]["A"]["answers"]["ep300_avg_kernel_speedup"]
-    assert answer["status"] == "found" and answer["reason"]
-    claim = ExtractedClaim(**answer["claim"])
-    assert claim.value_as_printed in claim.source_quote
+    assert set(record["extractions"]) == {"A", "B"}
+    assert record["status"].startswith("PASS A AND PASS B IMPORTED, NOT COMPARED")
+    normalized = set()
+    for name in ("A", "B"):
+        answer = record["extractions"][name]["answers"]["ep300_avg_kernel_speedup"]
+        assert answer["status"] == "found" and answer["reason"]
+        claim = ExtractedClaim(**answer["claim"])
+        assert claim.value_as_printed in claim.source_quote
+        normalized.add(claim.value_normalized)
+    assert len(normalized) == 1, "the two passes disagree on the normalized value"
     assert record["guard"]["status"] == "AUTO_QUOTE_MATCH"
 
 

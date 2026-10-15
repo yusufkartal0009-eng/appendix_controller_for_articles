@@ -28,22 +28,22 @@
       }
     },
     "B": {
-      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
-      "made_at": "2026-10-04T15:21:58+03:00",
+      "method": "Independent pass B: a new Claude Code session that worked only in a blind packet folder (scripts/make_blind_packet.py: questions, rules, page texts; no access to pass A), run by the owner. Imported and checked by scripts/import_pass.py.",
+      "made_at": "2026-10-15T21:03:37+03:00",
       "answers": {
         "ep3602_auroc": {
           "status": "not_found",
-          "reason": "No \"EP3602\" anywhere in the paper (it uses EP300).",
+          "reason": "No dataset named EP3602 occurs in the paper; only EP300 and EP300_47848 are present.",
           "claim": null
         },
         "ep3602_accuracy": {
           "status": "not_found",
-          "reason": "No \"EP3602\" anywhere in the paper (it uses EP300).",
+          "reason": "No dataset named EP3602 occurs in the paper, and accuracy is not the reported metric (AUC is).",
           "claim": null
         },
         "kernel_speedup_factor": {
           "status": "not_found",
-          "reason": "Figure 4's caption (page 7) is about varying the proportion of training samples; no speedup factor is shown in Figure 4.",
+          "reason": "Figure 4 shows test AUC versus training-set size (FastSK, CharCNN, LSTM), not a kernel speedup factor.",
           "claim": null
         }
       }

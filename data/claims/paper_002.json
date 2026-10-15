@@ -70,67 +70,64 @@
       ]
     },
     "B": {
-      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
-      "made_at": "2026-10-04T15:21:58+03:00",
+      "method": "Independent pass B: a new Claude Code session that worked only in a blind packet folder (scripts/make_blind_packet.py: questions, rules, page texts; no access to pass A), run by the owner. Imported and checked by scripts/import_pass.py.",
+      "made_at": "2026-10-15T21:03:37+03:00",
       "answers": {
         "mean_roc_auc": {
           "status": "found",
-          "reason": "Row 'Mean AUC OVO' of Table 1, 7th of 8 columns (header: LightGBM CatBoost XGBoost ASKL2.0 AutoGluon TabPFN n.e. TabPFN TabPFN + AutoGluon). Also printed: 0.894 ±.01 in Table 2 (30 datasets, page 18).",
+          "reason": "Table 1 (18 numerical OpenML-CC18 datasets, 60 min budget), column TabPFN (7th column; the 8th is TabPFN + AutoGluon, 0.934±.0084; TabPFN n.e. is 0.932±.0088). Metric is mean ROC AUC OVO.",
           "claim": {
             "metric_name": "mean_roc_auc_ovo",
             "value_as_printed": "0.934±.0086",
             "unit": "fraction",
-            "dataset": "OpenML-CC18",
+            "dataset": "18 numerical datasets in OpenML-CC18",
             "model_variant": "TabPFN",
-            "split": "not_stated",
+            "split": "test",
             "higher_is_better": true,
             "table_or_figure": "Table 1",
             "page": 8,
             "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
-            "confidence": 0.8,
+            "confidence": 0.85,
             "value_normalized": 0.934
           }
         },
         "inference_seconds__gpu": {
           "status": "found",
+          "reason": "Table 1 mean time (tune+train+predict) for TabPFN on GPU; TabPFN has no tuning, so this is essentially inference. Other values: TabPFN n.e. 0.0519 (GPU) in Table 1 and 0.05s in text; Table 2 also lists 0.6172 and gives no separate predict time for TabPFN.",
           "claim": {
-            "split": "not_stated",
-            "confidence": 0.7,
-            "metric_name": "tune_train_predict_seconds",
+            "metric_name": "inference_time_seconds",
             "value_as_printed": "0.6172",
             "unit": "seconds",
-            "dataset": "OpenML-CC18",
-            "model_variant": "TabPFN",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "TabPFN (GPU)",
+            "split": "test",
             "higher_is_better": false,
             "table_or_figure": "Table 1",
             "page": 8,
             "source_quote": "(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
+            "confidence": 0.6,
             "value_normalized": 0.6172
-          },
-          "reason": "Table 1, TabPFN column, GPU line of 'Mean time (s) (Tune + Train + Predict)'; TabPFN trains and predicts in one step. Revised on 2026-10-04 by owner decision 1 (#184)."
+          }
         },
         "inference_seconds__cpu": {
           "status": "found",
+          "reason": "Table 1 mean time (tune+train+predict) for TabPFN on CPU; TabPFN has no tuning. Other value: TabPFN n.e. 1.301 (CPU) in Table 1 and 1.30s in text.",
           "claim": {
-            "split": "not_stated",
-            "confidence": 0.7,
-            "metric_name": "tune_train_predict_seconds",
+            "metric_name": "inference_time_seconds",
             "value_as_printed": "37.59",
             "unit": "seconds",
-            "dataset": "OpenML-CC18",
-            "model_variant": "TabPFN",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "TabPFN (CPU)",
+            "split": "test",
             "higher_is_better": false,
             "table_or_figure": "Table 1",
             "page": 8,
             "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)",
+            "confidence": 0.6,
             "value_normalized": 37.59
-          },
-          "reason": "Table 1, TabPFN column, CPU line of 'Mean time (s)'. Revised on 2026-10-04 by owner decision 1 (#184)."
+          }
         }
-      },
-      "revisions": [
-        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
-      ]
+      }
     }
   }
 }

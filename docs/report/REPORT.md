@@ -349,7 +349,7 @@ limit and is kept with its reason (`data/pilot3_runs/first_attempts/README.md`).
 | Questions (6 papers) | 18 |
 | Answers over both passes | 36 |
 | Claims found | 24 (all from a table: 24) |
-| Quote guard: quote and value found in the paper text | 24 / 24 (unverified: 0) |
+| Quote guard: quote and value found in the paper text | 17 / 24 (unverified: 7) |
 | Passes A and B agree | 18 / 18 (disagreements: 0) |
 | Reviewed by the owner | accepted 12, rejected 0, pending 0 |
 | Gold set (pass A), scored questions | 18 |
@@ -358,8 +358,10 @@ limit and is kept with its reason (`data/pilot3_runs/first_attempts/README.md`).
 | Regression cases (must be true negatives) | `paper_005:ep3602_auroc`: TN, `paper_005:ep3602_accuracy`: TN, `paper_008:higgs_auroc`: TN |
 <!-- numbers:extraction:end -->
 
-These figures describe the extraction pipeline, with three caveats. The two passes are not independent: pass B took its
-values over from pass A (`docs/AGENT_EXTRACTION.md` section 3; a blind second pass was prepared and is not yet run). The
+These figures describe the extraction pipeline, with three caveats. Pass B is independent in process but not in model: a fresh
+Claude Code session that saw only a blind packet found the same 12 values and the same 6 "not found" answers as pass A
+(`docs/AGENT_EXTRACTION.md` section 3), but both passes are the same model and the session was started by the agent
+that knew pass A. The
 candidate values in the gold set form were listed by the same agent that did the extraction, although the owner chose
 among them without seeing which one the agent had chosen, so a value the agent never found could enter the gold set only
 through the free "other" answer, which the owner did not use. And 18 questions over 6 papers is a small sample, so a
@@ -378,7 +380,7 @@ install and run, not whether their numbers reproduce.
 - **Sources:** `docs/PILOT_WEEK2.md` section 11 and `docs/PILOT_2.md` section 12 (the generated blocks above are copied
   from `data/pilot_runs/` and `data/pilot2_runs/` by `scripts/report_numbers.py`); `data/pilot2_runs/first_attempts/`
   (every earlier attempt); `data/claims/` (guard report, A/B agreement, the owner's review decisions, the gold-set
-  score); `docs/AGENT_EXTRACTION.md` (section 3, why the passes are not independent).
+  score); `docs/AGENT_EXTRACTION.md` (section 3, how independent the passes are).
 - **Status:** written. Every number in this section is a generated block; `python scripts/report_numbers.py --check`
   and a test fail if one is edited by hand.
 
@@ -404,7 +406,7 @@ install and run, not whether their numbers reproduce.
   on the platform, which is also how the Windows-only defects of the tool were found.
 - **No numerical reproduction was tested.** No run reproduced an accepted claim, so Tier 2 (agreement with the paper's
   numbers) and Tier 3 (stability across seeds, not implemented, #48) were never exercised on real results.
-- **Extraction.** It is agent-assisted; the two passes are not independent; the gold set was built from candidates listed
+- **Extraction.** It is agent-assisted; the two passes are the same model, although pass B was made blind; the gold set was built from candidates listed
   by the same agent; and the quote guard proves that a quote occurs in the page text, not that the number means what the
   question asks (`docs/AGENT_EXTRACTION.md`). One paper, `paper_005`, ended with no accepted claim at all.
 - **Conclusion bounds.** From these results one can say that the sandbox and the run setups made the papers installable
@@ -460,7 +462,7 @@ rubric's agreement tier and stability tier work on real results.
    `cli.py score`; this is what would exercise Tier 2 on a real result.
 2. Decide how much memory `paper_004` and `paper_005` need (the pilot only shows that the values chosen in advance were
    not enough) and whether `paper_002` may fetch its OpenML data.
-3. Run the blind second extraction pass (`docs/AGENT_EXTRACTION.md`) so that the two passes are independent.
+3. Repeat the blind second pass with another model, or with the owner starting it, so that the two passes are also independent in model.
 4. Run several seeds per paper so that the stability tier (#48) can be measured.
 5. The AI diagnosis layer (#31 to #36) is not implemented and is outside the evidence of this report.
 

@@ -2,8 +2,8 @@
   "guard": "src/quote_guard.py",
   "answers": 36,
   "found_claims": 24,
-  "auto_quote_match": 24,
-  "unverified": 0,
+  "auto_quote_match": 17,
+  "unverified": 7,
   "from_table": 24,
   "rows": [
     {
@@ -65,11 +65,13 @@
       "answer": "found",
       "value_as_printed": "0.6172",
       "page": 8,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "model_variant 'TabPFN (GPU)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_002",
@@ -78,11 +80,13 @@
       "answer": "found",
       "value_as_printed": "37.59",
       "page": 8,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "model_variant 'TabPFN (CPU)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_003",
@@ -130,11 +134,13 @@
       "answer": "found",
       "value_as_printed": "0.459",
       "page": 7,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "dataset 'California Housing (CA)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_003",
@@ -143,11 +149,13 @@
       "answer": "found",
       "value_as_printed": "0.486",
       "page": 7,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "dataset 'California Housing (CA)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_003",
@@ -156,11 +164,14 @@
       "answer": "found",
       "value_as_printed": "0.433±1.6e-3",
       "page": 15,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "dataset 'California Housing (CA)' does not occur in the paper",
+        "model_variant 'XGBoost (tuned, single model)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_004",
@@ -201,11 +212,14 @@
       "answer": "found",
       "value_as_printed": "1.3± 0.9",
       "page": 7,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "dataset 'benchmark datasets (CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI)' does not occur in the paper",
+        "model_variant 'TabR (tuned hyperparameters, ensemble)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_004",
@@ -220,11 +234,14 @@
       "answer": "found",
       "value_as_printed": "2.5± 0.9",
       "page": 7,
-      "status": "AUTO_QUOTE_MATCH",
+      "status": "UNVERIFIED",
       "quote_match": "exact",
       "value_match": "exact",
       "from_table": true,
-      "reasons": []
+      "reasons": [
+        "dataset 'benchmark datasets (CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI)' does not occur in the paper",
+        "model_variant 'XGBoost (tuned hyperparameters, ensemble)' does not occur in the paper"
+      ]
     },
     {
       "paper_id": "paper_005",
@@ -361,12 +378,6 @@
     {
       "paper_id": "paper_008",
       "pass": "B",
-      "query_id": "higgs_auroc",
-      "answer": "not_found"
-    },
-    {
-      "paper_id": "paper_008",
-      "pass": "B",
       "query_id": "forest_covertype_accuracy__danet_20",
       "answer": "found",
       "value_as_printed": "97.23%±2e-4",
@@ -389,6 +400,12 @@
       "value_match": "exact",
       "from_table": true,
       "reasons": []
+    },
+    {
+      "paper_id": "paper_008",
+      "pass": "B",
+      "query_id": "higgs_auroc",
+      "answer": "not_found"
     }
   ]
 }
