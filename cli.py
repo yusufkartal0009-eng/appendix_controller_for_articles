@@ -130,7 +130,7 @@ def cmd_score_paper(args):
         run_root = SANDBOX_RUNS_DIR / "score"
         print(f"Running the paper in the Docker sandbox with its run setup (records in {run_root / paper.paper_id}) ...")
         run_pilot.run_paper(paper.paper_id, Path(args.staging_dir), pilot2=True, data_cache=Path(args.data_cache or DATA_CACHE_DIR),
-                            record_root=run_root)
+                            record_root=run_root, memory_limit=args.memory)
         run_dir = run_root / paper.paper_id
     record, report = load_run(run_dir)
 
@@ -269,6 +269,9 @@ def main():
     p_score.add_argument("--from-run", default=None, help="Score a stored run directory (pilot_record.json, run_report.json) instead of running")
     p_score.add_argument("--staging-dir", default=".sandbox_staging", help="Where repositories are cloned for a real run")
     p_score.add_argument("--data-cache", default=None, help="Host data cache of the run setups (scripts/fetch_data.py)")
+    p_score.add_argument("--memory", default="50%",
+                         help="Container memory limit of a real run: a size (8g) or a share of the host's RAM "
+                              "(default 50%%, capped at 90%% of the memory Docker can see)")
     p_score.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
     p_score.add_argument("--simulate", action="store_true", help="SIMULATION FOR TESTING: successful run with made-up numbers")
     p_score.add_argument("--simulate-failure", action="store_true", help="SIMULATION FOR TESTING: failed metric reproduction")

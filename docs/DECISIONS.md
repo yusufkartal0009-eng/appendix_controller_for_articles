@@ -277,3 +277,19 @@ the run image and keeping the install phase binary-only keeps the earlier guaran
 - Wheels built this way carry the plain `linux_x86_64` tag. Bundling accepts that platform only when built wheels
   are present.
 
+
+## D-009 — The memory limit of a real run is half of the host's RAM; the pilot protocols keep fixed sizes (2026-10-16)
+
+### Context
+The pilot protocols fix the memory limit (6 GiB; 12 GiB for `paper_005` in Pilot 3), and two Pilot 3 stops were memory limits (`paper_004` at 6 GiB, `paper_005` at 12 GiB). The owner wants the sandbox to use about half of the machine's memory when it runs a paper (#311).
+
+### Decision
+`SandboxConfig.memory_limit` accepts a percentage (`50%`), resolved at run time from the host's physical memory and capped at 90 percent of the memory that Docker can see (`docker info`). `cli.py score` uses `50%` by default (`--memory` changes it). The library default (`8g`), the pilot protocols, and `data/pilot3_settings.json` keep their fixed sizes, so the stored Pilot 1, 2, and 3 results stay comparable. A run started with an override records `memory_override` (requested size, resolved size, and the protocol's size) in its pilot record.
+
+### Reason
+A share of the host's RAM fits any machine, which a fixed size does not. The cap exists because Docker Desktop on WSL2 gives its virtual machine about half of the host's RAM by default (15.5 GiB on the owner's 32 GB machine), so a container limit above that cannot be met.
+
+### Consequences
+- To let a container use a full 50 percent on a WSL2 machine, give WSL more memory (see `docs/ENVIRONMENT.md`).
+- A run with the override is **not** a protocol run: its limits differ from Pilots 1 to 3 and it must not be compared with them as if it were.
+- Not verified: no real paper has been run with `50%` yet; the resolver is tested with mocked memory sizes and read once on the owner's machine (host 31.7 GiB, Docker not running at the time).

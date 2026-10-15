@@ -29,6 +29,7 @@ from pathlib import Path
 from typing import Any
 
 from src.config import DEFAULT_TIMEOUT_SECONDS, SANDBOX_RUNS_DIR
+from src.sandbox.resources import resolve_memory_limit
 
 logger = logging.getLogger(__name__)
 
@@ -308,8 +309,8 @@ class DockerSandboxRunner:
         # 4. Resource & Process Quotas
         docker_cmd.extend([
             f"--cpus={self.config.cpus}",
-            f"--memory={self.config.memory_limit}",
-            f"--memory-swap={self.config.memory_swap}",
+            f"--memory={resolve_memory_limit(self.config.memory_limit)}",
+            f"--memory-swap={resolve_memory_limit(self.config.memory_swap)}",
             f"--pids-limit={self.config.pids_limit}",
         ])
 
