@@ -621,3 +621,8 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Routes `GET /api/v1/papers/{paper_id}/report.md` and `.pdf` (attachment downloads, 404 for an unknown paper); two download links on the detail page.
 - `tests/test_web_exporter.py`: 8 tests (PDF text is read back with pypdf). Suite: 541 passed, 9 skipped; ruff clean.
 - Evidence: `docs/evidence/d4/`; the real database has 0 scores, the scored example is the labeled DEMO database.
+
+### 2026-10-15 14:27: report sections 1, 9 and 10 drafted (#299), not merged
+- Abstract (199 words; its numbers are the generated block `abstractnumbers`, a new name for the same sentence as `pilot3summary` because a block name can be used once per document), Conclusion and future work, and References [1]-[14] with a reproducibility statement. All text is marked "drafted, for the owner's review".
+- References: the five that had no title in the repository (1 to 5) were checked against Crossref (titles, authors, container) before they were written down; [6]-[14] come from `docs/report/RELATED_WORK_SOURCES.md`. No new source. No release tag exists (#45 open), which the statement says.
+- `scripts/report_numbers.py --check` in sync; suite 542 passed, 9 skipped; ruff clean.

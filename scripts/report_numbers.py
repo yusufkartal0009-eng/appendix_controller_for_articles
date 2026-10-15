@@ -13,6 +13,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 - `pilot2summary`: one sentence with the three rates of Pilot 2 next to Pilot 1's (`data/pilot2_runs/comparison.json`)
 - `pilot3`, `pilot3measurements`, `pilot3summary`, `pilot3failures`: the same for Pilot 3, with all three pilots side by
   side (`data/pilot3_runs/`, #292)
+- `abstractnumbers`: the same sentence as `pilot3summary`, under its own name because a block name can be used once
+  per document (the abstract and section 6.1a both show it; #299)
 - `pilot2failures`: per paper of Pilot 2, the failure category, the phase, and the deciding log line
   (`data/pilot2_runs/failure_categories.json`)
 - `extraction`: the claim extraction: quote guard, A/B agreement, the owner's review, and the gold set
@@ -158,7 +160,7 @@ BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": 
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
           "pilot3measurements": pilot3measurements_block, "pilot3summary": pilot3summary_block,
-          "pilot3failures": pilot3failures_block, "extraction": extraction_block}
+          "pilot3failures": pilot3failures_block, "abstractnumbers": pilot3summary_block, "extraction": extraction_block}
 BLOCK_RE = re.compile(r"(<!-- numbers:(?P<name>[a-z0-9]+):start -->\n)(?P<body>.*?)(\n<!-- numbers:(?P=name):end -->)", re.DOTALL)
 
 
