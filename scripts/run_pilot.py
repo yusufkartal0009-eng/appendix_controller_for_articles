@@ -42,6 +42,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from src.config import DATA_CACHE_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SEED_PAPERS_PATH
+from src.sandbox.resources import resolve_memory_limit
 from src.sandbox.run_setup import run_setup_of, sandbox_options
 from src.sandbox.runner import DEFAULT_PYTHON_VERSION, SandboxConfig
 from src.sandbox.stager import RepoStager, remove_tree
@@ -180,7 +181,7 @@ def _collect_pilot2_files(sandbox_dir: Path, build_dir: Path, target_dir: Path) 
 
 def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
               data_cache: Path | None = None, record_root: Path | None = None, pilot3: bool = False,
-              settings_path: Path | None = None) -> dict[str, Any]:
+              settings_path: Path | None = None, memory_limit: str | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
@@ -189,6 +190,14 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         pilot3_change = load_pilot3_change(paper_id, settings_path)
         entry = apply_pilot3_change(entry, pilot3_change)
         limits.update({k: pilot3_change[k] for k in PILOT3_LIMIT_KEYS if k in pilot3_change})
+    memory_override: dict[str, Any] = {}
+    if memory_limit:
+        # Not a protocol run: the limit replaces the protocol's (cli.py score uses this, #311). The size that a
+        # percentage resolves to is recorded, so the record says what the container really got.
+        resolved = resolve_memory_limit(memory_limit)
+        memory_override = {"requested": memory_limit, "resolved": resolved,
+                           "protocol_memory_limit": limits["memory_limit"]}
+        limits.update({"memory_limit": resolved, "memory_swap": resolved})
     setup_options: dict[str, Any] | None = None
     if pilot2:
         # Harness error (raised, exit 1) when the setup is malformed or its data is not in the cache
@@ -229,6 +238,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     }
     if pilot3:
         record["pilot3_change"] = pilot3_change
+    if memory_override:
+        record["memory_override"] = memory_override
 
     start = time.time()
     try:

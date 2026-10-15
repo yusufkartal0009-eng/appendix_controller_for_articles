@@ -655,3 +655,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - The owner accepted the follow-up claim of `paper_005`: EP300 average kernel speedup `16` (Table 1, page 10, row `EP300 2000 2000 4000 16 92`). Both passes (A, and the blind pass B) found it and the quote guard matched it; the value was also checked in the PDF text. Stored through `claim_store` as `verified_by: human`, exported with `scripts/apply_accepted_claims.py export`, applied to `data/seed_papers.json` (`apply`; `check`: consistent).
 - It is not one of the 18 gold-set questions, so precision and recall (12 / 0 / 0 / 6) are unchanged. 13 claims are accepted in total.
 - Not verified: no run has reproduced this value; the `paper_005` run stopped at the memory limit in Pilot 2 and Pilot 3. Its Tier 2 score still needs a run that produces the speedup.
+
+### 2026-10-15 22:34 +03:00: Memory limit as a share of the host's RAM (Issue #311)
+- `src/sandbox/resources.py`: `resolve_memory_limit` turns `50%` into a Docker size from the host's physical memory (Windows, Linux, macOS), capped at 90 percent of the memory Docker can see; a fixed size passes through. `DockerSandboxRunner` resolves it when it builds the command.
+- `scripts/run_pilot.py run_paper(memory_limit=...)` records `memory_override` (requested, resolved, protocol size); `cli.py score --memory` defaults to `50%`. The pilot protocols and the library default keep fixed sizes (D-009 in `docs/DECISIONS.md`).
+- `tests/test_sandbox_memory.py`: 13 cases with mocked memory sizes. Full suite 555 passed, 9 skipped; ruff clean. On the owner's machine the host reads 31.7 GiB and `50%` resolves to 16238m with Docker off; with Docker running at 15.5 GiB it is capped at about 14.3 GiB.
+- Not verified: a real paper run with `50%`; the effect on run time.

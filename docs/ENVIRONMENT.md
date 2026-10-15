@@ -201,3 +201,15 @@ Clean Windows 11 Home machine, Python 3.11.9, fresh `.venv` from `requirements-d
 - `cli.py init-db` → schema initialized, 8 seed papers loaded
 - Docker not installed → the suite still passes: sandbox tests mock the Docker availability check and
   opt into `ProcessSandboxRunner` explicitly, so Docker is not needed to run tests
+
+## Memory of the sandbox on Docker Desktop (WSL2)
+
+`cli.py score` gives a container 50 percent of the host's RAM by default (`--memory 50%`, or a size such as `--memory 12g`),
+capped at 90 percent of the memory that Docker itself can see. Docker Desktop on WSL2 gives its virtual machine about
+half of the host's RAM by default (15.5 GiB on a 32 GB machine), so a container then gets about 14 GiB, not 16. To give
+Docker more, create `%USERPROFILE%\.wslconfig` with
+
+    [wsl2]
+    memory=20GB
+
+then run `wsl --shutdown` and start Docker Desktop again. Keep at least 8 GB for Windows.
