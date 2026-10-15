@@ -638,3 +638,8 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ### 2026-10-15 18:59: docs(readme): add a dashboard section
 - README: new step 8 "Open the Local Dashboard" (command, localhost only, address table, empty states, where the screenshots are, no numbers) and a `src/web/` line in the directory layout.
 - Fixed the escaped backticks in the previous PROGRESS entry.
+
+### 2026-10-15 19:04: chore: review the old corpus, sandbox and scoring issues
+- Closed #6 with evidence (SPDX allow-list in `src/config.py`, the check in `scripts/verify_corpus.py`, two tests, the `corpus` CI job).
+- Status comments (what is done, what is missing) on #7, #8, #13, #14, #15, #17, #18, #20, #23.
+- Left alone: #19, #21, #22, #24, #30 (no code, or nothing new to add); #16 was already closed.
