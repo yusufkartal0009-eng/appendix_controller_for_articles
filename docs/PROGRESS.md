@@ -632,5 +632,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Fixed in the same PR: the introduction said "two pilots" (now three), and the report's banner and four section statuses said "skeleton" or "not merged" (now "written").
 
 ### 2026-10-15 18:56: docs: clean-install test of the README steps; fix stale CONTRIBUTING text
-- Followed the README steps in a fresh clone (commit c8a99f8): install, init-db, ruff, 542 tests, dashboard, badge, report all worked without a manual step. Recorded in \`docs/ENVIRONMENT.md\`.
-- Fixed \`CONTRIBUTING.md\`: it still said GitHub Actions was disabled.
+- Followed the README steps in a fresh clone (commit c8a99f8): install, init-db, ruff, 542 tests, dashboard, badge, report all worked without a manual step. Recorded in `docs/ENVIRONMENT.md`.
+- Fixed `CONTRIBUTING.md`: it still said GitHub Actions was disabled.
+
+### 2026-10-15 18:59: docs(readme): add a dashboard section
+- README: new step 8 "Open the Local Dashboard" (command, localhost only, address table, empty states, where the screenshots are, no numbers) and a `src/web/` line in the directory layout.
+- Fixed the escaped backticks in the previous PROGRESS entry.

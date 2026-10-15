@@ -124,6 +124,24 @@ ruff check .
 pytest tests/ -v
 ```
 
+### 8. Open the Local Dashboard
+```bash
+python -m src.web                  # http://127.0.0.1:8000 (use --port to change it)
+```
+The dashboard runs on **localhost only** (`127.0.0.1`, `docs/DECISIONS.md` D-006) and reads the project database (`data/repro_radar.db`, created by `cli.py init-db`); it never shows a number that is not stored there. Use `--db-url` to point it at another SQLAlchemy database.
+
+| Address | What it shows |
+|---|---|
+| `/` | The leaderboard: one table with search (title, venue), a status filter, and sorting by paper, year, or score. Papers without a stored score are listed last as "Not scored". |
+| `/papers/{paper_id}` | One paper: its score breakdown, its latest run with the end of the logs, and download links for the report. |
+| `/api/v1/papers`, `/api/v1/scores`, `/api/v1/scores/{paper_id}`, `/api/v1/runs/{run_id}` | The same data as JSON. The interactive documentation is at `/docs`. |
+| `/api/v1/badges/{paper_id}.svg` | An embeddable SVG badge with the stored score and status, or a gray "not scored" badge. |
+| `/api/v1/papers/{paper_id}/report.md` and `.pdf` | The audit report of one paper as a Markdown or PDF download. |
+
+**Empty states.** With no papers loaded the page says so and names the command to run (`python cli.py init-db`). A paper that has no score shows "Not scored", a paper that has not been run says so, and an unknown ID gives a 404. Seed claim values are hand-typed and unverified, so the dashboard never shows them.
+
+**Screenshots and samples** (a throwaway demo database with invented numbers is labeled as such, and is not a result): [`docs/evidence/d2/`](docs/evidence/d2/) (pages), [`d3/`](docs/evidence/d3/) (badges), [`d4/`](docs/evidence/d4/) (reports), [`d1/`](docs/evidence/d1/) (`curl` output). The report numbers are described in [`docs/report/REPORT.md`](docs/report/REPORT.md).
+
 ---
 
 ## 🎯 Target Domain & Seed Dataset (`data/seed_papers.json`)
@@ -189,6 +207,7 @@ repro-radar/
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
 │   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
 │   ├── metric_extractor.py  # Metric parsing from logs, JSON, and sklearn reports
+│   ├── web/                 # Local dashboard: API routes, pages, badges, report export (python -m src.web)
 │   └── sandbox/
 │       ├── __init__.py      # Sandbox package exports
 │       ├── runner.py        # DockerSandboxRunner; opt-in unisolated ProcessSandboxRunner
