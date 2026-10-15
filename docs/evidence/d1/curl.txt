@@ -1,0 +1,46 @@
+$ curl -s -i http://127.0.0.1:8137/api/v1/papers
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 09:20:10 GMT
+server: uvicorn
+content-length: 2804
+content-type: application/json
+
+[{"paper_id":"paper_002","title":"TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second","year":2022,"venue":"ICLR 2023","repo_url":"https://github.com/PriorLabs/TabPFN","paper_url":"https://arxiv.org/abs/2207.01848","license":"Apache-2.0","target_script":"tabpfn/scripts/tabular_baselines.py","latest_run":{"run_id":"pilot-36759195752-paper_002","status":"FAILED","exit_code":1,"failure_category":"MISSING_DEPENDENCY","timestamp":"2026-09-30T18:32:15"}},{"paper_id":"paper_003","title":"Revisiting Deep Learning Models for Tabular Data","year":2021,"venue":"NeurIPS 2021","repo_url":"https://github.com/yandex-research/rtdl-revisiting-models","paper_url":"https://arxiv.org/abs/2106.11959","license":"Apache-2.0","target_script":"bin/ft_transformer.py","latest_run":{"run_id":"pilot-36759195752-paper_003","status":"FAILED","exit_code":1,"failure_category":"MISSING_DEPENDENCY","timestamp":"2026-09-30T18:32:11"}},{"paper_id":"paper_004","title":"TabR: Tabular Deep Learning Meets Nearest Neighbors in 2023","year":2023,"venue":"ICLR 2024","repo_url":"https://github.com/yandex-research/tabular-dl-tabr","paper_url":"https://arxiv.org/abs/2307.14338","license":"MIT","target_script":"bin/tabr.py","latest_run":{"run_id":"pilot-36759195752-paper_004","status":"FAILED","exit_code":1,"failure_category":"MISSING_DEPENDENCY","timestamp":"2026-09
+
+$ curl -s -i http://127.0.0.1:8137/api/v1/scores
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 09:20:10 GMT
+server: uvicorn
+content-length: 2
+content-type: application/json
+
+[]
+
+$ curl -s -i http://127.0.0.1:8137/api/v1/scores/paper_001
+HTTP/1.1 404 Not Found
+date: Thu, 15 Oct 2026 09:20:10 GMT
+server: uvicorn
+content-length: 35
+content-type: application/json
+
+{"detail":"No score for paper_001"}
+
+$ curl -s -i http://127.0.0.1:8137/api/v1/scores?status=Failed
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 09:20:10 GMT
+server: uvicorn
+content-length: 2
+content-type: application/json
+
+[]
+
+$ curl -s -i http://127.0.0.1:8137/api/v1/runs/pilot-36759195752-paper_002
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 09:20:10 GMT
+server: uvicorn
+content-length: 501
+content-type: application/json
+
+{"run_id":"pilot-36759195752-paper_002","paper_id":"paper_002","status":"FAILED","execution_time":0.975,"exit_code":1,"stdout":"","stderr":"Traceback (most recent call last):\n  File \"/workspace/repo/tabpfn/scripts/tabular_baselines.py\", line 6, in <module>\n    from catboost import CatBoostClassifier, Pool\nModuleNotFoundError: No module named 'catboost'\n","seed":42,"failure_category":"MISSING_DEPENDENCY","artifact_manifest_sha256":null,"outputs_sha256":null,"timestamp":"2026-09-30T18:32:15"}
+
+docs status 200

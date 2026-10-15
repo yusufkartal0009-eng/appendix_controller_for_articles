@@ -1,4 +1,4 @@
-"""D0 dashboard skeleton (#170): one endpoint backed by a real database query, local only.
+"""Local dashboard (D0 skeleton #170; the API routes are in src/web/routes.py, #37). Local only.
 
 Every value the API returns comes from the database. Seed claim values (`papers.expected_claims`) are not exposed:
 they are hand-typed and unverified (docs/CORPUS_VERIFICATION.md), and the dashboard must not show such numbers.
@@ -6,77 +6,13 @@ they are hand-typed and unverified (docs/CORPUS_VERIFICATION.md), and the dashbo
 
 from __future__ import annotations
 
-from datetime import datetime
 from html import escape
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel, ConfigDict
-from sqlalchemy import func, select
-from sqlalchemy.engine import Engine
 
-from src.database import get_engine, get_session, init_db
-from src.models import PaperBase, PaperORM, RunORM
-
-
-class LatestRun(BaseModel):
-    """The most recent run of a paper, as stored in the `runs` table."""
-
-    model_config = ConfigDict(from_attributes=True)
-
-    run_id: str
-    status: str
-    exit_code: int | None
-    failure_category: str | None
-    timestamp: datetime | None
-
-
-# The catalog fields of src/models.py:PaperBase, without the unverified seed claims.
-_CATALOG_FIELDS = ("paper_id", "title", "year", "venue", "repo_url", "paper_url", "license", "target_script")
-
-
-class PaperSummary(BaseModel):
-    """One paper as the dashboard lists it."""
-
-    model_config = ConfigDict(from_attributes=True)
-
-    paper_id: str
-    title: str
-    year: int
-    venue: str
-    repo_url: str
-    paper_url: str | None
-    license: str
-    target_script: str
-    latest_run: LatestRun | None
-
-
-assert set(_CATALOG_FIELDS) <= set(PaperBase.model_fields)  # keep the summary in step with the shared schema
-
-
-def list_papers(engine: Engine) -> list[PaperSummary]:
-    """All papers, ordered by ID, each with its latest run (or None). An empty database gives []."""
-    session = get_session(engine)
-    try:
-        latest = (
-            select(RunORM.paper_id, func.max(RunORM.timestamp).label("ts")).group_by(RunORM.paper_id).subquery()
-        )
-        runs = {
-            run.paper_id: run
-            for run in session.execute(
-                select(RunORM).join(latest, (RunORM.paper_id == latest.c.paper_id) & (RunORM.timestamp == latest.c.ts))
-            ).scalars()
-        }
-        papers = session.execute(select(PaperORM).order_by(PaperORM.paper_id)).scalars().all()
-        return [
-            PaperSummary(
-                **{name: getattr(paper, name) for name in _CATALOG_FIELDS},
-                latest_run=LatestRun.model_validate(runs[paper.paper_id]) if paper.paper_id in runs else None,
-            )
-            for paper in papers
-        ]
-    finally:
-        session.close()
+from src.database import get_engine, init_db
+from src.web.routes import LatestRun, PaperSummary, list_papers, router
 
 
 def create_app(db_url: str | None = None) -> FastAPI:
@@ -84,9 +20,7 @@ def create_app(db_url: str | None = None) -> FastAPI:
     init_db(engine)  # creates missing tables; never deletes data
     app = FastAPI(title="Repro Radar (local)", docs_url="/docs", redoc_url=None)
 
-    @app.get("/api/v1/papers", response_model=list[PaperSummary])
-    def get_papers() -> list[PaperSummary]:
-        return list_papers(engine)
+    app.include_router(router)
 
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:
