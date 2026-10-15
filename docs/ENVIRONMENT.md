@@ -177,7 +177,22 @@ ruff check .
 pytest tests/ -v
 ```
 
-### Verified baseline
+### Clean-install test (2026-10-15, #301)
+
+The steps of the README (clone, virtual environment, `pip install -r requirements-dev.txt`, `cli.py init-db`, `list-papers`,
+`inspect`, `ruff`, `pytest`) were followed as written in an empty temporary folder, from a fresh clone of commit `c8a99f8`
+on Windows 11 Home with Python 3.11.9, without Docker running:
+
+- `pip install -r requirements-dev.txt` exit 0 (no manual step needed)
+- `cli.py init-db` loaded 6 papers; `list-papers` and `inspect paper_002` worked; no `-X utf8` flag was needed
+- `ruff check .` -> All checks passed; `pytest tests/` -> 542 passed, 9 skipped (12 s)
+- `python -m src.web --port 8191`: `/`, `/papers/paper_002`, `/api/v1/papers`, `/api/v1/scores`, `/api/v1/badges/paper_002.svg`,
+  `/api/v1/papers/paper_002/report.md`, `/api/v1/papers/paper_002/report.pdf`, and `/docs` all answered 200
+- Found and fixed: `CONTRIBUTING.md` still said GitHub Actions was disabled; this baseline was from 2026-09-25 (below).
+- Not tried: Linux or macOS, a machine without the Python 3.11 launcher, and running a paper (needs the Docker image).
+  `/docs` loads its page assets from a CDN, so it needs the network.
+
+### Earlier baseline (2026-09-25)
 
 Clean Windows 11 Home machine, Python 3.11.9, fresh `.venv` from `requirements-dev.txt` (2026-09-25):
 

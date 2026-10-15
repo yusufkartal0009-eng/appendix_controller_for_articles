@@ -2,7 +2,7 @@
 
 Repro Radar checks whether the numbers a research paper reports can be reproduced from the paper's public code, by running that code in an isolated Docker sandbox and scoring what comes out. This is a research prototype with a small corpus (six papers today). Contributions are welcome, within the rules below.
 
-> **State of the project, so you know what to expect.** The maintainer decides the direction: what is accepted as a paper's claim, what the sandbox may run, and what the dashboard looks like. GitHub Actions is currently disabled, so no pull request is checked by CI; you run the checks yourself (section 3) and say so in the pull request.
+> **State of the project, so you know what to expect.** The maintainer decides the direction: what is accepted as a paper's claim, what the sandbox may run, and what the dashboard looks like. GitHub Actions runs the `CI` workflow on every pull request (seven jobs: lint and tests on Linux and Windows, corpus verification, the sandbox image, and sandbox acceptance on real Docker); the `Pilot` workflow stays disabled. You still run the checks yourself (section 3) before you push.
 
 ## 1. Ways to contribute
 
