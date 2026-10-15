@@ -140,6 +140,11 @@ def test_pilot3_blocks_come_from_the_stored_files_and_name_all_three_pilots(tmp_
     assert "| `paper_003` | success | n/a | n/a |" in failures
 
 
+def test_the_abstract_block_renders_the_same_sentence_as_the_pilot3_summary(tmp_path):
+    _pilot3_files(tmp_path)
+    assert rn.render("abstractnumbers", tmp_path) == rn.render("pilot3summary", tmp_path)
+
+
 def test_a_hand_edit_of_a_pilot3_block_is_detected(tmp_path):
     _pilot3_files(tmp_path)
     text = rn.apply("<!-- numbers:pilot3summary:start -->\nx\n<!-- numbers:pilot3summary:end -->\n", tmp_path)
