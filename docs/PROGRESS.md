@@ -602,3 +602,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - `src/web/routes.py`: `GET /api/v1/papers` (moved from `app.py`), `GET /api/v1/scores` (best first, optional `?status=`), `GET /api/v1/scores/{paper_id}`, `GET /api/v1/runs/{run_id}`. All values come from the database; empty tables give `[]`, unknown IDs give 404, seed claim values stay hidden. OpenAPI at `/docs`.
 - `tests/test_web_api.py`: 11 test cases (D5 for this slice). Full suite 506 passed, 9 skipped; ruff clean.
 - Real local database: 6 papers, 6 runs, **0 scores** (nothing has been scored yet), so `/api/v1/scores` is honestly `[]`. Output in `docs/evidence/d1/curl.txt`. No UI decision in this step.
+
+### 2026-10-15 12:38: D2 leaderboard and detail page (#38, #41)
+- Owner's choices (asked with previews before building): one table, a search box plus a status menu, a separate detail page, option A style (light, plain, system font).
+- `src/web/pages.py`: leaderboard with search (title, venue), status filter (4 labels + "Not scored"), sorting by Paper / Year / Score (unscored papers always last), counts from the database; detail page `/papers/{paper_id}` with the score breakdown, latest run, and the last 20 log lines; explicit empty states and a 404 page. Filters are URL query parameters. No new dependency, so no Jinja template file (`templates/leaderboard.html` of the issue was not created).
+- `tests/test_web_pages.py`: 11 tests (order, sort, search, filter, counts, escaping, detail, 404, empty). Suite: 517 passed, 9 skipped; ruff clean.
+- Evidence: `docs/evidence/d2/`. The real database has 0 scores, so its screenshot shows only "Not scored"; the scored screens use a labeled DEMO database with invented numbers (not results).
