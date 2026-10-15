@@ -608,3 +608,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - `src/web/pages.py`: leaderboard with search (title, venue), status filter (4 labels + "Not scored"), sorting by Paper / Year / Score (unscored papers always last), counts from the database; detail page `/papers/{paper_id}` with the score breakdown, latest run, and the last 20 log lines; explicit empty states and a 404 page. Filters are URL query parameters. No new dependency, so no Jinja template file (`templates/leaderboard.html` of the issue was not created).
 - `tests/test_web_pages.py`: 11 tests (order, sort, search, filter, counts, escaping, detail, 404, empty). Suite: 517 passed, 9 skipped; ruff clean.
 - Evidence: `docs/evidence/d2/`. The real database has 0 scores, so its screenshot shows only "Not scored"; the scored screens use a labeled DEMO database with invented numbers (not results).
+
+### 2026-10-15 13:52: D3 SVG badges (#39, #41)
+- Owner's choice (asked with previews): shields.io style, two parts, gray "repro radar" and a colored "<score> · <status>"; gray "not scored" when a paper has no score.
+- `src/web/badge_generator.py` (pure function, all text escaped) and `GET /api/v1/badges/{paper_id}.svg` (404 for an unknown paper; `Cache-Control: public, max-age=300` and a content ETag with 304).
+- `tests/test_badge_generator.py`: 15 test cases. Suite: 533 passed, 9 skipped; ruff clean.
+- Evidence: `docs/evidence/d3/`. The real database has 0 scores, so its badge is "not scored"; the four colored badges come from the labeled DEMO database (invented numbers).

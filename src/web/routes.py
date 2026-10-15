@@ -8,13 +8,14 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi import APIRouter, HTTPException, Query, Request, Response
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import func, select
 from sqlalchemy.engine import Engine
 
 from src.database import get_session
 from src.models import PaperBase, PaperORM, RunORM, ScoreORM, ScoreRead
+from src.web.badge_generator import badge_etag, render_badge
 
 STATUS_LABELS = ("Verified", "Partially Verified", "Needs Review", "Failed")
 
@@ -157,3 +158,25 @@ def run(run_id: str, request: Request) -> RunDetail:
     if found is None:
         raise HTTPException(status_code=404, detail=f"No run {run_id}")
     return found
+
+
+BADGE_CACHE_CONTROL = "public, max-age=300"
+
+
+@router.get("/badges/{paper_id}.svg", response_class=Response, responses={200: {"content": {"image/svg+xml": {}}}})
+def badge(paper_id: str, request: Request) -> Response:
+    """The reproducibility badge of one paper, from its stored score. Cached for five minutes; ETag from the content."""
+    engine = request.app.state.engine
+    session = get_session(engine)
+    try:
+        if session.get(PaperORM, paper_id) is None:
+            raise HTTPException(status_code=404, detail=f"No paper {paper_id}")
+    finally:
+        session.close()
+    found = get_score(engine, paper_id)
+    svg = render_badge(found.total_score if found else None, found.status_label if found else None)
+    etag = badge_etag(svg)
+    headers = {"ETag": etag, "Cache-Control": BADGE_CACHE_CONTROL}
+    if request.headers.get("if-none-match") == etag:
+        return Response(status_code=304, headers=headers)
+    return Response(content=svg, media_type="image/svg+xml", headers=headers)
