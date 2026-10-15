@@ -57,54 +57,51 @@
       ]
     },
     "B": {
-      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
-      "made_at": "2026-10-04T15:21:58+03:00",
+      "method": "Independent pass B: a new Claude Code session that worked only in a blind packet folder (scripts/make_blind_packet.py: questions, rules, page texts; no access to pass A), run by the owner. Imported and checked by scripts/import_pass.py.",
+      "made_at": "2026-10-15T21:03:37+03:00",
       "answers": {
         "tabr_average_rank": {
           "status": "found",
+          "reason": "Table 4 (tuned TabR ensemble vs tuned GBDT ensembles), same table as the XGBoost rank so the ranks are comparable. Other values: Table 3 TabR 1.3± 0.6 (vs parametric/retrieval models), TabR-S default 2.0± 1.3.",
           "claim": {
-            "split": "not_stated",
-            "confidence": 0.8,
             "metric_name": "average_rank",
             "value_as_printed": "1.3± 0.9",
             "unit": "none",
-            "dataset": "default benchmark",
-            "model_variant": "TabR",
+            "dataset": "benchmark datasets (CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI)",
+            "model_variant": "TabR (tuned hyperparameters, ensemble)",
+            "split": "test",
             "higher_is_better": false,
             "table_or_figure": "Table 4",
             "page": 7,
             "source_quote": "TabR 0.865 0 .391 3 .025 0 .872 0 .131 0 .831 0 .733 0 .674 1 .661 0 .977 0.748 1.3± 0.9",
+            "confidence": 0.7,
             "value_normalized": 1.3
-          },
-          "reason": "Table 4 (ensembles, tuned hyperparameters), the one table that ranks TabR and XGBoost together; the previous answer came from Table 3 (1.3± 0.6), which has no XGBoost row. Revised on 2026-10-04 by owner decision 2 (#184)."
+          }
         },
         "ft_transformer_average_rank": {
           "status": "not_found",
-          "reason": "No row for FT-Transformer in any table; the name occurs only on page 1 and in appendix D.10 (hyperparameters, page 23).",
+          "reason": "FT-Transformer has no results row or average rank in this paper; it only appears in the model list and hyperparameter-space table.",
           "claim": null
         },
         "xgboost_average_rank": {
           "status": "found",
-          "reason": "XGBoost has no row in Table 3; Table 4 (ensembles vs GBDT), tuned XGBoost row, last column 'Avg. Rank'. Also printed: 3.4± 0.9 (default) and 1.9± 0.7 (Table 11). Ranks are relative to each table's set of models. Same table as TabR's answer (Table 4, tuned), so the two ranks are comparable (owner decision 2, #184).",
+          "reason": "Table 4, tuned XGBoost ensemble. Other values: default XGBoost 3.4± 0.9 (Table 4); 1.9± 0.7 in a separate 3-model comparison in the appendix.",
           "claim": {
             "metric_name": "average_rank",
             "value_as_printed": "2.5± 0.9",
             "unit": "none",
-            "dataset": "default benchmark",
-            "model_variant": "XGBoost",
-            "split": "not_stated",
+            "dataset": "benchmark datasets (CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI)",
+            "model_variant": "XGBoost (tuned hyperparameters, ensemble)",
+            "split": "test",
             "higher_is_better": false,
             "table_or_figure": "Table 4",
             "page": 7,
             "source_quote": "XGBoost 0.861 0 .432 3 .164 0.872 0.136 0.832 0.726 0 .680 1 .769 0 .971 0 .741 2.5± 0.9",
-            "confidence": 0.6,
+            "confidence": 0.7,
             "value_normalized": 2.5
           }
         }
-      },
-      "revisions": [
-        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
-      ]
+      }
     }
   }
 }

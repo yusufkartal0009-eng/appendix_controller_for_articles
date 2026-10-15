@@ -57,54 +57,51 @@
       ]
     },
     "B": {
-      "method": "Claude Code agent, pass B, made after pass A in the same session (NOT independent of A): searched each paper again from the start, first for the row or sentence that names the model, then for the column or value. Each re-search confirmed A's answer, so B's values, units, and pages were taken over from A; B's quotes (whole rows) and reasons were copied again from the pypdf page text (docs/AGENT_EXTRACTION.md, section 3).",
-      "made_at": "2026-10-04T15:21:58+03:00",
+      "method": "Independent pass B: a new Claude Code session that worked only in a blind packet folder (scripts/make_blind_packet.py: questions, rules, page texts; no access to pass A), run by the owner. Imported and checked by scripts/import_pass.py.",
+      "made_at": "2026-10-15T21:03:37+03:00",
       "answers": {
-        "higgs_auroc": {
-          "status": "not_found",
-          "reason": "No \"HIGGS\" or \"Higgs\" in the paper.",
-          "claim": null
-        },
         "forest_covertype_accuracy__danet_20": {
           "status": "found",
+          "reason": "Table 2, DANet-20 row, Forest column (first column).",
           "claim": {
-            "split": "not_stated",
-            "confidence": 0.8,
             "metric_name": "accuracy",
             "value_as_printed": "97.23%±2e-4",
             "unit": "percent",
             "dataset": "Forest Cover Type",
-            "model_variant": "DANet-20",
+            "model_variant": "DAN ET-20 (ours)",
+            "split": "test",
             "higher_is_better": true,
             "table_or_figure": "Table 2",
             "page": 6,
-            "source_quote": "DAN ET-20 (ours) 2 97.23%±2e-4",
+            "source_quote": "DAN ET-20 (ours) 2 97.23%±2e-4 74.04%±5e-4",
+            "confidence": 0.9,
             "value_normalized": 0.9723
-          },
-          "reason": "Table 2, row DANet-20 (printed 'DAN ET-20'), column Forest. Revised on 2026-10-04 by owner decision 4 (#184)."
+          }
         },
         "forest_covertype_accuracy__danet_32": {
           "status": "found",
+          "reason": "Table 2, DANet-32 row, Forest column (first column).",
           "claim": {
-            "split": "not_stated",
-            "confidence": 0.8,
             "metric_name": "accuracy",
             "value_as_printed": "97.27%±5e-4",
             "unit": "percent",
             "dataset": "Forest Cover Type",
-            "model_variant": "DANet-32",
+            "model_variant": "DAN ET-32 (ours)",
+            "split": "test",
             "higher_is_better": true,
             "table_or_figure": "Table 2",
             "page": 6,
-            "source_quote": "DAN ET-32 (ours) 1 97.27%±5e-4",
+            "source_quote": "DAN ET-32 (ours) 1 97.27%±5e-4 73.98%±2e-4",
+            "confidence": 0.9,
             "value_normalized": 0.9727
-          },
-          "reason": "Table 2, row DANet-32 (printed 'DAN ET-32'), column Forest. Revised on 2026-10-04 by owner decision 4 (#184)."
+          }
+        },
+        "higgs_auroc": {
+          "status": "not_found",
+          "reason": "The HIGGS dataset does not occur in the paper; the seven datasets are YearPrediction, Microsoft, Yahoo, Epsilon, Click, Cardiovascular Disease, Forest Cover Type, and no AUROC is reported.",
+          "claim": null
         }
-      },
-      "revisions": [
-        "2026-10-04: owner decisions of #184 applied by the agent (same values in both passes)."
-      ]
+      }
     }
   }
 }

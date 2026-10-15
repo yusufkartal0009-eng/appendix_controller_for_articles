@@ -5,7 +5,7 @@
   "pdf_text_extractor": "pypdf 6.19.0",
   "questions": "data/claim_queries/paper_005.json (followup_queries)",
   "protocol": "docs/AGENT_EXTRACTION.md",
-  "status": "PASS A ONLY. Not compared with a pass B, not in the gold set, not reviewed or accepted by the owner. Do not use in scoring or in data/seed_papers.json (#258).",
+  "status": "PASS A AND PASS B IMPORTED, NOT COMPARED. Not in the gold set, not reviewed or accepted by the owner. Do not use in scoring or in data/seed_papers.json (#258).",
   "extractions": {
     "A": {
       "method": "Claude Code agent, pass A: searched the page text of the paper for the question's dataset and metric terms and read the matching table row (docs/AGENT_EXTRACTION.md). The question was added after an audit pointed at Table 1, so this pass was not blind to where the value is.",
@@ -26,6 +26,30 @@
             "page": 10,
             "source_quote": "EP300 2000 2000 4000 16 92",
             "confidence": 0.8,
+            "value_normalized": 16.0
+          }
+        }
+      }
+    },
+    "B": {
+      "method": "Independent pass B: a new Claude Code session that worked only in a blind packet folder (scripts/make_blind_packet.py: questions, rules, page texts; no access to pass A), run by the owner. Imported and checked by scripts/import_pass.py.",
+      "made_at": "2026-10-15T21:03:37+03:00",
+      "answers": {
+        "ep300_avg_kernel_speedup": {
+          "status": "found",
+          "reason": "Table 1, EP300 row (columns Train Test Total Avg Speedup Max Speedup: 2000 2000 4000 16 92). The row label EP300 is on the preceding line in the flattened text.",
+          "claim": {
+            "metric_name": "average_kernel_speedup",
+            "value_as_printed": "16",
+            "unit": "none",
+            "dataset": "EP300",
+            "model_variant": "FastSK vs gkmSVM-2.0",
+            "split": "not_stated",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 10,
+            "source_quote": "2000 2000 4000 16 92",
+            "confidence": 0.85,
             "value_normalized": 16.0
           }
         }

@@ -44,19 +44,27 @@
 
 - **Extraction A** and **extraction B** each answer all 16 questions from the inputs above. They are stored side by
   side in `data/claims/<paper_id>.json`, each with its method, date, and the PDF hash.
-- **They are not fully independent.** On the owner's instruction (2026-10-04), no separate agent was used: both
-  extractions are made by the same agent (Claude Code) in one session. Extraction B is a second pass made after A was
-  written down: B searches each paper again from the start by a different route (first the row or sentence that names
-  the model, then the column or value), but its author has seen A. In the 2026-10-04 extraction every re-search
-  confirmed A's answer, so B's values, units, and pages were taken over from A, and only B's quotes and reasons
-  were copied again from the page text.
-  So the A/B comparison (step 1.2) catches copying, transcription, and normalization errors, but **not** a
-  misunderstanding that both passes share. Shared misunderstandings are caught only by the quote guard (W4), the
-  owner's gold set (W5, Y3), and the owner's approval (W7).
+- **Pass B is now independent (2026-10-15, #186).** The earlier pass B (2026-10-04) was made by the same agent that
+  made A, in one session, and took A's values over. It has been replaced by a **blind pass B**: a fresh Claude Code
+  process (`claude -p`, new session, no conversation history) that was started in an empty packet folder
+  (`make_blind_packet.py`, 19 questions) and allowed only the Read, Write, Edit, Glob, and Grep tools, so it could read
+  only the packet (the page text of the six papers, the questions, and the rules) and had no access to pass A, the
+  gold set, the owner's decisions, or the repository. It wrote its answers with the Write tool and
+  `scripts/import_pass.py` imported them. The packet was started by the main session, not by the owner in a separate
+  terminal as the README of the packet describes; the process is still a new session with no shared history, but the
+  starter knew pass A.
+  Result of the comparison (step 1.2): **18 of 18 questions agree by normalized value, 0 disagree** (12 values, 6 "not
+  found"). What this shows: the values were found again from the page text without seeing A, including the six
+  "not found" answers. What it does not show: that a value means what the question asks (both passes are the same
+  model), and the quote guard marks 7 of pass B's 12 found claims UNVERIFIED because the **labels** pass B wrote for
+  the dataset or model (for example "California Housing (CA)", "TabPFN (GPU)") do not occur verbatim in the paper;
+  their values and quotes match exactly. Shared misunderstandings are caught only by the owner's gold set (W5, Y3) and
+  the owner's approval (W7).
 - **Follow-up questions (#258):** a question added after the 18 gold-set questions is listed under
-  `followup_queries` in its question file and answered in pass A only, in `data/claims/followup/<paper_id>.json`
-  (with the quote guard's result). It is not part of the passes A and B comparison, the gold set, the database import,
-  or `data/seed_papers.json`. It becomes a claim only after a blind pass B (#186) and the owner's review (W7).
+  `followup_queries` in its question file and answered in pass A and, since 2026-10-15, in the blind pass B, in
+  `data/claims/followup/<paper_id>.json` (with the quote guard's result). It is not part of the passes A and B
+  comparison, the gold set, the database import, or `data/seed_papers.json`. It becomes a claim only after the owner's
+  review (W7). Both passes found `16` (EP300 average speedup, Table 1, page 10); it is **not accepted**.
   Today there is one: `paper_005`, the average kernel speedup on EP300 (Table 1). The blind packet of #186 asks the
   follow-up questions too (#283), and `scripts/import_pass.py` stores their answers as pass B in the same follow-up
   file, apart from the gold set; nothing compares, scores, or accepts them. The question names the table, so pass B is
