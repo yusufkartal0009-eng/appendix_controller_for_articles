@@ -626,3 +626,7 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Abstract (199 words; its numbers are the generated block `abstractnumbers`, a new name for the same sentence as `pilot3summary` because a block name can be used once per document), Conclusion and future work, and References [1]-[14] with a reproducibility statement. All text is marked "drafted, for the owner's review".
 - References: the five that had no title in the repository (1 to 5) were checked against Crossref (titles, authors, container) before they were written down; [6]-[14] come from `docs/report/RELATED_WORK_SOURCES.md`. No new source. No release tag exists (#45 open), which the statement says.
 - `scripts/report_numbers.py --check` in sync; suite 542 passed, 9 skipped; ruff clean.
+
+### 2026-10-15 18:51: review of the report sections 1, 9, 10 (#299, #120)
+- Rechecked: the rates of the three pilots against `data/pilot_runs`, `pilot2_runs`, `pilot3_runs` `measurements.json` (1/6, 0/6, 0/6; 6/6, 1/6, 1/6; 6/6, 2/6, 2/6); references [6]-[14] by re-running `scripts/verify_sources.py` (9 of 9 VERIFIED; only `checked_at` changed) and [1]-[5] against Crossref (year, volume, pages, authors); the conclusion against sections 6 and 7 (no claim beyond them).
+- Fixed in the same PR: the introduction said "two pilots" (now three), and the report's banner and four section statuses said "skeleton" or "not merged" (now "written").

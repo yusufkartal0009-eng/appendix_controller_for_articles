@@ -1,9 +1,10 @@
-# Repro Radar — Final Report (skeleton)
+# Repro Radar - Final Report
 
-> **Status: skeleton only** (#120, created 2026-10-05). Each section holds its one-line purpose, what it needs before it
-> can be written, and where that evidence is (or that it does not exist yet). **No section is written before its
-> evidence exists in the repository** (a merged PR, a stored run report, or a script output). Every number will come
-> from a script, and every factual statement will be listed in a claim → source table.
+> **Status: written (#120).** Each section lists its sources. Every number comes from a script (generated blocks, checked
+> by `python scripts/report_numbers.py --check`), and every factual statement is listed in a claim to source table
+> (`docs/INTRODUCTION_SOURCES.md`, `docs/report/RELATED_WORK_SOURCES.md`). Sections 1, 9, and 10 were re-checked on
+> 2026-10-15: the rates against `data/*/measurements.json`, the references against Crossref and arXiv
+> (`scripts/verify_sources.py`, 9 of 9 verified), and the conclusion against sections 6 and 7.
 
 ---
 
@@ -27,7 +28,7 @@ against real Docker, and a measured list of what stops each paper.
 
 - **Sources:** sections 5 to 7 of this report; the generated sentence above is copied from
   `data/pilot3_runs/comparison.json` by `scripts/report_numbers.py`.
-- **Status:** drafted, for the owner's review; not merged.
+- **Status:** written.
 
 ## 2. Introduction
 
@@ -56,7 +57,7 @@ papers: stage each paper's code at a pinned commit, run it inside an isolated sa
 are checked against a real Docker daemon in continuous integration (`docs/SANDBOX_ACCEPTANCE.md`), extract the
 paper's own numerical claims with a verbatim-quote guard against invented matches, and score the result on a
 four-tier rubric instead of a single pass/fail. As of this writing, the sandbox and the corpus verification are
-checked, the six papers of the corpus have been run through the sandbox in two pilots (section 6), and
+checked, the six papers of the corpus have been run through the sandbox in three pilots (section 6), and
 `cli.py score` scores a stored real run against accepted claims (`docs/gap_analysis.md`, finding GA-2, closed by
 #136); but no run has reproduced an accepted claim, so the scoring rubric's agreement tier has not yet been exercised
 on real results (section 6.3). The pilot covers tabular
@@ -110,7 +111,7 @@ and running (section 6).
   looked up by `scripts/verify_sources.py` in Crossref or the arXiv API (`docs/report/related_work_verification.json`);
   **only bibliographic data and abstracts were read, not full texts**, and for [11] only the title and bibliographic
   data (no abstract was returned).
-- **Status:** drafted, for the owner's review; not merged.
+- **Status:** written.
 
 ## 4. Method
 
@@ -465,7 +466,7 @@ rubric's agreement tier and stability tier work on real results.
 
 - **Sources:** sections 6 and 7 of this report and the records they cite; `docs/PROGRESS.md` for the dashboard (D1 to D4,
   `docs/evidence/d1` to `d4`); open issues #31 to #36 and #48.
-- **Status:** drafted, for the owner's review; not merged.
+- **Status:** written.
 
 ## 10. References and reproducibility statement
 
@@ -527,4 +528,4 @@ not full texts; the tables name what was read, and what was not verified.
 
 - **Sources:** `docs/INTRODUCTION_SOURCES.md`, `docs/report/RELATED_WORK_SOURCES.md`,
   `docs/report/related_work_verification.json`, `README.md`.
-- **Status:** drafted, for the owner's review; not merged.
+- **Status:** written.
