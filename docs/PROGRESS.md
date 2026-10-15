@@ -614,3 +614,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - `src/web/badge_generator.py` (pure function, all text escaped) and `GET /api/v1/badges/{paper_id}.svg` (404 for an unknown paper; `Cache-Control: public, max-age=300` and a content ETag with 304).
 - `tests/test_badge_generator.py`: 15 test cases. Suite: 533 passed, 9 skipped; ruff clean.
 - Evidence: `docs/evidence/d3/`. The real database has 0 scores, so its badge is "not scored"; the four colored badges come from the labeled DEMO database (invented numbers).
+
+### 2026-10-15 14:21: D4 report export, Markdown and PDF (#40, #41)
+- Owner's choices (asked with previews): one-page layout with the summary on top; PDF with the new dependency `fpdf2` (pure Python, added to `requirements.txt`).
+- `src/web/exporter.py`: one `Report` object from the database, rendered as Markdown and PDF (summary, score breakdown, latest run with the last 20 log lines, claims, integrity hashes, links). No score says "Not scored"; seed claim values are never exported; a code fence in a log cannot break out of the Markdown block; the PDF uses a core font, so characters outside Latin-1 become "?".
+- Routes `GET /api/v1/papers/{paper_id}/report.md` and `.pdf` (attachment downloads, 404 for an unknown paper); two download links on the detail page.
+- `tests/test_web_exporter.py`: 8 tests (PDF text is read back with pypdf). Suite: 541 passed, 9 skipped; ruff clean.
+- Evidence: `docs/evidence/d4/`; the real database has 0 scores, the scored example is the labeled DEMO database.
