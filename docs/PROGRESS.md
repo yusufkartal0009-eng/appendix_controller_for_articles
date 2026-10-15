@@ -661,3 +661,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - `scripts/run_pilot.py run_paper(memory_limit=...)` records `memory_override` (requested, resolved, protocol size); `cli.py score --memory` defaults to `50%`. The pilot protocols and the library default keep fixed sizes (D-009 in `docs/DECISIONS.md`).
 - `tests/test_sandbox_memory.py`: 13 cases with mocked memory sizes. Full suite 555 passed, 9 skipped; ruff clean. On the owner's machine the host reads 31.7 GiB and `50%` resolves to 16238m with Docker off; with Docker running at 15.5 GiB it is capped at about 14.3 GiB.
 - Not verified: a real paper run with `50%`; the effect on run time.
+
+### 2026-10-15 23:09 +03:00: Synthetic control paper (Issue #313)
+- `scripts/synthetic_control.py` runs a dependency-free synthetic paper (prints `accuracy: 0.9000`) through the real pipeline in real Docker twice and scores the stored run against a true claim (0.9) and a false claim (0.5). Evidence: `data/synthetic_control/`.
+- **Found a scoring bug:** both claims scored Tier 2 = 0 because a repository without requirements has install status SKIPPED, which `src/score_run.py` counted as a failed install, so the scorer ignored the reproduced metric. Fixed (SKIPPED means nothing to install; a failed script still reproduces nothing). Now: true claim Tier 2 100 (91.75, Verified), false claim Tier 2 0 (56.75, Needs Review). `tests/test_score_run_skipped.py` (4 cases). The first result is kept in `result_before_fix.json`.
+- Two runs of the synthetic paper agree on status, exit code, and metrics; the two log files are identical.
+- Not verified: real papers (the control is deterministic and has no training, data, or network); Tier 3.
