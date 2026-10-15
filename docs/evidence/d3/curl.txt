@@ -1,0 +1,27 @@
+$ curl -si http://127.0.0.1:8172/api/v1/badges/paper_002.svg   (real database)
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 10:52:41 GMT
+server: uvicorn
+etag: "e280d3b4bc2cf7d5"
+cache-control: public, max-age=300
+content-length: 524
+content-type: image/svg+xml
+
+<svg xmlns='http://www.w3.org/2000/svg' width='179' height='20' role='img' aria-label='repro radar: not scored'><title>repro radar: not scored</title><clipPath id='r'><rect width='179' height='20' rx='3'/></clipPath><g clip-path='url(#r)'><rect width='93' height='20' fill='#57606a'/><rect x='93' width='86' height='20' fill='#8c959f'/></g><g fill='#fff' text-anchor='middle' font-family='Verdana,DejaVu Sans,sans-serif' font-size='11'><text x='46.5' y='14'>repro radar</text><text x='136' y='14'>not scored</text></g></svg>
+
+$ curl -si http://127.0.0.1:8172/api/v1/badges/paper_000.svg
+HTTP/1.1 404 Not Found
+date: Thu, 15 Oct 2026 10:52:41 GMT
+server: uvicorn
+content-length: 31
+content-type: application/json
+
+{"detail":"No paper paper_000"}
+
+$ curl -si -H 'If-None-Match: "e280d3b4bc2cf7d5"' .../paper_002.svg
+HTTP/1.1 304 Not Modified
+date: Thu, 15 Oct 2026 10:52:41 GMT
+server: uvicorn
+etag: "e280d3b4bc2cf7d5"
+cache-control: public, max-age=300
+
