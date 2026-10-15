@@ -2,12 +2,17 @@
 
 import json
 
+import pytest
+
 from scripts import compare_extractions as ce
 from scripts import evaluate_gold as eg
 from scripts import gold_expansion as ge
 from src.config import DATA_DIR
 
 EXPANSION = DATA_DIR / "gold_expansion"
+# The PDFs are not committed (data/pdfs is downloaded by scripts/extract_claims.py); the tests that read them skip without them.
+needs_pdfs = pytest.mark.skipif(not all((DATA_DIR / "pdfs" / f"paper_00{n}.pdf").exists() for n in (2, 3, 4, 5, 6, 8)),
+                                reason="the paper PDFs are not downloaded")
 
 
 def test_there_are_three_questions_per_paper_and_one_negative_control():
@@ -48,6 +53,7 @@ def test_the_form_order_does_not_put_the_passes_answer_first_everywhere(tmp_path
     assert first_is_candidate_zero < 18
 
 
+@needs_pdfs
 def test_both_passes_are_stored_for_every_question_and_valid():
     for paper_id, spec in ge.load_questions().items():
         record = json.loads((EXPANSION / "claims" / f"{paper_id}.json").read_text(encoding="utf-8"))
@@ -72,6 +78,7 @@ def test_there_is_no_gold_file_before_the_owner_has_filled_the_form():
     assert not (EXPANSION / "gold").exists()
 
 
+@needs_pdfs
 def test_the_negative_controls_are_not_in_the_papers():
     papers = {"tabnet_mean_auc_ovo": ("paper_002", "TabNet"), "ft_transformer_mnist_accuracy": ("paper_003", "MNIST"),
               "tabr_imagenet_accuracy": ("paper_004", "ImageNet"), "higgs_avg_speedup": ("paper_005", "HIGGS"),
