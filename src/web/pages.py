@@ -201,7 +201,9 @@ def render_detail(engine: Engine, paper_id: str) -> str | None:
                 if text:
                     run_html += f"<h2>{name} (last {LOG_EXCERPT_LINES} lines)</h2><pre>{escape(_excerpt(text))}</pre>"
     body = (f"<a class='back' href='/'>&larr; Back to the list</a><h2 style='margin-top:0'>{escape(paper.title)}</h2>"
-            f"{facts}<h2>Score</h2>{score_html}<h2>Latest run</h2>{run_html}")
+            f"{facts}<p><a href='/api/v1/papers/{escape(paper.paper_id)}/report.md'>Download report (Markdown)</a> &middot; "
+            f"<a href='/api/v1/papers/{escape(paper.paper_id)}/report.pdf'>Download report (PDF)</a></p>"
+            f"<h2>Score</h2>{score_html}<h2>Latest run</h2>{run_html}")
     return _layout(f"{paper.paper_id} - Repro Radar", body)
 
 

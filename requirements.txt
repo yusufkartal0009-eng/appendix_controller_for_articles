@@ -7,3 +7,4 @@ fastapi>=0.115
 uvicorn>=0.30
 pyyaml>=6.0
 packaging>=23.0
+fpdf2>=2.8

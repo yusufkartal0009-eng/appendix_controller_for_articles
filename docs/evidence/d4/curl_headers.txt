@@ -1,0 +1,16 @@
+$ curl -s -D - -o /dev/null http://127.0.0.1:8183/api/v1/papers/paper_002/report.pdf
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 11:21:03 GMT
+server: uvicorn
+content-disposition: attachment; filename="paper_002_audit.pdf"
+content-length: 2237
+content-type: application/pdf
+
+$ curl -s -D - -o /dev/null .../report.md
+HTTP/1.1 200 OK
+date: Thu, 15 Oct 2026 11:21:04 GMT
+server: uvicorn
+content-disposition: attachment; filename="paper_002_audit.md"
+content-length: 1012
+content-type: text/markdown; charset=utf-8
+

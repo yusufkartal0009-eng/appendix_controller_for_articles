@@ -6,7 +6,7 @@ Seed claim values (`papers.expected_claims`) are not exposed: they are hand-type
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Query, Request, Response
 from pydantic import BaseModel, ConfigDict
@@ -16,6 +16,7 @@ from sqlalchemy.engine import Engine
 from src.database import get_session
 from src.models import PaperBase, PaperORM, RunORM, ScoreORM, ScoreRead
 from src.web.badge_generator import badge_etag, render_badge
+from src.web.exporter import build_report, to_markdown, to_pdf
 
 STATUS_LABELS = ("Verified", "Partially Verified", "Needs Review", "Failed")
 
@@ -180,3 +181,28 @@ def badge(paper_id: str, request: Request) -> Response:
     if request.headers.get("if-none-match") == etag:
         return Response(status_code=304, headers=headers)
     return Response(content=svg, media_type="image/svg+xml", headers=headers)
+
+
+def _report_or_404(request: Request, paper_id: str):
+    report = build_report(request.app.state.engine, paper_id, datetime.now(UTC))
+    if report is None:
+        raise HTTPException(status_code=404, detail=f"No paper {paper_id}")
+    return report
+
+
+@router.get("/papers/{paper_id}/report.md", response_class=Response,
+            responses={200: {"content": {"text/markdown": {}}}})
+def report_markdown(paper_id: str, request: Request) -> Response:
+    """The audit report of one paper as a Markdown download (#40)."""
+    body = to_markdown(_report_or_404(request, paper_id))
+    return Response(content=body, media_type="text/markdown; charset=utf-8",
+                    headers={"Content-Disposition": f'attachment; filename="{paper_id}_audit.md"'})
+
+
+@router.get("/papers/{paper_id}/report.pdf", response_class=Response,
+            responses={200: {"content": {"application/pdf": {}}}})
+def report_pdf(paper_id: str, request: Request) -> Response:
+    """The audit report of one paper as a PDF download (#40)."""
+    body = to_pdf(_report_or_404(request, paper_id))
+    return Response(content=body, media_type="application/pdf",
+                    headers={"Content-Disposition": f'attachment; filename="{paper_id}_audit.pdf"'})
