@@ -1,0 +1,63 @@
+{
+  "paper_id": "synthetic_control",
+  "protocol": "docs/PILOT_2.md",
+  "repro_radar_commit": "534f214a2ac0b53383036a328db028678c78f35c",
+  "started_at": "2026-10-15T20:10:07+00:00",
+  "repo_url": "<TMP>/synthetic_control_repo",
+  "pinned_commit": "18445f513de76a74f318a8336e468d0345ec0ff9",
+  "target_script": "train.py",
+  "container_command": "python /workspace/repo/train.py",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "6g",
+    "memory_swap": "6g",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "18445f513de76a74f318a8336e468d0345ec0ff9",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 0.06
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "fix",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<TMP>\\staging_2\\synthetic_control_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 0.801,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 0.538,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 7356416
+  },
+  "finished_at": "2026-10-15T20:10:08+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
