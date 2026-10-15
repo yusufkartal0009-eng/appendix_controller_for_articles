@@ -1,0 +1,188 @@
+{
+  "rule": "docs/DECISIONS.md D-005",
+  "questions": 18,
+  "agreements": 18,
+  "disagreements": 0,
+  "rows": [
+    {
+      "paper_id": "paper_002",
+      "query_id": "autogluon_mean_auc_ovo",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.93,
+      "b": 0.93,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_002",
+      "query_id": "catboost_mean_accuracy",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.864,
+      "b": 0.864,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_002",
+      "query_id": "tabnet_mean_auc_ovo",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_003",
+      "query_id": "node_adult_accuracy",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.858,
+      "b": 0.858,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_003",
+      "query_id": "ft_transformer_rank_table2",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 1.8,
+      "b": 1.8,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_003",
+      "query_id": "ft_transformer_mnist_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_004",
+      "query_id": "knn_california_rmse",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.588,
+      "b": 0.588,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_004",
+      "query_id": "mlp_plr_average_rank",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 2.0,
+      "b": 2.0,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_004",
+      "query_id": "tabr_imagenet_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_005",
+      "query_id": "ctcf_avg_speedup",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 151.0,
+      "b": 151.0,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_005",
+      "query_id": "zzz3_max_speedup",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 111.0,
+      "b": 111.0,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_005",
+      "query_id": "higgs_avg_speedup",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_006",
+      "query_id": "lightgbm_arcene_auroc",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.8105,
+      "b": 0.8105,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_006",
+      "query_id": "saint_i_income_auroc",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.9155,
+      "b": 0.9155,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_006",
+      "query_id": "saint_cifar10_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    },
+    {
+      "paper_id": "paper_008",
+      "query_id": "xgboost_forest_accuracy",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.9713,
+      "b": 0.9713,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_008",
+      "query_id": "danet32_epsilon_accuracy",
+      "verdict": "agree_value",
+      "agree": true,
+      "a": 0.8967,
+      "b": 0.8967,
+      "a_status": "found",
+      "b_status": "found"
+    },
+    {
+      "paper_id": "paper_008",
+      "query_id": "danet20_imagenet_accuracy",
+      "verdict": "agree_not_found",
+      "agree": true,
+      "a": null,
+      "b": null,
+      "a_status": "not_found",
+      "b_status": "not_found"
+    }
+  ]
+}

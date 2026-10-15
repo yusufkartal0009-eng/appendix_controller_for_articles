@@ -1,0 +1,101 @@
+{
+  "paper_id": "paper_005",
+  "pdf_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v2.full.pdf",
+  "pdf_sha256": "5101ef5605b03237c8e677a102ee8541f0599e4afb14a8fe43442df2cc4dd6fd",
+  "extractions": {
+    "A": {
+      "method": "Pass A: the main Claude Code session (not blind: it wrote the questions and knows where the answers are) searched the page text of each paper for the row and column that the question names; pypdf text.",
+      "made_at": "2026-10-15T23:23:13+03:00",
+      "answers": {
+        "ctcf_avg_speedup": {
+          "status": "found",
+          "reason": "Table 1, row CTCF: Train 2000, Test 2000, Total 4000, Avg Speedup 151, Max Speedup 723.",
+          "claim": {
+            "metric_name": "avg_kernel_speedup",
+            "value_as_printed": "151",
+            "unit": "none",
+            "dataset": "CTCF",
+            "model_variant": "FastSK vs gkmSVM",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 10,
+            "source_quote": "CTCF 2000 2000 4000 151 723",
+            "confidence": 0.9,
+            "value_normalized": 151.0
+          }
+        },
+        "zzz3_max_speedup": {
+          "status": "found",
+          "reason": "Table 1, row ZZZ3: Train 9966, Test 1108, Total 11074, Avg Speedup 18, Max Speedup 111.",
+          "claim": {
+            "metric_name": "max_kernel_speedup",
+            "value_as_printed": "111",
+            "unit": "none",
+            "dataset": "ZZZ3",
+            "model_variant": "FastSK vs gkmSVM",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 10,
+            "source_quote": "ZZZ3 9966 1108 11074 18 111",
+            "confidence": 0.9,
+            "value_normalized": 111.0
+          }
+        },
+        "higgs_avg_speedup": {
+          "status": "not_found",
+          "reason": "HIGGS does not occur in the paper; Table 1 lists 10 DNA datasets (CTCF, EP300, JUND, RAD21, SIN3A, Pbde, EP300_47848, KAT2B, TP53, ZZZ3).",
+          "claim": null
+        }
+      }
+    },
+    "B": {
+      "method": "Independent pass B: a fresh Claude Code process (claude -p, no history; tools Read, Write, Edit, Glob, Grep only) that worked in a blind packet folder (scripts/gold_expansion.py packet) with the page text of the papers, the questions, and the rules; started by the main session, which knew pass A.",
+      "made_at": "2026-10-15T23:25:10+03:00",
+      "answers": {
+        "ctcf_avg_speedup": {
+          "status": "found",
+          "reason": "Table 1, CTCF row: Train 2000, Test 2000, Total 4000, Avg Speedup 151, Max Speedup 723.",
+          "claim": {
+            "metric_name": "average_speedup",
+            "value_as_printed": "151",
+            "unit": "none",
+            "dataset": "CTCF",
+            "model_variant": "FastSK over gkmSVM",
+            "split": "not_stated",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 10,
+            "source_quote": "2000 2000 4000 151 723",
+            "confidence": 0.9,
+            "value_normalized": 151.0
+          }
+        },
+        "zzz3_max_speedup": {
+          "status": "found",
+          "reason": "Table 1, ZZZ3 row: Train 9966, Test 1108, Total 11074, Avg Speedup 18, Max Speedup 111.",
+          "claim": {
+            "metric_name": "max_speedup",
+            "value_as_printed": "111",
+            "unit": "none",
+            "dataset": "ZZZ3",
+            "model_variant": "FastSK over gkmSVM",
+            "split": "not_stated",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 10,
+            "source_quote": "9966 1108 11074 18 111",
+            "confidence": 0.9,
+            "value_normalized": 111.0
+          }
+        },
+        "higgs_avg_speedup": {
+          "status": "not_found",
+          "reason": "The HIGGS dataset does not occur in the paper text.",
+          "claim": null
+        }
+      }
+    }
+  }
+}

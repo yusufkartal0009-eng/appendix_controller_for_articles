@@ -1,0 +1,101 @@
+{
+  "paper_id": "paper_002",
+  "pdf_url": "https://arxiv.org/pdf/2207.01848v6",
+  "pdf_sha256": "97796b6e6b134b200555a7ebbacea2f6daecb9ab309279ba50d915d5ac5c9df6",
+  "extractions": {
+    "A": {
+      "method": "Pass A: the main Claude Code session (not blind: it wrote the questions and knows where the answers are) searched the page text of each paper for the row and column that the question names; pypdf text.",
+      "made_at": "2026-10-15T23:23:13+03:00",
+      "answers": {
+        "autogluon_mean_auc_ovo": {
+          "status": "found",
+          "reason": "Table 1, row Mean AUC OVO; columns: LightGBM, CatBoost, XGBoost, ASKL2.0, AutoGluon (5th), TabPFN n.e., TabPFN, TabPFN + AutoGluon.",
+          "claim": {
+            "metric_name": "mean_auc_ovo",
+            "value_as_printed": "0.93±.0091",
+            "unit": "fraction",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "AutoGluon",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
+            "confidence": 0.9,
+            "value_normalized": 0.93
+          }
+        },
+        "catboost_mean_accuracy": {
+          "status": "found",
+          "reason": "Table 1, row Mean Acc., CatBoost is the 2nd column.",
+          "claim": {
+            "metric_name": "mean_accuracy",
+            "value_as_printed": "0.864±.011",
+            "unit": "fraction",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "CatBoost",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean Acc. 0.862 ±.012 0.864±.011 0.866±.011 0.87±.014 0.881 ±.01 0.873 ±.0095 0.879±.0089 0.886±.0094",
+            "confidence": 0.9,
+            "value_normalized": 0.864
+          }
+        },
+        "tabnet_mean_auc_ovo": {
+          "status": "not_found",
+          "reason": "TabNet is named only in the running text as a deep learning method evaluated elsewhere; Table 1 has no TabNet column.",
+          "claim": null
+        }
+      }
+    },
+    "B": {
+      "method": "Independent pass B: a fresh Claude Code process (claude -p, no history; tools Read, Write, Edit, Glob, Grep only) that worked in a blind packet folder (scripts/gold_expansion.py packet) with the page text of the papers, the questions, and the rules; started by the main session, which knew pass A.",
+      "made_at": "2026-10-15T23:25:10+03:00",
+      "answers": {
+        "autogluon_mean_auc_ovo": {
+          "status": "found",
+          "reason": "Table 1, Mean AUC OVO row, 5th of 8 columns (LightGBM, CatBoost, XGBoost, ASKL2.0, AutoGluon, ...).",
+          "claim": {
+            "metric_name": "mean_auc_ovo",
+            "value_as_printed": "0.93±.0091",
+            "unit": "fraction",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "AutoGluon",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
+            "confidence": 0.95,
+            "value_normalized": 0.93
+          }
+        },
+        "catboost_mean_accuracy": {
+          "status": "found",
+          "reason": "Table 1, Mean Acc. row, 2nd of 8 columns (CatBoost).",
+          "claim": {
+            "metric_name": "mean_accuracy",
+            "value_as_printed": "0.864±.011",
+            "unit": "fraction",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "CatBoost",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean Acc. 0.862 ±.012 0.864±.011 0.866±.011 0.87±.014 0.881 ±.01 0.873 ±.0095 0.879±.0089 0.886±.0094",
+            "confidence": 0.95,
+            "value_normalized": 0.864
+          }
+        },
+        "tabnet_mean_auc_ovo": {
+          "status": "not_found",
+          "reason": "TabNet is only mentioned as related work; it is not evaluated in Table 1 or elsewhere in the paper text.",
+          "claim": null
+        }
+      }
+    }
+  }
+}

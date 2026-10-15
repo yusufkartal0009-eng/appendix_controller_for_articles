@@ -1,0 +1,101 @@
+{
+  "paper_id": "paper_003",
+  "pdf_url": "https://arxiv.org/pdf/2106.11959v5",
+  "pdf_sha256": "f2faa32ffd8c15ed8534677f978dc02730fdbe1f94e9c9557ada6aa19163478d",
+  "extractions": {
+    "A": {
+      "method": "Pass A: the main Claude Code session (not blind: it wrote the questions and knows where the answers are) searched the page text of each paper for the row and column that the question names; pypdf text.",
+      "made_at": "2026-10-15T23:23:13+03:00",
+      "answers": {
+        "node_adult_accuracy": {
+          "status": "found",
+          "reason": "Table 2 (single DL models), row NODE, column AD (2nd). Table 3 (ensembles) gives 0.860.",
+          "claim": {
+            "metric_name": "accuracy",
+            "value_as_printed": "0.858",
+            "unit": "fraction",
+            "dataset": "Adult (AD)",
+            "model_variant": "NODE",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "NODE 0.464 0.858 0.359 0 .727 0 .726 0 .918 0 .8958 8.784 0.958 0.753 0 .745 3.9 (2.8)",
+            "confidence": 0.9,
+            "value_normalized": 0.858
+          }
+        },
+        "ft_transformer_rank_table2": {
+          "status": "found",
+          "reason": "Table 2, row FT-T, last column rank (std).",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "1.8",
+            "unit": "none",
+            "dataset": "11 datasets of Table 2",
+            "model_variant": "FT-T",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "FT-T 0.459 0 .859 0.391 0.732 0 .729 0.960 0.8982 8.855 0.970 0.756 0 .746 1.8 (1.2)",
+            "confidence": 0.9,
+            "value_normalized": 1.8
+          }
+        },
+        "ft_transformer_mnist_accuracy": {
+          "status": "not_found",
+          "reason": "MNIST does not occur in the paper; Table 2 has the datasets CA, AD, HE, JA, HI, AL, EP, YE, CO, YA, MI.",
+          "claim": null
+        }
+      }
+    },
+    "B": {
+      "method": "Independent pass B: a fresh Claude Code process (claude -p, no history; tools Read, Write, Edit, Glob, Grep only) that worked in a blind packet folder (scripts/gold_expansion.py packet) with the page text of the papers, the questions, and the rules; started by the main session, which knew pass A.",
+      "made_at": "2026-10-15T23:25:10+03:00",
+      "answers": {
+        "node_adult_accuracy": {
+          "status": "found",
+          "reason": "Table 2, NODE row, AD column (2nd column after the row label).",
+          "claim": {
+            "metric_name": "accuracy",
+            "value_as_printed": "0.858",
+            "unit": "fraction",
+            "dataset": "Adult (AD)",
+            "model_variant": "NODE",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "NODE 0.464 0.858 0.359 0 .727 0 .726 0 .918 0 .8958 8.784 0.958 0.753 0 .745 3.9 (2.8)",
+            "confidence": 0.95,
+            "value_normalized": 0.858
+          }
+        },
+        "ft_transformer_rank_table2": {
+          "status": "found",
+          "reason": "Table 2, FT-T row, rank column; printed as 1.8 (1.2) with std in parentheses.",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "1.8",
+            "unit": "none",
+            "dataset": "all datasets in Table 2",
+            "model_variant": "FT-T (FT-Transformer)",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "FT-T 0.459 0 .859 0.391 0.732 0 .729 0.960 0.8982 8.855 0.970 0.756 0 .746 1.8 (1.2)",
+            "confidence": 0.95,
+            "value_normalized": 1.8
+          }
+        },
+        "ft_transformer_mnist_accuracy": {
+          "status": "not_found",
+          "reason": "The MNIST dataset does not occur in the paper text.",
+          "claim": null
+        }
+      }
+    }
+  }
+}
