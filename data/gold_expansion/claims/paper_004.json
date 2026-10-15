@@ -1,0 +1,101 @@
+{
+  "paper_id": "paper_004",
+  "pdf_url": "https://arxiv.org/pdf/2307.14338",
+  "pdf_sha256": "f6855570a0d96fcc445d355ab10f320f192d5100344d24b08c7308e5377a32fb",
+  "extractions": {
+    "A": {
+      "method": "Pass A: the main Claude Code session (not blind: it wrote the questions and knows where the answers are) searched the page text of each paper for the row and column that the question names; pypdf text.",
+      "made_at": "2026-10-15T23:23:13+03:00",
+      "answers": {
+        "knn_california_rmse": {
+          "status": "found",
+          "reason": "Table 3, row kNN, column CA (2nd).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0 .588",
+            "unit": "none",
+            "dataset": "California Housing (CA)",
+            "model_variant": "kNN",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "kNN 0.837 0 .588 3 .744 0 .834 0 .256 0 .774 0 .665 0 .712 2 .296 0 .927 0 .764 6.0± 1.7",
+            "confidence": 0.9,
+            "value_normalized": 0.588
+          }
+        },
+        "mlp_plr_average_rank": {
+          "status": "found",
+          "reason": "Table 3, row MLP-PLR, last column Avg. Rank.",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "2.0± 1.0",
+            "unit": "none",
+            "dataset": "11 datasets of Table 3",
+            "model_variant": "MLP-PLR",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "MLP-PLR 0.860 0 .476 3.056 0 .870 0.134 0 .819 0.729 0.687 1 .860 0 .970 0.744 2.0± 1.0",
+            "confidence": 0.9,
+            "value_normalized": 2.0
+          }
+        },
+        "tabr_imagenet_accuracy": {
+          "status": "not_found",
+          "reason": "ImageNet does not occur in the paper; Table 3 has the datasets CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI.",
+          "claim": null
+        }
+      }
+    },
+    "B": {
+      "method": "Independent pass B: a fresh Claude Code process (claude -p, no history; tools Read, Write, Edit, Glob, Grep only) that worked in a blind packet folder (scripts/gold_expansion.py packet) with the page text of the papers, the questions, and the rules; started by the main session, which knew pass A.",
+      "made_at": "2026-10-15T23:25:10+03:00",
+      "answers": {
+        "knn_california_rmse": {
+          "status": "found",
+          "reason": "Table 3, kNN row, CA column (2nd column).",
+          "claim": {
+            "metric_name": "rmse",
+            "value_as_printed": "0 .588",
+            "unit": "none",
+            "dataset": "California Housing (CA)",
+            "model_variant": "kNN",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "kNN 0.837 0 .588 3 .744 0 .834 0 .256 0 .774 0 .665 0 .712 2 .296 0 .927 0 .764 6.0± 1.7",
+            "confidence": 0.95,
+            "value_normalized": 0.588
+          }
+        },
+        "mlp_plr_average_rank": {
+          "status": "found",
+          "reason": "Table 3, MLP-PLR row, Avg. Rank column.",
+          "claim": {
+            "metric_name": "average_rank",
+            "value_as_printed": "2.0± 1.0",
+            "unit": "none",
+            "dataset": "all datasets in Table 3",
+            "model_variant": "MLP-PLR",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "MLP-PLR 0.860 0 .476 3.056 0 .870 0.134 0 .819 0.729 0.687 1 .860 0 .970 0.744 2.0± 1.0",
+            "confidence": 0.95,
+            "value_normalized": 2.0
+          }
+        },
+        "tabr_imagenet_accuracy": {
+          "status": "not_found",
+          "reason": "The ImageNet dataset does not occur in the paper text.",
+          "claim": null
+        }
+      }
+    }
+  }
+}

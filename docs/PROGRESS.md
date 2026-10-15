@@ -667,3 +667,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - **Found a scoring bug:** both claims scored Tier 2 = 0 because a repository without requirements has install status SKIPPED, which `src/score_run.py` counted as a failed install, so the scorer ignored the reproduced metric. Fixed (SKIPPED means nothing to install; a failed script still reproduces nothing). Now: true claim Tier 2 100 (91.75, Verified), false claim Tier 2 0 (56.75, Needs Review). `tests/test_score_run_skipped.py` (4 cases). The first result is kept in `result_before_fix.json`.
 - Two runs of the synthetic paper agree on status, exit code, and metrics; the two log files are identical.
 - Not verified: real papers (the control is deterministic and has no training, data, or network); Tier 3.
+
+### 2026-10-15 23:25 +03:00: Gold set expansion: 18 more questions, two passes (Issue #315)
+- `docs/GOLD_SET_EXPANSION.md` (selection rule written first), `data/gold_expansion/` (18 questions, candidates, pass A, pass B), `scripts/gold_expansion.py` (`packet`, `form`, `import-pass`), `tests/test_gold_expansion.py` (8 cases).
+- Pass A: the main session (not blind). Pass B: a fresh `claude -p` process on a blind packet. **18 of 18 agree** by normalized value (12 values, 6 "not found" including all 6 negative controls); every quote of both passes occurs on its page.
+- The owner's gold set for these questions does not exist yet: the form is outside the repository; **no precision or recall is claimed** until the owner has filled it and `evaluate_gold.py` has scored both passes.
+- Not verified: correctness of the values against the owner's own reading; same-model passes; the packet was started by the main session, not by the owner.

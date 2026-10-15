@@ -1,0 +1,107 @@
+{
+  "note": "Questions of the gold set expansion (docs/GOLD_SET_EXPANSION.md). Written from table headers and captions; no question contains a value.",
+  "papers": {
+    "paper_002": {
+      "pdf_url": "https://arxiv.org/pdf/2207.01848v6",
+      "queries": [
+        {
+          "query_id": "autogluon_mean_auc_ovo",
+          "question": "Mean AUC OVO of AutoGluon on the 18 numerical datasets of OpenML-CC18 in Table 1."
+        },
+        {
+          "query_id": "catboost_mean_accuracy",
+          "question": "Mean accuracy of CatBoost on the 18 numerical datasets of OpenML-CC18 in Table 1."
+        },
+        {
+          "query_id": "tabnet_mean_auc_ovo",
+          "question": "Mean AUC OVO of TabNet on the 18 numerical datasets of OpenML-CC18."
+        }
+      ]
+    },
+    "paper_003": {
+      "pdf_url": "https://arxiv.org/pdf/2106.11959v5",
+      "queries": [
+        {
+          "query_id": "node_adult_accuracy",
+          "question": "Test accuracy of NODE on the Adult (AD) dataset in the table of single DL models (Table 2)."
+        },
+        {
+          "query_id": "ft_transformer_rank_table2",
+          "question": "Average rank (the rank column) of FT-Transformer in the table of single DL models (Table 2)."
+        },
+        {
+          "query_id": "ft_transformer_mnist_accuracy",
+          "question": "Test accuracy of FT-Transformer on the MNIST dataset."
+        }
+      ]
+    },
+    "paper_004": {
+      "pdf_url": "https://arxiv.org/pdf/2307.14338",
+      "queries": [
+        {
+          "query_id": "knn_california_rmse",
+          "question": "Test RMSE of kNN on the California Housing (CA) dataset in Table 3."
+        },
+        {
+          "query_id": "mlp_plr_average_rank",
+          "question": "Average rank of MLP-PLR in Table 3."
+        },
+        {
+          "query_id": "tabr_imagenet_accuracy",
+          "question": "Test accuracy of TabR on the ImageNet dataset."
+        }
+      ]
+    },
+    "paper_005": {
+      "pdf_url": "https://www.biorxiv.org/content/10.1101/2020.04.21.053975v2.full.pdf",
+      "queries": [
+        {
+          "query_id": "ctcf_avg_speedup",
+          "question": "Average speedup of FastSK over gkmSVM on the CTCF dataset in Table 1."
+        },
+        {
+          "query_id": "zzz3_max_speedup",
+          "question": "Maximum speedup of FastSK over gkmSVM on the ZZZ3 dataset in Table 1."
+        },
+        {
+          "query_id": "higgs_avg_speedup",
+          "question": "Average speedup of FastSK on the HIGGS dataset."
+        }
+      ]
+    },
+    "paper_006": {
+      "pdf_url": "https://arxiv.org/pdf/2106.01342",
+      "queries": [
+        {
+          "query_id": "lightgbm_arcene_auroc",
+          "question": "Test AUROC (in %) of LightGBM on the Arcene dataset in Table 2."
+        },
+        {
+          "query_id": "saint_i_income_auroc",
+          "question": "Test AUROC (in %) of SAINT-i on the Income dataset in Table 2."
+        },
+        {
+          "query_id": "saint_cifar10_accuracy",
+          "question": "Test accuracy of SAINT on the CIFAR-10 dataset."
+        }
+      ]
+    },
+    "paper_008": {
+      "pdf_url": "https://arxiv.org/pdf/2112.02962",
+      "queries": [
+        {
+          "query_id": "xgboost_forest_accuracy",
+          "question": "Test accuracy of XGBoost on the Forest Cover Type dataset in Table 2."
+        },
+        {
+          "query_id": "danet32_epsilon_accuracy",
+          "question": "Test accuracy of DANet-32 on the Epsilon dataset in Table 2."
+        },
+        {
+          "query_id": "danet20_imagenet_accuracy",
+          "question": "Test accuracy of DANet-20 on the ImageNet dataset."
+        }
+      ]
+    }
+  }
+}
