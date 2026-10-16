@@ -1,0 +1,464 @@
+{
+  "evaluated_at": "2026-10-16T23:13:15+00:00",
+  "rules": "docs/EXTERNAL_VALIDATION.md",
+  "articles_commit": "58bc857c1a410ff115f7a8cf6416b5f53d7ff3d2",
+  "selected": 0,
+  "evaluated": 65,
+  "articles": [
+    {
+      "directory": "10.5281_zenodo.15321683",
+      "hash": "00adfacce5115fb04f5728cb17190d756864157b8007298873622960f17aeff2",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3886412",
+      "hash": "09f464cb5ba8dadc5c3290854b9970f1c9a69fa43a1b0ad1700efa07b69a7727",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.18401497",
+      "hash": "12bf799f730eff1ee2bc00e26371aa22ef0f08a805720345a46ab3f68f6d456f",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3943750",
+      "hash": "12d420f78478c69bfada176ea2f9971aeb24751a794e62de247cbeb11f49c54f",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.15172014",
+      "hash": "1575f0413aa52feb4afc4f2c51a30b056c022fd2b9e0f9ac55a81d178e59f7c9",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.6801765",
+      "hash": "18e07de2d7f993dcb70ba5a2626a8f780eaab26b13ee51d53f91af8f83e12111",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.18400484",
+      "hash": "1cd182bdcc1b28786424957076529123936080521cd563cfda5d941e67369b63",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.14941471",
+      "hash": "2462d9cdc92e554c9c9543286ff7469167686a78ec492485e03162ca271722b0",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3889694",
+      "hash": "2c11ff7324b1c130055da59604240d3a6ee0222c9eb6350760c46a8ba286f2f9",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4022361",
+      "hash": "34c59c42d087b0df5181bb4167d4cb8312e8271c512cfa7bd96e3becb9f490f7",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4617894",
+      "hash": "3c4a6ea87a8b42659c08adf0d72ff753071b38a927f2e66dae52576d382f1e19",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4081202",
+      "hash": "3d2c1d8a00c09869d13c9bc64dd4184d79e4bfa3c6bc53cd7f26ffed4430e408",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.6546488",
+      "hash": "3d3e20c111023cc10e06168bbb291d9dab3ba3f6b7c6b5ec8f79b652efd1b428",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3069619",
+      "hash": "428d6c8780a2297e9f5f79c60fb8e3191d9b6a90ece84db61f1de388c7d003a3",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.7484072",
+      "hash": "42c5c1d8a2db37bdeeb903ac217efdd01e8f639f7d124f8fa769abaf3d5f891a",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3842360",
+      "hash": "42f56cf8e1d15040e7f6e7c60635210778fd387991a0751ed462d9dd5e79ad71",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.10255347",
+      "hash": "4323ed8da7d310dfc158d57206ef6ca4e14d0d2693fc90f56215ec9861bf3481",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.7788556",
+      "hash": "437862f2383d9f5c0c9cc79793980e9eddb83266b41f4907787e6d3f43b308e0",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3234524",
+      "hash": "517a55a1df028f851ea5d695effbc59908243ef2cd829f25b4ea4d937c35eadd",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3161734",
+      "hash": "535d426f9329f447faf1ab20ee01088dbfa4cbc333bf02c2db5f50f56c22fa9e",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.16529268",
+      "hash": "56a6f057a17f1de0e80ea105f51633008af296817729d3b26fe816840fb7236b",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4461767",
+      "hash": "58a49e330e0448bcfef701cea98ba3b743d5051ae1ed5b0ac47ef723f733cdfb",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5722853",
+      "hash": "5d6ae36d85c0cefca252c3067faa4caf2a2a4297d69b9fa0a732f5ef41727596",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3630224",
+      "hash": "5ee0a0f9f5db9b93b5799a7e866963845adc804d5509d16ee3900ebf4afcbbc0",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.6573684",
+      "hash": "60fcae74d57c3559c4eea5290b75b8c5cfb049f7b40b7d4a28aa829bf6e51736",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.16374814",
+      "hash": "611fdcd1283d4fc8f29bb1a5ee2bff3548ef77664cc63ebccb35d75359f6df59",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3158244",
+      "hash": "6525c5236552cfe87047a01074a358e9b2547fdf269e85aad41b9bb93a02e553",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.20613595",
+      "hash": "671b8be347bb347f7b5e874ee2eda50b4f7aef42cf1c13c536f339e020d1672a",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4290512",
+      "hash": "6780ee2dfed8bde7ec3802ecaf39eeccea83dacc9268bfaad681d2b72f840009",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3162890",
+      "hash": "6932100e01cd2fd654bbe8ffe5babc22d06a24818bcce2627f722248224b72e2",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5718075",
+      "hash": "6998fd94c6ff8f2e304694da4f5fc6ad0c8a096697c413d999607af618a9d840",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.14964875",
+      "hash": "6b35ad587a769718c1bf6258dcf887da6ac85b10afb49988b539d852ffc84cc5",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3538217",
+      "hash": "6f5af4ec9ac97807b52d64460d3c83a2fb8b08c60744dcab577976902dfbea94",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.10257800",
+      "hash": "710e107346f28fd68323baada992f8f26019e83fce79ec28700000933d29e2c7",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5217602",
+      "hash": "7933a83c81cb2a633187b72291530319a1bc63d1cc2501d629c61ecdb71b8a40",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5006005",
+      "hash": "7a07c01a5082a7449692ee8a1bf3b5b498691eae2866515c0300d4abc9953aad",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.6255131",
+      "hash": "7dbb1bd41adf2f3e29a2ee15e27f468ec480cf10c03baf10feaa8791dd8b08b9",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3886739",
+      "hash": "816a2cf96fae235632ee59b96b7b47b16ef6e5d54b96baaef89a55f53c402f18",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.10275726",
+      "hash": "87e85246e1d4b3ec4fe3b6175ecb012f990f2fd32ea12b8921d59f1635f99176",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5379631",
+      "hash": "884b688dfa538214ce41816c917c2c42f59e76841fd269d70ef1a04dc0f83560",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3162114",
+      "hash": "8920b2bd1c1f98841a6f1f82e1913df737ae83970954703bd8f5349a8e909f63",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4242943",
+      "hash": "8a1de6c3b7f4179e8291903917dda44d796e5ead75c75e6c3a5dda43545a5543",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3160540",
+      "hash": "90ecb90a0a78f9f549813790e12fbd27c5668a95c50fba38a587a12b9968e985",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3886628",
+      "hash": "91025a697e844a9878e70ad0261f836b8013a7eb4e055b9541df149251b81c88",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3972130",
+      "hash": "926273d851a1706dcc51df15d26f526aa7787a7d7a64986bd915b6919c809a90",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4655870",
+      "hash": "948d518f75835b2e7b572f71aa0a7b21f2f93bb01671afea1e325b57862f4829",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5347786",
+      "hash": "9928c10e2ba56aed877bfe6215e375a125d79d56051fdf37b9d9edda0c07df52",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5234931",
+      "hash": "9b0b63e5a1ba6e03ab96d8d93c9e7839b3fe0d3dd87f034b1f607e612eb9b9b6",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3904595",
+      "hash": "9c19b4655060f5d68bc415e050e1b72aa91b223334232910c8683c16434c2ca3",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4646680",
+      "hash": "9caa92733d1743c1285e0bbef8043818174b936a8d61d04b444edfa4ce93651f",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3763416",
+      "hash": "bd5efbf55b1e5da6ce8bfee78a7e13e720fd23def6ecb84026fec3f5481d11c3",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4022518",
+      "hash": "c077ca7a4d57ac3961b4422e32b72d6ba9aba1a2e43fe2a511d222f0120f7486",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3886447",
+      "hash": "c6f33d4d708d1378d01467e86f047e3c5cde4932ae4bd2f51a7a0d6a3ec8caf3",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.5657320",
+      "hash": "d1529fb7a981b0478bce5441dfadf109000a692a9d243206919d4e0216d25771",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.10371655",
+      "hash": "d5d0dba8d1f28a2959a990b580577be1d82f268f78eb7bb825a4719622096132",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3885793",
+      "hash": "da30cdaf28b325e57d1e6c4b478f4d10f34094455b19307bbd677e1d2931b3b3",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.13627804",
+      "hash": "def3917351ba34a4631b33eaf316bffb7f983187bd62723bd30dbb8af924299d",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4543356",
+      "hash": "ed3efc2305274e9fadbf867d2e66b68755f937472fa3ee24db5253a20dd98678",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3922195",
+      "hash": "f0591e7a7ed39ff839c556c3bb3908d47bf8947236b8ceeec79f52db44aa52ed",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5072_zenodo.416801",
+      "hash": "f05b180fb368510da812978d959f813f3de187414912b85ceb40ae3a6cd609a0",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.4836230",
+      "hash": "f1ba4a61f7414e466d7a525c715926d5d59aa61efb6358ae20483823340f9993",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3528175",
+      "hash": "f4d695326dc1d1d14ded3ee7c0d40629af280ff5a7d8a1707dd3eb6b662b949f",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3901241",
+      "hash": "f70e8a3fcc5b724f05450029eac88b9d7d948ed524a8755c33314f7cde96a6d5",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.3959516",
+      "hash": "f7e7eeb988dfef0491ef606b7abbd6c64792b235df2ab4da91b4f8e5f0edd606",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    },
+    {
+      "directory": "10.5281_zenodo.11077385",
+      "hash": "fb223f10e0e24781791c145e7d3028de88ca2b77f108ad676ea45688abcf125d",
+      "passed": false,
+      "failed_rule": "E1",
+      "detail": "no review url that points to GitHub"
+    }
+  ]
+}

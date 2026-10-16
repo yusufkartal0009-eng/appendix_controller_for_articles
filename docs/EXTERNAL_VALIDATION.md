@@ -132,3 +132,60 @@ done after the table is fixed and does not change the table.
   reads. Many articles will print nothing of the kind, which gives "inconclusive", not "agreement".
 - **The machine.** Runs are on the owner's Windows machine with 8 CPUs; other work on the machine during a run is not
   controlled and run times are not compared with other pilots.
+
+## 9. Amendments (2026-10-17, issue #385)
+
+Sections 1 to 8 stay as they were written. The selection was run and gave results **before** these amendments were written, so
+they are **not blind to the results of the evaluations named below**; they are limited to the two defects named here. The
+earlier outputs are kept unchanged in `data/external_validation/first_attempt/` and `second_attempt/`.
+
+1. **Count of the pool.** Section 1 says 72 directories. The listing that was looked at had 72 entries, 65 of which are
+   directories; the pool has **65** article directories (`pool.json`).
+2. **Field shapes (a defect of the script, not of the rules).** `article.yaml` writes `review`, `code`, and `dates` as lists of
+   one-key mappings (`- url: ...`), not as one mapping. The first version of `scripts/external_validation.py` read only
+   mappings, so every article failed E1 (65 of 65, `first_attempt/`). The script now reads both shapes. The rules are unchanged.
+3. **A ref that does not exist.** After the second evaluation (`second_attempt/`: 0 of 65 selected; E2 23, E3 27, E4 9, E1 5,
+   E6 1) it turned out that 14 articles name the same code URL, `.../releases/tag/v3.0`, in a repository that has no tag.
+   E3 said the pinned commit is the one named in the URL. Amendment: **if the ref named in the URL does not exist, the head
+   of the default branch is used** (the entry says so). The change could only let more articles through E3; it was made
+   after seeing that this one category of failure was the largest.
+
+Not changed: the Python-main-language rule of E3 (many repositories are Jupyter notebooks and fail it), the README command
+rule E4, and the other rules.
+
+## 10. Result of the selection (2026-10-17, issue #385)
+
+Applied with `scripts/external_validation.py` after amendments 1 to 3 on the pool of `ReScience/articles` at commit
+`58bc857c1a41` (retrieved 2026-10-16T23:08:44+00:00, 65 article directories). Evaluation of
+2026-10-16T23:33:44+00:00: **65 articles evaluated, 0 selected.** Every article with its first failed rule and
+the reason is in `data/external_validation/evaluation.json`; `papers.json` is an empty list.
+
+| First rule that failed | Articles |
+|---|---|
+| E1 Accepted and reviewed (no GitHub review link, or no PDF) | 5 |
+| E2 Python (language field is not Python) | 23 |
+| E3 Code repository (no GitHub code URL, not Python as main language, archived, or commit not found) | 11 |
+| E4 Run command (no `python <script>.py` line in a fenced README block) | 25 |
+| E6 Size and license | 1 |
+
+Among the E3 failures:
+
+- language Jupyter Notebook: 5
+- language TeX: 3
+- no code entry with a GitHub repository U: 2
+- language Gnuplot: 1
+
+What this means:
+
+- **The runs, the claim extraction, the scoring, and the agreement table of sections 5 to 7 were not done**, because no article
+  passed the rules. Nothing is missing by accident: with no selected article there is nothing to run.
+- The bottleneck is E4. Of the articles that are written in Python and have a GitHub repository, 25 have no README with a
+  `python <script>.py` line; ReScience repositories typically run through notebooks, `make`, shell scripts, or `python -m`.
+  The pipeline of Pilot 4 starts from such a line, so the pool of ReScience C is largely out of reach of this protocol as
+  written. That is itself a finding about the tool's reach.
+- The rules were not widened again after this result. Three evaluations were made (the first failed because of a defect of the
+  script, the second and third are the ones described in section 9); a fourth, with a rule changed to admit articles, would be
+  fitting the rules to the wanted outcome. A change such as accepting `python -m` commands, a `Makefile` target, or
+  `jupyter nbconvert --execute` for notebook repositories is a decision for the owner and would be a new, documented
+  amendment before any run.
+- Not verified: how many of the 25 articles would run if given the right command.

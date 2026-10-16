@@ -18,6 +18,8 @@ import os
 import re
 import sys
 import tempfile
+import time
+import urllib.error
 import urllib.parse
 from datetime import UTC, datetime
 from pathlib import Path
@@ -43,6 +45,7 @@ from scripts.corpus_expansion import (
 )
 from scripts.verify_corpus import (
     GITHUB_API,
+    UrlHttp,
     check_repo_and_license,
     check_script,
     title_similarity,
@@ -101,13 +104,19 @@ def table_statistics(pages: list[str]) -> tuple[int, int]:
     return captions, decimals
 
 
+def mappings(value: Any) -> list[dict[str, Any]]:
+    """The mappings of a field that article.yaml writes as one mapping or as a list of one-key mappings."""
+    return [value] if isinstance(value, dict) else [v for v in (value if isinstance(value, list) else []) if isinstance(v, dict)]
+
+
+def field(article: dict[str, Any], key: str, name: str) -> Any:
+    """The first non-empty `name` among the mappings of article[key]."""
+    return next((m[name] for m in mappings(article.get(key)) if m.get(name)), None)
+
+
 def code_entry(article: dict[str, Any]) -> dict[str, Any] | None:
-    """The `code` entry of article.yaml with a GitHub URL (a mapping, or the first such mapping of a list)."""
-    code = article.get("code")
-    for item in (code if isinstance(code, list) else [code]):
-        if isinstance(item, dict) and CODE_URL.match(str(item.get("url", "")).strip()):
-            return item
-    return None
+    """The first `code` mapping with a GitHub URL."""
+    return next((m for m in mappings(article.get("code")) if CODE_URL.match(str(m.get("url") or "").strip())), None)
 
 
 def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_repos: set[str],
@@ -127,8 +136,7 @@ def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_
         article = None
     if not isinstance(article, dict):
         return fail("E1", "article.yaml missing or not a mapping")
-    review = article.get("review")
-    review_url = str(review.get("url", "")).strip() if isinstance(review, dict) else ""
+    review_url = str(field(article, "review", "url") or "").strip()
     if "github.com" not in review_url:
         return fail("E1", "no review url that points to GitHub")
     pdf = fetcher.article_pdf(commit, directory)
@@ -147,6 +155,12 @@ def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_
         return fail("E3", f"repository {full_name}: " + ("not available" if meta is None else
                                                           f"language {meta.get('language')}, archived {meta.get('archived')}"))
     sha = fetcher.resolve(full_name, ref or meta.get("default_branch") or "main")
+    fallback = None
+    if sha is None and ref:
+        # Amendment 2 (docs/EXTERNAL_VALIDATION.md section 9): a ref named in the URL that does not exist is replaced by the
+        # head of the default branch.
+        fallback = f"the ref {ref} named in the code URL does not exist; the head of the default branch is used"
+        sha = fetcher.resolve(full_name, meta.get("default_branch") or "main")
     if sha is None:
         return fail("E3", f"commit of {ref or 'the default branch'} not available")
     readme = fetcher.readme_at(full_name, sha)
@@ -180,10 +194,9 @@ def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_
     if full_name.lower() in seed_repos or full_name.lower() in taken_repos:
         return fail("E8", "repository already in a corpus or already selected")
     zenodo = re.fullmatch(r"10\.5281_zenodo\.(\d+)", directory)
-    published = ((article.get("dates") or {}).get("published") if isinstance(article.get("dates"), dict) else None) or ""
-    year = re.match(r"(\d{4})", str(published))
+    year = re.search(r"(\d{4})", str(field(article, "dates", "published") or ""))
     result.update(
-        passed=True, detail=f"{captions} table captions, {decimals} decimal numbers",
+        passed=True, detail=f"{captions} table captions, {decimals} decimal numbers" + (f"; {fallback}" if fallback else ""),
         entry={"title": str(article.get("title", "")).strip(), "year": int(year.group(1)) if year else None,
                "venue": "ReScience C", "repo_url": f"https://github.com/{meta['full_name']}", "repo_commit": sha,
                "paper_url": f"https://zenodo.org/records/{zenodo.group(1)}" if zenodo else
@@ -243,8 +256,28 @@ def papers_json(chosen: list[dict[str, Any]]) -> list[dict[str, Any]]:
              "source_table_or_section": {}} for i, c in enumerate(chosen)]
 
 
+class RetryHttp(UrlHttp):
+    """`UrlHttp` that tries again when the connection fails (the owner's network drops now and then)."""
+
+    ATTEMPTS = 6
+
+    def get(self, url: str) -> tuple[int, str]:
+        for attempt in range(1, self.ATTEMPTS + 1):
+            try:
+                return super().get(url)
+            except OSError:
+                if attempt == self.ATTEMPTS:
+                    raise
+                time.sleep(5 * attempt)
+        raise AssertionError("unreachable")
+
+
 class ReScienceFetcher(NetFetcher):
     """The real fetcher: GitHub API and raw files."""
+
+    def __init__(self, token: str | None) -> None:
+        super().__init__(token)
+        self.http = RetryHttp(token=token, timeout=60)
 
     def article_dirs(self) -> tuple[str, list[str]]:
         head = self._json(f"{GITHUB_API}/repos/{ARTICLES_REPO}/commits/HEAD")
@@ -261,11 +294,15 @@ class ReScienceFetcher(NetFetcher):
 
         request = urllib.request.Request(f"{RAW}/{ARTICLES_REPO}/{commit}/{urllib.parse.quote(directory)}/article.pdf",
                                          headers={"User-Agent": "repro-radar"})
-        try:
-            with urllib.request.urlopen(request, timeout=120) as response:
-                return response.read()
-        except OSError:
-            return None
+        for attempt in range(1, RetryHttp.ATTEMPTS + 1):
+            try:
+                with urllib.request.urlopen(request, timeout=120) as response:
+                    return response.read()
+            except urllib.error.HTTPError:
+                return None
+            except OSError:
+                time.sleep(5 * attempt)
+        return None
 
     def resolve(self, full_name: str, ref: str) -> str | None:
         data = self._json(f"{GITHUB_API}/repos/{full_name}/commits/{urllib.parse.quote(ref, safe='')}")

@@ -12,14 +12,24 @@ YAML = """
 title: A Replication of Something
 language: Python 3
 review:
-  url: https://github.com/ReScience/submission/issues/7
+  - url: https://github.com/ReScience/submission/issues/7
 code:
-  url: https://github.com/someone/code
+  - url: https://github.com/someone/code
+  - doi: 10.5281/zenodo.1
 dates:
-  published: 2020-05-03
+  - received: March 1, 2020
+  - published: May 3, 2020
 """
 README = "# Code\n\n```\npython run.py --n 3\n```\n"
 PDF = b"%PDF fake"
+NULLS = """title: T
+language:
+review:
+  - url:
+code:
+  - url:
+  - doi:
+"""
 
 
 class Fake:
@@ -85,7 +95,7 @@ def test_an_article_that_meets_every_rule_passes_with_a_complete_entry():
     (Fake(yaml=YAML.replace("https://github.com/ReScience/submission/issues/7", "https://example.org/review")), "E1"),
     (Fake(pdf=None), "E1"),
     (Fake(yaml=YAML.replace("Python 3", "R")), "E2"),
-    (Fake(yaml=YAML.replace("https://github.com/someone/code", "https://example.org/code")), "E3"),
+    (Fake(yaml=YAML.replace("url: https://github.com/someone/code", "url: https://example.org/code")), "E3"),
     (Fake(meta={"full_name": "someone/code", "language": "Julia", "archived": False}), "E3"),
     (Fake(meta={"full_name": "someone/code", "language": "Python", "archived": True}), "E3"),
     (Fake(readme="# no command here"), "E4"),
@@ -118,19 +128,30 @@ def test_a_repository_in_a_corpus_or_already_selected_fails_e8():
 
 
 def test_a_tree_or_tag_in_the_code_url_is_the_pinned_ref():
-    fake = Fake(yaml=YAML.replace("https://github.com/someone/code", "https://github.com/someone/code/tree/v1.2"))
+    fake = Fake(yaml=YAML.replace("url: https://github.com/someone/code", "url: https://github.com/someone/code/tree/v1.2"))
     assert run(fake)["passed"] and fake.resolved == ["v1.2"]
-    tag = Fake(yaml=YAML.replace("https://github.com/someone/code", "https://github.com/someone/code/releases/tag/r3"))
+    tag = Fake(yaml=YAML.replace("url: https://github.com/someone/code", "url: https://github.com/someone/code/releases/tag/r3"))
     assert run(tag)["passed"] and tag.resolved == ["r3"]
     plain = Fake()
     run(plain)
     assert plain.resolved == ["main"]  # the head of the default branch
 
 
-def test_the_code_entry_can_be_a_list():
-    fake = Fake(yaml=YAML.replace("code:\n  url: https://github.com/someone/code",
-                                  "code:\n  - url: https://example.org/archive\n  - url: https://github.com/someone/code"))
-    assert run(fake)["passed"]
+def test_the_fields_can_be_a_mapping_or_a_list_of_mappings_and_null_values_are_empty():
+    mapping = Fake(yaml="""
+title: T
+language: [Python]
+review: {url: https://github.com/ReScience/submission/issues/7}
+code: {url: https://github.com/someone/code}
+dates: {published: 2019-01-01}
+""")
+    assert run(mapping)["passed"]
+    assert run(mapping)["entry"]["year"] == 2019
+    nulls = Fake(yaml=NULLS)
+    assert run(nulls)["failed_rule"] == "E1"
+    archive = "  - url: https://example.org/archive"+chr(10)+"  - url: https://github.com/someone/code"
+    first_archive = Fake(yaml=YAML.replace("  - url: https://github.com/someone/code", archive))
+    assert run(first_archive)["passed"]
 
 
 def test_the_order_is_the_hash_of_the_directory_name_and_ignores_case_and_duplicates():
@@ -177,3 +198,18 @@ def test_verify_selected_checks_repository_script_and_the_title_in_the_pdf(monke
     assert {name: ok for name, ok, _ in checks} == {"repo": True, "license": True, "script": True, "article": True}
     monkeypatch.setattr(ev, "pdf_text", lambda pdf: ["Another title altogether"])
     assert {n: ok for n, ok, _ in ev.verify_selected(entry, Http(), PDF)}["article"] is False
+
+
+def test_a_ref_in_the_code_url_that_does_not_exist_falls_back_to_the_default_branch_head():
+    class NoTag(Fake):
+        def resolve(self, full_name, ref):
+            self.resolved.append(ref)
+            return None if ref == "v9" else "b" * 40
+
+    fake = NoTag(yaml=YAML.replace("url: https://github.com/someone/code", "url: https://github.com/someone/code/releases/tag/v9"))
+    result = run(fake)
+    assert result["passed"] and fake.resolved == ["v9", "main"] and result["entry"]["repo_commit"] == "b" * 40
+    assert "v9 named in the code URL does not exist" in result["detail"]
+    broken = NoTag(yaml=YAML)
+    broken.resolve = lambda full_name, ref: None
+    assert run(broken)["failed_rule"] == "E3"  # no ref in the URL and the default branch cannot be resolved
