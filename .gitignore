@@ -98,3 +98,6 @@ data/llm_cache/
 
 # Cloned paper repositories and downloaded wheels of the pilot runs
 .sandbox_staging/
+
+# Installed-environment cache (src/sandbox/env_cache.py, #380)
+.sandbox_cache/
