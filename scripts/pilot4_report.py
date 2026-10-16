@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+"""Pilot 4 results: strict (first attempt) and corrected rates, per-paper table, Pilots 1 to 4 side by side (#351).
+
+    python scripts/pilot4_report.py              # write data/pilot4_runs/summary.json and summary.md
+    python scripts/pilot4_report.py --check      # exit 1 if the stored summary differs from the stored runs
+
+Reads `data/pilot4_runs/<paper_id>/` (the final record of each paper) and, for a paper that had a correction round, the first
+attempt in `data/pilot4_runs/first_attempts/<paper_id>_attempt1/` (docs/PILOT_4.md section 7). The rates and categories come from
+`scripts/pilot_measurements.py` and `scripts/categorize_pilot_failures.py`; Pilots 1 to 3 are read from their stored
+`measurements.json`. Nothing is typed by hand.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+from typing import Any
+
+project_root = Path(__file__).resolve().parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from scripts import categorize_pilot_failures, pilot_measurements
+
+DATA = project_root / "data"
+CORPUS = DATA / "corpus_expansion" / "papers.json"
+RUNS = DATA / "pilot4_runs"
+RATE_KEYS = (("install_success_rate", "Install success"), ("run_success_rate", "Run success"),
+             ("pilot_success_rate", "Pilot success"))
+
+
+def _load(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+
+
+def strict_view(runs: Path, corpus_ids: list[str], target: Path) -> None:
+    """A directory with, per paper, the first attempt: the stored first attempt when there was a correction round, else the final record."""
+    for paper_id in corpus_ids:
+        first = runs / "first_attempts" / f"{paper_id}_attempt1"
+        source = first if first.is_dir() else runs / paper_id
+        if source.is_dir():
+            shutil.copytree(source, target / paper_id)
+
+
+def _paper_row(paper: dict[str, Any], measure: dict[str, Any], category: dict[str, Any]) -> dict[str, Any]:
+    evidence = category.get("evidence") or {}
+    return {"status": measure.get("run_status") or measure.get("stage_status"), "exit_code": measure.get("exit_code"),
+            "install_success": measure["install_success"], "run_success": measure["run_success"],
+            "pilot_success": measure["pilot_success"], "run_seconds": measure.get("run_seconds"),
+            "run_peak_memory_mib": measure.get("run_peak_memory_mib"),
+            "category": category.get("category") or category.get("other_name"), "phase": category.get("phase"),
+            "deciding_line": evidence.get("line"), "deciding_file": evidence.get("file")}
+
+
+def build(data: Path = DATA, runs: Path | None = None, corpus: Path | None = None) -> dict[str, Any]:
+    runs = runs or data / "pilot4_runs"
+    corpus = corpus or data / "corpus_expansion" / "papers.json"
+    papers = json.loads(corpus.read_text(encoding="utf-8"))
+    ids = [p["paper_id"] for p in papers]
+    with tempfile.TemporaryDirectory() as folder:
+        strict_dir = Path(folder) / "pilot4_strict"
+        strict_dir.mkdir()
+        strict_view(runs, ids, strict_dir)
+        strict_m, strict_c = pilot_measurements.measure(strict_dir, corpus), categorize_pilot_failures.categorize(strict_dir, corpus)
+    final_m, final_c = pilot_measurements.measure(runs, corpus), categorize_pilot_failures.categorize(runs, corpus)
+    rows = []
+    for index, paper in enumerate(papers):
+        pid = paper["paper_id"]
+        correction = _load(runs / pid / "pilot_record.json").get("pilot4", {}).get("correction")
+        rows.append({
+            "paper_id": pid, "title": paper["title"], "repository": paper["repo_url"], "run_command": paper["run_command"],
+            "correction_round": bool(correction), "corrections": (correction or {}).get("changes", []),
+            "strict": _paper_row(paper, strict_m["papers"][index], strict_c["papers"][index]),
+            "corrected": _paper_row(paper, final_m["papers"][index], final_c["papers"][index]),
+        })
+    earlier = {}
+    for name, folder in (("pilot1", "pilot_runs"), ("pilot2", "pilot2_runs"), ("pilot3", "pilot3_runs")):
+        measurements = _load(data / folder / "measurements.json")
+        earlier[name] = {key: measurements[key] for key, _ in RATE_KEYS} if measurements else None
+    return {"protocol": "docs/PILOT_4.md", "papers": rows,
+            "rates": {"strict": {key: strict_m[key] for key, _ in RATE_KEYS},
+                      "corrected": {key: final_m[key] for key, _ in RATE_KEYS}},
+            "failure_counts": {"strict": strict_c["counts"], "corrected": final_c["counts"]},
+            "earlier_pilots": earlier}
+
+
+def _fmt(rate: dict[str, Any] | None) -> str:
+    return "n/a" if not rate else f"{rate['count']} / {rate['of']} ({rate['rate']})"
+
+
+def to_markdown(result: dict[str, Any]) -> str:
+    lines = ["<!-- Generated by scripts/pilot4_report.py from data/pilot4_runs/ and the stored measurements of Pilots 1 to 3; do not edit by hand. -->", "",
+             "| Measure | Pilot 1 | Pilot 2 | Pilot 3 | Pilot 4, first attempt | Pilot 4, after one correction round |",
+             "|---|---|---|---|---|---|"]
+    for key, label in RATE_KEYS:
+        earlier = result["earlier_pilots"]
+        lines.append(f"| {label} | {_fmt((earlier['pilot1'] or {}).get(key))} | {_fmt((earlier['pilot2'] or {}).get(key))} | "
+                     f"{_fmt((earlier['pilot3'] or {}).get(key))} | {_fmt(result['rates']['strict'][key])} | "
+                     f"{_fmt(result['rates']['corrected'][key])} |")
+    lines += ["", "| Paper | README command | First attempt | After the correction round | Corrections |", "|---|---|---|---|---|"]
+
+    def cell(row: dict[str, Any]) -> str:
+        if row["pilot_success"]:
+            return f"success ({row['status']}, exit {row['exit_code']}, {row['run_seconds']} s)"
+        category = f"{row['category']} ({row['phase']})" if row["category"] else "no failure category"
+        return f"{category}: {row['status']}, exit {row['exit_code']}"
+
+    for p in result["papers"]:
+        corrections = "; ".join(c["change"] for c in p["corrections"]) or "none"
+        corrected = cell(p["corrected"]) if p["correction_round"] else "no correction round"
+        command = p["run_command"].replace("|", "/")
+        lines.append(f"| `{p['paper_id']}` | `{command}` | {cell(p['strict'])} | {corrected} | {corrections} |")
+    counts = result["failure_counts"]
+    lines += ["", "| Failure category | First attempt | After the correction round |", "|---|---|---|"]
+    lines += [f"| `{category}` | {counts['strict'][category]} | {counts['corrected'].get(category, 0)} |" for category in counts["strict"]]
+    return "\n".join(lines) + "\n"
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Pilot 4 results: strict and corrected rates, Pilots 1 to 4 side by side.")
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args(argv)
+    result = build()
+    text = json.dumps(result, indent=2) + "\n"
+    markdown = to_markdown(result)
+    json_path, md_path = RUNS / "summary.json", RUNS / "summary.md"
+    if args.check:
+        same = json_path.is_file() and md_path.is_file() and json_path.read_text(encoding="utf-8").replace("\r\n", "\n") == text \
+            and md_path.read_text(encoding="utf-8").replace("\r\n", "\n") == markdown
+        print(json.dumps({"in_sync": same}))
+        return 0 if same else 1
+    json_path.write_text(text, encoding="utf-8")
+    md_path.write_text(markdown, encoding="utf-8")
+    print(markdown)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
