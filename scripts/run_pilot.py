@@ -20,7 +20,8 @@ untouched), and `_collect_pilot2_files` copies the protocol's named files from t
 
 `--memory 50%` replaces the memory limit (a size or a share of the host's RAM; the record says `memory_override`) and
 `--record-root data/memory_runs` moves the record, so a run with another memory limit does not land among the protocol
-runs (#319). Together with `--pilot3` they re-run Pilot 3's settings with only the memory limit changed.
+runs (#319). `--cpus N` replaces the CPU limit the same way and writes `cpus_override` (#331). Together with
+`--pilot3` they re-run Pilot 3's settings with only the memory and CPU limits changed.
 
 Exit codes: 0 when the paper went through the pipeline, whatever the paper's own result (staging, install, and run
 failures are pilot results and are recorded); 1 on a harness error (for example Docker unavailable), so a failed
@@ -185,7 +186,8 @@ def _collect_pilot2_files(sandbox_dir: Path, build_dir: Path, target_dir: Path) 
 
 def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
               data_cache: Path | None = None, record_root: Path | None = None, pilot3: bool = False,
-              settings_path: Path | None = None, memory_limit: str | None = None) -> dict[str, Any]:
+              settings_path: Path | None = None, memory_limit: str | None = None,
+              cpus: float | None = None) -> dict[str, Any]:
     entry = load_entry(paper_id)
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
@@ -202,6 +204,13 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         memory_override = {"requested": memory_limit, "resolved": resolved,
                            "protocol_memory_limit": limits["memory_limit"]}
         limits.update({"memory_limit": resolved, "memory_swap": resolved})
+    cpus_override: dict[str, Any] = {}
+    if cpus is not None:
+        if cpus <= 0:
+            raise ValueError(f"the CPU limit must be positive, not {cpus}")
+        cpus_override = {"requested": cpus, "protocol_cpus": limits["cpus"],
+                         "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"}
+        limits["cpus"] = float(cpus)
     setup_options: dict[str, Any] | None = None
     if pilot2:
         # Harness error (raised, exit 1) when the setup is malformed or its data is not in the cache
@@ -244,6 +253,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         record["pilot3_change"] = pilot3_change
     if memory_override:
         record["memory_override"] = memory_override
+    if cpus_override:
+        record["cpus_override"] = cpus_override
 
     start = time.time()
     try:
@@ -338,12 +349,15 @@ def main(argv: list[str] | None = None) -> int:
                         help="Write the record and the collected files to DIR/<paper_id>/ instead of "
                              "data/pilot2_runs/ or data/pilot3_runs/ (needs --pilot2 or --pilot3), for example "
                              "data/memory_runs.")
+    parser.add_argument("--cpus", type=float, default=None, metavar="N",
+                        help="Replace the protocol's CPU limit (2) with N; the record gets `cpus_override`. "
+                             "Not a protocol run (#331).")
     args = parser.parse_args(argv)
     if args.record_root and not (args.pilot2 or args.pilot3):
         parser.error("--record-root needs --pilot2 or --pilot3 (Pilot 1 records stay in sandbox_runs/)")
     try:
         record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache),
-                           pilot3=args.pilot3, memory_limit=args.memory,
+                           pilot3=args.pilot3, memory_limit=args.memory, cpus=args.cpus,
                            record_root=Path(args.record_root) if args.record_root else None)
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
