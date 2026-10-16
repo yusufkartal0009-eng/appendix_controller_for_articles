@@ -1,0 +1,41 @@
+{
+  "arcene_auroc": {
+    "status": "found",
+    "reason": "Table 2 SAINT row, Arcene column (mean of 5 trials). SAINT-s (86.88) and SAINT-i (92.75) are separate variants.",
+    "claim": {
+      "metric_name": "auroc",
+      "value_as_printed": "91.04",
+      "unit": "percent",
+      "dataset": "Arcene",
+      "model_variant": "SAINT",
+      "split": "test",
+      "higher_is_better": true,
+      "table_or_figure": "Table 2",
+      "page": 7,
+      "source_quote": "SAINT 93.3 84.67 94.18 91.04 99.7 93.06 91.67 70.12 97.67 93.13",
+      "confidence": 0.95
+    }
+  },
+  "bank_marketing_accuracy": {
+    "status": "not_found",
+    "reason": "The paper reports only AUROC for Bank Marketing (binary task); accuracy is reported only for the multi-class Volkert and MNIST datasets.",
+    "claim": null
+  },
+  "xgboost_arcene_auroc": {
+    "status": "found",
+    "reason": "Table 2 XGBoost row, Arcene column (mean of 5 trials).",
+    "claim": {
+      "metric_name": "auroc",
+      "value_as_printed": "81.41",
+      "unit": "percent",
+      "dataset": "Arcene",
+      "model_variant": "XGBoost [4]",
+      "split": "test",
+      "higher_is_better": true,
+      "table_or_figure": "Table 2",
+      "page": 7,
+      "source_quote": "XGBoost [4] 92.96 81.78 81.98 81.41 95.53 92.51 92.31 68.95 94.13* 91.06",
+      "confidence": 0.95
+    }
+  }
+}

@@ -12,7 +12,12 @@ from collections.abc import Callable
 
 from sqlalchemy.orm import Session
 
-from src.claim_store import accepted_claims, get_extracted_claims, record_review
+from src.claim_store import (
+    accepted_claims,
+    consensus_candidates,
+    get_extracted_claims,
+    record_review,
+)
 from src.models import ExtractedClaimORM
 
 CHOICES = {"a": "accepted", "r": "rejected", "s": "skip", "q": "quit"}
@@ -64,6 +69,15 @@ def review_claims(session: Session, paper_id: str | None = None, input_fn: Calla
     return counts
 
 
-def claims_for_scoring(session: Session, paper_id: str) -> dict[str, float]:
-    """The claimed values the scorer may use: only claims a person accepted, keyed by question id."""
-    return {claim.query_id: claim.value for claim in accepted_claims(session, paper_id)}
+def claims_for_scoring(session: Session, paper_id: str, include_auto_consensus: bool = False) -> dict[str, float]:
+    """The claimed values the scorer may use: only claims a person accepted, keyed by question id.
+
+    `include_auto_consensus=True` adds the candidates that independent extraction passes agree on (#381). A person's
+    accepted claim wins over a candidate for the same question. The caller must label the score as one that used
+    unreviewed candidates (`cli.py score --claims auto-consensus` does).
+    """
+    claims = {claim.query_id: claim.value for claim in accepted_claims(session, paper_id)}
+    if include_auto_consensus:
+        for claim in consensus_candidates(session, paper_id):
+            claims.setdefault(claim.query_id, claim.value)
+    return claims

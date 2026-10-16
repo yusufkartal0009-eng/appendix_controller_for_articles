@@ -1,0 +1,41 @@
+{
+  "forest_covertype_accuracy__danet_20": {
+    "status": "found",
+    "reason": "Table 2, Forest column, DANet-20 row.",
+    "claim": {
+      "metric_name": "accuracy",
+      "value_as_printed": "97.23%±2e-4",
+      "unit": "percent",
+      "dataset": "Forest Cover Type",
+      "model_variant": "DAN ET-20 (ours)",
+      "split": "test",
+      "higher_is_better": true,
+      "table_or_figure": "Table 2",
+      "page": 6,
+      "source_quote": "DAN ET-20 (ours) 2 97.23%±2e-4",
+      "confidence": 0.95
+    }
+  },
+  "forest_covertype_accuracy__danet_32": {
+    "status": "found",
+    "reason": "Table 2, Forest column, DANet-32 row.",
+    "claim": {
+      "metric_name": "accuracy",
+      "value_as_printed": "97.27%±5e-4",
+      "unit": "percent",
+      "dataset": "Forest Cover Type",
+      "model_variant": "DAN ET-32 (ours)",
+      "split": "test",
+      "higher_is_better": true,
+      "table_or_figure": "Table 2",
+      "page": 6,
+      "source_quote": "DAN ET-32 (ours) 1 97.27%±5e-4",
+      "confidence": 0.95
+    }
+  },
+  "higgs_auroc": {
+    "status": "not_found",
+    "reason": "The HIGGS dataset and AUROC metric do not occur in the paper.",
+    "claim": null
+  }
+}

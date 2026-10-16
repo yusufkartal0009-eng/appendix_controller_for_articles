@@ -91,4 +91,4 @@ These are attached after extraction and are not produced by the extractor itself
      (`exact`, `whitespace_normalized`, or `split_numbers_repaired`) is recorded;
   3. `dataset` and `model_variant` to occur somewhere in the paper as whole words (ignoring case), so a claim
      about a dataset the paper never mentions (`EP3602`) cannot pass.
-- `verified_by`: `auto-quote-match` or `human` (W6, #10, and W7, #134).
+- `verified_by`: `auto-quote-match`, `auto-consensus` (at least two independent extraction passes agree and pass the quote check; a candidate that stays `pending`, #381), or `human` (W6, #10, and W7, #134).
