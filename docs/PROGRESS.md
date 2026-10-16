@@ -777,3 +777,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Together with `paper_006` (#348): 4 times the CPUs gave a run phase about 3.2 times (`paper_003`) and 3.1 times (`paper_006`) shorter, with the same status, exit code and metrics.
 - `docs/report/REPORT.md`: the stability block is regenerated (the new run is in the table).
 - Not verified: that CPUs alone caused the difference (the tool commit differs, and short test and CI jobs and the corpus evaluation ran on the machine during this run); a repeat of the CPU run; other papers.
+
+### 2026-10-16 22:11 +03:00: docs: CPU runs of paper_003 and paper_006 (Issue #350)
+- `docs/CPU_RUNS.md`: how the two 8-CPU runs were made, why they are not protocol runs, a generated table next to the same papers' 2-CPU runs (run phase, seconds saved, speed-up, install and run, same status and metrics), how to read it, and the limits. `scripts/run_stability.py` gets `cpu_effect`, `--write` and `--check` for the generated blocks (the stability document waits for the second runs); 3 new tests in `tests/test_run_stability.py`. `tests/`: 657 passed, 9 skipped; ruff clean.
+- What the generated table says: with 8 CPUs instead of 2 the run phase was 2.79 to 3.26 times faster in the 4 comparisons (`paper_003`: 3.26 and 3.21 times, 1050.9 and 1031.7 s shorter; `paper_006`: 2.79 and 3.07 times, 2002.8 and 2315.5 s shorter); install and run together 1.69 to 2.38 times; status, exit code and metrics the same in all of them. Four times the CPUs gave less than four times the speed-up; the reason was not investigated.
+- `docs/report/REPORT.md`: the sentence on the repeated runs now names both CPU runs.
+- Not verified: that the CPUs alone caused the difference (tool commit, memory limit and other work on the machine differ); other papers; a repeat of a CPU run.

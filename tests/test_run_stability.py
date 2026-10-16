@@ -55,3 +55,42 @@ def test_the_stored_runs_agree_and_the_report_block_is_in_sync():
     assert report_numbers.mismatches(text) == []
     for name in ("syntheticcontrol", "stability", "goldexpansion"):
         assert f"<!-- numbers:{name}:start -->" in text
+
+
+def _cpu_world(tmp_path):
+    _run(tmp_path / "pilot3_runs" / "paper_003")
+    _run(tmp_path / "memory_runs" / "paper_003", limit="14265m")
+    _run(tmp_path / "cpu_runs" / "paper_003", limit="14265m", cpus=8.0)
+    for name, seconds, total in (("pilot3_runs", 100.0, 150.0), ("memory_runs", 90.0, 140.0), ("cpu_runs", 30.0, 60.0)):
+        directory = tmp_path / name / "paper_003"
+        record = json.loads((directory / "pilot_record.json").read_text(encoding="utf-8"))
+        record["run"]["duration_seconds"] = seconds
+        record["sandbox_duration_seconds"] = total
+        (directory / "pilot_record.json").write_text(json.dumps(record), encoding="utf-8")
+    return tmp_path
+
+
+def test_cpu_effect_compares_a_cpu_run_with_every_run_that_has_two_cpus(tmp_path):
+    rows = run_stability.cpu_effect(_cpu_world(tmp_path))
+    assert [(r["reference"], r["speedup"], r["seconds_saved"], r["total_speedup"]) for r in rows] == [
+        ("Pilot 3", 3.33, 70.0, 2.5), ("memory re-run", 3.0, 60.0, 2.33)]
+    assert all(r["same_status"] and r["same_metrics"] and r["cpu_cpus"] == 8.0 for r in rows)
+    assert "3 to 3.33 times faster in the 2 comparisons" in run_stability.cpu_sentence(rows)
+    assert "were the same in all of them" in run_stability.cpu_sentence(rows)
+
+
+def test_cpu_effect_notices_different_metrics_and_skips_papers_without_a_cpu_run(tmp_path):
+    world = _cpu_world(tmp_path)
+    _run(world / "pilot3_runs" / "paper_006", metrics={"auroc": 0.9})
+    report = world / "cpu_runs" / "paper_003" / "run_report.json"
+    report.write_text(json.dumps({"metrics": {"rmse": 0.9}}), encoding="utf-8")
+    rows = run_stability.cpu_effect(world)
+    assert {r["paper_id"] for r in rows} == {"paper_003"} and not any(r["same_metrics"] for r in rows)
+    assert "not all" in run_stability.cpu_sentence(rows)
+    assert run_stability.cpu_sentence([]) == "No CPU run is stored."
+
+
+def test_the_generated_block_of_the_cpu_document_is_in_sync_with_the_stored_runs():
+    text = (PROJECT_ROOT / "docs" / "CPU_RUNS.md").read_text(encoding="utf-8").replace("\r\n", "\n")
+    assert run_stability.apply_block(text, "docs/CPU_RUNS.md") == text
+    assert run_stability.main(["--check"]) == 0
