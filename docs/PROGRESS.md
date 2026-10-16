@@ -673,3 +673,8 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Pass A: the main session (not blind). Pass B: a fresh `claude -p` process on a blind packet. **18 of 18 agree** by normalized value (12 values, 6 "not found" including all 6 negative controls); every quote of both passes occurs on its page.
 - The owner's gold set for these questions does not exist yet: the form is outside the repository; **no precision or recall is claimed** until the owner has filled it and `evaluate_gold.py` has scored both passes.
 - Not verified: correctness of the values against the owner's own reading; same-model passes; the packet was started by the main session, not by the owner.
+
+### 2026-10-16 14:23 +03:00: fix(scoring): 'not found' is no longer reported as a divergence (Issue #317)
+- `ReproducibilityScorer.calculate_composite_score` has a new flag `nothing_compared`; `evaluate_paper_run` sets it when the run succeeded, claims exist, and none of them was found in the output. The two summaries that blamed the claims ("significant divergence" and "fell short of claims") then say "claimed metrics not found in the output (nothing was compared)". "Divergence" stays for claims that were found and differ.
+- Tests: `tests/test_scoring.py` (two new cases: nothing found, including an empty output; found and different). `tests/`: 569 passed, 9 skipped; ruff clean.
+- Not verified: the stored summary of the earlier `paper_006` score run was not rewritten; this change only affects scores computed from now on.
