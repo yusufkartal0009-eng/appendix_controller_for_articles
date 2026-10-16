@@ -25,11 +25,16 @@ class Fetcher:
     def __init__(self, repos=None, arxiv=None):
         self.repos = repos or {}
         self.paper = arxiv or {"title": "A Paper", "year": 2021, "text": GOOD_TEXT}
+        self.ids = {}  # every repository links its own paper, so that R7 does not see one paper twice
+
+    def _link(self, name):
+        number = self.ids.setdefault(name, len(self.ids) + 1)
+        return f"https://arxiv.org/abs/2101.{number:05d}"
 
     def _get(self, name):
         base = {"meta": {"full_name": name, "language": "Python", "archived": False, "fork": False, "private": False,
                          "license": MIT, "size": 500, "default_branch": "main"},
-                "readme": README, "sha": "a" * 40, "paths": ["train.py", "requirements.txt", "other.py"],
+                "readme": README.replace(LINK, self._link(name)), "sha": "a" * 40, "paths": ["train.py", "requirements.txt", "other.py"],
                 "files": {"requirements.txt": "numpy\n"}}
         base.update(self.repos.get(name, {}))
         return base
@@ -150,7 +155,7 @@ def test_a_candidate_that_fails_verify_corpus_is_eliminated_and_the_next_takes_i
 
 def test_the_pool_is_stored_with_the_queries_and_the_hash_order(tmp_path):
     pool = ce.command_pool(Fetcher({"b/two": {}, "a/one": {}}), tmp_path)
-    assert [s["query"] for s in pool["searches"]] == ce.QUERIES
+    assert [s["query"] for s in pool["searches"]] == ce.STAGES[0]
     stored = json.loads((tmp_path / "pool.json").read_text(encoding="utf-8"))
     assert [c["full_name"] for c in stored["candidates_in_order"]] == ce.order_candidates(["b/two", "a/one"])
 
@@ -162,3 +167,49 @@ def test_the_rules_in_the_code_are_the_rules_of_the_document():
     for rule in ce.RULES:
         assert f"| {rule} " in text
     assert "100,000 KB" in text and "500 MB" in text and f"first {ce.POOL_PER_QUERY} results" in text
+
+
+def test_r7_rejects_a_paper_that_is_in_the_corpus_even_in_another_repository():
+    result = ce.evaluate_candidate("o/other", Fetcher({"o/other": {}}), set(), set(), seed_papers={"2101.00001"})
+    assert result["failed_rule"] == "R7" and "arXiv:2101.00001" in result["detail"]
+    taken = ce.evaluate_candidate("o/other", Fetcher({"o/other": {}}), set(), set(), taken_papers={"2101.00001"})
+    assert taken["failed_rule"] == "R7"
+
+
+def test_selection_does_not_choose_two_repositories_of_the_same_paper():
+    evaluations, chosen = ce.select(["a/1", "a/2", "a/3"], Fetcher(), set(), None, count=2)
+    assert [c["full_name"] for c in chosen] == ["a/1", "a/2"]
+    same = Fetcher({n: {"readme": README} for n in ("a/1", "a/2", "a/3")})
+    evaluations, chosen = ce.select(["a/1", "a/2", "a/3"], same, set(), None, count=2)
+    assert [c["full_name"] for c in chosen] == ["a/1"] and evaluations[1]["failed_rule"] == "R7"
+
+
+def test_the_seed_corpus_gives_repositories_and_arxiv_ids():
+    assert "somepago/saint" in ce.seed_repo_names() and "2106.01342" in ce.seed_arxiv_ids()
+
+
+def test_a_command_that_continues_with_a_backslash_is_joined_and_a_comment_is_dropped():
+    bs = chr(92)
+    readme = f"{FENCE}\npython train.py experiment=a {bs}\n    model=b {bs}\n    seed=1 # a comment\n{FENCE}\n"
+    assert ce.find_run_command(readme, {"train.py"}) == ("python train.py experiment=a model=b seed=1", "train.py")
+    commented = f"{FENCE}\npython train.py   # explains the line\n{FENCE}\n"
+    assert ce.find_run_command(commented, {"train.py"}) == ("python train.py", "train.py")
+
+
+def test_stage_2_leaves_out_names_that_are_in_stage_1(tmp_path):
+    ce.command_pool(Fetcher({"a/1": {}, "a/2": {}}), tmp_path, stage=1)
+    stage2 = ce.command_pool(Fetcher({"a/2": {}, "a/3": {}}), tmp_path, stage=2)
+    assert [c["full_name"] for c in stage2["candidates_in_order"]] == ["a/3"]
+    assert [s["query"] for s in stage2["searches"]] == ce.STAGES[1] and (tmp_path / "pool_stage2.json").is_file()
+
+
+def test_evaluation_goes_through_the_stages_in_order_and_records_the_stage(tmp_path, monkeypatch):
+    ce.command_pool(Fetcher({"a/1": {}, "a/2": {}}), tmp_path, stage=1)
+    ce.command_pool(Fetcher({"a/3": {}, "a/4": {}}), tmp_path, stage=2)
+    monkeypatch.setattr(ce, "seed_repo_names", lambda: set())
+    monkeypatch.setattr(ce, "seed_arxiv_ids", lambda: set())
+    fetcher = Fetcher({n: {"meta": {"full_name": n, "language": "R", "license": MIT}} for n in ("a/1", "a/2")})
+    fetcher.repos.update({"a/3": {}, "a/4": {}})
+    evaluations, chosen = ce.command_evaluate(fetcher, tmp_path, None)
+    assert len(chosen) == 2 and {e["stage"] for e in evaluations} == {1, 2}
+    assert all(e["stage"] == 1 for e in evaluations if e["failed_rule"] == "R1")

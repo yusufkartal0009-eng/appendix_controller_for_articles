@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Choose six new papers by the rules of docs/CORPUS_EXPANSION.md (#335).
 
-    python scripts/corpus_expansion.py pool       # run the four searches once; write data/corpus_expansion/pool.json
+    python scripts/corpus_expansion.py pool       # run the four searches of stage 1 once; write data/corpus_expansion/pool.json
+    python scripts/corpus_expansion.py pool --stage 2    # stage 2 (and 3): only when fewer than six passed (document section 6)
     python scripts/corpus_expansion.py evaluate   # apply R1 to R7 in the hash order; write evaluation.json and papers.json
 
 Set GH_TOKEN (or GITHUB_TOKEN) to avoid GitHub's API limits. The rules look only at metadata, the README, a few named files,
@@ -39,12 +40,29 @@ from scripts.verify_corpus import (
 from src.config import ALLOWED_LICENSES, SEED_PAPERS_PATH
 
 OUT_DIR = project_root / "data" / "corpus_expansion"
-QUERIES = [
-    "topic:tabular-data language:Python arxiv.org in:readme",
-    "topic:tabular-deep-learning language:Python arxiv.org in:readme",
-    "topic:gradient-boosting language:Python arxiv.org in:readme",
-    "topic:scikit-learn language:Python arxiv.org in:readme",
+# Stage 1 is the pool of docs/CORPUS_EXPANSION.md section 2; stages 2 and 3 are its amendment (section 6), used in order only
+# while fewer than six papers have passed.
+STAGES = [
+    [
+        "topic:tabular-data language:Python arxiv.org in:readme",
+        "topic:tabular-deep-learning language:Python arxiv.org in:readme",
+        "topic:gradient-boosting language:Python arxiv.org in:readme",
+        "topic:scikit-learn language:Python arxiv.org in:readme",
+    ],
+    [
+        "topic:machine-learning language:Python arxiv.org in:readme",
+        "topic:classification language:Python arxiv.org in:readme",
+        "topic:regression language:Python arxiv.org in:readme",
+        "topic:xgboost language:Python arxiv.org in:readme",
+    ],
+    [
+        "topic:deep-learning language:Python arxiv.org in:readme",
+        "topic:data-science language:Python arxiv.org in:readme",
+        "topic:random-forest language:Python arxiv.org in:readme",
+        "topic:feature-selection language:Python arxiv.org in:readme",
+    ],
 ]
+QUERIES = [q for stage in STAGES for q in stage]
 POOL_PER_QUERY = 100
 SELECT_COUNT = 6
 MAX_REPO_SIZE_KB = 100_000
@@ -53,6 +71,7 @@ MIN_TABLE_CAPTIONS = 2
 MIN_DECIMAL_NUMBERS = 20
 REQUIREMENT_FILE = re.compile(r"(^|/)(requirements[^/]*\.txt|setup\.py|environment\.yml|pyproject\.toml)$")
 MAX_REQUIREMENT_FILES = 20
+BACKSLASH = chr(92)
 RULES = ("R1", "R2", "R3", "R4", "R5", "R6", "R7")
 FIRST_ID = 101  # new entries are paper_101, paper_102, ...: apart from the seed corpus
 
@@ -81,11 +100,18 @@ def find_run_command(readme: str, paths: set[str]) -> tuple[str, str] | None:
     """(command line, script path) of the first README line in a fenced block that starts with `python ` and a `.py` path
     that exists. The first non-option token after `python` must be the path (R3)."""
     for block in re.findall(r"```[^\n]*\n(.*?)```", readme, re.DOTALL):
-        for raw in block.splitlines():
+        lines = block.splitlines()
+        for index, raw in enumerate(lines):
             line = raw.strip()
             line = line[2:].strip() if line.startswith("$ ") else line
             if not line.startswith("python "):
                 continue
+            # a line that ends with a backslash continues on the next line; a trailing shell comment is not part of the command
+            following = index + 1
+            while line.endswith(BACKSLASH) and following < len(lines):
+                line = line[:-1].rstrip() + " " + lines[following].strip()
+                following += 1
+            line = re.sub(r"\s+#.*$", "", line).rstrip(BACKSLASH).strip()
             tokens = line.split()
             script = next((t for t in tokens[1:] if not t.startswith("-")), "")
             path = script.removeprefix("./")
@@ -106,8 +132,11 @@ def find_arxiv_id(readme: str) -> str | None:
     return match.group(1) if match else None
 
 
-def evaluate_candidate(full_name: str, fetcher: Fetcher, seed_repos: set[str], taken_repos: set[str]) -> dict[str, Any]:
-    """Apply R1 to R7 in order. The result names the first rule that failed, or carries the entry that passed."""
+def evaluate_candidate(full_name: str, fetcher: Fetcher, seed_repos: set[str], taken_repos: set[str],
+                       seed_papers: set[str] = frozenset(), taken_papers: set[str] = frozenset()) -> dict[str, Any]:  # type: ignore[assignment]
+    """Apply R1 to R7 in order. The result names the first rule that failed, or carries the entry that passed.
+
+    R7 looks at the repository and at the paper (its arXiv id): both must be new."""
     result: dict[str, Any] = {"full_name": full_name, "hash": candidate_hash(full_name), "passed": False,
                               "failed_rule": None, "detail": ""}
 
@@ -161,6 +190,8 @@ def evaluate_candidate(full_name: str, fetcher: Fetcher, seed_repos: set[str], t
         return fail("R6", f"{captions} table captions and {decimals} decimal numbers in the paper's text")
     if full_name.lower() in seed_repos or full_name.lower() in taken_repos:
         return fail("R7", "repository already in the corpus or already selected")
+    if arxiv_id in seed_papers or arxiv_id in taken_papers:
+        return fail("R7", f"paper arXiv:{arxiv_id} already in the corpus or already selected")
     result.update(passed=True, detail=f"{captions} table captions, {decimals} decimal numbers",
                   entry={"title": paper["title"], "year": paper.get("year"), "venue": "arXiv preprint",
                          "repo_url": f"https://github.com/{meta['full_name']}", "repo_commit": sha,
@@ -179,8 +210,13 @@ def seed_repo_names(path: Path = SEED_PAPERS_PATH) -> set[str]:
     return names
 
 
+def seed_arxiv_ids(path: Path = SEED_PAPERS_PATH) -> set[str]:
+    ids = {find_arxiv_id(entry.get("paper_url") or "") for entry in json.loads(path.read_text(encoding="utf-8"))}
+    return {i for i in ids if i}
+
+
 def select(candidates: list[str], fetcher: Fetcher, seed_repos: set[str], http: Any = None,
-           count: int = SELECT_COUNT) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+           count: int = SELECT_COUNT, seed_papers: set[str] = frozenset()) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """(all evaluations in order, the selected evaluations). A passing candidate that fails `verify_corpus` is
     recorded as eliminated and the next candidate takes its place (docs/CORPUS_EXPANSION.md section 4)."""
     evaluations: list[dict[str, Any]] = []
@@ -189,7 +225,8 @@ def select(candidates: list[str], fetcher: Fetcher, seed_repos: set[str], http: 
         if len(chosen) == count:
             break
         taken = {c["full_name"].lower() for c in chosen}
-        result = evaluate_candidate(full_name, fetcher, seed_repos, taken)
+        taken_papers = {find_arxiv_id(c["entry"]["paper_url"]) for c in chosen}
+        result = evaluate_candidate(full_name, fetcher, seed_repos, taken, seed_papers, taken_papers)
         if result["passed"] and http is not None:
             entry = dict(result["entry"], paper_id=f"paper_{FIRST_ID + len(chosen)}")
             report = verify_entry(entry, http)
@@ -273,25 +310,39 @@ class NetFetcher:
         return {"title": title, "year": int(date.group(1)) if date else None, "text": text}
 
 
-def command_pool(fetcher: Fetcher, out_dir: Path) -> dict[str, Any]:
+def pool_path(out_dir: Path, stage: int) -> Path:
+    return out_dir / ("pool.json" if stage == 1 else f"pool_stage{stage}.json")
+
+
+def command_pool(fetcher: Fetcher, out_dir: Path, stage: int = 1) -> dict[str, Any]:
+    """Run the searches of one stage and store them. Names found in an earlier stage's pool are left out of this one."""
     searches = []
     names: list[str] = []
-    for query in QUERIES:
+    for query in STAGES[stage - 1]:
         found = fetcher.search(query)
         searches.append({"query": query, "results": found})
         names.extend(found)
-    ordered = order_candidates(names)
-    pool = {"retrieved_at": datetime.now(UTC).isoformat(timespec="seconds"), "per_query_limit": POOL_PER_QUERY,
+    earlier = {c["full_name"].lower() for s in range(1, stage) if pool_path(out_dir, s).is_file()
+               for c in json.loads(pool_path(out_dir, s).read_text(encoding="utf-8"))["candidates_in_order"]}
+    ordered = [n for n in order_candidates(names) if n.lower() not in earlier]
+    pool = {"stage": stage, "retrieved_at": datetime.now(UTC).isoformat(timespec="seconds"), "per_query_limit": POOL_PER_QUERY,
             "searches": searches, "candidates_in_order": [{"full_name": n, "hash": candidate_hash(n)} for n in ordered]}
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "pool.json").write_text(json.dumps(pool, indent=2) + "\n", encoding="utf-8")
+    pool_path(out_dir, stage).write_text(json.dumps(pool, indent=2) + "\n", encoding="utf-8")
     return pool
 
 
 def command_evaluate(fetcher: Fetcher, out_dir: Path, http: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    pool = json.loads((out_dir / "pool.json").read_text(encoding="utf-8"))
-    candidates = [c["full_name"] for c in pool["candidates_in_order"]]
-    evaluations, chosen = select(candidates, fetcher, seed_repo_names(), http)
+    candidates: list[str] = []
+    stage_of: dict[str, int] = {}
+    for stage in range(1, len(STAGES) + 1):
+        if pool_path(out_dir, stage).is_file():
+            for c in json.loads(pool_path(out_dir, stage).read_text(encoding="utf-8"))["candidates_in_order"]:
+                candidates.append(c["full_name"])
+                stage_of[c["full_name"]] = stage
+    evaluations, chosen = select(candidates, fetcher, seed_repo_names(), http, seed_papers=seed_arxiv_ids())
+    for result in evaluations:
+        result["stage"] = stage_of[result["full_name"]]
     document = {"evaluated_at": datetime.now(UTC).isoformat(timespec="seconds"), "rules": "docs/CORPUS_EXPANSION.md",
                 "selected": len(chosen), "evaluated": len(evaluations), "candidates": evaluations}
     (out_dir / "evaluation.json").write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
@@ -303,13 +354,14 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Choose six new papers by the rules of docs/CORPUS_EXPANSION.md.")
     parser.add_argument("command", choices=["pool", "evaluate"])
     parser.add_argument("--out-dir", default=str(OUT_DIR))
+    parser.add_argument("--stage", type=int, choices=[1, 2, 3], default=1, help="pool: which stage's searches to run")
     args = parser.parse_args(argv)
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     fetcher = NetFetcher(token)
     out_dir = Path(args.out_dir)
     if args.command == "pool":
-        pool = command_pool(fetcher, out_dir)
-        print(f"pool: {len(pool['candidates_in_order'])} candidates from {len(QUERIES)} searches")
+        pool = command_pool(fetcher, out_dir, args.stage)
+        print(f"pool stage {args.stage}: {len(pool['candidates_in_order'])} candidates from {len(pool['searches'])} searches")
         return 0
     evaluations, chosen = command_evaluate(fetcher, out_dir, fetcher.http)
     print(f"evaluated {len(evaluations)} candidates, selected {len(chosen)}")
