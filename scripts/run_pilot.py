@@ -23,6 +23,11 @@ untouched), and `_collect_pilot2_files` copies the protocol's named files from t
 runs (#319). `--cpus N` replaces the CPU limit the same way and writes `cpus_override` (#331). Together with
 `--pilot3` they re-run Pilot 3's settings with only the memory and CPU limits changed.
 
+`--pilot4` runs a paper of `data/corpus_expansion/papers.json` as docs/PILOT_4.md specifies (#346): the README command as
+written, Python 3.11, no network, 2 CPUs, 50% of the host's RAM, a 14400 s run phase, a read-only repository and no data.
+`--correction FILE` applies the one correction round of that protocol (allowed keys only, each change with the log line of
+the first attempt that motivated it). Records go to `data/pilot4_runs/<paper_id>/`.
+
 Exit codes: 0 when the paper went through the pipeline, whatever the paper's own result (staging, install, and run
 failures are pilot results and are recorded); 1 on a harness error (for example Docker unavailable), so a failed
 CI job always means Repro Radar did not run the paper as specified.
@@ -34,6 +39,7 @@ import argparse
 import copy
 import json
 import os
+import shlex
 import shutil
 import subprocess
 import sys
@@ -56,6 +62,15 @@ from src.sandbox.stager import RepoStager, remove_tree
 # shared with Pilot 1 and real-Docker CI and are not changed to write here directly.
 PILOT2_RUNS_DIR = PROJECT_ROOT / "data" / "pilot2_runs"
 PILOT3_RUNS_DIR = PROJECT_ROOT / "data" / "pilot3_runs"
+PILOT4_RUNS_DIR = PROJECT_ROOT / "data" / "pilot4_runs"
+CORPUS_EXPANSION_PATH = PROJECT_ROOT / "data" / "corpus_expansion" / "papers.json"
+# docs/PILOT_4.md section 2: the settings of every Pilot 4 paper
+PILOT4_MEMORY = "50%"
+PILOT4_RUN_TIMEOUT_SECONDS = 14400
+# docs/PILOT_4.md section 4: what the one correction round may change (and nothing else)
+CORRECTION_KEYS = ("extra_requirements", "constraints", "constraints_source", "python_version", "working_dir",
+                   "writable_repo", "env", "data", "changes")
+PYTHON_VERSIONS = ("3.8", "3.9", "3.11")
 PILOT3_SETTINGS_PATH = PROJECT_ROOT / "data" / "pilot3_settings.json"
 
 # What a Pilot 3 overlay entry may contain (docs/PILOT_3.md section 2): limits that replace Pilot 2's, and two changes of
@@ -100,12 +115,54 @@ PILOT_LIMITS: dict[str, Any] = {
 BUNDLE_TIMEOUT_SECONDS = 1800
 
 
-def load_entry(paper_id: str) -> dict[str, Any]:
-    entries = json.loads(SEED_PAPERS_PATH.read_text(encoding="utf-8"))
+def load_entry(paper_id: str, path: Path | None = None) -> dict[str, Any]:
+    path = path or SEED_PAPERS_PATH
+    entries = json.loads(path.read_text(encoding="utf-8"))
     for entry in entries:
         if entry["paper_id"] == paper_id:
             return entry
-    raise KeyError(f"{paper_id} is not in {SEED_PAPERS_PATH.name}")
+    raise KeyError(f"{paper_id} is not in {path.name}")
+
+
+def validate_correction(correction: dict[str, Any]) -> None:
+    """The correction round of docs/PILOT_4.md section 4: only the allowed keys, and every change names the log line of the
+    first attempt that motivated it. Raises ValueError otherwise."""
+    unknown = sorted(set(correction) - set(CORRECTION_KEYS))
+    if unknown:
+        raise ValueError(f"not allowed in a correction round (docs/PILOT_4.md section 4): {unknown}")
+    changes = correction.get("changes")
+    if not changes or not all(isinstance(c, dict) and c.get("change") and c.get("log_line") for c in changes):
+        raise ValueError("a correction needs `changes`, each with a `change` and the `log_line` of the first attempt")
+    if correction.get("python_version") not in (None, *PYTHON_VERSIONS):
+        raise ValueError(f"python_version must be one of {PYTHON_VERSIONS}")
+    if correction.get("constraints") and not correction.get("constraints_source"):
+        raise ValueError("constraints need a constraints_source")
+
+
+def pilot4_entry(paper_id: str, corpus_path: Path | None = None, correction: dict[str, Any] | None = None) -> dict[str, Any]:
+    """The corpus entry with the run setup of docs/PILOT_4.md: the README command as written (section 3), plus the one
+    correction round when given (section 4). The entry in the corpus file is not modified."""
+    entry = copy.deepcopy(load_entry(paper_id, corpus_path or CORPUS_EXPANSION_PATH))
+    tokens = shlex.split(entry["run_command"])
+    if len(tokens) < 2 or tokens[0] != "python" or tokens[1].startswith("-"):
+        raise ValueError(f"{paper_id}: the run command must be `python <script> <arguments>`: {entry['run_command']!r}")
+    if tokens[1].removeprefix("./") != entry["target_script"]:
+        raise ValueError(f"{paper_id}: the script of the run command is not the target script")
+    setup: dict[str, Any] = {
+        "decision": "report_as_is", "reason": "Pilot 4: the README command as written (docs/PILOT_4.md section 3)",
+        "args": tokens[2:], "env": {}, "working_dir": "", "writable_repo": False, "data": [],
+        "extra_requirements": [], "constraints": [], "build": None, "open_items": [],
+    }
+    if correction:
+        validate_correction(correction)
+        for key in ("extra_requirements", "constraints", "constraints_source", "working_dir", "writable_repo", "env", "data"):
+            if key in correction:
+                setup[key] = correction[key]
+        if "python_version" in correction:
+            entry["python_version"] = correction["python_version"]
+    entry["python_version"] = entry.get("python_version", "3.11")
+    entry["run_setup"] = setup
+    return entry
 
 
 def load_pilot3_change(paper_id: str, settings_path: Path | None = None) -> dict[str, Any]:
@@ -187,10 +244,18 @@ def _collect_pilot2_files(sandbox_dir: Path, build_dir: Path, target_dir: Path) 
 def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None, pilot2: bool = False,
               data_cache: Path | None = None, record_root: Path | None = None, pilot3: bool = False,
               settings_path: Path | None = None, memory_limit: str | None = None,
-              cpus: float | None = None) -> dict[str, Any]:
-    entry = load_entry(paper_id)
+              cpus: float | None = None, pilot4: bool = False, correction: dict[str, Any] | None = None,
+              corpus_path: Path | None = None) -> dict[str, Any]:
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
+    if pilot4:
+        # docs/PILOT_4.md section 2; a paper of the corpus expansion, not of the seed corpus
+        pilot2 = True
+        entry = pilot4_entry(paper_id, corpus_path, correction)
+        memory_limit = memory_limit or PILOT4_MEMORY
+        limits["run_timeout_seconds"] = PILOT4_RUN_TIMEOUT_SECONDS
+    else:
+        entry = load_entry(paper_id)
     if pilot3:
         pilot2 = True  # Pilot 3 is Pilot 2 with the overlay
         pilot3_change = load_pilot3_change(paper_id, settings_path)
@@ -222,7 +287,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     # pilot record and the protocol's named files are additionally collected into `record_dir` below (#207).
     sandbox_dir = SANDBOX_RUNS_DIR / paper_id
     build_dir = SANDBOX_RUNS_DIR / f"{paper_id}.build"
-    default_root = PILOT3_RUNS_DIR if pilot3 else PILOT2_RUNS_DIR
+    default_root = PILOT4_RUNS_DIR if pilot4 else PILOT3_RUNS_DIR if pilot3 else PILOT2_RUNS_DIR
     record_dir = (record_root or default_root) / paper_id if pilot2 else sandbox_dir
     if pilot2:
         # An earlier attempt is evidence (docs/PILOT_2.md section 9) and is never overwritten (#217); and the
@@ -238,7 +303,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     stager = stager or RepoStager(staging_root=staging_dir, bundle_in_docker=pilot2)
     record: dict[str, Any] = {
         "paper_id": paper_id,
-        "protocol": "docs/PILOT_3.md" if pilot3 else "docs/PILOT_2.md" if pilot2 else "docs/PILOT_WEEK2.md",
+        "protocol": ("docs/PILOT_4.md" if pilot4 else "docs/PILOT_3.md" if pilot3
+                     else "docs/PILOT_2.md" if pilot2 else "docs/PILOT_WEEK2.md"),
         "repro_radar_commit": repro_radar_commit(),
         "started_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "repo_url": entry["repo_url"],
@@ -251,6 +317,9 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     }
     if pilot3:
         record["pilot3_change"] = pilot3_change
+    if pilot4:
+        record["pilot4"] = {"run_command": entry["run_command"], "readme_url": entry.get("readme_url"),
+                            "attempt": "correction" if correction else "first", "correction": correction or None}
     if memory_override:
         record["memory_override"] = memory_override
     if cpus_override:
@@ -335,7 +404,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run one pilot paper as specified in docs/PILOT_WEEK2.md.")
-    parser.add_argument("paper_id", choices=sorted(PILOT_SPECS))
+    parser.add_argument("paper_id", help="a seed paper, or a paper of the corpus expansion with --pilot4")
     parser.add_argument("--staging-dir", default=".sandbox_staging", help="Where repositories are cloned.")
     parser.add_argument("--pilot2", action="store_true", help="Run with the paper's run_setup (docs/PILOT_2.md).")
     parser.add_argument("--pilot3", action="store_true",
@@ -352,12 +421,26 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cpus", type=float, default=None, metavar="N",
                         help="Replace the protocol's CPU limit (2) with N; the record gets `cpus_override`. "
                              "Not a protocol run (#331).")
+    parser.add_argument("--pilot4", action="store_true",
+                        help="Run a paper of data/corpus_expansion/papers.json as docs/PILOT_4.md specifies (#346).")
+    parser.add_argument("--corpus", default=None, metavar="FILE",
+                        help="With --pilot4: the corpus file (default data/corpus_expansion/papers.json).")
+    parser.add_argument("--correction", default=None, metavar="FILE",
+                        help="With --pilot4: the one correction round as JSON (docs/PILOT_4.md section 4).")
     args = parser.parse_args(argv)
+    if not args.pilot4 and (args.correction or args.corpus):
+        parser.error("--correction and --corpus need --pilot4")
+    if not args.pilot4 and args.paper_id not in PILOT_SPECS:
+        parser.error(f"unknown paper {args.paper_id}; choose from {sorted(PILOT_SPECS)}")
+    if args.pilot4 and (args.pilot2 or args.pilot3):
+        parser.error("--pilot4 cannot be combined with --pilot2 or --pilot3")
     if args.record_root and not (args.pilot2 or args.pilot3):
         parser.error("--record-root needs --pilot2 or --pilot3 (Pilot 1 records stay in sandbox_runs/)")
     try:
         record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache),
                            pilot3=args.pilot3, memory_limit=args.memory, cpus=args.cpus,
+                           pilot4=args.pilot4, corpus_path=Path(args.corpus) if args.corpus else None,
+                           correction=json.loads(Path(args.correction).read_text(encoding="utf-8")) if args.correction else None,
                            record_root=Path(args.record_root) if args.record_root else None)
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
