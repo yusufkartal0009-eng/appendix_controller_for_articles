@@ -18,6 +18,10 @@ Pilot 2's files land in `data/pilot2_runs/<paper_id>/`, not `sandbox_runs/<paper
 untouched), and `_collect_pilot2_files` copies the protocol's named files from there afterwards, next to
 `pilot_record.json`, which is written directly into `data/pilot2_runs/<paper_id>/` for this mode.
 
+`--memory 50%` replaces the memory limit (a size or a share of the host's RAM; the record says `memory_override`) and
+`--record-root data/memory_runs` moves the record, so a run with another memory limit does not land among the protocol
+runs (#319). Together with `--pilot3` they re-run Pilot 3's settings with only the memory limit changed.
+
 Exit codes: 0 when the paper went through the pipeline, whatever the paper's own result (staging, install, and run
 failures are pilot results and are recorded); 1 on a harness error (for example Docker unavailable), so a failed
 CI job always means Repro Radar did not run the paper as specified.
@@ -327,10 +331,20 @@ def main(argv: list[str] | None = None) -> int:
                         help="Pilot 2 plus the four changes of docs/PILOT_3.md (data/pilot3_settings.json); "
                              "files go to data/pilot3_runs/.")
     parser.add_argument("--data-cache", default=str(DATA_CACHE_DIR), help="Host data cache (scripts/fetch_data.py).")
+    parser.add_argument("--memory", default=None, metavar="LIMIT",
+                        help="Replace the memory limit (and the swap limit) with a size such as 8g or a share of the "
+                             "host's RAM such as 50%%; the record gets `memory_override`. Not a protocol run (#319).")
+    parser.add_argument("--record-root", default=None, metavar="DIR",
+                        help="Write the record and the collected files to DIR/<paper_id>/ instead of "
+                             "data/pilot2_runs/ or data/pilot3_runs/ (needs --pilot2 or --pilot3), for example "
+                             "data/memory_runs.")
     args = parser.parse_args(argv)
+    if args.record_root and not (args.pilot2 or args.pilot3):
+        parser.error("--record-root needs --pilot2 or --pilot3 (Pilot 1 records stay in sandbox_runs/)")
     try:
         record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache),
-                           pilot3=args.pilot3)
+                           pilot3=args.pilot3, memory_limit=args.memory,
+                           record_root=Path(args.record_root) if args.record_root else None)
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1

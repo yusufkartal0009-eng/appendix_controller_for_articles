@@ -678,3 +678,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - `ReproducibilityScorer.calculate_composite_score` has a new flag `nothing_compared`; `evaluate_paper_run` sets it when the run succeeded, claims exist, and none of them was found in the output. The two summaries that blamed the claims ("significant divergence" and "fell short of claims") then say "claimed metrics not found in the output (nothing was compared)". "Divergence" stays for claims that were found and differ.
 - Tests: `tests/test_scoring.py` (two new cases: nothing found, including an empty output; found and different). `tests/`: 569 passed, 9 skipped; ruff clean.
 - Not verified: the stored summary of the earlier `paper_006` score run was not rewritten; this change only affects scores computed from now on.
+
+### 2026-10-16 14:26 +03:00: feat(pilot): --memory and --record-root for run_pilot.py (Issue #319)
+- `scripts/run_pilot.py` has two new options. `--memory` (a size or a share such as `50%`) replaces the memory and swap limits and writes `memory_override` (requested, resolved size, the protocol's limit) into the record. `--record-root DIR` writes the record and the collected files to `DIR/<paper_id>/` (needs `--pilot2` or `--pilot3`). `run_paper` already took both values (#311); only the command line was missing.
+- With `--pilot3` the settings of `data/pilot3_settings.json` are used as they are; only the memory limit is replaced. For `paper_004` the 14400 s run phase stays. Long re-runs can go to `data/memory_runs/`, so `data/pilot2_runs/` and `data/pilot3_runs/` are not touched.
+- Tests: `tests/test_pilot3.py` (4 new cases: only memory and directory change, Pilot 3's own limit is replaced and recorded, the command line passes both options, `--record-root` alone is refused). `tests/`: 573 passed, 9 skipped; ruff clean.
+- Not verified: a real Docker run with the new options (that is the next job of the plan).

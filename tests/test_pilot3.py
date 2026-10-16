@@ -138,3 +138,55 @@ def test_the_tools_name_the_pilot_3_directory(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(record_pilot2_environment, "COMMANDS", [("python --version", [sys.executable, "--version"])])
     assert record_pilot2_environment.main(["--pilot3"]) == 0
     assert out.read_text(encoding="utf-8").startswith("Pilot 3 environment, recorded ")
+
+
+def test_memory_and_record_root_options_change_only_the_memory_limit_and_the_directory(tmp_path, monkeypatch):
+    """#319: Pilot 3's settings stay as they are; the memory limit is replaced; the record goes elsewhere."""
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "PILOT3_RUNS_DIR", tmp_path / "pilot3")
+    monkeypatch.setattr(run_pilot, "PILOT2_RUNS_DIR", tmp_path / "pilot2")
+    monkeypatch.setattr(run_pilot, "resolve_memory_limit", lambda value: "7777m" if value == "50%" else value)
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_004", tmp_path / "staging", stager=stager, pilot3=True,
+                                 data_cache=_cache(tmp_path, "paper_004"), memory_limit="50%",
+                                 record_root=tmp_path / "memory_runs")
+    config = stager.executed[2]
+    # memory and swap replaced; Pilot 3's longer run phase (paper_004) and the other limits are kept
+    assert (config.memory_limit, config.memory_swap, config.run_timeout_seconds, config.timeout_seconds) == (
+        "7777m", "7777m", 14400, 3600)
+    assert record["memory_override"] == {"requested": "50%", "resolved": "7777m", "protocol_memory_limit": "6g"}
+    assert record["protocol"] == "docs/PILOT_3.md" and record["pilot3_change"]["run_timeout_seconds"] == 14400
+    assert (tmp_path / "memory_runs" / "paper_004" / "pilot_record.json").exists()
+    assert not (tmp_path / "pilot3").exists() and not (tmp_path / "pilot2").exists()  # protocol directories untouched
+
+
+def test_the_memory_option_replaces_pilot_3s_own_memory_limit(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(run_pilot, "resolve_memory_limit", lambda value: value)
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_005", tmp_path / "staging", stager=stager, pilot3=True,
+                                 data_cache=_cache(tmp_path, "paper_005"), memory_limit="8g",
+                                 record_root=tmp_path / "memory_runs")
+    assert stager.executed[2].memory_limit == "8g"
+    assert record["memory_override"]["protocol_memory_limit"] == "12g"  # Pilot 3's own value is recorded
+
+
+def test_the_command_line_passes_both_options_on(monkeypatch, tmp_path):
+    seen = {}
+
+    def fake(paper_id, staging_dir, **kwargs):
+        seen.update(kwargs)
+        return {"paper_id": paper_id}
+
+    monkeypatch.setattr(run_pilot, "run_paper", fake)
+    assert run_pilot.main(["paper_005", "--pilot3", "--memory", "50%", "--record-root", str(tmp_path / "m")]) == 0
+    assert seen["pilot3"] is True and seen["memory_limit"] == "50%" and seen["record_root"] == tmp_path / "m"
+    seen.clear()
+    assert run_pilot.main(["paper_005", "--pilot3"]) == 0  # without the options: nothing changes
+    assert seen["memory_limit"] is None and seen["record_root"] is None
+
+
+def test_record_root_without_a_pilot_flag_is_refused(monkeypatch, tmp_path):
+    monkeypatch.setattr(run_pilot, "run_paper", lambda *a, **k: pytest.fail("must not run"))
+    with pytest.raises(SystemExit):
+        run_pilot.main(["paper_005", "--record-root", str(tmp_path)])
