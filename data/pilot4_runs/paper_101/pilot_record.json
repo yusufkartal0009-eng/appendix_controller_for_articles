@@ -1,0 +1,75 @@
+{
+  "paper_id": "paper_101",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "d7fcb77d2936ad6a85188b5e0fe41ea13aff167c",
+  "started_at": "2026-10-16T20:54:14+00:00",
+  "repo_url": "https://github.com/yuvrajiro/lairnet",
+  "pinned_commit": "af5d5e18eb99e75aa57358ff1caa1e0272b5aac3",
+  "target_script": "docs/check_styles.py",
+  "container_command": "python /workspace/repo/docs/check_styles.py",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 14400
+  },
+  "pilot4": {
+    "run_command": "python docs/check_styles.py",
+    "readme_url": "https://github.com/yuvrajiro/lairnet/blob/af5d5e18eb99e75aa57358ff1caa1e0272b5aac3/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "af5d5e18eb99e75aa57358ff1caa1e0272b5aac3",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.157
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_101_packages",
+    "duration_seconds": 0.002
+  },
+  "sandbox_duration_seconds": 1.342,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 1.013,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 26738688
+  },
+  "finished_at": "2026-10-16T20:54:16+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
