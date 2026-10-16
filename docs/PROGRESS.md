@@ -807,3 +807,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - By the definitions of `docs/PILOT_4.md` section 5: **not a pilot success** (install SKIPPED is not install success) and category `RAN_WITHOUT_INSTALLED_DEPENDENCIES`; run success yes. No correction round (the first attempt ended without an error). Strict and final result are the same.
 - What it does not show: the command is a docs checker, so this run says nothing about the paper's model (LAIR-Net) running.
 - Not verified: whether the paper's own experiment runs.
+
+### 2026-10-17 00:09 +03:00: test(pilot4): paper_102 first attempt (Issue #364)
+- `python scripts/run_pilot.py paper_102 --pilot4`; record and `failure_category.json` in `data/pilot4_runs/paper_102/` (unchanged files). Paper: Geometric Manifold Rectification for Imbalanced Learning (`wangxb96/gmr-imbalanced-learning`, matches the pin). README command, as written: `python code/examples/quick_start.py`.
+- Result: **COMPLETED, exit code 0**; the repository's `requirements.txt` was bundled (10 wheels, 18.4 s) and the install status is **INSTALLED**; run phase 12.7 s, install and run in the sandbox 362.0 s, peak memory 175353856 bytes. The script printed `Baseline AUPRC: 0.7131` and `GMR AUPRC: 0.7461` (the program's output, not compared with the paper and not scored).
+- By the definitions of `docs/PILOT_4.md` section 5: **pilot success** (install success and run success). No failure category. No correction round was needed. Strict and final result are the same.
+- Not verified: that the printed numbers match the paper (out of scope for Pilot 4).

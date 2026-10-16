@@ -1,0 +1,5 @@
+Original training shape: (840, 20), minority=87
+GMR training shape:      (846, 20), minority=89
+Baseline AUPRC:         0.7131
+GMR AUPRC:              0.7461
+GMR audit:              {'activation': 0.27504388170401467, 'geometric_need': 0.5424655622587891, 'overlap': 0.4116591893786136, 'boundary_conflict': 0.016666666666666666, 'minority_sparsity': 1.0, 'majority_sparsity': 0.7753175151486293, 'imbalance_pressure': 0.7447781448700114, 'minority_sufficiency': 0.009722222222222222, 'majority_removed': 1, 'synthetic_added': 2, 'majority_synthetic_added': 5, 'weighted': 0, 'profile': 'rectified'}
