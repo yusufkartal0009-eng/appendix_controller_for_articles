@@ -484,7 +484,7 @@ is judged on the status, the exit code, and the metrics that the metric extracto
 
 The runs listed are not repetitions under one protocol: the runs of each paper were made at different commits of the tool
 (the `repro_radar_commit` of their records), the memory limit also differs for `paper_003` (`docs/MEMORY_RUNS.md`), and the
-CPU run of `paper_006` used 8 CPUs instead of 2 (`data/cpu_runs/`); the paper settings of `paper_006` are the same. Within these
+CPU runs of `paper_003` and `paper_006` used 8 CPUs instead of 2 (`data/cpu_runs/`, `docs/CPU_RUNS.md`); the paper settings are the same. Within these
 limits the status, the exit code, and the metrics are the same in every run listed, while the log files differ where they
 contain clock times. The runs were not made with different seeds, so this is not the stability tier of the score (#48).
 
