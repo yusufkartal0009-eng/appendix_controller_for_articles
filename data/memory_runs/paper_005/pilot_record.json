@@ -1,0 +1,139 @@
+{
+  "paper_id": "paper_005",
+  "protocol": "docs/PILOT_3.md",
+  "repro_radar_commit": "7bd86cc9e9fee3109762885c7b530cab8ef20340",
+  "started_at": "2026-10-16T12:14:32+00:00",
+  "repo_url": "https://github.com/QData/FastSK",
+  "pinned_commit": "d275a232cea129299021051cd6ac94d2296e83c8",
+  "target_script": "results/run_gridsearch.py",
+  "container_command": "python /workspace/repo/results/run_gridsearch.py",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "pilot3_change": {
+    "memory_limit": "12g",
+    "memory_swap": "12g",
+    "reason": "The run was killed by the 6 GiB memory limit at 76 of 540 grid-search steps. 12 GiB fits in the 15.5 GiB that Docker Desktop has on the owner's machine. It is a choice, not a measured need.",
+    "pilot2_evidence": "data/pilot2_runs/paper_005/execution_meta.json: status OOM_KILLED, peak 6144 MiB (data/pilot2_runs/measurements.md)"
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "12g"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "d275a232cea129299021051cd6ac94d2296e83c8",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 13.314
+  },
+  "python_version": "3.8",
+  "run_setup": {
+    "command": null,
+    "working_dir": "results",
+    "writable_repo": false,
+    "extra_requirements": [
+      "fastsk==0.0.2"
+    ],
+    "constraints": [
+      "numpy==1.20.3",
+      "pandas==1.2.4",
+      "scikit-learn==0.24.2",
+      "scipy==1.6.3",
+      "tqdm==4.60.0"
+    ],
+    "build": {
+      "sdists": [],
+      "from_repo": true,
+      "build_requirements": [
+        "pybind11==2.6.2"
+      ],
+      "source": "pyproject.toml build-system requires pybind11~=2.6.1 (2.6.2 is the newest in that range); setup.py builds fastsk._fastsk with Pybind11Extension (#193)"
+    },
+    "decision": "fix",
+    "data_mounts": []
+  },
+  "build": {
+    "status": "BUILT",
+    "exit_code": 0,
+    "image": "repro-radar-sandbox:py3.8-build",
+    "targets": [
+      "/workspace/repo"
+    ],
+    "build_requirements": [
+      "pybind11==2.6.2"
+    ],
+    "wheels": [
+      "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_005.build\\built_wheels\\fastsk-0.0.2-cp38-cp38-linux_x86_64.whl"
+    ],
+    "duration_seconds": 15.919,
+    "log_tail": "Looking in links: /workspace/packages\nProcessing /workspace/packages/pybind11-2.6.2-py2.py3-none-any.whl\nInstalling collected packages: pybind11\nSuccessfully installed pybind11-2.6.2\nLooking in links: /workspace/packages\nProcessing /workspace/repo\n  Preparing metadata (pyproject.toml): started\n  Preparing metadata (pyproject.toml): finished with status 'done'\nBuilding wheels for collected packages: fastsk\n  Building wheel for fastsk (pyproject.toml): started\n  Building wheel for fastsk (pyproject.toml): finished with status 'done'\n  Created wheel for fastsk: filename=fastsk-0.0.2-cp38-cp38-linux_x86_64.whl size=149195 sha256=069912c6f134283aa2ffc689fed96d0c94a085100b63092568368a6f64cf3c7f\n  Stored in directory: /workspace/output/.build-tmp/pip-ephem-wheel-cache-792vb0vd/wheels/b7/5d/0a/20f53119bf6a352f84566db7c41156378f14a0b68cc443ed6e\nSuccessfully built fastsk\n",
+    "sdists": [],
+    "duration_seconds_total": 19.318
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.8",
+    "extra_requirements": [
+      "fastsk==0.0.2"
+    ],
+    "constraints": [
+      "numpy==1.20.3",
+      "pandas==1.2.4",
+      "scikit-learn==0.24.2",
+      "scipy==1.6.3",
+      "tqdm==4.60.0"
+    ],
+    "built_wheels": [
+      "fastsk-0.0.2-cp38-cp38-linux_x86_64.whl"
+    ],
+    "wheel_count": 14,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_005_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "it-learn (from -r /staging/paper_005/requirements.txt (line 7))\n  File was already downloaded /staging/paper_005_packages/scikit_learn-0.24.2-cp38-cp38-manylinux2010_x86_64.whl\nCollecting scipy (from -r /staging/paper_005/requirements.txt (line 8))\n  File was already downloaded /staging/paper_005_packages/scipy-1.6.3-cp38-cp38-manylinux1_x86_64.whl\nCollecting six==1.14.0 (from -r /staging/paper_005/requirements.txt (line 9))\n  File was already downloaded /staging/paper_005_packages/six-1.14.0-py2.py3-none-any.whl\nCollecting tqdm (from -r /staging/paper_005/requirements.txt (line 10))\n  File was already downloaded /staging/paper_005_packages/tqdm-4.60.0-py2.py3-none-any.whl\nCollecting threadpoolctl>=2.0.0 (from scikit-learn->-r /staging/paper_005/requirements.txt (line 7))\n  File was already downloaded /staging/paper_005_packages/threadpoolctl-3.5.0-py3-none-any.whl\nSuccessfully downloaded fastsk certifi joblib python-dateutil pytz six numpy pandas scikit-learn scipy tqdm threadpoolctl\n",
+    "stderr": "",
+    "duration_seconds": 4.02
+  },
+  "sandbox_duration_seconds": 1361.912,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "OOM_KILLED",
+    "exit_code": 137,
+    "duration_seconds": 1178.498,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 14957936640
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 182.206,
+    "peak_memory_bytes": 74797056
+  },
+  "finished_at": "2026-10-16T12:37:50+00:00",
+  "collected_files": [
+    "build.log",
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

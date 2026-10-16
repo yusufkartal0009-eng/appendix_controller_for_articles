@@ -1,0 +1,184 @@
+{
+  "paper_id": "paper_005",
+  "source": "https://github.com/QData/FastSK",
+  "commit_hash": "d275a232cea129299021051cd6ac94d2296e83c8",
+  "target_script": "results/run_gridsearch.py",
+  "command": null,
+  "working_dir": "results",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.8",
+  "image": "repro-radar-sandbox:py3.8",
+  "status": "OOM_KILLED",
+  "exit_code": 137,
+  "duration_seconds": 1178.498,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_005",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "OOM_KILLED",
+    "exit_code": 137,
+    "duration_seconds": 1178.1,
+    "timeout_limit_seconds": 3600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 14957936640,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "certifi",
+      "version": "2020.4.5.1"
+    },
+    {
+      "name": "fastsk",
+      "version": "0.0.2"
+    },
+    {
+      "name": "joblib",
+      "version": "0.14.1"
+    },
+    {
+      "name": "numpy",
+      "version": "1.20.3"
+    },
+    {
+      "name": "pandas",
+      "version": "1.2.4"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.8.1"
+    },
+    {
+      "name": "pytz",
+      "version": "2019.3"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "0.24.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.6.3"
+    },
+    {
+      "name": "six",
+      "version": "1.14.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.5.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.60.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "certifi==2020.4.5.1",
+      "name": "certifi",
+      "requested": "==2020.4.5.1",
+      "installed": "2020.4.5.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==0.14.1",
+      "name": "joblib",
+      "requested": "==0.14.1",
+      "installed": "0.14.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": "1.20.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas",
+      "name": "pandas",
+      "requested": "any",
+      "installed": "1.2.4",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "python-dateutil==2.8.1",
+      "name": "python-dateutil",
+      "requested": "==2.8.1",
+      "installed": "2.8.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2019.3",
+      "name": "pytz",
+      "requested": "==2019.3",
+      "installed": "2019.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn",
+      "name": "scikit-learn",
+      "requested": "any",
+      "installed": "0.24.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy",
+      "name": "scipy",
+      "requested": "any",
+      "installed": "1.6.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "six==1.14.0",
+      "name": "six",
+      "requested": "==1.14.0",
+      "installed": "1.14.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm",
+      "name": "tqdm",
+      "requested": "any",
+      "installed": "4.60.0",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo/results\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/results/run_gridsearch.py\n==================================================\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 4, k = 4, 547204 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 1 mismatch profiles using 1 threads...\nThread 0 finished in 1 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 4, k = 3, 547204 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 4 mismatch profiles using 1 threads...\nThread 0 finished in 4 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 5, k = 5, 543630 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 1 mismatch profiles using 1 threads...\nThread 0 finished in 1 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 5, k = 4, 543630 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 5 mismatch profiles using 1 threads...\nThread 0 finished in 5 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 5, k = 3, 543630 features\nInitializing kernel function\nComputing approximate kernel...\nComputing 10 mismatch profiles using 1 threads...\nThread 0 finished in 10 iterations...\nLength of shortest train sequence: 16\nLength of shortest test sequence: 20\nDictionary size = 24 (+1 for unknown char).\ng = 6, k = 6, 540056 features\nInitializ",
+  "stderr_preview": "\nGrid Searches:   0%|          | 0/27 [00:00<?, ?it/s]\n\n1.1 grid search:   0%|          | 0/540 [00:00<?, ?it/s]\u001b[A\n\n1.1 grid search:   0%|          | 1/540 [00:01<17:43,  1.97s/it]\u001b[A\n\n1.1 grid search:   0%|          | 2/540 [00:04<22:04,  2.46s/it]\u001b[A\n\n1.1 grid search:   1%|          | 3/540 [00:06<19:33,  2.18s/it]\u001b[A\n\n1.1 grid search:   1%|          | 4/540 [00:09<23:24,  2.62s/it]\u001b[A\n\n1.1 grid search:   1%|          | 5/540 [00:14<28:26,  3.19s/it]\u001b[A\n\n1.1 grid search:   1%|          | 6/540 [00:15<23:52,  2.68s/it]\u001b[A\n\n1.1 grid search:   1%|\u258f         | 7/540 [00:18<23:29,  2.65s/it]\u001b[A\n\n1.1 grid search:   1%|\u258f         | 8/540 [00:23<30:19,  3.42s/it]\u001b[A\n\n1.1 grid search:   2%|\u258f         | 9/540 [00:29<36:36,  4.14s/it]\u001b[A\n\n1.1 grid search:   2%|\u258f         | 10/540 [00:30<29:52,  3.38s/it]\u001b[A\n\n1.1 grid search:   2%|\u258f         | 11/540 [00:33<27:10,  3.08s/it]\u001b[A\n\n1.1 grid search:   2%|\u258f         | 12/540 [00:38<33:10,  3.77s/it]\u001b[A\n\n1.1 grid search:   2%|\u258f         | 13/540 [00:47<47:01,  5.35s/it]\u001b[A\n\n1.1 grid search:   3%|\u258e         | 14/540 [00:55<54:07,  6.17s/it]\u001b[A\n\n1.1 grid search:   3%|\u258e         | 15/540 [00:57<42:10,  4.82s/it]\u001b[A\n\n1.1 grid search:   3%|\u258e         | 16/540 [00:59<35:47,  4.10s/it]\u001b[A\n\n1.1 grid search:   3%|\u258e         | 17/540 [01:04<36:44,  4.21s/it]\u001b[A\n\n1.1 grid search:   3%|\u258e         | 18/540 [01:11<45:32,  5.23s/it]\u001b[A\n\n1.1 grid search:   4%|\u258e         | 19/540 [01:27<1:11:40,  8.25s/it]\u001b[A\n\n1.1 grid search:   4%|\u258e         | 20/540 [01:38<1:20:29,  9.29s/it]\u001b[A\n\n1.1 grid search:   4%|\u258d         | 21/540 [01:40<1:00:56,  7.04s/it]\u001b[A\n\n1.1 grid search:   4%|\u258d         | 22/540 [01:43<49:16,  5.71s/it]  \u001b[A\n\n1.1 grid search:   4%|\u258d         | 23/540 [01:47<45:16,  5.26s/it]\u001b[A\n\n1.1 grid search:   4%|\u258d         | 24/540 [01:52<44:32,  5.18s/it]\u001b[A\n\n1.1 grid search:   5%|\u258d         | 25/540 [02:00<52:14,  6.09s/it]\u001b[A\n\n1.1 grid search:   5%|\u258d         | 26/540 [02:14<1:11:43,  8.37s/it]\u001b[A\n\n1.1 grid search:   5%|\u258c         | 27/540 [02:30<1:31:14, 10.67"
+}
