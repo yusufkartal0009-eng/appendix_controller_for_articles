@@ -478,9 +478,10 @@ is judged on the status, the exit code, and the metrics that the metric extracto
 | `paper_003` | CPU run (`data/cpu_runs/paper_003`) | COMPLETED (0) | 465.777 | 1.15 | 13.93 | 8.0 | loss 0.106, rmse 0.473 |
 | `paper_006` | Pilot 2 (`data/pilot2_runs/paper_006`) | COMPLETED (0) | 3122.657 | 0.65 | 6.0 | 2.0 | accuracy 0.8886, auroc 0.892 |
 | `paper_006` | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED (0) | 3435.356 | 0.65 | 6.0 | 2.0 | accuracy 0.8886, auroc 0.892 |
+| `paper_006` | memory re-run, second (`data/memory_runs/paper_006_run2`) | COMPLETED (0) | 3268.898 | 0.65 | 13.93 | 2.0 | accuracy 0.8886, auroc 0.892 |
 | `paper_006` | CPU run (`data/cpu_runs/paper_006`) | COMPLETED (0) | 1119.834 | 0.64 | 13.93 | 8.0 | accuracy 0.8886, auroc 0.892 |
 
-`paper_003`: 4 runs, status identical, exit code identical, metrics identical (loss 0.106, rmse 0.473); 3 of 9 log files identical (line endings ignored) with the first run's; `paper_006`: 3 runs, status identical, exit code identical, metrics identical (accuracy 0.8886, auroc 0.892); 6 of 10 log files identical (line endings ignored) with the first run's.
+`paper_003`: 4 runs, status identical, exit code identical, metrics identical (loss 0.106, rmse 0.473); 3 of 9 log files identical (line endings ignored) with the first run's; `paper_006`: 4 runs, status identical, exit code identical, metrics identical (accuracy 0.8886, auroc 0.892); 9 of 15 log files identical (line endings ignored) with the first run's.
 <!-- numbers:stability:end -->
 
 The runs listed are not repetitions under one protocol: the runs of each paper were made at different commits of the tool

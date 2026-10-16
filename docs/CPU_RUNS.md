@@ -29,8 +29,9 @@ the host-side bundling of wheels). A speed-up is the 2-CPU time divided by the 8
 | `paper_003` | 8 | memory re-run, second | 1390.574 | 465.777 | 924.8 | 2.99x | 2399.558 / 1513.969 | yes | yes |
 | `paper_006` | 8 | Pilot 2 | 3122.657 | 1119.834 | 2002.8 | 2.79x | 3688.728 / 1711.129 | yes | yes |
 | `paper_006` | 8 | Pilot 3 | 3435.356 | 1119.834 | 2315.5 | 3.07x | 4065.419 / 1711.129 | yes | yes |
+| `paper_006` | 8 | memory re-run, second | 3268.898 | 1119.834 | 2149.1 | 2.92x | 3853.736 / 1711.129 | yes | yes |
 
-With 8 CPUs instead of 2, the run phase was 2.79 to 3.26 times faster in the 5 comparisons (install and run together: 1.58 to 2.38 times); status, exit code, and metrics were the same in all of them.
+With 8 CPUs instead of 2, the run phase was 2.79 to 3.26 times faster in the 6 comparisons (install and run together: 1.58 to 2.38 times); status, exit code, and metrics were the same in all of them.
 <!-- cpu-runs:end -->
 
 ## 3. How to read it

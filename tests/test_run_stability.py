@@ -90,7 +90,16 @@ def test_cpu_effect_notices_different_metrics_and_skips_papers_without_a_cpu_run
     assert run_stability.cpu_sentence([]) == "No CPU run is stored."
 
 
-def test_the_generated_block_of_the_cpu_document_is_in_sync_with_the_stored_runs():
-    text = (PROJECT_ROOT / "docs" / "CPU_RUNS.md").read_text(encoding="utf-8").replace("\r\n", "\n")
-    assert run_stability.apply_block(text, "docs/CPU_RUNS.md") == text
+def test_the_generated_blocks_of_the_documents_are_in_sync_with_the_stored_runs():
+    for doc in ("docs/CPU_RUNS.md", "docs/STABILITY_RUNS.md"):
+        text = (PROJECT_ROOT / doc).read_text(encoding="utf-8").replace("\r\n", "\n")
+        assert run_stability.apply_block(text, doc) == text
     assert run_stability.main(["--check"]) == 0
+
+
+def test_the_stored_second_runs_agree_with_the_runs_before_them():
+    stored = run_stability.measure()
+    for paper_id, folder in (("paper_003", "paper_003_run2"), ("paper_006", "paper_006_run2")):
+        group = stored[paper_id]
+        assert any(r["directory"].endswith(folder) for r in group["runs"])
+        assert group["same_status"] and group["same_exit_code"] and group["same_metrics"]
