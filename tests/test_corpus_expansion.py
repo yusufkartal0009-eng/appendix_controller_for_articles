@@ -213,3 +213,12 @@ def test_evaluation_goes_through_the_stages_in_order_and_records_the_stage(tmp_p
     evaluations, chosen = ce.command_evaluate(fetcher, tmp_path, None)
     assert len(chosen) == 2 and {e["stage"] for e in evaluations} == {1, 2}
     assert all(e["stage"] == 1 for e in evaluations if e["failed_rule"] == "R1")
+
+
+def test_a_setup_py_line_is_an_install_command_and_is_skipped():
+    readme = f"{FENCE}\npython setup.py install\npython sub/setup.py build\npython run.py --fast\n{FENCE}\n"
+    assert ce.find_run_command(readme, {"setup.py", "sub/setup.py", "run.py"}) == ("python run.py --fast", "run.py")
+    only = f"{FENCE}\npython setup.py install\n{FENCE}\n"
+    assert ce.find_run_command(only, {"setup.py"}) is None
+    kept = f"{FENCE}\npython docs/check_styles.py\n{FENCE}\n"
+    assert ce.find_run_command(kept, {"docs/check_styles.py"}) == ("python docs/check_styles.py", "docs/check_styles.py")

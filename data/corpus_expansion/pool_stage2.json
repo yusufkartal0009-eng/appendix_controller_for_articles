@@ -1,0 +1,1217 @@
+{
+  "stage": 2,
+  "retrieved_at": "2026-10-16T18:29:24+00:00",
+  "per_query_limit": 100,
+  "searches": [
+    {
+      "query": "topic:machine-learning language:Python arxiv.org in:readme",
+      "results": [
+        "jacobgil/pytorch-grad-cam",
+        "OlafenwaMoses/ImageAI",
+        "deepspeedai/DeepSpeed",
+        "dmlc/gluon-cv",
+        "iperov/DeepFaceLab",
+        "QData/TextAttack",
+        "lopusz/awesome-interpretable-machine-learning",
+        "fastmachinelearning/hls4ml",
+        "tensorflow/quantum",
+        "zuruoke/watermark-removal",
+        "bigscience-workshop/petals",
+        "ljvmiranda921/pyswarms",
+        "tencent-quantum-lab/tensorcircuit",
+        "awslabs/gluonts",
+        "SforAiDl/KD_Lib",
+        "py-why/dowhy",
+        "conceptofmind/LaMDA-rlhf-pytorch",
+        "ethanluoyc/pytorch-vae",
+        "pytorch/audio",
+        "SAP-archive/machine-learning-diff-private-federated-learning",
+        "lucidrains/stylegan2-pytorch",
+        "altosaar/variational-autoencoder",
+        "PriorLabs/TabPFN",
+        "lmcinnes/umap",
+        "pytorch/executorch",
+        "NX-AI/xlstm",
+        "Hironsan/anago",
+        "meta-pytorch/opacus",
+        "KaiyangZhou/deep-person-reid",
+        "awslabs/graphstorm",
+        "neuml/annotateai",
+        "FenTechSolutions/CausalDiscoveryToolbox",
+        "bethgelab/foolbox",
+        "amazon-science/chronos-forecasting",
+        "dmbee/seglearn",
+        "extropic-ai/thrml",
+        "GPflow/GPflow",
+        "NatLibFi/Annif",
+        "snipsco/snips-nlu",
+        "lucidrains/reformer-pytorch",
+        "LudwigStumpp/llm-leaderboard",
+        "leduckhai/MultiMed",
+        "GPflow/GPflowOpt",
+        "OlafenwaMoses/IdenProf",
+        "stavros0/bitcoin-price-prediction",
+        "i-Jayus/RecSystem-Pytorch",
+        "AFAgarap/cnn-svm",
+        "nicola-decao/s-vae-pytorch",
+        "ImprintLab/Medical-Graph-RAG",
+        "tensorflow/gnn",
+        "r9y9/deepvoice3_pytorch",
+        "uber-research/deep-neuroevolution",
+        "tensorcircuit/tensorcircuit-ng",
+        "agencyenterprise/PromptInject",
+        "limix-ldm-ai/LimiX",
+        "openai/EPG",
+        "ezelikman/parsel",
+        "CRIPAC-DIG/GRACE",
+        "PythonOT/POT",
+        "iArunava/scratchai",
+        "NUAA-AL/ALiPy",
+        "allegro/allRank",
+        "RobertCsordas/RFCN-tensorflow",
+        "hitachi-speech/EEND",
+        "kingfengji/gcForest",
+        "philipperemy/keras-tcn",
+        "mirceamironenco/BayesianRecurrentNN",
+        "nrontsis/PILCO",
+        "mir-group/nequip",
+        "timoschick/pet",
+        "reservoirpy/reservoirpy",
+        "microsoft/mattersim",
+        "microsoft/torchscale",
+        "yalaudah/facies_classification_benchmark",
+        "nicola-decao/s-vae-tf",
+        "skfolio/skfolio",
+        "tensorflow/model-card-toolkit",
+        "stanford-centaur/PyPantograph",
+        "stellargraph/stellargraph",
+        "lab-cosmo/upet",
+        "Time-MoE/Time-MoE",
+        "X-DataInitiative/tick",
+        "jieyilong/tree-of-thought-puzzle-solver",
+        "invictus717/MetaTransformer",
+        "torchmd/torchmd",
+        "Trusted-AI/AIF360",
+        "tensorflow/compression",
+        "bstellato/mlopt",
+        "CyberDataLab/nebula",
+        "Accenture/AmpliGraph",
+        "bosch-ros-pkg/bstld",
+        "Zebreu/ConvolutionalEmotion",
+        "datamllab/tods",
+        "modAL-python/modAL",
+        "akshaybahadur21/Facial-Recognition-using-Facenet",
+        "SakanaAI/evo-memory",
+        "ProjectNeura/MIPCandy",
+        "gregversteeg/CorEx",
+        "vudung45/FaceRec",
+        "yzhao062/pyod"
+      ]
+    },
+    {
+      "query": "topic:classification language:Python arxiv.org in:readme",
+      "results": [
+        "seopbo/nlp_classification",
+        "NatLibFi/Annif",
+        "kaushalshetty/Structured-Self-Attention",
+        "AFAgarap/cnn-svm",
+        "dcmocanu/sparse-evolutionary-artificial-neural-networks",
+        "PrashantRanjan09/WordEmbeddings-Elmo-Fasttext-Word2Vec",
+        "mmaaz60/EdgeNeXt",
+        "hint-lab/bert-relation-classification",
+        "preritj/segmentation",
+        "ProjectNeura/MIPCandy",
+        "MISP/misp-galaxy",
+        "AFAgarap/malware-classification",
+        "mims-harvard/UniTS",
+        "dougbrion/pytorch-classification-uncertainty",
+        "AdeelH/pytorch-multi-class-focal-loss",
+        "microsoft/Semi-supervised-learning",
+        "bertinetto/r2d2",
+        "basiralab/BrainNet-ML-ToolBox",
+        "DensoITLab/TeachAugment",
+        "dshahrokhian/YOLO_tensorflow",
+        "AFAgarap/gru-svm",
+        "AFAgarap/wisconsin-breast-cancer",
+        "Deep-AI-Application-DAIP/acoustic-leakage-dataset-GPLA-12",
+        "StartLuxLabs/StartLux-Decision",
+        "yi-ding-cs/EmT",
+        "ml-stat-Sustech/TorchCP",
+        "NeelBhowmik/efficient-compact-fire-detection-cnn",
+        "tatigabru/kaggle-rsna",
+        "dlmacedo/distinction-maximization-loss",
+        "naver-ai/seit",
+        "ocatak/malware_api_class",
+        "naver-ai/rdnet",
+        "ModSSC/ModSSC",
+        "cair/PyTsetlinMachineCUDA",
+        "abdoelsayed2016/TNCR_Dataset",
+        "yangyanli/PointCNN",
+        "antonpuz/DeROL",
+        "ocatak-zz/malware_api_class",
+        "EpiSci/SafeAI",
+        "dlmacedo/robust-deep-learning",
+        "monajalal/Kenyan-Food",
+        "Tencent/YOLO-Master",
+        "nla-group/classix",
+        "philipdarke/torchtime",
+        "antao97/dgcnn.pytorch",
+        "haihabi/GeneticNAS",
+        "baraline/convst",
+        "artefactory/woodtapper",
+        "ngmarchant/oasis",
+        "basiralab/reproducibleFedGNN",
+        "krislette/bach-or-bot",
+        "oligoglot/theedhum-nandrum",
+        "shrebox/Political-Ideology-Detection-on-Twitter",
+        "satyamahesh84/SIDU_XAI_CODE",
+        "ssuncheol/vision-transformer-pytorch",
+        "MartinThoma/clana",
+        "GauravPandeyLab/eipy",
+        "holdfire/CLS",
+        "ChristophReich1996/ECG_Classification",
+        "faverogian/med-diffusion-classifier",
+        "refactoring-ai/Machine-Learning",
+        "alvinwan/shiftresnet-cifar",
+        "AFAgarap/pt-datasets",
+        "yuddim/deepClassificationTool",
+        "Ashu11-A/Manga-Segment",
+        "knodle/knodle",
+        "jiaowoguanren0615/ConvNextV2-Pytorch",
+        "CVMLmu/DGMMC",
+        "NeelKanwal/Equipping-Computational-Pathology-Systems-with-Artifact-Processing-Pipeline",
+        "BodduSriPavan-111/chandassu",
+        "madziejm/project-fontr",
+        "BM-K/Question-Difficulty-Estimation",
+        "basiralab/RG-Select",
+        "csiro-robotics/deepseagrass",
+        "Lornatang/InceptionV4-PyTorch",
+        "nathansomavarapu/Basic-Models",
+        "BR-IDL/PaddleViT",
+        "abhishek-kathuria/Question-Answering-using-Capsule-Networks",
+        "vojha-code/Multi-Output-Neural-Tree",
+        "kumar10725/PeerLoss-Keras",
+        "nphdang/CCRAL",
+        "said-ohamouddou/MS-DGCNN2",
+        "zahraatashgahi/CTRE",
+        "crillab/pyxai",
+        "Carlosandp/qiskit-data-reuploading",
+        "nphdang/DeepCoDA",
+        "ElMehdiBouamama/MBTI-Tweetouilles",
+        "MCG-NJU/APP-Net",
+        "stephanegaiffas/AMF",
+        "KatharineShapcott/rank-similarity",
+        "DrMMZ/ProtoNet",
+        "mazurowski-lab/MRI-parameter-prediction",
+        "LinusWu/TENET_Training",
+        "zbMATHOpen/mscHarvester",
+        "agr78/SpectralViT",
+        "Cominder/Iwin-Transformer",
+        "wayne1204/NOAA-fish-finding",
+        "pedro-acunha/SHEEP",
+        "Abolfazl-Younesi/face_mask",
+        "Lornatang/InceptionV3-PyTorch"
+      ]
+    },
+    {
+      "query": "topic:regression language:Python arxiv.org in:readme",
+      "results": [
+        "nickkunz/smogn",
+        "katiana22/latent-deeponet",
+        "samuelyu2002/ImVisible",
+        "yi-ding-cs/EmT",
+        "ml-stat-Sustech/TorchCP",
+        "cair/PyTsetlinMachineCUDA",
+        "basiralab/RegGNN",
+        "msesia/chr",
+        "artefactory/woodtapper",
+        "pm25/Semi-Supervised-Regression",
+        "cair/regression-tsetlin-machine",
+        "crillab/pyxai",
+        "yaniv-shulman/rsklpr",
+        "alejandrodebus/Indices-Net",
+        "FlorentF9/MAGNETS",
+        "jeriek/xsec",
+        "DuckDuckPig/Regression_Blur",
+        "dirknbr/pymalp",
+        "envfluids/MEDIDA",
+        "levimcclenny/multimodal_transfer_learned_regression",
+        "DanielGoman/DropLasso",
+        "you-leee/deep-nn-examples",
+        "Danziger/CarND-T1-P3-Behavioral-Cloning",
+        "Eelis03/av-scenario-runner"
+      ]
+    },
+    {
+      "query": "topic:xgboost language:Python arxiv.org in:readme",
+      "results": [
+        "pratikpv/malware_detect2",
+        "linkedin/TE2Rules",
+        "fireindark707/Python-Schema-Matching",
+        "Opt-Mucca/PySCIPOpt-ML",
+        "mohammad-gh009/DrugReasoner",
+        "snowfluke/paperium",
+        "fabsig/GradientNewtonBoosting",
+        "pierobeat/Hoax-News-Classification",
+        "iamaleksandra/Gaia-Teff",
+        "Javihaus/Auto-ML-app-with-dash",
+        "miharcan/lora-preference-optimization-comparison",
+        "ahk-93/risky-driving",
+        "OmerKurtulus/DeepReality",
+        "0-Sam-0/do-we-really-need-dl-for-tsf",
+        "10div10/Legal-Contract-Classification",
+        "raghav4-vedi/wpd_toolkit",
+        "QuantisMol/TDC-ADMET-Pgp-AttrMasking",
+        "kevnguyentech/LLM-Query-Router",
+        "4f4d/Project-Chronos",
+        "Aliekhalj/tabular-benchmark-reproduce",
+        "Aravind0403/clairvoyant-scheduler",
+        "Denis060/sierraleone-agri-ml",
+        "zebunneen004-ai/graph-financial-crime-detection",
+        "rahulptel/HMORDD",
+        "aashshahh/agentic-signal-detection-engine",
+        "havidaqoma/perovskite-screening-ml-tea",
+        "m01ali/HEAPO-Predict",
+        "KoshiirRa/midgley"
+      ]
+    }
+  ],
+  "candidates_in_order": [
+    {
+      "full_name": "MISP/misp-galaxy",
+      "hash": "004a80c8120264c1ffaf050c083b9274710ad950d8214b2fed2d18498f721471"
+    },
+    {
+      "full_name": "mir-group/nequip",
+      "hash": "020e974121d5e95bee98c876450e4e8121df2d31f1b07d60768d3fb539e1ebbd"
+    },
+    {
+      "full_name": "Hironsan/anago",
+      "hash": "023a0334fc25e6ce765d04f8cd612dbbf5f3f1d887ddd9f1cff9461e06d99e20"
+    },
+    {
+      "full_name": "Eelis03/av-scenario-runner",
+      "hash": "024e2e9e8606fe4256872232596fb19e20ff8648ca60aa3b5576c2117c5de18f"
+    },
+    {
+      "full_name": "EpiSci/SafeAI",
+      "hash": "036b3084e090d9af75f7a084bef639c19fafa90d0001bc7df81521e8475e62b7"
+    },
+    {
+      "full_name": "KoshiirRa/midgley",
+      "hash": "0462a86fc8ff878b83554cfbf30b50c20e243582c916a75bd812033e250a5117"
+    },
+    {
+      "full_name": "AFAgarap/pt-datasets",
+      "hash": "0a314f95319d7b3359be3f87ee681cb8eacc5c2ccc06ae81c03b20a4fd825948"
+    },
+    {
+      "full_name": "microsoft/Semi-supervised-learning",
+      "hash": "0abfc22ffc1d2a353842c4f812f32f965c43c9f4f784396991e10e43668dea2b"
+    },
+    {
+      "full_name": "tensorflow/quantum",
+      "hash": "0b525283c3fa32de61e38aa31ff8d79205a21e9e256602f0f04506b257cde9a1"
+    },
+    {
+      "full_name": "ezelikman/parsel",
+      "hash": "0d2cd9ac67a85c68683b983435c74e56578635f0f42804675429e49913c04a63"
+    },
+    {
+      "full_name": "preritj/segmentation",
+      "hash": "0dbd9eabeb6c518fac6722360c9a1808ce9bb4dd9a120b9e0447f7f05c306c24"
+    },
+    {
+      "full_name": "miharcan/lora-preference-optimization-comparison",
+      "hash": "0de08911bd683ced05b0709c58a9fb58f35c8da021be9cbb1a120101d42dbd75"
+    },
+    {
+      "full_name": "Javihaus/Auto-ML-app-with-dash",
+      "hash": "0e0c134941c02a5d8b04813913d95779a675c5d43172db5f324547f298576313"
+    },
+    {
+      "full_name": "SforAiDl/KD_Lib",
+      "hash": "132f7af3180a5ccef8a55620ca6180b6b8cd0af27dfef089a417440fe3877c9b"
+    },
+    {
+      "full_name": "meta-pytorch/opacus",
+      "hash": "1343f2e2bb20754b8a33718476a58f5969e2e2f17ca78a4c6dbf37a597f476f0"
+    },
+    {
+      "full_name": "DanielGoman/DropLasso",
+      "hash": "15863af91d0fd9f64bec94967ed0a43532e7a44e58bcbf1056e31ca38da44e30"
+    },
+    {
+      "full_name": "Trusted-AI/AIF360",
+      "hash": "15b7132f3f6b85dc237a240ef6a3837c397b37e30717ea6d7fbe79c6f75ea1b5"
+    },
+    {
+      "full_name": "iamaleksandra/Gaia-Teff",
+      "hash": "173a8c5355a34aa74f3159a6834d68ffaac63b63fcca4bbc33b159bf901469b6"
+    },
+    {
+      "full_name": "akshaybahadur21/Facial-Recognition-using-Facenet",
+      "hash": "17c05520f95197bd6534390d804c78236736b2dacfa1e6294c2d362265bbebb5"
+    },
+    {
+      "full_name": "seopbo/nlp_classification",
+      "hash": "18988c00ce75484a51ffa3096bf9c63cef40aa4747a8c6da1b81e84a9e878acf"
+    },
+    {
+      "full_name": "AFAgarap/cnn-svm",
+      "hash": "1a19424df17bf43db3f7aa8cd295abd31f5a4fc051734a29a1bdf2ec2f284d8f"
+    },
+    {
+      "full_name": "samuelyu2002/ImVisible",
+      "hash": "1c3b73cbbfef337f329a2c024b3a2503d4178e2d99bdae3b7215842a95bc3aeb"
+    },
+    {
+      "full_name": "nicola-decao/s-vae-tf",
+      "hash": "1d485e10a2627846365cbec2a9b959dc9db9f097f2e8721cb74a8b1803c5a4ae"
+    },
+    {
+      "full_name": "tensorflow/gnn",
+      "hash": "1dc2181bae48536e44d4e6a21cce5f9ededd3aa84c5c8267f6cfc1f9a2bfa2a3"
+    },
+    {
+      "full_name": "ssuncheol/vision-transformer-pytorch",
+      "hash": "1de6846181c59b0b41d55fc4314c95db253ad497da14e05910d34c76d55cfe24"
+    },
+    {
+      "full_name": "fastmachinelearning/hls4ml",
+      "hash": "1e03ffd6043b6cc643c450814ab009d81e2ea5fa75eeba7963441154f81bca3e"
+    },
+    {
+      "full_name": "basiralab/reproducibleFedGNN",
+      "hash": "1e7a4b462d8c2762372097cc35444f63c577bcce5e4d51f942280bc6c21f27bc"
+    },
+    {
+      "full_name": "agencyenterprise/PromptInject",
+      "hash": "207970052174c3f494895673073b106406c232898dd5145295387bd36b3ac999"
+    },
+    {
+      "full_name": "Denis060/sierraleone-agri-ml",
+      "hash": "223dc1e88db27bc8d6c9b8017dc01a28019e887142ce18085733964584d40b71"
+    },
+    {
+      "full_name": "awslabs/graphstorm",
+      "hash": "226d41a9e73f54b7693cd9618ac816a89d1354db41def7b7321cd1218d6e31a0"
+    },
+    {
+      "full_name": "lab-cosmo/upet",
+      "hash": "2297d4be74097e3ba03fbc9b095c43db6d0e258ddc28b7992fdca2b11a8854f5"
+    },
+    {
+      "full_name": "fabsig/GradientNewtonBoosting",
+      "hash": "23846d66e174be25f02dba552fbb961f6b4f4e038c292e79466d60d45166f25f"
+    },
+    {
+      "full_name": "uber-research/deep-neuroevolution",
+      "hash": "26be71ab7537d57d7335a4e0e196d6dcc18d10274603e08363037dad9fb53484"
+    },
+    {
+      "full_name": "neuml/annotateai",
+      "hash": "26ea0fefe647d28b099f822917c2ea3384d085e9da3a70d9cda01f4135cbfc89"
+    },
+    {
+      "full_name": "shrebox/Political-Ideology-Detection-on-Twitter",
+      "hash": "2852e582b5f43a97c27ff65d7c7b6aba124561307458edffbbf8c2b083f1a5cd"
+    },
+    {
+      "full_name": "holdfire/CLS",
+      "hash": "294cb76ec79780c620b59c2b85c8feddb66e08ef4c0fdfc6860536896647196a"
+    },
+    {
+      "full_name": "pm25/Semi-Supervised-Regression",
+      "hash": "2b558bcfdb63d32ee13b8812db93b682ef27836d806ea35e928daeb8a9190db5"
+    },
+    {
+      "full_name": "lopusz/awesome-interpretable-machine-learning",
+      "hash": "3048d536740b0e4394d311b7888d40240dbe36a30ed6d7615b5c7dc02304c9e7"
+    },
+    {
+      "full_name": "dlmacedo/distinction-maximization-loss",
+      "hash": "3106fe9753c812e65db9732a47f99928428231acf866b8c7f4369a0c7bc83f9e"
+    },
+    {
+      "full_name": "baraline/convst",
+      "hash": "3200f2d421f784697a2e1b3b527fcaa9fb5ce590e387a95d2ccdd31056cbaa6d"
+    },
+    {
+      "full_name": "SakanaAI/evo-memory",
+      "hash": "32deb79da479846ce4f5911ccd81a73337d437d3c1311f2b3ab58ecfcfbef0c8"
+    },
+    {
+      "full_name": "nathansomavarapu/Basic-Models",
+      "hash": "33308d12dd986b7dc834adb3bf3ef6b11777addb44814f73db802eff6bb731e2"
+    },
+    {
+      "full_name": "stellargraph/stellargraph",
+      "hash": "336f7b416237fd03ab255dcee772c9fb842bef9524cb1a53df2fd61bc4fbf9bf"
+    },
+    {
+      "full_name": "tensorflow/model-card-toolkit",
+      "hash": "33e196d81d0661034467ac0f651e61e33286868a1a488ec8cf94557295d737b8"
+    },
+    {
+      "full_name": "lucidrains/reformer-pytorch",
+      "hash": "3946838eeacd693e76d4c1ab00cc68a6ff69a9edb25b2c9927b8122f7baf1fb6"
+    },
+    {
+      "full_name": "py-why/dowhy",
+      "hash": "3a80a84113e0d3e8ff1c1a0edbe6adcb97b845e441475a40fa519780354a31d5"
+    },
+    {
+      "full_name": "AdeelH/pytorch-multi-class-focal-loss",
+      "hash": "3c1b4c36c21532fe4708566eb108a6e6d93a8be3e04a60a81f1ac2fdad086adb"
+    },
+    {
+      "full_name": "10div10/Legal-Contract-Classification",
+      "hash": "3c56c2d5ec380c15e9d9461854f57d5185fb90894293cec40615ee34b915a14f"
+    },
+    {
+      "full_name": "Ashu11-A/Manga-Segment",
+      "hash": "3de4474fe286434c72c4ac32f3bf8dcf3cafe443910ef6339af81a2cec34080e"
+    },
+    {
+      "full_name": "altosaar/variational-autoencoder",
+      "hash": "4042be99e3e25e537e7fdfa416df78282a6a2c567e34695e46f8b282e7c5e94d"
+    },
+    {
+      "full_name": "envfluids/MEDIDA",
+      "hash": "4193021cc63a753b725104ea1cf308b01f799f054281d4f1cb3bf0ebca6b1c53"
+    },
+    {
+      "full_name": "GPflow/GPflow",
+      "hash": "430195b8fce4b8b56ab43065a01cfb0f88b7d04734efd3e230ff844e65190d2e"
+    },
+    {
+      "full_name": "SAP-archive/machine-learning-diff-private-federated-learning",
+      "hash": "435a4ccde179e285d4bbd8ec3aa63e2d20d1fdbf328d887c02196d94b656ffcc"
+    },
+    {
+      "full_name": "philipperemy/keras-tcn",
+      "hash": "44ce6c38b0d26d0a11f7a3f8b87ccb1bac95bfad9444f1dafacbf318ffa824ea"
+    },
+    {
+      "full_name": "FenTechSolutions/CausalDiscoveryToolbox",
+      "hash": "45201fc8ad2a24eb383cfcc6013515ccd47c2e169f1c793c26f17d683e91ff62"
+    },
+    {
+      "full_name": "mirceamironenco/BayesianRecurrentNN",
+      "hash": "46ccb9ba723ecd824a86f6630e528fae071510b3aa82e57d875cb638a1047071"
+    },
+    {
+      "full_name": "yangyanli/PointCNN",
+      "hash": "473c884ce4be61819b5a9f60b1f2acf582d5ffbb65a118ad07e29f65e091b477"
+    },
+    {
+      "full_name": "Opt-Mucca/PySCIPOpt-ML",
+      "hash": "47416e64c855ee6d787cb06ce8b2403d338bcbe8fa904f782881d551faabb264"
+    },
+    {
+      "full_name": "gregversteeg/CorEx",
+      "hash": "476e3d97def9ec8f675f55e257ba2a8e6b633a22ffc82038b16dc5925f232938"
+    },
+    {
+      "full_name": "Deep-AI-Application-DAIP/acoustic-leakage-dataset-GPLA-12",
+      "hash": "47f1a63e1764d9bfec0521f27490320908b0371efa62d26f9e7aed3450c12be4"
+    },
+    {
+      "full_name": "csiro-robotics/deepseagrass",
+      "hash": "480d1a4ea6ce5586f1e17321e94d09e4af721e9d7c49c48f02e1186dd93e4d13"
+    },
+    {
+      "full_name": "Abolfazl-Younesi/face_mask",
+      "hash": "4a9f5c6fb9e2dc4519da0d3cff482a14740414953b2517216e45af263f040260"
+    },
+    {
+      "full_name": "invictus717/MetaTransformer",
+      "hash": "4c3b132ae2e4a61744e283e1596e24d988e97d0a077047a3e694b4287f90bb4d"
+    },
+    {
+      "full_name": "ml-stat-Sustech/TorchCP",
+      "hash": "4d36767c7e75f5169570bac8f009aff6d297bae72e9ab549733af65b9b35f14d"
+    },
+    {
+      "full_name": "zuruoke/watermark-removal",
+      "hash": "4d51ffbb848fefa571c0a607cc411e698111b067ffbad77d83e29870bcc1bc5c"
+    },
+    {
+      "full_name": "tensorcircuit/tensorcircuit-ng",
+      "hash": "4e46d0169764c244402022ad24d1fdbfa3a3906d12d79981e4bc76bea27fc69e"
+    },
+    {
+      "full_name": "FlorentF9/MAGNETS",
+      "hash": "4f339ce755c76d3217cb66bbb6c347323d20790b16ccbb02b4ce6c17776e1395"
+    },
+    {
+      "full_name": "yaniv-shulman/rsklpr",
+      "hash": "4f4b0ad6945bf07cce6b783de3ea9b99248f86a2b4dfef37fc9080c7656a69e7"
+    },
+    {
+      "full_name": "tatigabru/kaggle-rsna",
+      "hash": "4fbdf65c50f0ec3b75fd3e2e28d5cc79993409e191b872561dfafbe4b870fab0"
+    },
+    {
+      "full_name": "haihabi/GeneticNAS",
+      "hash": "522c06a88ee57673466f3864ee52aaf41c68c466a12b19d0b6766f02e0712c7a"
+    },
+    {
+      "full_name": "BodduSriPavan-111/chandassu",
+      "hash": "52ce9f9c3a2e2958c21c963c238b8faa58797dfe095856a54af60f984c7f4356"
+    },
+    {
+      "full_name": "OlafenwaMoses/ImageAI",
+      "hash": "52f24db93d6f3af5456605050293830494cd26c021975e1cee993261b9af281b"
+    },
+    {
+      "full_name": "datamllab/tods",
+      "hash": "538efca302ee181c001ed18fa528d0cb98e95e3ed3a781263ae63b269ecb5741"
+    },
+    {
+      "full_name": "GPflow/GPflowOpt",
+      "hash": "53d51873851973f8d20defc52ef10edf08d73868954e481fadd1727ed7df7cd4"
+    },
+    {
+      "full_name": "mmaaz60/EdgeNeXt",
+      "hash": "563f24655715b979064fd0d2777be3c6ae17f5893813771c0fc0428602780575"
+    },
+    {
+      "full_name": "dougbrion/pytorch-classification-uncertainty",
+      "hash": "5644233ab1ddeb0378f0e879ab86c703168dcfb9c0d8d00a2331d606efd21fa9"
+    },
+    {
+      "full_name": "bstellato/mlopt",
+      "hash": "5670dda21de3ea910ea71c59e46ec6056f5e54c05e112f56ae1deae32d13b02a"
+    },
+    {
+      "full_name": "limix-ldm-ai/LimiX",
+      "hash": "581db90c65594c18f1ce443732ba9d70082ff79236a6531a483d5063df65750d"
+    },
+    {
+      "full_name": "LudwigStumpp/llm-leaderboard",
+      "hash": "59da41ab48f4a98a410c136e8d49adb255628348a605b316349a40234bd0caa1"
+    },
+    {
+      "full_name": "linkedin/TE2Rules",
+      "hash": "5a6911d80780ff45fa6ff0c4bcaedc54d0eb92ae8d5000a0ac5503aa932b7fc0"
+    },
+    {
+      "full_name": "nphdang/DeepCoDA",
+      "hash": "5b65384fa2ac7d35136c4510ac41fd7558a185b36a0dd126e9039dc2237fb9af"
+    },
+    {
+      "full_name": "Danziger/CarND-T1-P3-Behavioral-Cloning",
+      "hash": "5fdcb2e20713df8ed4f7bf2a53d6667a28b4183e3ff08f5f4c72588f5f250771"
+    },
+    {
+      "full_name": "Lornatang/InceptionV3-PyTorch",
+      "hash": "6151554293903e5b4fb7a28a4732c38f42e2ff71e7b73ae27d13a49af1189dd1"
+    },
+    {
+      "full_name": "tencent-quantum-lab/tensorcircuit",
+      "hash": "6428da66468840671925a135d6c4480a209ecdc3e586c97c379151e78345df49"
+    },
+    {
+      "full_name": "pedro-acunha/SHEEP",
+      "hash": "6431ff1e253e77fe4f9dcfa05277af4051bb999dca415cd94aa0fe3465decbc5"
+    },
+    {
+      "full_name": "snipsco/snips-nlu",
+      "hash": "65b667ecd2b3d8d62bbf3bddaab4f7f2f5aaf47ba6f0555200bb296aa8d4485f"
+    },
+    {
+      "full_name": "hint-lab/bert-relation-classification",
+      "hash": "68f1ba3d469847190f8d1aa2f347c101bf2f351d486cf6703e4300f7cc500a43"
+    },
+    {
+      "full_name": "MartinThoma/clana",
+      "hash": "6c16fb259a369a6d7674c9344f473f534d2128325834e462fdeca2c1b0475df8"
+    },
+    {
+      "full_name": "crillab/pyxai",
+      "hash": "6d30f9364771c7871a7173a952d3d537fc7863e1ae05e4fdd519974d5de44b4d"
+    },
+    {
+      "full_name": "4f4d/Project-Chronos",
+      "hash": "6d5cce9d1c3eea64087eb731bfc0d8c2f215fde281d38cb830e1843884f98db4"
+    },
+    {
+      "full_name": "QData/TextAttack",
+      "hash": "6dc51997e26cc0e5b912b1e31b590e2bc66f595ca35debcaf1bdf67a2284cdd0"
+    },
+    {
+      "full_name": "microsoft/mattersim",
+      "hash": "6e19f033b28e992939e48e06d3c24252205e04b9c8b8a32737fc7c27906244e3"
+    },
+    {
+      "full_name": "vudung45/FaceRec",
+      "hash": "6e95180102b4c381beda404f708565c598cc699ceea5920d6f21ce9d63e2f241"
+    },
+    {
+      "full_name": "ocatak-zz/malware_api_class",
+      "hash": "70530adbcdbf51616aee60d65d5ac8a1269b30f4c64bbf53679882e4087f845b"
+    },
+    {
+      "full_name": "bigscience-workshop/petals",
+      "hash": "72efa5093c962f7e971c588dd3374db6197ebe4fc26b467b9762800be53bd6a7"
+    },
+    {
+      "full_name": "havidaqoma/perovskite-screening-ml-tea",
+      "hash": "73ba688d71500234c56ee7f41c6b94bafcc78770e50456c6fdfab367fba7fb05"
+    },
+    {
+      "full_name": "NUAA-AL/ALiPy",
+      "hash": "7406b64575c8eab7d0f065fa4224afa76398d69826160dab2fd3c51520ad8c23"
+    },
+    {
+      "full_name": "nickkunz/smogn",
+      "hash": "743cc6e91d29cbeb5cb5d1ac48fa3af22b37aa353d6351b2ddd427a0e653b5a2"
+    },
+    {
+      "full_name": "basiralab/RG-Select",
+      "hash": "759496359634adb909f780d26ef70687f2a33c66b82625cae1f07a78c0f6f759"
+    },
+    {
+      "full_name": "Time-MoE/Time-MoE",
+      "hash": "76457baddc716d16ff715b35e1193370f4636b19cacc67d7b0678a1e81061f76"
+    },
+    {
+      "full_name": "dirknbr/pymalp",
+      "hash": "7661ac7a61e40d3a36d5e321fb2ebef4ce8709de6ae6a3f7aabde02332287b84"
+    },
+    {
+      "full_name": "agr78/SpectralViT",
+      "hash": "781f589461493f494ee3c231e868f6da9a1306974c9c366dc77593d342d04a2d"
+    },
+    {
+      "full_name": "amazon-science/chronos-forecasting",
+      "hash": "7a227155eabf0611759fe53a42e1136bd76d4e7d344d198d0989911f790653b3"
+    },
+    {
+      "full_name": "timoschick/pet",
+      "hash": "7bc1e5d7f87c4a02ca52970e586c625e3886550cebeb84a1cedd5c501b4bcf4c"
+    },
+    {
+      "full_name": "m01ali/HEAPO-Predict",
+      "hash": "7c045ed22c9ef027286299046c345bdcf16977c2ec3243c185305f03e5908432"
+    },
+    {
+      "full_name": "CRIPAC-DIG/GRACE",
+      "hash": "7c171d5c8fd8809bb0925a0e30604e724119515a3e51c7e855fee164a9a54af9"
+    },
+    {
+      "full_name": "zbMATHOpen/mscHarvester",
+      "hash": "7cb22707bbef53493fe40bbbdb4018f52e277996f2472654f87304f79640bf13"
+    },
+    {
+      "full_name": "kaushalshetty/Structured-Self-Attention",
+      "hash": "7d20da976bb2586849119f0ebe399fb05f16f02b950b545fba9eb6942852a89a"
+    },
+    {
+      "full_name": "QuantisMol/TDC-ADMET-Pgp-AttrMasking",
+      "hash": "7d4544f2ab75a4285bc416fe85b1c6e6c98c2a86a75216ce65fb6b3340563272"
+    },
+    {
+      "full_name": "extropic-ai/thrml",
+      "hash": "8019608562955025ce4132536fd2b26d9bc9cf309137c791c48e5ebedc12c3c3"
+    },
+    {
+      "full_name": "torchmd/torchmd",
+      "hash": "807534a69350296d59f10ad78ef4abe2f9f09f6ffcba4b8731f460dded1a7dfa"
+    },
+    {
+      "full_name": "deepspeedai/DeepSpeed",
+      "hash": "808abec00bbcfcbb04b10b2e13287f60389b2eff8d23aa088419013352c2a225"
+    },
+    {
+      "full_name": "zahraatashgahi/CTRE",
+      "hash": "82f975a270b6f123bad8904dd7038233fc07ab0d07b1cded5901cda4ac6aab85"
+    },
+    {
+      "full_name": "yi-ding-cs/EmT",
+      "hash": "865275760140aad095e7b09d203ce7cdbaecbf70eabdf719b690b6be9ca73372"
+    },
+    {
+      "full_name": "satyamahesh84/SIDU_XAI_CODE",
+      "hash": "895e7894ae8d8da42692bcea1177fd5cd7077ff24e53f4084a7da78698d4cdbc"
+    },
+    {
+      "full_name": "naver-ai/seit",
+      "hash": "8b4a395543002e5ac4144727121380de232b642db5eb3cc3389bf0a67da17d20"
+    },
+    {
+      "full_name": "NatLibFi/Annif",
+      "hash": "8befcd07a38eab6d50622e968d8f8ecf2033858c89a62d5219be3ad548c55317"
+    },
+    {
+      "full_name": "madziejm/project-fontr",
+      "hash": "8c35b1eb33e01e6996321e1949800447e58a809e3d52028b56a9e1d8e4ceb3b9"
+    },
+    {
+      "full_name": "X-DataInitiative/tick",
+      "hash": "8d87bf1f76bb7b3ab6a2a53f39f3a8b201573b2e934ad767e517e4ad3068bde4"
+    },
+    {
+      "full_name": "ImprintLab/Medical-Graph-RAG",
+      "hash": "8f4e65fe06a28ed7f28ccda64379c56d43001223c4db62035d1a8e4a8dbf4924"
+    },
+    {
+      "full_name": "hitachi-speech/EEND",
+      "hash": "9056571b7412c26cdc494036ec7b11b5068a87ab83fd52f1d642f84c5634dd3a"
+    },
+    {
+      "full_name": "KaiyangZhou/deep-person-reid",
+      "hash": "9108fe1196e07d87dd2b8c9441c807322f2cc6a031039c79646c9a0e58697268"
+    },
+    {
+      "full_name": "nla-group/classix",
+      "hash": "91134671fe14d9f7a30136b5f44f984a601fe9b489621aa862b092679d596db9"
+    },
+    {
+      "full_name": "ProjectNeura/MIPCandy",
+      "hash": "91a2f633bacfde7473af72d0fa0abd8122e8a992357b85aafa9002530440528a"
+    },
+    {
+      "full_name": "said-ohamouddou/MS-DGCNN2",
+      "hash": "93f559fbd4f5d9290ee9e075cc22589b17a2dd44b7adddc8560714c8226f375d"
+    },
+    {
+      "full_name": "dshahrokhian/YOLO_tensorflow",
+      "hash": "94a8771eb71d8013535ffdb5a9b5d93187c144ea907aef8abef15ea0f28ab1fe"
+    },
+    {
+      "full_name": "faverogian/med-diffusion-classifier",
+      "hash": "94dcd255e75eb36ef2eac51ca17cd6f6a271198ee24b16de76bd0be311435fc8"
+    },
+    {
+      "full_name": "pratikpv/malware_detect2",
+      "hash": "957d4188eb44429cc88b6850f4672f361111c7002abe09f55ddc22051eed0ca9"
+    },
+    {
+      "full_name": "raghav4-vedi/wpd_toolkit",
+      "hash": "966fa7b4bae9f9d8ba336aaa8b292939b3a4f2fc4e09071982dee021d56f9730"
+    },
+    {
+      "full_name": "kingfengji/gcForest",
+      "hash": "98550998abafac8fe9691dda3759977429cc7f69f80b0db0c83a96370d7e51f5"
+    },
+    {
+      "full_name": "katiana22/latent-deeponet",
+      "hash": "99a8fc8f73ac36d69ee7f93d16ef51b946c811851b1e5d5c6aa232cd301d5c1e"
+    },
+    {
+      "full_name": "oligoglot/theedhum-nandrum",
+      "hash": "99c20e6b76bb33854aa1358a2b05a3d4fc119d2e3f34bc22e18ad4cfc6922914"
+    },
+    {
+      "full_name": "ngmarchant/oasis",
+      "hash": "99c70f3265c181e8588596e6963bb323dbcfe99f3f16bdce15a07a6a1d840d9b"
+    },
+    {
+      "full_name": "vojha-code/Multi-Output-Neural-Tree",
+      "hash": "9a477e52db1511fc6933f509bc1bcf7f1ad36a9a6b6d0858b043179c6bc2d11a"
+    },
+    {
+      "full_name": "DensoITLab/TeachAugment",
+      "hash": "9a4967adb46ce8210613264842c3a6daf7ef5f8185a08d303ac6c2bddc5dfa18"
+    },
+    {
+      "full_name": "Aravind0403/clairvoyant-scheduler",
+      "hash": "9a8ccc2a9e858ccd60e6f5dd5d77149e08a3a1cd51580de81530159b13a1edd0"
+    },
+    {
+      "full_name": "pytorch/executorch",
+      "hash": "9d6db0815593f097e289fabdc53ec45fc71a7fd0fab49e0612155a7e9f398899"
+    },
+    {
+      "full_name": "basiralab/RegGNN",
+      "hash": "9d9ece09fa9606173e54f128f75fde650450e8e49be478442b1023c43c3978d4"
+    },
+    {
+      "full_name": "wayne1204/NOAA-fish-finding",
+      "hash": "9dcd85ccdb16b8208548d93676c2afd7de948a4f9d5fd387f2f48601ab022f08"
+    },
+    {
+      "full_name": "naver-ai/rdnet",
+      "hash": "9f023f5b1d7ca1d38663df8036380b5c3f3cc35455e003d52b22de529372e820"
+    },
+    {
+      "full_name": "msesia/chr",
+      "hash": "9f458ba0f3d63b695cc49351b63893a47132ae4988ae79587f97f47b8a60f46d"
+    },
+    {
+      "full_name": "ocatak/malware_api_class",
+      "hash": "a057ccc2a3e499ad990a60c8a01c8fa558fe8f5e77721de3aff99054d54c7240"
+    },
+    {
+      "full_name": "Zebreu/ConvolutionalEmotion",
+      "hash": "a07ab6dfd3fb6bcb10553311574ffb56c68283509f5afaa3f77f574379d6adce"
+    },
+    {
+      "full_name": "knodle/knodle",
+      "hash": "a07f5eb5a8a09885be6c3c06735797a18ed097d8f465dbd4ec2b9dfde7bde93a"
+    },
+    {
+      "full_name": "DuckDuckPig/Regression_Blur",
+      "hash": "a08c7980b7ed8a8b6b51d1f7f6f8929d08c0bb3b3385581b51b351588b341689"
+    },
+    {
+      "full_name": "alvinwan/shiftresnet-cifar",
+      "hash": "a0a272426c9bbdc7bc84c4cce38550cd80ccff7515bc8ed2594c3c1059ff22e9"
+    },
+    {
+      "full_name": "openai/EPG",
+      "hash": "a26a3ecf85fd4dcad6a8b2e3f4279971c16199877cc65e9672af5599763becbd"
+    },
+    {
+      "full_name": "nrontsis/PILCO",
+      "hash": "a2bd54c66f2ea3fa763bb6cd4450bec2397f640ebdad1012a1659328a134d4f9"
+    },
+    {
+      "full_name": "iperov/DeepFaceLab",
+      "hash": "a7203e2b6d3f6e1fe765e1cce817c65a58a06ac4e70aa6c8e43b3ebc09f8dacc"
+    },
+    {
+      "full_name": "dlmacedo/robust-deep-learning",
+      "hash": "a75fb1f7fd7ac6b911bc9cbe677ee33a5be1b9cdc28f1f6359491764dff64f5d"
+    },
+    {
+      "full_name": "AFAgarap/gru-svm",
+      "hash": "ab372ee7998a9831ef7db6074672c5d950dae67e2877f131d23ce7f8ede8aab5"
+    },
+    {
+      "full_name": "BM-K/Question-Difficulty-Estimation",
+      "hash": "ad30a188f2bc8c16b92238f1324a1301a2fc704118827c4b96ac682e664ff242"
+    },
+    {
+      "full_name": "abhishek-kathuria/Question-Answering-using-Capsule-Networks",
+      "hash": "adb828e470c157ce1364f31ed47e22e49f9eb4d5535f92ab3756d6e57d8a5eb1"
+    },
+    {
+      "full_name": "NeelKanwal/Equipping-Computational-Pathology-Systems-with-Artifact-Processing-Pipeline",
+      "hash": "af060238b88b116af2c8f67bf020ce9abb6c62558831a5425ca6fb11dc3fd207"
+    },
+    {
+      "full_name": "OmerKurtulus/DeepReality",
+      "hash": "b0a1616ba8ef50b35903525636d7cd3b29922c3699fa3d74dbd0bb10735851f9"
+    },
+    {
+      "full_name": "mohammad-gh009/DrugReasoner",
+      "hash": "b0dff97cb8e496d7faaa32c08011016e2a108b96ebd58445f5f92cd78f5ac6ac"
+    },
+    {
+      "full_name": "abdoelsayed2016/TNCR_Dataset",
+      "hash": "b10267f38bcc903523fd7f8b89505b309ed4fc63930e7f472362ac35934e8ad9"
+    },
+    {
+      "full_name": "kumar10725/PeerLoss-Keras",
+      "hash": "b27a73226579780c90b473400d8b8522d534095edc60e68c81789830c3a5d779"
+    },
+    {
+      "full_name": "jiaowoguanren0615/ConvNextV2-Pytorch",
+      "hash": "b29864172ced0bb6e404ea7097af1b6cf3b8e337bce3a22b2d5b2efd3606b54f"
+    },
+    {
+      "full_name": "PrashantRanjan09/WordEmbeddings-Elmo-Fasttext-Word2Vec",
+      "hash": "b3ea6540b88670bccf769ed98dc6ca52f0dcf0336fe6836aa95d9894b9f87875"
+    },
+    {
+      "full_name": "stephanegaiffas/AMF",
+      "hash": "b4d256f2e3c0fd6c3d82c6b56c4c56c0985222a359de14accfa0d851e026ca50"
+    },
+    {
+      "full_name": "Tencent/YOLO-Master",
+      "hash": "b5a58a7e410a9542006f6191033e566682dce4fb26d56b6baef589ce8c638d32"
+    },
+    {
+      "full_name": "yuddim/deepClassificationTool",
+      "hash": "b8878c0a8380bdb2b1404f3470da87f2532cdd250d623943627acf25988145cb"
+    },
+    {
+      "full_name": "zebunneen004-ai/graph-financial-crime-detection",
+      "hash": "bd5b26e5886d874fc2d380d388b9bf56c926afe5406f0d8e86b1f4d5632a4b19"
+    },
+    {
+      "full_name": "jieyilong/tree-of-thought-puzzle-solver",
+      "hash": "bd5c801f20372db12d644a51a587578ad993fcdbd6f0bce460d461bd8ec5e8a3"
+    },
+    {
+      "full_name": "ljvmiranda921/pyswarms",
+      "hash": "bdc4ee9310326a09582d95231d8619ca90adf397fdbd956e41fe4d2f6b3e5bf9"
+    },
+    {
+      "full_name": "cair/regression-tsetlin-machine",
+      "hash": "be6e6dae84f701b9e76b0de6fda1c7bafa3120ba477700c911d99f1a1fb1aad4"
+    },
+    {
+      "full_name": "leduckhai/MultiMed",
+      "hash": "bec7f7249c04e8a9ed026526bfc3a10539699b8767a471362827248e13be157f"
+    },
+    {
+      "full_name": "Accenture/AmpliGraph",
+      "hash": "bf76dc1f8d6d5c95bd3bec3bcbe18a21551207337da8da4ec70c45eded2b86f5"
+    },
+    {
+      "full_name": "AFAgarap/malware-classification",
+      "hash": "bfc9b38fae650b125245ad538db639569d355a0b822a38878f5f43d916e6fe35"
+    },
+    {
+      "full_name": "alejandrodebus/Indices-Net",
+      "hash": "c0b42f7ca186eccbbd270b984060768772a372cbc1075561d53ed98f5826702e"
+    },
+    {
+      "full_name": "levimcclenny/multimodal_transfer_learned_regression",
+      "hash": "c0ed59cbed895b72cabd0fcc13d42a4809f3e0f03090726ae18680d784e16b73"
+    },
+    {
+      "full_name": "Carlosandp/qiskit-data-reuploading",
+      "hash": "c10be1655edeff4c588e79bcbcb0541740863f0af737f81f58348b364748e213"
+    },
+    {
+      "full_name": "yalaudah/facies_classification_benchmark",
+      "hash": "c59c67bf5b371573d62522acd894a8c4a43f1b3309b8b1ec2ea72fc83362c699"
+    },
+    {
+      "full_name": "microsoft/torchscale",
+      "hash": "c653b3961f022d3a9cf26c26c221cceae29b60ea30e2f2396bd69c586a853ef2"
+    },
+    {
+      "full_name": "CyberDataLab/nebula",
+      "hash": "c8ee46b6fa401ea16663ee01d6861249755f27321128d0d6f19bf66a1fd89c78"
+    },
+    {
+      "full_name": "StartLuxLabs/StartLux-Decision",
+      "hash": "c9138d578245c8db59d6ae5b9c0d418a70ed32667dcbf9ed04f34c30445a2279"
+    },
+    {
+      "full_name": "conceptofmind/LaMDA-rlhf-pytorch",
+      "hash": "c96bd523c58c09daf7833dbc5498b280efe853655f49e4cc0704b3f79299623b"
+    },
+    {
+      "full_name": "snowfluke/paperium",
+      "hash": "ca0b1597e34362fb7bd37a686358eda70240a4412f0b3b7f95cedde749f71063"
+    },
+    {
+      "full_name": "ModSSC/ModSSC",
+      "hash": "ca14f2440f976ba3ecfc84e8fdbb1e705132b9ae75911eb7eaef18b3a8dca0e9"
+    },
+    {
+      "full_name": "allegro/allRank",
+      "hash": "ca2e3392f1f403faf2406d0209c3b6e5decb8f44875c5ab25f5da36f77629d5e"
+    },
+    {
+      "full_name": "lmcinnes/umap",
+      "hash": "cb035eab6610f5e44a45440d794c026884290f7462e60f670a0f7b61b860ba40"
+    },
+    {
+      "full_name": "RobertCsordas/RFCN-tensorflow",
+      "hash": "cb93bc50b7797985c1a6f38241431f0c4fc84f94f89ec46679ed3e29c167cbad"
+    },
+    {
+      "full_name": "tensorflow/compression",
+      "hash": "ccb21059d163f89c6a68cede478cb06a802e9b92aeadc6c629b132bb23c04b12"
+    },
+    {
+      "full_name": "bosch-ros-pkg/bstld",
+      "hash": "cdeda4682dc4232ee6b7caa4d01ae1a026d9b6382cb94c40ac2f82f3b8512dc5"
+    },
+    {
+      "full_name": "OlafenwaMoses/IdenProf",
+      "hash": "ce79133ff6c392c9b298731ef377b9327258afb4dc7908c526d10f93a11a6dff"
+    },
+    {
+      "full_name": "ahk-93/risky-driving",
+      "hash": "cedf4ee1b8c0d14e36b3e18f6759b4818271ff9a005847535df5ee87dcc58304"
+    },
+    {
+      "full_name": "monajalal/Kenyan-Food",
+      "hash": "cef169a2eddf83ff75b6c8f8792dc4b1f7130029e89af6b66721fe07005cce1a"
+    },
+    {
+      "full_name": "fireindark707/Python-Schema-Matching",
+      "hash": "cf4fb57ec39da071987d72fad4e4b8c71741d3b32d4d3e3ac832c86c7b1006c1"
+    },
+    {
+      "full_name": "aashshahh/agentic-signal-detection-engine",
+      "hash": "cffe9af1cca6d5d40f534e78d7842e9be5543597c8bce55c6b2f2a2238d43bd9"
+    },
+    {
+      "full_name": "PythonOT/POT",
+      "hash": "d02255ea40f62a503d67f1f45c163bb155781941a5b1f109994fc499a05935bc"
+    },
+    {
+      "full_name": "bethgelab/foolbox",
+      "hash": "d0ed60f3706610e85d63ff29d10f324ac8aed93e21195480b67d9fe463c18c76"
+    },
+    {
+      "full_name": "dcmocanu/sparse-evolutionary-artificial-neural-networks",
+      "hash": "d14836def1164cb1e15bfc4fac6787fe1da5208e05c01e7e40820bdf1f3b33f8"
+    },
+    {
+      "full_name": "you-leee/deep-nn-examples",
+      "hash": "d197ee3a25b6267c768fdc5581c766cf598da552d56daa8b658e49b0597554a8"
+    },
+    {
+      "full_name": "iArunava/scratchai",
+      "hash": "d48bd4499e69d90ce3ffd66655377c5aaadd0f50f069a85206960533b885e130"
+    },
+    {
+      "full_name": "Lornatang/InceptionV4-PyTorch",
+      "hash": "d59faa22d6b8bbf3904282bb5c58554fad0fe1ce5aee8b9e0851bc9ee041760d"
+    },
+    {
+      "full_name": "refactoring-ai/Machine-Learning",
+      "hash": "d5af43c5f4ec8da69ac4527e62aef4257e29445ca417e29c34f959a0ce151db1"
+    },
+    {
+      "full_name": "stanford-centaur/PyPantograph",
+      "hash": "d7404d8d1148efb68818790ddd1f2c47a001993ff81f0356f45af3fd8fc2a392"
+    },
+    {
+      "full_name": "awslabs/gluonts",
+      "hash": "d787ef0e2aa9d9957f00e58fe5406b142628f69ae7d15f5ff544fbb471fc340b"
+    },
+    {
+      "full_name": "dmlc/gluon-cv",
+      "hash": "d9177f0b1da2a3da8e68a4fd1fcd8d29221ac91a1a1970b24e76c1cfaba7a317"
+    },
+    {
+      "full_name": "mims-harvard/UniTS",
+      "hash": "d96286db97356207a6d4314a400b6e344b87beb0a158b0df6e9fc508485d807d"
+    },
+    {
+      "full_name": "jeriek/xsec",
+      "hash": "da6e0a6415137fb676f5ce9290c6fb2b6d1f7afbd93df6e99725568e04d935ed"
+    },
+    {
+      "full_name": "antao97/dgcnn.pytorch",
+      "hash": "da709fffe1d90f74d05af8d6c99c89b98c490686b0ebf5cb141c260731ef868c"
+    },
+    {
+      "full_name": "NX-AI/xlstm",
+      "hash": "ddf37ceff86f8170b2df1b4c93f7c043c140d586a2e3e64e83a44a874b68a43d"
+    },
+    {
+      "full_name": "ElMehdiBouamama/MBTI-Tweetouilles",
+      "hash": "de84720bfadeae4245a58eed1ff60877967ab7652cca3125180fc6538344de7f"
+    },
+    {
+      "full_name": "MCG-NJU/APP-Net",
+      "hash": "deee0937dae4800d279be6fa7a89b08070638a430dda92144469659882a6a965"
+    },
+    {
+      "full_name": "dmbee/seglearn",
+      "hash": "dfe18f255453c024cb5f35b9f4d07f3a755c8063d5ac6674522432a41894bdee"
+    },
+    {
+      "full_name": "stavros0/bitcoin-price-prediction",
+      "hash": "e1e5a16ccede7a02d4bab0295ce299df1cd001e7296bdc4fa98a51bfa5d1e486"
+    },
+    {
+      "full_name": "pytorch/audio",
+      "hash": "e34381eab8ac98af4a61e3156c969ea76758470987e6b578297d680e9a0c23ac"
+    },
+    {
+      "full_name": "lucidrains/stylegan2-pytorch",
+      "hash": "e349c612f85413644377d0a9a0cdbe2ad124eb9ad93675c4b149db4d9f6c5ec3"
+    },
+    {
+      "full_name": "nicola-decao/s-vae-pytorch",
+      "hash": "e44336830a5ccd856d93242f64d6822b274b400f0d1350f702a7bf052801f50d"
+    },
+    {
+      "full_name": "i-Jayus/RecSystem-Pytorch",
+      "hash": "e49159abef240e896d390607d956884ea1f828655f7a0faf5816f1de3c31de2d"
+    },
+    {
+      "full_name": "krislette/bach-or-bot",
+      "hash": "e63fbdb1d921323425b6afbd3483eedf387d5be00596adc172bc2be4668dd819"
+    },
+    {
+      "full_name": "cair/PyTsetlinMachineCUDA",
+      "hash": "e6409a4ae5b80ad7fb0f83e9087992399eb36613d201ec50ed5e27597bfe4dc2"
+    },
+    {
+      "full_name": "BR-IDL/PaddleViT",
+      "hash": "e76fe9bedb337d8256068fb88c3d8b77dfe76f7396acfdc2def6952a9fd119cc"
+    },
+    {
+      "full_name": "NeelBhowmik/efficient-compact-fire-detection-cnn",
+      "hash": "e8626e69586806283e13739c25cca96c92b83425f5d320725ede725b81ee2087"
+    },
+    {
+      "full_name": "antonpuz/DeROL",
+      "hash": "e9df5da662915b7e11b0b37532a3d218617c02aca845529383531198925e80a9"
+    },
+    {
+      "full_name": "DrMMZ/ProtoNet",
+      "hash": "eaa43f6a015445897a0ed098d1b79ab49af6c3ff873cb51d5c2f4b6dd21fc32b"
+    },
+    {
+      "full_name": "reservoirpy/reservoirpy",
+      "hash": "ec5d0941e7121bb6d8be3bbd670a3863fa9388d8b00ffec410fc3024923b56d5"
+    },
+    {
+      "full_name": "ethanluoyc/pytorch-vae",
+      "hash": "ecab8a8706b41abaadec1748f6e0c68d0d553a4343aff53168c11aa5f4c11f1e"
+    },
+    {
+      "full_name": "jacobgil/pytorch-grad-cam",
+      "hash": "edaaa9b4a43d42bba05edcadbcef734a28b82b5c022a12cfad61950525a6eb8b"
+    },
+    {
+      "full_name": "kevnguyentech/LLM-Query-Router",
+      "hash": "f0f289f2974686256249fc4912406dac4b8338bd19512d9c36b3850f42f409dc"
+    },
+    {
+      "full_name": "pierobeat/Hoax-News-Classification",
+      "hash": "f1c1c80d0852e44a3b708fd5297f7d5017970992d83f7888ba73f26de55567e3"
+    },
+    {
+      "full_name": "Cominder/Iwin-Transformer",
+      "hash": "f1c5195b90be60e89445777ad334399dc78a5a5223513fe67c96046a2467cb57"
+    },
+    {
+      "full_name": "LinusWu/TENET_Training",
+      "hash": "f2932052e45a40250d0b8738d706f3d73190b014a481d30f051239edc355abf2"
+    },
+    {
+      "full_name": "r9y9/deepvoice3_pytorch",
+      "hash": "f5b222b19668b95546d525322a6cc394f5b520fcc116f6fec0cc6e3b5fbeec84"
+    },
+    {
+      "full_name": "rahulptel/HMORDD",
+      "hash": "f6d0dec8d7cef7b5f2aa1fb9ed831f850423240d9ec9dc12ad4ac1002802f49a"
+    },
+    {
+      "full_name": "CVMLmu/DGMMC",
+      "hash": "f8aa6c07643e333a74f03f56ad11f65b2906356c93641b39574ad64dbf0ccbcd"
+    },
+    {
+      "full_name": "bertinetto/r2d2",
+      "hash": "f8ca5a30fa103af7081890179c01b32fd43934b173a9a54fb4c54c7a8b693680"
+    },
+    {
+      "full_name": "ChristophReich1996/ECG_Classification",
+      "hash": "fa60670af5fc39e66fe605c94c0aed495555508780da8a9b64b945cbf62bc6d7"
+    },
+    {
+      "full_name": "yzhao062/pyod",
+      "hash": "fb802896125ae2f3034590588c04aec0972b5f6a315a0b1665a0f08ee500cbc2"
+    },
+    {
+      "full_name": "philipdarke/torchtime",
+      "hash": "fd1bc7c04ea82daa00de1378dc7d3e1baa28dd94a224818edb7e2d988dd0e0b6"
+    },
+    {
+      "full_name": "mazurowski-lab/MRI-parameter-prediction",
+      "hash": "ff00a1992ce5f4ca82fa7412c5d7478224d7920c20861a180fad948a6f2b2f22"
+    },
+    {
+      "full_name": "basiralab/BrainNet-ML-ToolBox",
+      "hash": "ff59eb0e4392b76cd755571b2722e10b6b105fe159f2c8fa8292b90d8c21ba61"
+    }
+  ]
+}

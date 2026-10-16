@@ -115,6 +115,8 @@ def find_run_command(readme: str, paths: set[str]) -> tuple[str, str] | None:
             tokens = line.split()
             script = next((t for t in tokens[1:] if not t.startswith("-")), "")
             path = script.removeprefix("./")
+            if path.rsplit("/", 1)[-1] == "setup.py":
+                continue  # an install command, not a run command (docs/CORPUS_EXPANSION.md section 6, item 4)
             if path.endswith(".py") and path in paths:
                 return line, path
     return None

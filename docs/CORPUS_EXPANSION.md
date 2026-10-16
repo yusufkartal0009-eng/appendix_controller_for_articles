@@ -108,5 +108,13 @@ are written before **stages 2 and 3** were retrieved.
    If fewer than six papers have passed after stage 3, Pilot 4 runs the papers that passed and says that the selection was
    short; no further stage is added.
 
+4. **R3 skips install commands (issue #340).** After stages 1 and 2 had been evaluated, the six selected papers included two
+   whose first README line was `python setup.py install`, which installs a package and runs no experiment. A line whose script
+   is `setup.py` is an install command and is skipped; the next `python` line of the README is taken (a candidate with no other
+   line fails R3). This amendment was written **after** that result was seen, so it is not blind to it; it is limited to
+   this one category error. The documentation style checker (`docs/check_styles.py`) and a data preparation step that
+   the README gives as its first line are kept: they are what the README says to run. The earlier output is kept in
+   `data/corpus_expansion/first_attempt/` and the evaluation was repeated on the stored pools.
+
 The wider stages reach papers that are less specific to tabular data. That is a change of the scope of the sample, and the
 success rate of Pilot 4 is a rate for papers selected this way.
