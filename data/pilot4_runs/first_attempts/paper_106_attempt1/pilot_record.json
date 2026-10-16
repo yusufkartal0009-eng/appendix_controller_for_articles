@@ -1,0 +1,75 @@
+{
+  "paper_id": "paper_106",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "8e88eb05f6b7a02dc38fc9c4a0289e0f7383e98c",
+  "started_at": "2026-10-16T21:11:17+00:00",
+  "repo_url": "https://github.com/yalaudah/facies_classification_benchmark",
+  "pinned_commit": "aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3",
+  "target_script": "patch_train.py",
+  "container_command": "python /workspace/repo/patch_train.py --batch_size 32 --aug True",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 14400
+  },
+  "pilot4": {
+    "run_command": "python patch_train.py --batch_size 32 --aug True",
+    "readme_url": "https://github.com/yalaudah/facies_classification_benchmark/blob/aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.154
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_106_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 1.556,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.068,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 59514880
+  },
+  "finished_at": "2026-10-16T21:11:19+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
