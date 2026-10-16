@@ -800,3 +800,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ### 2026-10-17 00:00 +03:00: feat(pilot): categorize one paper into its own folder (Issue #360)
 - `scripts/categorize_pilot_failures.py --runs-dir <dir> --paper <id>` writes `failure_category.json` into that paper's run folder and prints it (the file for the whole directory is not written). It is for Pilot 4, where each paper's pull request holds its record and its category (`docs/PILOT_4.md` section 7). `tests/test_pilot_compare.py`: one new case. Ruff clean.
+
+### 2026-10-17 00:05 +03:00: test(pilot4): paper_101 first attempt (Issue #362)
+- `python scripts/run_pilot.py paper_101 --pilot4`; record and `failure_category.json` in `data/pilot4_runs/paper_101/` (unchanged files). Paper: LAIR-Net (`yuvrajiro/lairnet`, commit af5d5e1, matches the pin). README command, as written: `python docs/check_styles.py` (a documentation style checker; the first `python` line of the README, see `docs/CORPUS_EXPANSION.md` section 7).
+- Result: **COMPLETED, exit code 0**, run phase 1.0 s, peak memory 26738688 bytes. The repository has no requirements file, so the bundling was SKIPPED and the install status is `SKIPPED`. Last output line: `all 21 classes styled`.
+- By the definitions of `docs/PILOT_4.md` section 5: **not a pilot success** (install SKIPPED is not install success) and category `RAN_WITHOUT_INSTALLED_DEPENDENCIES`; run success yes. No correction round (the first attempt ended without an error). Strict and final result are the same.
+- What it does not show: the command is a docs checker, so this run says nothing about the paper's model (LAIR-Net) running.
+- Not verified: whether the paper's own experiment runs.

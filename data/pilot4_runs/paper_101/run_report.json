@@ -1,0 +1,51 @@
+{
+  "paper_id": "paper_101",
+  "source": "https://github.com/yuvrajiro/lairnet",
+  "commit_hash": "af5d5e18eb99e75aa57358ff1caa1e0272b5aac3",
+  "target_script": "docs/check_styles.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 1.013,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_101",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 0.454,
+    "timeout_limit_seconds": 14400,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 26738688,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 14400s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/docs/check_styles.py\n==================================================\n   .figure-card            gallery.rst\n   .figure-read            gallery.rst\n   .ln-actions             index.md\n   .ln-btn                 index.md\n   .ln-btn-ghost           index.md\n   .ln-btn-solid           index.md\n   .ln-card                index.md\n   .ln-cards               index.md\n   .ln-cite                index.md\n   .ln-eyebrow             index.md\n   .ln-figure              index.md\n   .ln-hero                index.md\n   .ln-install             index.md\n   .ln-lead                index.md\n   .ln-step                index.md\n   .ln-step-arrow          index.md\n   .ln-step-num            index.md\n   .ln-steps               index.md\n   .ln-title               index.md\n   .model-cards            api.rst, usage.rst\n   .not-uncertainty        gallery.rst\n\nall 21 classes styled\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : SKIPPED\nDuration      : 0.454s\n==================================================\n",
+  "stderr_preview": ""
+}
