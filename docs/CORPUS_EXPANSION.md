@@ -28,7 +28,7 @@ this order, run once on the day of selection and stored unchanged in `data/corpu
 3. `topic:gradient-boosting language:Python arxiv.org in:readme`
 4. `topic:scikit-learn language:Python arxiv.org in:readme`
 
-Duplicates are removed. The candidates are then **ordered by the SHA-256 hash of the lower-case `owner/name`** (ascending), a
+Duplicates are removed (section 6 adds stages 2 and 3 for the case that fewer than six papers pass). The candidates are then **ordered by the SHA-256 hash of the lower-case `owner/name`** (ascending), a
 fixed pseudo-random order that does not depend on stars, date, or content. No other ordering is used.
 
 ## 3. The rules
@@ -70,3 +70,43 @@ The pinned commit is the head of the default branch on the day of selection (ful
   sizes that the README states). Such cases are not filtered: they are the kind of obstacle that the pilot is meant to find.
 - R4 rejects any README that merely mentions a GPU, which also rejects papers that run well without one.
 - The selection is one draw of six from this pool: another day gives another pool and other papers.
+
+## 6. Amendments (2026-10-16, issue #338)
+
+The rules were applied once (issue #337) and showed three problems **before any paper was installed or run**. This section
+amends the document; sections 1 to 5 stay as they were written. The first output is kept unchanged in
+`data/corpus_expansion/first_attempt/`. These amendments were written after the author had seen the **stage 1** result
+(the pool of 89 candidates, 3 of which passed under the first version of the script), so they are not blind to stage 1; they
+are written before **stages 2 and 3** were retrieved.
+
+1. **R7 means the paper too.** Section 3 says the repository **and the paper** must be new. The first version of the script
+   checked only the repository, and one selected candidate was the paper of `paper_006` (arXiv 2106.01342, SAINT) in another
+   repository. The script now also compares the arXiv id with the papers of `data/seed_papers.json` and with the papers
+   already selected.
+2. **The run command.** A command line that ends with a backslash continues on the next line, and the lines are joined into
+   one command. A shell comment at the end of a line (a space, `#`, and the rest) is not part of the command. Neither
+   change alters whether a candidate passes R3: the rule only needs the first line to start with `python ` and a script that
+   exists.
+3. **Stages for a pool that is too small.** Stage 1 (section 2) gave 89 candidates and fewer than six papers. If fewer than six
+   papers have passed after the candidates of a stage, the candidates of the next stage are evaluated, in this order, each
+   stage by the same rules and the same hash order (names already in an earlier stage are left out). A stage is retrieved once,
+   on the day it is needed, and stored unchanged (`pool_stage2.json`, `pool_stage3.json`). The queries are fixed here, before
+   they were run:
+
+   Stage 2:
+   - `topic:machine-learning language:Python arxiv.org in:readme`
+   - `topic:classification language:Python arxiv.org in:readme`
+   - `topic:regression language:Python arxiv.org in:readme`
+   - `topic:xgboost language:Python arxiv.org in:readme`
+
+   Stage 3:
+   - `topic:deep-learning language:Python arxiv.org in:readme`
+   - `topic:data-science language:Python arxiv.org in:readme`
+   - `topic:random-forest language:Python arxiv.org in:readme`
+   - `topic:feature-selection language:Python arxiv.org in:readme`
+
+   If fewer than six papers have passed after stage 3, Pilot 4 runs the papers that passed and says that the selection was
+   short; no further stage is added.
+
+The wider stages reach papers that are less specific to tabular data. That is a change of the scope of the sample, and the
+success rate of Pilot 4 is a rate for papers selected this way.

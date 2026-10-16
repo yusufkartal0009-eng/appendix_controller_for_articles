@@ -1,0 +1,47 @@
+[
+  {
+    "paper_id": "paper_101",
+    "title": "LAIR-Net: Leaky Alignment-Impulse Residual Networks for Tabular Regression",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "repo_url": "https://github.com/yuvrajiro/lairnet",
+    "repo_commit": "af5d5e18eb99e75aa57358ff1caa1e0272b5aac3",
+    "paper_url": "https://arxiv.org/abs/2610.11538",
+    "license": "MIT",
+    "target_script": "docs/check_styles.py",
+    "run_command": "python docs/check_styles.py          # a class named in a page with no CSS rule",
+    "readme_url": "https://github.com/yuvrajiro/lairnet/blob/af5d5e18eb99e75aa57358ff1caa1e0272b5aac3/README.md",
+    "expected_claims": {},
+    "source_table_or_section": {}
+  },
+  {
+    "paper_id": "paper_102",
+    "title": "Geometric Manifold Rectification for Imbalanced Learning",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "repo_url": "https://github.com/wangxb96/gmr-imbalanced-learning",
+    "repo_commit": "ebb98157451122b6a1189d2597a77eca0839ac4c",
+    "paper_url": "https://arxiv.org/abs/2602.13045",
+    "license": "MIT",
+    "target_script": "code/examples/quick_start.py",
+    "run_command": "python code/examples/quick_start.py",
+    "readme_url": "https://github.com/wangxb96/gmr-imbalanced-learning/blob/ebb98157451122b6a1189d2597a77eca0839ac4c/README.md",
+    "expected_claims": {},
+    "source_table_or_section": {}
+  },
+  {
+    "paper_id": "paper_103",
+    "title": "SAINT: Improved Neural Networks for Tabular Data via Row Attention and Contrastive Pre-Training",
+    "year": 2021,
+    "venue": "arXiv preprint",
+    "repo_url": "https://github.com/ogunlao/saint",
+    "repo_commit": "172e0d17d5e4edeed1d833cc1f67b21b85e84bd8",
+    "paper_url": "https://arxiv.org/abs/2106.01342",
+    "license": "MIT",
+    "target_script": "main.py",
+    "run_command": "python main.py experiment=self-supervised \\",
+    "readme_url": "https://github.com/ogunlao/saint/blob/172e0d17d5e4edeed1d833cc1f67b21b85e84bd8/README.md",
+    "expected_claims": {},
+    "source_table_or_section": {}
+  }
+]

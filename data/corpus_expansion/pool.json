@@ -1,0 +1,479 @@
+{
+  "retrieved_at": "2026-10-16T18:15:36+00:00",
+  "per_query_limit": 100,
+  "searches": [
+    {
+      "query": "topic:tabular-data language:Python arxiv.org in:readme",
+      "results": [
+        "PriorLabs/TabPFN",
+        "lucidrains/tab-transformer-pytorch",
+        "stanford-star/relbench",
+        "automl/Auto-PyTorch",
+        "dreamquark-ai/tabnet",
+        "RyanWangZf/transtab",
+        "pytorch-tabular/pytorch_tabular",
+        "sfme/RVAE_MixedTypes",
+        "ptuls/tabnet-modified",
+        "probcomp/cgpm",
+        "vanderschaarlab/synthcity",
+        "sdv-dev/TGAN",
+        "WalkingDevFlag/MLE-STAR-Open",
+        "ogunlao/saint",
+        "artefactory/woodtapper",
+        "capitalone/DataProfiler",
+        "xuhongzuo/scale-learning",
+        "PriorLabs/tabpfn-client",
+        "fmp453/rectable",
+        "LAMDA-Tabular/TALENT",
+        "The-FinAI/HARMONIC",
+        "namkoong-lab/LLM-Tabular-Shifts",
+        "nphdang/CCRAL",
+        "zadid6pretam/TabSeq",
+        "LAMDA-Tabular/TopBench",
+        "LAMDA-Tabular/TabCausal",
+        "muellermarkus/cdtd",
+        "fearlessAAA/TableDART",
+        "wwweiwei/DoRA",
+        "mohalim/IFENet",
+        "nphdang/ImbLLM",
+        "Lexsi-Labs/TabTune",
+        "ahmeddoghri/tabflowmini",
+        "DiTEC-project/rule_learning_high_dimensional_small_tabular_data",
+        "davor10105/laat",
+        "muellermarkus/mostly_ai_prize",
+        "powidla/Friend-Or-Foe",
+        "wangxb96/gmr-imbalanced-learning",
+        "yuvrajiro/lairnet",
+        "abailey81/credit-default-tabular-transformer",
+        "Maximilianb1/zen-focus-tabular-anomaly-detection",
+        "Aliekhalj/tabular-benchmark-reproduce",
+        "zypl-ai/pamir",
+        "srikumar2050/hugiml-core"
+      ]
+    },
+    {
+      "query": "topic:tabular-deep-learning language:Python arxiv.org in:readme",
+      "results": [
+        "LAMDA-Tabular/TopBench"
+      ]
+    },
+    {
+      "query": "topic:gradient-boosting language:Python arxiv.org in:readme",
+      "results": [
+        "harshraj11584/Paper-Implementation-Overview-Gradient-Descent-Optimization-Sebastian-Ruder",
+        "benedekrozemberczki/BoostedFactorization",
+        "mustafa1728/Yogasana-Classifier",
+        "0-Sam-0/do-we-really-need-dl-for-tsf",
+        "johnny-godoy/optimal-discretizer"
+      ]
+    },
+    {
+      "query": "topic:scikit-learn language:Python arxiv.org in:readme",
+      "results": [
+        "automl/auto-sklearn",
+        "skfolio/skfolio",
+        "modAL-python/modAL",
+        "ibrahimsharaf/doc2vec",
+        "adapt-python/adapt",
+        "MLCIL/scikit-fingerprints",
+        "AFAgarap/wisconsin-breast-cancer",
+        "vanderschaarlab/hyperimpute",
+        "AlexImb/automl-streams",
+        "raamana/kernelmethods",
+        "jasonlaska/spherecluster",
+        "Neclow/SERAB",
+        "asad1996172/Authorship-attribution-using-CNN",
+        "GauravPandeyLab/eipy",
+        "songyang-dev/uml-translation-3step",
+        "PlasmaControl/PyRCN",
+        "392781/scikit-ntk",
+        "rvandewater/ReciPies",
+        "KatharineShapcott/rank-similarity",
+        "davisidarta/fastlapmap",
+        "KohlerHECTOR/Tree-MBPO",
+        "sunnyadn/comprisk",
+        "danielduongg/membership-inference-lab",
+        "danielduongg/data-poisoning-lab",
+        "pulkittomar2809/bank-customer-churn-prediction",
+        "berkinksk/SenseCatch",
+        "amurlaniakea/materials-confounding-check",
+        "AkandaAshraf/gnn-augment",
+        "Ashar-Siddiqui/rotating-shaft-fault-classification",
+        "MicheleDiSabato/BayesianOptimizationKG",
+        "DavidBraun777/RAGeATM",
+        "Hassanolowofela/PhishGuard-Capstone",
+        "wangxb96/gmr-imbalanced-learning",
+        "carmen-timpau/BBO-Capstone-Project",
+        "yuvrajiro/lairnet",
+        "Baaqar-007/dyslexia-accessibility-nlp",
+        "johnny-godoy/optimal-discretizer",
+        "Jybbs/chalkline",
+        "siliconsagenerd/Fashion-CV-Project",
+        "Amon20044/Quantum-Bayes-classifiers-and-their-application-in-image-classification",
+        "nathan-lindstedt/randomization_tests",
+        "Aliekhalj/tabular-benchmark-reproduce",
+        "Anish1441/SPARK-Engineering-Quality-Intelligence",
+        "Sajjad-Shahali/Elliptic-Bitcoin-Anomaly-Detection",
+        "srikumar2050/hugiml-core"
+      ]
+    }
+  ],
+  "candidates_in_order": [
+    {
+      "full_name": "0-Sam-0/do-we-really-need-dl-for-tsf",
+      "hash": "00b4f3453a3e8c7fa624aaeb3d8358b5f376ac4d1873cc7502e8b897eede3409"
+    },
+    {
+      "full_name": "PriorLabs/tabpfn-client",
+      "hash": "056ece51d691b7cb306104134bd818ee3519d5e568590aac228e942088b437ad"
+    },
+    {
+      "full_name": "sdv-dev/TGAN",
+      "hash": "088ac1f7f9adc4bbd1aaa1b50edf93481f367c9597495eb8443ae23851e13355"
+    },
+    {
+      "full_name": "namkoong-lab/LLM-Tabular-Shifts",
+      "hash": "094601a2bcb196917d62811b024c8c0fb516e7ae12061447148ea2f14d6276a7"
+    },
+    {
+      "full_name": "MLCIL/scikit-fingerprints",
+      "hash": "0cd8f14692b66c086a0ae30ac880fd492dcfdfd80d01609834edaa6782ecca39"
+    },
+    {
+      "full_name": "AlexImb/automl-streams",
+      "hash": "14708ae464d8d44ffdbcdcfc151d42764a293208c146a9d6c2204f5d9f8d1b5f"
+    },
+    {
+      "full_name": "ibrahimsharaf/doc2vec",
+      "hash": "1488c93d0de57f9f370e84fe154e3921173986938bad032e460ae32589b4497b"
+    },
+    {
+      "full_name": "Amon20044/Quantum-Bayes-classifiers-and-their-application-in-image-classification",
+      "hash": "15f4a280ea9c3e4620530fe33a243ff21032563f0e32bba0f3f27d50d88699a7"
+    },
+    {
+      "full_name": "pulkittomar2809/bank-customer-churn-prediction",
+      "hash": "20432dae7077dd8006026712c313217dfb6c95107545fccc01873a05bdb0a6bc"
+    },
+    {
+      "full_name": "DiTEC-project/rule_learning_high_dimensional_small_tabular_data",
+      "hash": "21ab75adde74771312d27e705aeb2f1857cbb8b7343bc3f893a856b7ff6715b3"
+    },
+    {
+      "full_name": "yuvrajiro/lairnet",
+      "hash": "2277b84f9baec17a8175b6e0de9b2c5e05a03e5a3224d8cd00ca0509702bcd60"
+    },
+    {
+      "full_name": "adapt-python/adapt",
+      "hash": "22cdccf3966084348cc61365f46a35b505dd4dd3785648c85e86c6ef2c48851e"
+    },
+    {
+      "full_name": "wangxb96/gmr-imbalanced-learning",
+      "hash": "2405b70d8f5d8ba70920ac14e713684a20798025d54b184223b23431bb79a48b"
+    },
+    {
+      "full_name": "KatharineShapcott/rank-similarity",
+      "hash": "275c75837517d21eec2450c6da60d4d8811dd133065bd4d56756f3aa82a2dd99"
+    },
+    {
+      "full_name": "davisidarta/fastlapmap",
+      "hash": "2f2cee40f767a60fd3adcc59605cfdf46dd1f014f89270cb3af9762c1025211f"
+    },
+    {
+      "full_name": "Anish1441/SPARK-Engineering-Quality-Intelligence",
+      "hash": "30f5450e5b966bf11f09cce7465a0efa72dbc90901836619543e7962683d87c2"
+    },
+    {
+      "full_name": "Maximilianb1/zen-focus-tabular-anomaly-detection",
+      "hash": "32eda58cc3fb80a7be39f747231dbcded4e0f0afec463f89f7b37223e1f412f8"
+    },
+    {
+      "full_name": "KohlerHECTOR/Tree-MBPO",
+      "hash": "33a964497408ece9c492c3638a64b6d2243f2ceda25fadef92b971d7e438c74c"
+    },
+    {
+      "full_name": "capitalone/DataProfiler",
+      "hash": "3e29f1679b30537277752cbf3a9c6ad25a31a1cba2be91a8f131591e69c417ec"
+    },
+    {
+      "full_name": "zypl-ai/pamir",
+      "hash": "43b5c067373b320c246a07815237ba9ea2988fb7b302a6197023c74812adaedb"
+    },
+    {
+      "full_name": "RyanWangZf/transtab",
+      "hash": "4411249bf6c801fbda7edca4c969bf448dcbd4046a3df107097b7909c69d8999"
+    },
+    {
+      "full_name": "nphdang/CCRAL",
+      "hash": "441d649c213fe9c99733fd736579e8366f1fc4ac7256dd83a5ef78a25259cf50"
+    },
+    {
+      "full_name": "jasonlaska/spherecluster",
+      "hash": "4517c06bb43776aa2857fa994baef670d6d6b5661618709f01db0cfc38ebeef0"
+    },
+    {
+      "full_name": "Aliekhalj/tabular-benchmark-reproduce",
+      "hash": "45a4d25536fccc13d5b036d497b5d63c80f195bb5b36be24dc13eab9c1df2948"
+    },
+    {
+      "full_name": "pytorch-tabular/pytorch_tabular",
+      "hash": "46788695af7f2faa72a40ac9c9e7c1d7ef6654d589f6e3971cb74dba2aea40c7"
+    },
+    {
+      "full_name": "xuhongzuo/scale-learning",
+      "hash": "53ab896649c7409e7b1fa2f22d4b8a5095f0186530d9e41d69372b5035038ec9"
+    },
+    {
+      "full_name": "abailey81/credit-default-tabular-transformer",
+      "hash": "57905b72ea5cb57f5669b6aa1ba1e5886b87c791d5e9909ae69e840fa539d155"
+    },
+    {
+      "full_name": "siliconsagenerd/Fashion-CV-Project",
+      "hash": "598deae64186c61334a7e76f656d53e5e1758c83414e77f9db853d33b2990f68"
+    },
+    {
+      "full_name": "AkandaAshraf/gnn-augment",
+      "hash": "5b251e2c7dfc9b16e17d0f0c618d42718b1441b4f57b26d34737b61ca27f50b6"
+    },
+    {
+      "full_name": "nphdang/ImbLLM",
+      "hash": "5d8e55fab038131ede8d02170edf0994be0700a7b27dc6ad134356ca99186b83"
+    },
+    {
+      "full_name": "ogunlao/saint",
+      "hash": "5e9304a540ef400641f27df1259f44bc9e3a1de2708ef6e23ec1aa6f2b06eaf4"
+    },
+    {
+      "full_name": "amurlaniakea/materials-confounding-check",
+      "hash": "5f78cb855f9aa594e4f87e18743e94df3148eb0d798f83ae08810c0930d5b24d"
+    },
+    {
+      "full_name": "392781/scikit-ntk",
+      "hash": "6202b5286f0b6b9fd958a79133507efcd041ba110f0141df27f925efc0b97c00"
+    },
+    {
+      "full_name": "asad1996172/Authorship-attribution-using-CNN",
+      "hash": "63ac9b97256fc271f337f65f28a5d13e116431bba7cff5aac8913db2ad648445"
+    },
+    {
+      "full_name": "modAL-python/modAL",
+      "hash": "6b74291d0ad946943b2d6ffe4daf72f23b1c75b3af7830992e2cced1632610a8"
+    },
+    {
+      "full_name": "Lexsi-Labs/TabTune",
+      "hash": "6d48f9090d02ee9aa545753e8d88ac59995944d55f4593a7d15796e78344bd9b"
+    },
+    {
+      "full_name": "srikumar2050/hugiml-core",
+      "hash": "6f30efc84a8c38af0af6642bbbfca803c50b2a1d4818e326e40da0892ff84cec"
+    },
+    {
+      "full_name": "Baaqar-007/dyslexia-accessibility-nlp",
+      "hash": "756df6f822dc1b8b22fb3f16201e2033a17f586b2fabe91e985640be6fc8f0b1"
+    },
+    {
+      "full_name": "PriorLabs/TabPFN",
+      "hash": "79b5b13cd0b7e9b15c0063ced086b80bb776fc631485fcfff320bd0b40c78cd0"
+    },
+    {
+      "full_name": "AFAgarap/wisconsin-breast-cancer",
+      "hash": "7bc84b3a2c1fca582583eeaedddcb26151321c70934731fc2c6f75d9f572008b"
+    },
+    {
+      "full_name": "Neclow/SERAB",
+      "hash": "7cac8c1e5830bef81d1324415dc5fd16eee59b181917ee15f8a6097ee6f0363e"
+    },
+    {
+      "full_name": "Jybbs/chalkline",
+      "hash": "7e3c347c620cc9234ce6960f121a557b8c431416db924f600dc370e5e4720864"
+    },
+    {
+      "full_name": "vanderschaarlab/synthcity",
+      "hash": "81bd4541cf421e0d851dc05fcbb8135a73f5ed3f83f00668debb37631bb3bfc3"
+    },
+    {
+      "full_name": "fmp453/rectable",
+      "hash": "846fcd7aee6eda00ac31c8200b43c828feeaeefdbfcb8b12cc30a28bedb91bba"
+    },
+    {
+      "full_name": "nathan-lindstedt/randomization_tests",
+      "hash": "84c6799fdb33319357192d9fd5d8f9b406e925455437244d6a8c7844c43eaaa2"
+    },
+    {
+      "full_name": "GauravPandeyLab/eipy",
+      "hash": "8b7701701e4259df8e8d369be1f86ab9dc90c1d56fc4b34a5270e3880672ee8a"
+    },
+    {
+      "full_name": "davor10105/laat",
+      "hash": "8c70862d67f48d2527b318cba99256ecd9d488ccb17211b48d6db935e4f91211"
+    },
+    {
+      "full_name": "raamana/kernelmethods",
+      "hash": "8e22cdfb81446af55148e165b1c911f128e58ac0efc790f99509fd5953a39027"
+    },
+    {
+      "full_name": "wwweiwei/DoRA",
+      "hash": "90adf0a19279624401346776c847e433f4a252bc7dbf3cddcf159fac7e1bc7b4"
+    },
+    {
+      "full_name": "stanford-star/relbench",
+      "hash": "9346fdd575c8928d8ab8c6beff3c74424c0c49cc46cdeb18d165e98e8fb91ffa"
+    },
+    {
+      "full_name": "WalkingDevFlag/MLE-STAR-Open",
+      "hash": "96629c21f6d94374ae5e6562ea7e222b8d3d24f4a110e7ecaa896f84b54a9ab4"
+    },
+    {
+      "full_name": "Sajjad-Shahali/Elliptic-Bitcoin-Anomaly-Detection",
+      "hash": "984d31bb9632db4212ce45284ad1608bff85c269fddb2ded15bdfb6b8ab0eb33"
+    },
+    {
+      "full_name": "songyang-dev/uml-translation-3step",
+      "hash": "9906121df5888edf64c73fddc9424123d0dbba5044a911ff13cb8b1c233b8fac"
+    },
+    {
+      "full_name": "powidla/Friend-Or-Foe",
+      "hash": "9e63004698caa3b0540ab981b230c1174efcc474df615bf211fc751426955c8b"
+    },
+    {
+      "full_name": "lucidrains/tab-transformer-pytorch",
+      "hash": "a1487c1d6dac402325f16f2c2cdbf2f0c3738733d693583f91b38204c0fa7931"
+    },
+    {
+      "full_name": "automl/Auto-PyTorch",
+      "hash": "a34aebbcb1b723fa2861a434f240de114783983e4559d2da2a00dd7a34b53228"
+    },
+    {
+      "full_name": "muellermarkus/mostly_ai_prize",
+      "hash": "a521b963a09e32186d24b6722b2af121631f9e91e26bc6ae380ddb1d94533b58"
+    },
+    {
+      "full_name": "mustafa1728/Yogasana-Classifier",
+      "hash": "a5d19e01ecd08c1e40e691d88ae30ba1a2c1ba29d55cac70df5cc9d716ca5af5"
+    },
+    {
+      "full_name": "sfme/RVAE_MixedTypes",
+      "hash": "aaa3448a6b30c35f603d39dba56dc9bfafe3084a9539c091d584579e1f0741f7"
+    },
+    {
+      "full_name": "LAMDA-Tabular/TopBench",
+      "hash": "acbb112bee40da468cdc776c28957b72b334e5e30ccb8c8188d9ffb505b10aca"
+    },
+    {
+      "full_name": "ahmeddoghri/tabflowmini",
+      "hash": "adc68106ff2a2d0073689848d20cd2730f1eb103af006ab0006032ef29e7fb1d"
+    },
+    {
+      "full_name": "mohalim/IFENet",
+      "hash": "b191a4ae25664cf18199d2e925cd5d39f0c297337449e9f33f873d304cca48dc"
+    },
+    {
+      "full_name": "MicheleDiSabato/BayesianOptimizationKG",
+      "hash": "b4d3b080c09cbc7c8b5088d59ae9b3e6f16a502ef1b36ea2389c1c4dd8ac0604"
+    },
+    {
+      "full_name": "fearlessAAA/TableDART",
+      "hash": "b4e4b711145c576f7602b7bbf00cee2b940995e9e2f41441b56aa696de164184"
+    },
+    {
+      "full_name": "rvandewater/ReciPies",
+      "hash": "b8cfa86a1a10fb59448fc940b4d9bbc1682ba7d3efb077eafc12a9e391bbeb18"
+    },
+    {
+      "full_name": "carmen-timpau/BBO-Capstone-Project",
+      "hash": "b9a303f1287abec7af857ee0dd2f68ad9753532b038f6e4025f5aec8e10ae4a6"
+    },
+    {
+      "full_name": "probcomp/cgpm",
+      "hash": "bc4f9f3f694f87138e73d96ea8519bce3f0a943c1343a13ae0deada8ffac5537"
+    },
+    {
+      "full_name": "muellermarkus/cdtd",
+      "hash": "c13e0c0fa8d1d02e8396b4232cad0612a6f55dcadb0c1e8cf63beb6eafbc2fe5"
+    },
+    {
+      "full_name": "DavidBraun777/RAGeATM",
+      "hash": "c3cd8886ccbe1d14efe0a49a83dc8828d17faa01fadfd204e21e43070d5d065d"
+    },
+    {
+      "full_name": "The-FinAI/HARMONIC",
+      "hash": "c4e6d29eba954ff120a2f93c104b5d8788b4afc61c857cb102589bc7aa39e920"
+    },
+    {
+      "full_name": "benedekrozemberczki/BoostedFactorization",
+      "hash": "c8398f67ed55d7f4c941fd4e5a2459bd9aa072ec9ceb347858a918acab0308ff"
+    },
+    {
+      "full_name": "berkinksk/SenseCatch",
+      "hash": "c91875a3b041ffd4bbbde6e05963d97e42f40d07d1dca0b2dea1646d95e6c996"
+    },
+    {
+      "full_name": "ptuls/tabnet-modified",
+      "hash": "cbffd557a2128586f5419fc4d7426f44272057a7ded0cd67b14b6da27a737a59"
+    },
+    {
+      "full_name": "Ashar-Siddiqui/rotating-shaft-fault-classification",
+      "hash": "cce90f329f7cb81e17babd143690e79138961b34d54627fe21c6ab28a4b69d78"
+    },
+    {
+      "full_name": "vanderschaarlab/hyperimpute",
+      "hash": "d0448a6b71753947cd7e94fd6dbf0e934cd51390e245433e4ebac4c356598024"
+    },
+    {
+      "full_name": "sunnyadn/comprisk",
+      "hash": "d102e889b6fe7657ea1e283f3e8ed94f3aaa756e95c3a08d6c86e0b936a7e442"
+    },
+    {
+      "full_name": "zadid6pretam/TabSeq",
+      "hash": "d40ab4ff34ca6dcbdcd5e7fb304a20872fc99ec5ce5c4f11d7a9e05f5509c60b"
+    },
+    {
+      "full_name": "LAMDA-Tabular/TALENT",
+      "hash": "d45a8bb90aa8c01c7ddc448cecab1f72c23bc10df8ef4fced45c6a0d0609b278"
+    },
+    {
+      "full_name": "automl/auto-sklearn",
+      "hash": "d51e6fc7d147d094bda87cd08793f293fb245accc151d728b426495670f6e203"
+    },
+    {
+      "full_name": "LAMDA-Tabular/TabCausal",
+      "hash": "d56854cb2a9805cb1477e635f165b1795c63bccc2cbf3ede0d6ff0be8cee6558"
+    },
+    {
+      "full_name": "artefactory/woodtapper",
+      "hash": "dc30784656fbaa14b60e30ed3db493c34d85f0d74163ec388bf31e37617e5ffb"
+    },
+    {
+      "full_name": "danielduongg/membership-inference-lab",
+      "hash": "dd9759343d902aa8b5b6dbcd40b1ec3e92eac3a0090a2b2adcc9245438b507e5"
+    },
+    {
+      "full_name": "johnny-godoy/optimal-discretizer",
+      "hash": "de1ec4102b66445ea90ec7f1a4eb17202f7792e94fc4f20d156c31189ac5d72a"
+    },
+    {
+      "full_name": "PlasmaControl/PyRCN",
+      "hash": "de32720297cf0d731d0309036650262495272a7e3dfc7ac5d9b59fb13e7e7564"
+    },
+    {
+      "full_name": "Hassanolowofela/PhishGuard-Capstone",
+      "hash": "e7afe55ee967b1d4eb02f1a501cb78d99eb56af521800cf23008a72dabaf17fe"
+    },
+    {
+      "full_name": "skfolio/skfolio",
+      "hash": "e942050147442426fceefd732dff293015bb0d92591123751dd6edd8d93ad075"
+    },
+    {
+      "full_name": "harshraj11584/Paper-Implementation-Overview-Gradient-Descent-Optimization-Sebastian-Ruder",
+      "hash": "ee90613bb8a61fc0307f4e3db93d277bec78d1b5c9d5fa7ef80760f5347af3e8"
+    },
+    {
+      "full_name": "dreamquark-ai/tabnet",
+      "hash": "f7e18152b34460140f1e0eb07dd465693af17ce9116cba138a1acba771616a64"
+    },
+    {
+      "full_name": "danielduongg/data-poisoning-lab",
+      "hash": "fcd29c3065456178e9efbd050ab82ce73c7fef96659f444ea2d52cd1689136a9"
+    }
+  ]
+}
