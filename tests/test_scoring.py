@@ -198,3 +198,26 @@ def test_evaluate_paper_run_failed_build_zeros_tier2_and_tier3():
     assert bd.tier2_metrics == 0.0
     assert bd.tier3_stability == 0.0
     assert bd.status_label == STATUS_FAILED
+
+
+def _evaluate(claimed, reproduced):
+    return ReproducibilityScorer.evaluate_paper_run(
+        paper_id="paper_901", clone_success=True, deps_installed=True, script_executed=True, exit_code=0,
+        claimed_metrics=claimed, reproduced_metrics=reproduced, license_name="MIT",
+    )["breakdown"]
+
+
+def test_summary_says_nothing_was_compared_when_no_claim_is_found_in_the_output():
+    """#317: Tier 2 = 0 because the claims were not found must not be reported as a divergence."""
+    for reproduced in ({"other_metric": 0.9}, {}):
+        breakdown = _evaluate({"arcene_auroc": 0.8, "xgboost_arcene_auroc": 0.85}, reproduced)
+        assert breakdown.tier2_metrics == 0.0
+        assert "claimed metrics not found in the output (nothing was compared)" in breakdown.summary
+        assert "divergence" not in breakdown.summary
+
+
+def test_summary_keeps_divergence_for_claims_that_were_found_and_differ():
+    breakdown = _evaluate({"auroc": 0.8}, {"auroc": 0.5})
+    assert breakdown.tier2_metrics == 0.0
+    assert "significant divergence" in breakdown.summary
+    assert "nothing was compared" not in breakdown.summary

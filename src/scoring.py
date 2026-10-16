@@ -34,6 +34,8 @@ from src.config import (
 )
 from src.models import ScoreBreakdown
 
+NOTHING_COMPARED_TEXT = "claimed metrics not found in the output (nothing was compared)"
+
 
 class Tier1BuildEvaluator:
     """Evaluates buildability, dependency installation, and clean execution."""
@@ -334,8 +336,13 @@ class ReproducibilityScorer:
         tier4: float,
         tier1_exit_code: int | None = 0,
         has_critical_error: bool = False,
+        nothing_compared: bool = False,
     ) -> tuple[float, str, str]:
-        """Compute composite score (0-100) and assign neutral status label."""
+        """Compute composite score (0-100) and assign neutral status label.
+
+        `nothing_compared` is True when claims exist but none of them was found in the run's output; the summary then
+        says so instead of reporting a divergence that was never measured (#317).
+        """
         total = (
             tier1 * TIER1_BUILD_WEIGHT
             + tier2 * TIER2_METRICS_WEIGHT
@@ -366,11 +373,17 @@ class ReproducibilityScorer:
             # Check if metrics diverged or partially matched
             if tier2 < 50.0 and tier1 >= 80.0:
                 status = STATUS_NEEDS_REVIEW
-                summary = (
-                    f"Needs Review (Total: {total}/100). Code built and ran cleanly, but "
-                    f"significant divergence was observed between claimed and reproduced metrics "
-                    f"(Tier 2: {tier2}/100)."
-                )
+                if nothing_compared:
+                    summary = (
+                        f"Needs Review (Total: {total}/100). Code built and ran cleanly, but "
+                        f"{NOTHING_COMPARED_TEXT} (Tier 2: {tier2}/100)."
+                    )
+                else:
+                    summary = (
+                        f"Needs Review (Total: {total}/100). Code built and ran cleanly, but "
+                        f"significant divergence was observed between claimed and reproduced metrics "
+                        f"(Tier 2: {tier2}/100)."
+                    )
             else:
                 status = STATUS_PARTIALLY_VERIFIED
                 summary = (
@@ -380,9 +393,14 @@ class ReproducibilityScorer:
         else:
             if tier1 >= 75.0:
                 status = STATUS_NEEDS_REVIEW
-                summary = (
-                    f"Needs Review (Total: {total}/100). Code executed cleanly, but empirical outcomes fell short of claims."
-                )
+                if nothing_compared:
+                    summary = (
+                        f"Needs Review (Total: {total}/100). Code executed cleanly, but {NOTHING_COMPARED_TEXT}."
+                    )
+                else:
+                    summary = (
+                        f"Needs Review (Total: {total}/100). Code executed cleanly, but empirical outcomes fell short of claims."
+                    )
             else:
                 status = STATUS_FAILED
                 summary = (
@@ -452,6 +470,8 @@ class ReproducibilityScorer:
             tier4=t4_score,
             tier1_exit_code=exit_code,
             has_critical_error=bool(exit_code is not None and exit_code != 0),
+            nothing_compared=bool(execution_succeeded and claimed_metrics
+                                  and not any(d["reproduced"] is not None for d in claim_details.values())),
         )
 
         breakdown = ScoreBreakdown(
