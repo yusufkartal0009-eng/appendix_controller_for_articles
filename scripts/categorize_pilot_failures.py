@@ -183,8 +183,15 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Categorize pilot failures from data/pilot_runs/.")
     parser.add_argument("--runs-dir", default=str(PILOT_RUNS_DIR))
     parser.add_argument("--corpus", default=None, help="Corpus file with the paper list (default: data/seed_papers.json).")
+    parser.add_argument("--paper", default=None,
+                        help="Only this paper: write `failure_category.json` into its run folder and print it (Pilot 4, one PR per paper).")
     args = parser.parse_args(argv)
     runs_dir = Path(args.runs_dir)
+    if args.paper:
+        one = categorize_paper(args.paper, runs_dir)
+        (runs_dir / args.paper / "failure_category.json").write_text(json.dumps(one, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps(one, indent=2))
+        return 0
     result = categorize(runs_dir, Path(args.corpus) if args.corpus else None)
     (runs_dir / "failure_categories.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     for p in result["papers"]:
