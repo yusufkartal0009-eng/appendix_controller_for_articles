@@ -476,13 +476,14 @@ is judged on the status, the exit code, and the metrics that the metric extracto
 | `paper_003` | memory re-run (`data/memory_runs/paper_003`) | COMPLETED (0) | 1497.443 | 1.09 | 13.93 | 2.0 | loss 0.106, rmse 0.473 |
 | `paper_006` | Pilot 2 (`data/pilot2_runs/paper_006`) | COMPLETED (0) | 3122.657 | 0.65 | 6.0 | 2.0 | accuracy 0.8886, auroc 0.892 |
 | `paper_006` | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED (0) | 3435.356 | 0.65 | 6.0 | 2.0 | accuracy 0.8886, auroc 0.892 |
+| `paper_006` | CPU run (`data/cpu_runs/paper_006`) | COMPLETED (0) | 1119.834 | 0.64 | 13.93 | 8.0 | accuracy 0.8886, auroc 0.892 |
 
-`paper_003`: 2 runs, status identical, exit code identical, metrics identical (loss 0.106, rmse 0.473); 1 of 3 log files identical (line endings ignored) with the first run's; `paper_006`: 2 runs, status identical, exit code identical, metrics identical (accuracy 0.8886, auroc 0.892); 3 of 5 log files identical (line endings ignored) with the first run's.
+`paper_003`: 2 runs, status identical, exit code identical, metrics identical (loss 0.106, rmse 0.473); 1 of 3 log files identical (line endings ignored) with the first run's; `paper_006`: 3 runs, status identical, exit code identical, metrics identical (accuracy 0.8886, auroc 0.892); 6 of 10 log files identical (line endings ignored) with the first run's.
 <!-- numbers:stability:end -->
 
-The runs listed are not repetitions under one protocol: the two runs of each paper were made at different commits of the
-tool (the `repro_radar_commit` of their records), and the memory limit also differs for `paper_003`
-(`docs/MEMORY_RUNS.md`); the paper settings of `paper_006` are the same. Within these
+The runs listed are not repetitions under one protocol: the runs of each paper were made at different commits of the tool
+(the `repro_radar_commit` of their records), the memory limit also differs for `paper_003` (`docs/MEMORY_RUNS.md`), and the
+CPU run of `paper_006` used 8 CPUs instead of 2 (`data/cpu_runs/`); the paper settings of `paper_006` are the same. Within these
 limits the status, the exit code, and the metrics are the same in every run listed, while the log files differ where they
 contain clock times. The runs were not made with different seeds, so this is not the stability tier of the score (#48).
 
@@ -529,7 +530,7 @@ not that they are right. The extraction accuracy of section 6.2 therefore still 
 - **No numerical reproduction was tested.** No run reproduced an accepted claim, so Tier 2 (agreement with the paper's
   numbers) and Tier 3 (stability across seeds, not implemented, #48) were never exercised on real results. Tier 2 was
   exercised only on the synthetic control paper (section 6.4), which tests the scorer and not a paper.
-- **Stability was seen, not measured.** Two papers have two runs each in section 6.4; the runs have different memory
+- **Stability was seen, not measured.** Two papers have two or three runs each in section 6.4; the runs have different memory
   limits or tool commits and no different seeds, so they show that the metrics repeated, not how much they vary.
 - **Extended gold set without answers.** The 18 added questions have two agreeing passes but no answers from the owner,
   so no accuracy is claimed for them (section 6.4).
