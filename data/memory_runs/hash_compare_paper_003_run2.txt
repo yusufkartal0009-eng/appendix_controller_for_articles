@@ -1,0 +1,12 @@
+hash_run.py data/pilot3_runs/paper_003 --compare data/memory_runs/paper_003_run2 (run on 2026-10-16)
+paper output files: 0 of 0 identical
+log files: 0 of 3 identical; differing: install.log, stderr.log, stdout.log
+sandbox metadata files: 0 of 4 identical; differing: execution_meta.json, install_meta.json, pilot_record.json, run_report.json
+paper output files reproduced byte for byte: no
+
+hash_run.py data/memory_runs/paper_003 --compare data/memory_runs/paper_003_run2 (run on 2026-10-16)
+paper output files: 0 of 1 identical; only in the first run: hash_compare.txt
+log files: 0 of 3 identical; differing: install.log, stderr.log, stdout.log
+sandbox metadata files: 0 of 4 identical; differing: execution_meta.json, install_meta.json, pilot_record.json, run_report.json
+paper output files reproduced byte for byte: no
+
