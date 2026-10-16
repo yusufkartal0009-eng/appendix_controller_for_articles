@@ -129,3 +129,13 @@ def test_three_pilots_side_by_side_and_pilot_2_files_untouched(tmp_path):
     assert "| Pilot success | 0 / 6 (0.0) | 1 / 6 (0.167) | 3 / 6 (0.5) |" in md
     assert f"| `{PAPERS[1]}` | MISSING_DEPENDENCY (install) | MISSING_DEPENDENCY (install) | success |" in md
     assert (tmp_path / "p2" / "comparison.json").read_text(encoding="utf-8") == "pilot 2 as it was"  # not rewritten
+
+
+def test_one_paper_can_be_categorized_into_its_own_folder(tmp_path, capsys):
+    folder = tmp_path / "paper_901"
+    folder.mkdir()
+    (folder / "pilot_record.json").write_text(json.dumps({"stage": {"status": "FAILED", "error": "clone failed"}}), encoding="utf-8")
+    assert cat.main(["--runs-dir", str(tmp_path), "--paper", "paper_901"]) == 0
+    stored = json.loads((folder / "failure_category.json").read_text(encoding="utf-8"))
+    assert stored["other_name"] == "STAGING_FAILED" and stored["paper_id"] == "paper_901"
+    assert not (tmp_path / "failure_categories.json").exists()  # the file for the whole directory is not written
