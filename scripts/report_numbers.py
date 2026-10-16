@@ -19,6 +19,11 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
   (`data/pilot2_runs/failure_categories.json`)
 - `memoryruns`: per paper, the outcome and the memory limit of Pilot 3 and of the memory re-run
   (`data/memory_runs/`, `data/pilot3_runs/`; `scripts/memory_runs.py`, #327)
+- `syntheticcontrol`: the synthetic control paper: two runs, a true and a false claim, and the bug it found
+  (`data/synthetic_control/result.json`, `result_before_fix.json`; #313)
+- `stability`: repeated runs of the completed papers (`scripts/run_stability.py`, #329)
+- `goldexpansion`: the extended gold set: agreement of the two passes and the owner's answers
+  (`data/gold_expansion/claims/consistency.json`, `data/gold_expansion/gold/`; #315)
 - `extraction`: the claim extraction: quote guard, A/B agreement, the owner's review, and the gold set
   (`data/claims/guard_report.json`, `consistency.json`, `review_decisions.json`, `gold_score_pass_A.json`)
 
@@ -38,7 +43,7 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from scripts import memory_runs
+from scripts import memory_runs, run_stability
 
 REPORT_PATH = project_root / "docs" / "report" / "REPORT.md"
 DATA = project_root / "data"
@@ -149,6 +154,45 @@ def memoryruns_block(data: Path = DATA) -> str:
     return "\n".join([header, "", memory_runs.to_sentence(rows)])
 
 
+def syntheticcontrol_block(data: Path = DATA) -> str:
+    result = _load(data / "synthetic_control" / "result.json")
+    before = _load(data / "synthetic_control" / "result_before_fix.json")["scores"]
+    after, same = result["scores"], result["comparison"]["same"]
+    files = result["comparison"]["files"]["log"]
+
+    def row(label: str, scores: dict[str, Any]) -> str:
+        t, f = scores["true_claim"], scores["false_claim"]
+        return (f"| {label} | {t['tier2_metrics']:g} / {t['total_score']:g} ({t['status_label']}) | "
+                f"{f['tier2_metrics']:g} / {f['total_score']:g} ({f['status_label']}) |")
+    summary = (f"Metric `{result['metric']}`, reproduced {after['true_claim']['reproduced'][result['metric']]:g} in both runs; "
+               f"true claim {after['true_claim']['claimed']:g}, false claim {after['false_claim']['claimed']:g}. "
+               f"Two runs agree on status ({str(same['run_status']).lower()}), exit code ({str(same['exit_code']).lower()}), "
+               f"and metrics ({str(same['metrics']).lower()}); log files identical: {files['identical']} of {files['files']}.")
+    lines = [HEADER.format(sources="data/synthetic_control/result.json and result_before_fix.json"), "", summary, "",
+             "| Scored | True claim: Tier 2 / total | False claim: Tier 2 / total |", "|---|---|---|",
+             row("Before the fix (a repository without requirements counted as a failed install)", before),
+             row("After the fix", after)]
+    return "\n".join(lines)
+
+
+def stability_block(data: Path = DATA) -> str:
+    result = run_stability.measure(data)
+    assert result, "no repeated runs"
+    header = HEADER.format(sources="data/pilot2_runs/, data/pilot3_runs/, data/memory_runs/ (scripts/run_stability.py)")
+    return "\n".join([header, "", run_stability.to_markdown(result), "", run_stability.to_sentence(result)])
+
+
+def goldexpansion_block(data: Path = DATA) -> str:
+    consistency = _load(data / "gold_expansion" / "claims" / "consistency.json")
+    gold_dir = data / "gold_expansion" / "gold"
+    answers = len(list(gold_dir.glob("*.json"))) if gold_dir.is_dir() else 0
+    statement = ("the owner's answers exist, see docs/GOLD_SET_EXPANSION.md" if answers
+                 else "the owner's answers do not exist yet, so no precision or recall is computed or claimed")
+    sentence = (f"Extended gold set: {consistency['questions']} new questions; pass A and the blind pass B agree on "
+                f"{consistency['agreements']} of {consistency['questions']} (disagreements: {consistency['disagreements']}); {statement}.")
+    return "\n".join([HEADER.format(sources="data/gold_expansion/"), "", sentence])
+
+
 def extraction_block(data: Path = DATA) -> str:
     guard = _load(data / "claims" / "guard_report.json")
     consistency = _load(data / "claims" / "consistency.json")
@@ -175,6 +219,7 @@ BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": 
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
           "pilot3measurements": pilot3measurements_block, "pilot3summary": pilot3summary_block,
           "pilot3failures": pilot3failures_block, "abstractnumbers": pilot3summary_block, "memoryruns": memoryruns_block,
+          "syntheticcontrol": syntheticcontrol_block, "stability": stability_block, "goldexpansion": goldexpansion_block,
           "extraction": extraction_block}
 BLOCK_RE = re.compile(r"(<!-- numbers:(?P<name>[a-z0-9]+):start -->\n)(?P<body>.*?)(\n<!-- numbers:(?P=name):end -->)", re.DOTALL)
 
