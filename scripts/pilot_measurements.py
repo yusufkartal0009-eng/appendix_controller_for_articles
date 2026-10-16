@@ -84,8 +84,8 @@ def _paper_measurement(paper_id: str, runs_dir: Path) -> dict[str, Any]:
     }
 
 
-def measure(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
-    paper_ids = [e["paper_id"] for e in json.loads(SEED_PAPERS_PATH.read_text(encoding="utf-8"))]
+def measure(runs_dir: Path = PILOT_RUNS_DIR, corpus: Path | None = None) -> dict[str, Any]:
+    paper_ids = [e["paper_id"] for e in json.loads((corpus or SEED_PAPERS_PATH).read_text(encoding="utf-8"))]
     papers = [paper_measurement(pid, runs_dir) for pid in paper_ids]
     n = len(paper_ids)  # the denominator is always the corpus size (protocol section 5)
 
@@ -94,7 +94,8 @@ def measure(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
         return {"count": count, "of": n, "rate": round(count / n, 3) if n else None}
 
     return {
-        "protocol": ("docs/PILOT_3.md" if "pilot3" in runs_dir.name
+        "protocol": ("docs/PILOT_4.md" if "pilot4" in runs_dir.name
+                     else "docs/PILOT_3.md" if "pilot3" in runs_dir.name
                      else "docs/PILOT_2.md" if "pilot2" in runs_dir.name else "docs/PILOT_WEEK2.md"),
         "papers": papers,
         "valid_runs": rate("valid_run"),

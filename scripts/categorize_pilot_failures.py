@@ -167,8 +167,8 @@ def categorize_paper(paper_id: str, runs_dir: Path) -> dict[str, Any]:
     return result
 
 
-def categorize(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
-    paper_ids = [e["paper_id"] for e in json.loads(SEED_PAPERS_PATH.read_text(encoding="utf-8"))]
+def categorize(runs_dir: Path = PILOT_RUNS_DIR, corpus: Path | None = None) -> dict[str, Any]:
+    paper_ids = [e["paper_id"] for e in json.loads((corpus or SEED_PAPERS_PATH).read_text(encoding="utf-8"))]
     papers = [categorize_paper(pid, runs_dir) for pid in paper_ids]
     counts: dict[str, int] = {c: 0 for c in CATEGORIES}
     for p in papers:
@@ -182,9 +182,10 @@ def categorize(runs_dir: Path = PILOT_RUNS_DIR) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Categorize pilot failures from data/pilot_runs/.")
     parser.add_argument("--runs-dir", default=str(PILOT_RUNS_DIR))
+    parser.add_argument("--corpus", default=None, help="Corpus file with the paper list (default: data/seed_papers.json).")
     args = parser.parse_args(argv)
     runs_dir = Path(args.runs_dir)
-    result = categorize(runs_dir)
+    result = categorize(runs_dir, Path(args.corpus) if args.corpus else None)
     (runs_dir / "failure_categories.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     for p in result["papers"]:
         ev = p["evidence"] or {}
