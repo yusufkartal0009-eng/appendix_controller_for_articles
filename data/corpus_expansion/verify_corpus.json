@@ -1,0 +1,158 @@
+[
+  {
+    "paper_id": "paper_101",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: yuvrajiro/lairnet"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "docs/check_styles.py exists at af5d5e18eb99"
+      }
+    ]
+  },
+  {
+    "paper_id": "paper_102",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: wangxb96/gmr-imbalanced-learning"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "code/examples/quick_start.py exists at ebb981574511"
+      }
+    ]
+  },
+  {
+    "paper_id": "paper_103",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: dlmacedo/distinction-maximization-loss"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "example.py exists at a9b4a86d9a8e"
+      }
+    ]
+  },
+  {
+    "paper_id": "paper_104",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: 10div10/Legal-Contract-Classification"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "src/prepare_data.py exists at 991ef0ed273e"
+      }
+    ]
+  },
+  {
+    "paper_id": "paper_105",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: CRIPAC-DIG/GRACE"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "train.py exists at b3b5ac3fcbaa"
+      }
+    ]
+  },
+  {
+    "paper_id": "paper_106",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: yalaudah/facies_classification_benchmark"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "patch_train.py exists at aa0173672cd0"
+      }
+    ]
+  }
+]
