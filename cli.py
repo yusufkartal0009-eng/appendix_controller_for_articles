@@ -118,7 +118,7 @@ def cmd_score_paper(args):
             args.simulate_deps_error)):
         return cmd_score_simulated(args, paper)
 
-    from scripts import run_pilot
+    from scripts import preflight, run_pilot
     from src.config import DATA_CACHE_DIR
     from src.score_run import load_run, score_run
 
@@ -128,6 +128,11 @@ def cmd_score_paper(args):
         print(f"Scoring the stored run in {run_dir} (no new run).")
     else:
         run_root = SANDBOX_RUNS_DIR / "score"
+        try:
+            preflight.ensure_ready()  # #378
+        except RuntimeError as exc:
+            print(exc)
+            sys.exit(1)
         print(f"Running the paper in the Docker sandbox with its run setup (records in {run_root / paper.paper_id}) ...")
         run_pilot.run_paper(paper.paper_id, Path(args.staging_dir), pilot2=True, data_cache=Path(args.data_cache or DATA_CACHE_DIR),
                             record_root=run_root, memory_limit=args.memory)
