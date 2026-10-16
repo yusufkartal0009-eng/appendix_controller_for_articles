@@ -474,12 +474,13 @@ is judged on the status, the exit code, and the metrics that the metric extracto
 |---|---|---|---|---|---|---|---|
 | `paper_003` | Pilot 3 (`data/pilot3_runs/paper_003`) | COMPLETED (0) | 1516.673 | 1.11 | 6.0 | 2.0 | loss 0.106, rmse 0.473 |
 | `paper_003` | memory re-run (`data/memory_runs/paper_003`) | COMPLETED (0) | 1497.443 | 1.09 | 13.93 | 2.0 | loss 0.106, rmse 0.473 |
+| `paper_003` | memory re-run, second (`data/memory_runs/paper_003_run2`) | COMPLETED (0) | 1390.574 | 1.03 | 13.93 | 2.0 | loss 0.106, rmse 0.473 |
 | `paper_003` | CPU run (`data/cpu_runs/paper_003`) | COMPLETED (0) | 465.777 | 1.15 | 13.93 | 8.0 | loss 0.106, rmse 0.473 |
 | `paper_006` | Pilot 2 (`data/pilot2_runs/paper_006`) | COMPLETED (0) | 3122.657 | 0.65 | 6.0 | 2.0 | accuracy 0.8886, auroc 0.892 |
 | `paper_006` | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED (0) | 3435.356 | 0.65 | 6.0 | 2.0 | accuracy 0.8886, auroc 0.892 |
 | `paper_006` | CPU run (`data/cpu_runs/paper_006`) | COMPLETED (0) | 1119.834 | 0.64 | 13.93 | 8.0 | accuracy 0.8886, auroc 0.892 |
 
-`paper_003`: 3 runs, status identical, exit code identical, metrics identical (loss 0.106, rmse 0.473); 2 of 6 log files identical (line endings ignored) with the first run's; `paper_006`: 3 runs, status identical, exit code identical, metrics identical (accuracy 0.8886, auroc 0.892); 6 of 10 log files identical (line endings ignored) with the first run's.
+`paper_003`: 4 runs, status identical, exit code identical, metrics identical (loss 0.106, rmse 0.473); 3 of 9 log files identical (line endings ignored) with the first run's; `paper_006`: 3 runs, status identical, exit code identical, metrics identical (accuracy 0.8886, auroc 0.892); 6 of 10 log files identical (line endings ignored) with the first run's.
 <!-- numbers:stability:end -->
 
 The runs listed are not repetitions under one protocol: the runs of each paper were made at different commits of the tool
@@ -531,7 +532,7 @@ not that they are right. The extraction accuracy of section 6.2 therefore still 
 - **No numerical reproduction was tested.** No run reproduced an accepted claim, so Tier 2 (agreement with the paper's
   numbers) and Tier 3 (stability across seeds, not implemented, #48) were never exercised on real results. Tier 2 was
   exercised only on the synthetic control paper (section 6.4), which tests the scorer and not a paper.
-- **Stability was seen, not measured.** Two papers have two or three runs each in section 6.4; the runs have different memory
+- **Stability was seen, not measured.** Two papers have two to four runs each in section 6.4; the runs have different memory
   limits or tool commits and no different seeds, so they show that the metrics repeated, not how much they vary.
 - **Extended gold set without answers.** The 18 added questions have two agreeing passes but no answers from the owner,
   so no accuracy is claimed for them (section 6.4).

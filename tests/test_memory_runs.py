@@ -86,3 +86,8 @@ def test_the_report_has_the_memory_block_and_no_empty_numbers_block():
     for name in names:
         match = re.search(rf"<!-- numbers:{name}:start -->\n(.*?)\n<!-- numbers:{name}:end -->", text, re.DOTALL)
         assert match and match.group(1).strip(), f"block {name} is empty"
+
+
+def test_a_second_run_folder_is_not_a_first_memory_run(data):
+    _record(data / "memory_runs" / "paper_901_run2", "COMPLETED", 0, 1024 ** 3, "14265m")
+    assert [r["paper_id"] for r in memory_runs.measure(data)] == ["paper_901"]
