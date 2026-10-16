@@ -190,3 +190,36 @@ def test_record_root_without_a_pilot_flag_is_refused(monkeypatch, tmp_path):
     monkeypatch.setattr(run_pilot, "run_paper", lambda *a, **k: pytest.fail("must not run"))
     with pytest.raises(SystemExit):
         run_pilot.main(["paper_005", "--record-root", str(tmp_path)])
+
+
+def test_the_cpus_option_changes_only_the_cpu_limit_and_is_recorded(tmp_path, monkeypatch):
+    """#331: not a protocol run; every other Pilot 3 setting stays."""
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_005", tmp_path / "staging", stager=stager, pilot3=True,
+                                 data_cache=_cache(tmp_path, "paper_005"), cpus=8, record_root=tmp_path / "cpu_runs")
+    config = stager.executed[2]
+    assert (config.cpus, config.memory_limit, config.pids_limit, config.timeout_seconds) == (8.0, "12g", 100, 3600)
+    assert record["cpus_override"]["requested"] == 8 and record["cpus_override"]["protocol_cpus"] == 2.0
+    assert "not a protocol run" in record["cpus_override"]["note"] and "memory_override" not in record
+    assert record["limits"]["cpus"] == 8.0
+    assert (tmp_path / "cpu_runs" / "paper_005" / "pilot_record.json").exists()
+
+
+def test_without_the_cpus_option_nothing_changes(tmp_path, monkeypatch):
+    record, stager = _run(tmp_path, monkeypatch, "paper_005")
+    assert stager.executed[2].cpus == 2.0 and "cpus_override" not in record
+
+
+@pytest.mark.parametrize("value", [0, -1])
+def test_a_non_positive_cpu_limit_is_a_harness_error(tmp_path, monkeypatch, value):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    with pytest.raises(ValueError, match="CPU limit"):
+        run_pilot.run_paper("paper_005", tmp_path / "staging", stager=Pilot2Stager(tmp_path), pilot3=True,
+                            data_cache=_cache(tmp_path, "paper_005"), cpus=value)
+
+
+def test_the_command_line_passes_cpus_on(monkeypatch):
+    seen = {}
+    monkeypatch.setattr(run_pilot, "run_paper", lambda paper_id, staging_dir, **kw: seen.update(kw) or {"paper_id": paper_id})
+    assert run_pilot.main(["paper_003", "--pilot3", "--cpus", "8"]) == 0 and seen["cpus"] == 8.0
