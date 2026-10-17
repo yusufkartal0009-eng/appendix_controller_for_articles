@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(readme): accurate limits, options, requirements, and what a result means (2026-10-17 23:58 +03:00, Issue #391)
+- README: the memory and CPU statement now says that `cli.py score` uses 50% of the host's RAM by default; the claim that a CI job runs the corpus check is replaced (there is no CI, D-010); the options of `cli.py score`, the preflight, and the existing-run-folder stop are described; new sections "Requirements" (RAM, disk, time, Docker, network, GPU) and "What a Result Means (and What It Does Not)". Every number is copied from a stored record or generated table (`docs/MEMORY_RUNS.md`, `docs/CPU_RUNS.md`, `docs/ENV_CACHE_RUNS.md`, `docs/STABILITY_RUNS.md`, `data/pilot4_runs/summary.md`).
+- Evidence: `pytest` and `ruff check .` clean (see the pull request).
+- Not verified: the RAM advice for light papers is an estimate; the README walk-through on a clean clone is still to do.
+
 ### fix(sandbox): say how to build the sandbox image (2026-10-17 23:45 +03:00, Issue #389)
 - The mentor's clean-clone test of the README stopped at `cli.py score` with Docker's `pull access denied for repro-radar-sandbox`: the image is built locally and the quickstart never said so. README: new step 6 "Build the Sandbox Image" (later steps renumbered 7 to 9) with the build commands, including the compiler image and the Python 3.8/3.9 images. `scripts/preflight.py`: new `image` check that fails with the exact build command and skips the container check when the image is missing; 3 tests.
 - Evidence: `pytest` 736 passed, 11 skipped; `ruff check .` clean.
