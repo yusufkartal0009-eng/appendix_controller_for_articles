@@ -1,0 +1,53 @@
+{
+  "ft_transformer_rmse": {
+    "status": "found",
+    "reason": "Single tuned model from Table 2; other values: ensemble 0.448 (Tables 3, 4), default-hyperparameter single 0.469 (Table 8), default ensemble 0.454.",
+    "claim": {
+      "metric_name": "rmse",
+      "value_as_printed": "0.459",
+      "unit": "none",
+      "dataset": "California Housing",
+      "model_variant": "FT-T",
+      "split": "test",
+      "higher_is_better": false,
+      "table_or_figure": "Table 2",
+      "page": 7,
+      "source_quote": "FT-T 0.459 0 .859 0.391 0.732 0 .729 0.960 0.8982 8.855 0.970 0.756 0 .746 1.8 (1.2)",
+      "confidence": 0.95
+    }
+  },
+  "resnet_rmse": {
+    "status": "found",
+    "reason": "Single model from Table 2; other value: ensemble 0.478 (Tables 3, 4, 9).",
+    "claim": {
+      "metric_name": "rmse",
+      "value_as_printed": "0.486",
+      "unit": "none",
+      "dataset": "California Housing",
+      "model_variant": "ResNet",
+      "split": "test",
+      "higher_is_better": false,
+      "table_or_figure": "Table 2",
+      "page": 7,
+      "source_quote": "ResNet 0.486 0 .854 0.396 0.728 0 .727 0.963 0.8969 8 .846 0 .964 0 .757 0 .748 3.3 (1.8)",
+      "confidence": 0.95
+    }
+  },
+  "xgboost_rmse": {
+    "status": "found",
+    "reason": "Single tuned XGBoost from Table 8 (supplementary; no single-model XGBoost in the main text). Other values: default single 0.462, tuned ensemble 0.431, default ensemble 0.462 (Table 4).",
+    "claim": {
+      "metric_name": "rmse",
+      "value_as_printed": "0.433",
+      "unit": "none",
+      "dataset": "California Housing",
+      "model_variant": "XGBoost",
+      "split": "test",
+      "higher_is_better": false,
+      "table_or_figure": "Table 8",
+      "page": 15,
+      "source_quote": "XGBoost 0.433±1.6e-3 0.872±4.6e-4",
+      "confidence": 0.8
+    }
+  }
+}

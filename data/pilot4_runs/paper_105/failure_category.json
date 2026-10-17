@@ -1,0 +1,12 @@
+{
+  "paper_id": "paper_105",
+  "category": "MISSING_DEPENDENCY",
+  "other_name": null,
+  "phase": "install",
+  "evidence": {
+    "file": "install.log",
+    "line_number": 3,
+    "line": "ERROR: Could not find a version that satisfies the requirement torch-scatter (from versions: none)"
+  },
+  "pilot_success": false
+}

@@ -450,6 +450,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.record_root and not (args.pilot2 or args.pilot3):
         parser.error("--record-root needs --pilot2 or --pilot3 (Pilot 1 records stay in sandbox_runs/)")
     try:
+        from scripts import preflight
+
+        preflight.ensure_ready()  # #378: Docker, disk, memory, sleep, and a real hello-world before a real run
         record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache),
                            pilot3=args.pilot3, memory_limit=args.memory, cpus=args.cpus,
                            pilot4=args.pilot4, corpus_path=Path(args.corpus) if args.corpus else None,

@@ -116,8 +116,9 @@ class ClaimORM(Base):
 class ExtractedClaimORM(Base):
     """A claim extracted from a paper, with its provenance and its human review (W6, #10).
 
-    `verified_by`: 'auto-quote-match' (the quote guard found quote and value in the paper text; not an approval)
-    or 'human' (a person accepted or rejected it). Only `review_status == 'accepted'` with `verified_by == 'human'`
+    `verified_by`: 'auto-quote-match' (the quote guard found quote and value in the paper text; not an approval),
+    'auto-consensus' (at least two independent extraction passes agree and pass the quote check; a candidate, not an
+    approval, #381), or 'human' (a person accepted or rejected it). Only `review_status == 'accepted'` with `verified_by == 'human'`
     reaches the scorer (src/claim_store.py).
     """
     __tablename__ = "extracted_claims"
@@ -138,7 +139,7 @@ class ExtractedClaimORM(Base):
     source_file = Column(String, nullable=False)  # extraction file, e.g. data/claims/paper_003.json
     pdf_sha256 = Column(String, nullable=True)
     extractor_version = Column(String, nullable=False)
-    verified_by = Column(String, nullable=True)  # 'auto-quote-match' | 'human' | NULL (quote not matched)
+    verified_by = Column(String, nullable=True)  # 'auto-quote-match' | 'auto-consensus' | 'human' | NULL
     review_status = Column(String, nullable=False, default="pending")  # 'pending' | 'accepted' | 'rejected'
     reviewed_at = Column(DateTime, nullable=True)
     review_note = Column(Text, nullable=True)
@@ -146,7 +147,7 @@ class ExtractedClaimORM(Base):
 
     __table_args__ = (
         UniqueConstraint("paper_id", "query_id"),
-        CheckConstraint("verified_by IN ('auto-quote-match', 'human') OR verified_by IS NULL"),
+        CheckConstraint("verified_by IN ('auto-quote-match', 'auto-consensus', 'human') OR verified_by IS NULL"),
         CheckConstraint("review_status IN ('pending', 'accepted', 'rejected')"),
         CheckConstraint("review_status = 'pending' OR verified_by = 'human'"),
     )

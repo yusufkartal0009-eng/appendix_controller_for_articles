@@ -336,3 +336,19 @@ directory read-only at `/workspace/deps`. `install_meta.json` says `env_cache: h
 - The pip **download** cache (the bundling step) already existed: the bundling container uses `PIP_CACHE_DIR=/staging/.pip-cache`
   inside the staging directory, shared by all papers (9.3 GB on the owner's machine). This decision does not change it.
 
+## D-010 — The project does not use CI; checks run locally and are recorded in the pull request (2026-10-17)
+
+### Context
+`.github/workflows/ci.yml` ran seven jobs on GitHub Actions (lint, tests on Linux and Windows, image build, corpus verification, and real-Docker acceptance checks for three Python versions). On 2026-10-16 every job began to fail at once with "recent account payments have failed or your spending limit needs to be increased", so no pull request could show a green check. The repository is private and the free plan has no branch protection, so the checks never blocked a merge in any case.
+
+### Decision
+The CI workflow is removed. The checks stay as scripts and tests and are run locally: `ruff check .`, `pytest`, `scripts/verify_corpus.py`, and `scripts/sandbox_acceptance.py` (needs Docker). The author pastes their results into the pull request description. `.github/workflows/pilot.yml` (started by hand only) is not part of this decision and stays.
+
+### Reason
+A check that cannot run gives no evidence, and paying for minutes is not a project goal. Local runs on the owner's machine are the same checks.
+
+### Consequences
+- There is no automatic check on Windows and no automatic check of the three Python images. These are run by hand when `src/sandbox`, `docker/`, or `scripts/run_pilot.py` change.
+- "CI green before merge" no longer applies; "local results pasted in the pull request" replaces it.
+- Earlier documents that describe CI (for example `docs/PROGRESS.md`, test counts "in CI") describe the state at their date.
+- Not verified: the local run of `scripts/sandbox_acceptance.py` was not repeated for this change; the change touches no code.
