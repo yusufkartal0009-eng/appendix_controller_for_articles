@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(sandbox): say how to build the sandbox image (2026-10-17 23:45 +03:00, Issue #389)
+- The mentor's clean-clone test of the README stopped at `cli.py score` with Docker's `pull access denied for repro-radar-sandbox`: the image is built locally and the quickstart never said so. README: new step 6 "Build the Sandbox Image" (later steps renumbered 7 to 9) with the build commands, including the compiler image and the Python 3.8/3.9 images. `scripts/preflight.py`: new `image` check that fails with the exact build command and skips the container check when the image is missing; 3 tests.
+- Evidence: `pytest` 736 passed, 11 skipped; `ruff check .` clean.
+- Not verified: the compiler-image and Python 3.8/3.9 build commands have not been run from the README; the clean-clone walk-through is the last step of the mentor's list and is still to do.
+
 ### Pilot 3 Results: Three Pilots Side by Side (2026-10-13 08:08 +03:00, Issue #293)
 - pilot_compare.py --pilot3-dir and four report_numbers blocks (pilot3, pilot3measurements, pilot3summary, pilot3failures); docs/PILOT_3.md results and docs/report/REPORT.md section 6.1a, all numbers generated. Pilot 3: install 6/6, run 2/6, pilot success 2/6. The text says the four settings were chosen after Pilot 2's failures, so the rates measure the settings, not the papers.
 
