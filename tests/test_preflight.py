@@ -112,3 +112,29 @@ def test_main_exit_code_follows_the_checks(monkeypatch, capsys):
     assert '"status": "FAIL"' in capsys.readouterr().out
     monkeypatch.setattr(preflight, "run_checks", lambda start_docker: [preflight.Check("docker", "PASS", "up")])
     assert preflight.main([]) == 0
+
+
+def test_a_missing_sandbox_image_fails_with_the_build_command():
+    asked = []
+
+    def run(cmd, timeout):
+        asked.append(cmd)
+        return done("", 1, "Error: No such image: repro-radar-sandbox:latest")
+
+    check = preflight.check_image(run=run, image="repro-radar-sandbox:latest")
+    assert check.status == "FAIL"
+    assert "docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest ." in check.detail
+    assert asked == [["docker", "image", "inspect", "repro-radar-sandbox:latest"]]
+
+
+def test_an_existing_sandbox_image_passes():
+    assert preflight.check_image(run=lambda c, t: done("[{}]"), image="img:1").status == "PASS"
+
+
+def test_run_checks_skips_the_container_when_the_image_is_missing(monkeypatch):
+    monkeypatch.setattr(preflight, "check_docker", lambda start=True: (preflight.Check("docker", "PASS", "ok"), {"NCPU": 4, "MemTotal": 16 * 2**30}))
+    monkeypatch.setattr(preflight, "check_image", lambda: preflight.Check("image", "FAIL", "not built"))
+    monkeypatch.setattr(preflight, "check_hello_world", lambda: pytest.fail("no container may be started without the image"))
+    names = [c.name for c in preflight.run_checks()]
+    assert "image" in names and "hello_world" not in names
+

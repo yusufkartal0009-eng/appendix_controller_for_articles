@@ -181,6 +181,20 @@ def check_docker_resources(info: dict | None) -> Check:
     return Check("docker_resources", "PASS", detail)
 
 
+def check_image(run: Runner = _run, image: str | None = None) -> Check:
+    """The sandbox image is built on this machine (it is not pulled from anywhere: `docker build` makes it, once)."""
+    image = image or image_for(DEFAULT_PYTHON_VERSION)
+    try:
+        out = run(["docker", "image", "inspect", image], HELLO_TIMEOUT_SECONDS)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return Check("image", "FAIL", f"could not ask Docker about the image {image} ({type(exc).__name__})")
+    if out.returncode == 0:
+        return Check("image", "PASS", f"the sandbox image {image} exists on this machine")
+    return Check("image", "FAIL", f"the sandbox image {image} is not built on this machine; build it once with: "
+                                  f"docker build -f docker/Dockerfile.sandbox -t {image} . "
+                                  "(the other images: README step 6)")
+
+
 def check_hello_world(run: Runner = _run, image: str | None = None) -> Check:
     image = image or image_for(DEFAULT_PYTHON_VERSION)
     cmd = ["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
@@ -201,7 +215,14 @@ def run_checks(start_docker: bool = True) -> list[Check]:
     docker, info = check_docker(start=start_docker)
     checks = [docker, check_disk(), check_memory(), check_sleep(), check_docker_resources(info)]
     # Without a Docker engine there is nothing to run the container on.
-    checks.append(check_hello_world() if info else Check("hello_world", "FAIL", "Docker did not answer, so no container was run"))
+    if not info:
+        checks.append(Check("hello_world", "FAIL", "Docker did not answer, so no container was run"))
+        return checks
+    image_check = check_image()
+    checks.append(image_check)
+    # Without the image a container cannot start; the raw Docker error would only repeat the line above.
+    if image_check.status == "PASS":
+        checks.append(check_hello_world())
     return checks
 
 

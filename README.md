@@ -108,7 +108,23 @@ python cli.py list-papers
 python cli.py inspect paper_001
 ```
 
-### 6. Score a Paper from a Real Run
+### 6. Build the Sandbox Image (one time)
+```bash
+docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .
+```
+The sandbox image is built on your machine; it is not downloaded from anywhere, so without this step the first run stops with `pull access denied for repro-radar-sandbox`. `cli.py score` runs a preflight check first (`python scripts/preflight.py` runs it alone) and, if the image is missing, prints this command.
+
+Some papers need more images. Build them when a run asks for them (the commands follow `docker/Dockerfile.sandbox`; the compiler and Python 3.8/3.9 commands have not been run from this README yet):
+
+```bash
+# compiler image, used by the build phase when a paper's dependencies must be compiled
+docker build -f docker/Dockerfile.sandbox --target build -t repro-radar-sandbox:build .
+# Python 3.8 and 3.9 papers (replace 3.8 by 3.9 for the second); the -build image is the compiler image of that version
+docker build -f docker/Dockerfile.sandbox --build-arg PYTHON_VERSION=3.8 -t repro-radar-sandbox:py3.8 .
+docker build -f docker/Dockerfile.sandbox --build-arg PYTHON_VERSION=3.8 --target build -t repro-radar-sandbox:py3.8-build .
+```
+
+### 7. Score a Paper from a Real Run
 ```bash
 python cli.py score paper_008                                  # runs the paper in the Docker sandbox, then scores it
 python cli.py score paper_008 --from-run data/pilot2_runs/paper_008   # scores a stored run, no Docker
@@ -118,13 +134,13 @@ python cli.py score paper_008 --from-run data/pilot2_runs/paper_008   # scores a
 
 > **The `--simulate`, `--simulate-failure`, `--simulate-divergence`, `--simulate-build-error`, `--simulate-clone-error`, and `--simulate-deps-error` flags are a test aid.** They print `SIMULATION FOR TESTING`, make up the reproduced numbers from the claimed ones, and are never saved to the database.
 
-### 7. Lint & Run Test Suite
+### 8. Lint & Run Test Suite
 ```bash
 ruff check .
 pytest tests/ -v
 ```
 
-### 8. Open the Local Dashboard
+### 9. Open the Local Dashboard
 ```bash
 python -m src.web                  # http://127.0.0.1:8000 (use --port to change it)
 ```
