@@ -130,6 +130,8 @@ python cli.py score paper_008                                  # runs the paper 
 python cli.py score paper_008 --from-run data/pilot2_runs/paper_008   # scores a stored run, no Docker
 ```
 
+Options of `cli.py score`: `--memory` (container memory: a size such as `8g`, or a share of the host's RAM; default `50%`), `--from-run DIR` (score a stored run, no Docker), `--data-cache` and `--staging-dir`. A preflight check runs before every real run (Docker answers, the sandbox image exists, disk and memory, a container starts); the CPU limit is changed only by `scripts/run_pilot.py --cpus`. A real run writes its record to `sandbox_runs/score/<paper_id>`; if that folder already holds an earlier run, `cli.py score` stops instead of overwriting the evidence: move the folder to `sandbox_runs/score/first_attempts/` (or delete it if you do not need it) and run again.
+
 `cli.py score` runs the paper with its run setup (`run_setup` in `data/seed_papers.json`, the Pilot 2 flow of `scripts/run_pilot.py`), then scores the stored record and run report against the claims a person **accepted** (`python cli.py review-claims`). Datasets must already be in the cache (`scripts/fetch_data.py`). A claim is matched to the run's output by its question ID and is never guessed. A paper with no accepted claim gets the scorer's neutral Tier 2 baseline, and the output says so.
 
 > **The `--simulate`, `--simulate-failure`, `--simulate-divergence`, `--simulate-build-error`, `--simulate-clone-error`, and `--simulate-deps-error` flags are a test aid.** They print `SIMULATION FOR TESTING`, make up the reproduced numbers from the claimed ones, and are never saved to the database.
@@ -160,17 +162,40 @@ The dashboard runs on **localhost only** (`127.0.0.1`, `docs/DECISIONS.md` D-006
 
 ---
 
+## 🧰 Requirements
+
+| What | Need | Where it comes from |
+|---|---|---|
+| Python, Git | Python 3.11 (3.10+ for the tests), Git | |
+| Docker | Docker Desktop or Engine that starts containers; on Windows with WSL2 it gets about half of the machine's RAM by default (15.5 GiB on a 32 GB machine) | `scripts/preflight.py` reads it |
+| RAM | 32 GB is what the heavy pilots were run on; 16 GB should cover light papers (my estimate, not tested). In the pilots `paper_004` peaked at 10.6 GiB; `paper_005` was killed for memory even at 13.9 GiB. | `docs/MEMORY_RUNS.md` |
+| Disk | At least 30 GB free (the preflight warns below that). The six sandbox images are 0.6 to 1.1 GB each. | `scripts/preflight.py`, `docker images` |
+| Time | A tiny paper runs in seconds (`paper_102`: 12.7 s run). The two strongest examples take minutes: `paper_006` about 19 min on 8 CPUs, `paper_003` about 25 min for the run alone (the whole run, with staging and install, took about 44 min cold and about 26 min with a warm environment cache); `paper_004` took about 2.5 h. | `docs/CPU_RUNS.md`, `docs/MEMORY_RUNS.md`, `docs/ENV_CACHE_RUNS.md` |
+| Network | Needed to clone repositories and download wheels and datasets *before* a run; the run itself has no network | `docs/SANDBOX_GUIDE.md` |
+| GPU | Not needed; opt-in only (`docs/ENVIRONMENT.md`) | |
+
+Times are from one machine (Windows, 8 CPUs given to Docker) and are not guarantees.
+
+## 🔍 What a Result Means (and What It Does Not)
+
+- **The strongest evidence** is two papers, `paper_003` and `paper_006`: each reproduced identical metrics in 4 runs (`docs/STABILITY_RUNS.md`), and a synthetic control paper with a known true and a known false claim scored as it should (`scripts/synthetic_control.py`, `data/synthetic_control/`).
+- **The overall success rate is low.** Pilot 4 took six *new* papers with the command from their README as it stands: pilot success **1 of 6** (install 2 of 6, 3 of 6 after one correction round; run 2 of 6). Pilot 3 (2 of 6) used settings chosen after the failures of Pilots 1 and 2, so it measures the settings, not new papers. Details: `data/pilot4_runs/summary.md`.
+- **Repro Radar does not verify every paper.** Most failures are missing dependencies, data that is not available offline, and memory or time limits. A failure is reported with its category and the log line, in neutral words, and it says nothing about the authors.
+- **A score is only as good as the claims behind it.** Only claims a person accepted are scored, and a paper without an accepted claim gets a neutral baseline for the metric tier and the output says so. A run that "completes" can still run something other than the paper's main experiment (the README command may be a demo).
+
+---
+
 ## 🎯 Target Domain & Seed Dataset (`data/seed_papers.json`)
 
 The seed domain is **"Tabular Machine Learning & Light NLP Benchmarks"**:
 - **Frameworks:** TabPFN, FT-Transformer, TabR, FastSK, SAINT, DANets.
-- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); the `corpus` job of the CI workflow runs it on every push to main and every pull request. Whether the papers install and run was measured in Pilot 2 (`docs/PILOT_2.md`), and the numeric claims are the **12 claims** that were extracted from the papers' text and accepted one by one by the owner, in 5 of the 6 papers (`paper_005` has none); see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
+- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); run it yourself with `python scripts/verify_corpus.py` (there is no CI service, `docs/DECISIONS.md` D-010; checks run locally). Whether the papers install and run was measured in Pilot 2 (`docs/PILOT_2.md`), and the numeric claims are the **12 claims** that were extracted from the papers' text and accepted one by one by the owner, in 5 of the 6 papers (`paper_005` has none); see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
 
 ---
 
 ## 🛡️ Security, Isolation, & Ethical Standards
 
-1. **Sandboxed Execution:** External code runs in ephemeral containers with restricted CPU (2.0), memory (8GB), and complete network isolation (`--network none`). If Docker is unavailable, execution is refused (exit code 4). The only way to run paper code on the host is the explicit `--allow-unsafe-local` flag: **development only, and only for code you trust.** Such runs are marked `"isolated": false` in `run_report.json` and print a red warning. Real-Docker evidence for these guarantees: [docs/SANDBOX_ACCEPTANCE.md](docs/SANDBOX_ACCEPTANCE.md).
+1. **Sandboxed Execution:** External code runs in ephemeral containers with restricted CPU (2.0 by default), memory, and complete network isolation (`--network none`). The memory limit of a `cli.py score` run is 50% of the host's RAM by default (capped at 90% of what Docker can see; `--memory 8g` sets a fixed size). The library default (`SandboxConfig`) is 8 GB. If Docker is unavailable, execution is refused (exit code 4). The only way to run paper code on the host is the explicit `--allow-unsafe-local` flag: **development only, and only for code you trust.** Such runs are marked `"isolated": false` in `run_report.json` and print a red warning. Real-Docker evidence for these guarantees: [docs/SANDBOX_ACCEPTANCE.md](docs/SANDBOX_ACCEPTANCE.md).
 2. **Neutral Diagnostic Reporting:** When code fails to replicate claims, Repro Radar avoids accusatory language, providing detailed stack traces and assigning a `Needs Review` status.
 3. **Open Licenses Only:** Only open source repositories (MIT, Apache-2.0, BSD, etc.) are evaluated.
 
