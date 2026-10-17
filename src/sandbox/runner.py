@@ -29,6 +29,12 @@ from pathlib import Path
 from typing import Any
 
 from src.config import DEFAULT_TIMEOUT_SECONDS, SANDBOX_RUNS_DIR
+from src.sandbox.env_cache import (
+    DEPS_DIR,
+    INSTALL_FILES,
+    EnvironmentCache,
+    environment_key,
+)
 from src.sandbox.resources import resolve_memory_limit
 
 logger = logging.getLogger(__name__)
@@ -125,6 +131,8 @@ class SandboxConfig:
     writable_data: list[str] = field(default_factory=list)
     # Requirements installed in the install phase in addition to the repository's requirement files (#193).
     extra_requirements: list[str] = field(default_factory=list)
+    # Host directory of the installed-environment cache (src/sandbox/env_cache.py, #380); "" switches the cache off.
+    env_cache_dir: str = ""
     # Local NVIDIA GPU for the run (#169), opt-in: "" (none, the default), "all", a count ("1"), or
     # "device=0[,1]". Passed to `docker run --gpus` (Docker Desktop with WSL2 and the NVIDIA driver); every other
     # isolation flag stays as it is.
@@ -415,6 +423,24 @@ class DockerSandboxRunner:
         deps_dir = Path(output_dir) / "deps"
         if deps_dir.exists():
             shutil.rmtree(deps_dir)
+        cache_info: dict[str, Any] | None = None
+        cache_key = cache_inputs = None
+        cache = EnvironmentCache(self.config.env_cache_dir) if self.config.env_cache_dir else None
+        if cache:
+            cache_start = time.time()
+            cache_info = {"enabled": True, "hit": False}
+            try:
+                cache_key, cache_inputs = environment_key(self.config.image_name, Path(packages_dir), Path(repo_dir),
+                                                          self.config.extra_requirements)
+            except (LookupError, OSError) as exc:
+                cache_info["reason"] = f"no key: {exc}"
+                cache = None
+            else:
+                cache_info["key"] = cache_key
+                entry, lookup = cache.lookup(cache_key)
+                cache_info.update({k: v for k, v in lookup.items() if k != "stored"})
+                if entry is not None:
+                    return self._restore_cached_install(entry, lookup["stored"], output_dir, cache_info, cache_start)
         deps_dir.mkdir(parents=True)
         deps_dir.chmod(0o777)  # written by the sandbox user (uid 1000) during the install phase only
         meta_path = Path(output_dir) / "install_meta.json"
@@ -442,7 +468,38 @@ class DockerSandboxRunner:
         except (OSError, ValueError) as exc:
             logger.warning("Unreadable install_meta.json: %s", exc)
             status = None
-        return deps_dir, status if status in ("INSTALLED", "FAILED") else "FAILED"
+        status = status if status in ("INSTALLED", "FAILED") else "FAILED"
+        if cache_info is not None:
+            if cache and status == "INSTALLED":  # only an install that ended INSTALLED is stored
+                try:
+                    cache_info["stored"] = cache.store(cache_key, cache_inputs, deps_dir, Path(output_dir))
+                except OSError as exc:
+                    cache_info["stored"] = False
+                    cache_info["store_error"] = str(exc)
+            self._write_env_cache(Path(output_dir), cache_info)
+        return deps_dir, status
+
+    @staticmethod
+    def _write_env_cache(output_dir: Path, info: dict[str, Any]) -> None:
+        (output_dir / "env_cache.json").write_text(json.dumps(info, indent=2) + "\n", encoding="utf-8")
+
+    def _restore_cached_install(self, entry: Path, stored: dict[str, Any], output_dir: Path, info: dict[str, Any],
+                                started: float) -> tuple[Path, str]:
+        """Use a verified cache entry in place of the install phase: its files become this run's install files."""
+        output_dir = Path(output_dir)
+        for name in INSTALL_FILES:
+            if (entry / name).is_file():
+                shutil.copy2(entry / name, output_dir / name)
+        try:
+            meta = json.loads((entry / "install_meta.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            meta = {"phase": "install", "status": "INSTALLED", "exit_code": 0}
+        meta.update(original_duration_seconds=meta.get("duration_seconds"), duration_seconds=round(time.time() - started, 3),
+                    peak_memory_bytes=None, env_cache="hit", status="INSTALLED")
+        (output_dir / "install_meta.json").write_text(json.dumps(meta) + "\n", encoding="utf-8")
+        info.update(hit=True, restore_seconds=meta["duration_seconds"], created_at=stored.get("created_at"))
+        self._write_env_cache(output_dir, info)
+        return entry / DEPS_DIR, "INSTALLED"
 
     def run(
         self,

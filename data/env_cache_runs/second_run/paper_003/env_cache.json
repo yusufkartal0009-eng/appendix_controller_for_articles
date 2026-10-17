@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "hit": true,
+  "key": "2bbecadaab4fae6a8cc68425411a868938d5ad0c69f65f41a5ab819bdddca94e",
+  "verify_seconds": 177.425,
+  "reason": "hit",
+  "files": 47206,
+  "bytes": 4998378892,
+  "restore_seconds": 179.142,
+  "created_at": "2026-10-16T23:11:46+00:00"
+}
