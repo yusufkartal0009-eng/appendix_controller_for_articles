@@ -255,3 +255,28 @@ def test_remove_tree_clears_read_only_files(tmp_path):
     locked.chmod(0o444)
     stager_module.remove_tree(target)
     assert not target.exists()
+
+
+def test_extra_requirements_are_bundled_when_the_repository_has_no_requirements_file(stager, tmp_path, monkeypatch):
+    """#372: the Pilot 4 correction round of a repository without requirements was silently skipped."""
+    commands = []
+
+    def fake_pip(cmd, timeout):
+        commands.append(cmd)
+        return subprocess.CompletedProcess(cmd, 0, "", "")
+
+    monkeypatch.setattr(stager, "_run_pip", fake_pip)
+    report = stager.bundle_dependencies(_staged(tmp_path), extra_requirements=["torch", "numpy"])
+    assert report["status"] == "SUCCESS" and report["source"] == "extra_requirements"
+    assert report["extra_requirements"] == ["torch", "numpy"] and commands[0][-2:] == ["torch", "numpy"]
+    assert "-r" not in commands[0]
+
+
+def test_failing_extra_requirements_without_a_requirements_file_make_the_bundle_partial(stager, tmp_path, monkeypatch):
+    monkeypatch.setattr(stager, "_run_pip", lambda cmd, timeout: subprocess.CompletedProcess(cmd, 1, "", "ERROR: no match"))
+    report = stager.bundle_dependencies(_staged(tmp_path), extra_requirements=["nonexistent-package"])
+    assert report["status"] == "PARTIAL" and report["extra_requirements_error"] == "ERROR: no match"
+
+
+def test_no_requirements_and_no_extras_is_still_skipped(stager, tmp_path):
+    assert stager.bundle_dependencies(_staged(tmp_path), extra_requirements=[])["status"] == "SKIPPED"
