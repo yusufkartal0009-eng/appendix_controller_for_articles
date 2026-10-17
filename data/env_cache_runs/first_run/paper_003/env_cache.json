@@ -1,0 +1,12 @@
+{
+  "enabled": true,
+  "hit": false,
+  "key": "2bbecadaab4fae6a8cc68425411a868938d5ad0c69f65f41a5ab819bdddca94e",
+  "verify_seconds": 0.0,
+  "reason": "no entry for this key",
+  "stored": {
+    "store_seconds": 268.155,
+    "files": 47206,
+    "bytes": 4998378892
+  }
+}

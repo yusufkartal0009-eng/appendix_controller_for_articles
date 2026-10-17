@@ -293,3 +293,46 @@ A share of the host's RAM fits any machine, which a fixed size does not. The cap
 - To let a container use a full 50 percent on a WSL2 machine, give WSL more memory (see `docs/ENVIRONMENT.md`).
 - A run with the override is **not** a protocol run: its limits differ from Pilots 1 to 3 and it must not be compared with them as if it were.
 - Not verified: no real paper has been run with `50%` yet; the resolver is tested with mocked memory sizes and read once on the owner's machine (host 31.7 GiB, Docker not running at the time).
+
+
+## D-010 — The install phase can be skipped on a second run, from a verified cache of its own output (2026-10-17)
+
+### Context
+`paper_003` takes about 45 minutes, and a rerun repeats the install phase every time. The install phase is a separate,
+network-isolated container that installs bundled binary wheels into a host directory (`/workspace/deps`); the run phase mounts
+that directory read-only. The owner asked for a cache of the installed environment per paper and locked package list, with
+the cache holding only the output of the install phase, the network off, and the run phase using it read-only.
+
+### Decision
+`src/sandbox/env_cache.py` keeps one directory per key under a host cache directory (`SandboxConfig.env_cache_dir`, empty by
+default, `run_pilot.py --env-cache DIR`). The key is the SHA-256 of: the ID of the sandbox image, the name and SHA-256 of
+every file in the bundle (the locked package list: the exact wheels), the name and SHA-256 of every `*requirements*.txt` in the
+repository root, the extra requirements of the run setup, and the install mode. An entry is written only after an install
+phase that ended `INSTALLED`. On a hit the runner does not start the install container: it checks the SHA-256 digest of the
+whole stored tree against the digest taken when the entry was written (a mismatch deletes the entry and the install phase
+runs), copies the stored install log, package list and metadata into the run directory, and mounts the stored `deps`
+directory read-only at `/workspace/deps`. `install_meta.json` says `env_cache: hit`, keeps the original duration as
+`original_duration_seconds`, and sets the peak memory to `null` (the restored run did not measure one).
+
+### Reason
+- **Only install output is cached.** No paper code runs in the install phase (binary wheels only, `--no-index`, network off,
+  uid 1000, read-only root), so an entry holds nothing a paper wrote. Run output, data and the repository are not cached.
+- **The key covers what decides the content.** A rebuilt image, another wheel with the same file name, a changed requirement
+  file or a different extra requirement gives another key; the tests change each of them.
+- **The run phase is unchanged.** It mounts the directory read-only as before, so paper code cannot alter a cached entry or add
+  executables to it. No container ever gets the cache directory writable.
+- **Tampering on the host is detected.** The digest is checked before every use; a changed or added file means no hit.
+- **Off by default.** Pilots 1 to 4 and every protocol run keep the install phase; a run that uses the cache is labeled in its
+  record (`env_cache`, "not a protocol run").
+
+### Consequences
+- The first run of a paper still installs (and then stores, which costs a copy); the gain is on later runs only, and only the
+  install phase and the restore are compared. Whether the whole run gets shorter is measured, not assumed:
+  `docs/ENV_CACHE_RUNS.md`.
+- A hit reads the whole stored tree to verify it (the time is recorded as `verify_seconds`), so the saving is the install time
+  minus the key, verification and copy time.
+- The cache grows with each locked package list (several GiB for a torch environment); it lives in `.sandbox_cache/`, which is
+  ignored by git. Nothing deletes old entries yet.
+- The pip **download** cache (the bundling step) already existed: the bundling container uses `PIP_CACHE_DIR=/staging/.pip-cache`
+  inside the staging directory, shared by all papers (9.3 GB on the owner's machine). This decision does not change it.
+
