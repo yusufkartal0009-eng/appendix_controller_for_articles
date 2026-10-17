@@ -299,6 +299,12 @@ class RepoStager:
             report = self._bundle_conda_env(staged, bundle_dir, timeout, python_version, options)
             return self._with_extras(report, staged, bundle_dir, timeout, python_version, options, extra_requirements)
         if not staged.manifest.requirements_files:
+            if extra_requirements:
+                # Nothing to install from the repository, but the run setup (or a Pilot 4 correction round) names
+                # requirements: download them with their dependencies. The entrypoint installs them (#372).
+                report = {"status": "SUCCESS", "source": "extra_requirements", "python_version": python_version,
+                          "wheel_count": 0, "bundle_dir": str(bundle_dir), "needs_sdist_build": []}
+                return self._with_extras(report, staged, bundle_dir, timeout, python_version, options, extra_requirements)
             return {
                 "status": "SKIPPED",
                 "message": "No requirements.txt found to bundle",
