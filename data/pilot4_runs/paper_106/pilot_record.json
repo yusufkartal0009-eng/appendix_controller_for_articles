@@ -1,0 +1,101 @@
+{
+  "paper_id": "paper_106",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "ec939424dd6fbdcc26f9240c849e44f1a0689153",
+  "started_at": "2026-10-16T21:16:51+00:00",
+  "repo_url": "https://github.com/yalaudah/facies_classification_benchmark",
+  "pinned_commit": "aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3",
+  "target_script": "patch_train.py",
+  "container_command": "python /workspace/repo/patch_train.py --batch_size 32 --aug True",
+  "environment": {},
+  "limits": {
+    "cpus": 2.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 14400
+  },
+  "pilot4": {
+    "run_command": "python patch_train.py --batch_size 32 --aug True",
+    "readme_url": "https://github.com/yalaudah/facies_classification_benchmark/blob/aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3/README.md",
+    "attempt": "correction",
+    "correction": {
+      "extra_requirements": [
+        "torch"
+      ],
+      "changes": [
+        {
+          "change": "add `torch` to the extra requirements (the repository lists no requirement file)",
+          "log_line": "ModuleNotFoundError: No module named 'torch' (first attempt, stderr.log, line 4: File \"/workspace/repo/patch_train.py\", line 8, in <module>: import torch)"
+        }
+      ]
+    }
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.24
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [
+      "torch"
+    ],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "source": "extra_requirements",
+    "python_version": "3.11",
+    "wheel_count": 29,
+    "bundle_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\.sandbox_staging\\paper_106_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [
+      "torch"
+    ],
+    "duration_seconds": 79.823
+  },
+  "sandbox_duration_seconds": 702.43,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 24.56,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 910131200
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 675.733,
+    "peak_memory_bytes": 139972608
+  },
+  "finished_at": "2026-10-16T21:29:54+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
