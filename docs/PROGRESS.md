@@ -37,6 +37,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(readme): the inspect example names a paper that exists (2026-10-18 00:05 +03:00, Issue #393)
+- Found by following the README in a clean clone: step 5 inspected `paper_001`, which is not in the corpus (`paper_002` to `paper_008` are). The example now uses `paper_003`. Evidence: the walk-through log of the clean clone (outside the repository).
+
 ### docs(readme): accurate limits, options, requirements, and what a result means (2026-10-17 23:58 +03:00, Issue #391)
 - README: the memory and CPU statement now says that `cli.py score` uses 50% of the host's RAM by default; the claim that a CI job runs the corpus check is replaced (there is no CI, D-010); the options of `cli.py score`, the preflight, and the existing-run-folder stop are described; new sections "Requirements" (RAM, disk, time, Docker, network, GPU) and "What a Result Means (and What It Does Not)". Every number is copied from a stored record or generated table (`docs/MEMORY_RUNS.md`, `docs/CPU_RUNS.md`, `docs/ENV_CACHE_RUNS.md`, `docs/STABILITY_RUNS.md`, `data/pilot4_runs/summary.md`).
 - Evidence: `pytest` and `ruff check .` clean (see the pull request).
