@@ -1,0 +1,12 @@
+{
+  "paper_id": "paper_104",
+  "category": "DATA_NOT_ACCESSIBLE",
+  "other_name": null,
+  "phase": "run",
+  "evidence": {
+    "file": "stderr.log",
+    "line_number": 70,
+    "line": "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /datasets/theatticusproject/cuad/raw/main/CUAD_v1/master_clauses.csv (Caused by NameResolutionError(\"HTTPSConnection(host='huggingface.co', port=443): Failed to resolve 'huggingface.co' ([Errno -3] Temporary failure in name resolution)\"))"
+  },
+  "pilot_success": false
+}
