@@ -105,7 +105,7 @@ python cli.py list-papers
 
 ### 5. Inspect Paper Details & Numerical Claims
 ```bash
-python cli.py inspect paper_001
+python cli.py inspect paper_003
 ```
 
 ### 6. Build the Sandbox Image (one time)
