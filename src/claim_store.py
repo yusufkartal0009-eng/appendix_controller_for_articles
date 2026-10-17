@@ -5,10 +5,13 @@ file, and the extractor version. `verified_by` records who checked it:
 
 - `auto-quote-match`: the quote guard (`src/quote_guard.py`) found the quote and the value in the paper text.
   This is not an approval; the claim stays `pending`.
+- `auto-consensus`: at least two independent extraction passes gave the same normalized value and each passed the quote
+  check (`scripts/auto_extract.py`, #381). It is a candidate, not an approval: the claim stays `pending`.
 - `human`: a person accepted or rejected the claim (`review_status` `accepted` or `rejected`).
 
 Only claims with `review_status == "accepted"` and `verified_by == "human"` reach the scorer (`accepted_claims`).
-Importing never accepts anything.
+Importing never accepts anything. `consensus_candidates` lists the `auto-consensus` ones, for a run that asks for them by
+name and labels its result as such.
 """
 
 from __future__ import annotations
@@ -23,7 +26,7 @@ from sqlalchemy.orm import Session
 from src.models import ClaimORM, ExtractedClaimORM
 
 REVIEW_STATUSES = ("pending", "accepted", "rejected")
-VERIFIED_BY = ("auto-quote-match", "human")
+VERIFIED_BY = ("auto-quote-match", "auto-consensus", "human")
 # Fields that define what a person reviewed: if one changes on re-import, the review no longer applies.
 REVIEWED_FIELDS = ("value_as_printed", "page", "quote", "table_or_section", "model_variant", "dataset")
 
@@ -131,6 +134,11 @@ def record_review(session: Session, extracted_claim_id: str, decision: str, note
 def accepted_claims(session: Session, paper_id: str) -> list[ExtractedClaimORM]:
     """The claims that may reach the scorer: accepted by a person."""
     return [c for c in get_extracted_claims(session, paper_id, "accepted") if c.verified_by == "human"]
+
+
+def consensus_candidates(session: Session, paper_id: str) -> list[ExtractedClaimORM]:
+    """Pending claims that independent passes agree on (`auto-consensus`); never accepted by a person (#381)."""
+    return [c for c in get_extracted_claims(session, paper_id, "pending") if c.verified_by == "auto-consensus"]
 
 
 def get_claims_by_run(session: Session, run_id: str) -> list[ClaimORM]:

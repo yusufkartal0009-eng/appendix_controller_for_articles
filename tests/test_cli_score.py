@@ -11,7 +11,7 @@ from scripts import run_pilot
 from src.claim_store import import_extraction, record_review
 from src.config import DATA_DIR, PROJECT_ROOT
 from src.database import get_engine, get_session, init_db, seed_database
-from src.models import ScoreORM
+from src.models import ExtractedClaimORM, ScoreORM
 
 CLAIMS_DIR = DATA_DIR / "claims"
 
@@ -144,3 +144,20 @@ def test_a_conda_environment_file_with_another_name_still_counts_as_an_environme
     (run_dir / "pilot_record.json").write_text(json.dumps(record))
     score(monkeypatch, url, "paper_003", "--from-run", str(run_dir))
     assert "Environment definition present" in capsys.readouterr().out
+
+
+def test_consensus_candidates_are_used_only_when_asked_for_and_the_score_says_so(db, tmp_path, monkeypatch, capsys):
+    url, session = db
+    row = session.get(ExtractedClaimORM, "paper_003:ft_transformer_rmse")
+    row.verified_by = "auto-consensus"  # a candidate that nobody has reviewed
+    session.commit()
+    run_dir = make_run(tmp_path, metrics={"ft_transformer_rmse": 0.46})
+    score(monkeypatch, url, "paper_003", "--from-run", str(run_dir))
+    assert "Accepted claims of this paper (accepted by a person): 0" in capsys.readouterr().out
+    (plain,) = saved_scores(session)
+    assert "auto-consensus" not in (plain.summary or "")
+    score(monkeypatch, url, "paper_003", "--from-run", str(run_dir), "--claims", "auto-consensus")
+    out = capsys.readouterr().out
+    assert "auto-consensus candidates that nobody reviewed" in out and "ft_transformer_rmse" in out
+    labeled = [s for s in saved_scores(session) if "auto-consensus" in (s.summary or "")]
+    assert len(labeled) == 1 and labeled[0].summary.startswith("[claims: auto-consensus candidates, not accepted by a person]")

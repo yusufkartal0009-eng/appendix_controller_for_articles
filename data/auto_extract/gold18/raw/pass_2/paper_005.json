@@ -1,0 +1,17 @@
+{
+  "ep3602_auroc": {
+    "status": "not_found",
+    "reason": "No dataset named EP3602 occurs in the paper; only EP300 (and EP300_47848) appear.",
+    "claim": null
+  },
+  "ep3602_accuracy": {
+    "status": "not_found",
+    "reason": "No dataset named EP3602 occurs in the paper; only EP300 (and EP300_47848) appear.",
+    "claim": null
+  },
+  "kernel_speedup_factor": {
+    "status": "not_found",
+    "reason": "Figure 4 shows test AUC versus number of training samples (ZZZ3), not kernel computation speedup; speedups are reported elsewhere (Figure 7, Figure on page 15).",
+    "claim": null
+  }
+}

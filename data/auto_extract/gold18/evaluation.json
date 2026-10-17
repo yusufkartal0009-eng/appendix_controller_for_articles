@@ -1,0 +1,514 @@
+{
+  "name": "gold18",
+  "gold_questions": 18,
+  "gold_questions_with_a_value": 12,
+  "gold_questions_not_in_paper": 6,
+  "decided_by_consensus": 18,
+  "left_to_a_person": 0,
+  "left_to_a_person_questions": [],
+  "consensus_decisions": {
+    "tp": 10,
+    "fp": 2,
+    "fn": 2,
+    "tn": 6,
+    "precision": 0.833,
+    "recall": 0.833
+  },
+  "consensus_decisions_main_value_only": {
+    "tp": 12,
+    "fp": 0,
+    "fn": 0,
+    "tn": 6,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "consensus_recall_over_all_gold_values": 0.833,
+  "single_passes": {
+    "pass_1": {
+      "tp": 10,
+      "fp": 2,
+      "fn": 2,
+      "tn": 6,
+      "precision": 0.833,
+      "recall": 0.833
+    },
+    "pass_2": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 1,
+      "tn": 6,
+      "precision": 0.917,
+      "recall": 0.917
+    },
+    "pass_3": {
+      "tp": 10,
+      "fp": 2,
+      "fn": 2,
+      "tn": 6,
+      "precision": 0.833,
+      "recall": 0.833
+    }
+  },
+  "rows": [
+    {
+      "question": "paper_002:inference_seconds__cpu",
+      "gold": [
+        "37.59"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "37.59",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "37.59",
+        "2": "37.59",
+        "3": "37.59"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_002:inference_seconds__gpu",
+      "gold": [
+        "0.6172",
+        "0.62s"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "0.6172",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "0.6172",
+        "2": "0.6172",
+        "3": "0.6172"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_002:mean_roc_auc",
+      "gold": [
+        "0.934±.0086"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "0.934±.0086",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "0.934±.0086",
+        "2": "0.934±.0086",
+        "3": "0.934±.0086"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_003:ft_transformer_rmse",
+      "gold": [
+        "0.459",
+        "0.459±3.5e-3"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "0.459",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "0.459",
+        "2": "0.459",
+        "3": "0.459"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_003:resnet_rmse",
+      "gold": [
+        "0.486",
+        "0.486±2.9e-3"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "0.486",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "0.486",
+        "2": "0.486",
+        "3": "0.486"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_003:xgboost_rmse",
+      "gold": [
+        "0.433±1.6e-3"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "0.433",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "0.433",
+        "2": "0.433±1.6e-3",
+        "3": "0.433"
+      },
+      "result": "FP+FN",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "FP+FN",
+        "2": "TP",
+        "3": "FP+FN"
+      }
+    },
+    {
+      "question": "paper_004:ft_transformer_average_rank",
+      "gold": [],
+      "gold_not_in_paper": true,
+      "consensus": "consensus_not_found",
+      "candidate": null,
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "not_found",
+        "2": "not_found",
+        "3": "not_found"
+      },
+      "result": "TN",
+      "result_main_value_only": "TN",
+      "single_pass_results": {
+        "1": "TN",
+        "2": "TN",
+        "3": "TN"
+      }
+    },
+    {
+      "question": "paper_004:tabr_average_rank",
+      "gold": [
+        "1.3± 0.9"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "1.3± 0.6",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "1.3± 0.6",
+        "2": "1.3± 0.6",
+        "3": "1.3± 0.6"
+      },
+      "result": "FP+FN",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "FP+FN",
+        "2": "FP+FN",
+        "3": "FP+FN"
+      }
+    },
+    {
+      "question": "paper_004:xgboost_average_rank",
+      "gold": [
+        "2.5± 0.9"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "2.5± 0.9",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "2.5± 0.9",
+        "2": "2.5± 0.9",
+        "3": "2.5± 0.9"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_005:ep3602_accuracy",
+      "gold": [],
+      "gold_not_in_paper": true,
+      "consensus": "consensus_not_found",
+      "candidate": null,
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "not_found",
+        "2": "not_found",
+        "3": "not_found"
+      },
+      "result": "TN",
+      "result_main_value_only": "TN",
+      "single_pass_results": {
+        "1": "TN",
+        "2": "TN",
+        "3": "TN"
+      }
+    },
+    {
+      "question": "paper_005:ep3602_auroc",
+      "gold": [],
+      "gold_not_in_paper": true,
+      "consensus": "consensus_not_found",
+      "candidate": null,
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "not_found",
+        "2": "not_found",
+        "3": "not_found"
+      },
+      "result": "TN",
+      "result_main_value_only": "TN",
+      "single_pass_results": {
+        "1": "TN",
+        "2": "TN",
+        "3": "TN"
+      }
+    },
+    {
+      "question": "paper_005:kernel_speedup_factor",
+      "gold": [],
+      "gold_not_in_paper": true,
+      "consensus": "consensus_not_found",
+      "candidate": null,
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "not_found",
+        "2": "not_found",
+        "3": "not_found"
+      },
+      "result": "TN",
+      "result_main_value_only": "TN",
+      "single_pass_results": {
+        "1": "TN",
+        "2": "TN",
+        "3": "TN"
+      }
+    },
+    {
+      "question": "paper_006:arcene_auroc",
+      "gold": [
+        "91.04"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "91.04",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "91.04",
+        "2": "91.04",
+        "3": "91.04"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_006:bank_marketing_accuracy",
+      "gold": [],
+      "gold_not_in_paper": true,
+      "consensus": "consensus_not_found",
+      "candidate": null,
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "not_found",
+        "2": "not_found",
+        "3": "not_found"
+      },
+      "result": "TN",
+      "result_main_value_only": "TN",
+      "single_pass_results": {
+        "1": "TN",
+        "2": "TN",
+        "3": "TN"
+      }
+    },
+    {
+      "question": "paper_006:xgboost_arcene_auroc",
+      "gold": [
+        "81.41"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "81.41",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "81.41",
+        "2": "81.41",
+        "3": "81.41"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_008:forest_covertype_accuracy__danet_20",
+      "gold": [
+        "97.23%±2e-4"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "97.23%±2e-4",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "97.23%±2e-4",
+        "2": "97.23%±2e-4",
+        "3": "97.23%±2e-4"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_008:forest_covertype_accuracy__danet_32",
+      "gold": [
+        "97.27%±5e-4"
+      ],
+      "gold_not_in_paper": false,
+      "consensus": "candidate",
+      "candidate": "97.27%±5e-4",
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "97.27%±5e-4",
+        "2": "97.27%±5e-4",
+        "3": "97.27%±5e-4"
+      },
+      "result": "TP",
+      "result_main_value_only": "TP",
+      "single_pass_results": {
+        "1": "TP",
+        "2": "TP",
+        "3": "TP"
+      }
+    },
+    {
+      "question": "paper_008:higgs_auroc",
+      "gold": [],
+      "gold_not_in_paper": true,
+      "consensus": "consensus_not_found",
+      "candidate": null,
+      "agreeing_passes": [
+        1,
+        2,
+        3
+      ],
+      "per_pass": {
+        "1": "not_found",
+        "2": "not_found",
+        "3": "not_found"
+      },
+      "result": "TN",
+      "result_main_value_only": "TN",
+      "single_pass_results": {
+        "1": "TN",
+        "2": "TN",
+        "3": "TN"
+      }
+    }
+  ],
+  "note": "Reported without a threshold. Candidates are pending claims; nothing here accepts a claim."
+}

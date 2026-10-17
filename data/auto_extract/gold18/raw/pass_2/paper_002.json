@@ -1,0 +1,53 @@
+{
+  "mean_roc_auc": {
+    "status": "found",
+    "reason": "Table 1 (18 numerical OpenML-CC18 datasets), TabPFN column (32 permutations); TabPFN n.e. (no ensembling) is 0.932 and TabPFN + AutoGluon is 0.934 as well.",
+    "claim": {
+      "metric_name": "mean_roc_auc_ovo",
+      "value_as_printed": "0.934±.0086",
+      "unit": "fraction",
+      "dataset": "18 numerical datasets in OpenML-CC18",
+      "model_variant": "TabPFN",
+      "split": "test",
+      "higher_is_better": true,
+      "table_or_figure": "Table 1",
+      "page": 8,
+      "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
+      "confidence": 0.85
+    }
+  },
+  "inference_seconds__gpu": {
+    "status": "found",
+    "reason": "Table 1 reports combined tune+train+predict time for TabPFN (32 permutations) on GPU; no separate inference-only time is printed (Table 2 holds ROC AUC, not times). TabPFN n.e. is 0.0519 on GPU.",
+    "claim": {
+      "metric_name": "mean_time_seconds",
+      "value_as_printed": "0.6172",
+      "unit": "seconds",
+      "dataset": "18 numerical datasets in OpenML-CC18",
+      "model_variant": "TabPFN",
+      "split": "test",
+      "higher_is_better": false,
+      "table_or_figure": "Table 1",
+      "page": 8,
+      "source_quote": "(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
+      "confidence": 0.6
+    }
+  },
+  "inference_seconds__cpu": {
+    "status": "found",
+    "reason": "Table 1 reports combined tune+train+predict time for TabPFN (32 permutations) on CPU; no separate inference-only time is printed (Table 2 holds ROC AUC, not times). TabPFN n.e. is 1.301 on CPU.",
+    "claim": {
+      "metric_name": "mean_time_seconds",
+      "value_as_printed": "37.59",
+      "unit": "seconds",
+      "dataset": "18 numerical datasets in OpenML-CC18",
+      "model_variant": "TabPFN",
+      "split": "test",
+      "higher_is_better": false,
+      "table_or_figure": "Table 1",
+      "page": 8,
+      "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)",
+      "confidence": 0.6
+    }
+  }
+}
