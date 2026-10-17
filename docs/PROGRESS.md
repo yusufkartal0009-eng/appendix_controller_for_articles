@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: clean-clone walk-through of the README and what it found (2026-10-18 01:30 +03:00, Issues #395, #396)
+- A fresh clone of `main`, a new virtual environment, and the README steps in order (`docs/evidence/clean_clone/WALKTHROUGH.md`). Steps 2 to 4 and 6 worked; step 5 named a paper that does not exist (fixed in #394). `cli.py score paper_008` ends Failed after 38 s (its data is a manual download); `cli.py score paper_006` was killed by the 3,600 s run limit during epoch 36 (issue #396); both scored with 0 accepted claims because a fresh database holds none (issue #395). A stored run (`--from-run`) scored 85.75, Partially Verified, with Tier 2 as the neutral baseline.
+- README: a warning before the scoring step states exactly this.
+- Not verified: no paper completed a fresh run from a clean clone; the images were built from cache, not from scratch.
+
 ### docs(readme): the inspect example names a paper that exists (2026-10-18 00:05 +03:00, Issue #393)
 - Found by following the README in a clean clone: step 5 inspected `paper_001`, which is not in the corpus (`paper_002` to `paper_008` are). The example now uses `paper_003`. Evidence: the walk-through log of the clean clone (outside the repository).
 
