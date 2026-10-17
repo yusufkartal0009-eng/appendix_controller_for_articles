@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS claims (
 );
 
 -- 3b. EXTRACTED CLAIMS: claims extracted from the paper text, with provenance and human review (W6, #10).
--- verified_by: 'auto-quote-match' (quote guard matched, not an approval) or 'human' (a person decided).
+-- verified_by: 'auto-quote-match' (quote guard matched, not an approval), 'auto-consensus' (at least two independent
+-- extraction passes agree, a candidate and not an approval, #381) or 'human' (a person decided).
 -- Only review_status = 'accepted' with verified_by = 'human' reaches the scorer.
 CREATE TABLE IF NOT EXISTS extracted_claims (
     extracted_claim_id TEXT PRIMARY KEY, -- "<paper_id>:<query_id>"
@@ -71,7 +72,7 @@ CREATE TABLE IF NOT EXISTS extracted_claims (
     source_file TEXT NOT NULL,
     pdf_sha256 TEXT,
     extractor_version TEXT NOT NULL,
-    verified_by TEXT CHECK(verified_by IN ('auto-quote-match', 'human') OR verified_by IS NULL),
+    verified_by TEXT CHECK(verified_by IN ('auto-quote-match', 'auto-consensus', 'human') OR verified_by IS NULL),
     review_status TEXT NOT NULL DEFAULT 'pending' CHECK(review_status IN ('pending', 'accepted', 'rejected')),
     reviewed_at TIMESTAMP,
     review_note TEXT,

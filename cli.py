@@ -118,7 +118,7 @@ def cmd_score_paper(args):
             args.simulate_deps_error)):
         return cmd_score_simulated(args, paper)
 
-    from scripts import run_pilot
+    from scripts import preflight, run_pilot
     from src.config import DATA_CACHE_DIR
     from src.score_run import load_run, score_run
 
@@ -128,18 +128,29 @@ def cmd_score_paper(args):
         print(f"Scoring the stored run in {run_dir} (no new run).")
     else:
         run_root = SANDBOX_RUNS_DIR / "score"
+        try:
+            preflight.ensure_ready()  # #378
+        except RuntimeError as exc:
+            print(exc)
+            sys.exit(1)
         print(f"Running the paper in the Docker sandbox with its run setup (records in {run_root / paper.paper_id}) ...")
         run_pilot.run_paper(paper.paper_id, Path(args.staging_dir), pilot2=True, data_cache=Path(args.data_cache or DATA_CACHE_DIR),
                             record_root=run_root, memory_limit=args.memory)
         run_dir = run_root / paper.paper_id
     record, report = load_run(run_dir)
 
-    claims = claims_for_scoring(session, paper.paper_id)
-    print(f"Accepted claims of this paper (accepted by a person): {len(claims)}")
+    use_consensus = getattr(args, "claims", "accepted") == "auto-consensus"
+    claims = claims_for_scoring(session, paper.paper_id, include_auto_consensus=use_consensus)
+    if use_consensus:
+        print(f"Claims of this paper: {len(claims)} (accepted by a person, plus auto-consensus candidates that nobody reviewed)")
+    else:
+        print(f"Accepted claims of this paper (accepted by a person): {len(claims)}")
     repo_dir = Path(args.staging_dir) / paper.paper_id
     result = score_run(paper.paper_id, paper.license, claims, record, report, run_dir, repo_dir if repo_dir.is_dir() else None)
 
     bd = result["breakdown"]
+    if use_consensus:  # the score must not be read as one on reviewed claims (#381)
+        bd.summary = f"[claims: auto-consensus candidates, not accepted by a person] {bd.summary}"
     run = record.get("run") or {}
     print(f"Run: stage={record.get('stage', {}).get('status')} build={(record.get('build') or {}).get('status', 'none')} "
           f"install={report.get('dependency_install_status', 'n/a')} run={run.get('status', 'not started')} "
@@ -273,6 +284,9 @@ def main():
                          help="Container memory limit of a real run: a size (8g) or a share of the host's RAM "
                               "(default 50%%, capped at 90%% of the memory Docker can see)")
     p_score.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
+    p_score.add_argument("--claims", choices=["accepted", "auto-consensus"], default="accepted",
+                         help="Which claims the score uses: only the ones a person accepted (default), or those plus the "
+                              "auto-consensus candidates of scripts/auto_extract.py; the score is then labeled as unreviewed")
     p_score.add_argument("--simulate", action="store_true", help="SIMULATION FOR TESTING: successful run with made-up numbers")
     p_score.add_argument("--simulate-failure", action="store_true", help="SIMULATION FOR TESTING: failed metric reproduction")
     p_score.add_argument("--simulate-divergence", action="store_true", help="SIMULATION FOR TESTING: divergent metric reproduction")

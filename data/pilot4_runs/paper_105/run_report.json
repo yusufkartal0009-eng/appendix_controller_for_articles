@@ -1,0 +1,127 @@
+{
+  "paper_id": "paper_105",
+  "source": "https://github.com/CRIPAC-DIG/GRACE",
+  "commit_hash": "b3b5ac3fcbaabbb50e8bd69a075b46cd82a50378",
+  "target_script": "train.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.746,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "C:\\Users\\USER\\appendix_controller_for_articles\\sandbox_runs\\paper_105",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.256,
+    "timeout_limit_seconds": 14400,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 12296192,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch >= 1.4.0",
+      "name": "torch",
+      "requested": ">=1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch-scatter",
+      "name": "torch-scatter",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch-sparse",
+      "name": "torch-sparse",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch-cluster",
+      "name": "torch-cluster",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch-spline",
+      "name": "torch-spline",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch-geometric >= 1.4.3",
+      "name": "torch-geometric",
+      "requested": ">=1.4.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "sklearn",
+      "name": "sklearn",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pyyaml",
+      "name": "pyyaml",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 14400s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/train.py --dataset Cora\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.256s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/train.py\", line 5, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'\n"
+}

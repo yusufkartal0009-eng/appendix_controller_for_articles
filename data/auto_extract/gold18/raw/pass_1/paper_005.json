@@ -1,0 +1,17 @@
+{
+  "ep3602_auroc": {
+    "status": "not_found",
+    "reason": "The dataset EP3602 does not occur in the paper; the DNA datasets are CTCF, EP300, JUND, RAD21, SIN3A, Pbde, EP300_47848, KAT2B, TP53, ZZZ3, and per-dataset test AUCs are only shown in scatter plots.",
+    "claim": null
+  },
+  "ep3602_accuracy": {
+    "status": "not_found",
+    "reason": "The dataset EP3602 does not occur in the paper, and no per-dataset test accuracy is printed.",
+    "claim": null
+  },
+  "kernel_speedup_factor": {
+    "status": "not_found",
+    "reason": "Figure 4 shows test AUC versus number of training samples (FastSK, CharCNN, LSTM), not kernel speedup; speedups appear in Figure 7 and Table 1, not Figure 4.",
+    "claim": null
+  }
+}

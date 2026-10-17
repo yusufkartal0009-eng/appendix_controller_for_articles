@@ -316,6 +316,45 @@ def _v6_runs_output_limit_status(conn: sqlite3.Connection) -> None:
         rebuild_table(conn, "runs", RUNS_WITH_OUTPUT_LIMIT_STATUS_SQL)
 
 
+# extracted_claims.verified_by accepts 'auto-consensus': a claim that at least two independent extraction passes agree on
+# (scripts/auto_extract.py, #381). It is a candidate, not an approval: the CHECK on review_status stays, so only a person
+# ('human') can make a claim accepted.
+EXTRACTED_CLAIMS_WITH_CONSENSUS_SQL = """
+CREATE TABLE {name} (
+    extracted_claim_id TEXT PRIMARY KEY, -- "<paper_id>:<query_id>"
+    paper_id TEXT NOT NULL,
+    query_id TEXT NOT NULL,
+    metric_name TEXT NOT NULL,
+    dataset TEXT,
+    model_variant TEXT,
+    split TEXT,
+    value REAL NOT NULL,
+    value_as_printed TEXT NOT NULL,
+    higher_is_better BOOLEAN,
+    page INTEGER NOT NULL,
+    table_or_section TEXT,
+    quote TEXT NOT NULL,
+    source_file TEXT NOT NULL,
+    pdf_sha256 TEXT,
+    extractor_version TEXT NOT NULL,
+    verified_by TEXT CHECK(verified_by IN ('auto-quote-match', 'auto-consensus', 'human') OR verified_by IS NULL),
+    review_status TEXT NOT NULL DEFAULT 'pending' CHECK(review_status IN ('pending', 'accepted', 'rejected')),
+    reviewed_at TIMESTAMP,
+    review_note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (paper_id, query_id),
+    CHECK(review_status = 'pending' OR verified_by = 'human'),
+    FOREIGN KEY (paper_id) REFERENCES papers(paper_id) ON DELETE CASCADE
+)
+"""
+
+
+def _v7_auto_consensus(conn: sqlite3.Connection) -> None:
+    row = conn.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'extracted_claims'").fetchone()
+    if row is not None and "auto-consensus" not in row[0]:
+        rebuild_table(conn, "extracted_claims", EXTRACTED_CLAIMS_WITH_CONSENSUS_SQL)
+
+
 MIGRATIONS: list[Migration] = [
     Migration(1, "baseline tables (papers, runs, claims, scores)", _v1_baseline),
     Migration(2, "runs.failure_category and idx_claims_run_id", _v2_failure_category),
@@ -323,6 +362,7 @@ MIGRATIONS: list[Migration] = [
     Migration(4, "runs.status accepts OOM_KILLED", _v4_runs_oom_status),
     Migration(5, "runs.artifact_manifest_sha256 and runs.outputs_sha256", _v5_run_hashes),
     Migration(6, "runs.status accepts OUTPUT_LIMIT_EXCEEDED", _v6_runs_output_limit_status),
+    Migration(7, "extracted_claims.verified_by accepts auto-consensus", _v7_auto_consensus),
 ]
 
 

@@ -1,0 +1,720 @@
+{
+  "name": "gold18",
+  "passes": [
+    1,
+    2,
+    3
+  ],
+  "minimum_agreeing_passes": 2,
+  "rule": "candidate: at least two passes with the same normalized value, each with its quote found on its page; consensus_not_found: at least two passes say not found and none found a valid claim; otherwise no_consensus (left to a person). Candidates are not accepted claims.",
+  "papers": {
+    "paper_002": {
+      "pdf_sha256": "97796b6e6b134b200555a7ebbacea2f6daecb9ab309279ba50d915d5ac5c9df6",
+      "questions": {
+        "mean_roc_auc": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "mean_roc_auc_ovo",
+            "value_as_printed": "0.934±.0086",
+            "unit": "fraction",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "TabPFN",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean AUC OVO 0.92 ±.013 0.924 ±.011 0.924±.01 0.929 ±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084",
+            "confidence": 0.9,
+            "value_normalized": 0.934
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.934±.0086"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.934±.0086"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.934±.0086"
+            }
+          ]
+        },
+        "inference_seconds__gpu": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "mean_time_seconds",
+            "value_as_printed": "0.6172",
+            "unit": "seconds",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "TabPFN (GPU)",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "(Tune + Train + Predict) 0.0519 (GPU) 0.6172 (GPU) 3077 (GPU)",
+            "confidence": 0.8,
+            "value_normalized": 0.6172
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.6172"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.6172"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.6172"
+            }
+          ]
+        },
+        "inference_seconds__cpu": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "mean_time_seconds",
+            "value_as_printed": "37.59",
+            "unit": "seconds",
+            "dataset": "18 numerical datasets in OpenML-CC18",
+            "model_variant": "TabPFN (CPU)",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 1",
+            "page": 8,
+            "source_quote": "Mean time (s) 3280 3746 3364 3601 3077 1.301 (CPU) 37.59 (CPU) 3109 (CPU)",
+            "confidence": 0.8,
+            "value_normalized": 37.59
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "37.59"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "37.59"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "37.59"
+            }
+          ]
+        }
+      }
+    },
+    "paper_003": {
+      "pdf_sha256": "f2faa32ffd8c15ed8534677f978dc02730fdbe1f94e9c9557ada6aa19163478d",
+      "questions": {
+        "ft_transformer_rmse": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.459",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "FT-T",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "FT-T 0.459 0 .859 0.391 0.732",
+            "confidence": 0.95,
+            "value_normalized": 0.459
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.459"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.459"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.459"
+            }
+          ]
+        },
+        "resnet_rmse": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.486",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "ResNet",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "ResNet 0.486 0 .854 0.396 0.728",
+            "confidence": 0.95,
+            "value_normalized": 0.486
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.486"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.486"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.486"
+            }
+          ]
+        },
+        "xgboost_rmse": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "rmse",
+            "value_as_printed": "0.433",
+            "unit": "none",
+            "dataset": "California Housing",
+            "model_variant": "XGBoost",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 8",
+            "page": 15,
+            "source_quote": "XGBoost 0.433±1.6e-3 0.872±4.6e-4",
+            "confidence": 0.8,
+            "value_normalized": 0.433
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.433"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.433±1.6e-3"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "0.433"
+            }
+          ]
+        }
+      }
+    },
+    "paper_004": {
+      "pdf_sha256": "f6855570a0d96fcc445d355ab10f320f192d5100344d24b08c7308e5377a32fb",
+      "questions": {
+        "tabr_average_rank": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "average_rank",
+            "value_as_printed": "1.3± 0.6",
+            "unit": "none",
+            "dataset": "benchmark datasets (CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI)",
+            "model_variant": "TabR",
+            "split": "not_stated",
+            "higher_is_better": false,
+            "table_or_figure": "Table 3",
+            "page": 7,
+            "source_quote": "TabR 0.862 0 .400 3.105 0.870 0 .133 0 .825 0 .729 0 .676 1 .690 0 .976 0.750 1.3± 0.6",
+            "confidence": 0.9,
+            "value_normalized": 1.3
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "1.3± 0.6"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "1.3± 0.6"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "1.3± 0.6"
+            }
+          ]
+        },
+        "ft_transformer_average_rank": {
+          "outcome": "consensus_not_found",
+          "candidate": null,
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 2,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 3,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            }
+          ]
+        },
+        "xgboost_average_rank": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "average_rank",
+            "value_as_printed": "2.5± 0.9",
+            "unit": "none",
+            "dataset": "default benchmark (CH, CA, HO, AD, DI, OT, HI, BL, WE, CO, MI)",
+            "model_variant": "XGBoost (tuned hyperparameters)",
+            "split": "test",
+            "higher_is_better": false,
+            "table_or_figure": "Table 4",
+            "page": 7,
+            "source_quote": "XGBoost 0.861 0 .432 3 .164 0.872 0.136 0.832 0.726 0 .680 1 .769 0 .971 0 .741 2.5± 0.9",
+            "confidence": 0.8,
+            "value_normalized": 2.5
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "2.5± 0.9"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "2.5± 0.9"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "2.5± 0.9"
+            }
+          ]
+        }
+      }
+    },
+    "paper_005": {
+      "pdf_sha256": "5101ef5605b03237c8e677a102ee8541f0599e4afb14a8fe43442df2cc4dd6fd",
+      "questions": {
+        "ep3602_auroc": {
+          "outcome": "consensus_not_found",
+          "candidate": null,
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 2,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 3,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            }
+          ]
+        },
+        "ep3602_accuracy": {
+          "outcome": "consensus_not_found",
+          "candidate": null,
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 2,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 3,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            }
+          ]
+        },
+        "kernel_speedup_factor": {
+          "outcome": "consensus_not_found",
+          "candidate": null,
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 2,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 3,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            }
+          ]
+        }
+      }
+    },
+    "paper_006": {
+      "pdf_sha256": "9069de09bcd867b6b8604460f5d98de678eef5a731fac0e2a4216fa850aad018",
+      "questions": {
+        "arcene_auroc": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "auroc",
+            "value_as_printed": "91.04",
+            "unit": "percent",
+            "dataset": "Arcene",
+            "model_variant": "SAINT",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "SAINT 93.3 84.67 94.18 91.04 99.7 93.06 91.67 70.12 97.67 93.13",
+            "confidence": 0.95,
+            "value_normalized": 0.9104
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "91.04"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "91.04"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "91.04"
+            }
+          ]
+        },
+        "bank_marketing_accuracy": {
+          "outcome": "consensus_not_found",
+          "candidate": null,
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 2,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 3,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            }
+          ]
+        },
+        "xgboost_arcene_auroc": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "auroc",
+            "value_as_printed": "81.41",
+            "unit": "percent",
+            "dataset": "Arcene",
+            "model_variant": "XGBoost [4]",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 7,
+            "source_quote": "XGBoost [4] 92.96 81.78 81.98 81.41 95.53 92.51 92.31 68.95 94.13* 91.06",
+            "confidence": 0.95,
+            "value_normalized": 0.8141
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "81.41"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "81.41"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "81.41"
+            }
+          ]
+        }
+      }
+    },
+    "paper_008": {
+      "pdf_sha256": "4697ca5f24c53437da2ed6b11ab1b7364fe927c41c2c2df5cc04fe94189ee713",
+      "questions": {
+        "forest_covertype_accuracy__danet_20": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "accuracy",
+            "value_as_printed": "97.23%±2e-4",
+            "unit": "percent",
+            "dataset": "Forest Cover Type",
+            "model_variant": "DAN ET-20 (ours)",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 6,
+            "source_quote": "DAN ET-20 (ours) 2 97.23%±2e-4",
+            "confidence": 0.95,
+            "value_normalized": 0.9723
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "97.23%±2e-4"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "97.23%±2e-4"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "97.23%±2e-4"
+            }
+          ]
+        },
+        "forest_covertype_accuracy__danet_32": {
+          "outcome": "candidate",
+          "candidate": {
+            "metric_name": "accuracy",
+            "value_as_printed": "97.27%±5e-4",
+            "unit": "percent",
+            "dataset": "Forest Cover Type",
+            "model_variant": "DAN ET-32 (ours)",
+            "split": "test",
+            "higher_is_better": true,
+            "table_or_figure": "Table 2",
+            "page": 6,
+            "source_quote": "DAN ET-32 (ours) 1 97.27%±5e-4",
+            "confidence": 0.95,
+            "value_normalized": 0.9727
+          },
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "97.27%±5e-4"
+            },
+            {
+              "pass": 2,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "97.27%±5e-4"
+            },
+            {
+              "pass": 3,
+              "state": "found",
+              "problem": null,
+              "value_as_printed": "97.27%±5e-4"
+            }
+          ]
+        },
+        "higgs_auroc": {
+          "outcome": "consensus_not_found",
+          "candidate": null,
+          "agreeing_passes": [
+            1,
+            2,
+            3
+          ],
+          "votes": [
+            {
+              "pass": 1,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 2,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            },
+            {
+              "pass": 3,
+              "state": "not_found",
+              "problem": null,
+              "value_as_printed": null
+            }
+          ]
+        }
+      }
+    }
+  }
+}

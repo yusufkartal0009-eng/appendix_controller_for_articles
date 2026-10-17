@@ -23,6 +23,10 @@ untouched), and `_collect_pilot2_files` copies the protocol's named files from t
 runs (#319). `--cpus N` replaces the CPU limit the same way and writes `cpus_override` (#331). Together with
 `--pilot3` they re-run Pilot 3's settings with only the memory and CPU limits changed.
 
+`--env-cache DIR` keeps the output of the install phase in DIR, keyed by the locked package list and the image; a second
+run of the same paper skips the install container and mounts the verified copy read-only (#380, D-010). The record gets
+`env_cache` (hit or miss, key, timings). Not a protocol run: the install phase is replaced on a hit.
+
 `--pilot4` runs a paper of `data/corpus_expansion/papers.json` as docs/PILOT_4.md specifies (#346): the README command as
 written, Python 3.11, no network, 2 CPUs, 50% of the host's RAM, a 14400 s run phase, a read-only repository and no data.
 `--correction FILE` applies the one correction round of that protocol (allowed keys only, each change with the log line of
@@ -82,7 +86,7 @@ PILOT3_KEYS = (*PILOT3_LIMIT_KEYS, "extra_requirements_add", "data_writable", "r
 # directory, not copied). "build.log" comes from the build phase's own output directory; the rest from the
 # run/install phases' output directory.
 _PILOT2_RUN_FILES = ("run_report.json", "execution_meta.json", "install.log", "install_meta.json",
-                     "stdout.log", "stderr.log")
+                     "stdout.log", "stderr.log", "env_cache.json")
 _PILOT2_BUILD_FILES = ("build.log",)
 
 # docs/PILOT_WEEK2.md section 4: script arguments and environment per paper (frozen with the protocol).
@@ -245,7 +249,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
               data_cache: Path | None = None, record_root: Path | None = None, pilot3: bool = False,
               settings_path: Path | None = None, memory_limit: str | None = None,
               cpus: float | None = None, pilot4: bool = False, correction: dict[str, Any] | None = None,
-              corpus_path: Path | None = None) -> dict[str, Any]:
+              corpus_path: Path | None = None, env_cache_dir: Path | None = None) -> dict[str, Any]:
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
     if pilot4:
@@ -361,6 +365,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         bundle_extra = {"extra_requirements": setup_options["extra_requirements"],
                         "constraints": setup_options["constraints"]}
         command = setup_options["command"]
+    if env_cache_dir:
+        config_extra = {**config_extra, "env_cache_dir": str(env_cache_dir)}
     config = SandboxConfig(**limits, env_vars=dict(spec["env"]), python_version=python_version, **config_extra)
 
     if setup_options and setup_options["build"]:
@@ -395,6 +401,10 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     install_meta = sandbox_dir / "install_meta.json"
     if install_meta.exists():
         record["install_meta"] = json.loads(install_meta.read_text(encoding="utf-8"))
+    env_cache_file = sandbox_dir / "env_cache.json"
+    if env_cache_dir and env_cache_file.exists():
+        record["env_cache"] = json.loads(env_cache_file.read_text(encoding="utf-8"))
+        record["env_cache"]["note"] = "not a protocol run: on a hit the install phase was replaced by a verified copy (#380)"
     record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
     if pilot2:
         record["collected_files"] = _collect_pilot2_files(sandbox_dir, build_dir, record_dir)
@@ -421,6 +431,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cpus", type=float, default=None, metavar="N",
                         help="Replace the protocol's CPU limit (2) with N; the record gets `cpus_override`. "
                              "Not a protocol run (#331).")
+    parser.add_argument("--env-cache", default=None, metavar="DIR",
+                        help="Installed-environment cache (#380): a second run of the same locked packages skips the install "
+                             "phase; the record gets `env_cache`. Not a protocol run.")
     parser.add_argument("--pilot4", action="store_true",
                         help="Run a paper of data/corpus_expansion/papers.json as docs/PILOT_4.md specifies (#346).")
     parser.add_argument("--corpus", default=None, metavar="FILE",
@@ -437,11 +450,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.record_root and not (args.pilot2 or args.pilot3):
         parser.error("--record-root needs --pilot2 or --pilot3 (Pilot 1 records stay in sandbox_runs/)")
     try:
+        from scripts import preflight
+
+        preflight.ensure_ready()  # #378: Docker, disk, memory, sleep, and a real hello-world before a real run
         record = run_paper(args.paper_id, Path(args.staging_dir), pilot2=args.pilot2, data_cache=Path(args.data_cache),
                            pilot3=args.pilot3, memory_limit=args.memory, cpus=args.cpus,
                            pilot4=args.pilot4, corpus_path=Path(args.corpus) if args.corpus else None,
                            correction=json.loads(Path(args.correction).read_text(encoding="utf-8")) if args.correction else None,
-                           record_root=Path(args.record_root) if args.record_root else None)
+                           record_root=Path(args.record_root) if args.record_root else None,
+                           env_cache_dir=Path(args.env_cache) if args.env_cache else None)
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1
