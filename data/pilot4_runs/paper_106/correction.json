@@ -1,0 +1,9 @@
+{
+  "extra_requirements": ["torch"],
+  "changes": [
+    {
+      "change": "add `torch` to the extra requirements (the repository lists no requirement file)",
+      "log_line": "ModuleNotFoundError: No module named 'torch' (first attempt, stderr.log, line 4: File \"/workspace/repo/patch_train.py\", line 8, in <module>: import torch)"
+    }
+  ]
+}

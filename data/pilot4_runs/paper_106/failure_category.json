@@ -1,0 +1,12 @@
+{
+  "paper_id": "paper_106",
+  "category": "MISSING_DEPENDENCY",
+  "other_name": null,
+  "phase": "run",
+  "evidence": {
+    "file": "stderr.log",
+    "line_number": 4,
+    "line": "ModuleNotFoundError: No module named 'tensorboardX'"
+  },
+  "pilot_success": false
+}

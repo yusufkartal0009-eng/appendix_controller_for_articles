@@ -1,0 +1,323 @@
+{
+  "protocol": "docs/PILOT_4.md",
+  "papers": [
+    {
+      "paper_id": "paper_101",
+      "title": "LAIR-Net: Leaky Alignment-Impulse Residual Networks for Tabular Regression",
+      "repository": "https://github.com/yuvrajiro/lairnet",
+      "run_command": "python docs/check_styles.py",
+      "correction_round": false,
+      "corrections": [],
+      "strict": {
+        "status": "COMPLETED",
+        "exit_code": 0,
+        "install_success": false,
+        "run_success": true,
+        "pilot_success": false,
+        "run_seconds": 1.013,
+        "run_peak_memory_mib": 25.5,
+        "category": "RAN_WITHOUT_INSTALLED_DEPENDENCIES",
+        "phase": "install",
+        "deciding_line": null,
+        "deciding_file": null
+      },
+      "corrected": {
+        "status": "COMPLETED",
+        "exit_code": 0,
+        "install_success": false,
+        "run_success": true,
+        "pilot_success": false,
+        "run_seconds": 1.013,
+        "run_peak_memory_mib": 25.5,
+        "category": "RAN_WITHOUT_INSTALLED_DEPENDENCIES",
+        "phase": "install",
+        "deciding_line": null,
+        "deciding_file": null
+      }
+    },
+    {
+      "paper_id": "paper_102",
+      "title": "Geometric Manifold Rectification for Imbalanced Learning",
+      "repository": "https://github.com/wangxb96/gmr-imbalanced-learning",
+      "run_command": "python code/examples/quick_start.py",
+      "correction_round": false,
+      "corrections": [],
+      "strict": {
+        "status": "COMPLETED",
+        "exit_code": 0,
+        "install_success": true,
+        "run_success": true,
+        "pilot_success": true,
+        "run_seconds": 12.746,
+        "run_peak_memory_mib": 167.2,
+        "category": null,
+        "phase": null,
+        "deciding_line": null,
+        "deciding_file": null
+      },
+      "corrected": {
+        "status": "COMPLETED",
+        "exit_code": 0,
+        "install_success": true,
+        "run_success": true,
+        "pilot_success": true,
+        "run_seconds": 12.746,
+        "run_peak_memory_mib": 167.2,
+        "category": null,
+        "phase": null,
+        "deciding_line": null,
+        "deciding_file": null
+      }
+    },
+    {
+      "paper_id": "paper_103",
+      "title": "Distinction Maximization Loss: Efficiently Improving Out-of-Distribution Detection and Uncertainty Estimation by Replacing the Loss and Calibrating",
+      "repository": "https://github.com/dlmacedo/distinction-maximization-loss",
+      "run_command": "python example.py",
+      "correction_round": false,
+      "corrections": [],
+      "strict": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 0.61,
+        "run_peak_memory_mib": 7.3,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install",
+        "deciding_line": "ERROR: Could not find a version that satisfies the requirement filelock (from torch) (from versions: none)",
+        "deciding_file": "install.log"
+      },
+      "corrected": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 0.61,
+        "run_peak_memory_mib": 7.3,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install",
+        "deciding_line": "ERROR: Could not find a version that satisfies the requirement filelock (from torch) (from versions: none)",
+        "deciding_file": "install.log"
+      }
+    },
+    {
+      "paper_id": "paper_104",
+      "title": "CUAD: An Expert-Annotated NLP Dataset for Legal Contract Review",
+      "repository": "https://github.com/10div10/Legal-Contract-Classification",
+      "run_command": "python src/prepare_data.py",
+      "correction_round": false,
+      "corrections": [],
+      "strict": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 6.037,
+        "run_peak_memory_mib": 71.8,
+        "category": "DATA_NOT_ACCESSIBLE",
+        "phase": "run",
+        "deciding_line": "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /datasets/theatticusproject/cuad/raw/main/CUAD_v1/master_clauses.csv (Caused by NameResolutionError(\"HTTPSConnection(host='huggingface.co', port=443): Failed to resolve 'huggingface.co' ([Errno -3] Temporary failure in name resolution)\"))",
+        "deciding_file": "stderr.log"
+      },
+      "corrected": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 6.037,
+        "run_peak_memory_mib": 71.8,
+        "category": "DATA_NOT_ACCESSIBLE",
+        "phase": "run",
+        "deciding_line": "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /datasets/theatticusproject/cuad/raw/main/CUAD_v1/master_clauses.csv (Caused by NameResolutionError(\"HTTPSConnection(host='huggingface.co', port=443): Failed to resolve 'huggingface.co' ([Errno -3] Temporary failure in name resolution)\"))",
+        "deciding_file": "stderr.log"
+      }
+    },
+    {
+      "paper_id": "paper_105",
+      "title": "Deep Graph Contrastive Representation Learning",
+      "repository": "https://github.com/CRIPAC-DIG/GRACE",
+      "run_command": "python train.py --dataset Cora",
+      "correction_round": false,
+      "corrections": [],
+      "strict": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 0.746,
+        "run_peak_memory_mib": 11.7,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install",
+        "deciding_line": "ERROR: Could not find a version that satisfies the requirement torch-scatter (from versions: none)",
+        "deciding_file": "install.log"
+      },
+      "corrected": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 0.746,
+        "run_peak_memory_mib": 11.7,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "install",
+        "deciding_line": "ERROR: Could not find a version that satisfies the requirement torch-scatter (from versions: none)",
+        "deciding_file": "install.log"
+      }
+    },
+    {
+      "paper_id": "paper_106",
+      "title": "A Machine Learning Benchmark for Facies Classification",
+      "repository": "https://github.com/yalaudah/facies_classification_benchmark",
+      "run_command": "python patch_train.py --batch_size 32 --aug True",
+      "correction_round": true,
+      "corrections": [
+        {
+          "change": "add `torch` to the extra requirements (the repository lists no requirement file)",
+          "log_line": "ModuleNotFoundError: No module named 'torch' (first attempt, stderr.log, line 4: File \"/workspace/repo/patch_train.py\", line 8, in <module>: import torch)"
+        }
+      ],
+      "strict": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 1.068,
+        "run_peak_memory_mib": 56.8,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "run",
+        "deciding_line": "ModuleNotFoundError: No module named 'torch'",
+        "deciding_file": "stderr.log"
+      },
+      "corrected": {
+        "status": "FAILED",
+        "exit_code": 1,
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "run_seconds": 24.56,
+        "run_peak_memory_mib": 868.0,
+        "category": "MISSING_DEPENDENCY",
+        "phase": "run",
+        "deciding_line": "ModuleNotFoundError: No module named 'tensorboardX'",
+        "deciding_file": "stderr.log"
+      }
+    }
+  ],
+  "rates": {
+    "strict": {
+      "install_success_rate": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      },
+      "run_success_rate": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      },
+      "pilot_success_rate": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      }
+    },
+    "corrected": {
+      "install_success_rate": {
+        "count": 3,
+        "of": 6,
+        "rate": 0.5
+      },
+      "run_success_rate": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      },
+      "pilot_success_rate": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      }
+    }
+  },
+  "failure_counts": {
+    "strict": {
+      "MISSING_DEPENDENCY": 3,
+      "DATA_NOT_ACCESSIBLE": 1,
+      "HARDWARE_GPU_REQUIRED": 0,
+      "TIMEOUT": 0,
+      "SCRIPT_NOT_FOUND": 0,
+      "LICENSE_BLOCKED": 0,
+      "OTHER": 0
+    },
+    "corrected": {
+      "MISSING_DEPENDENCY": 3,
+      "DATA_NOT_ACCESSIBLE": 1,
+      "HARDWARE_GPU_REQUIRED": 0,
+      "TIMEOUT": 0,
+      "SCRIPT_NOT_FOUND": 0,
+      "LICENSE_BLOCKED": 0,
+      "OTHER": 0
+    }
+  },
+  "earlier_pilots": {
+    "pilot1": {
+      "install_success_rate": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      },
+      "run_success_rate": {
+        "count": 0,
+        "of": 6,
+        "rate": 0.0
+      },
+      "pilot_success_rate": {
+        "count": 0,
+        "of": 6,
+        "rate": 0.0
+      }
+    },
+    "pilot2": {
+      "install_success_rate": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      },
+      "run_success_rate": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      },
+      "pilot_success_rate": {
+        "count": 1,
+        "of": 6,
+        "rate": 0.167
+      }
+    },
+    "pilot3": {
+      "install_success_rate": {
+        "count": 6,
+        "of": 6,
+        "rate": 1.0
+      },
+      "run_success_rate": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      },
+      "pilot_success_rate": {
+        "count": 2,
+        "of": 6,
+        "rate": 0.333
+      }
+    }
+  }
+}

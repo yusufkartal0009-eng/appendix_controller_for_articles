@@ -83,3 +83,17 @@ def test_the_first_attempt_directory_is_not_modified(world):
     before = sorted(p.name for p in (runs / "first_attempts").iterdir())
     pilot4_report.build(data, runs, corpus)
     assert sorted(p.name for p in (runs / "first_attempts").iterdir()) == before
+
+
+def test_the_stored_summary_is_in_sync_with_the_stored_records_and_the_report_shows_it():
+    from src.config import PROJECT_ROOT
+
+    assert pilot4_report.main(["--check"]) == 0
+    report = (PROJECT_ROOT / "docs" / "report" / "REPORT.md").read_text(encoding="utf-8").replace("\r\n", "\n")
+    assert "<!-- numbers:pilot4:start -->" in report
+    result = json.loads((PROJECT_ROOT / "data" / "pilot4_runs" / "summary.json").read_text(encoding="utf-8"))
+    assert [p["paper_id"] for p in result["papers"]] == [f"paper_10{i}" for i in range(1, 7)]
+    assert result["rates"]["strict"]["pilot_success_rate"]["of"] == 6
+    # a correction cannot lower the install result, and the strict result is read from the first attempt
+    strict, corrected = result["rates"]["strict"], result["rates"]["corrected"]
+    assert corrected["install_success_rate"]["count"] >= strict["install_success_rate"]["count"]

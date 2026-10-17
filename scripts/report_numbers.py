@@ -24,6 +24,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 - `stability`: repeated runs of the completed papers (`scripts/run_stability.py`, #329)
 - `goldexpansion`: the extended gold set: agreement of the two passes and the owner's answers
   (`data/gold_expansion/claims/consistency.json`, `data/gold_expansion/gold/`; #315)
+- `pilot4`: Pilot 4 (six new papers): strict and corrected rates next to Pilots 1 to 3, the per-paper table with the README
+  command and every correction, and the failure categories (`data/pilot4_runs/summary.md`, `scripts/pilot4_report.py`, #376)
 - `extraction`: the claim extraction: quote guard, A/B agreement, the owner's review, and the gold set
   (`data/claims/guard_report.json`, `consistency.json`, `review_decisions.json`, `gold_score_pass_A.json`)
 
@@ -193,6 +195,15 @@ def goldexpansion_block(data: Path = DATA) -> str:
     return "\n".join([HEADER.format(sources="data/gold_expansion/"), "", sentence])
 
 
+def pilot4_block(data: Path = DATA) -> str:
+    source = data / "pilot4_runs" / "summary.md"
+    if not source.is_file():
+        raise FileNotFoundError(f"{source} not found")
+    lines = [line for line in source.read_text(encoding="utf-8").splitlines() if not line.startswith("<!--")]
+    header = HEADER.format(sources="data/pilot4_runs/summary.md (scripts/pilot4_report.py)")
+    return "\n".join([header, "", "\n".join(lines).strip()])
+
+
 def extraction_block(data: Path = DATA) -> str:
     guard = _load(data / "claims" / "guard_report.json")
     consistency = _load(data / "claims" / "consistency.json")
@@ -218,7 +229,7 @@ BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": 
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
           "pilot3measurements": pilot3measurements_block, "pilot3summary": pilot3summary_block,
-          "pilot3failures": pilot3failures_block, "abstractnumbers": pilot3summary_block, "memoryruns": memoryruns_block,
+          "pilot3failures": pilot3failures_block, "abstractnumbers": pilot3summary_block, "memoryruns": memoryruns_block, "pilot4": pilot4_block,
           "syntheticcontrol": syntheticcontrol_block, "stability": stability_block, "goldexpansion": goldexpansion_block,
           "extraction": extraction_block}
 BLOCK_RE = re.compile(r"(<!-- numbers:(?P<name>[a-z0-9]+):start -->\n)(?P<body>.*?)(\n<!-- numbers:(?P=name):end -->)", re.DOTALL)
