@@ -10,7 +10,9 @@ file, and the extractor version. `verified_by` records who checked it:
 - `human`: a person accepted or rejected the claim (`review_status` `accepted` or `rejected`).
 
 Only claims with `review_status == "accepted"` and `verified_by == "human"` reach the scorer (`accepted_claims`).
-Importing never accepts anything. `consensus_candidates` lists the `auto-consensus` ones, for a run that asks for them by
+Importing an extraction never accepts anything. The one exception is `restore_decisions`, which re-applies decisions that a
+person already made and that are committed in `data/claims/review_decisions.json`, so that a fresh clone has the same
+accepted claims as the machine where they were reviewed (#395). `consensus_candidates` lists the `auto-consensus` ones, for a run that asks for them by
 name and labels its result as such.
 """
 
@@ -103,6 +105,38 @@ def import_extraction(session: Session, claims_file: Path, guard_report: Path, p
             "verified_by": "auto-quote-match" if guard_row.get("status") == "AUTO_QUOTE_MATCH" else None,
         })
         counts[outcome] = counts.get(outcome, 0) + 1
+    return counts
+
+
+def restore_decisions(session: Session, decisions_file: Path) -> dict[str, int]:
+    """Re-apply the human `accepted` decisions that are committed in `decisions_file` (the export of `apply_accepted_claims.py`).
+
+    Only entries with `review_status == "accepted"` and `verified_by == "human"` are restored; anything else in the file is
+    ignored. A claim that already has a review in this database keeps it (a decision made here outranks the file), and a
+    claim whose reviewed fields differ from the file is left alone for the same reason as in `save_extracted_claim`.
+    Returns the counts `restored`, `kept` (already reviewed here), and `ignored`.
+    """
+    counts = {"restored": 0, "kept": 0, "ignored": 0}
+    if not decisions_file.is_file():
+        return counts
+    columns = {column.name for column in ExtractedClaimORM.__table__.columns}
+    skip = {"extracted_claim_id", "review_status", "verified_by", "reviewed_at", "review_note", "created_at"}
+    for entry in json.loads(decisions_file.read_text(encoding="utf-8")).get("claims", []):
+        if entry.get("review_status") != "accepted" or entry.get("verified_by") != "human":
+            counts["ignored"] += 1
+            continue
+        existing = session.get(ExtractedClaimORM, claim_key(entry["paper_id"], entry["query_id"]))
+        if existing is not None and existing.review_status != "pending":
+            counts["kept"] += 1
+            continue
+        data = {name: value for name, value in entry.items() if name in columns and name not in skip}
+        row, _ = save_extracted_claim(session, data)
+        row.review_status, row.verified_by = "accepted", "human"
+        row.reviewed_at = datetime.fromisoformat(entry["reviewed_at"]) if entry.get("reviewed_at") else None
+        note = f"restored from {decisions_file.name}"
+        row.review_note = f"{entry['review_note']} ({note})" if entry.get("review_note") else note
+        counts["restored"] += 1
+    session.flush()
     return counts
 
 

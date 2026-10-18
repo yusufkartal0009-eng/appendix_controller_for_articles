@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(cli): init-db restores the accepted claims of the committed decisions (2026-10-18 02:10 +03:00, Issue #395)
+- A fresh clone scored every paper with 0 accepted claims, because the claim review lives in a database that is not committed. `restore_decisions` (`src/claim_store.py`) re-applies the 13 `accepted` / `human` decisions of `data/claims/review_decisions.json` after `init-db` seeds the papers; anything else in the file is ignored, and a review made in this database is kept. This does not accept anything new: it restores decisions that the owner made (`review_note` says "restored from review_decisions.json").
+- Evidence: 5 tests (`tests/test_restore_decisions.py`); in a new database `cli.py init-db` printed "Restored 13 claims" and `cli.py score paper_006 --from-run data/pilot3_runs/paper_006` used 2 accepted claims (Tier 2 0, Needs Review, 58.2). `pytest` and `ruff check .` below in the pull request.
+- Not verified: a fresh run (not a stored run) scored against the restored claims from a clean clone.
+
 ### docs: clean-clone walk-through of the README and what it found (2026-10-18 01:30 +03:00, Issues #395, #396)
 - A fresh clone of `main`, a new virtual environment, and the README steps in order (`docs/evidence/clean_clone/WALKTHROUGH.md`). Steps 2 to 4 and 6 worked; step 5 named a paper that does not exist (fixed in #394). `cli.py score paper_008` ends Failed after 38 s (its data is a manual download); `cli.py score paper_006` was killed by the 3,600 s run limit during epoch 36 (issue #396); both scored with 0 accepted claims because a fresh database holds none (issue #395). A stored run (`--from-run`) scored 85.75, Partially Verified, with Tier 2 as the neutral baseline.
 - README: a warning before the scoring step states exactly this.

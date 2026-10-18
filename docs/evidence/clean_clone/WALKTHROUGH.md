@@ -36,3 +36,11 @@ The full console log is kept outside the repository because it holds local paths
 - No paper was scored against accepted claims from a clean clone: the database holds none (issue #395). Fresh runs of the two
   papers tried did not complete (issue #396 for `paper_006`).
 - The sandbox images were not built from scratch.
+
+## Update (issue #395, fixed)
+
+`python cli.py init-db` now restores the 13 claims that the owner accepted, from `data/claims/review_decisions.json`. In a
+fresh database, `python cli.py score paper_006 --from-run data/pilot3_runs/paper_006` then reports 2 accepted claims and
+Tier 2 = 0 (the Arcene metrics are not found in a run on another dataset), status Needs Review, 58.2, instead of the neutral
+baseline. Point 3 above describes the state before this fix.
+
