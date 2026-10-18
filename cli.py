@@ -143,7 +143,7 @@ def cmd_score_paper(args):
             sys.exit(1)
         print(f"Running the paper in the Docker sandbox with its run setup (records in {run_root / paper.paper_id}) ...")
         run_pilot.run_paper(paper.paper_id, Path(args.staging_dir), pilot2=True, data_cache=Path(args.data_cache or DATA_CACHE_DIR),
-                            record_root=run_root, memory_limit=args.memory)
+                            record_root=run_root, memory_limit=args.memory, cpus=args.cpus, run_timeout=args.timeout)
         run_dir = run_root / paper.paper_id
     record, report = load_run(run_dir)
 
@@ -291,6 +291,10 @@ def main():
     p_score.add_argument("--memory", default="50%",
                          help="Container memory limit of a real run: a size (8g) or a share of the host's RAM "
                               "(default 50%%, capped at 90%% of the memory Docker can see)")
+    p_score.add_argument("--cpus", type=float, default=None, metavar="N",
+                         help="CPU limit of a real run (default 2); the record gets `cpus_override`")
+    p_score.add_argument("--timeout", type=int, default=None, metavar="SECONDS",
+                         help="Time limit of the run phase of a real run (default 3600); the record gets `timeout_override`")
     p_score.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
     p_score.add_argument("--claims", choices=["accepted", "auto-consensus"], default="accepted",
                          help="Which claims the score uses: only the ones a person accepted (default), or those plus the "

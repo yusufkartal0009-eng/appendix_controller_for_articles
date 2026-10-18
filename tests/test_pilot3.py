@@ -223,3 +223,29 @@ def test_the_command_line_passes_cpus_on(monkeypatch):
     seen = {}
     monkeypatch.setattr(run_pilot, "run_paper", lambda paper_id, staging_dir, **kw: seen.update(kw) or {"paper_id": paper_id})
     assert run_pilot.main(["paper_003", "--pilot3", "--cpus", "8"]) == 0 and seen["cpus"] == 8.0
+
+
+def test_the_timeout_option_changes_only_the_run_phase_limit_and_is_recorded(tmp_path, monkeypatch):
+    """#396: not a protocol run; the install phase keeps its limit."""
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_005", tmp_path / "staging", stager=stager, pilot3=True,
+                                 data_cache=_cache(tmp_path, "paper_005"), run_timeout=7200, record_root=tmp_path / "t_runs")
+    config = stager.executed[2]
+    assert (config.run_timeout_seconds, config.timeout_seconds, config.cpus) == (7200, 3600, 2.0)
+    assert record["timeout_override"]["requested"] == 7200 and "not a protocol run" in record["timeout_override"]["note"]
+    assert record["limits"]["run_timeout_seconds"] == 7200
+
+
+def test_without_the_timeout_option_nothing_changes(tmp_path, monkeypatch):
+    record, _stager = _run(tmp_path, monkeypatch, "paper_005")
+    assert "timeout_override" not in record
+
+
+@pytest.mark.parametrize("value", [0, -5])
+def test_a_non_positive_run_time_limit_is_a_harness_error(tmp_path, monkeypatch, value):
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    with pytest.raises(ValueError, match="run time limit"):
+        run_pilot.run_paper("paper_005", tmp_path / "staging", stager=Pilot2Stager(tmp_path), pilot3=True,
+                            data_cache=_cache(tmp_path, "paper_005"), run_timeout=value)
+
