@@ -189,3 +189,56 @@ What this means:
   `jupyter nbconvert --execute` for notebook repositories is a decision for the owner and would be a new, documented
   amendment before any run.
 - Not verified: how many of the 25 articles would run if given the right command.
+
+## 11. Amendment 4 and the fourth evaluation (2026-10-18, issue #400)
+
+**Written after the results of sections 9 and 10 were seen.** Section 10 showed that rule E4 was the largest single blocker
+(25 of 65 articles), and the owner asked to widen it. This is therefore a change made *because of* a result, not a blind
+rule. It is limited to what is written here; sections 1 to 10 stay as they were, and the earlier outputs are kept unchanged
+(`first_attempt/`, `second_attempt/`, and now `third_attempt/` for the evaluation of section 10).
+
+1. **E4 accepts four forms of run command.** The README at the pinned commit must hold a fenced code block with a line that
+   (in document order, the first accepted line is the run command; a leading `$ `, backslash continuations, and a trailing
+   shell comment are handled as before):
+   - starts with `python ` and a `.py` path that exists in the repository (as before; `setup.py` is still skipped), or
+   - starts with `python -m <module>` where `<module>.py` or `<module>/__main__.py` exists in the repository
+     (`command_kind` = `python_module`), or
+   - starts with `make` and the repository root has a `Makefile`, `makefile`, or `GNUmakefile`; a `make` line whose targets
+     include `install`, `clean`, `setup`, `env`, or `deps` is skipped, as `setup.py` is (`command_kind` = `make`), or
+   - runs a notebook that exists in the repository: `jupyter nbconvert ... --execute <nb>.ipynb`, `jupyter execute <nb>.ipynb`,
+     or `papermill <nb>.ipynb ...`; `jupyter nbconvert` without `--execute` and `jupyter notebook` do not run the code
+     (`command_kind` = `notebook`).
+   The entry's `target_script` is the file the command needs (the module file, the Makefile, or the notebook) so that
+   `scripts/verify_corpus.py` can check that it exists at the pinned commit.
+2. **At most 4 articles are selected** (section 3 said 8). The first four articles that pass E1 to E8 in the hash order.
+3. **The reference is stored with each entry.** `papers.json` entries carry `expected_verdict: "reproducible"` and
+   `review_url` (the referees' report). The review text is still not read.
+4. **Not changed:** E1 to E3 and E5 to E8. In particular E3 still requires Python as the main language of the repository, so a
+   repository that is mostly notebooks stays out; the owner's instruction was to widen the run command, not that rule.
+5. **A defect of the script was fixed on the way:** a dropped connection while downloading `article.pdf`
+   (`http.client.IncompleteRead`) stopped the first run of this evaluation; the download is now tried again like other
+   network errors. The first run produced no output.
+
+### Result (evaluation of 2026-10-18T17:48:50+00:00, same pool and commit as section 10)
+
+**65 articles evaluated, 0 selected.** The first failed rules are the same as in section 10: E4 25, E2 23, E3 11, E1 5,
+E6 1 (`data/external_validation/evaluation.json`; the previous file is `third_attempt/evaluation.json`). `papers.json` is an
+empty list.
+
+What a one-off inspection of the 25 E4 READMEs showed (not a stored script output; the reader can repeat it with the pool):
+
+- 16 of the 25 articles name the same repository (`rsankar9/Reimplementation-SUPERTREX`), whose README has no fenced block
+  at all; the widened rule cannot help there.
+- The other README lines that would run code are in forms that amendment 4 does not include: `python3 <script>.py`
+  (`theoboraud/JaegerESN`), `sh run.sh <job>` (`c-torre/replication-recanatesi-2015`), and a `make` line in a repository with no
+  Makefile (`mupsh/ReScience_Qian_2014`). Two repositories have a notebook but no run line for it, and one has a Makefile
+  but the README has no `make` line.
+- So the three forms the owner named did not admit a single article in this pool. Adding `python3` or `sh` would be a fifth
+  amendment, made after seeing these results; it is the owner's decision and was not made.
+
+Consequences, stated plainly:
+
+- **No article was selected, so no run protocol result, no run, no claim extraction, no scoring, and no agreement table exist.**
+  Nothing is missing by accident (section 10 said the same).
+- The reach of the pipeline for ReScience C is still not measured: *not verified* is how many of the 65 articles would run
+  with a command the README does not state.

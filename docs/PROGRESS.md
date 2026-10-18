@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): external validation, E4 widened to python -m, make, and notebook commands; selection of at most 4 (2026-10-18 20:55 +03:00, Issue #400)
+- `docs/EXTERNAL_VALIDATION.md` section 11 (marked "written after the results were seen"): E4 accepts `python -m <module>`, `make [target]` with a Makefile, and notebook runs; the selection count is 4; entries carry `expected_verdict` and `review_url`. `scripts/external_validation.py` implements it, and a dropped PDF download is tried again.
+- Evidence: 41 tests in `tests/test_external_validation.py` (10 new, written first and seen failing). The selection run of 2026-10-18T17:48:50+00:00 evaluated 65 articles and selected **0**: E4 25, E2 23, E3 11, E1 5, E6 1 (`data/external_validation/evaluation.json`, previous result in `third_attempt/`).
+- Not verified: how many articles would run with a command the README does not state; whether `python3` or `sh` forms should be admitted (the owner's decision, not made).
+
 ### feat(cli): `cli.py score --cpus` and `--timeout` (2026-10-18 02:40 +03:00, Issue #396)
 - In the clean-clone test `cli.py score paper_006` was killed by the 3,600 s run limit during epoch 36. `score` now takes `--cpus N` and `--timeout SECONDS` (run phase only); `run_paper` records `cpus_override` and `timeout_override`, so such a run is not mistaken for a protocol run.
 - Evidence: 3 new tests in `tests/test_pilot3.py` (override applied and recorded, nothing recorded without it, non-positive value refused).
