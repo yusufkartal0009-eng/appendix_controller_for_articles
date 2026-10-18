@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import os
 import re
@@ -32,6 +33,7 @@ if str(project_root) not in sys.path:
 import yaml
 
 from scripts.corpus_expansion import (
+    BACKSLASH,
     MAX_REPO_SIZE_KB,
     MAX_REQUIREMENT_FILES,
     MAX_STATED_SIZE_MB,
@@ -54,11 +56,13 @@ from src.config import ALLOWED_LICENSES, PROJECT_ROOT
 
 OUT_DIR = PROJECT_ROOT / "data" / "external_validation"
 ARTICLES_REPO = "ReScience/articles"
-SELECT_COUNT = 8
+SELECT_COUNT = 4  # 8 in the rules as first written; amendment 4 (docs/EXTERNAL_VALIDATION.md section 11) makes it 4
 FIRST_ID = 201
 RULES = ("E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8")
 CODE_URL = re.compile(r"^https?://github\.com/([^/\s]+)/([^/\s#?]+?)(?:\.git)?(?:/(?:tree|releases/tag)/([^\s#?]+))?/?$")
 RAW = "https://raw.githubusercontent.com"
+NOTEBOOK_RUNNERS = ("jupyter nbconvert", "jupyter-nbconvert", "jupyter execute", "papermill")
+NOT_RUN_TARGETS = {"install", "clean", "setup", "env", "deps"}  # `make` targets that prepare or tidy, like `setup.py` (amendment 4)
 
 
 class ArticleFetcher(Protocol):
@@ -119,6 +123,56 @@ def code_entry(article: dict[str, Any]) -> dict[str, Any] | None:
     return next((m for m in mappings(article.get("code")) if CODE_URL.match(str(m.get("url") or "").strip())), None)
 
 
+def readme_command_lines(readme: str) -> list[str]:
+    """The logical command lines of the fenced README blocks, in document order: a leading `$ ` is dropped, backslash
+    continuations are joined and a trailing shell comment is removed."""
+    commands = []
+    for block in re.findall(r"```[^\n]*\n(.*?)```", readme, re.DOTALL):
+        lines = block.splitlines()
+        index = 0
+        while index < len(lines):
+            line = lines[index].strip()
+            index += 1
+            line = line[2:].strip() if line.startswith("$ ") else line
+            while line.endswith(BACKSLASH) and index < len(lines):
+                line = line[:-1].rstrip() + " " + lines[index].strip()
+                index += 1
+            commands.append(re.sub(r"\s+#.*$", "", line).rstrip(BACKSLASH).strip())
+    return commands
+
+
+def find_widened_run_command(readme: str, paths: set[str]) -> tuple[str, str, str] | None:
+    """(command line, target file, kind) of the first README command that runs the code (E4 after amendment 4): a
+    `python <script>.py` line (R3), `python -m <module>` of a module in the repository, `make [target]` with a Makefile at
+    the root, or a notebook run (`jupyter nbconvert --execute`, `jupyter execute`, `papermill`) of a notebook in the
+    repository. The target is a file at the pinned commit."""
+    for line in readme_command_lines(readme):
+        tokens = line.split()
+        if not tokens:
+            continue
+        if tokens[0] == "python":
+            if len(tokens) > 2 and tokens[1] == "-m":
+                base = tokens[2].replace(".", "/")
+                target = next((c for c in (f"{base}.py", f"{base}/__main__.py") if c in paths), None)
+                if target:
+                    return line, target, "python_module"
+                continue
+            found = find_run_command(f"```\n{line}\n```", paths)
+            if found:
+                return found[0], found[1], "python_script"
+        elif tokens[0] == "make":
+            makefile = next((p for p in ("Makefile", "makefile", "GNUmakefile") if p in paths), None)
+            targets = [t for t in tokens[1:] if not t.startswith("-") and "=" not in t]
+            if makefile and not set(targets) & NOT_RUN_TARGETS:
+                return line, makefile, "make"
+        elif line.startswith(NOTEBOOK_RUNNERS):
+            converts_only = line.startswith(("jupyter nbconvert", "jupyter-nbconvert")) and "--execute" not in tokens
+            notebook = next((t.removeprefix("./") for t in tokens if t.endswith(".ipynb") and t.removeprefix("./") in paths), None)
+            if notebook and not converts_only:
+                return line, notebook, "notebook"
+    return None
+
+
 def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_repos: set[str],
                      taken_repos: set[str]) -> dict[str, Any]:
     """Apply E1 to E8 in order. The result names the first rule that failed, or carries the entry that passed."""
@@ -167,10 +221,11 @@ def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_
     if readme is None:
         return fail("E4", "README not available at the pinned commit")
     paths = {item["path"] for item in fetcher.tree(full_name, sha) if item.get("type") == "blob"}
-    command = find_run_command(readme, paths)
+    command = find_widened_run_command(readme, paths)
     if command is None:
-        return fail("E4", "no `python <script>.py` line in a fenced README block with a script that exists")
-    run_command, script = command
+        return fail("E4", "no `python <script>.py`, `python -m`, `make`, or notebook run line in a fenced README block "
+                          "that names a file of the repository")
+    run_command, script, kind = command
     texts = {"README": readme}
     for path in sorted(p for p in paths if REQUIREMENT_FILE.search(p))[:MAX_REQUIREMENT_FILES]:
         texts[path] = fetcher.file(full_name, sha, path) or ""
@@ -201,7 +256,7 @@ def evaluate_article(directory: str, commit: str, fetcher: ArticleFetcher, seed_
                "venue": "ReScience C", "repo_url": f"https://github.com/{meta['full_name']}", "repo_commit": sha,
                "paper_url": f"https://zenodo.org/records/{zenodo.group(1)}" if zenodo else
                "https://doi.org/" + directory.replace("_", "/", 1),
-               "license": spdx, "target_script": script, "run_command": run_command,
+               "license": spdx, "target_script": script, "run_command": run_command, "command_kind": kind,
                "readme_url": f"https://github.com/{meta['full_name']}/blob/{sha}/README.md",
                "article_yaml_url": f"{RAW}/{ARTICLES_REPO}/{commit}/{directory}/article.yaml",
                "review_url": review_url, "article_pdf_url": f"{RAW}/{ARTICLES_REPO}/{commit}/{directory}/article.pdf",
@@ -251,8 +306,9 @@ def select(directories: list[str], commit: str, fetcher: ArticleFetcher, seed_re
 
 def papers_json(chosen: list[dict[str, Any]]) -> list[dict[str, Any]]:
     keys = ("title", "year", "venue", "repo_url", "repo_commit", "paper_url", "license", "target_script", "run_command",
-            "readme_url", "article_yaml_url", "review_url", "article_pdf_url", "article_pdf_sha256")
-    return [{"paper_id": f"paper_{FIRST_ID + i}", **{k: c["entry"][k] for k in keys}, "expected_claims": {},
+            "readme_url", "command_kind", "article_yaml_url", "review_url", "article_pdf_url", "article_pdf_sha256")
+    return [{"paper_id": f"paper_{FIRST_ID + i}", **{k: c["entry"][k] for k in keys},
+             "expected_verdict": "reproducible", "expected_claims": {},
              "source_table_or_section": {}} for i, c in enumerate(chosen)]
 
 
@@ -300,7 +356,7 @@ class ReScienceFetcher(NetFetcher):
                     return response.read()
             except urllib.error.HTTPError:
                 return None
-            except OSError:
+            except (OSError, http.client.HTTPException):  # a dropped connection (IncompleteRead) is tried again
                 time.sleep(5 * attempt)
         return None
 

@@ -213,3 +213,44 @@ def test_a_ref_in_the_code_url_that_does_not_exist_falls_back_to_the_default_bra
     broken = NoTag(yaml=YAML)
     broken.resolve = lambda full_name, ref: None
     assert run(broken)["failed_rule"] == "E3"  # no ref in the URL and the default branch cannot be resolved
+
+
+@pytest.mark.parametrize(("readme", "paths", "kind", "command", "target"), [
+    ("```\npython -m pkg.train --epochs 2\n```", ["pkg/train.py"], "python_module", "python -m pkg.train --epochs 2", "pkg/train.py"),
+    ("```\npython -m pkg\n```", ["pkg/__main__.py"], "python_module", "python -m pkg", "pkg/__main__.py"),
+    ("```\n$ make results\n```", ["Makefile", "run.py"], "make", "make results", "Makefile"),
+    ("```\nmake\n```", ["Makefile"], "make", "make", "Makefile"),
+    ("```\njupyter nbconvert --to notebook --execute analysis.ipynb\n```", ["analysis.ipynb"], "notebook",
+     "jupyter nbconvert --to notebook --execute analysis.ipynb", "analysis.ipynb"),
+    ("```\njupyter execute nb/a.ipynb\n```", ["nb/a.ipynb"], "notebook", "jupyter execute nb/a.ipynb", "nb/a.ipynb"),
+    ("```\npapermill a.ipynb out.ipynb  # run it\n```", ["a.ipynb"], "notebook", "papermill a.ipynb out.ipynb", "a.ipynb"),
+    ("```\npython run.py\n```", ["run.py"], "python_script", "python run.py", "run.py"),
+])
+def test_the_widened_e4_accepts_python_m_make_and_notebook_commands(readme, paths, kind, command, target):
+    result = run(Fake(readme=readme, paths=paths, files={}))
+    assert result["passed"], result
+    assert (result["entry"]["command_kind"], result["entry"]["run_command"], result["entry"]["target_script"]) == (kind, command, target)
+
+
+@pytest.mark.parametrize(("readme", "paths"), [
+    ("```\npython -m pytest\n```", ["run.py"]),  # the module is not in the repository
+    ("```\nmake\n```", ["run.py"]),  # no Makefile
+    ("```\nmake install\nmake clean\n```", ["Makefile"]),  # install-like targets are not run commands
+    ("```\njupyter nbconvert --to html a.ipynb\n```", ["a.ipynb"]),  # converts, does not execute
+    ("```\njupyter notebook a.ipynb\n```", ["a.ipynb"]),  # opens a server
+    ("```\npapermill missing.ipynb out.ipynb\n```", ["a.ipynb"]),  # the notebook does not exist
+])
+def test_the_widened_e4_still_rejects_commands_that_do_not_run_the_code(readme, paths):
+    assert run(Fake(readme=readme, paths=paths, files={}))["failed_rule"] == "E4"
+
+
+def test_the_first_accepted_line_in_readme_order_is_the_run_command_whatever_its_form():
+    readme = "```\npip install -r requirements.txt\nmake data\npython run.py\n```"
+    result = run(Fake(readme=readme, paths=["Makefile", "run.py"], files={}))
+    assert result["entry"]["run_command"] == "make data" and result["entry"]["command_kind"] == "make"
+
+
+def test_the_selection_takes_four_articles_by_default_and_the_entry_carries_the_expected_verdict():
+    assert ev.SELECT_COUNT == 4
+    (entry,) = ev.papers_json([run(Fake())])
+    assert entry["expected_verdict"] == "reproducible" and entry["command_kind"] == "python_script"
