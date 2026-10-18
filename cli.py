@@ -15,7 +15,7 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 from src.claim_review import claims_for_scoring, review_claims
-from src.claim_store import get_extracted_claims
+from src.claim_store import get_extracted_claims, restore_decisions
 from src.config import DATA_DIR, PROJECT_ROOT, SANDBOX_RUNS_DIR, SANDBOX_TEMP_DIR
 from src.database import (
     get_all_papers,
@@ -38,6 +38,14 @@ def cmd_init_db(args):
     print("SQLite database schema initialized from data/schema.sql.")
     count = seed_database(overwrite=True)
     print(f"Successfully seeded {count} papers from data/seed_papers.json.")
+    session = get_session(get_engine(args.db_url) if getattr(args, "db_url", None) else get_engine())
+    try:
+        restored = restore_decisions(session, DATA_DIR / "claims" / "review_decisions.json")
+        session.commit()
+    finally:
+        session.close()
+    print(f"Restored {restored['restored']} claims that a person accepted (data/claims/review_decisions.json); "
+          f"{restored['kept']} already reviewed here, {restored['ignored']} not accepted and ignored.")
 
 
 def cmd_list_papers(args):
