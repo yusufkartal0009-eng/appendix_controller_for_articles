@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(cli): `cli.py score --cpus` and `--timeout` (2026-10-18 02:40 +03:00, Issue #396)
+- In the clean-clone test `cli.py score paper_006` was killed by the 3,600 s run limit during epoch 36. `score` now takes `--cpus N` and `--timeout SECONDS` (run phase only); `run_paper` records `cpus_override` and `timeout_override`, so such a run is not mistaken for a protocol run.
+- Evidence: 3 new tests in `tests/test_pilot3.py` (override applied and recorded, nothing recorded without it, non-positive value refused).
+- Not verified: a fresh `cli.py score paper_006 --cpus 8 --timeout 7200` run from a clean clone.
+
 ### fix(cli): init-db restores the accepted claims of the committed decisions (2026-10-18 02:10 +03:00, Issue #395)
 - A fresh clone scored every paper with 0 accepted claims, because the claim review lives in a database that is not committed. `restore_decisions` (`src/claim_store.py`) re-applies the 13 `accepted` / `human` decisions of `data/claims/review_decisions.json` after `init-db` seeds the papers; anything else in the file is ignored, and a review made in this database is kept. This does not accept anything new: it restores decisions that the owner made (`review_note` says "restored from review_decisions.json").
 - Evidence: 5 tests (`tests/test_restore_decisions.py`); in a new database `cli.py init-db` printed "Restored 13 claims" and `cli.py score paper_006 --from-run data/pilot3_runs/paper_006` used 2 accepted claims (Tier 2 0, Needs Review, 58.2). `pytest` and `ruff check .` below in the pull request.

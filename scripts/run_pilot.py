@@ -249,7 +249,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
               data_cache: Path | None = None, record_root: Path | None = None, pilot3: bool = False,
               settings_path: Path | None = None, memory_limit: str | None = None,
               cpus: float | None = None, pilot4: bool = False, correction: dict[str, Any] | None = None,
-              corpus_path: Path | None = None, env_cache_dir: Path | None = None) -> dict[str, Any]:
+              corpus_path: Path | None = None, env_cache_dir: Path | None = None,
+              run_timeout: int | None = None) -> dict[str, Any]:
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
     if pilot4:
@@ -280,6 +281,14 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         cpus_override = {"requested": cpus, "protocol_cpus": limits["cpus"],
                          "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"}
         limits["cpus"] = float(cpus)
+    timeout_override: dict[str, Any] = {}
+    if run_timeout is not None:
+        if run_timeout <= 0:
+            raise ValueError(f"the run time limit must be positive, not {run_timeout}")
+        timeout_override = {"requested": run_timeout,
+                            "protocol_run_timeout_seconds": limits.get("run_timeout_seconds") or limits["timeout_seconds"],
+                            "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"}
+        limits["run_timeout_seconds"] = int(run_timeout)
     setup_options: dict[str, Any] | None = None
     if pilot2:
         # Harness error (raised, exit 1) when the setup is malformed or its data is not in the cache
@@ -328,6 +337,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         record["memory_override"] = memory_override
     if cpus_override:
         record["cpus_override"] = cpus_override
+    if timeout_override:
+        record["timeout_override"] = timeout_override
 
     start = time.time()
     try:
