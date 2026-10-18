@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(validation): run protocol for the external-validation articles (2026-10-18 21:00 +03:00, Issue #402)
+- `docs/EXTERNAL_VALIDATION_PROTOCOL.md`: Pilot 4's protocol with `--memory 50% --cpus 4`, a 14400 s run phase, one attempt, no correction round and no retry, records in `data/external_validation/runs/`. It replaces the 8 CPUs of `docs/EXTERNAL_VALIDATION.md` section 5 before any run, and states that the runner only runs `python <script>` commands.
+- Evidence: documentation only. No article is selected (#400, 0 of 65), so no run was made and #403 (run the articles) had nothing to run.
+- Not verified: that the image or the staging step can run `make` or a notebook command.
+
 ### feat(corpus): external validation, E4 widened to python -m, make, and notebook commands; selection of at most 4 (2026-10-18 20:55 +03:00, Issue #400)
 - `docs/EXTERNAL_VALIDATION.md` section 11 (marked "written after the results were seen"): E4 accepts `python -m <module>`, `make [target]` with a Makefile, and notebook runs; the selection count is 4; entries carry `expected_verdict` and `review_url`. `scripts/external_validation.py` implements it, and a dropped PDF download is tried again.
 - Evidence: 41 tests in `tests/test_external_validation.py` (10 new, written first and seen failing). The selection run of 2026-10-18T17:48:50+00:00 evaluated 65 articles and selected **0**: E4 25, E2 23, E3 11, E1 5, E6 1 (`data/external_validation/evaluation.json`, previous result in `third_attempt/`).
