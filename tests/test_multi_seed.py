@@ -252,3 +252,32 @@ def test_run_setup_refuses_a_malformed_seed_object():
     entry = {"paper_id": "p", "run_setup": {"decision": "fix", "reason": "r", "seed": {"values": [1]}}}
     with pytest.raises(ValueError):
         run_setup_of(entry)
+
+
+def test_the_summary_says_which_metric_decided_and_what_each_metric_alone_would_score(tmp_path, monkeypatch):
+    from scripts import run_multi_seed
+
+    runs = {1: {"rmse": 0.470, "loss": 0.10}, 2: {"rmse": 0.472, "loss": 0.13}, 3: {"rmse": 0.471, "loss": 0.11}}
+    monkeypatch.setattr(run_multi_seed.run_pilot, "run_paper", fake_run_paper(runs))
+    summary = run_multi_seed.run_seeds(ENTRY, spec(), tmp_path, tmp_path / "staging")
+    assert summary["tier3"]["decided_by"] == "loss" and summary["tier3"]["score"] == 40.0
+    assert summary["tier3_by_metric"]["rmse"]["score_if_this_metric_alone"] == 100.0
+    assert summary["tier3_by_metric"]["loss"]["score_if_this_metric_alone"] == 40.0
+    assert summary["tier3_by_metric"]["rmse"]["cv"] < summary["tier3_by_metric"]["loss"]["cv"]
+
+
+def test_summarize_only_rebuilds_the_summary_from_stored_folders_without_docker(tmp_path, monkeypatch):
+    from scripts import run_multi_seed
+
+    monkeypatch.setattr(run_multi_seed.run_pilot, "run_paper", fake_run_paper({1: {"acc": 0.9}, 2: {"acc": 0.9}, 3: {"acc": 0.9}}))
+    run_multi_seed.run_seeds(ENTRY, spec(), tmp_path, tmp_path / "staging")
+    summary_path = tmp_path / "p" / "multi_seed_summary.json"
+    summary_path.unlink()
+    monkeypatch.setattr(run_multi_seed.run_pilot, "run_paper", lambda *a, **k: pytest.fail("must not run anything"))
+    monkeypatch.setattr(run_multi_seed.run_pilot, "load_entry", lambda paper_id: ENTRY)
+    settings = tmp_path / "settings.json"
+    settings.write_text(json.dumps({"papers": {"p": {"seed": spec()}}}), encoding="utf-8")
+    assert run_multi_seed.main(["p", "--summarize-only", "--record-root", str(tmp_path), "--settings", str(settings)]) == 0
+    rebuilt = json.loads(summary_path.read_text(encoding="utf-8"))
+    assert rebuilt["successful_seed_runs"] == 3 and rebuilt["tier3"]["score"] == 100.0
+    assert run_multi_seed.stored_seeds(tmp_path / "p") == [1, 2, 3]

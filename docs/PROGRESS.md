@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(scoring): per-metric Tier 3 in the seed summary (2026-10-20 04:09 +03:00, Issue #48)
+- `scripts/run_multi_seed.py`: `tier3.decided_by`, `tier3_by_metric`, `--summarize-only`, `summarize_stored`; `docs/MULTI_SEED.md` says why (a noisy side metric such as a training loss can decide Tier 3). The score rule is unchanged.
+- Evidence: 2 new tests; the earlier 29 tests of the file pass unchanged.
+- Not verified: on the real seed folders (still running).
+
 ### feat(sandbox): GPU check with a modern PyTorch on the RTX 5070 (2026-10-20 03:45 +03:00, Issue #169)
 - `scripts/gpu_paper_check.py`, `run_pilot.py --gpus`, `data/gpu_check/` and `docs/ENVIRONMENT.md`: a synthetic paper with `torch==2.8.0` (CUDA 12.8) ran through the real pipeline with `--gpus all` on the RTX 5070.
 - Real output (`data/gpu_check/result.json`): torch 2.8.0+cu128, tensor on `cuda:0`, GPU result equal to the CPU result, run report `gpu.used` true (peak 2530 MiB over 1793 MiB before), COMPLETED exit 0 in 45.156 s, isolation intact. Bundled wheels 3.65 GiB, bundling 575.403 s, sandbox install and run 563.407 s.

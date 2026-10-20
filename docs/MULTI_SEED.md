@@ -62,6 +62,14 @@ read; the score uses the population one. With 3 to 5 seeds the two differ notice
 
 Metric names are those of `run_report.json` (`metrics`), compared exactly, as Tier 2 does.
 
+**Which metric decides, and what each one alone would give (added with the first real seed runs).** The metrics are the numbers
+the metric extractor found in the output, and for a training script they include values such as the last printed training loss,
+not only the headline result. Because the metric with the largest CV decides, a noisy side number can set Tier 3 although the
+headline metric hardly moves. The summary therefore stores `tier3.decided_by` (the metric that decided) and `tier3_by_metric`
+(the CV of every metric and the score that metric alone would give), so that the reader can see both. The score itself still
+follows section 5; this only makes the choice visible. `python scripts/run_multi_seed.py <paper_id> --summarize-only` rebuilds the
+summary from the stored seed folders without Docker.
+
 ## 5. Connecting `seed_results` to real seed results
 
 `src/scoring.py` takes `seed_results: list[float]`. It stays as it is (one list, one metric), and a new optional input is

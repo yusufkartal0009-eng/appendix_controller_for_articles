@@ -46,29 +46,39 @@ def run_seeds(entry: dict[str, Any], spec: dict[str, Any], out_dir: Path, stagin
     paper_id = entry["paper_id"]
     paper_dir = out_dir / paper_id
     paper_dir.mkdir(parents=True, exist_ok=True)
-    runs: list[dict[str, Any]] = []
-    metrics_by_seed: dict[int, dict[str, float]] = {}
-    limits: dict[str, Any] = {}
-    for seed in seeds or spec["values"]:
+    seed_list = list(seeds or spec["values"])
+    for seed in seed_list:
         seed_dir = paper_dir / f"seed_{seed}"
         if seed_dir.exists():
             raise FileExistsError(f"{seed_dir} already holds a run; a stored run is evidence and is not overwritten")
         scratch = paper_dir / f".scratch_seed_{seed}"
         if scratch.exists():
             shutil.rmtree(scratch)
-        extra = {"multi_seed": {"seed": seed, "seeds": list(seeds or spec["values"]), "seed_source": spec["source"],
+        extra = {"multi_seed": {"seed": seed, "seeds": seed_list, "seed_source": spec["source"],
                                 "note": "not a protocol run (docs/MULTI_SEED.md): one of several runs of the same paper "
                                         "that differ only in the paper's own seed parameter"}}
-        record = run_pilot.run_paper(paper_id, staging_dir, pilot2=True, record_root=scratch,
-                                     entry_override=apply_seed(entry, spec, seed), record_extra=extra, **run_options)
+        run_pilot.run_paper(paper_id, staging_dir, pilot2=True, record_root=scratch,
+                            entry_override=apply_seed(entry, spec, seed), record_extra=extra, **run_options)
         shutil.move(str(scratch / paper_id), str(seed_dir))
         shutil.rmtree(scratch, ignore_errors=True)
+    return summarize_stored(paper_id, paper_dir, spec, seed_list)
+
+
+def stored_seeds(paper_dir: Path) -> list[int]:
+    """The seeds that have a stored run folder (`seed_<N>/pilot_record.json`), in numeric order."""
+    return sorted(int(p.name.split("_")[1]) for p in paper_dir.glob("seed_*") if (p / "pilot_record.json").is_file())
+
+
+def summarize_stored(paper_id: str, paper_dir: Path, spec: dict[str, Any], seeds: list[int]) -> dict[str, Any]:
+    """Read the stored seed folders, write `multi_seed_summary.json`, and return it. Needs no Docker."""
+    runs: list[dict[str, Any]] = []
+    metrics_by_seed: dict[int, dict[str, float]] = {}
+    limits: dict[str, Any] = {}
+    for seed in seeds:
+        seed_dir = paper_dir / f"seed_{seed}"
+        record, report = load_run(seed_dir)
         limits = limits or record.get("limits", {})
         run = record.get("run") or {}
-        try:
-            _, report = load_run(seed_dir)
-        except FileNotFoundError:
-            report = {}
         metrics = {k: float(v) for k, v in (report.get("metrics") or {}).items() if isinstance(v, (int, float))}
         used = run.get("status") == "COMPLETED" and run.get("exit_code") == 0 and bool(metrics)
         if used:
@@ -80,17 +90,24 @@ def run_seeds(entry: dict[str, Any], spec: dict[str, Any], out_dir: Path, stagin
                      "metrics": metrics, "used": used,
                      "reason_not_used": None if used else "the seed run did not complete with metrics"})
     metrics_summary = summarize_seed_runs(metrics_by_seed)
+    measured = len(metrics_by_seed) >= 2
     score, notes = Tier3StabilityEvaluator.evaluate_by_metric(
-        {name: m["values"] for name, m in metrics_summary.items()} if len(metrics_by_seed) >= 2 else None,
+        {name: m["values"] for name, m in metrics_summary.items()} if measured else None,
         single_run_clean=bool(metrics_by_seed), execution_succeeded=bool(metrics_by_seed))
+    by_metric = {name: {"cv": m["cv"], "score_if_this_metric_alone": Tier3StabilityEvaluator.evaluate(m["values"])[0]}
+                 for name, m in metrics_summary.items()}
     summary = {
         "paper_id": paper_id, "protocol": PROTOCOL, "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "seed_spec": spec, "limits": limits, "runs": runs,
         "successful_seed_runs": len(metrics_by_seed), "metrics": metrics_summary,
         "tier3": {"score": score, "notes": notes,
-                  "basis": ("measured: the metric with the largest CV decides" if len(metrics_by_seed) >= 2
+                  "decided_by": max(by_metric, key=lambda n: by_metric[n]["cv"]) if measured else None,
+                  "basis": ("measured: the metric with the largest CV decides" if measured
                             else "single-run baseline, not a stability measurement")},
-        "note": "std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading.",
+        "tier3_by_metric": by_metric,
+        "note": ("std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading. "
+                 "tier3_by_metric shows what each metric alone would score; the score above is that of the metric "
+                 "with the largest CV."),
     }
     (paper_dir / SUMMARY_NAME).write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8", newline="\n")
     return summary
@@ -108,12 +125,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--memory", default=None, metavar="LIMIT")
     parser.add_argument("--cpus", type=float, default=None, metavar="N")
     parser.add_argument("--run-timeout", type=int, default=None, metavar="SECONDS")
+    parser.add_argument("--summarize-only", action="store_true",
+                        help="Rebuild multi_seed_summary.json from the stored seed folders; runs nothing (no Docker).")
     args = parser.parse_args(argv)
     try:
+        entry = run_pilot.load_entry(args.paper_id)
+        if args.summarize_only:
+            spec = seed_spec_of(entry, load_seed_settings(Path(args.settings) if args.settings else None))
+            if spec is None:
+                raise ValueError(f"{args.paper_id} has no seed spec")
+            paper_dir = Path(args.record_root) / args.paper_id
+            summary = summarize_stored(args.paper_id, paper_dir, spec, stored_seeds(paper_dir))
+            print(json.dumps({k: summary[k] for k in ("paper_id", "successful_seed_runs", "metrics", "tier3", "tier3_by_metric")}, indent=2))
+            return 0
         from scripts import preflight
 
         preflight.ensure_ready()
-        entry = run_pilot.load_entry(args.paper_id)
         spec = seed_spec_of(entry, load_seed_settings(Path(args.settings) if args.settings else None))
         if spec is None:
             print(f"{args.paper_id}: the paper offers no seed parameter that Repro Radar knows of "
