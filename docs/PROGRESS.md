@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(ai): diagnosis input schema and prompt templates (2026-10-20 03:09 +03:00, Issue #31)
+- `docs/DIAGNOSIS.md`, `src/diagnosis/schema.py` (input schema with a source for every value), `src/diagnosis/prompts.py`, and `docs/prompts/` (system prompt and one template per status). Rule-based; no model, network, or key.
+- Evidence: 16 new tests in `tests/test_diagnosis_schema.py`.
+- Not verified: any use with a real model.
+
 ### feat(scoring): multi-seed execution for Tier 3 and synthetic evidence (2026-10-20 03:06 +03:00, Issue #48)
 - `src/multi_seed.py` (seed spec, `apply_seed`, per-metric summary), `scripts/run_multi_seed.py` (one real sandbox run per seed, one record per seed in `data/multi_seed_runs/<paper>/seed_<N>/`, `multi_seed_summary.json`), `Tier3StabilityEvaluator.evaluate_by_metric` and `seed_metric_results` in `src/scoring.py` / `src/score_run.py`, `run_setup.seed` validation, and `data/multi_seed_settings.json` (the seed parameters of `paper_003` and `paper_006`, each with the place in the paper's code where it was read; `data/seed_papers.json` is not edited).
 - Synthetic evidence (`scripts/synthetic_seeds.py`, real Docker, 5 seeds each, `data/synthetic_seeds/result.json`): the seed-free paper gave mean 0.9, standard deviation 0, Tier 3 = 100; the `random.Random(seed)` paper gave mean 0.7531, population standard deviation 0.1079, CV 14.333%, Tier 3 = 40. Both summaries equal the values computed on the host from the same seeds; Tier 3 differs between the two.
