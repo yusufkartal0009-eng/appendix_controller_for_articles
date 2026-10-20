@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(ai): diagnosis backends with a locked-number check (2026-10-20 03:18 +03:00, Issue #34)
+- `src/diagnosis/backends.py` (NullBackend default; optional Anthropic or local backend chosen by environment variables; number lock; graceful fallback), `cli.py diagnose --explain`, and `docs/DIAGNOSIS.md` section 6.
+- Evidence: 18 new tests with mock clients only.
+- Not verified: any real model (no key and no local model were available).
+
 ### feat(ai): explainer of the difference between two runs (2026-10-20 03:16 +03:00, Issue #35)
 - `src/diagnosis/compare.py`, `scripts/diagnosis_comparisons.py`, `docs/DIAGNOSIS_COMPARISONS.md`, and `docs/DIAGNOSIS.md` section 8 (rules R1 to R6): the difference between two runs, with "same metrics, different time" kept apart from "different metrics", and no cause named.
 - Evidence: 16 new tests; the generated document is checked against the records by a test (9 pairs).

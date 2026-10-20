@@ -53,6 +53,17 @@ The categories are those of `scripts/categorize_pilot_failures.py` (`docs/PILOT_
 
 The prompts are not evidence of anything: they have not been used with a real model.
 
+### Backends (`src/diagnosis/backends.py`)
+
+- **`NullBackend` is the default.** With no setting, nothing is sent anywhere and `cli.py diagnose --explain` prints the rule-based report alone.
+- `REPRO_RADAR_DIAGNOSIS_BACKEND=anthropic` uses the Claude API through the SDK. The key is read from `ANTHROPIC_API_KEY` by the SDK, the model name from `REPRO_RADAR_DIAGNOSIS_MODEL` (no model name is assumed). Nothing is stored or committed.
+- `REPRO_RADAR_DIAGNOSIS_BACKEND=local` uses a model served on this machine through an OpenAI-style `/v1/chat/completions` endpoint (llama.cpp server, Ollama, vLLM): `REPRO_RADAR_LOCAL_LLM_URL` and `REPRO_RADAR_DIAGNOSIS_MODEL`.
+- A backend that is offline, fails, or returns nothing never breaks the report: the report is printed with a line saying that no model text is shown, and why.
+
+**The numbers are locked.** The rule-based report is printed first and never replaced. A model text is added after it, labeled as model-written, **only if** every number in it occurs in the rule-based report character for character (`0.50` is not `0.5`) and it contains none of the loaded words. Otherwise it is dropped and the reason is printed. A diagnosis alone never says "Verified": without a scored status (`--status`), a failed run uses the Failed prompt and anything else the Needs Review prompt.
+
+**Not verified with a real model.** The backends were tested with a mock client and a mock server response only (`tests/test_diagnosis_backends.py`). No key was available, no local model was installed, and no real call was made, so the real SDK call, the real endpoint format, and the quality of any model text are untested.
+
 ## 7. What this layer does not do
 
 - It does not read the paper. It knows a run, not the paper's text.
