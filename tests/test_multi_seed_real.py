@@ -73,9 +73,10 @@ def test_the_stored_folders_carry_no_local_path(paper):
             assert "Users" not in path.read_text(encoding="utf-8", errors="replace"), path
 
 
-def test_seed_0_of_paper_003_gives_the_metrics_of_the_earlier_single_runs():
-    if "paper_003" not in PAPERS:
-        pytest.skip("paper_003 seed runs are not stored")
-    earlier = json.loads((REPO / "data" / "cpu_runs" / "paper_003" / "run_report.json").read_text(encoding="utf-8"))["metrics"]
-    seed_0 = json.loads((ROOT / "paper_003" / "seed_0" / "run_report.json").read_text(encoding="utf-8"))["metrics"]
-    assert seed_0 == earlier  # the config file 0.toml is the one every earlier run used
+@pytest.mark.parametrize("paper, default_seed", [("paper_003", 0), ("paper_006", 1)])
+def test_the_default_seed_gives_the_metrics_of_the_earlier_single_runs(paper, default_seed):
+    if paper not in PAPERS:
+        pytest.skip(f"{paper} seed runs are not stored")
+    earlier = json.loads((REPO / "data" / "cpu_runs" / paper / "run_report.json").read_text(encoding="utf-8"))["metrics"]
+    seed_run = json.loads((ROOT / paper / f"seed_{default_seed}" / "run_report.json").read_text(encoding="utf-8"))["metrics"]
+    assert seed_run == earlier  # 0.toml (paper_003) and --set_seed 1 (paper_006) are what every earlier run used
