@@ -1,7 +1,7 @@
 {
   "paper_id": "synthetic_seed_free",
   "protocol": "docs/MULTI_SEED.md",
-  "generated_at": "2026-10-20T00:05:27+00:00",
+  "generated_at": "2026-10-20T01:44:47+00:00",
   "seed_spec": {
     "values": [
       1,
@@ -118,7 +118,14 @@
       "Multi-seed evaluated (n=5, Mean=0.9000, StdDev=0.0000, CV=0.000%)",
       "Excellent seed invariance: Coefficient of Variation <= 2% (+100)"
     ],
+    "decided_by": "accuracy",
     "basis": "measured: the metric with the largest CV decides"
   },
-  "note": "std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading."
+  "tier3_by_metric": {
+    "accuracy": {
+      "cv": 0.0,
+      "score_if_this_metric_alone": 100.0
+    }
+  },
+  "note": "std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading. tier3_by_metric shows what each metric alone would score; the score above is that of the metric with the largest CV."
 }

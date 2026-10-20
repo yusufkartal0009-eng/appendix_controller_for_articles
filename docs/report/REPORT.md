@@ -524,6 +524,39 @@ not that they are right. The extraction accuracy of section 6.2 therefore still 
 - **Sources:** `data/synthetic_control/`, `scripts/run_stability.py`, `docs/MEMORY_RUNS.md`, `data/gold_expansion/`.
 - **Status:** written.
 
+### 6.4a Seed runs for the stability tier, and a check with the GPU
+
+**Seed runs (#48, `docs/MULTI_SEED.md`).** A paper is run once per seed only if it has a seed parameter of its own; nothing in a
+paper's code is changed. For `paper_003` the seed is the configuration file (`0.toml`, `1.toml`, `2.toml` differ only in their first line,
+`seed = N`); for `paper_006` it is the option `--set_seed` (1, 2, 3). Each seed is one real run in the sandbox, with the paper's Pilot 3
+setting, 4 CPUs, and 50% of the host's memory; **these are not protocol runs** (the CPU and memory limits differ from the protocol's) and
+every record says so. The seeds were written into `data/multi_seed_settings.json` before any run. Two synthetic papers test the path on
+numbers that are known beforehand: one prints a metric that ignores its seed, the other draws its metric from `random.Random(seed)`; their
+mean and standard deviation were also computed on the host from the same seeds and compared with the summary of the sandbox runs.
+
+<!-- numbers:multiseed:start -->
+PLACEHOLDER
+<!-- numbers:multiseed:end -->
+
+@@READING@@
+
+**A synthetic paper with the local GPU (#169).** `scripts/gpu_paper_check.py` runs a small repository that pins `torch==2.8.0` (the default
+PyPI Linux wheel of that release is built for CUDA 12.8, which the RTX 5070 needs) through the same pipeline as a pilot paper: wheel bundling
+in the image, offline install, then the sandbox with `--gpus all`, no network, and a read-only root. The paper does a matrix product on the GPU
+and compares it with the CPU result.
+
+<!-- numbers:gpucheck:start -->
+PLACEHOLDER
+<!-- numbers:gpucheck:end -->
+
+The tensor lived on the GPU, the result equalled the CPU result, and the isolation was unchanged. The paper's own output is the strong evidence;
+`gpu.used` in the run report is a heuristic (GPU memory in use rose during the run, and other programs on the host can raise it). This is one
+synthetic paper: it shows that the sandbox can give a modern PyTorch the GPU, not that any real paper benefits. The papers of the corpus pin
+PyTorch 1.x, which this GPU cannot use, and none was run with it.
+
+- **Sources:** `data/multi_seed_runs/`, `data/synthetic_seeds/`, `data/gpu_check/`, `docs/MULTI_SEED.md`, `docs/ENVIRONMENT.md` (GPU section).
+- **Status:** written.
+
 ### 6.5 Pilot 4: six papers the tool had not seen
 
 Pilots 1 to 3 used the six papers that the project corrected before the pilots. Pilot 4 (`docs/PILOT_4.md`, written before any

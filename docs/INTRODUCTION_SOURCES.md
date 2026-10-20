@@ -51,6 +51,13 @@ The previous draft's reference list had 6 entries and no in-text citations. [2] 
 | §3 table | Tier 3 uses the coefficient of variation with a 2% threshold | `src/scoring.py` (Tier 3) | Project code |
 | §4 | Other scientific fields are out of scope for this pilot | Project scope (pilot on tabular ML benchmarks) | Project decision |
 
+**Note (2026-10-20).** The rows marked "Abstract" describe the introduction draft of early October, not the current report. Two of them are
+superseded and are kept as the record of what was checked then: "No paper has been run end to end yet" (Pilots 1 to 4 have run since,
+`docs/report/REPORT.md` section 6) and "An AI component for diagnosing failed runs is planned but not implemented" (a rule-based diagnosis
+layer is implemented in `src/diagnosis/`, `docs/DIAGNOSIS.md`; it has not been tried with a real language model; M5 issues #31 to #33 and #36
+are closed, #34 and #35 are open with a done/left comment). The statements added to the report since then (sections 6.4a to 6.7) are sourced
+by the generated blocks of `scripts/report_numbers.py` and by the files named in those sections, not by this table.
+
 ---
 
 ## 3. Removed from the previous draft

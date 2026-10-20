@@ -247,24 +247,33 @@ def multiseed_block(data: Path = DATA) -> str:
     synthetic = _load(data / "synthetic_seeds" / "result.json")
     lines = [HEADER.format(sources="data/synthetic_seeds/result.json and data/multi_seed_runs/*/multi_seed_summary.json"), "",
              "| Paper | Metric | Seed runs | Mean | Std (population) | Std (sample) | CV |", "|---|---|---|---|---|---|---|"]
-    tier3: list[tuple[str, Any, str]] = []
+    rows: list[tuple[str, Any, Any, str, str]] = []  # label, successful runs, score, basis, deciding metric and each metric alone
     for paper_id, result in synthetic["papers"].items():
         summary = _load(data / "synthetic_seeds" / paper_id / "multi_seed_summary.json")
         lines += _metric_rows(f"`{paper_id}` (synthetic)", summary)
-        tier3.append((f"`{paper_id}` (synthetic)", result["tier3"]["score"], result["tier3"]["basis"]))
+        rows.append((f"`{paper_id}` (synthetic)", result["successful_seed_runs"], result["tier3"]["score"],
+                     result["tier3"]["basis"], _alone(summary)))
     real_dir = data / "multi_seed_runs"
     for path in sorted(real_dir.glob("*/multi_seed_summary.json")) if real_dir.is_dir() else []:
         summary = _load(path)
         lines += _metric_rows(f"`{summary['paper_id']}`", summary)
-        tier3.append((f"`{summary['paper_id']}`", summary["tier3"]["score"], summary["tier3"]["basis"]))
-    lines += ["", "| Paper | Successful seed runs | Tier 3 score | Basis |", "|---|---|---|---|"]
-    counts = {f"`{pid}` (synthetic)": r["successful_seed_runs"] for pid, r in synthetic["papers"].items()}
-    for path in sorted(real_dir.glob("*/multi_seed_summary.json")) if real_dir.is_dir() else []:
-        summary = _load(path)
-        counts[f"`{summary['paper_id']}`"] = f"{summary['successful_seed_runs']} of {len(summary['runs'])}"
-    for label, score, basis in tier3:
-        lines.append(f"| {label} | {counts[label]} | {score} | {basis} |")
+        rows.append((f"`{summary['paper_id']}`", f"{summary['successful_seed_runs']} of {len(summary['runs'])}",
+                     summary["tier3"]["score"], summary["tier3"]["basis"], _alone(summary)))
+    lines += ["", "| Paper | Successful seed runs | Tier 3 score | Basis | Decided by; score of each metric alone |",
+              "|---|---|---|---|---|"]
+    lines += [f"| {label} | {runs} | {score} | {basis} | {alone} |" for label, runs, score, basis, alone in rows]
+    match = ", ".join(f"`{pid}` {'yes' if r['comparison']['all_match'] else 'NO'}" for pid, r in synthetic["papers"].items())
+    lines += ["", f"The synthetic papers' summary equals the mean and standard deviation computed on the host from the same seeds: {match}."]
     return "\n".join(lines)
+
+
+def _alone(summary: dict[str, Any]) -> str:
+    by_metric = summary.get("tier3_by_metric")
+    if not by_metric:
+        return "n/a"
+    decided = summary["tier3"].get("decided_by")
+    alone = ", ".join(f"`{name}` {m['score_if_this_metric_alone']}" for name, m in sorted(by_metric.items()))
+    return f"`{decided}`; {alone}"
 
 
 def gpucheck_block(data: Path = DATA) -> str:
