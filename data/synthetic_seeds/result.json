@@ -1,0 +1,133 @@
+{
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "papers": {
+    "synthetic_seed_free": {
+      "tier3": {
+        "score": 100.0,
+        "notes": [
+          "Metric 'accuracy' has the largest CV of 1 metric(s) with seed results and decides",
+          "Multi-seed evaluated (n=5, Mean=0.9000, StdDev=0.0000, CV=0.000%)",
+          "Excellent seed invariance: Coefficient of Variation <= 2% (+100)"
+        ],
+        "basis": "measured: the metric with the largest CV decides"
+      },
+      "successful_seed_runs": 5,
+      "comparison": {
+        "fields": {
+          "mean": {
+            "expected": 0.9,
+            "measured": 0.9,
+            "match": true
+          },
+          "std_population": {
+            "expected": 0.0,
+            "measured": 0.0,
+            "match": true
+          },
+          "std_sample": {
+            "expected": 0.0,
+            "measured": 0.0,
+            "match": true
+          },
+          "cv": {
+            "expected": 0.0,
+            "measured": 0.0,
+            "match": true
+          }
+        },
+        "per_seed": {
+          "1": {
+            "expected": 0.9,
+            "measured": 0.9
+          },
+          "2": {
+            "expected": 0.9,
+            "measured": 0.9
+          },
+          "3": {
+            "expected": 0.9,
+            "measured": 0.9
+          },
+          "4": {
+            "expected": 0.9,
+            "measured": 0.9
+          },
+          "5": {
+            "expected": 0.9,
+            "measured": 0.9
+          }
+        },
+        "per_seed_match": true,
+        "all_match": true
+      }
+    },
+    "synthetic_seeded": {
+      "tier3": {
+        "score": 40.0,
+        "notes": [
+          "Metric 'accuracy' has the largest CV of 1 metric(s) with seed results and decides",
+          "Multi-seed evaluated (n=5, Mean=0.7531, StdDev=0.1079, CV=14.333%)",
+          "High variance across seeds: Coefficient of Variation (14.33%) exceeds 10% (+40)"
+        ],
+        "basis": "measured: the metric with the largest CV decides"
+      },
+      "successful_seed_runs": 5,
+      "comparison": {
+        "fields": {
+          "mean": {
+            "expected": 0.7531,
+            "measured": 0.7531,
+            "match": true
+          },
+          "std_population": {
+            "expected": 0.1079386492411314,
+            "measured": 0.1079386492411314,
+            "match": true
+          },
+          "std_sample": {
+            "expected": 0.12067907855133796,
+            "measured": 0.12067907855133796,
+            "match": true
+          },
+          "cv": {
+            "expected": 0.14332578574044802,
+            "measured": 0.14332578574044802,
+            "match": true
+          }
+        },
+        "per_seed": {
+          "1": {
+            "expected": 0.647,
+            "measured": 0.647
+          },
+          "2": {
+            "expected": 0.9346,
+            "measured": 0.9346
+          },
+          "3": {
+            "expected": 0.6833,
+            "measured": 0.6833
+          },
+          "4": {
+            "expected": 0.6826,
+            "measured": 0.6826
+          },
+          "5": {
+            "expected": 0.818,
+            "measured": 0.818
+          }
+        },
+        "per_seed_match": true,
+        "all_match": true
+      }
+    }
+  },
+  "tier3_differs": true,
+  "note": "synthetic papers; this shows that the multi-seed path measures a known difference, not that a real paper is stable"
+}

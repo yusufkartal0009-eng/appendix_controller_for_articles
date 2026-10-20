@@ -1,0 +1,24 @@
+{
+  "protocol": "docs/MULTI_SEED.md",
+  "note": "The seed parameters of the seed papers, applied on top of the run setups of data/seed_papers.json (which is not edited). Each entry says where in the paper's own files the seed parameter was read. The seeds were written before any seed run was made.",
+  "papers": {
+    "paper_003": {
+      "seed": {
+        "values": [0, 1, 2],
+        "args": [
+          "output/california_housing/ft_transformer/default/{seed}.toml",
+          "-o",
+          "/workspace/output/ft_transformer_default_{seed}"
+        ],
+        "source": "bin/ft_transformer.py reads its configuration with lib.load_config() and calls zero.set_randomness(args['seed']); the repository holds output/california_housing/ft_transformer/default/0.toml to 14.toml, which differ from each other only in their first line, `seed = N` (0.toml, the file of the existing runs, and 2.toml compared line by line)."
+      }
+    },
+    "paper_006": {
+      "seed": {
+        "values": [1, 2, 3],
+        "arg": "--set_seed",
+        "source": "train.py line 36: parser.add_argument('--set_seed', default=1, type=int); line 72: torch.manual_seed(opt.set_seed). The data split has its own option, --dset_seed (default 5), which is left unchanged. Seed 1 is the default of the existing runs."
+      }
+    }
+  }
+}

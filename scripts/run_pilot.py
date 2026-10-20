@@ -250,7 +250,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
               settings_path: Path | None = None, memory_limit: str | None = None,
               cpus: float | None = None, pilot4: bool = False, correction: dict[str, Any] | None = None,
               corpus_path: Path | None = None, env_cache_dir: Path | None = None,
-              run_timeout: int | None = None) -> dict[str, Any]:
+              run_timeout: int | None = None, entry_override: dict[str, Any] | None = None,
+              record_extra: dict[str, Any] | None = None) -> dict[str, Any]:
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
     if pilot4:
@@ -260,7 +261,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         memory_limit = memory_limit or PILOT4_MEMORY
         limits["run_timeout_seconds"] = PILOT4_RUN_TIMEOUT_SECONDS
     else:
-        entry = load_entry(paper_id)
+        # entry_override: the paper's entry with a seed applied (scripts/run_multi_seed.py, #48)
+        entry = entry_override if entry_override is not None else load_entry(paper_id)
     if pilot3:
         pilot2 = True  # Pilot 3 is Pilot 2 with the overlay
         pilot3_change = load_pilot3_change(paper_id, settings_path)
@@ -333,6 +335,8 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
     if pilot4:
         record["pilot4"] = {"run_command": entry["run_command"], "readme_url": entry.get("readme_url"),
                             "attempt": "correction" if correction else "first", "correction": correction or None}
+    if record_extra:
+        record.update(record_extra)
     if memory_override:
         record["memory_override"] = memory_override
     if cpus_override:

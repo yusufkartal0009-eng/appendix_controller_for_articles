@@ -183,6 +183,13 @@ class Tier2MetricsEvaluator:
         return min(100.0, max(0.0, score)), claim_results, notes
 
 
+def coefficient_of_variation(values: list[float]) -> float:
+    """Population standard deviation over |mean| (the denominator is floored at 1e-6)."""
+    mean_val = sum(values) / len(values)
+    variance = sum((x - mean_val) ** 2 for x in values) / len(values)
+    return math.sqrt(variance) / max(abs(mean_val), 1e-6)
+
+
 class Tier3StabilityEvaluator:
     """Evaluates multi-seed repeatability and variance stability."""
 
@@ -212,7 +219,7 @@ class Tier3StabilityEvaluator:
         mean_val = sum(seed_results) / len(seed_results)
         variance = sum((x - mean_val) ** 2 for x in seed_results) / len(seed_results)
         std_dev = math.sqrt(variance)
-        cv = std_dev / max(abs(mean_val), 1e-6)
+        cv = coefficient_of_variation(seed_results)
 
         notes.append(f"Multi-seed evaluated (n={len(seed_results)}, Mean={mean_val:.4f}, StdDev={std_dev:.4f}, CV={cv:.3%})")
 
@@ -229,6 +236,27 @@ class Tier3StabilityEvaluator:
             score = 40.0
             notes.append(f"High variance across seeds: Coefficient of Variation ({cv:.2%}) exceeds 10% (+40)")
 
+        return score, notes
+
+    @classmethod
+    def evaluate_by_metric(
+        cls,
+        seed_metric_results: dict[str, list[float]] | None = None,
+        single_run_clean: bool = True,
+        execution_succeeded: bool = True,
+    ) -> tuple[float, list[str]]:
+        """Tier 3 from real seed runs (docs/MULTI_SEED.md section 5): the metric with the largest CV decides.
+
+        Without a metric that has at least two values the single-run behavior of `evaluate` applies (the 75.0 baseline).
+        """
+        usable = {name: values for name, values in (seed_metric_results or {}).items() if len(values) >= 2}
+        if not usable:
+            return cls.evaluate(None, single_run_clean=single_run_clean, execution_succeeded=execution_succeeded)
+        worst = max(usable, key=lambda name: coefficient_of_variation(usable[name]))
+        score, notes = cls.evaluate(usable[worst], single_run_clean=single_run_clean,
+                                    execution_succeeded=execution_succeeded)
+        if execution_succeeded:
+            notes.insert(0, f"Metric '{worst}' has the largest CV of {len(usable)} metric(s) with seed results and decides")
         return score, notes
 
 
@@ -421,6 +449,7 @@ class ReproducibilityScorer:
         reproduced_metrics: dict[str, float],
         license_name: str,
         seed_results: list[float] | None = None,
+        seed_metric_results: dict[str, list[float]] | None = None,
         has_environment_file: bool = True,
         has_readme: bool = True,
         has_saved_artifacts: bool = True,
@@ -448,11 +477,18 @@ class ReproducibilityScorer:
         )
 
         # 3. Tier 3 Stability (tied to clean execution)
-        t3_score, t3_notes = Tier3StabilityEvaluator.evaluate(
-            seed_results=seed_results if execution_succeeded else None,
-            single_run_clean=execution_succeeded,
-            execution_succeeded=execution_succeeded,
-        )
+        if seed_metric_results:
+            t3_score, t3_notes = Tier3StabilityEvaluator.evaluate_by_metric(
+                seed_metric_results if execution_succeeded else None,
+                single_run_clean=execution_succeeded,
+                execution_succeeded=execution_succeeded,
+            )
+        else:
+            t3_score, t3_notes = Tier3StabilityEvaluator.evaluate(
+                seed_results=seed_results if execution_succeeded else None,
+                single_run_clean=execution_succeeded,
+                execution_succeeded=execution_succeeded,
+            )
 
         # 4. Tier 4 Artifacts
         t4_score, t4_notes = Tier4ArtifactsEvaluator.evaluate(

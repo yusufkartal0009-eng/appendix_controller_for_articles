@@ -1,0 +1,85 @@
+{
+  "paper_id": "synthetic_seed_free",
+  "protocol": "docs/PILOT_2.md",
+  "repro_radar_commit": "e347b3e3c3528f05020406216d822a4c5602b7a5",
+  "started_at": "2026-10-20T00:05:23+00:00",
+  "repo_url": "<TMP>/synthetic_seed_free_repo",
+  "pinned_commit": "180b7544068a10fb1f170bd4d2f7c0eea6b4973f",
+  "target_script": "train.py",
+  "container_command": "python /workspace/repo/train.py --seed 2",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "multi_seed": {
+    "seed": 2,
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "seed_source": "scripts/synthetic_seeds.py: train.py --seed",
+    "note": "not a protocol run (docs/MULTI_SEED.md): one of several runs of the same paper that differ only in the paper's own seed parameter"
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "180b7544068a10fb1f170bd4d2f7c0eea6b4973f",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 0.044
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "fix",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<TMP>\\staging_synthetic_seed_free\\synthetic_seed_free_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 0.785,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 0.554,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 12226560
+  },
+  "finished_at": "2026-10-20T00:05:24+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
