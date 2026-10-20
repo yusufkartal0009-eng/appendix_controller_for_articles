@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(ai): explainer of the difference between two runs (2026-10-20 03:16 +03:00, Issue #35)
+- `src/diagnosis/compare.py`, `scripts/diagnosis_comparisons.py`, `docs/DIAGNOSIS_COMPARISONS.md`, and `docs/DIAGNOSIS.md` section 8 (rules R1 to R6): the difference between two runs, with "same metrics, different time" kept apart from "different metrics", and no cause named.
+- Evidence: 16 new tests; the generated document is checked against the records by a test (9 pairs).
+- Not verified: the shift thresholds; the database tag `Needs Review` (not done).
+
 ### feat(ai): template-based diagnosis report and cli.py diagnose (2026-10-20 03:12 +03:00, Issue #33)
 - `src/diagnosis/report.py` (statements with fields and sources, unknown written as unknown), `cli.py diagnose <run_dir>`, `scripts/diagnosis_examples.py`, and `docs/DIAGNOSIS_EXAMPLES.md` (31 stored runs of Pilots 1 to 4, memory runs, and CPU runs).
 - Evidence: 17 new tests; the examples document is checked against the records by a test.

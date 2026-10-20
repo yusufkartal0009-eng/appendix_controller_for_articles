@@ -26,6 +26,9 @@ FIELD_SOURCES: dict[str, tuple[str, str]] = {
     "started_at": (RECORD_NAME, "started_at"),
     "finished_at": (RECORD_NAME, "finished_at"),
     "python_version": (RECORD_NAME, "python_version"),
+    "repro_radar_commit": (RECORD_NAME, "repro_radar_commit"),
+    "image": (REPORT_NAME, "image"),
+    "installed_packages": (REPORT_NAME, "installed_packages"),
     "container_command": (RECORD_NAME, "container_command"),
     "stage_status": (RECORD_NAME, "stage.status"),
     "stage_error": (RECORD_NAME, "stage.error"),
@@ -44,6 +47,7 @@ FIELD_SOURCES: dict[str, tuple[str, str]] = {
     "memory_override": (RECORD_NAME, "memory_override"),
     "cpus_override": (RECORD_NAME, "cpus_override"),
     "timeout_override": (RECORD_NAME, "timeout_override"),
+    "pilot3_change": (RECORD_NAME, "pilot3_change"),
 }
 
 
@@ -66,6 +70,9 @@ class DiagnosisInput:
     started_at: str | None = None
     finished_at: str | None = None
     python_version: str | None = None
+    repro_radar_commit: str | None = None
+    image: str | None = None
+    installed_packages: dict[str, str] | None = None
     container_command: str | None = None
     stage_status: str | None = None
     stage_error: str | None = None
@@ -85,6 +92,7 @@ class DiagnosisInput:
     memory_override: dict[str, Any] | None = None
     cpus_override: dict[str, Any] | None = None
     timeout_override: dict[str, Any] | None = None
+    pilot3_change: dict[str, Any] | None = None
     stderr_tail: list[LogLine] = field(default_factory=list)
     stdout_tail: list[LogLine] = field(default_factory=list)
     files_present: list[str] = field(default_factory=list)
@@ -138,6 +146,8 @@ def load_diagnosis_input(run_dir: Path | str, claims: dict[str, float] | None = 
             continue
         if name == "metrics":
             value = {k: float(v) for k, v in value.items() if isinstance(v, (int, float)) and not isinstance(v, bool)}
+        if name == "installed_packages":
+            value = {p["name"]: p["version"] for p in value if isinstance(p, dict) and "name" in p and "version" in p}
         setattr(result, name, value)
         result.sources[name] = f"{file}: {key}"
     # A run that did not start the run phase has no run_report; the pilot record's own `run` block is the fallback.

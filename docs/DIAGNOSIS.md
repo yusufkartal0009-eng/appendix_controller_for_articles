@@ -58,3 +58,22 @@ The prompts are not evidence of anything: they have not been used with a real mo
 - It does not read the paper. It knows a run, not the paper's text.
 - It does not match a claim to a metric by meaning. A claim is compared with the output only when a metric has the same name; otherwise the report lists both and says that nothing was compared.
 - It does not accept or reject claims, and it does not score; scoring is `src/scoring.py`.
+
+## 8. Comparing two runs (#35)
+
+`src/diagnosis/compare.py` (`compare_runs(run_a, run_b)`, `docs/DIAGNOSIS_COMPARISONS.md` from `scripts/diagnosis_comparisons.py`) explains the difference between two stored runs of the same paper. It lists the **recorded** differences and the size of the metric shifts. It does not name a cause, because the records do not show which recorded difference, if any, produced a shift.
+
+Recorded factors compared: CPUs, memory limit, GPU requested, seed (runs of `docs/MULTI_SEED.md`), container command, Python version, sandbox image, tool commit, installed package versions, the Pilot 3 paper settings, and whether a limit was set by hand. A factor missing from a record is listed as "not recorded", never as equal.
+
+Size of a metric shift (relative difference of the two stored values): `identical` (equal as stored), `small` (at most 0.1%), `moderate` (at most the Tier 2 tolerance, 5%), `large` (more than that). The 0.1% line is a convention of this report, not a property of floating-point arithmetic; the stored metrics are rounded to the digits the extractor kept, so "identical" means identical as stored.
+
+| Rule | When | What the report says |
+|---|---|---|
+| R1 | same metrics, same time | the repeat of this setup gave the same stored metrics and time |
+| R2 | same metrics, different time | **same metrics, different time**: lists the recorded differences, says the records do not show which changed the time, and that the load of the machine is not in the files |
+| R3 | different metrics, different seed | the seeds differ; whether this paper's seed controls these metrics is not shown |
+| R4 | different metrics, different CPUs, memory, GPU, or package versions | these can change numerical results in some programs; the records do not show whether they did here |
+| R5 | different metrics, no recorded factor differs | not explained by the stored files; a large shift suggests that a person looks at the pair |
+| R6 | different status | the metrics are compared only if both runs have some |
+
+Metric outcome of a pair: `SAME_METRICS` (every shared metric identical; follows R1 or R2), `SMALL_METRIC_SHIFT` (the largest shift is small; follows R3 to R5 with the wording "a small shift"), `DIFFERENT_METRICS` (at least one shift is moderate or large; follows R3 to R5), and `NOT_COMPARABLE` (a run has no metric, or the runs share no metric name; follows R6).
