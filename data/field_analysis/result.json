@@ -1,0 +1,641 @@
+{
+  "protocol": "docs/FIELD_ANALYSIS.md",
+  "pool": [
+    "paper_002",
+    "paper_003",
+    "paper_004",
+    "paper_005",
+    "paper_006",
+    "paper_008",
+    "paper_101",
+    "paper_102",
+    "paper_103",
+    "paper_104",
+    "paper_105",
+    "paper_106"
+  ],
+  "reference_runs": {
+    "paper_002": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 1"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 3"
+      }
+    },
+    "paper_003": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 1"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": true,
+        "pilot_success": true,
+        "source": "Pilot 3"
+      }
+    },
+    "paper_004": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 1"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 3"
+      }
+    },
+    "paper_005": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 1"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 3"
+      }
+    },
+    "paper_006": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 1"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": true,
+        "pilot_success": true,
+        "source": "Pilot 3"
+      }
+    },
+    "paper_008": {
+      "first": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 1"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 3"
+      }
+    },
+    "paper_101": {
+      "first": {
+        "install_success": false,
+        "run_success": true,
+        "pilot_success": false,
+        "source": "Pilot 4 first attempt",
+        "category": "RAN_WITHOUT_INSTALLED_DEPENDENCIES"
+      },
+      "final": {
+        "install_success": false,
+        "run_success": true,
+        "pilot_success": false,
+        "source": "Pilot 4 after the correction round",
+        "category": "RAN_WITHOUT_INSTALLED_DEPENDENCIES"
+      }
+    },
+    "paper_102": {
+      "first": {
+        "install_success": true,
+        "run_success": true,
+        "pilot_success": true,
+        "source": "Pilot 4 first attempt",
+        "category": null
+      },
+      "final": {
+        "install_success": true,
+        "run_success": true,
+        "pilot_success": true,
+        "source": "Pilot 4 after the correction round",
+        "category": null
+      }
+    },
+    "paper_103": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 first attempt",
+        "category": "MISSING_DEPENDENCY"
+      },
+      "final": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 after the correction round",
+        "category": "MISSING_DEPENDENCY"
+      }
+    },
+    "paper_104": {
+      "first": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 first attempt",
+        "category": "DATA_NOT_ACCESSIBLE"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 after the correction round",
+        "category": "DATA_NOT_ACCESSIBLE"
+      }
+    },
+    "paper_105": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 first attempt",
+        "category": "MISSING_DEPENDENCY"
+      },
+      "final": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 after the correction round",
+        "category": "MISSING_DEPENDENCY"
+      }
+    },
+    "paper_106": {
+      "first": {
+        "install_success": false,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 first attempt",
+        "category": "MISSING_DEPENDENCY"
+      },
+      "final": {
+        "install_success": true,
+        "run_success": false,
+        "pilot_success": false,
+        "source": "Pilot 4 after the correction round",
+        "category": "MISSING_DEPENDENCY"
+      }
+    }
+  },
+  "rates": {
+    "seed papers": {
+      "first": {
+        "install_success": {
+          "k": 1,
+          "n": 6,
+          "proportion": 0.167
+        },
+        "run_success": {
+          "k": 0,
+          "n": 6,
+          "proportion": 0.0
+        },
+        "pilot_success": {
+          "k": 0,
+          "n": 6,
+          "proportion": 0.0
+        }
+      },
+      "final": {
+        "install_success": {
+          "k": 6,
+          "n": 6,
+          "proportion": 1.0
+        },
+        "run_success": {
+          "k": 2,
+          "n": 6,
+          "proportion": 0.333
+        },
+        "pilot_success": {
+          "k": 2,
+          "n": 6,
+          "proportion": 0.333
+        }
+      }
+    },
+    "expansion papers": {
+      "first": {
+        "install_success": {
+          "k": 2,
+          "n": 6,
+          "proportion": 0.333
+        },
+        "run_success": {
+          "k": 2,
+          "n": 6,
+          "proportion": 0.333
+        },
+        "pilot_success": {
+          "k": 1,
+          "n": 6,
+          "proportion": 0.167
+        }
+      },
+      "final": {
+        "install_success": {
+          "k": 3,
+          "n": 6,
+          "proportion": 0.5
+        },
+        "run_success": {
+          "k": 2,
+          "n": 6,
+          "proportion": 0.333
+        },
+        "pilot_success": {
+          "k": 1,
+          "n": 6,
+          "proportion": 0.167
+        }
+      }
+    },
+    "all 12 papers": {
+      "first": {
+        "install_success": {
+          "k": 3,
+          "n": 12,
+          "proportion": 0.25
+        },
+        "run_success": {
+          "k": 2,
+          "n": 12,
+          "proportion": 0.167
+        },
+        "pilot_success": {
+          "k": 1,
+          "n": 12,
+          "proportion": 0.083
+        }
+      },
+      "final": {
+        "install_success": {
+          "k": 9,
+          "n": 12,
+          "proportion": 0.75
+        },
+        "run_success": {
+          "k": 4,
+          "n": 12,
+          "proportion": 0.333
+        },
+        "pilot_success": {
+          "k": 3,
+          "n": 12,
+          "proportion": 0.25
+        }
+      }
+    }
+  },
+  "interventions": {
+    "paper_002": {
+      "I1_command_or_setup_by_a_person": true,
+      "I2_correction_or_setting_after_a_failure": true,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": true
+    },
+    "paper_003": {
+      "I1_command_or_setup_by_a_person": true,
+      "I2_correction_or_setting_after_a_failure": true,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": true
+    },
+    "paper_004": {
+      "I1_command_or_setup_by_a_person": true,
+      "I2_correction_or_setting_after_a_failure": true,
+      "I3_tool_change_for_this_paper": true,
+      "I4_claim_accepted_by_a_person": true
+    },
+    "paper_005": {
+      "I1_command_or_setup_by_a_person": true,
+      "I2_correction_or_setting_after_a_failure": true,
+      "I3_tool_change_for_this_paper": true,
+      "I4_claim_accepted_by_a_person": true
+    },
+    "paper_006": {
+      "I1_command_or_setup_by_a_person": true,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": true,
+      "I4_claim_accepted_by_a_person": true
+    },
+    "paper_008": {
+      "I1_command_or_setup_by_a_person": true,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": true,
+      "I4_claim_accepted_by_a_person": true
+    },
+    "paper_101": {
+      "I1_command_or_setup_by_a_person": false,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": false
+    },
+    "paper_102": {
+      "I1_command_or_setup_by_a_person": false,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": false
+    },
+    "paper_103": {
+      "I1_command_or_setup_by_a_person": false,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": false
+    },
+    "paper_104": {
+      "I1_command_or_setup_by_a_person": false,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": false
+    },
+    "paper_105": {
+      "I1_command_or_setup_by_a_person": false,
+      "I2_correction_or_setting_after_a_failure": false,
+      "I3_tool_change_for_this_paper": false,
+      "I4_claim_accepted_by_a_person": false
+    },
+    "paper_106": {
+      "I1_command_or_setup_by_a_person": false,
+      "I2_correction_or_setting_after_a_failure": true,
+      "I3_tool_change_for_this_paper": true,
+      "I4_claim_accepted_by_a_person": false
+    }
+  },
+  "autonomy": {
+    "seed papers": {
+      "first": {
+        "concluded_autonomously": {
+          "k": 0,
+          "n": 6
+        },
+        "succeeded_autonomously": {
+          "k": 0,
+          "n": 6
+        }
+      },
+      "final": {
+        "concluded_autonomously": {
+          "k": 0,
+          "n": 6
+        },
+        "succeeded_autonomously": {
+          "k": 0,
+          "n": 6
+        }
+      },
+      "papers_with_an_accepted_claim_I4": {
+        "k": 6,
+        "n": 6
+      }
+    },
+    "expansion papers": {
+      "first": {
+        "concluded_autonomously": {
+          "k": 6,
+          "n": 6
+        },
+        "succeeded_autonomously": {
+          "k": 1,
+          "n": 6
+        }
+      },
+      "final": {
+        "concluded_autonomously": {
+          "k": 5,
+          "n": 6
+        },
+        "succeeded_autonomously": {
+          "k": 1,
+          "n": 6
+        }
+      },
+      "papers_with_an_accepted_claim_I4": {
+        "k": 0,
+        "n": 6
+      }
+    },
+    "all 12 papers": {
+      "first": {
+        "concluded_autonomously": {
+          "k": 6,
+          "n": 12
+        },
+        "succeeded_autonomously": {
+          "k": 1,
+          "n": 12
+        }
+      },
+      "final": {
+        "concluded_autonomously": {
+          "k": 5,
+          "n": 12
+        },
+        "succeeded_autonomously": {
+          "k": 1,
+          "n": 12
+        }
+      },
+      "papers_with_an_accepted_claim_I4": {
+        "k": 6,
+        "n": 12
+      }
+    }
+  },
+  "factors": {
+    "rows": [
+      {
+        "paper_id": "paper_002",
+        "pool": "seed",
+        "F1": 2,
+        "F2": 1.93,
+        "F3": 12,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_003",
+        "pool": "seed",
+        "F1": 4,
+        "F2": 1.88,
+        "F3": 28,
+        "first_pilot_success": false,
+        "final_pilot_success": true
+      },
+      {
+        "paper_id": "paper_004",
+        "pool": "seed",
+        "F1": 3,
+        "F2": 0.87,
+        "F3": 439,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_005",
+        "pool": "seed",
+        "F1": 3,
+        "F2": 5.39,
+        "F3": 10,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_006",
+        "pool": "seed",
+        "F1": 3,
+        "F2": 4.82,
+        "F3": 194,
+        "first_pilot_success": false,
+        "final_pilot_success": true
+      },
+      {
+        "paper_id": "paper_008",
+        "pool": "seed",
+        "F1": 3,
+        "F2": 4.62,
+        "F3": 5,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_101",
+        "pool": "expansion",
+        "F1": 3,
+        "F2": 0.02,
+        "F3": 0,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_102",
+        "pool": "expansion",
+        "F1": 4,
+        "F2": 0.41,
+        "F3": 3,
+        "first_pilot_success": true,
+        "final_pilot_success": true
+      },
+      {
+        "paper_id": "paper_103",
+        "pool": "expansion",
+        "F1": 4,
+        "F2": 4.07,
+        "F3": 12,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_104",
+        "pool": "expansion",
+        "F1": 4,
+        "F2": 0.16,
+        "F3": 8,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_105",
+        "pool": "expansion",
+        "F1": 3,
+        "F2": 2.48,
+        "F3": 9,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      },
+      {
+        "paper_id": "paper_106",
+        "pool": "expansion",
+        "F1": 3,
+        "F2": 4.29,
+        "F3": 0,
+        "first_pilot_success": false,
+        "final_pilot_success": false
+      }
+    ],
+    "medians": {
+      "first_pilot_success": {
+        "F1": {
+          "with pilot success": {
+            "n": 1,
+            "median": 4
+          },
+          "without pilot success": {
+            "n": 11,
+            "median": 3
+          }
+        },
+        "F2": {
+          "with pilot success": {
+            "n": 1,
+            "median": 0.41
+          },
+          "without pilot success": {
+            "n": 11,
+            "median": 2.48
+          }
+        },
+        "F3": {
+          "with pilot success": {
+            "n": 1,
+            "median": 3
+          },
+          "without pilot success": {
+            "n": 11,
+            "median": 10
+          }
+        }
+      },
+      "final_pilot_success": {
+        "F1": {
+          "with pilot success": {
+            "n": 3,
+            "median": 4
+          },
+          "without pilot success": {
+            "n": 9,
+            "median": 3
+          }
+        },
+        "F2": {
+          "with pilot success": {
+            "n": 3,
+            "median": 1.88
+          },
+          "without pilot success": {
+            "n": 9,
+            "median": 2.48
+          }
+        },
+        "F3": {
+          "with pilot success": {
+            "n": 3,
+            "median": 28
+          },
+          "without pilot success": {
+            "n": 9,
+            "median": 9
+          }
+        }
+      }
+    }
+  }
+}

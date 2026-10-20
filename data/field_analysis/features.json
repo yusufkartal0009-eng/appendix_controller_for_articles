@@ -1,0 +1,266 @@
+{
+  "protocol": "docs/FIELD_ANALYSIS.md section 6",
+  "papers": {
+    "paper_002": {
+      "pinned_commit": "ddf5e852c05e42d7032604638ede86c81f9a95ea",
+      "readme_file": "README.md",
+      "readme_sha256": "64105b9b40617902662ee6e45b9d2d6b9eb335c51f896fd046f7ec11b36dcc00",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": false,
+        "data_described": false
+      },
+      "F1_documentation_quality": 2,
+      "commit_date": "2024-10-23T21:15:20+02:00",
+      "first_protocol_run_started_at": "2026-09-30T18:32:15+00:00",
+      "F2_code_age_years": 1.93,
+      "F3_declared_dependencies": 12,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 12
+        }
+      ]
+    },
+    "paper_003": {
+      "pinned_commit": "e3ed46cac38568785289d8fa16b8cfa585bde27e",
+      "readme_file": "README.md",
+      "readme_sha256": "50f7994f73937093c01412164e07142d198c000fcb69a01041c7404552ca0215",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": true
+      },
+      "F1_documentation_quality": 4,
+      "commit_date": "2024-11-13T00:04:04+03:00",
+      "first_protocol_run_started_at": "2026-09-30T18:32:11+00:00",
+      "F2_code_age_years": 1.88,
+      "F3_declared_dependencies": 28,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 28
+        }
+      ]
+    },
+    "paper_004": {
+      "pinned_commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+      "readme_file": "README.md",
+      "readme_sha256": "ac2da5a73b397e8c4f85d98df3d8dc86116a3ad502d06d2d8ec3d1ee81437af8",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": false
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2025-11-17T21:25:45+03:00",
+      "first_protocol_run_started_at": "2026-09-30T18:32:08+00:00",
+      "F2_code_age_years": 0.87,
+      "F3_declared_dependencies": 439,
+      "dependency_files": [
+        {
+          "file": "environment-simple.yaml",
+          "entries": 24,
+          "kind": "conda environment"
+        },
+        {
+          "file": "environment.yaml",
+          "entries": 415,
+          "kind": "conda environment"
+        }
+      ]
+    },
+    "paper_005": {
+      "pinned_commit": "d275a232cea129299021051cd6ac94d2296e83c8",
+      "readme_file": "README.md",
+      "readme_sha256": "b07ce376bd8d933e61a56a2bfad6e618289472bf0d45d884eb35d34619c83dd2",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": false
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2021-05-11T14:11:25-04:00",
+      "first_protocol_run_started_at": "2026-09-30T18:32:11+00:00",
+      "F2_code_age_years": 5.39,
+      "F3_declared_dependencies": 10,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 10
+        }
+      ]
+    },
+    "paper_006": {
+      "pinned_commit": "e288e84c77a54cfd2ffb55a53678fb7cbbb16630",
+      "readme_file": "README.md",
+      "readme_sha256": "f84070627ad3c54e1f5a780427a44c4b6f2ecc34edf416afcc3c1affcef3f1dc",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": false
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2021-12-05T20:18:04-05:00",
+      "first_protocol_run_started_at": "2026-09-30T18:32:12+00:00",
+      "F2_code_age_years": 4.82,
+      "F3_declared_dependencies": 194,
+      "dependency_files": [
+        {
+          "file": "saint_environment.yml",
+          "entries": 194,
+          "kind": "conda environment"
+        }
+      ]
+    },
+    "paper_008": {
+      "pinned_commit": "b007c57121ec9082f6ef19ec7465d9df70767c26",
+      "readme_file": "README.md",
+      "readme_sha256": "b0f8207e3c5895e6be5e8100875fedefece871a46627d683201a5926c2deb4f0",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": false,
+        "data_described": true
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2022-02-14T19:03:22+08:00",
+      "first_protocol_run_started_at": "2026-09-30T18:32:15+00:00",
+      "F2_code_age_years": 4.62,
+      "F3_declared_dependencies": 5,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 5
+        }
+      ]
+    },
+    "paper_101": {
+      "pinned_commit": "af5d5e18eb99e75aa57358ff1caa1e0272b5aac3",
+      "readme_file": "README.md",
+      "readme_sha256": "f5ec921ba002b701c3c520a3fcd36e7ea194076b8afeb5a0fa441c7c7f969d6e",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": false
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2026-10-10T02:15:02+05:30",
+      "first_protocol_run_started_at": "2026-10-16T20:54:14+00:00",
+      "F2_code_age_years": 0.02,
+      "F3_declared_dependencies": 0,
+      "dependency_files": []
+    },
+    "paper_102": {
+      "pinned_commit": "ebb98157451122b6a1189d2597a77eca0839ac4c",
+      "readme_file": "README.md",
+      "readme_sha256": "dae9d5e71aa04ddd46c86ea0affd256d36c2520b03ecb4866fa303530fa71190",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": true
+      },
+      "F1_documentation_quality": 4,
+      "commit_date": "2026-05-21T09:01:02+08:00",
+      "first_protocol_run_started_at": "2026-10-16T20:54:17+00:00",
+      "F2_code_age_years": 0.41,
+      "F3_declared_dependencies": 3,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 3
+        }
+      ]
+    },
+    "paper_103": {
+      "pinned_commit": "a9b4a86d9a8e20abb68b1b1bdb99ffe4df0bba26",
+      "readme_file": "README.md",
+      "readme_sha256": "088f3e18007c370252717668b8f70944604f2269abd04f919c1353dfe85c30bf",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": true
+      },
+      "F1_documentation_quality": 4,
+      "commit_date": "2022-09-22T10:04:48-03:00",
+      "first_protocol_run_started_at": "2026-10-16T21:00:40+00:00",
+      "F2_code_age_years": 4.07,
+      "F3_declared_dependencies": 12,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 12
+        }
+      ]
+    },
+    "paper_104": {
+      "pinned_commit": "991ef0ed273eec6e70acb809469abbb45a0c275b",
+      "readme_file": "README.md",
+      "readme_sha256": "6bd7f2ab4dd6322fdb7fa32696b8fe5eb58fed690575f0e73122154713fadafb",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": true
+      },
+      "F1_documentation_quality": 4,
+      "commit_date": "2026-08-18T22:13:11+05:30",
+      "first_protocol_run_started_at": "2026-10-16T21:02:27+00:00",
+      "F2_code_age_years": 0.16,
+      "F3_declared_dependencies": 8,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 8
+        }
+      ]
+    },
+    "paper_105": {
+      "pinned_commit": "b3b5ac3fcbaabbb50e8bd69a075b46cd82a50378",
+      "readme_file": "README.md",
+      "readme_sha256": "0eaa7e66b2c584ede9fef21d6639138d8eec6caea562282f5a23d6ce34e4a42d",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": true,
+        "run_command_in_code_block": true,
+        "data_described": false
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2024-04-25T16:21:20+08:00",
+      "first_protocol_run_started_at": "2026-10-16T21:10:37+00:00",
+      "F2_code_age_years": 2.48,
+      "F3_declared_dependencies": 9,
+      "dependency_files": [
+        {
+          "file": "requirements.txt",
+          "entries": 9
+        }
+      ]
+    },
+    "paper_106": {
+      "pinned_commit": "aa0173672cd08a1e6a6ab7bab7760b7fbe8452a3",
+      "readme_file": "README.md",
+      "readme_sha256": "6cf3f7fa19c65fcc7f13c42a1bdaf12a9375e5e6f60a10ce3df0e799e20ec58d",
+      "readme_checks": {
+        "readme_exists": true,
+        "installation_instruction": false,
+        "run_command_in_code_block": true,
+        "data_described": true
+      },
+      "F1_documentation_quality": 3,
+      "commit_date": "2022-07-03T19:14:23Z",
+      "first_protocol_run_started_at": "2026-10-16T21:11:17+00:00",
+      "F2_code_age_years": 4.29,
+      "F3_declared_dependencies": 0,
+      "dependency_files": []
+    }
+  }
+}
