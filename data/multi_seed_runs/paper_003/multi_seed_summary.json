@@ -1,0 +1,128 @@
+{
+  "paper_id": "paper_003",
+  "protocol": "docs/MULTI_SEED.md",
+  "generated_at": "2026-10-20T01:41:15+00:00",
+  "seed_spec": {
+    "values": [
+      0,
+      1,
+      2
+    ],
+    "args": [
+      "output/california_housing/ft_transformer/default/{seed}.toml",
+      "-o",
+      "/workspace/output/ft_transformer_default_{seed}"
+    ],
+    "source": "bin/ft_transformer.py reads its configuration with lib.load_config() and calls zero.set_randomness(args['seed']); the repository holds output/california_housing/ft_transformer/default/0.toml to 14.toml, which differ from each other only in their first line, `seed = N` (0.toml, the file of the existing runs, and 2.toml compared line by line)."
+  },
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 14400
+  },
+  "runs": [
+    {
+      "seed": 0,
+      "record_dir": "data/multi_seed_runs/paper_003/seed_0",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 806.012,
+      "metrics": {
+        "loss": 0.106,
+        "rmse": 0.473
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 1,
+      "record_dir": "data/multi_seed_runs/paper_003/seed_1",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 585.094,
+      "metrics": {
+        "loss": 0.127,
+        "rmse": 0.47
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 2,
+      "record_dir": "data/multi_seed_runs/paper_003/seed_2",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 760.873,
+      "metrics": {
+        "loss": 0.119,
+        "rmse": 0.465
+      },
+      "used": true,
+      "reason_not_used": null
+    }
+  ],
+  "successful_seed_runs": 3,
+  "metrics": {
+    "loss": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "values": [
+        0.106,
+        0.127,
+        0.119
+      ],
+      "n": 3,
+      "mean": 0.11733333333333333,
+      "std_population": 0.00865383665716478,
+      "std_sample": 0.0105987420637231,
+      "cv": 0.07375428969174529
+    },
+    "rmse": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "values": [
+        0.473,
+        0.47,
+        0.465
+      ],
+      "n": 3,
+      "mean": 0.4693333333333333,
+      "std_population": 0.0032998316455372,
+      "std_sample": 0.004041451884327354,
+      "cv": 0.007030891290207102
+    }
+  },
+  "tier3": {
+    "score": 65.0,
+    "notes": [
+      "Metric 'loss' has the largest CV of 2 metric(s) with seed results and decides",
+      "Multi-seed evaluated (n=3, Mean=0.1173, StdDev=0.0087, CV=7.375%)",
+      "Moderate variance across seeds: Coefficient of Variation <= 10% (+65)"
+    ],
+    "decided_by": "loss",
+    "basis": "measured: the metric with the largest CV decides"
+  },
+  "tier3_by_metric": {
+    "loss": {
+      "cv": 0.07375428969174529,
+      "score_if_this_metric_alone": 65.0
+    },
+    "rmse": {
+      "cv": 0.007030891290207102,
+      "score_if_this_metric_alone": 100.0
+    }
+  },
+  "note": "std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading. tier3_by_metric shows what each metric alone would score; the score above is that of the metric with the largest CV."
+}
