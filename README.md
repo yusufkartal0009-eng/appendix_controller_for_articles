@@ -1,11 +1,22 @@
 # Repro Radar 🛰️
 
-[![Status](https://img.shields.io/badge/Status-In%20Development%20(Week%201%20Completed)-blue.svg)](#)
+[![Status](https://img.shields.io/badge/Status-Pilot%20Study%20Written-blue.svg)](#)
 [![Python](https://img.shields.io/badge/Python-3.11+-brightgreen.svg)](#)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Reproducibility Tier](https://img.shields.io/badge/Rubric-4--Tier%20Scoring-orange.svg)](docs/methodology.md)
 
 **Repro Radar** is an automated replication and verification platform for empirical AI and machine learning papers. It tests paper-code pairs within isolated sandbox environments, generates a **4-Tier Reproducibility Score** (0–100), and automates verification diagnostics with an **AI Decision Layer**.
+
+---
+
+## 📍 Current Status (2026-10-20)
+
+- **Built and checked:** the Docker sandbox (its isolation is checked against a real Docker daemon in CI, [`docs/SANDBOX_ACCEPTANCE.md`](docs/SANDBOX_ACCEPTANCE.md)), the corpus verification, claim extraction with a verbatim-quote guard and a person's review of every claim, `cli.py score` for a stored or a fresh real run, and a local dashboard.
+- **Pilots:** four pilots ran 12 papers in total ([`docs/report/REPORT.md`](docs/report/REPORT.md) section 6, [`docs/FIELD_ANALYSIS.md`](docs/FIELD_ANALYSIS.md)). The success rate is low, and the run setups of Pilots 2 and 3 were written by us (see *What a Result Means* below).
+- **Tier 3 (seed stability) now runs real seed runs** (#48, [`docs/MULTI_SEED.md`](docs/MULTI_SEED.md)): `paper_003` and `paper_006` were run with three seeds each (`data/multi_seed_runs/`, not protocol runs). Tier 3 is 65.0 for `paper_003` (its training loss varies more between seeds than its RMSE, which alone would score 100.0) and 100.0 for `paper_006`; no claim was compared, so Tier 2 is untouched.
+- **AI Decision Layer:** implemented as a rule-based diagnosis (`python cli.py diagnose <run directory>`, [`docs/DIAGNOSIS.md`](docs/DIAGNOSIS.md)). An optional language-model step is off by default and was tested only with a mock client, never with a real model.
+- **GPU:** opt-in (`--gpus all`). One synthetic paper with a modern PyTorch ran on the RTX 5070 through the real pipeline (`data/gpu_check/`); no real paper was run with the GPU.
+- **Not done:** no run has reproduced an accepted claim, so Tier 2 has not been exercised on a real result; no release is tagged (#45); the selection of external reference articles from ReScience C found none usable ([`docs/EXTERNAL_VALIDATION.md`](docs/EXTERNAL_VALIDATION.md)).
 
 ---
 
@@ -56,6 +67,8 @@ Repro Radar avoids subjective or punitive terminology. The AI Decision Layer ins
 - **`Partially Verified`**: Code executed cleanly and the majority of claims aligned (Score $\ge 60$).
 - **`Needs Review`**: Code compiled cleanly, but reproduced outputs diverged significantly from claims (suggesting hardware differences, dataset version mismatch, or unseeded stochastic operations).
 - **`Failed`**: Compilation or fatal runtime errors prevented execution (Tier 1 $< 50$).
+
+In this repository the layer is **rule-based**: it classifies a failure with the categories of Pilot 1, writes a report in which every sentence names the file and key it was read from, writes "unknown" for a value the files do not hold, names no cause beyond the quoted log line, and explains the difference between two runs without naming a cause either ([`docs/DIAGNOSIS.md`](docs/DIAGNOSIS.md), examples in [`docs/DIAGNOSIS_EXAMPLES.md`](docs/DIAGNOSIS_EXAMPLES.md) and [`docs/DIAGNOSIS_COMPARISONS.md`](docs/DIAGNOSIS_COMPARISONS.md)). The classifier was checked against labels written by hand ([`docs/DIAGNOSIS_VALIDATION.md`](docs/DIAGNOSIS_VALIDATION.md)); the statuses above are assigned by the scorer, not by the diagnosis.
 
 ---
 
@@ -137,6 +150,14 @@ Options of `cli.py score`: `--memory` (container memory: a size such as `8g`, or
 `cli.py score` runs the paper with its run setup (`run_setup` in `data/seed_papers.json`, the Pilot 2 flow of `scripts/run_pilot.py`), then scores the stored record and run report against the claims a person **accepted** (`python cli.py review-claims`). Datasets must already be in the cache (`scripts/fetch_data.py`). A claim is matched to the run's output by its question ID and is never guessed. A paper with no accepted claim gets the scorer's neutral Tier 2 baseline, and the output says so.
 
 > **The `--simulate`, `--simulate-failure`, `--simulate-divergence`, `--simulate-build-error`, `--simulate-clone-error`, and `--simulate-deps-error` flags are a test aid.** They print `SIMULATION FOR TESTING`, make up the reproduced numbers from the claimed ones, and are never saved to the database.
+
+### 7a. Explain a Run, or Run a Paper with Several Seeds
+```bash
+python cli.py diagnose data/pilot3_runs/paper_004              # a stored run explained from its files only (add --json for JSON)
+python scripts/run_multi_seed.py paper_006 --pilot3 --memory 50% --cpus 4   # one real run per seed (Tier 3, needs Docker)
+python scripts/field_analysis.py --check                       # the week 6 field analysis equals the stored records
+```
+`diagnose` calls no model and no network. `run_multi_seed.py` uses the paper's own seed parameter (`data/multi_seed_settings.json`; a paper without one is not run) and stores one record per seed under `data/multi_seed_runs/<paper_id>/`.
 
 ### 8. Lint & Run Test Suite
 ```bash
@@ -237,6 +258,10 @@ repro-radar/
 │   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
 │   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run in CI)
 │   ├── hash_run.py                     # SHA-256 manifest of a run directory; verify and compare runs (#29)
+│   ├── run_multi_seed.py               # One real sandbox run per seed; summary and Tier 3 (#48)
+│   ├── field_analysis.py               # Week 6 analysis over 12 papers: rates, autonomy, descriptive factors (#413)
+│   ├── gpu_paper_check.py              # Synthetic paper with a modern PyTorch run with the local GPU (#169)
+│   ├── evaluate_diagnosis_classifier.py # Classifier against hand-written labels (#36)
 │   ├── generate_academic_introduction_doc.py # Builds the introduction draft (.docx, not committed)
 │   ├── setup_github_backlog.py         # Provisions labels, milestones & backlog issues
 │   ├── setup_7week_board.py            # Provisions the weekly tracking board
@@ -248,7 +273,9 @@ repro-radar/
 │   ├── database.py          # SQLite engine, sessions, init, and seeding
 │   ├── migrations.py        # Versioned schema migrations for existing databases (#12)
 │   ├── models.py            # Pydantic and SQLAlchemy ORM schemas
-│   ├── scoring.py           # 4-Tier scoring engine and AI decision layer
+│   ├── scoring.py           # 4-Tier scoring engine and decision rules (Tier 3 from seed runs: multi_seed.py)
+│   ├── multi_seed.py        # Seed spec, applying a seed to a run setup, per-metric seed summary (#48)
+│   ├── diagnosis/           # Rule-based diagnosis: schema, classifier, report, run comparison, optional model backends
 │   ├── metric_extractor.py  # Metric parsing from logs, JSON, and sklearn reports
 │   ├── web/                 # Local dashboard: API routes, pages, badges, report export (python -m src.web)
 │   └── sandbox/
@@ -257,7 +284,9 @@ repro-radar/
 │       └── stager.py        # RepoStager & DependencyManifest parser
 ├── data/
 │   ├── schema.sql           # SQLite DDL schema
-│   └── seed_papers.json     # Seed corpus (checked by scripts/verify_corpus.py)
+│   ├── seed_papers.json     # Seed corpus (checked by scripts/verify_corpus.py)
+│   ├── multi_seed_settings.json # The seed parameters of the seed papers (#48)
+│   └── pilot*_runs/, multi_seed_runs/, field_analysis/, diagnosis_validation/, gpu_check/  # Stored records and results
 ├── docs/
 │   ├── BLUEPRINT.md         # Master project blueprint and milestone gates
 │   ├── ARCHITECTURE.md      # System constraints, components, and contracts
@@ -270,6 +299,8 @@ repro-radar/
 │   ├── SANDBOX_ACCEPTANCE.md  # Real-Docker evidence of sandbox isolation
 │   ├── DECISIONS.md           # Security-relevant decisions with risks and evidence
 │   ├── methodology.md       # Reproducibility scoring rubric and formulas
+│   ├── MULTI_SEED.md, DIAGNOSIS.md, FIELD_ANALYSIS.md # Tier 3 design, diagnosis layer, week 6 analysis
+│   ├── report/REPORT.md     # The final report (its numbers are generated: scripts/report_numbers.py)
 │   ├── project_roadmap.md   # 7-week detailed roadmap
 │   └── assets/              # Images used by the docs (the generated banner is not committed)
 └── tests/

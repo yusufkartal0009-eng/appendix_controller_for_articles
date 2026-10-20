@@ -156,3 +156,16 @@ def test_the_pilot3_document_and_the_report_are_in_sync_with_the_stored_files():
     from src.config import PROJECT_ROOT
     for path in (PROJECT_ROOT / "docs" / "PILOT_3.md", PROJECT_ROOT / "docs" / "report" / "REPORT.md"):
         assert rn.mismatches(path.read_text(encoding="utf-8").replace("\r\n", "\n")) == [], path
+
+
+def test_the_blocks_added_for_the_final_pass_render_their_stored_facts():
+    seeds = rn.render("multiseed")
+    assert "`paper_003` | 3 of 3 | 65.0" in seeds and "`paper_006` | 3 of 3 | 100.0" in seeds
+    assert "`synthetic_seeded` yes" in seeds and "`loss`; `loss` 65.0, `rmse` 100.0" in seeds
+    gpu = rn.render("gpucheck")
+    assert "2.8.0+cu128 / 12.8" in gpu and "cuda:0; result equal to the CPU result: True" in gpu and "Checks passed | 8 of 8" in gpu
+    validation = rn.render("diagnosisvalidation")
+    assert "| Real runs | 46 | 46 / 46 | 9 / 10 | 36 / 36 | 45 / 46 | R41 |" in validation
+    field = rn.render("fieldanalysis")
+    assert "| all 12 papers | final | 9 / 12 | 4 / 12 | 3 / 12 | 5 / 12 | 1 / 12 |" in field
+    assert "evaluated: 65; selected: 0" in rn.render("rescience")

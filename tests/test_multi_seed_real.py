@@ -80,3 +80,13 @@ def test_the_default_seed_gives_the_metrics_of_the_earlier_single_runs(paper, de
     earlier = json.loads((REPO / "data" / "cpu_runs" / paper / "run_report.json").read_text(encoding="utf-8"))["metrics"]
     seed_run = json.loads((ROOT / paper / f"seed_{default_seed}" / "run_report.json").read_text(encoding="utf-8"))["metrics"]
     assert seed_run == earlier  # 0.toml (paper_003) and --set_seed 1 (paper_006) are what every earlier run used
+
+
+def test_the_readme_quotes_the_stored_tier3_scores():
+    if not {"paper_003", "paper_006"} <= set(PAPERS):
+        pytest.skip("both papers' seed runs are needed")
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    first, second = summary_of("paper_003")["tier3"]["score"], summary_of("paper_006")["tier3"]["score"]
+    assert f"Tier 3 is {first} for `paper_003`" in readme and f"and {second} for `paper_006`" in readme
+    progress = (REPO / "docs" / "PROGRESS.md").read_text(encoding="utf-8")
+    assert f"Tier 3 is {first} for `paper_003`" in progress and f"and {second} for `paper_006`" in progress

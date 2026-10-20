@@ -4,38 +4,46 @@
 
 ---
 
-## Current Status (2026-10-03 20:55 +03:00): 2026-10-01 Plan Recorded, Stage 0b and Stage 1 Next
+## Current Status (2026-10-20 06:03 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; External Reference and Two Issues Open
 
-- **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). Stage 0 is done (#167, #168; decisions D-004 to D-007). Next: the D0 dashboard skeleton (#170, stage 0b) and claim extraction steps 1.1-1.3 (#131, #162).
-- **Pilot 1** (`docs/PILOT_WEEK2.md`): pilot success 0 / 6, install success 1 / 6, run success 0 / 6. Pilot 2 (#171) runs on the owner's machine once Docker is installed (#172).
-- **Claim extraction:** W1 schema (#129), W2 PDF text (#130), W3 API extractor (#131, PR #156; never called, no key), and W4 quote guard (#132) are merged. Extraction is now agent-assisted, with no API key (D-004). No extracted claim has been approved yet.
-- **CLI:** `cli.py score` still produces simulated numbers (GA-2, #136, stage 3).
-- **Planned Milestones:** M0 to M7 (45 trackable issues cataloged in `docs/BLUEPRINT.md`)
-- **Functional Areas:** `corpus`, `sandbox`, `scoring`, `ai`, `web`, `devops`
-- **Tests:** 496 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). CI: Ubuntu, Windows, sandbox image, corpus verification, and real-Docker sandbox acceptance with 20 checks for each of the Python 3.11, 3.9, and 3.8 images
+- **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). The stages are recorded in the entries below; the final report is `docs/report/REPORT.md` and its numbers are generated (`python scripts/report_numbers.py --check`).
+- **Pilots** (12 papers: 6 seed papers in Pilots 1 to 3, 6 new papers in Pilot 4): pilot success 0 / 6 (Pilot 1), 1 / 6 (Pilot 2), 2 / 6 (Pilot 3, with four settings chosen after Pilot 2's failures), and 1 / 6 for the new papers at their first attempt (Pilot 4). `docs/FIELD_ANALYSIS.md` section 8 (generated) has the pool-wide rates, the human-intervention table, the autonomy rate, and a descriptive factor table (exploratory, n = 12).
+- **Claim extraction:** 13 claims accepted by the owner. No run has reproduced an accepted claim, so Tier 2 has not been exercised on a real result (REPORT section 6.3).
+- **Tier 3 (stability):** implemented (#48, `docs/MULTI_SEED.md`): a paper with a seed parameter of its own is run once per seed. Two synthetic papers check the path against values computed on the host; `paper_003` and `paper_006` ran with three seeds each (`data/multi_seed_runs/`; not protocol runs). Tier 3 is 65.0 for `paper_003` (decided by its training loss; `rmse` alone would give 100.0) and 100.0 for `paper_006`.
+- **AI Decision Layer:** a rule-based diagnosis (#31 to #36, `docs/DIAGNOSIS.md`, `python cli.py diagnose <run dir>`): input schema, failure classifier, template report, run comparison, optional model backends, and a hand-labeled validation. #34 and #35 stay open with a done/left comment. Not tried with a real language model.
+- **GPU:** one synthetic paper with `torch==2.8.0` (CUDA 12.8) ran with `--gpus all` on the RTX 5070 through the real pipeline (`data/gpu_check/`, `docs/ENVIRONMENT.md`); no real paper was run with the GPU.
+- **External reference:** the ReScience C selection evaluated 65 articles and selected none (`docs/EXTERNAL_VALIDATION.md`); no external run was made.
+- **Open:** the release (#45), the old M3 issues (#19 to #24), #34 and #35, the standing issue #115, and `docs/PLAN_2026-10-01.md` question Y2 (the AI-attribution rule; issue #165 does not exist in this repository).
+- **Tests:** 928 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
 
 ---
 
 ## Milestone Roadmap & Progress
 
-Issue numbers and open/closed counts match GitHub as of 2026-10-03 20:55 +03:00 (issues only, not PRs), counted with #175 closed by its PR. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
+Issue numbers and open/closed counts match GitHub as of 2026-10-20 06:03 +03:00 (issues only, not PRs), counted with #48 closed by this PR. Backlog ranges are the per-issue items listed in `docs/BLUEPRINT.md`; partly implemented open issues carry a status note on GitHub. Open/closed also includes issues added after the backlog (e.g. M2: #48, #80, #86, #88, #90, #92).
 
 | Milestone | Focus | Backlog issues | Open / closed | Status |
 |---|---|:---:|:---:|:---:|
-| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 4 / 19 | IN PROGRESS |
-| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 12 / 8 | IN PROGRESS |
-| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 9 / 12 | IN PROGRESS |
-| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 10 / 1 | QUEUED |
-| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 3 / 5 | IN PROGRESS |
-| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 6 / 1 | QUEUED |
-| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #37 – #41 | 6 / 0 | QUEUED |
-| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 6 / 12 | IN PROGRESS |
+| **M0: Baseline Hygiene & Audit** | Seed audit, projectflow adoption, hygiene tests | #2 – #6 | 1 / 32 | IN PROGRESS |
+| **M1: Seed Corpus & Relational Data Foundation** | ArXiv ingestion, repo verification, claims schema | #7 – #12 | 3 / 29 | IN PROGRESS |
+| **M2: Isolated Container Sandbox** | Docker runner, cgroups, network isolation, timeout | #13 – #18 | 5 / 28 | IN PROGRESS |
+| **M3: Static Code Analysis & Dependency Solver** | AST scanner, manifest parser, unpinned solver, GPU flags | #19 – #24 | 6 / 5 | IN PROGRESS |
+| **M4: Empirical Metric Extraction Engine** | Regex log parsers, stdout extraction, multi-seed CV, rubric | #25 – #30, #55 | 1 / 9 | IN PROGRESS |
+| **M5: AI Decision Layer & Diagnostics** | Failure classifier, neutral reports, discrepancy explainer | #31 – #36 | 2 / 5 | IN PROGRESS |
+| **M6: Web Dashboard & Reporting Portal** | FastAPI REST API, leaderboard UI, SVG badges, PDF reports | #37 – #41 | 0 / 6 | DONE (local dashboard) |
+| **M7: Verification Suite & Production Release** | Pilot verification, contribution guide, CI/CD, v1.0 release | #42 – #46 | 1 / 18 | IN PROGRESS |
 
 The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella issues (#47 – #53) were closed as completed or as duplicates of the backlog above and moved into the matching M milestones.
 
 ---
 
 ## Changelog & Completed Work
+
+### docs(report): final consistency pass (2026-10-20 06:03 +03:00, Issues #48 and #413)
+- Final consistency pass: `docs/report/REPORT.md` (new sections 6.4a, 6.5a, 6.6, 6.7; abstract, limitations, conclusion, and reproducibility statement updated; five new generated blocks in `scripts/report_numbers.py`), `README.md` (status, AI layer, quickstart, layout), the Current Status and the milestone counts of this file, and a note in `docs/INTRODUCTION_SOURCES.md` (#48, #413).
+- Checks: `report_numbers.py --check` in sync; `verify_sources.py` all verified; `verify_corpus.py` 6 of 6; Turkish-letter scan 0 lines in 889 files.
+- Evidence: 2 new tests.
+- Not verified: a second reader; the new sections are not in the claim-to-source tables.
 
 ### data(scoring): real seed runs of paper_006 (2026-10-20 06:00 +03:00, Issue #48)
 - Real seed runs: `paper_006`, seeds 1, 2, 3 (`data/multi_seed_runs/paper_006/`, `multi_seed_summary.json`), `docs/MULTI_SEED.md` section 9, `docs/DIAGNOSIS_COMPARISONS.md` regenerated. Correction: the Progress entry of PR #418 said 7 new tests; it was 6.

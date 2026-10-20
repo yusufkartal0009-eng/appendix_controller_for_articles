@@ -28,6 +28,12 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
   command and every correction, and the failure categories (`data/pilot4_runs/summary.md`, `scripts/pilot4_report.py`, #376)
 - `extraction`: the claim extraction: quote guard, A/B agreement, the owner's review, and the gold set
   (`data/claims/guard_report.json`, `consistency.json`, `review_decisions.json`, `gold_score_pass_A.json`)
+- `multiseed`: Tier 3 from real seed runs: the synthetic papers and the real papers (`data/synthetic_seeds/result.json`,
+  `data/multi_seed_runs/*/multi_seed_summary.json`; #48)
+- `gpucheck`: the synthetic paper that needs a modern PyTorch, run with the local GPU (`data/gpu_check/result.json`; #169)
+- `diagnosisvalidation`: the failure classifier against hand-written labels (`data/diagnosis_validation/results.json`; #36)
+- `fieldanalysis`: the week 6 field analysis over 12 papers (`data/field_analysis/result.json`; #413)
+- `rescience`: the selection of external-validation articles (`data/external_validation/evaluation.json`; #400)
 
 Nothing in a block is typed by hand: a hand edit makes `--check` (and its test) fail.
 """
@@ -225,7 +231,121 @@ def extraction_block(data: Path = DATA) -> str:
     return "\n".join(lines)
 
 
-BLOCKS = {"pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
+def _fmt(value: float, digits: int = 4) -> str:
+    return f"{value:.{digits}f}".rstrip("0").rstrip(".")
+
+
+def _metric_rows(label: str, summary: dict[str, Any]) -> list[str]:
+    rows = []
+    for name, m in sorted(summary["metrics"].items()):
+        rows.append(f"| {label} | `{name}` | {m['n']} | {_fmt(m['mean'])} | {_fmt(m['std_population'])} | "
+                    f"{_fmt(m['std_sample'])} | {m['cv'] * 100:.3f}% |")
+    return rows
+
+
+def multiseed_block(data: Path = DATA) -> str:
+    synthetic = _load(data / "synthetic_seeds" / "result.json")
+    lines = [HEADER.format(sources="data/synthetic_seeds/result.json and data/multi_seed_runs/*/multi_seed_summary.json"), "",
+             "| Paper | Metric | Seed runs | Mean | Std (population) | Std (sample) | CV |", "|---|---|---|---|---|---|---|"]
+    rows: list[tuple[str, Any, Any, str, str]] = []  # label, successful runs, score, basis, deciding metric and each metric alone
+    for paper_id, result in synthetic["papers"].items():
+        summary = _load(data / "synthetic_seeds" / paper_id / "multi_seed_summary.json")
+        lines += _metric_rows(f"`{paper_id}` (synthetic)", summary)
+        rows.append((f"`{paper_id}` (synthetic)", result["successful_seed_runs"], result["tier3"]["score"],
+                     result["tier3"]["basis"], _alone(summary)))
+    real_dir = data / "multi_seed_runs"
+    for path in sorted(real_dir.glob("*/multi_seed_summary.json")) if real_dir.is_dir() else []:
+        summary = _load(path)
+        lines += _metric_rows(f"`{summary['paper_id']}`", summary)
+        rows.append((f"`{summary['paper_id']}`", f"{summary['successful_seed_runs']} of {len(summary['runs'])}",
+                     summary["tier3"]["score"], summary["tier3"]["basis"], _alone(summary)))
+    lines += ["", "| Paper | Successful seed runs | Tier 3 score | Basis | Decided by; score of each metric alone |",
+              "|---|---|---|---|---|"]
+    lines += [f"| {label} | {runs} | {score} | {basis} | {alone} |" for label, runs, score, basis, alone in rows]
+    match = ", ".join(f"`{pid}` {'yes' if r['comparison']['all_match'] else 'NO'}" for pid, r in synthetic["papers"].items())
+    lines += ["", f"The synthetic papers' summary equals the mean and standard deviation computed on the host from the same seeds: {match}."]
+    return "\n".join(lines)
+
+
+def _alone(summary: dict[str, Any]) -> str:
+    by_metric = summary.get("tier3_by_metric")
+    if not by_metric:
+        return "n/a"
+    decided = summary["tier3"].get("decided_by")
+    alone = ", ".join(f"`{name}` {m['score_if_this_metric_alone']}" for name, m in sorted(by_metric.items()))
+    return f"`{decided}`; {alone}"
+
+
+def gpucheck_block(data: Path = DATA) -> str:
+    result = _load(data / "gpu_check" / "result.json")
+    out = result["container_output"]
+    gpu = result["gpu_block_of_run_report"] or {}
+    devices = ", ".join(f"{d['name']} (driver {d['driver']}, {d['memory_total_mib']} MiB)" for d in gpu.get("devices", [])) or "none"
+    lines = [HEADER.format(sources="data/gpu_check/result.json"), "",
+             "| Fact | Value |", "|---|---|",
+             f"| Requirement of the synthetic paper | `{result['requirement']}` |",
+             f"| torch / CUDA build seen in the container | {out.get('torch_version', 'n/a')} / {out.get('torch_cuda_version', 'n/a')} |",
+             f"| Device seen by torch | {out.get('device_name', 'n/a')}, capability {out.get('device_capability', 'n/a')} |",
+             f"| Tensor operation on | {out.get('tensor_device', 'n/a')}; result equal to the CPU result: {out.get('matmul_matches_cpu', 'n/a')} |",
+             (f"| Run report `gpu` block | requested {gpu.get('requested')}, available {gpu.get('available')}, used {gpu.get('used')}; "
+             f"devices: {devices}; peak GPU memory {gpu.get('peak_memory_used_mib')} MiB |"),
+             f"| Bundled wheels | {result['bundled_packages_gib']} GiB, bundling took {result['bundle_seconds']} s |",
+             f"| Sandbox time (install and run) | {result['sandbox_duration_seconds']} s |",
+             f"| Checks passed | {sum(result['checks'].values())} of {len(result['checks'])} |"]
+    failed = [name for name, ok in result["checks"].items() if not ok]
+    if failed:
+        lines.append(f"| Checks failed | {', '.join(failed)} |")
+    return "\n".join(lines)
+
+
+def diagnosisvalidation_block(data: Path = DATA) -> str:
+    summary = _load(data / "diagnosis_validation" / "results.json")["summary"]
+
+    def frac(d: dict[str, Any]) -> str:
+        return f"{d['correct']} / {d['of']}"
+
+    real, synthetic = summary["real"], summary["synthetic"]
+    lines = [HEADER.format(sources="data/diagnosis_validation/results.json"), "",
+             "| Set | Items | Category correct | Name of an OTHER correct | Phase correct | All levels correct | Wrong |",
+             "|---|---|---|---|---|---|---|",
+             f"| Real runs | {real['n']} | {frac(real['category'])} | {frac(real['name'])} | {frac(real['phase'])} | {frac(real['all'])} | {', '.join(real['wrong']) or 'none'} |",
+             f"| Synthetic probes | {synthetic['n']} | {frac(synthetic['category'])} | {frac(synthetic['name'])} | {frac(synthetic['phase'])} | {frac(synthetic['all'])} | {', '.join(synthetic['wrong']) or 'none'} |"]
+    return "\n".join(lines)
+
+
+def fieldanalysis_block(data: Path = DATA) -> str:
+    result = _load(data / "field_analysis" / "result.json")
+
+    def frac(d: dict[str, Any]) -> str:
+        return f"{d['k']} / {d['n']}"
+
+    lines = [HEADER.format(sources="data/field_analysis/result.json (scripts/field_analysis.py)"), "",
+             "| Pool | Run | Setup success | Run success | Pilot success | Concluded autonomously | Succeeded autonomously |",
+             "|---|---|---|---|---|---|---|"]
+    for pool, runs in result["rates"].items():
+        for which in ("first", "final"):
+            r, a = runs[which], result["autonomy"][pool][which]
+            lines.append(f"| {pool} | {which} | {frac(r['install_success'])} | {frac(r['run_success'])} | {frac(r['pilot_success'])} | "
+                         f"{frac(a['concluded_autonomously'])} | {frac(a['succeeded_autonomously'])} |")
+    accepted = ", ".join(f"{pool} {frac(v['papers_with_an_accepted_claim_I4'])}" for pool, v in result["autonomy"].items())
+    lines += ["", f"Papers with at least one claim accepted by a person (not part of the autonomy rate): {accepted}."]
+    return "\n".join(lines)
+
+
+def rescience_block(data: Path = DATA) -> str:
+    evaluation = _load(data / "external_validation" / "evaluation.json")
+    stopped: dict[str, int] = {}
+    for article in evaluation["articles"]:
+        if not article["passed"]:
+            stopped[article["failed_rule"]] = stopped.get(article["failed_rule"], 0) + 1
+    by_rule = ", ".join(f"{rule} {count}" for rule, count in sorted(stopped.items(), key=lambda kv: (-kv[1], kv[0])))
+    return "\n".join([HEADER.format(sources="data/external_validation/evaluation.json"), "",
+                      (f"Articles of ReScience C evaluated: {evaluation['evaluated']}; selected: {evaluation['selected']}. "
+                      f"Rule that stopped each article (the first failed rule): {by_rule}.")])
+
+
+BLOCKS = {"multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+          "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
           "pilot3measurements": pilot3measurements_block, "pilot3summary": pilot3summary_block,
