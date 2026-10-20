@@ -1,0 +1,124 @@
+{
+  "paper_id": "synthetic_seeded",
+  "protocol": "docs/MULTI_SEED.md",
+  "generated_at": "2026-10-20T00:05:33+00:00",
+  "seed_spec": {
+    "values": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "arg": "--seed",
+    "source": "scripts/synthetic_seeds.py: train.py --seed"
+  },
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600
+  },
+  "runs": [
+    {
+      "seed": 1,
+      "record_dir": "data/synthetic_seeds/synthetic_seeded/seed_1",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 0.54,
+      "metrics": {
+        "accuracy": 0.647
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 2,
+      "record_dir": "data/synthetic_seeds/synthetic_seeded/seed_2",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 0.536,
+      "metrics": {
+        "accuracy": 0.9346
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 3,
+      "record_dir": "data/synthetic_seeds/synthetic_seeded/seed_3",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 0.554,
+      "metrics": {
+        "accuracy": 0.6833
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 4,
+      "record_dir": "data/synthetic_seeds/synthetic_seeded/seed_4",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 0.532,
+      "metrics": {
+        "accuracy": 0.6826
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 5,
+      "record_dir": "data/synthetic_seeds/synthetic_seeded/seed_5",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 0.538,
+      "metrics": {
+        "accuracy": 0.818
+      },
+      "used": true,
+      "reason_not_used": null
+    }
+  ],
+  "successful_seed_runs": 5,
+  "metrics": {
+    "accuracy": {
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "values": [
+        0.647,
+        0.9346,
+        0.6833,
+        0.6826,
+        0.818
+      ],
+      "n": 5,
+      "mean": 0.7531,
+      "std_population": 0.1079386492411314,
+      "std_sample": 0.12067907855133796,
+      "cv": 0.14332578574044802
+    }
+  },
+  "tier3": {
+    "score": 40.0,
+    "notes": [
+      "Metric 'accuracy' has the largest CV of 1 metric(s) with seed results and decides",
+      "Multi-seed evaluated (n=5, Mean=0.7531, StdDev=0.1079, CV=14.333%)",
+      "High variance across seeds: Coefficient of Variation (14.33%) exceeds 10% (+40)"
+    ],
+    "basis": "measured: the metric with the largest CV decides"
+  },
+  "note": "std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading."
+}

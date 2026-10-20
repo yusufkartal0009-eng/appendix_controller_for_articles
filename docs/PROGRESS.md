@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(scoring): multi-seed execution for Tier 3 and synthetic evidence (2026-10-20 03:06 +03:00, Issue #48)
+- `src/multi_seed.py` (seed spec, `apply_seed`, per-metric summary), `scripts/run_multi_seed.py` (one real sandbox run per seed, one record per seed in `data/multi_seed_runs/<paper>/seed_<N>/`, `multi_seed_summary.json`), `Tier3StabilityEvaluator.evaluate_by_metric` and `seed_metric_results` in `src/scoring.py` / `src/score_run.py`, `run_setup.seed` validation, and `data/multi_seed_settings.json` (the seed parameters of `paper_003` and `paper_006`, each with the place in the paper's code where it was read; `data/seed_papers.json` is not edited).
+- Synthetic evidence (`scripts/synthetic_seeds.py`, real Docker, 5 seeds each, `data/synthetic_seeds/result.json`): the seed-free paper gave mean 0.9, standard deviation 0, Tier 3 = 100; the `random.Random(seed)` paper gave mean 0.7531, population standard deviation 0.1079, CV 14.333%, Tier 3 = 40. Both summaries equal the values computed on the host from the same seeds; Tier 3 differs between the two.
+- Evidence: 29 new tests in `tests/test_multi_seed.py` (written first and seen failing); full suite 792 passed, 9 skipped; ruff clean.
+- Not verified: the real papers (their seed runs follow); the host-side expected values use the same summary function as the runs, the hand calculation is in the unit tests.
+
 ### docs(scoring): design of multi-seed execution for Tier 3 (2026-10-20 03:01 +03:00, Issue #48)
 - `docs/MULTI_SEED.md`: how Tier 3 gets real seed results. A paper's own seed parameter goes in an optional `run_setup.seed` object (`values`, `arg` or `args` with `{seed}`, and a required `source`); the runner makes one record per seed; the summary holds mean, standard deviation, and CV per metric; `src/scoring.py` takes `seed_metric_results` and scores the metric with the largest CV; the single-run baseline of 75.0 stays only when fewer than two seed runs succeeded.
 - Evidence: documentation only; nothing is implemented in this PR. The implementation and its runs follow in separate PRs.

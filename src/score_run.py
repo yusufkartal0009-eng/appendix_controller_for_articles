@@ -61,14 +61,19 @@ def run_facts(record: dict[str, Any], report: dict[str, Any], run_dir: Path, rep
 
 
 def score_run(paper_id: str, license_name: str, claims: dict[str, float], record: dict[str, Any],
-              report: dict[str, Any], run_dir: Path, repo_dir: Path | None = None) -> dict[str, Any]:
-    """Score one stored run. `claims` are the accepted claims only (question ID -> normalized value)."""
+              report: dict[str, Any], run_dir: Path, repo_dir: Path | None = None,
+              seed_metric_results: dict[str, list[float]] | None = None) -> dict[str, Any]:
+    """Score one stored run. `claims` are the accepted claims only (question ID -> normalized value).
+
+    `seed_metric_results` (docs/MULTI_SEED.md) gives Tier 3 the seed runs of a multi-seed run; without it Tier 3 is the
+    single-run baseline.
+    """
     facts = run_facts(record, report, run_dir, repo_dir)
     result = ReproducibilityScorer.evaluate_paper_run(
         paper_id=paper_id,
         claimed_metrics=claims,
         license_name=license_name,
-        seed_results=None,  # one run per paper: multi-seed execution is not implemented (#48)
+        seed_metric_results=seed_metric_results,  # per metric, one value per successful seed run (#48); None: one run
         **facts,
     )
     result["inputs"] = {**facts, "claims": dict(claims), "run_status": (record.get("run") or {}).get("status"),

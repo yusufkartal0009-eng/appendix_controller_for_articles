@@ -15,6 +15,7 @@ fix needs:
 - `extra_requirements`: installed with the repository's requirements, for an entry point they do not cover
 - `constraints`: pip constraints for versions the repository leaves open, with `constraints_source` saying how
   they were chosen
+- `seed`: the paper's own seed parameter, so that it can be run once per seed (docs/MULTI_SEED.md)
 - `open_items`: what the fix still needs and was not done; a paper with open items is not ready to run
 
 The setup is what Repro Radar will run in Pilot 2 (#171); none of it is a result about the paper.
@@ -51,6 +52,12 @@ def run_setup_of(entry: dict[str, Any]) -> dict[str, Any]:
     build = setup.get("build")
     if build is not None and (not isinstance(build, dict) or not (build.get("sdists") or build.get("from_repo"))):
         raise ValueError(f"{entry['paper_id']}: build needs sdists or from_repo: {build}")
+    if setup.get("seed") is not None:
+        from src.multi_seed import (
+            validate_seed_spec,  # imported here: src.multi_seed imports the scorer
+        )
+
+        validate_seed_spec(entry["paper_id"], setup["seed"])
     if setup.get("constraints") and not setup.get("constraints_source"):
         raise ValueError(f"{entry['paper_id']}: constraints need a constraints_source")
     return setup
