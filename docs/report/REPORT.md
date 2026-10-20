@@ -2,9 +2,10 @@
 
 > **Status: written (#120).** Each section lists its sources. Every number comes from a script (generated blocks, checked
 > by `python scripts/report_numbers.py --check`), and every factual statement is listed in a claim to source table
-> (`docs/INTRODUCTION_SOURCES.md`, `docs/report/RELATED_WORK_SOURCES.md`). Sections 1, 9, and 10 were re-checked on
-> 2026-10-15: the rates against `data/*/measurements.json`, the references against Crossref and arXiv
-> (`scripts/verify_sources.py`, 9 of 9 verified), and the conclusion against sections 6 and 7.
+> (`docs/INTRODUCTION_SOURCES.md`, `docs/report/RELATED_WORK_SOURCES.md`). The report was read through and made consistent on
+> 2026-10-20 (sections 1, 2, 3, 4, 6.4a, 6.5a to 6.7, 7, 9, and 10): the numbers against their stored files
+> (`python scripts/report_numbers.py --check`), and the related-work references against Crossref and arXiv
+> (`scripts/verify_sources.py`, 9 of 9 verified).
 
 ---
 
@@ -27,6 +28,13 @@ pilot ran six papers that the tool had not seen from their README commands alone
 3, whose run setups the project had prepared by hand (section 6.5). No run reproduced an accepted claim, so the score's agreement tier has not been exercised on real
 results. With six papers and one run each, the results are anecdotal. The contribution is the method, a sandbox checked
 against real Docker, and a measured list of what stops each paper.
+
+Since the third pilot the project added five things, each reported with numbers generated from stored files: the stability tier
+now runs a paper once per seed (section 6.4a), a synthetic paper with a modern PyTorch was run with the local GPU through the same
+pipeline (section 6.4a), an exploratory analysis covers all twelve papers of Pilots 1 to 4 (section 6.6), a rule-based diagnosis layer
+explains a stored run and the difference between two runs, and its classifier was checked against hand-written labels
+(section 6.7), and an attempt to find independent reference articles in ReScience C selected none (section 6.5a). The diagnosis
+layer was not tried with a real language model.
 
 - **Sources:** sections 5 to 7 of this report; the generated sentence above is copied from
   `data/pilot3_runs/comparison.json` by `scripts/report_numbers.py`.
@@ -62,7 +70,7 @@ four-tier rubric instead of a single pass/fail. As of this writing, the sandbox 
 checked, the six papers of the corpus have been run through the sandbox in three pilots (section 6), and
 `cli.py score` scores a stored real run against accepted claims (`docs/gap_analysis.md`, finding GA-2, closed by
 #136); but no run has reproduced an accepted claim, so the scoring rubric's agreement tier has not yet been exercised
-on real results (section 6.3). The pilot covers tabular
+on real results (section 6.3). The stability tier has been exercised on real seed runs of two of the papers (section 6.4a). The pilot covers tabular
 ML benchmarks only; other scientific fields are out of scope for this project.
 
 - **Sources:** [1]–[7] and every other factual statement above are listed with how they were verified in
@@ -99,7 +107,7 @@ code it does not trust as well as for repeatability (section 4.1).
 together with variance intrinsic to the methods can make reported results hard to interpret [7]. Bouthillier et al.
 model the benchmarking process and find that data sampling, parameter initialization, and hyperparameter choice each
 affect results markedly [14]. These results motivate Tier 3 of the score, stability across seeds (section 4.2); the
-pilots used one counted run per paper, so that tier has not been exercised on real results.
+counted pilot runs were single runs, and the seed runs of section 6.4a are what exercise that tier.
 
 **Where Repro Radar sits.** Compared with the large studies above, Repro Radar is small and deep: six tabular machine
 learning papers chosen by the project, not sampled, each at a pinned commit, run in an isolated sandbox with a setup
@@ -131,7 +139,8 @@ timeout (checks 8 and a dedicated acceptance test), 100 processes (check 9), and
 would run arbitrary `setup.py` code outside the sandbox, so source-only packages are either built inside a
 separate, identically isolated build-phase container (check 18) or flagged `NEEDS_SDIST_BUILD` and not built at
 all (`docs/gap_analysis.md`, GA-22). A GPU is never attached unless explicitly requested (check 20) and is never
-part of the counted pilot run (`docs/PILOT_2.md` section 3). Running without Docker at all is refused by
+part of the counted pilot run (`docs/PILOT_2.md` section 3); one run of a synthetic paper with the GPU attached is reported in
+section 6.4a. Running without Docker at all is refused by
 default; an explicit, logged opt-in is required to fall back to an unisolated local run (check 6). The container
 shares the host kernel, so these measures reduce, not eliminate, the risk of running unknown code — this is a
 property of container isolation generally, not specific to this project.
@@ -151,8 +160,13 @@ to 0.05 also counts; within twice the tolerance earns half the points; beyond th
 metrics, recognized by name, are judged by relative error only, because an absolute bound would let 0.02 s
 become 0.06 s, a 200% error, and still pass. The scorer has no per-category tolerance (for example a tighter
 bound for AUROC than for accuracy) and does not separate a hardware difference from a real divergence; a module
-that was meant to do this was never connected to the scorer and was removed (#254). Tier 3's stability check uses the coefficient of variation (CV) across seeds: CV ≤ 2% is
-scored as deterministic, ≤ 5% as stable, with the score falling as the variance grows.
+that was meant to do this was never connected to the scorer and was removed (#254). The comparison of two runs in the
+diagnosis layer (section 6.7) lists recorded differences and sizes a metric shift, but the scorer does not use it.
+Tier 3's stability check uses the coefficient of variation (CV) across seeds: CV ≤ 2% is
+scored as deterministic, ≤ 5% as stable, with the score falling as the variance grows. Since #48 a paper that has a seed
+parameter of its own is run once per seed (`docs/MULTI_SEED.md`, `scripts/run_multi_seed.py`); the metric with the largest CV
+among the metrics found in every successful seed run decides, and a paper without two successful seed runs keeps the
+single-run baseline of 75.0, which is a placeholder and not a measurement.
 
 ### 4.3 Claim extraction
 
@@ -442,8 +456,8 @@ install and run, not whether their numbers reproduce.
 
 ### 6.4 Checks made after the pilots
 
-Four small checks were made after the pilots. None of them changes a pilot rate, and none is a result about the
-reproducibility of real papers.
+Small checks were made after the pilots. None of them changes a pilot rate; the first three are checks of the tool, and the seed
+runs and the GPU check of section 6.4a are described there.
 
 **A synthetic control paper (`data/synthetic_control/`, #313).** A tiny repository with a deterministic classifier whose
 accuracy is known by construction. It was run twice in the real Docker sandbox and scored against a true and a false
@@ -464,7 +478,7 @@ The control found a defect in Repro Radar's own scoring: a repository that lists
 SKIPPED, which the scoring step counted as a failed install, so the reproduced metric was ignored and both claims scored
 Tier 2 = 0. After the fix the true claim reaches Tier 2 = 100 and the false claim stays at 0 (the first result is kept in
 `result_before_fix.json`). The control tests the scorer; it is not a paper, has no training, data, or network, and says
-nothing about real papers. Tier 3 was not exercised by it.
+nothing about real papers. Tier 3 was not exercised by it (section 6.4a does that, on seed runs).
 
 **Repeated runs of the completed papers.** The two papers whose runs completed have more than one stored run. Agreement
 is judged on the status, the exit code, and the metrics that the metric extractor found in the output:
@@ -490,7 +504,7 @@ The runs listed are not repetitions under one protocol: the runs of each paper w
 (the `repro_radar_commit` of their records), the memory limit also differs for `paper_003` (`docs/MEMORY_RUNS.md`), and the
 CPU runs of `paper_003` and `paper_006` used 8 CPUs instead of 2 (`data/cpu_runs/`, `docs/CPU_RUNS.md`); the paper settings are the same. Within these
 limits the status, the exit code, and the metrics are the same in every run listed, while the log files differ where they
-contain clock times. The runs were not made with different seeds, so this is not the stability tier of the score (#48).
+contain clock times. The runs were not made with different seeds, so this is not the stability tier of the score (#48); the seed runs are in section 6.4a.
 
 **Memory re-runs.** Section 6.1a and `docs/MEMORY_RUNS.md` show Pilot 3's settings with a larger memory limit: the limit
 alone decided the outcome of `paper_004`, and `paper_005` was killed again later in its grid search. They are not protocol
@@ -562,9 +576,87 @@ for a repository without a requirements file), which was fixed, and the earlier 
 anecdote: it says that a README command alone is a weak recipe for these papers in this sandbox, not how often it is for machine
 learning papers in general; the pool was biased and drifted from tabular data (`docs/CORPUS_EXPANSION.md` sections 5 and 7).
 
+### 6.5a External reference articles: ReScience C
+
+To have an outside reference for the score (articles that reviewers found reproducible), the project fixed rules before looking
+at the pool and applied them to the articles of ReScience C (`docs/EXTERNAL_VALIDATION.md`). The rules were relaxed once after the
+first result was seen (rule E4 accepts `python -m`, `make`, and notebook commands, section 11 of that document, marked as written
+after the result), and the protocol for running the selected articles was written (`docs/EXTERNAL_VALIDATION_PROTOCOL.md`).
+
+<!-- numbers:rescience:start -->
+<!-- Generated by scripts/report_numbers.py from data/external_validation/evaluation.json; do not edit by hand. -->
+
+Articles of ReScience C evaluated: 65; selected: 0. Rule that stopped each article (the first failed rule): E4 25, E2 23, E3 11, E1 5, E6 1.
+<!-- numbers:rescience:end -->
+
+No article passed, so **no external-validation run was made** and nothing in this report depends on one. The most common stop is
+the rule that the README must state a command the pipeline can run; the pool's articles mostly run through other forms (shell
+scripts, a `python3` line, a Makefile that is absent). Adding such forms would be a further change to the rules after the result
+was seen, and was not made. What to do about the reference is an open question for the owner and the mentor.
+
+### 6.6 Field analysis over twelve papers (exploratory)
+
+`docs/FIELD_ANALYSIS.md` fixes, before the numbers were computed, what counts as human intervention and how the autonomy rate
+and three descriptive factors are calculated; `scripts/field_analysis.py` computes them from the stored records. The pool is the six
+seed papers and the six Pilot 4 papers. The first protocol run is Pilot 1 (seed papers) or the Pilot 4 first attempt; the final one is
+Pilot 3 or Pilot 4 after the correction round.
+
+<!-- numbers:fieldanalysis:start -->
+<!-- Generated by scripts/report_numbers.py from data/field_analysis/result.json (scripts/field_analysis.py); do not edit by hand. -->
+
+| Pool | Run | Setup success | Run success | Pilot success | Concluded autonomously | Succeeded autonomously |
+|---|---|---|---|---|---|---|
+| seed papers | first | 1 / 6 | 0 / 6 | 0 / 6 | 0 / 6 | 0 / 6 |
+| seed papers | final | 6 / 6 | 2 / 6 | 2 / 6 | 0 / 6 | 0 / 6 |
+| expansion papers | first | 2 / 6 | 2 / 6 | 1 / 6 | 6 / 6 | 1 / 6 |
+| expansion papers | final | 3 / 6 | 2 / 6 | 1 / 6 | 5 / 6 | 1 / 6 |
+| all 12 papers | first | 3 / 12 | 2 / 12 | 1 / 12 | 6 / 12 | 1 / 12 |
+| all 12 papers | final | 9 / 12 | 4 / 12 | 3 / 12 | 5 / 12 | 1 / 12 |
+
+Papers with at least one claim accepted by a person (not part of the autonomy rate): seed papers 6 / 6, expansion papers 0 / 6, all 12 papers 6 / 12.
+<!-- numbers:fieldanalysis:end -->
+
+Read this way: the setup, run, and pilot success of the seed papers rose between their first and final run because of settings that
+people chose after the failures were seen (section 6.1a), and the autonomy rate of the seed papers is 0 by construction, since
+their command and setup were chosen by a person. Among the expansion papers, the autonomy rate counts a paper as concluded
+autonomously when no person chose its command or setup, no correction round was made, and no change to the tool was made for it
+(the definition, `docs/FIELD_ANALYSIS.md` section 5); it counts only human actions that left a file, so it is an upper bound. The
+factor table (documentation checklist, code age, declared dependencies) is in `docs/FIELD_ANALYSIS.md` section 8.5. It is a table,
+not a test: with twelve papers and crude measures no relationship between a factor and success is claimed, and the two sub-pools
+were chosen differently and are not comparable.
+
+### 6.7 Diagnosis layer: explaining a run, and the difference between two
+
+The diagnosis layer (`docs/DIAGNOSIS.md`, `src/diagnosis/`) is rule-based. For one stored run it classifies the failure with the
+categories of Pilot 1 and writes a report in which every sentence names the file and key it was read from, an unknown value is
+written as unknown, and no cause is named beyond the quoted log line (`python cli.py diagnose <run directory>`;
+`docs/DIAGNOSIS_EXAMPLES.md` holds the reports of every stored run of Pilots 1 to 4, the memory runs, and the CPU runs). For two
+runs of one paper it lists the recorded differences (CPUs, memory limit, seed, command, image, tool commit, package versions) and keeps
+"same metrics, different time" apart from "different metrics" (`docs/DIAGNOSIS_COMPARISONS.md`). An optional language-model step is off by
+default and cannot change a number; it was tested with a mock client only.
+
+The classifier was checked against labels written by hand from the error lines of the stored runs (and against invented probes):
+
+<!-- numbers:diagnosisvalidation:start -->
+<!-- Generated by scripts/report_numbers.py from data/diagnosis_validation/results.json; do not edit by hand. -->
+
+| Set | Items | Category correct | Name of an OTHER correct | Phase correct | All levels correct | Wrong |
+|---|---|---|---|---|---|---|
+| Real runs | 46 | 46 / 46 | 9 / 10 | 36 / 36 | 45 / 46 | R41 |
+| Synthetic probes | 12 | 9 / 12 | 3 / 5 | 12 / 12 | 7 / 12 | S01, S06, S07, S08, S09 |
+<!-- numbers:diagnosisvalidation:end -->
+
+The labels are not blind (the labeler had read the classifier's rules), the real runs are the logs the rules came from, and the set
+is dominated by missing packages, so the first row is an upper bound for new papers. The probes were written to find gaps and
+found them: the rules have no name for a permission error, a GPU out of memory, or a full disk, they treat a missing `.pt` file as
+a plain missing file and not as data, and they do not count an HTTP error or a refused connection as a network failure
+(`docs/DIAGNOSIS_VALIDATION.md` gives the reason for each). The gaps were reported, not fixed. No real language model was used, so
+nothing is claimed about the quality of a model-written restatement.
+
 ## 7. Limitations and threats to validity
 
-- **Small sample.** Six papers, one counted run each, no seed loop: the results are anecdotal, not statistical. The
+- **Small sample.** Six papers, one counted run each (the seed runs of section 6.4a are extra, not counted, runs of two papers):
+  the results are anecdotal, not statistical. The
   corpus is tabular deep learning and sequence kernels, and it was corrected and reduced before the pilots (section 5.1); no
   paper was replaced because it failed (#166).
 - **The run setups were written by us.** The entry command, working directory, data, build, extra requirements, and
@@ -585,10 +677,20 @@ learning papers in general; the pool was biased and drifted from tabular data (`
 - **One platform per pilot.** Pilot 1 ran on Linux runners and Pilot 2 on one Windows machine; some failures may depend
   on the platform, which is also how the Windows-only defects of the tool were found.
 - **No numerical reproduction was tested.** No run reproduced an accepted claim, so Tier 2 (agreement with the paper's
-  numbers) and Tier 3 (stability across seeds, not implemented, #48) were never exercised on real results. Tier 2 was
-  exercised only on the synthetic control paper (section 6.4), which tests the scorer and not a paper.
-- **Stability was seen, not measured.** Two papers have two to four runs each in section 6.4; the runs have different memory
-  limits or tool commits and no different seeds, so they show that the metrics repeated, not how much they vary.
+  numbers) was never exercised on real results. It was exercised only on the synthetic control paper (section 6.4), which tests
+  the scorer and not a paper.
+- **Stability rests on three seeds of two papers.** The seed runs of section 6.4a are not protocol runs (the CPU and memory limits
+  differ from the protocol's), use three seeds each, and cover only the two papers that complete; a CV from three runs is a rough
+  number, and the metric that decides Tier 3 can be a side number such as a training loss. The synthetic papers show that the
+  path measures a known difference, not that a real paper is stable. Before them the repeated runs of section 6.4 (different
+  memory limits or tool commits, no different seeds) showed only that the metrics repeated.
+- **Field analysis.** Twelve papers from two differently chosen sub-pools, definitions written after the pilot outcomes were known,
+  and an autonomy rate that counts only human actions that left a file (section 6.6): exploratory, no test, no relationship claimed.
+- **Diagnosis layer.** Rule-based and tested on stored runs of this project; the hand labels are not blind, the real runs are the logs
+  the rules came from, and the probes found gaps that were not fixed (section 6.7). No real language model was used.
+- **GPU.** One synthetic paper only; no real paper was run with the GPU, and the seed papers pin PyTorch 1.x, which the GPU cannot use.
+- **External reference.** The ReScience C selection found no article that the pipeline could run (section 6.5a), so the score has no
+  outside reference yet.
 - **Pilot 4 is six new papers, one attempt each.** The sample came from a biased pool and drifted from tabular data, the
   README command is the first `python` line and is not always the paper's experiment (a documentation checker, a data
   preparation step), and the correction round was limited to what the logs justify, so a person with the code might have
@@ -621,6 +723,11 @@ learning papers in general; the pool was biased and drifted from tabular data (`
   the papers'; the index is generated from the stored records, so the story is not retold from memory.
 - **Generate the numbers and test the generation.** The generated blocks and their tests caught a stored file that
   carried a local path and a log line that a color code hid from the categorizer.
+- **Label with the definitions, then look at the rules.** The hand-labeled check of the classifier (section 6.7) was labeled by
+  someone who had read the rules, so it is not blind; the probes written to find gaps found them. Report both, and keep the numbers
+  of the check that cannot lose.
+- **A noisy side number can decide a score.** The first real seed run showed that the metric with the largest CV was a training loss;
+  the summary now shows which metric decided and what each metric alone would give (section 6.4a).
 - **What we would change next:** make `paper_003`'s data directory writable, give `paper_005` more memory and `paper_004`
   more time, list `lightgbm` for `paper_002`, and, above all, choose each paper's command so that it produces the metrics
   its accepted claims name (`docs/PILOT_2.md` section 12).
@@ -641,7 +748,8 @@ settings that were chosen after the failures were seen (section 6.1a), so it is 
 failures that remain have named causes in the stored records: a dataset that is not accessible (`paper_008`), a request
 to the OpenML API with the network off (`paper_002`), and the memory limit (`paper_004`, `paper_005`). The claim
 extraction pipeline produced claims that each have a verbatim quote in the paper and an owner decision (section 6.2).
-The dashboard of the project (`src/web/`) shows stored scores, badges, and audit reports from the database only; the
+The stability tier was run on real seed runs for the first time (section 6.4a) and the diagnosis layer explains stored runs and the
+difference between two (section 6.7). The dashboard of the project (`src/web/`) shows stored scores, badges, and audit reports from the database only; the
 database holds no score yet, because no run produced a metric that an accepted claim names, so the dashboard shows
 "Not scored" for every paper.
 
@@ -656,11 +764,14 @@ rubric's agreement tier and stability tier work on real results.
 2. Decide how much memory `paper_004` and `paper_005` need (the pilot only shows that the values chosen in advance were
    not enough) and whether `paper_002` may fetch its OpenML data.
 3. Repeat the blind second pass with another model, or with the owner starting it, so that the two passes are also independent in model.
-4. Run several seeds per paper so that the stability tier (#48) can be measured.
-5. The AI diagnosis layer (#31 to #36) is not implemented and is outside the evidence of this report.
+4. Run more seeds per paper, and on more papers than the two that complete, so that the stability tier (#48) rests on more than three
+   runs; decide whether the metric with the largest CV should decide (section 6.4a).
+5. Try the optional language-model step of the diagnosis layer with a real model, and fix the gaps the probes found in the classifier
+   (section 6.7), before anything is said about either.
+6. Decide what outside reference to use for the score now that the ReScience C selection found none (section 6.5a).
 
 - **Sources:** sections 6 and 7 of this report and the records they cite; `docs/PROGRESS.md` for the dashboard (D1 to D4,
-  `docs/evidence/d1` to `d4`); open issues #31 to #36 and #48.
+  `docs/evidence/d1` to `d4`); issues #31 to #36, #48, and #413 and the files named in sections 6.4a to 6.7.
 - **Status:** written.
 
 ## 10. References and reproducibility statement
@@ -705,7 +816,8 @@ not full texts; the tables name what was read, and what was not verified.
 ### Reproducibility statement
 
 - **Code and data.** The repository holds the code, the six-paper corpus (`data/seed_papers.json`), every stored run
-  record (`data/pilot_runs/`, `data/pilot2_runs/`, `data/pilot3_runs/`), and the claim files (`data/claims/`). **No release
+  record (`data/pilot_runs/`, `data/pilot2_runs/`, `data/pilot3_runs/`, `data/pilot4_runs/`, `data/multi_seed_runs/`,
+  `data/synthetic_seeds/`, `data/gpu_check/`), and the claim files (`data/claims/`). **No release
   is tagged yet** (the release issue, #45, is open), so the version of this report is the commit of the pull request
   that merges it.
 - **Re-run the checks that need no Docker.** `pip install -r requirements-dev.txt`, then `pytest tests/` and
@@ -714,7 +826,14 @@ not full texts; the tables name what was read, and what was not verified.
 - **Re-run the pilots.** They need Docker. The images are built with `docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .` (`docs/ENVIRONMENT.md`; the Python 3.8 and 3.9 images use `--build-arg PYTHON_VERSION=...`), and each paper
   runs with `python scripts/run_pilot.py <paper_id>` (Pilot 2) or with `--pilot3` (Pilot 3, `docs/PILOT_3.md`). Pilot 3 ran
   on one Windows machine with Docker Desktop and WSL2 at the commit recorded in
-  `data/pilot3_runs/environment.txt`. A re-run on other hardware may differ, in particular for the memory limits.
+  `data/pilot3_runs/environment.txt`. A re-run on other hardware may differ, in particular for the memory limits. The seed runs and
+  the GPU check ran on the same machine (`--memory 50% --cpus 4`), and their records say that they are not protocol runs.
+- **Re-run the later checks.** `python scripts/synthetic_seeds.py` (two synthetic papers, five seeds each, needs Docker),
+  `python scripts/run_multi_seed.py paper_003 --pilot3 --memory 50% --cpus 4` (one real run per seed; `--summarize-only` rebuilds the
+  summary from the stored folders), `python scripts/gpu_paper_check.py` (needs Docker and an NVIDIA GPU, about 3.7 GiB of wheels),
+  `python cli.py diagnose <run directory>`, and, without Docker, `python scripts/field_analysis.py --check`,
+  `python scripts/evaluate_diagnosis_classifier.py --check`, `python scripts/diagnosis_examples.py --check`, and
+  `python scripts/diagnosis_comparisons.py --check`.
 - **See the dashboard.** `python cli.py init-db`, then `python -m src.web` serves `http://127.0.0.1:8000` on the local
   machine only.
 - **What is not reproducible from the repository alone.** The datasets that the papers download (they are fetched
