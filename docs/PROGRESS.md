@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): definitions of the week 6 field analysis (2026-10-20 03:27 +03:00, Issue #413)
+- `docs/FIELD_ANALYSIS.md`: definitions of the week 6 analysis (pool of 12, reference runs, success rates, human intervention I1 to I4, AI autonomy rate, three descriptive factors), written before the script (#413).
+- Evidence: documentation only.
+- Not verified: the definitions against the script and the data (next PRs).
+
 ### test(ai): validation of the failure classifier on hand-labeled runs (2026-10-20 03:23 +03:00, Issue #36)
 - `data/diagnosis_validation/` (46 hand-labeled stored runs, 12 synthetic probes, a written analysis of every wrong answer, generated results), `scripts/evaluate_diagnosis_classifier.py`, and `docs/DIAGNOSIS_VALIDATION.md`.
 - Result (from the script): real runs 45 / 46 correct on category, name, and phase together (category 46 / 46); synthetic probes 7 / 12. The labels are not blind; the accuracy is an upper bound. The classifier was not changed.
