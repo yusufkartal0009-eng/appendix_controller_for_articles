@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(ai): template-based diagnosis report and cli.py diagnose (2026-10-20 03:12 +03:00, Issue #33)
+- `src/diagnosis/report.py` (statements with fields and sources, unknown written as unknown), `cli.py diagnose <run_dir>`, `scripts/diagnosis_examples.py`, and `docs/DIAGNOSIS_EXAMPLES.md` (31 stored runs of Pilots 1 to 4, memory runs, and CPU runs).
+- Evidence: 17 new tests; the examples document is checked against the records by a test.
+- Not verified: a human reading for clarity and neutrality; no language model is involved.
+
 ### feat(ai): rule-based failure classifier (2026-10-20 03:10 +03:00, Issue #32)
 - `src/diagnosis/classifier.py` takes over the rules of `scripts/categorize_pilot_failures.py` (the script imports them) and adds `classify_run` and `classify_log_text`.
 - Evidence: 18 new tests; the classifier reproduces the stored categories of Pilots 1 to 4 (same category, name, phase, and quoted line); the 35 older failure tests pass unchanged.
