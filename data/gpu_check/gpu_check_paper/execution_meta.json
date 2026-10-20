@@ -1,0 +1,14 @@
+{
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 44.457,
+  "timeout_limit_seconds": 1800,
+  "killed_before_timeout": false,
+  "dependency_install_status": "INSTALLED",
+  "peak_memory_bytes": 1030598656,
+  "gpu_requested": true,
+  "gpu_devices": [{"index": 0, "name": "NVIDIA GeForce RTX 5070", "driver": "610.88", "memory_total_mib": 12227, "memory_used_before_mib": 1793}],
+  "gpu_peak_memory_used_mib": 2530,
+  "user_id": 1000,
+  "group_id": 1000
+}

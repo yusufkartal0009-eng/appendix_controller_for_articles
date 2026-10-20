@@ -1,0 +1,180 @@
+{
+  "paper_id": "gpu_check_paper",
+  "source": "<TMP>/gpu_check_repo",
+  "commit_hash": "e1d45d04f31c4af69ea8e4febe1123256c3fe51b",
+  "target_script": "train.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 45.156,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\gpu_check_paper",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": "all",
+    "available": true,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5070",
+        "driver": "610.88",
+        "memory_total_mib": 12227,
+        "memory_used_before_mib": 1793
+      }
+    ],
+    "peak_memory_used_mib": 2530,
+    "used": true
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 44.457,
+    "timeout_limit_seconds": 1800,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 1030598656,
+    "gpu_requested": true,
+    "gpu_devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5070",
+        "driver": "610.88",
+        "memory_total_mib": 12227,
+        "memory_used_before_mib": 1793
+      }
+    ],
+    "gpu_peak_memory_used_mib": 2530,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1"
+    },
+    {
+      "name": "nvidia-cublas-cu12",
+      "version": "12.8.4.1"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu12",
+      "version": "12.8.90"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "version": "12.8.93"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu12",
+      "version": "12.8.90"
+    },
+    {
+      "name": "nvidia-cudnn-cu12",
+      "version": "9.10.2.21"
+    },
+    {
+      "name": "nvidia-cufft-cu12",
+      "version": "11.3.3.83"
+    },
+    {
+      "name": "nvidia-cufile-cu12",
+      "version": "1.13.1.3"
+    },
+    {
+      "name": "nvidia-curand-cu12",
+      "version": "10.3.9.90"
+    },
+    {
+      "name": "nvidia-cusolver-cu12",
+      "version": "11.7.3.90"
+    },
+    {
+      "name": "nvidia-cusparse-cu12",
+      "version": "12.5.8.93"
+    },
+    {
+      "name": "nvidia-cusparselt-cu12",
+      "version": "0.7.1"
+    },
+    {
+      "name": "nvidia-nccl-cu12",
+      "version": "2.27.3"
+    },
+    {
+      "name": "nvidia-nvjitlink-cu12",
+      "version": "12.8.93"
+    },
+    {
+      "name": "nvidia-nvtx-cu12",
+      "version": "12.8.90"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.0"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "torch",
+      "version": "2.8.0"
+    },
+    {
+      "name": "triton",
+      "version": "3.4.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch==2.8.0",
+      "name": "torch",
+      "requested": "==2.8.0",
+      "installed": "2.8.0",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 1800s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/train.py\n==================================================\ntorch_version: 2.8.0+cu128\ntorch_cuda_version: 12.8\ncuda_available: True\narch_list: sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120\ndevice_name: NVIDIA GeForce RTX 5070\ndevice_capability: (12, 0)\ntensor_device: cuda:0\nmatmul_matches_cpu: True\ngpu_memory_allocated_mib: 264\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : INSTALLED\nDuration      : 44.457s\n==================================================\n",
+  "stderr_preview": ""
+}

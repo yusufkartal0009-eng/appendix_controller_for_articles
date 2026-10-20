@@ -1,0 +1,68 @@
+{
+  "paper_id": "gpu_check_paper",
+  "requirement": "torch==2.8.0",
+  "checks": {
+    "run_completed_exit_0": true,
+    "gpu_requested": true,
+    "gpu_visible_in_container": true,
+    "torch_sees_cuda": true,
+    "tensor_op_on_gpu": true,
+    "gpu_result_matches_cpu": true,
+    "report_gpu_used": true,
+    "isolated": true
+  },
+  "all_checks_pass": true,
+  "container_output": {
+    "torch_version": "2.8.0+cu128",
+    "torch_cuda_version": "12.8",
+    "cuda_available": "True",
+    "arch_list": "sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120",
+    "device_name": "NVIDIA GeForce RTX 5070",
+    "device_capability": "(12, 0)",
+    "tensor_device": "cuda:0",
+    "matmul_matches_cpu": "True",
+    "gpu_memory_allocated_mib": "264"
+  },
+  "gpu_block_of_run_report": {
+    "requested": "all",
+    "available": true,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5070",
+        "driver": "610.88",
+        "memory_total_mib": 12227,
+        "memory_used_before_mib": 1793
+      }
+    ],
+    "peak_memory_used_mib": 2530,
+    "used": true
+  },
+  "run": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 45.156,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 1030598656
+  },
+  "bundle_seconds": 575.403,
+  "bundle_status": "SUCCESS",
+  "bundled_packages_bytes": 3916873587,
+  "bundled_packages_gib": 3.65,
+  "sandbox_duration_seconds": 563.407,
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 1800
+  },
+  "gpus_override": {
+    "requested": "all",
+    "note": "not a protocol run: the container got the local GPU (#169)"
+  },
+  "note": "synthetic paper; shows that the sandbox can give a modern PyTorch the GPU, not that a real paper benefits"
+}

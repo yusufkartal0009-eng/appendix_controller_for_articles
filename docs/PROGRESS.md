@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(sandbox): GPU check with a modern PyTorch on the RTX 5070 (2026-10-20 03:45 +03:00, Issue #169)
+- `scripts/gpu_paper_check.py`, `run_pilot.py --gpus`, `data/gpu_check/` and `docs/ENVIRONMENT.md`: a synthetic paper with `torch==2.8.0` (CUDA 12.8) ran through the real pipeline with `--gpus all` on the RTX 5070.
+- Real output (`data/gpu_check/result.json`): torch 2.8.0+cu128, tensor on `cuda:0`, GPU result equal to the CPU result, run report `gpu.used` true (peak 2530 MiB over 1793 MiB before), COMPLETED exit 0 in 45.156 s, isolation intact. Bundled wheels 3.65 GiB, bundling 575.403 s, sandbox install and run 563.407 s.
+- Evidence: 8 new tests.
+- Not verified: any real paper with the GPU (the seed papers pin PyTorch 1.x); `gpu.used` is a memory-sampling heuristic.
+
 ### feat(corpus): week 6 field analysis over 12 papers (2026-10-20 03:30 +03:00, Issue #413)
 - `scripts/field_analysis.py`, `data/field_analysis/features.json` and `result.json`, and the generated section 8 of `docs/FIELD_ANALYSIS.md`: setup/run/pilot success rates, human interventions I1 to I4 per paper, the AI autonomy rate, and a descriptive factor table over the 12 papers (#413).
 - Result (from the script): pilot success 1 / 12 at the first protocol run and 3 / 12 at the final one; autonomy of the expansion papers 5 / 6 concluded and 1 / 6 succeeded at the final run; seed papers 0 / 6 by construction. Exploratory, n = 12; no significance claimed.
