@@ -54,6 +54,8 @@ class DiagnosisReport:
     paper_id: str | None
     category_label: str | None
     statements: list[Statement] = field(default_factory=list)
+    pilot_success: bool | None = None  # the classifier's finding; None when the run was not classified
+    quoted_log_lines: str = "(none)"  # the deciding line and the last stderr lines, for the optional model prompt
 
     def sections(self) -> dict[str, list[Statement]]:
         grouped: dict[str, list[Statement]] = {}
@@ -99,7 +101,8 @@ def _unknown(data: DiagnosisInput, name: str, what: str) -> tuple[str, tuple[str
 def build_report(data: DiagnosisInput, classification: Classification | None = None) -> DiagnosisReport:
     """The statements of one run. `classification` is the classifier's answer (None: not classified)."""
     report = DiagnosisReport(run_dir=data.run_dir, paper_id=data.paper_id,
-                             category_label=classification.label if classification else None)
+                             category_label=classification.label if classification else None,
+                             pilot_success=classification.pilot_success if classification else None)
 
     def add(section: str, text: str, fields: tuple[str, ...], source: str | None = None) -> None:
         report.statements.append(Statement(section, text, fields, source or "; ".join(data.source_of(f) for f in fields)))
@@ -225,6 +228,8 @@ def build_report(data: DiagnosisInput, classification: Classification | None = N
         sec = "Last lines of stderr"
         for line in data.stderr_tail[-3:]:
             add(sec, f"`stderr.log:{line.line_number}`: `{line.text}`", ("run_status",), f"stderr.log:{line.line_number}")
+    quoted = [s.text for s in report.statements if s.section in ("Last lines of stderr",) or s.text.startswith("The deciding line")]
+    report.quoted_log_lines = "\n".join(quoted) or "(none)"
     return report
 
 

@@ -273,6 +273,24 @@ def cmd_diagnose(args):
     except FileNotFoundError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         sys.exit(1)
+    if args.explain:
+        # Optional model step (docs/DIAGNOSIS.md section 6): off unless REPRO_RADAR_DIAGNOSIS_BACKEND names a backend; the
+        # rule-based report is printed unchanged, and a model text is added only if it passes the number check.
+        from src.diagnosis.backends import (
+            BackendUnavailable,
+            explain,
+            select_backend,
+            status_for,
+        )
+
+        try:
+            backend = select_backend()
+        except (BackendUnavailable, ValueError) as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            sys.exit(1)
+        status = args.status or status_for(bool(report.pilot_success))
+        print(explain(report.to_markdown(), status, backend, report.quoted_log_lines).to_markdown(), end="")
+        return
     if args.json:
         import json
 
@@ -336,6 +354,11 @@ def main():
     p_diag.add_argument("run_dir", help="A run folder (pilot_record.json, run_report.json, logs)")
     p_diag.add_argument("--no-claims", action="store_true", help="Do not compare with the seed paper's expected claims")
     p_diag.add_argument("--json", action="store_true", help="Print the statements as JSON")
+    p_diag.add_argument("--explain", action="store_true",
+                        help="Add a model restatement if REPRO_RADAR_DIAGNOSIS_BACKEND names a backend (default: none)")
+    p_diag.add_argument("--status", choices=["Verified", "Partially Verified", "Needs Review", "Failed"], default=None,
+                        help="With --explain: the scored status that picks the prompt (default: Failed for a failed run, "
+                             "otherwise Needs Review)")
     p_diag.set_defaults(func=cmd_diagnose)
 
     args = parser.parse_args()
