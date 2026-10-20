@@ -43,6 +43,17 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Evidence: 8 new tests.
 - Not verified: any real paper with the GPU (the seed papers pin PyTorch 1.x); `gpu.used` is a memory-sampling heuristic.
 
+### feat(corpus): week 6 field analysis over 12 papers (2026-10-20 03:30 +03:00, Issue #413)
+- `scripts/field_analysis.py`, `data/field_analysis/features.json` and `result.json`, and the generated section 8 of `docs/FIELD_ANALYSIS.md`: setup/run/pilot success rates, human interventions I1 to I4 per paper, the AI autonomy rate, and a descriptive factor table over the 12 papers (#413).
+- Result (from the script): pilot success 1 / 12 at the first protocol run and 3 / 12 at the final one; autonomy of the expansion papers 5 / 6 concluded and 1 / 6 succeeded at the final run; seed papers 0 / 6 by construction. Exploratory, n = 12; no significance claimed.
+- Evidence: 15 new tests.
+- Not verified: the factors against a second extraction.
+
+### docs(corpus): definitions of the week 6 field analysis (2026-10-20 03:27 +03:00, Issue #413)
+- `docs/FIELD_ANALYSIS.md`: definitions of the week 6 analysis (pool of 12, reference runs, success rates, human intervention I1 to I4, AI autonomy rate, three descriptive factors), written before the script (#413).
+- Evidence: documentation only.
+- Not verified: the definitions against the script and the data (next PRs).
+
 ### test(ai): validation of the failure classifier on hand-labeled runs (2026-10-20 03:23 +03:00, Issue #36)
 - `data/diagnosis_validation/` (46 hand-labeled stored runs, 12 synthetic probes, a written analysis of every wrong answer, generated results), `scripts/evaluate_diagnosis_classifier.py`, and `docs/DIAGNOSIS_VALIDATION.md`.
 - Result (from the script): real runs 45 / 46 correct on category, name, and phase together (category 46 / 46); synthetic probes 7 / 12. The labels are not blind; the accuracy is an upper bound. The classifier was not changed.
