@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(sandbox): GPU check with a modern PyTorch on the RTX 5070 (2026-10-20 03:45 +03:00, Issue #169)
+- `scripts/gpu_paper_check.py`, `run_pilot.py --gpus`, `data/gpu_check/` and `docs/ENVIRONMENT.md`: a synthetic paper with `torch==2.8.0` (CUDA 12.8) ran through the real pipeline with `--gpus all` on the RTX 5070.
+- Real output (`data/gpu_check/result.json`): torch 2.8.0+cu128, tensor on `cuda:0`, GPU result equal to the CPU result, run report `gpu.used` true (peak 2530 MiB over 1793 MiB before), COMPLETED exit 0 in 45.156 s, isolation intact. Bundled wheels 3.65 GiB, bundling 575.403 s, sandbox install and run 563.407 s.
+- Evidence: 8 new tests.
+- Not verified: any real paper with the GPU (the seed papers pin PyTorch 1.x); `gpu.used` is a memory-sampling heuristic.
+
 ### test(ai): validation of the failure classifier on hand-labeled runs (2026-10-20 03:23 +03:00, Issue #36)
 - `data/diagnosis_validation/` (46 hand-labeled stored runs, 12 synthetic probes, a written analysis of every wrong answer, generated results), `scripts/evaluate_diagnosis_classifier.py`, and `docs/DIAGNOSIS_VALIDATION.md`.
 - Result (from the script): real runs 45 / 46 correct on category, name, and phase together (category 46 / 46); synthetic probes 7 / 12. The labels are not blind; the accuracy is an upper bound. The classifier was not changed.

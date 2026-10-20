@@ -251,7 +251,7 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
               cpus: float | None = None, pilot4: bool = False, correction: dict[str, Any] | None = None,
               corpus_path: Path | None = None, env_cache_dir: Path | None = None,
               run_timeout: int | None = None, entry_override: dict[str, Any] | None = None,
-              record_extra: dict[str, Any] | None = None) -> dict[str, Any]:
+              record_extra: dict[str, Any] | None = None, gpus: str = "") -> dict[str, Any]:
     pilot3_change: dict[str, Any] = {}
     limits = dict(PILOT_LIMITS)
     if pilot4:
@@ -382,6 +382,10 @@ def run_paper(paper_id: str, staging_dir: Path, stager: RepoStager | None = None
         command = setup_options["command"]
     if env_cache_dir:
         config_extra = {**config_extra, "env_cache_dir": str(env_cache_dir)}
+    if gpus:
+        # Opt-in local GPU (#169); not a protocol run. The run report's `gpu` block says what the container saw.
+        config_extra["gpus"] = gpus
+        record["gpus_override"] = {"requested": gpus, "note": "not a protocol run: the container got the local GPU (#169)"}
     config = SandboxConfig(**limits, env_vars=dict(spec["env"]), python_version=python_version, **config_extra)
 
     if setup_options and setup_options["build"]:
@@ -446,6 +450,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cpus", type=float, default=None, metavar="N",
                         help="Replace the protocol's CPU limit (2) with N; the record gets `cpus_override`. "
                              "Not a protocol run (#331).")
+    parser.add_argument("--gpus", default="", metavar="VALUE",
+                        help="Give the container the local NVIDIA GPU: all, a count, or device=0 (#169). Not a protocol run.")
     parser.add_argument("--env-cache", default=None, metavar="DIR",
                         help="Installed-environment cache (#380): a second run of the same locked packages skips the install "
                              "phase; the record gets `env_cache`. Not a protocol run.")
@@ -473,7 +479,7 @@ def main(argv: list[str] | None = None) -> int:
                            pilot4=args.pilot4, corpus_path=Path(args.corpus) if args.corpus else None,
                            correction=json.loads(Path(args.correction).read_text(encoding="utf-8")) if args.correction else None,
                            record_root=Path(args.record_root) if args.record_root else None,
-                           env_cache_dir=Path(args.env_cache) if args.env_cache else None)
+                           env_cache_dir=Path(args.env_cache) if args.env_cache else None, gpus=args.gpus)
     except Exception as exc:  # noqa: BLE001 - harness error: the paper was not run as specified; reported, exit 1
         print(f"HARNESS ERROR: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1

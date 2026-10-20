@@ -249,3 +249,24 @@ def test_a_non_positive_run_time_limit_is_a_harness_error(tmp_path, monkeypatch,
         run_pilot.run_paper("paper_005", tmp_path / "staging", stager=Pilot2Stager(tmp_path), pilot3=True,
                             data_cache=_cache(tmp_path, "paper_005"), run_timeout=value)
 
+
+
+def test_the_gpus_option_reaches_the_sandbox_config_and_is_recorded(tmp_path, monkeypatch):
+    """#169: the local GPU is opt-in, recorded, and not a protocol run."""
+    monkeypatch.setattr(run_pilot, "SANDBOX_RUNS_DIR", tmp_path / "runs")
+    stager = Pilot2Stager(tmp_path)
+    record = run_pilot.run_paper("paper_005", tmp_path / "staging", stager=stager, pilot3=True,
+                                 data_cache=_cache(tmp_path, "paper_005"), gpus="all", record_root=tmp_path / "gpu_runs")
+    assert stager.executed[2].gpus == "all"
+    assert record["gpus_override"]["requested"] == "all" and "not a protocol run" in record["gpus_override"]["note"]
+
+
+def test_without_the_gpus_option_no_gpu_is_requested(tmp_path, monkeypatch):
+    record, stager = _run(tmp_path, monkeypatch, "paper_005")
+    assert stager.executed[2].gpus == "" and "gpus_override" not in record
+
+
+def test_the_command_line_passes_gpus_on(monkeypatch):
+    seen = {}
+    monkeypatch.setattr(run_pilot, "run_paper", lambda paper_id, staging_dir, **kw: seen.update(kw) or {"paper_id": paper_id})
+    assert run_pilot.main(["paper_003", "--pilot3", "--gpus", "all"]) == 0 and seen["gpus"] == "all"

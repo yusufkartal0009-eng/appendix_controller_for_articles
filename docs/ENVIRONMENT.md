@@ -105,6 +105,19 @@ python scripts/gpu_check.py            # --gpus all; exit 0 only if the GPU is v
 The RTX 5070 (Blackwell) needs a PyTorch build for CUDA 12.8 or newer; papers that pin PyTorch 1.x cannot use it and
 run on the CPU.
 
+A pilot run gets the GPU with `python scripts/run_pilot.py <paper_id> --pilot3 --gpus all` (the record gets `gpus_override` and says it
+is not a protocol run). To check that a **modern PyTorch** really uses the GPU through the whole pipeline (wheel bundling in the
+image, offline install, the sandbox with `--gpus all`, no network, read-only root), run the synthetic paper:
+
+```bash
+python scripts/gpu_paper_check.py      # about 3.7 GiB of wheels; writes data/gpu_check/result.json; exit 0 only if every check passes
+```
+
+It pins `torch==2.8.0` (the default PyPI Linux wheel of that release is built for CUDA 12.8), does a matrix product on the GPU,
+compares it with the CPU result, and keeps the GPU busy for a few seconds so that the memory sampler sees it. The stored result
+is `data/gpu_check/result.json`. It is a synthetic paper: it shows that the sandbox can give a modern PyTorch the GPU, not that a
+real paper benefits (the seed papers pin PyTorch 1.x).
+
 ---
 
 ## 4. Environment Variables
