@@ -1,0 +1,124 @@
+{
+  "paper_id": "paper_006",
+  "protocol": "docs/MULTI_SEED.md",
+  "generated_at": "2026-10-20T03:00:17+00:00",
+  "seed_spec": {
+    "values": [
+      1,
+      2,
+      3
+    ],
+    "arg": "--set_seed",
+    "source": "train.py line 36: parser.add_argument('--set_seed', default=1, type=int); line 72: torch.manual_seed(opt.set_seed). The data split has its own option, --dset_seed (default 5), which is left unchanged. Seed 1 is the default of the existing runs."
+  },
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 14400
+  },
+  "runs": [
+    {
+      "seed": 1,
+      "record_dir": "data/multi_seed_runs/paper_006/seed_1",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 1793.883,
+      "metrics": {
+        "accuracy": 0.8886,
+        "auroc": 0.892
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 2,
+      "record_dir": "data/multi_seed_runs/paper_006/seed_2",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 1555.023,
+      "metrics": {
+        "accuracy": 0.8944,
+        "auroc": 0.911
+      },
+      "used": true,
+      "reason_not_used": null
+    },
+    {
+      "seed": 3,
+      "record_dir": "data/multi_seed_runs/paper_006/seed_3",
+      "stage_status": "STAGED",
+      "run_status": "COMPLETED",
+      "exit_code": 0,
+      "duration_seconds": 1556.861,
+      "metrics": {
+        "accuracy": 0.8929,
+        "auroc": 0.905
+      },
+      "used": true,
+      "reason_not_used": null
+    }
+  ],
+  "successful_seed_runs": 3,
+  "metrics": {
+    "accuracy": {
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "values": [
+        0.8886,
+        0.8944,
+        0.8929
+      ],
+      "n": 3,
+      "mean": 0.8919666666666667,
+      "std_population": 0.0024580932086115687,
+      "std_sample": 0.0030105370506495143,
+      "cv": 0.002755812857668338
+    },
+    "auroc": {
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "values": [
+        0.892,
+        0.911,
+        0.905
+      ],
+      "n": 3,
+      "mean": 0.9026666666666667,
+      "std_population": 0.007930251502246887,
+      "std_sample": 0.009712534856222319,
+      "cv": 0.008785359862164202
+    }
+  },
+  "tier3": {
+    "score": 100.0,
+    "notes": [
+      "Metric 'auroc' has the largest CV of 2 metric(s) with seed results and decides",
+      "Multi-seed evaluated (n=3, Mean=0.9027, StdDev=0.0079, CV=0.879%)",
+      "Excellent seed invariance: Coefficient of Variation <= 2% (+100)"
+    ],
+    "decided_by": "auroc",
+    "basis": "measured: the metric with the largest CV decides"
+  },
+  "tier3_by_metric": {
+    "accuracy": {
+      "cv": 0.002755812857668338,
+      "score_if_this_metric_alone": 100.0
+    },
+    "auroc": {
+      "cv": 0.008785359862164202,
+      "score_if_this_metric_alone": 100.0
+    }
+  },
+  "note": "std_population (divisor n) is the one Tier 3 uses; std_sample (divisor n - 1) is stored for reading. tier3_by_metric shows what each metric alone would score; the score above is that of the metric with the largest CV."
+}

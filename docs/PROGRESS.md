@@ -37,10 +37,16 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(scoring): real seed runs of paper_006 (2026-10-20 06:00 +03:00, Issue #48)
+- Real seed runs: `paper_006`, seeds 1, 2, 3 (`data/multi_seed_runs/paper_006/`, `multi_seed_summary.json`), `docs/MULTI_SEED.md` section 9, `docs/DIAGNOSIS_COMPARISONS.md` regenerated. Correction: the Progress entry of PR #418 said 7 new tests; it was 6.
+- Result (from the summary): `accuracy` 0.8886, 0.8944, 0.8929 (CV 0.276%); `auroc` 0.892, 0.911, 0.905 (CV 0.879%); Tier 3 = 100.0, decided by `auroc`. Seed 1 equals the earlier single runs.
+- Evidence: the test file now has 14 cases; full suite below.
+- Not verified: more seeds; the data split's own seed; Tier 2 (claims concern Arcene).
+
 ### data(scoring): real seed runs of paper_003 (2026-10-20 04:43 +03:00, Issue #48)
 - First real seed runs: `paper_003`, seeds 0, 1, 2 (`data/multi_seed_runs/paper_003/`, `multi_seed_summary.json`), `docs/MULTI_SEED.md` section 9, `docs/DIAGNOSIS_COMPARISONS.md` regenerated.
 - Result (from the summary): `loss` 0.106, 0.127, 0.119 (CV 7.375%); `rmse` 0.473, 0.47, 0.465 (CV 0.703%); Tier 3 = 65.0 decided by `loss`; `rmse` alone would give 100.0. Seed 0 equals the earlier single runs.
-- Evidence: 7 new tests in `tests/test_multi_seed_real.py`.
+- Evidence: 6 new tests in `tests/test_multi_seed_real.py` (corrected from 7 on 2026-10-20; the count of the full suite went from 912 to 918).
 - Not verified: more seeds; Tier 2 (the claim names do not equal the metric names).
 
 ### feat(scoring): per-metric Tier 3 in the seed summary (2026-10-20 04:09 +03:00, Issue #48)
