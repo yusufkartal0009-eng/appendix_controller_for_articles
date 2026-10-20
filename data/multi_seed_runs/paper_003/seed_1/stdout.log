@@ -1,0 +1,398 @@
+===============================================================================
+Config: /workspace/repo/output/california_housing/ft_transformer/default/1.toml
+Output: /workspace/output/ft_transformer_default_1
+===============================================================================
+Creating the output...
+
+>>> Epoch 1 | 0:00:00 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.423
+[val  ] score = -0.638 | rmse = 0.638
+[test ] score = -0.630 | rmse = 0.63
+New best epoch!
+
+>>> Epoch 2 | 0:00:10 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.282
+[val  ] score = -0.604 | rmse = 0.604
+[test ] score = -0.584 | rmse = 0.584
+New best epoch!
+
+>>> Epoch 3 | 0:00:19 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.262
+[val  ] score = -0.602 | rmse = 0.602
+[test ] score = -0.587 | rmse = 0.587
+New best epoch!
+
+>>> Epoch 4 | 0:00:29 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.252
+[val  ] score = -0.574 | rmse = 0.574
+[test ] score = -0.558 | rmse = 0.558
+New best epoch!
+
+>>> Epoch 5 | 0:00:38 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.237
+[val  ] score = -0.553 | rmse = 0.553
+[test ] score = -0.538 | rmse = 0.538
+New best epoch!
+
+>>> Epoch 6 | 0:00:47 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.23
+[val  ] score = -0.567 | rmse = 0.567
+[test ] score = -0.553 | rmse = 0.553
+
+>>> Epoch 7 | 0:00:57 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.221
+[val  ] score = -0.555 | rmse = 0.555
+[test ] score = -0.540 | rmse = 0.54
+
+>>> Epoch 8 | 0:01:06 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.218
+[val  ] score = -0.542 | rmse = 0.542
+[test ] score = -0.526 | rmse = 0.526
+New best epoch!
+
+>>> Epoch 9 | 0:01:15 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.212
+[val  ] score = -0.552 | rmse = 0.552
+[test ] score = -0.535 | rmse = 0.535
+
+>>> Epoch 10 | 0:01:24 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.208
+[val  ] score = -0.548 | rmse = 0.548
+[test ] score = -0.526 | rmse = 0.526
+
+>>> Epoch 11 | 0:01:33 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.209
+[val  ] score = -0.527 | rmse = 0.527
+[test ] score = -0.509 | rmse = 0.509
+New best epoch!
+
+>>> Epoch 12 | 0:01:43 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.201
+[val  ] score = -0.536 | rmse = 0.536
+[test ] score = -0.514 | rmse = 0.514
+
+>>> Epoch 13 | 0:01:52 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.197
+[val  ] score = -0.531 | rmse = 0.531
+[test ] score = -0.508 | rmse = 0.508
+
+>>> Epoch 14 | 0:02:01 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.195
+[val  ] score = -0.528 | rmse = 0.528
+[test ] score = -0.507 | rmse = 0.507
+
+>>> Epoch 15 | 0:02:10 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.19
+[val  ] score = -0.518 | rmse = 0.518
+[test ] score = -0.496 | rmse = 0.496
+New best epoch!
+
+>>> Epoch 16 | 0:02:20 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.189
+[val  ] score = -0.514 | rmse = 0.514
+[test ] score = -0.495 | rmse = 0.495
+New best epoch!
+
+>>> Epoch 17 | 0:02:29 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.189
+[val  ] score = -0.511 | rmse = 0.511
+[test ] score = -0.496 | rmse = 0.496
+New best epoch!
+
+>>> Epoch 18 | 0:02:38 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.185
+[val  ] score = -0.508 | rmse = 0.508
+[test ] score = -0.491 | rmse = 0.491
+New best epoch!
+
+>>> Epoch 19 | 0:02:47 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.183
+[val  ] score = -0.506 | rmse = 0.506
+[test ] score = -0.489 | rmse = 0.489
+New best epoch!
+
+>>> Epoch 20 | 0:02:57 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.178
+[val  ] score = -0.515 | rmse = 0.515
+[test ] score = -0.500 | rmse = 0.5
+
+>>> Epoch 21 | 0:03:06 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.178
+[val  ] score = -0.504 | rmse = 0.504
+[test ] score = -0.485 | rmse = 0.485
+New best epoch!
+
+>>> Epoch 22 | 0:03:15 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.176
+[val  ] score = -0.506 | rmse = 0.506
+[test ] score = -0.486 | rmse = 0.486
+
+>>> Epoch 23 | 0:03:24 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.175
+[val  ] score = -0.521 | rmse = 0.521
+[test ] score = -0.501 | rmse = 0.501
+
+>>> Epoch 24 | 0:03:34 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.171
+[val  ] score = -0.496 | rmse = 0.496
+[test ] score = -0.479 | rmse = 0.479
+New best epoch!
+
+>>> Epoch 25 | 0:03:43 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.171
+[val  ] score = -0.520 | rmse = 0.52
+[test ] score = -0.502 | rmse = 0.502
+
+>>> Epoch 26 | 0:03:52 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.169
+[val  ] score = -0.503 | rmse = 0.503
+[test ] score = -0.489 | rmse = 0.489
+
+>>> Epoch 27 | 0:04:01 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.165
+[val  ] score = -0.499 | rmse = 0.499
+[test ] score = -0.481 | rmse = 0.481
+
+>>> Epoch 28 | 0:04:10 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.167
+[val  ] score = -0.495 | rmse = 0.495
+[test ] score = -0.479 | rmse = 0.479
+New best epoch!
+
+>>> Epoch 29 | 0:04:20 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.163
+[val  ] score = -0.494 | rmse = 0.494
+[test ] score = -0.481 | rmse = 0.481
+New best epoch!
+
+>>> Epoch 30 | 0:04:29 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.162
+[val  ] score = -0.499 | rmse = 0.499
+[test ] score = -0.485 | rmse = 0.485
+
+>>> Epoch 31 | 0:04:38 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.159
+[val  ] score = -0.488 | rmse = 0.488
+[test ] score = -0.476 | rmse = 0.476
+New best epoch!
+
+>>> Epoch 32 | 0:04:48 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.157
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.474 | rmse = 0.474
+
+>>> Epoch 33 | 0:04:57 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.155
+[val  ] score = -0.488 | rmse = 0.488
+[test ] score = -0.476 | rmse = 0.476
+
+>>> Epoch 34 | 0:05:06 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.156
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.474 | rmse = 0.474
+
+>>> Epoch 35 | 0:05:16 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.154
+[val  ] score = -0.490 | rmse = 0.49
+[test ] score = -0.480 | rmse = 0.48
+
+>>> Epoch 36 | 0:05:25 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.151
+[val  ] score = -0.493 | rmse = 0.493
+[test ] score = -0.474 | rmse = 0.474
+
+>>> Epoch 37 | 0:05:35 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.151
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.477 | rmse = 0.477
+
+>>> Epoch 38 | 0:05:44 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.149
+[val  ] score = -0.486 | rmse = 0.486
+[test ] score = -0.472 | rmse = 0.472
+New best epoch!
+
+>>> Epoch 39 | 0:05:53 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.149
+[val  ] score = -0.497 | rmse = 0.497
+[test ] score = -0.478 | rmse = 0.478
+
+>>> Epoch 40 | 0:06:02 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.15
+[val  ] score = -0.495 | rmse = 0.495
+[test ] score = -0.477 | rmse = 0.477
+
+>>> Epoch 41 | 0:06:11 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.149
+[val  ] score = -0.484 | rmse = 0.484
+[test ] score = -0.473 | rmse = 0.473
+New best epoch!
+
+>>> Epoch 42 | 0:06:21 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.145
+[val  ] score = -0.489 | rmse = 0.489
+[test ] score = -0.476 | rmse = 0.476
+
+>>> Epoch 43 | 0:06:30 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.143
+[val  ] score = -0.479 | rmse = 0.479
+[test ] score = -0.464 | rmse = 0.464
+New best epoch!
+
+>>> Epoch 44 | 0:06:39 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.141
+[val  ] score = -0.478 | rmse = 0.478
+[test ] score = -0.470 | rmse = 0.47
+New best epoch!
+
+>>> Epoch 45 | 0:06:48 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.144
+[val  ] score = -0.496 | rmse = 0.496
+[test ] score = -0.481 | rmse = 0.481
+
+>>> Epoch 46 | 0:06:57 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.142
+[val  ] score = -0.485 | rmse = 0.485
+[test ] score = -0.473 | rmse = 0.473
+
+>>> Epoch 47 | 0:07:07 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.138
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.482 | rmse = 0.482
+
+>>> Epoch 48 | 0:07:16 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.139
+[val  ] score = -0.481 | rmse = 0.481
+[test ] score = -0.472 | rmse = 0.472
+
+>>> Epoch 49 | 0:07:25 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.139
+[val  ] score = -0.479 | rmse = 0.479
+[test ] score = -0.470 | rmse = 0.47
+
+>>> Epoch 50 | 0:07:34 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.136
+[val  ] score = -0.485 | rmse = 0.485
+[test ] score = -0.476 | rmse = 0.476
+
+>>> Epoch 51 | 0:07:44 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.137
+[val  ] score = -0.484 | rmse = 0.484
+[test ] score = -0.478 | rmse = 0.478
+
+>>> Epoch 52 | 0:07:53 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.136
+[val  ] score = -0.483 | rmse = 0.483
+[test ] score = -0.475 | rmse = 0.475
+
+>>> Epoch 53 | 0:08:02 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.133
+[val  ] score = -0.482 | rmse = 0.482
+[test ] score = -0.475 | rmse = 0.475
+
+>>> Epoch 54 | 0:08:11 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.134
+[val  ] score = -0.478 | rmse = 0.478
+[test ] score = -0.472 | rmse = 0.472
+
+>>> Epoch 55 | 0:08:20 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.129
+[val  ] score = -0.484 | rmse = 0.484
+[test ] score = -0.480 | rmse = 0.48
+
+>>> Epoch 56 | 0:08:29 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.129
+[val  ] score = -0.492 | rmse = 0.492
+[test ] score = -0.479 | rmse = 0.479
+
+>>> Epoch 57 | 0:08:39 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.129
+[val  ] score = -0.494 | rmse = 0.494
+[test ] score = -0.484 | rmse = 0.484
+
+>>> Epoch 58 | 0:08:48 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.13
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.476 | rmse = 0.476
+
+>>> Epoch 59 | 0:08:57 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.127
+[val  ] score = -0.485 | rmse = 0.485
+[test ] score = -0.477 | rmse = 0.477
+
+>>> Epoch 60 | 0:09:06 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.127
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.479 | rmse = 0.479
+
+>>> Epoch 61 | 0:09:16 | /workspace/output/ft_transformer_default_1
+lr = 0.0001 | batch_size = 256 | chunk_size = None | epoch_size = 52 | n_parameters = 893179
+[train] loss = 0.127
+[val  ] score = -0.491 | rmse = 0.491
+[test ] score = -0.477 | rmse = 0.477
+
+Running the final evaluation...
+[train] score = -0.400 | rmse = 0.4
+[val  ] score = -0.478 | rmse = 0.478
+[test ] score = -0.470 | rmse = 0.47
+Done!

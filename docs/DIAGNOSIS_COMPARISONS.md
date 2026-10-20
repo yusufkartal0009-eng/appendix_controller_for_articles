@@ -15,6 +15,8 @@ Rule-based comparisons (docs/DIAGNOSIS.md section 8) of stored runs of the same 
 | `data/pilot3_runs/paper_006` | `data/cpu_runs/paper_006` | SAME_METRICS | CPUs, Memory limit, Tool commit (repro_radar_commit), Memory limit set by hand, CPU limit set by hand | no |
 | `data/synthetic_seeds/synthetic_seed_free/seed_1` | `data/synthetic_seeds/synthetic_seed_free/seed_2` | SAME_METRICS | Seed, Container command | no |
 | `data/synthetic_seeds/synthetic_seeded/seed_1` | `data/synthetic_seeds/synthetic_seeded/seed_2` | DIFFERENT_METRICS | Seed, Container command | yes |
+| `data/multi_seed_runs/paper_003/seed_0` | `data/multi_seed_runs/paper_003/seed_1` | DIFFERENT_METRICS | Seed, Container command, Tool commit (repro_radar_commit) | yes |
+| `data/multi_seed_runs/paper_003/seed_0` | `data/multi_seed_runs/paper_003/seed_2` | DIFFERENT_METRICS | Seed, Container command, Tool commit (repro_radar_commit) | yes |
 
 ### Comparison of `data/pilot3_runs/paper_003` (A) and `data/pilot2_runs/paper_003` (B)
 
@@ -265,6 +267,66 @@ This comparison is rule-based and uses only the stored files of the two runs. It
 #### Time and memory
 - The run phase took 0.54 s in A and 0.536 s in B (B was 1.01 times faster than A). *(source: A run_report.json: duration_seconds; B run_report.json: duration_seconds)*
 - The peak memory was 0.01 GiB in A and 0.01 GiB in B. *(source: A run_report.json: meta.peak_memory_bytes; B run_report.json: meta.peak_memory_bytes)*
+- The time of a run also depends on the load of the machine, which the run files do not hold. *(source: rule R2, docs/DIAGNOSIS.md section 8)*
+
+#### Reading
+- Rule R3, different metric values with a different seed: the seeds differ. A paper that uses its seed can give different values for different seeds; this comparison does not show whether this paper's seed controls these metrics. *(source: rule R3, docs/DIAGNOSIS.md section 8)*
+- At least one shift is large (more than the Tier 2 tolerance). A person should look at this pair before any conclusion is drawn. *(source: rule R5, docs/DIAGNOSIS.md section 8)*
+
+This comparison is rule-based and uses only the stored files of the two runs. It lists recorded differences; it does not say which of them, if any, caused a change.
+
+### Comparison of `data/multi_seed_runs/paper_003/seed_0` (A) and `data/multi_seed_runs/paper_003/seed_1` (B)
+
+#### The runs
+- A is `data/multi_seed_runs/paper_003/seed_0` (paper_003); B is `data/multi_seed_runs/paper_003/seed_1` (paper_003). *(source: A pilot_record.json: paper_id; B pilot_record.json: paper_id)*
+
+#### Recorded differences between the runs
+- Seed: 0 in A, 1 in B. *(source: A pilot_record.json: multi_seed.seed; B pilot_record.json: multi_seed.seed)*
+- Container command: python /workspace/repo/bin/ft_transformer.py output/california_housing/ft_transformer/default/0.toml -o /workspace/output/ft_transformer_default_0 in A, python /workspace/repo/bin/ft_transformer.py output/california_housing/ft_transformer/default/1.toml -o /workspace/output/ft_transformer_default_1 in B. *(source: A pilot_record.json: container_command; B pilot_record.json: container_command)*
+- Tool commit (repro_radar_commit): 803d4e26 in A, 7678f084 in B. *(source: A pilot_record.json: repro_radar_commit; B pilot_record.json: repro_radar_commit)*
+- The same in both runs: CPUs, Memory limit, GPU requested, Python version, Sandbox image, Installed package versions. *(source: the stored files of both runs)*
+
+#### Outcome
+- The run phase ended with COMPLETED (exit code 0) in both runs. *(source: A run_report.json: status; B run_report.json: status)*
+
+#### Metrics
+- `loss` is 0.106 in A and 0.127 in B: the difference is 0.021 (16.54% relative), a large shift. *(source: A run_report.json: metrics; B run_report.json: metrics)*
+- `rmse` is 0.473 in A and 0.47 in B: the difference is 0.003 (0.63% relative), a moderate shift. *(source: A run_report.json: metrics; B run_report.json: metrics)*
+- The metrics are the numbers the extractor found in the output, stored with the digits the extractor kept; equal stored values do not show that the unrounded values are equal. *(source: A run_report.json: metrics; B run_report.json: metrics)*
+
+#### Time and memory
+- The run phase took 806.012 s in A and 585.094 s in B (B was 1.38 times faster than A). *(source: A run_report.json: duration_seconds; B run_report.json: duration_seconds)*
+- The peak memory was 1.09 GiB in A and 1.23 GiB in B. *(source: A run_report.json: meta.peak_memory_bytes; B run_report.json: meta.peak_memory_bytes)*
+- The time of a run also depends on the load of the machine, which the run files do not hold. *(source: rule R2, docs/DIAGNOSIS.md section 8)*
+
+#### Reading
+- Rule R3, different metric values with a different seed: the seeds differ. A paper that uses its seed can give different values for different seeds; this comparison does not show whether this paper's seed controls these metrics. *(source: rule R3, docs/DIAGNOSIS.md section 8)*
+- At least one shift is large (more than the Tier 2 tolerance). A person should look at this pair before any conclusion is drawn. *(source: rule R5, docs/DIAGNOSIS.md section 8)*
+
+This comparison is rule-based and uses only the stored files of the two runs. It lists recorded differences; it does not say which of them, if any, caused a change.
+
+### Comparison of `data/multi_seed_runs/paper_003/seed_0` (A) and `data/multi_seed_runs/paper_003/seed_2` (B)
+
+#### The runs
+- A is `data/multi_seed_runs/paper_003/seed_0` (paper_003); B is `data/multi_seed_runs/paper_003/seed_2` (paper_003). *(source: A pilot_record.json: paper_id; B pilot_record.json: paper_id)*
+
+#### Recorded differences between the runs
+- Seed: 0 in A, 2 in B. *(source: A pilot_record.json: multi_seed.seed; B pilot_record.json: multi_seed.seed)*
+- Container command: python /workspace/repo/bin/ft_transformer.py output/california_housing/ft_transformer/default/0.toml -o /workspace/output/ft_transformer_default_0 in A, python /workspace/repo/bin/ft_transformer.py output/california_housing/ft_transformer/default/2.toml -o /workspace/output/ft_transformer_default_2 in B. *(source: A pilot_record.json: container_command; B pilot_record.json: container_command)*
+- Tool commit (repro_radar_commit): 803d4e26 in A, 7678f084 in B. *(source: A pilot_record.json: repro_radar_commit; B pilot_record.json: repro_radar_commit)*
+- The same in both runs: CPUs, Memory limit, GPU requested, Python version, Sandbox image, Installed package versions. *(source: the stored files of both runs)*
+
+#### Outcome
+- The run phase ended with COMPLETED (exit code 0) in both runs. *(source: A run_report.json: status; B run_report.json: status)*
+
+#### Metrics
+- `loss` is 0.106 in A and 0.119 in B: the difference is 0.013 (10.92% relative), a large shift. *(source: A run_report.json: metrics; B run_report.json: metrics)*
+- `rmse` is 0.473 in A and 0.465 in B: the difference is 0.008 (1.69% relative), a moderate shift. *(source: A run_report.json: metrics; B run_report.json: metrics)*
+- The metrics are the numbers the extractor found in the output, stored with the digits the extractor kept; equal stored values do not show that the unrounded values are equal. *(source: A run_report.json: metrics; B run_report.json: metrics)*
+
+#### Time and memory
+- The run phase took 806.012 s in A and 760.873 s in B (B was 1.06 times faster than A). *(source: A run_report.json: duration_seconds; B run_report.json: duration_seconds)*
+- The peak memory was 1.09 GiB in A and 1.09 GiB in B. *(source: A run_report.json: meta.peak_memory_bytes; B run_report.json: meta.peak_memory_bytes)*
 - The time of a run also depends on the load of the machine, which the run files do not hold. *(source: rule R2, docs/DIAGNOSIS.md section 8)*
 
 #### Reading

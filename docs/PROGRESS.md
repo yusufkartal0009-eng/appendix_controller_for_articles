@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(scoring): real seed runs of paper_003 (2026-10-20 04:43 +03:00, Issue #48)
+- First real seed runs: `paper_003`, seeds 0, 1, 2 (`data/multi_seed_runs/paper_003/`, `multi_seed_summary.json`), `docs/MULTI_SEED.md` section 9, `docs/DIAGNOSIS_COMPARISONS.md` regenerated.
+- Result (from the summary): `loss` 0.106, 0.127, 0.119 (CV 7.375%); `rmse` 0.473, 0.47, 0.465 (CV 0.703%); Tier 3 = 65.0 decided by `loss`; `rmse` alone would give 100.0. Seed 0 equals the earlier single runs.
+- Evidence: 7 new tests in `tests/test_multi_seed_real.py`.
+- Not verified: more seeds; Tier 2 (the claim names do not equal the metric names).
+
 ### feat(scoring): per-metric Tier 3 in the seed summary (2026-10-20 04:09 +03:00, Issue #48)
 - `scripts/run_multi_seed.py`: `tier3.decided_by`, `tier3_by_metric`, `--summarize-only`, `summarize_stored`; `docs/MULTI_SEED.md` says why (a noisy side metric such as a training loss can decide Tier 3). The score rule is unchanged.
 - Evidence: 2 new tests; the earlier 29 tests of the file pass unchanged.
