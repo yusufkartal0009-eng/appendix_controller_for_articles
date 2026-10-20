@@ -1,0 +1,604 @@
+{
+  "protocol": "docs/DIAGNOSIS_VALIDATION.md",
+  "label_source": "Labels were written by hand by reading, in each run folder, the error line of the install log, the stderr log, or the status in run_report.json, and applying the category definitions of docs/PILOT_WEEK2.md section 7. `evidence` is the text that was read. The labels were written before the classifier was run on this set. They are NOT blind: the labeler had read the classifier's code (src/diagnosis/classifier.py, moved from scripts/categorize_pilot_failures.py) and had seen part of data/pilot_runs/failure_categories.json and the Pilot 4 summary before labeling.",
+  "runs": [
+    {
+      "id": "R01",
+      "run_dir": "data/pilot_runs/paper_002",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "Could not find a version that satisfies the requirement torch==1.9.0"
+      }
+    },
+    {
+      "id": "R02",
+      "run_dir": "data/pilot_runs/paper_003",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for catboost==0.24.4"
+      }
+    },
+    {
+      "id": "R03",
+      "run_dir": "data/pilot_runs/paper_004",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'delu'"
+      }
+    },
+    {
+      "id": "R04",
+      "run_dir": "data/pilot_runs/paper_005",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "ResolutionImpossible"
+      }
+    },
+    {
+      "id": "R05",
+      "run_dir": "data/pilot_runs/paper_006",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'torch'"
+      }
+    },
+    {
+      "id": "R06",
+      "run_dir": "data/pilot_runs/paper_008",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      }
+    },
+    {
+      "id": "R07",
+      "run_dir": "data/pilot2_runs/paper_002",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'lightgbm'"
+      }
+    },
+    {
+      "id": "R08",
+      "run_dir": "data/pilot2_runs/paper_003",
+      "label": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "Read-only file system"
+      }
+    },
+    {
+      "id": "R09",
+      "run_dir": "data/pilot2_runs/paper_004",
+      "label": {
+        "category": "TIMEOUT",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"TIMEOUT\""
+      }
+    },
+    {
+      "id": "R10",
+      "run_dir": "data/pilot2_runs/paper_005",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"OOM_KILLED\""
+      }
+    },
+    {
+      "id": "R11",
+      "run_dir": "data/pilot2_runs/paper_006",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R12",
+      "run_dir": "data/pilot2_runs/paper_008",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      }
+    },
+    {
+      "id": "R13",
+      "run_dir": "data/pilot3_runs/paper_002",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "Max retries exceeded with url: /api/v1/xml/data/list"
+      }
+    },
+    {
+      "id": "R14",
+      "run_dir": "data/pilot3_runs/paper_003",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R15",
+      "run_dir": "data/pilot3_runs/paper_004",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"OOM_KILLED\""
+      }
+    },
+    {
+      "id": "R16",
+      "run_dir": "data/pilot3_runs/paper_005",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"OOM_KILLED\""
+      }
+    },
+    {
+      "id": "R17",
+      "run_dir": "data/pilot3_runs/paper_006",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R18",
+      "run_dir": "data/pilot3_runs/paper_008",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      }
+    },
+    {
+      "id": "R19",
+      "run_dir": "data/pilot4_runs/paper_101",
+      "label": {
+        "category": "NO_FAILURE_CATEGORY",
+        "name": "RAN_WITHOUT_INSTALLED_DEPENDENCIES",
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"dependency_install_status\": \"SKIPPED\""
+      }
+    },
+    {
+      "id": "R20",
+      "run_dir": "data/pilot4_runs/paper_102",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R21",
+      "run_dir": "data/pilot4_runs/paper_103",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for filelock"
+      }
+    },
+    {
+      "id": "R22",
+      "run_dir": "data/pilot4_runs/paper_104",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "Failed to resolve 'huggingface.co'"
+      }
+    },
+    {
+      "id": "R23",
+      "run_dir": "data/pilot4_runs/paper_105",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for torch-scatter"
+      }
+    },
+    {
+      "id": "R24",
+      "run_dir": "data/pilot4_runs/paper_106",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'tensorboardX'"
+      }
+    },
+    {
+      "id": "R25",
+      "run_dir": "data/memory_runs/paper_003",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R26",
+      "run_dir": "data/memory_runs/paper_003_run2",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R27",
+      "run_dir": "data/memory_runs/paper_004",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R28",
+      "run_dir": "data/memory_runs/paper_005",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"OOM_KILLED\""
+      }
+    },
+    {
+      "id": "R29",
+      "run_dir": "data/memory_runs/paper_006_run2",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R30",
+      "run_dir": "data/cpu_runs/paper_003",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R31",
+      "run_dir": "data/cpu_runs/paper_006",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"COMPLETED\""
+      }
+    },
+    {
+      "id": "R32",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_002_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'lightgbm'"
+      }
+    },
+    {
+      "id": "R33",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_003_attempt1",
+      "label": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "Read-only file system"
+      }
+    },
+    {
+      "id": "R34",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_004_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for graphviz"
+      }
+    },
+    {
+      "id": "R35",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_004_attempt2",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'faiss'"
+      }
+    },
+    {
+      "id": "R36",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_005_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'fastsk'"
+      }
+    },
+    {
+      "id": "R37",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_005_attempt2",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"OOM_KILLED\""
+      }
+    },
+    {
+      "id": "R38",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for setuptools>=18.5"
+      }
+    },
+    {
+      "id": "R39",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt2",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for pyrsistent>=0.14.0"
+      }
+    },
+    {
+      "id": "R40",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt3",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for pyrsistent>=0.14.0"
+      }
+    },
+    {
+      "id": "R41",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt4",
+      "label": {
+        "category": "OTHER",
+        "name": "PERMISSION_DENIED",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "PermissionError: [Errno 13] Permission denied: '/workspace/home/.openml/config'"
+      }
+    },
+    {
+      "id": "R42",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_008_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence": {
+        "file": "install.log",
+        "text": "No matching distribution found for cuda-toolkit"
+      }
+    },
+    {
+      "id": "R43",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_008_attempt2",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      }
+    },
+    {
+      "id": "R44",
+      "run_dir": "data/pilot3_runs/first_attempts/paper_002_attempt1",
+      "label": {
+        "category": "OTHER",
+        "name": "OUTPUT_LIMIT_EXCEEDED",
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "run_report.json",
+        "text": "\"status\": \"OUTPUT_LIMIT_EXCEEDED\""
+      }
+    },
+    {
+      "id": "R45",
+      "run_dir": "data/pilot4_runs/first_attempts/paper_106_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'torch'"
+      }
+    },
+    {
+      "id": "R46",
+      "run_dir": "data/pilot4_runs/first_attempts/paper_106_attempt2_tool_defect",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence": {
+        "file": "stderr.log",
+        "text": "ModuleNotFoundError: No module named 'torch'"
+      }
+    }
+  ]
+}
