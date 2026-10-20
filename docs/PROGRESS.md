@@ -37,6 +37,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### test(ai): validation of the failure classifier on hand-labeled runs (2026-10-20 03:23 +03:00, Issue #36)
+- `data/diagnosis_validation/` (46 hand-labeled stored runs, 12 synthetic probes, a written analysis of every wrong answer, generated results), `scripts/evaluate_diagnosis_classifier.py`, and `docs/DIAGNOSIS_VALIDATION.md`.
+- Result (from the script): real runs 45 / 46 correct on category, name, and phase together (category 46 / 46); synthetic probes 7 / 12. The labels are not blind; the accuracy is an upper bound. The classifier was not changed.
+- Evidence: 10 new tests.
+- Not verified: papers outside these logs.
+
 ### feat(ai): diagnosis backends with a locked-number check (2026-10-20 03:18 +03:00, Issue #34)
 - `src/diagnosis/backends.py` (NullBackend default; optional Anthropic or local backend chosen by environment variables; number lock; graceful fallback), `cli.py diagnose --explain`, and `docs/DIAGNOSIS.md` section 6.
 - Evidence: 18 new tests with mock clients only.

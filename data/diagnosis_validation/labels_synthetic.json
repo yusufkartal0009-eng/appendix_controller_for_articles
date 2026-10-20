@@ -1,0 +1,30 @@
+{
+  "protocol": "docs/DIAGNOSIS_VALIDATION.md",
+  "label_source": "SYNTHETIC probes: these error lines were written by hand to test the edges of the rules; they are not from a real run. Each label is the category that docs/PILOT_WEEK2.md section 7 gives for the line. They were written before the classifier was run on them (the labeler had read the classifier's code). They are reported separately from the real runs and are not part of the headline accuracy.",
+  "cases": [
+    {"id": "S01", "stderr": "Traceback (most recent call last):\n  File \"train.py\", line 40, in <module>\nRuntimeError: CUDA out of memory. Tried to allocate 2.00 GiB (GPU 0; 8.00 GiB total capacity)\n",
+     "label": {"category": "OTHER", "name": "GPU_OUT_OF_MEMORY"}},
+    {"id": "S02", "stderr": "Traceback (most recent call last):\nAssertionError: Torch not compiled with CUDA enabled\n",
+     "label": {"category": "HARDWARE_GPU_REQUIRED", "name": null}},
+    {"id": "S03", "stderr": "Traceback (most recent call last):\nImportError: cannot import name 'Foo' from 'bar' (/workspace/deps/bar/__init__.py)\n",
+     "label": {"category": "MISSING_DEPENDENCY", "name": null}},
+    {"id": "S04", "stderr": "Traceback (most recent call last):\nModuleNotFoundError: No module named 'src'\n",
+     "label": {"category": "MISSING_DEPENDENCY", "name": null}},
+    {"id": "S05", "stderr": "Traceback (most recent call last):\nFileNotFoundError: [Errno 2] No such file or directory: 'config/model.yaml'\n",
+     "label": {"category": "OTHER", "name": "MISSING_FILE"}},
+    {"id": "S06", "stderr": "Traceback (most recent call last):\nFileNotFoundError: [Errno 2] No such file or directory: 'checkpoints/pretrained.pt'\n",
+     "label": {"category": "DATA_NOT_ACCESSIBLE", "name": null}},
+    {"id": "S07", "stderr": "Traceback (most recent call last):\nOSError: [Errno 28] No space left on device\n",
+     "label": {"category": "OTHER", "name": "NO_SPACE_LEFT"}},
+    {"id": "S08", "stderr": "Traceback (most recent call last):\nurllib.error.HTTPError: HTTP Error 404: Not Found\n",
+     "label": {"category": "DATA_NOT_ACCESSIBLE", "name": null}},
+    {"id": "S09", "stderr": "Traceback (most recent call last):\nConnectionRefusedError: [Errno 111] Connection refused\n",
+     "label": {"category": "DATA_NOT_ACCESSIBLE", "name": null}},
+    {"id": "S10", "stderr": "Traceback (most recent call last):\nValueError: could not convert string to float: 'abc'\n",
+     "label": {"category": "OTHER", "name": null}},
+    {"id": "S11", "stderr": "Traceback (most recent call last):\nRuntimeError: CUDA error: no kernel image is available for execution on the device\n",
+     "label": {"category": "HARDWARE_GPU_REQUIRED", "name": null}},
+    {"id": "S12", "stderr": "Traceback (most recent call last):\nOSError: [Errno 30] Read-only file system: '/workspace/repo/out.txt'\n",
+     "label": {"category": "OTHER", "name": "WRITE_TO_READ_ONLY_REPOSITORY"}}
+  ]
+}

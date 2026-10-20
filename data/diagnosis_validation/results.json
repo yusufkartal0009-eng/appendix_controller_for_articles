@@ -1,0 +1,1402 @@
+{
+  "real": [
+    {
+      "id": "R01",
+      "run_dir": "data/pilot_runs/paper_002",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 3,
+        "line": "ERROR: Could not find a version that satisfies the requirement torch==1.9.0 (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R02",
+      "run_dir": "data/pilot_runs/paper_003",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 2,
+        "line": "ERROR: Could not find a version that satisfies the requirement catboost==0.24.4 (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R03",
+      "run_dir": "data/pilot_runs/paper_004",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'delu'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R04",
+      "run_dir": "data/pilot_runs/paper_005",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 13,
+        "line": "ERROR: Cannot install -r /workspace/repo/requirements.txt (line 4) and python-dateutil==2.8.1 because these package versions have conflicting dependencies."
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R05",
+      "run_dir": "data/pilot_runs/paper_006",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'torch'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R06",
+      "run_dir": "data/pilot_runs/paper_008",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 26,
+        "line": "FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R07",
+      "run_dir": "data/pilot2_runs/paper_002",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 91,
+        "line": "ModuleNotFoundError: No module named 'lightgbm'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R08",
+      "run_dir": "data/pilot2_runs/paper_003",
+      "label": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 8,
+        "line": "OSError: [Errno 30] Read-only file system: '/workspace/repo/data/california_housing/build_X__quantile__mean__new__indices__0.pickle'"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R09",
+      "run_dir": "data/pilot2_runs/paper_004",
+      "label": {
+        "category": "TIMEOUT",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "TIMEOUT",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: TIMEOUT"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R10",
+      "run_dir": "data/pilot2_runs/paper_005",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OOM_KILLED"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R11",
+      "run_dir": "data/pilot2_runs/paper_006",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R12",
+      "run_dir": "data/pilot2_runs/paper_008",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 26,
+        "line": "FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R13",
+      "run_dir": "data/pilot3_runs/paper_002",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 282,
+        "line": "ConnectionError: HTTPSConnectionPool(host='www.openml.org', port=443): Max retries exceeded with url: /api/v1/xml/data/list/limit/10000/offset/0/data_id/11,14,15,16,18,22,23,29,31,37,50,54,188,458,469,1049,1050,1063,1068,1510,1494,1480,1462,1464,6332,23381,40966,40982,40994,40975 (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x7a339f56f3d0>: Failed to resolve 'www.openml.org' ([Errno -3] Temporary failure in name resolution)\"))"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R14",
+      "run_dir": "data/pilot3_runs/paper_003",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R15",
+      "run_dir": "data/pilot3_runs/paper_004",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OOM_KILLED"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R16",
+      "run_dir": "data/pilot3_runs/paper_005",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OOM_KILLED"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R17",
+      "run_dir": "data/pilot3_runs/paper_006",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R18",
+      "run_dir": "data/pilot3_runs/paper_008",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 26,
+        "line": "FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R19",
+      "run_dir": "data/pilot4_runs/paper_101",
+      "label": {
+        "category": "NO_FAILURE_CATEGORY",
+        "name": "RAN_WITHOUT_INSTALLED_DEPENDENCIES",
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "NO_FAILURE_CATEGORY",
+        "name": "RAN_WITHOUT_INSTALLED_DEPENDENCIES",
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R20",
+      "run_dir": "data/pilot4_runs/paper_102",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R21",
+      "run_dir": "data/pilot4_runs/paper_103",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 15,
+        "line": "ERROR: Could not find a version that satisfies the requirement filelock (from torch) (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R22",
+      "run_dir": "data/pilot4_runs/paper_104",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 70,
+        "line": "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /datasets/theatticusproject/cuad/raw/main/CUAD_v1/master_clauses.csv (Caused by NameResolutionError(\"HTTPSConnection(host='huggingface.co', port=443): Failed to resolve 'huggingface.co' ([Errno -3] Temporary failure in name resolution)\"))"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R23",
+      "run_dir": "data/pilot4_runs/paper_105",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 3,
+        "line": "ERROR: Could not find a version that satisfies the requirement torch-scatter (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R24",
+      "run_dir": "data/pilot4_runs/paper_106",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'tensorboardX'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R25",
+      "run_dir": "data/memory_runs/paper_003",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R26",
+      "run_dir": "data/memory_runs/paper_003_run2",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R27",
+      "run_dir": "data/memory_runs/paper_004",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R28",
+      "run_dir": "data/memory_runs/paper_005",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OOM_KILLED"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R29",
+      "run_dir": "data/memory_runs/paper_006_run2",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R30",
+      "run_dir": "data/cpu_runs/paper_003",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R31",
+      "run_dir": "data/cpu_runs/paper_006",
+      "label": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "predicted": {
+        "category": "NO_FAILURE",
+        "name": null,
+        "phase": null
+      },
+      "evidence_quoted_by_classifier": null,
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": null,
+        "all": true
+      }
+    },
+    {
+      "id": "R32",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_002_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 91,
+        "line": "ModuleNotFoundError: No module named 'lightgbm'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R33",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_003_attempt1",
+      "label": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 8,
+        "line": "OSError: [Errno 30] Read-only file system: '/workspace/repo/data/california_housing/build_X__quantile__mean__new__indices__0.pickle'"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R34",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_004_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 200,
+        "line": "ERROR: Could not find a version that satisfies the requirement graphviz (from catboost) (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R35",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_004_attempt2",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'faiss'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R36",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_005_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 6,
+        "line": "ModuleNotFoundError: No module named 'fastsk'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R37",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_005_attempt2",
+      "label": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OOM_KILLED"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R38",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 109,
+        "line": "ERROR: Could not find a version that satisfies the requirement setuptools>=18.5 (from ipython) (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R39",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt2",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 112,
+        "line": "ERROR: Could not find a version that satisfies the requirement pyrsistent>=0.14.0 (from jsonschema) (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R40",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt3",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 112,
+        "line": "ERROR: Could not find a version that satisfies the requirement pyrsistent>=0.14.0 (from jsonschema) (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R41",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_006_attempt4",
+      "label": {
+        "category": "OTHER",
+        "name": "PERMISSION_DENIED",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 16,
+        "line": "PermissionError: [Errno 13] Permission denied: '/workspace/home/.openml/config'"
+      },
+      "match": {
+        "category": true,
+        "name": false,
+        "phase": true,
+        "all": false
+      }
+    },
+    {
+      "id": "R42",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_008_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "install"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "install.log",
+        "line_number": 15,
+        "line": "ERROR: Could not find a version that satisfies the requirement cuda-toolkit==13.0.3; platform_system == \"Linux\" (from torch) (from versions: none)"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R43",
+      "run_dir": "data/pilot2_runs/first_attempts/paper_008_attempt2",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 26,
+        "line": "FileNotFoundError: [Errno 2] No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R44",
+      "run_dir": "data/pilot3_runs/first_attempts/paper_002_attempt1",
+      "label": {
+        "category": "OTHER",
+        "name": "OUTPUT_LIMIT_EXCEEDED",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "OUTPUT_LIMIT_EXCEEDED",
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "run_report.json",
+        "line_number": null,
+        "line": "status: OUTPUT_LIMIT_EXCEEDED"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R45",
+      "run_dir": "data/pilot4_runs/first_attempts/paper_106_attempt1",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'torch'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "R46",
+      "run_dir": "data/pilot4_runs/first_attempts/paper_106_attempt2_tool_defect",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "evidence_quoted_by_classifier": {
+        "file": "stderr.log",
+        "line_number": 4,
+        "line": "ModuleNotFoundError: No module named 'torch'"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "S01",
+      "last_line": "RuntimeError: CUDA out of memory. Tried to allocate 2.00 GiB (GPU 0; 8.00 GiB total capacity)",
+      "label": {
+        "category": "OTHER",
+        "name": "GPU_OUT_OF_MEMORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": false,
+        "phase": true,
+        "all": false
+      }
+    },
+    {
+      "id": "S02",
+      "last_line": "AssertionError: Torch not compiled with CUDA enabled",
+      "label": {
+        "category": "HARDWARE_GPU_REQUIRED",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "HARDWARE_GPU_REQUIRED",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "S03",
+      "last_line": "ImportError: cannot import name 'Foo' from 'bar' (/workspace/deps/bar/__init__.py)",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "S04",
+      "last_line": "ModuleNotFoundError: No module named 'src'",
+      "label": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "MISSING_DEPENDENCY",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "S05",
+      "last_line": "FileNotFoundError: [Errno 2] No such file or directory: 'config/model.yaml'",
+      "label": {
+        "category": "OTHER",
+        "name": "MISSING_FILE",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "MISSING_FILE",
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "S06",
+      "last_line": "FileNotFoundError: [Errno 2] No such file or directory: 'checkpoints/pretrained.pt'",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "MISSING_FILE",
+        "phase": "run"
+      },
+      "match": {
+        "category": false,
+        "name": null,
+        "phase": true,
+        "all": false
+      }
+    },
+    {
+      "id": "S07",
+      "last_line": "OSError: [Errno 28] No space left on device",
+      "label": {
+        "category": "OTHER",
+        "name": "NO_SPACE_LEFT",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": false,
+        "phase": true,
+        "all": false
+      }
+    },
+    {
+      "id": "S08",
+      "last_line": "urllib.error.HTTPError: HTTP Error 404: Not Found",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": false,
+        "name": null,
+        "phase": true,
+        "all": false
+      }
+    },
+    {
+      "id": "S09",
+      "last_line": "ConnectionRefusedError: [Errno 111] Connection refused",
+      "label": {
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": false,
+        "name": null,
+        "phase": true,
+        "all": false
+      }
+    },
+    {
+      "id": "S10",
+      "last_line": "ValueError: could not convert string to float: 'abc'",
+      "label": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "S11",
+      "last_line": "RuntimeError: CUDA error: no kernel image is available for execution on the device",
+      "label": {
+        "category": "HARDWARE_GPU_REQUIRED",
+        "name": null,
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "HARDWARE_GPU_REQUIRED",
+        "name": null,
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": null,
+        "phase": true,
+        "all": true
+      }
+    },
+    {
+      "id": "S12",
+      "last_line": "OSError: [Errno 30] Read-only file system: '/workspace/repo/out.txt'",
+      "label": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "predicted": {
+        "category": "OTHER",
+        "name": "WRITE_TO_READ_ONLY_REPOSITORY",
+        "phase": "run"
+      },
+      "match": {
+        "category": true,
+        "name": true,
+        "phase": true,
+        "all": true
+      }
+    }
+  ],
+  "summary": {
+    "real": {
+      "n": 46,
+      "category": {
+        "correct": 46,
+        "of": 46
+      },
+      "name": {
+        "correct": 9,
+        "of": 10
+      },
+      "phase": {
+        "correct": 36,
+        "of": 36
+      },
+      "all": {
+        "correct": 45,
+        "of": 46
+      },
+      "wrong": [
+        "R41"
+      ]
+    },
+    "synthetic": {
+      "n": 12,
+      "category": {
+        "correct": 9,
+        "of": 12
+      },
+      "name": {
+        "correct": 3,
+        "of": 5
+      },
+      "phase": {
+        "correct": 12,
+        "of": 12
+      },
+      "all": {
+        "correct": 7,
+        "of": 12
+      },
+      "wrong": [
+        "S01",
+        "S06",
+        "S07",
+        "S08",
+        "S09"
+      ]
+    }
+  }
+}
