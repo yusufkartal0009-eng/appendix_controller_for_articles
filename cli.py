@@ -264,6 +264,23 @@ def cmd_review_claims(args):
         session.close()
 
 
+def cmd_diagnose(args):
+    """Explain one stored run in plain language, from its files only (docs/DIAGNOSIS.md; no model, no network)."""
+    from src.diagnosis.report import diagnose_run
+
+    try:
+        report = diagnose_run(args.run_dir, use_seed_claims=not args.no_claims)
+    except FileNotFoundError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(1)
+    if args.json:
+        import json
+
+        print(json.dumps(report.to_dict(), indent=2))
+    else:
+        print(report.to_markdown(), end="")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Repro Radar CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -313,6 +330,13 @@ def main():
     p_review.add_argument("--list", action="store_true", help="List the claims and their review status; ask nothing")
     p_review.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
     p_review.set_defaults(func=cmd_review_claims)
+
+    # diagnose
+    p_diag = subparsers.add_parser("diagnose", help="Explain a stored run in plain language, from its files only")
+    p_diag.add_argument("run_dir", help="A run folder (pilot_record.json, run_report.json, logs)")
+    p_diag.add_argument("--no-claims", action="store_true", help="Do not compare with the seed paper's expected claims")
+    p_diag.add_argument("--json", action="store_true", help="Print the statements as JSON")
+    p_diag.set_defaults(func=cmd_diagnose)
 
     args = parser.parse_args()
     args.func(args)
