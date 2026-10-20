@@ -287,8 +287,8 @@ def gpucheck_block(data: Path = DATA) -> str:
              f"| torch / CUDA build seen in the container | {out.get('torch_version', 'n/a')} / {out.get('torch_cuda_version', 'n/a')} |",
              f"| Device seen by torch | {out.get('device_name', 'n/a')}, capability {out.get('device_capability', 'n/a')} |",
              f"| Tensor operation on | {out.get('tensor_device', 'n/a')}; result equal to the CPU result: {out.get('matmul_matches_cpu', 'n/a')} |",
-             f"| Run report `gpu` block | requested {gpu.get('requested')}, available {gpu.get('available')}, used {gpu.get('used')}; "
-             f"devices: {devices}; peak GPU memory {gpu.get('peak_memory_used_mib')} MiB |",
+             (f"| Run report `gpu` block | requested {gpu.get('requested')}, available {gpu.get('available')}, used {gpu.get('used')}; "
+             f"devices: {devices}; peak GPU memory {gpu.get('peak_memory_used_mib')} MiB |"),
              f"| Bundled wheels | {result['bundled_packages_gib']} GiB, bundling took {result['bundle_seconds']} s |",
              f"| Sandbox time (install and run) | {result['sandbox_duration_seconds']} s |",
              f"| Checks passed | {sum(result['checks'].values())} of {len(result['checks'])} |"]
@@ -340,8 +340,8 @@ def rescience_block(data: Path = DATA) -> str:
             stopped[article["failed_rule"]] = stopped.get(article["failed_rule"], 0) + 1
     by_rule = ", ".join(f"{rule} {count}" for rule, count in sorted(stopped.items(), key=lambda kv: (-kv[1], kv[0])))
     return "\n".join([HEADER.format(sources="data/external_validation/evaluation.json"), "",
-                      f"Articles of ReScience C evaluated: {evaluation['evaluated']}; selected: {evaluation['selected']}. "
-                      f"Rule that stopped each article (the first failed rule): {by_rule}."])
+                      (f"Articles of ReScience C evaluated: {evaluation['evaluated']}; selected: {evaluation['selected']}. "
+                      f"Rule that stopped each article (the first failed rule): {by_rule}.")])
 
 
 BLOCKS = {"multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
