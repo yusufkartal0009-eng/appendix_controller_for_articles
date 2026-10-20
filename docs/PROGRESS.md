@@ -37,6 +37,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(scoring): design of multi-seed execution for Tier 3 (2026-10-20 03:01 +03:00, Issue #48)
+- `docs/MULTI_SEED.md`: how Tier 3 gets real seed results. A paper's own seed parameter goes in an optional `run_setup.seed` object (`values`, `arg` or `args` with `{seed}`, and a required `source`); the runner makes one record per seed; the summary holds mean, standard deviation, and CV per metric; `src/scoring.py` takes `seed_metric_results` and scores the metric with the largest CV; the single-run baseline of 75.0 stays only when fewer than two seed runs succeeded.
+- Evidence: documentation only; nothing is implemented in this PR. The implementation and its runs follow in separate PRs.
+- Not verified: that `paper_003` and `paper_006` really take their seed as the design assumes (read from the staged code before the runs).
+
 ### docs(validation): run protocol for the external-validation articles (2026-10-18 21:00 +03:00, Issue #402)
 - `docs/EXTERNAL_VALIDATION_PROTOCOL.md`: Pilot 4's protocol with `--memory 50% --cpus 4`, a 14400 s run phase, one attempt, no correction round and no retry, records in `data/external_validation/runs/`. It replaces the 8 CPUs of `docs/EXTERNAL_VALIDATION.md` section 5 before any run, and states that the runner only runs `python <script>` commands.
 - Evidence: documentation only. No article is selected (#400, 0 of 65), so no run was made and #403 (run the articles) had nothing to run.
