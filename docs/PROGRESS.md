@@ -46,6 +46,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Evidence: full suite below; `ruff check .` clean.
 - Not verified: that any output number equals a number of the paper.
 
+### feat(ai): six gaps of the failure classifier closed (2026-10-21 19:54 +03:00, Issue #424)
+- `src/diagnosis/classifier.py`: rules for `PermissionError` (`PERMISSION_DENIED`), CUDA out of memory (`GPU_OUT_OF_MEMORY`), no space left on device (`NO_SPACE_LEFT`), `HTTPError` and `ConnectionRefusedError` (both `DATA_NOT_ACCESSIBLE`), and a missing `.pt` file (`DATA_NOT_ACCESSIBLE`). `tests/test_diagnosis_gaps.py` holds one case per line plus six unchanged-behaviour cases.
+- Validation set (labels not edited): before, real runs 45 / 46 and probes 7 / 12 right at all levels; after, 46 / 46 and 12 / 12 (`scripts/evaluate_diagnosis_classifier.py`). The rules were written from these very lines, so the set no longer measures the classifier on new logs; `docs/DIAGNOSIS_VALIDATION.md` section 5 says so. The hand-written analyses of the six answers moved from `analysis.json` to `closed_gaps.json`; `docs/report/REPORT.md` prose and the generated block were updated.
+- Evidence: full suite 968 passed, 11 skipped (worktree without ignored data); `ruff check .` clean; `report_numbers.py --check` in sync.
+- Not verified: the rules on any log that is not in the set; a real run that ends in one of these errors was not made.
+
 ### feat(corpus): demo set script (S1 to S6 and the run test K1) (2026-10-21 19:48 +03:00, Issue #421)
 - `scripts/demo_set.py` (`pool` and `run`), 26 tests in `tests/test_demo_set.py`; `scripts/corpus_expansion.py` gets one option (`stated_size_rule`, default unchanged) so that the demo set can skip the README size statement that `docs/DEMO_SET.md` does not have. The run uses `run_pilot.run_paper(pilot4=True)` with `--memory 50%`, 4 CPUs, and a 600 s run limit.
 - Evidence: full suite 954 passed, 9 skipped; `ruff check .` clean.

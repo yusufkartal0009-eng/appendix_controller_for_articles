@@ -1,0 +1,8 @@
+{
+  "R41": "The category (OTHER) and the phase are right. The classifier has no rule for `PermissionError`, so the OTHER gets no name; the label names it PERMISSION_DENIED (the quoted line is `Permission denied: '/workspace/home/.openml/config'`). The docs/PILOT_WEEK2.md rule asks for every OTHER to be named by hand; the classifier does not.",
+  "S01": "The category (OTHER) and the phase are right. There is no rule for a GPU running out of memory: `GPU_PATTERNS` holds `cuda error` and `cudaerror`, not `cuda out of memory`, so the line is an unnamed OTHER. The label names it GPU_OUT_OF_MEMORY. Whether that should be HARDWARE_GPU_REQUIRED is a definition question that the categories do not settle.",
+  "S06": "The classifier treats a missing file as data only when its path contains `data` or ends with an extension of the list `DATA_EXTENSIONS`; `.pt` is not in the list and `checkpoints/pretrained.pt` has no `data`, so it is named MISSING_FILE. The label calls a missing pretrained weight file data that the sandbox did not provide.",
+  "S07": "The category (OTHER) and the phase are right. No rule names `No space left on device`; the OTHER stays unnamed. The label names it NO_SPACE_LEFT.",
+  "S08": "`NETWORK_PATTERNS` lists `urlerror` and connection errors but not `HTTPError`; a failed download that reaches a server and gets 404 is therefore OTHER. The label counts a failed data download as DATA_NOT_ACCESSIBLE (docs/PILOT_WEEK2.md section 7: a data download fails).",
+  "S09": "`NETWORK_PATTERNS` holds `connectionerror` (as in requests' ConnectionError); `ConnectionRefusedError` does not contain that word, so the line is OTHER. The label counts it as a failed network access (DATA_NOT_ACCESSIBLE)."
+}

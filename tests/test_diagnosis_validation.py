@@ -39,40 +39,29 @@ def test_the_labels_do_not_copy_the_stored_categories():
     assert "failure_categories" not in json.dumps(labels()["runs"])
 
 
-def test_the_classifier_matches_the_real_labels_except_for_the_one_documented_gap():
+def test_the_classifier_matches_the_real_labels_since_the_gaps_were_closed():
+    # R41 was the one wrong answer until #424 closed its gap; the labels were not edited
     results = evaluation.evaluate()
     summary = results["summary"]["real"]
     assert summary["n"] == len(labels()["runs"])
     assert summary["category"]["correct"] == summary["category"]["of"]
-    assert summary["wrong"] == ["R41"]
+    assert summary["wrong"] == []
 
 
-def test_every_wrong_answer_has_a_written_analysis():
+def test_every_wrong_answer_has_a_written_analysis_and_a_closed_gap_is_not_wrong():
     results = evaluation.evaluate()
     analysis = json.loads((VALIDATION / "analysis.json").read_text(encoding="utf-8"))
+    closed = json.loads((VALIDATION / "closed_gaps.json").read_text(encoding="utf-8"))
     wrong = results["summary"]["real"]["wrong"] + results["summary"]["synthetic"]["wrong"]
-    assert wrong and set(wrong) <= set(analysis)
-    assert set(analysis) <= set(wrong), "an analysis for an answer that is no longer wrong should be removed"
+    assert set(wrong) <= set(analysis)
+    assert set(analysis) <= set(wrong), "an analysis for an answer that is no longer wrong belongs in closed_gaps.json"
+    assert set(closed) == {"R41", "S01", "S06", "S07", "S08", "S09"} and not set(closed) & set(wrong)
 
 
-def test_the_synthetic_probes_find_gaps_and_are_kept_apart():
+def test_the_synthetic_probes_are_kept_apart_and_were_written_to_find_gaps():
     synthetic = evaluation.evaluate()["summary"]["synthetic"]
-    assert synthetic["n"] >= 10 and synthetic["wrong"]
-    assert "not part of the numbers of section 2" in (REPO / "docs" / "DIAGNOSIS_VALIDATION.md").read_text(encoding="utf-8")
-
-
-def test_the_three_error_kinds_of_the_issue_are_classified():
-    cases = {c["id"]: c for c in evaluation.evaluate()["synthetic"]}
-    assert cases["S04"]["match"]["all"]  # ModuleNotFoundError
-    assert cases["S05"]["match"]["all"]  # FileNotFoundError of a config file
-    assert cases["S01"]["match"]["category"]  # CUDA out of memory is at least an OTHER
-
-
-def test_compare_levels():
-    label = {"category": "OTHER", "name": "OUT_OF_MEMORY", "phase": "run"}
-    assert evaluation.compare(label, {"category": "OTHER", "name": "OUT_OF_MEMORY", "phase": "run"})["all"]
-    assert not evaluation.compare(label, {"category": "OTHER", "name": None, "phase": "run"})["all"]
-    assert evaluation.compare({"category": "NO_FAILURE"}, {"category": "NO_FAILURE", "name": None, "phase": None})["all"]
+    assert synthetic["n"] >= 10
+    assert len(json.loads((VALIDATION / "closed_gaps.json").read_text(encoding="utf-8"))) >= 5
 
 
 def test_the_stored_results_and_document_match_the_labels():

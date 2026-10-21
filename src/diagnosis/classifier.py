@@ -27,9 +27,10 @@ CATEGORIES = (
 GPU_PATTERNS = ("no cuda gpus are available", "torch not compiled with cuda", "cuda driver", "nvidia driver",
                 "found no nvidia driver", "cuda error", "cudaerror")
 NETWORK_PATTERNS = ("network is unreachable", "temporary failure in name resolution", "name or service not known",
-                    "urlerror", "connectionerror", "max retries exceeded", "failed to establish a new connection")
+                    "urlerror", "connectionerror", "max retries exceeded", "failed to establish a new connection",
+                    "httperror", "connectionrefusederror", "connection refused")
 DATA_EXTENSIONS = (".csv", ".tsv", ".npy", ".npz", ".pkl", ".pickle", ".parquet", ".arff", ".fasta", ".tar", ".gz",
-                   ".zip", ".h5", ".hdf5", ".json", ".txt", ".svm", ".libsvm")
+                   ".zip", ".h5", ".hdf5", ".json", ".txt", ".svm", ".libsvm", ".pt")
 
 
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")  # terminal colors, for example from a Jupyter traceback (#243)
@@ -66,12 +67,18 @@ def classify_exception(line: str) -> tuple[str, str | None]:
     lower = line.lower()
     if line.startswith(("ModuleNotFoundError", "ImportError")):
         return "MISSING_DEPENDENCY", None
+    if "cuda out of memory" in lower:
+        return "OTHER", "GPU_OUT_OF_MEMORY"
     if any(p in lower for p in GPU_PATTERNS):
         return "HARDWARE_GPU_REQUIRED", None
     if any(p in lower for p in NETWORK_PATTERNS):
         return "DATA_NOT_ACCESSIBLE", None
     if "read-only file system" in lower:
         return "OTHER", "WRITE_TO_READ_ONLY_REPOSITORY"
+    if "no space left on device" in lower:
+        return "OTHER", "NO_SPACE_LEFT"
+    if "permissionerror" in lower or "permission denied" in lower:
+        return "OTHER", "PERMISSION_DENIED"
     missing = re.search(r"(FileNotFoundError|No such file or directory).*?'([^']+)'", line)
     if missing:
         path = missing.group(2).lower()
