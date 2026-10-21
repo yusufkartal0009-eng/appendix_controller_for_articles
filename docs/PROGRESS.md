@@ -39,6 +39,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: the path of one paper through the tool, with times (2026-10-22 00:10 +03:00, Issue #427)
+- New `docs/WORKFLOW.md`: 13 steps from adding a paper to the dashboard, who does each step, and how long it takes. Each time is marked measured (with the record it comes from) or estimate. Examples: `paper_102` about 6 to 7 min of machine time, `paper_003` 2,660 s cold and 1,549 s with the environment cache.
+- Not verified: the estimated steps (adding a paper, source check, data fetch, claim extraction, claim acceptance) were not timed; the build phase has no recorded time.
+
 ### data(corpus): demo set run and results (2026-10-21 22:34 +03:00, Issue #421)
 - `scripts/demo_set.py report` (results section generator) and the run itself: `data/demo_set/{pool.json, evaluation.json, papers.json, runs/}`, `docs/DEMO_SET.md` section 7.
 - Result (from `evaluation.json`): the pool of 464 candidates was checked up to the 2.5-hour limit (416 checked), 22 candidates passed S1 to S6 and were run once, and 1 passed K1: `demo_020` (`skimeur/pioneer-detection-method`, arXiv 2511.16760). The set is smaller than five. This is a hand-picked demo set, not a success rate.
