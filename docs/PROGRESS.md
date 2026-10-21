@@ -39,6 +39,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): demo set rules (written before any candidate was listed) (2026-10-21 19:45 +03:00, Issue #421)
+- `docs/DEMO_SET.md`: the mechanical rules S1 to S6, the run test K1, the pool (eight GitHub searches), the hash order, and the stop rule. The set is hand-picked for the dashboard; it is not a random sample and no number of it is a success rate.
+- Evidence: documentation only; no search was run and no candidate was opened before this file was written.
+- Not verified: the rules have not been applied yet.
+
 ### docs(report): final consistency pass (2026-10-20 06:03 +03:00, Issues #48 and #413)
 - Final consistency pass: `docs/report/REPORT.md` (new sections 6.4a, 6.5a, 6.6, 6.7; abstract, limitations, conclusion, and reproducibility statement updated; five new generated blocks in `scripts/report_numbers.py`), `README.md` (status, AI layer, quickstart, layout), the Current Status and the milestone counts of this file, and a note in `docs/INTRODUCTION_SOURCES.md` (#48, #413).
 - Checks: `report_numbers.py --check` in sync; `verify_sources.py` all verified; `verify_corpus.py` 6 of 6; Turkish-letter scan 0 lines in 889 files.
