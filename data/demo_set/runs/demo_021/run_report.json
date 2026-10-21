@@ -1,0 +1,735 @@
+{
+  "paper_id": "demo_021",
+  "source": "https://github.com/AgvanTsydypov/sample-efficiency-mujoco",
+  "commit_hash": "400e813636995305e17254cd7571aa41f6894587",
+  "target_script": "aggregate_results.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.71,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\demo_021",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.363,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 21647360,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "absl-py==2.5.0",
+      "name": "absl-py",
+      "requested": "==2.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ale-py==0.12.1",
+      "name": "ale-py",
+      "requested": "==0.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "annotated-types==0.8.0",
+      "name": "annotated-types",
+      "requested": "==0.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2026.7.22",
+      "name": "certifi",
+      "requested": "==2026.7.22",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==3.5.1",
+      "name": "charset-normalizer",
+      "requested": "==3.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "click==8.5.0",
+      "name": "click",
+      "requested": "==8.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cloudpickle==3.1.2",
+      "name": "cloudpickle",
+      "requested": "==3.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "contourpy==1.4.0",
+      "name": "contourpy",
+      "requested": "==1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cycler==0.12.1",
+      "name": "cycler",
+      "requested": "==0.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "etils==1.14.0",
+      "name": "etils",
+      "requested": "==1.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Farama-Notifications==0.0.6",
+      "name": "Farama-Notifications",
+      "requested": "==0.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "filelock==4.0.5",
+      "name": "filelock",
+      "requested": "==4.0.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fonttools==4.66.0",
+      "name": "fonttools",
+      "requested": "==4.66.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fsspec==2026.9.0",
+      "name": "fsspec",
+      "requested": "==2026.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "glfw==2.10.2",
+      "name": "glfw",
+      "requested": "==2.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "googleapis-common-protos==1.75.4",
+      "name": "googleapis-common-protos",
+      "requested": "==1.75.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "grpcio==1.84.0",
+      "name": "grpcio",
+      "requested": "==1.84.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gymnasium==1.3.0",
+      "name": "gymnasium",
+      "requested": "==1.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.20",
+      "name": "idna",
+      "requested": "==3.20",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ImageIO==2.38.0",
+      "name": "ImageIO",
+      "requested": "==2.38.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "imageio-ffmpeg==0.6.0",
+      "name": "imageio-ffmpeg",
+      "requested": "==0.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Jinja2==3.1.6",
+      "name": "Jinja2",
+      "requested": "==3.1.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "kiwisolver==1.5.1",
+      "name": "kiwisolver",
+      "requested": "==1.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Markdown==3.11",
+      "name": "Markdown",
+      "requested": "==3.11",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markdown-it-py==4.2.0",
+      "name": "markdown-it-py",
+      "requested": "==4.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "MarkupSafe==3.0.3",
+      "name": "MarkupSafe",
+      "requested": "==3.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.11.2",
+      "name": "matplotlib",
+      "requested": "==3.11.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mdurl==0.1.2",
+      "name": "mdurl",
+      "requested": "==0.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mpmath==1.3.0",
+      "name": "mpmath",
+      "requested": "==1.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mujoco==3.14.0",
+      "name": "mujoco",
+      "requested": "==3.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==3.7",
+      "name": "networkx",
+      "requested": "==3.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.5.3",
+      "name": "numpy",
+      "requested": "==2.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opencv-python==5.0.0.93",
+      "name": "opencv-python",
+      "requested": "==5.0.0.93",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-api==1.45.0",
+      "name": "opentelemetry-api",
+      "requested": "==1.45.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-exporter-http-transport==0.66b0",
+      "name": "opentelemetry-exporter-http-transport",
+      "requested": "==0.66b0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-exporter-otlp-common==0.66b0",
+      "name": "opentelemetry-exporter-otlp-common",
+      "requested": "==0.66b0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-exporter-otlp-proto-common==1.45.0",
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "requested": "==1.45.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-exporter-otlp-proto-http==1.45.0",
+      "name": "opentelemetry-exporter-otlp-proto-http",
+      "requested": "==1.45.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-proto==1.45.0",
+      "name": "opentelemetry-proto",
+      "requested": "==1.45.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-sdk==1.45.0",
+      "name": "opentelemetry-sdk",
+      "requested": "==1.45.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-semantic-conventions==0.66b0",
+      "name": "opentelemetry-semantic-conventions",
+      "requested": "==0.66b0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==26.3",
+      "name": "packaging",
+      "requested": "==26.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==3.0.6",
+      "name": "pandas",
+      "requested": "==3.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==12.3.0",
+      "name": "pillow",
+      "requested": "==12.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "platformdirs==4.12.1",
+      "name": "platformdirs",
+      "requested": "==4.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==7.36.2",
+      "name": "protobuf",
+      "requested": "==7.36.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "psutil==7.2.2",
+      "name": "psutil",
+      "requested": "==7.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.13.5",
+      "name": "pydantic",
+      "requested": "==2.13.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic_core==2.46.5",
+      "name": "pydantic_core",
+      "requested": "==2.46.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pygame-ce==2.5.8",
+      "name": "pygame-ce",
+      "requested": "==2.5.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pygments==2.21.0",
+      "name": "Pygments",
+      "requested": "==2.21.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyOpenGL==3.1.10",
+      "name": "PyOpenGL",
+      "requested": "==3.1.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.3.3",
+      "name": "pyparsing",
+      "requested": "==3.3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.9.0.post0",
+      "name": "python-dateutil",
+      "requested": "==2.9.0.post0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.3",
+      "name": "PyYAML",
+      "requested": "==6.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.34.2",
+      "name": "requests",
+      "requested": "==2.34.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rich==15.0.0",
+      "name": "rich",
+      "requested": "==15.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "setuptools==84.0.0",
+      "name": "setuptools",
+      "requested": "==84.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.17.0",
+      "name": "six",
+      "requested": "==1.17.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "stable_baselines3==2.9.0",
+      "name": "stable_baselines3",
+      "requested": "==2.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sympy==1.14.0",
+      "name": "sympy",
+      "requested": "==1.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard==2.21.0",
+      "name": "tensorboard",
+      "requested": "==2.21.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard-data-server==0.7.2",
+      "name": "tensorboard-data-server",
+      "requested": "==0.7.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.14.0",
+      "name": "torch",
+      "requested": "==2.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.70.1",
+      "name": "tqdm",
+      "requested": "==4.70.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing-inspection==0.4.4",
+      "name": "typing-inspection",
+      "requested": "==0.4.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.16.0",
+      "name": "typing_extensions",
+      "requested": "==4.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==2.8.0",
+      "name": "urllib3",
+      "requested": "==2.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wandb==0.30.0",
+      "name": "wandb",
+      "requested": "==0.30.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "websockets==17.1",
+      "name": "websockets",
+      "requested": "==17.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Werkzeug==3.1.9",
+      "name": "Werkzeug",
+      "requested": "==3.1.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xxhash==4.0.1",
+      "name": "xxhash",
+      "requested": "==4.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zipp==4.1.0",
+      "name": "zipp",
+      "requested": "==4.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "stable-baselines3[extra]>=2.4.0",
+      "name": "stable-baselines3",
+      "requested": ">=2.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "gymnasium>=1.0.0",
+      "name": "gymnasium",
+      "requested": ">=1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "gymnasium[mujoco]>=1.0.0",
+      "name": "gymnasium",
+      "requested": ">=1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "gymnasium[classic-control]>=1.0.0",
+      "name": "gymnasium",
+      "requested": ">=1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "mujoco>=3.2.0",
+      "name": "mujoco",
+      "requested": ">=3.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch>=2.4.0",
+      "name": "torch",
+      "requested": ">=2.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy>=1.26.0",
+      "name": "numpy",
+      "requested": ">=1.26.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "matplotlib>=3.8.0",
+      "name": "matplotlib",
+      "requested": ">=3.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "imageio>=2.34.0",
+      "name": "imageio",
+      "requested": ">=2.34.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "imageio-ffmpeg>=0.5.0",
+      "name": "imageio-ffmpeg",
+      "requested": ">=0.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pillow>=10.0.0",
+      "name": "pillow",
+      "requested": ">=10.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "wandb>=0.18.0",
+      "name": "wandb",
+      "requested": ">=0.18.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/aggregate_results.py --env Hopper-v5 --algos ppo sac sac_ls1000\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.363s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/aggregate_results.py\", line 17, in <module>\n    import matplotlib.pyplot as plt\nModuleNotFoundError: No module named 'matplotlib'\n"
+}

@@ -39,6 +39,13 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): demo set run and results (2026-10-21 22:34 +03:00, Issue #421)
+- `scripts/demo_set.py report` (results section generator) and the run itself: `data/demo_set/{pool.json, evaluation.json, papers.json, runs/}`, `docs/DEMO_SET.md` section 7.
+- Result (from `evaluation.json`): the pool of 464 candidates was checked up to the 2.5-hour limit (416 checked), 22 candidates passed S1 to S6 and were run once, and 1 passed K1: `demo_020` (`skimeur/pioneer-detection-method`, arXiv 2511.16760). The set is smaller than five. This is a hand-picked demo set, not a success rate.
+- `demo_020` passed on a setup value (`True post-break alpha: 1.5`); none of its 48 printed decimals (three or more decimals) was found in the paper's text, so a match with a paper table is not verified.
+- Evidence: full suite below; `ruff check .` clean.
+- Not verified: that any output number equals a number of the paper.
+
 ### feat(ai): six gaps of the failure classifier closed (2026-10-21 19:54 +03:00, Issue #424)
 - `src/diagnosis/classifier.py`: rules for `PermissionError` (`PERMISSION_DENIED`), CUDA out of memory (`GPU_OUT_OF_MEMORY`), no space left on device (`NO_SPACE_LEFT`), `HTTPError` and `ConnectionRefusedError` (both `DATA_NOT_ACCESSIBLE`), and a missing `.pt` file (`DATA_NOT_ACCESSIBLE`). `tests/test_diagnosis_gaps.py` holds one case per line plus six unchanged-behaviour cases.
 - Validation set (labels not edited): before, real runs 45 / 46 and probes 7 / 12 right at all levels; after, 46 / 46 and 12 / 12 (`scripts/evaluate_diagnosis_classifier.py`). The rules were written from these very lines, so the set no longer measures the classifier on new logs; `docs/DIAGNOSIS_VALIDATION.md` section 5 says so. The hand-written analyses of the six answers moved from `analysis.json` to `closed_gaps.json`; `docs/report/REPORT.md` prose and the generated block were updated.

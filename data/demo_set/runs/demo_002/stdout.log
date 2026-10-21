@@ -1,0 +1,103 @@
+usage: stable_shift_bench.py [-h] --h5ad H5AD --string_links STRING_LINKS
+                             --string_info STRING_INFO
+                             [--dorothea_file DOROTHEA_FILE] [--outdir OUTDIR]
+                             [--obs_gene_col OBS_GENE_COL]
+                             [--var_gene_col VAR_GENE_COL]
+                             [--ctrl_label CTRL_LABEL]
+                             [--min_cells_per_pert MIN_CELLS_PER_PERT]
+                             [--model_type {mean,knn,ridge,mlp,gcn}]
+                             [--graph_type {none,STRING_only,COEXPR_only,STRING_plus_COEXPR,TF_only,STRING_plus_TF}]
+                             [--use_bio_features] [--svd_dim SVD_DIM]
+                             [--node2vec_dim NODE2VEC_DIM]
+                             [--hidden_dim HIDDEN_DIM] [--dropout DROPOUT]
+                             [--lr LR] [--weight_decay WEIGHT_DECAY]
+                             [--epochs EPOCHS] [--patience PATIENCE]
+                             [--test_frac TEST_FRAC] [--val_frac VAL_FRAC]
+                             [--string_min_score STRING_MIN_SCORE]
+                             [--coexpr_top_k COEXPR_TOP_K]
+                             [--coexpr_min_abs_corr COEXPR_MIN_ABS_CORR]
+                             [--max_ctrl_cells MAX_CTRL_CELLS]
+                             [--positive_only]
+                             [--dorothea_mode {curated_clean,curated_plus,all_noisy,signed_only}]
+                             [--dorothea_min_support DOROTHEA_MIN_SUPPORT]
+                             [--knn_k KNN_K] [--ridge_alpha RIDGE_ALPHA]
+                             [--seed SEED] [--go_file GO_FILE]
+                             [--use_go_features] [--go_gene_col GO_GENE_COL]
+                             [--go_term_col GO_TERM_COL] [--go_sep GO_SEP]
+                             [--go_min_genes_per_term GO_MIN_GENES_PER_TERM]
+                             [--go_max_genes_per_term GO_MAX_GENES_PER_TERM]
+                             [--go_svd_dim GO_SVD_DIM]
+                             [--pathway_file PATHWAY_FILE]
+                             [--use_pathway_features] [--pathway_format {gmt}]
+                             [--pathway_min_genes_per_term PATHWAY_MIN_GENES_PER_TERM]
+                             [--pathway_max_genes_per_term PATHWAY_MAX_GENES_PER_TERM]
+                             [--pathway_svd_dim PATHWAY_SVD_DIM]
+                             [--n2v_walk_length N2V_WALK_LENGTH]
+                             [--n2v_num_walks N2V_NUM_WALKS]
+                             [--n2v_window N2V_WINDOW] [--n2v_p N2V_P]
+                             [--n2v_q N2V_Q] [--n2v_workers N2V_WORKERS]
+                             [--use_dual_loss]
+                             [--loss_alpha_latent LOSS_ALPHA_LATENT]
+                             [--loss_beta_gene LOSS_BETA_GENE]
+                             [--loss_gamma_cosine LOSS_GAMMA_COSINE]
+
+Stable-Shift benchmark with TF graph support
+
+options:
+  -h, --help            show this help message and exit
+  --h5ad H5AD
+  --string_links STRING_LINKS
+  --string_info STRING_INFO
+  --dorothea_file DOROTHEA_FILE
+  --outdir OUTDIR
+  --obs_gene_col OBS_GENE_COL
+  --var_gene_col VAR_GENE_COL
+  --ctrl_label CTRL_LABEL
+  --min_cells_per_pert MIN_CELLS_PER_PERT
+  --model_type {mean,knn,ridge,mlp,gcn}
+  --graph_type {none,STRING_only,COEXPR_only,STRING_plus_COEXPR,TF_only,STRING_plus_TF}
+  --use_bio_features
+  --svd_dim SVD_DIM
+  --node2vec_dim NODE2VEC_DIM
+  --hidden_dim HIDDEN_DIM
+  --dropout DROPOUT
+  --lr LR
+  --weight_decay WEIGHT_DECAY
+  --epochs EPOCHS
+  --patience PATIENCE
+  --test_frac TEST_FRAC
+  --val_frac VAL_FRAC
+  --string_min_score STRING_MIN_SCORE
+  --coexpr_top_k COEXPR_TOP_K
+  --coexpr_min_abs_corr COEXPR_MIN_ABS_CORR
+  --max_ctrl_cells MAX_CTRL_CELLS
+  --positive_only
+  --dorothea_mode {curated_clean,curated_plus,all_noisy,signed_only}
+  --dorothea_min_support DOROTHEA_MIN_SUPPORT
+  --knn_k KNN_K
+  --ridge_alpha RIDGE_ALPHA
+  --seed SEED
+  --go_file GO_FILE
+  --use_go_features
+  --go_gene_col GO_GENE_COL
+  --go_term_col GO_TERM_COL
+  --go_sep GO_SEP
+  --go_min_genes_per_term GO_MIN_GENES_PER_TERM
+  --go_max_genes_per_term GO_MAX_GENES_PER_TERM
+  --go_svd_dim GO_SVD_DIM
+  --pathway_file PATHWAY_FILE
+  --use_pathway_features
+  --pathway_format {gmt}
+  --pathway_min_genes_per_term PATHWAY_MIN_GENES_PER_TERM
+  --pathway_max_genes_per_term PATHWAY_MAX_GENES_PER_TERM
+  --pathway_svd_dim PATHWAY_SVD_DIM
+  --n2v_walk_length N2V_WALK_LENGTH
+  --n2v_num_walks N2V_NUM_WALKS
+  --n2v_window N2V_WINDOW
+  --n2v_p N2V_P
+  --n2v_q N2V_Q
+  --n2v_workers N2V_WORKERS
+  --use_dual_loss
+  --loss_alpha_latent LOSS_ALPHA_LATENT
+  --loss_beta_gene LOSS_BETA_GENE
+  --loss_gamma_cosine LOSS_GAMMA_COSINE

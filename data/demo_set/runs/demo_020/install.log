@@ -1,0 +1,24 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/pandas-3.0.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/statsmodels-0.15.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/matplotlib-3.11.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/python_dateutil-2.9.0.post0-py2.py3-none-any.whl (from pandas>=1.3->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/patsy-1.0.3-py2.py3-none-any.whl (from statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/packaging-26.3-py3-none-any.whl (from statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/formulaic-1.2.2-py3-none-any.whl (from statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from matplotlib>=3.5->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/cycler-0.12.1-py3-none-any.whl (from matplotlib>=3.5->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/fonttools-4.67.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from matplotlib>=3.5->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/kiwisolver-1.5.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from matplotlib>=3.5->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from matplotlib>=3.5->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/pyparsing-3.3.3-py3-none-any.whl (from matplotlib>=3.5->-r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/interface_meta-2.0.1-py3-none-any.whl (from formulaic>=1.1.0->statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/narwhals-2.27.1-py3-none-any.whl (from formulaic>=1.1.0->statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/typing_extensions-4.16.0-py3-none-any.whl (from formulaic>=1.1.0->statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/wrapt-2.5.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (from formulaic>=1.1.0->statsmodels>=0.13->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/six-1.17.0-py2.py3-none-any.whl (from python-dateutil>=2.8.2->pandas>=1.3->-r /workspace/repo/requirements.txt (line 2))
+Installing collected packages: wrapt, typing-extensions, six, pyparsing, pillow, packaging, numpy, narwhals, kiwisolver, interface-meta, fonttools, cycler, scipy, python-dateutil, patsy, contourpy, pandas, matplotlib, formulaic, statsmodels
+
+Successfully installed contourpy-1.3.3 cycler-0.12.1 fonttools-4.67.0 formulaic-1.2.2 interface-meta-2.0.1 kiwisolver-1.5.1 matplotlib-3.11.2 narwhals-2.27.1 numpy-2.4.6 packaging-26.3 pandas-3.0.6 patsy-1.0.3 pillow-13.0.0 pyparsing-3.3.3 python-dateutil-2.9.0.post0 scipy-1.17.1 six-1.17.0 statsmodels-0.15.0 typing-extensions-4.16.0 wrapt-2.5.1

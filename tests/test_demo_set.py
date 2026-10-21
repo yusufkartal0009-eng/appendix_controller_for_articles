@@ -124,3 +124,62 @@ def test_the_same_repository_or_paper_is_not_taken_twice(tmp_path):
     fetcher = Fetcher({"o/a": {}, "O/A": {}})
     summary = ds.select_and_run(["o/a", "O/A"], fetcher, set(), set(), tmp_path, lambda e, c, r: PASSED)
     assert summary["runs"] == 1
+
+
+class FakePdf:
+    def __init__(self, pages):
+        self.pages = pages
+
+    def find(self, needle):
+        return [i for i, t in enumerate(self.pages, start=1) if needle in t]
+
+    def page(self, number):
+        return self.pages[number - 1]
+
+
+def test_number_forms_cover_the_leading_zero_and_the_percentage():
+    assert [f for f, _ in ds.number_forms("0.9123")] == ["0.9123", ".9123", "91.23"]
+    assert [f for f, _ in ds.number_forms("3.14")] == ["3.14"]
+
+
+def test_a_printed_number_is_located_on_the_pages_of_the_paper_with_the_table_captions():
+    pdf = FakePdf(["intro 0.5", "Table 2. Results\nours 91.23 base 80.1", "Table 3. Ablation"])
+    hits = ds.locate_numbers(["accuracy: 0.9123", "loss=7.77"], pdf)
+    assert hits[0]["pages"] == [2] and hits[0]["captions"] == ["Table 2"] and "percentage" in hits[0]["form"]
+    assert hits[1]["pages"] == [] and hits[1]["form"] is None
+
+
+def test_the_results_section_lists_every_run_and_only_the_passed_papers_in_detail():
+    document = {"written_at": "T", "stopped_because": "five_passed", "evaluated": 3, "pool_size": 9, "candidates": [
+        {"full_name": "o/a", "failed_rule": "S2", "passed": False},
+        {"full_name": "o/b", "failed_rule": None, "passed": True, "paper_id": "demo_001",
+         "k1": {"k1_passed": True, "category": None, "log_line": "", "install_status": "INSTALLED", "run_status": "COMPLETED",
+                "exit_code": 0, "duration_seconds": 4.2, "metric_lines": ["acc: 0.5"]}},
+        {"full_name": "o/c", "failed_rule": None, "passed": True, "paper_id": "demo_002",
+         "k1": {"k1_passed": False, "category": "run", "log_line": "a|b", "install_status": "INSTALLED", "run_status": "FAILED",
+                "exit_code": 1, "duration_seconds": 1.0, "metric_lines": []}}]}
+    papers = [{"paper_id": i, "title": f"T{i}", "paper_url": "u", "repo_url": "r", "repo_commit": "c", "license": "MIT",
+               "run_command": "python x.py"} for i in ("demo_001", "demo_002")]
+    text = ds.render_results(document, papers, {"demo_001": ds.locate_numbers(["acc: 0.5"], FakePdf(["Table 1\n0.5"]))})
+    assert "Candidates that passed K1: 1" in text and "no number below is a success rate" in text
+    assert "#### demo_001: Tdemo_001" in text and "#### demo_002" not in text
+    assert "| demo_002 | `o/c` |" in text and r"a\|b" in text and "| S2 | 1 |" in text
+
+
+def test_output_numbers_are_the_distinct_decimals_with_three_decimals_or_more():
+    text = "RMSE 0.6620 and 0.6620 again\n3.5 1.123456 2024.05 -0.250 v1.2.3.4567"
+    assert ds.output_numbers(text) == ["0.6620", "1.123456", "-0.250"]
+
+
+def test_the_results_section_counts_the_output_numbers_found_in_the_paper():
+    document = {"written_at": "T", "stopped_because": "time_limit", "evaluated": 1, "candidates": [
+        {"full_name": "o/b", "failed_rule": None, "paper_id": "demo_001",
+         "k1": {"k1_passed": True, "category": None, "log_line": "", "install_status": "SKIPPED", "run_status": "COMPLETED",
+                "exit_code": 0, "duration_seconds": 1.0, "metric_lines": ["a: 0.5"]}}]}
+    papers = [{"paper_id": "demo_001", "title": "T", "paper_url": "u", "repo_url": "r", "repo_commit": "c", "license": "MIT",
+               "run_command": "python x.py"}]
+    pdf = FakePdf(["Table 1\n0.6620"])
+    hits = ds.locate_numbers([f"= {n}" for n in ds.output_numbers("rmse 0.6620 0.7173")], pdf)
+    text = ds.render_results(document, papers, {"demo_001": []}, {"demo_001": hits})
+    assert "printed anywhere in `stdout.log`: 2; found in the paper's text by the same string match: 1." in text
+    assert "| 0.6620 | 0.6620 (as printed) | 1 | Table 1 |" in text

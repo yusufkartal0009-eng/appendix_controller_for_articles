@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/repo/data/generate_toy_finance.py", line 206, in <module>
+    generate_database(db_path, n_transactions)
+  File "/workspace/repo/data/generate_toy_finance.py", line 38, in generate_database
+    conn = sqlite3.connect(db_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file

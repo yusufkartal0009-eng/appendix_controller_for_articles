@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/00_preflight.py", line 186, in <module>
+    main()
+  File "/workspace/repo/scripts/00_preflight.py", line 181, in main
+    result = run_one(cfg_path, args, output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/scripts/00_preflight.py", line 115, in run_one
+    save_json(asdict(result), output_dir / f"{result.model_id}.json")
+  File "/workspace/repo/src/sbdrift/utils.py", line 35, in save_json
+    with p.open("w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: '/workspace/repo/results/processed/preflight/gg_1d.json'

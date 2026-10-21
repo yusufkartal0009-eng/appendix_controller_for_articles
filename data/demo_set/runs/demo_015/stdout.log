@@ -1,0 +1,23 @@
+config_path: configs/e1_execre_deepseek_chat.json
+config: ExperimentConfig(model=ModelConfig(model='deepseek-deepseek-chat', temperature=0.0, top_p=0.99, sampling_temperature=1.0, max_tokens=2000, stop=['###'], local_model_path=None, trust_remote_code=False, tensor_parallel_size=-1, enable_prefix_caching=False, dtype='bfloat16', openai_timeout=90), evaluator=EvaluatorConfig(timeout=6, debug=False, num_process_evaluate=12, evaluation_mode='multiprocess', test_case_count=100000, single_test_timeout=0.8, total_generation_timeout=60, boundary_bias=False, list_range=[1, 20], matrix_range=[1, 20], group_range=[1, 20], int_range=[-20, 20], float_range=[-20.0, 20.0]), experiment=ExperimentParams(experiment_id='e1', benchmark='LiveCodeBench', baseline='ExeCRE', input_generator='schema', verifier='TrustTest', eval_score=None, error_score=None, allowed_error_ratio=0.1, n=5, difficulty='all', start_date='2025-01-01', end_date='2025-05-01', test_count=None, specific_question_id=None, specific_question_ids=None, release_version='release_latest', version='trusttest_v001', not_fast=False, cot_code_execution=False), multiprocess=10, max_rounds=20, continue_existing=False, continue_existing_with_eval=False, use_cache=False, cache_batch_size=100, force_regenerate=False, force_reevaluate=False, skip_generate=False, skip_evaluate=False, start_from=1, debug=False)
+================================================================================
+Experiment configuration information
+--------------------------------------------------------------------------------
+  Configuration hash: b637eba9
+  Model:     deepseek-deepseek-chat
+  Experiment ID:   e1
+  Baseline:     ExeCRE
+  Dataset:   LiveCodeBench
+  Input generator: schema
+  Date range: 2025-01-01 ~ 2025-05-01
+  Version:     trusttest_v001
+  Group number:     5
+  Test problem number: All
+  Process number:   10
+--------------------------------------------------------------------------------
+  Control parameters:
+    force_regenerate  = False
+    force_reevaluate  = False
+    skip_generate     = False
+    skip_evaluate     = False
+================================================================================

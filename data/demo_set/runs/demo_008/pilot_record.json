@@ -1,0 +1,106 @@
+{
+  "paper_id": "demo_008",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1298c62760acb75328cd0af59206849dc9569a54",
+  "started_at": "2026-10-21T17:58:02+00:00",
+  "repo_url": "https://github.com/ibm-client-engineering/output-drift-financial-llms",
+  "pinned_commit": "6fae9c36cb2a95a8a871da48630f7000e8c7a359",
+  "target_script": "data/generate_toy_finance.py",
+  "container_command": "python /workspace/repo/data/generate_toy_finance.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python data/generate_toy_finance.py",
+    "readme_url": "https://github.com/ibm-client-engineering/output-drift-financial-llms/blob/6fae9c36cb2a95a8a871da48630f7000e8c7a359/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "6fae9c36cb2a95a8a871da48630f7000e8c7a359",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 5.978
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 61,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\demo_008_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "rtifi-2026.10.19-py3-none-any.whl\nSaved ./demo_008_packages/pycparser-3.11-py3-none-any.whl\nSaved ./demo_008_packages/requests-2.34.2-py3-none-any.whl\nSaved ./demo_008_packages/charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSaved ./demo_008_packages/urllib3-2.8.0-py3-none-any.whl\nSuccessfully downloaded ollama pandas numpy scikit-learn scipy statsmodels matplotlib rapidfuzz jsonschema python-Levenshtein Levenshtein httpx httpcore sec-edgar-downloader beautifulsoup4 lxml html2text faker python-dotenv pytest pluggy cryptography attrs cffi contourpy cycler fonttools formulaic h11 iniconfig interface-meta joblib cloudpickle jsonschema-specifications kiwisolver narwhals packaging patsy pillow pydantic pydantic-core annotated-types pygments pyparsing pyrate-limiter python-dateutil referencing rpds-py six soupsieve threadpoolctl typing-extensions typing-inspection wrapt anyio idna certifi pycparser requests charset_normalizer urllib3\n",
+    "stderr": "",
+    "duration_seconds": 19.268
+  },
+  "sandbox_duration_seconds": 433.376,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 7.757,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 27291648
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 424.035,
+    "peak_memory_bytes": 111169536
+  },
+  "finished_at": "2026-10-21T18:05:40+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

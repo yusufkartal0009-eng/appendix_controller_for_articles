@@ -1,0 +1,106 @@
+{
+  "paper_id": "demo_017",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1298c62760acb75328cd0af59206849dc9569a54",
+  "started_at": "2026-10-21T18:55:13+00:00",
+  "repo_url": "https://github.com/OthmaneAnalytics/sb-drift-experiments",
+  "pinned_commit": "305e548094e4141236968b179b4e4bfcdecbb4d8",
+  "target_script": "scripts/00_preflight.py",
+  "container_command": "python /workspace/repo/scripts/00_preflight.py --config configs/gg_1d.yaml",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/00_preflight.py --config configs/gg_1d.yaml",
+    "readme_url": "https://github.com/OthmaneAnalytics/sb-drift-experiments/blob/305e548094e4141236968b179b4e4bfcdecbb4d8/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "305e548094e4141236968b179b4e4bfcdecbb4d8",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.58
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 18,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\demo_017_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "mo_017_packages/contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved ./demo_017_packages/cycler-0.12.1-py3-none-any.whl\nSaved ./demo_017_packages/fonttools-4.67.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl\nSaved ./demo_017_packages/iniconfig-2.3.1-py3-none-any.whl\nSaved ./demo_017_packages/kiwisolver-1.5.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl\nSaved ./demo_017_packages/packaging-26.3-py3-none-any.whl\nSaved ./demo_017_packages/pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved ./demo_017_packages/pygments-2.21.0-py3-none-any.whl\nSaved ./demo_017_packages/pyparsing-3.3.3-py3-none-any.whl\nSaved ./demo_017_packages/python_dateutil-2.9.0.post0-py2.py3-none-any.whl\nSaved ./demo_017_packages/six-1.17.0-py2.py3-none-any.whl\nSuccessfully downloaded numpy scipy PyYAML matplotlib pandas pytest pluggy contourpy cycler fonttools iniconfig kiwisolver packaging pillow pygments pyparsing python-dateutil six\n",
+    "stderr": "",
+    "duration_seconds": 6.243
+  },
+  "sandbox_duration_seconds": 246.69,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 7.85,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 100679680
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 237.48,
+    "peak_memory_bytes": 82284544
+  },
+  "finished_at": "2026-10-21T18:59:28+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

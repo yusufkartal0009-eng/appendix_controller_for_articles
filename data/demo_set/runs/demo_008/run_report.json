@@ -1,0 +1,452 @@
+{
+  "paper_id": "demo_008",
+  "source": "https://github.com/ibm-client-engineering/output-drift-financial-llms",
+  "commit_hash": "6fae9c36cb2a95a8a871da48630f7000e8c7a359",
+  "target_script": "data/generate_toy_finance.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 7.757,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\demo_008",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 7.432,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 27291648,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.19"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.2"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "Faker",
+      "version": "40.43.0"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0"
+    },
+    {
+      "name": "formulaic",
+      "version": "1.2.2"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "html2text",
+      "version": "2025.4.15"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1"
+    },
+    {
+      "name": "interface_meta",
+      "version": "2.0.1"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1"
+    },
+    {
+      "name": "Levenshtein",
+      "version": "0.27.5"
+    },
+    {
+      "name": "lxml",
+      "version": "6.1.3"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.2"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "ollama",
+      "version": "0.6.3"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "3.0.6"
+    },
+    {
+      "name": "patsy",
+      "version": "1.0.3"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.11"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "pyrate-limiter",
+      "version": "4.5.1"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4"
+    },
+    {
+      "name": "python-Levenshtein",
+      "version": "0.27.5"
+    },
+    {
+      "name": "RapidFuzz",
+      "version": "3.14.6"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.9.1"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "sec-edgar-downloader",
+      "version": "5.1.0"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "soupsieve",
+      "version": "3.0.3"
+    },
+    {
+      "name": "statsmodels",
+      "version": "0.15.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "wrapt",
+      "version": "2.5.1"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "ollama>=0.1.0",
+      "name": "ollama",
+      "requested": ">=0.1.0",
+      "installed": "0.6.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=2.0.0",
+      "name": "pandas",
+      "requested": ">=2.0.0",
+      "installed": "3.0.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy>=1.24.0",
+      "name": "numpy",
+      "requested": ">=1.24.0",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-learn>=1.3.0",
+      "name": "scikit-learn",
+      "requested": ">=1.3.0",
+      "installed": "1.9.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.14.0",
+      "name": "scipy",
+      "requested": ">=1.14.0",
+      "installed": "1.17.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "statsmodels>=0.14.0",
+      "name": "statsmodels",
+      "requested": ">=0.14.0",
+      "installed": "0.15.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "matplotlib>=3.7.0",
+      "name": "matplotlib",
+      "requested": ">=3.7.0",
+      "installed": "3.11.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "rapidfuzz>=3.0.0",
+      "name": "rapidfuzz",
+      "requested": ">=3.0.0",
+      "installed": "3.14.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "jsonschema>=4.0.0",
+      "name": "jsonschema",
+      "requested": ">=4.0.0",
+      "installed": "4.26.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "python-Levenshtein>=0.25.0",
+      "name": "python-Levenshtein",
+      "requested": ">=0.25.0",
+      "installed": "0.27.5",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "httpx>=0.24.0",
+      "name": "httpx",
+      "requested": ">=0.24.0",
+      "installed": "0.28.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "sec-edgar-downloader>=5.1.0",
+      "name": "sec-edgar-downloader",
+      "requested": ">=5.1.0",
+      "installed": "5.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "beautifulsoup4>=4.12.0",
+      "name": "beautifulsoup4",
+      "requested": ">=4.12.0",
+      "installed": "4.15.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "lxml>=5.0.0",
+      "name": "lxml",
+      "requested": ">=5.0.0",
+      "installed": "6.1.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "html2text>=2024.2.0",
+      "name": "html2text",
+      "requested": ">=2024.2.0",
+      "installed": "2025.4.15",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "faker>=20.0.0",
+      "name": "faker",
+      "requested": ">=20.0.0",
+      "installed": "40.43.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "python-dotenv>=1.0.0",
+      "name": "python-dotenv",
+      "requested": ">=1.0.0",
+      "installed": "1.2.4",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pytest>=7.4.0",
+      "name": "pytest",
+      "requested": ">=7.4.0",
+      "installed": "9.1.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "cryptography>=42.0.0",
+      "name": "cryptography",
+      "requested": ">=42.0.0",
+      "installed": "50.0.2",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/data/generate_toy_finance.py\n==================================================\n============================================================\nSYNTHETIC FINANCIAL DATABASE GENERATOR\n============================================================\n\nDatabase: toy_finance.sqlite\nTransactions: 1000\nSeed: 1234 (for deterministic reproduction)\n\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 7.432s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/data/generate_toy_finance.py\", line 206, in <module>\n    generate_database(db_path, n_transactions)\n  File \"/workspace/repo/data/generate_toy_finance.py\", line 38, in generate_database\n    conn = sqlite3.connect(db_path)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: unable to open database file\n"
+}

@@ -1,0 +1,117 @@
+{
+  "paper_id": "demo_010",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1298c62760acb75328cd0af59206849dc9569a54",
+  "started_at": "2026-10-21T18:07:09+00:00",
+  "repo_url": "https://github.com/mainlp/semantic_components",
+  "pinned_commit": "b2ec8a879ebfc3c13a8e3ae0b8a160170b3c6191",
+  "target_script": "example.py",
+  "container_command": "python /workspace/repo/example.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python example.py",
+    "readme_url": "https://github.com/mainlp/semantic_components/blob/b2ec8a879ebfc3c13a8e3ae0b8a160170b3c6191/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "b2ec8a879ebfc3c13a8e3ae0b8a160170b3c6191",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.65
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 8,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\demo_010_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "jieba==0.42.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for jieba==0.42.1"
+      },
+      {
+        "requirement": "scikit-learn==1.1.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scikit-learn==1.1.0"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "Collecting numpy==1.26.4 (from -r /staging/demo_010/requirements.txt (line 1))\n  Using cached numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)\nCollecting hdbscan==0.8.39 (from -r /staging/demo_010/requirements.txt (line 2))\n  Downloading hdbscan-0.8.39-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (15 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement jieba==0.42.1 (from versions: none)\nERROR: No matching distribution found for jieba==0.42.1\n",
+    "duration_seconds": 28.397
+  },
+  "sandbox_duration_seconds": 3.856,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.244,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 269225984
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.727,
+    "peak_memory_bytes": 41451520
+  },
+  "finished_at": "2026-10-21T18:07:43+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
