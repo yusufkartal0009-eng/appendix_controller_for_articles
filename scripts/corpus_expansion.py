@@ -135,10 +135,12 @@ def find_arxiv_id(readme: str) -> str | None:
 
 
 def evaluate_candidate(full_name: str, fetcher: Fetcher, seed_repos: set[str], taken_repos: set[str],
-                       seed_papers: set[str] = frozenset(), taken_papers: set[str] = frozenset()) -> dict[str, Any]:  # type: ignore[assignment]
+                       seed_papers: set[str] = frozenset(), taken_papers: set[str] = frozenset(),  # type: ignore[assignment]
+                       stated_size_rule: bool = True) -> dict[str, Any]:
     """Apply R1 to R7 in order. The result names the first rule that failed, or carries the entry that passed.
 
-    R7 looks at the repository and at the paper (its arXiv id): both must be new."""
+    R7 looks at the repository and at the paper (its arXiv id): both must be new. `stated_size_rule=False` leaves out the
+    README size statement of R5 (the demo set, docs/DEMO_SET.md, does not have it)."""
     result: dict[str, Any] = {"full_name": full_name, "hash": candidate_hash(full_name), "passed": False,
                               "failed_rule": None, "detail": ""}
 
@@ -176,7 +178,7 @@ def evaluate_candidate(full_name: str, fetcher: Fetcher, seed_repos: set[str], t
     attributes = fetcher.file(full_name, sha, ".gitattributes") if ".gitattributes" in paths else ""
     if "filter=lfs" in (attributes or ""):
         return fail("R5", "Git LFS files")
-    big = [s for s in stated_sizes_mb(readme) if s >= MAX_STATED_SIZE_MB]
+    big = [s for s in stated_sizes_mb(readme) if s >= MAX_STATED_SIZE_MB] if stated_size_rule else []
     if big:
         return fail("R5", f"README states a size of {max(big):g} MB")
     arxiv_id = find_arxiv_id(readme)
