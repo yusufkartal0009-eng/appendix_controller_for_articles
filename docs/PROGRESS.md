@@ -39,6 +39,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): demo set script (S1 to S6 and the run test K1) (2026-10-21 19:48 +03:00, Issue #421)
+- `scripts/demo_set.py` (`pool` and `run`), 26 tests in `tests/test_demo_set.py`; `scripts/corpus_expansion.py` gets one option (`stated_size_rule`, default unchanged) so that the demo set can skip the README size statement that `docs/DEMO_SET.md` does not have. The run uses `run_pilot.run_paper(pilot4=True)` with `--memory 50%`, 4 CPUs, and a 600 s run limit.
+- Evidence: full suite 954 passed, 9 skipped; `ruff check .` clean.
+- Not verified: the script has not been run against GitHub or Docker yet (the tests use fakes).
+
 ### docs(corpus): demo set rules (written before any candidate was listed) (2026-10-21 19:45 +03:00, Issue #421)
 - `docs/DEMO_SET.md`: the mechanical rules S1 to S6, the run test K1, the pool (eight GitHub searches), the hash order, and the stop rule. The set is hand-picked for the dashboard; it is not a random sample and no number of it is a success rate.
 - Evidence: documentation only; no search was run and no candidate was opened before this file was written.
