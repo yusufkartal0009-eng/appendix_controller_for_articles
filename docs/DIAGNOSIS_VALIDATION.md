@@ -17,15 +17,11 @@ Labels were written by hand by reading, in each run folder, the error line of th
 | Level | Correct |
 |---|---|
 | Category | 46 / 46 (100.0%) |
-| Name of an `OTHER` (or of a run without a failure category) | 9 / 10 (90.0%) |
+| Name of an `OTHER` (or of a run without a failure category) | 10 / 10 (100.0%) |
 | Phase in which the run stopped | 36 / 36 (100.0%) |
-| All three levels | 45 / 46 (97.8%) |
+| All three levels | 46 / 46 (100.0%) |
 
-Wrong answers:
-
-| Id | Run | Label | Classifier | Why |
-|---|---|---|---|---|
-| R41 | `data/pilot2_runs/first_attempts/paper_006_attempt4` | OTHER / PERMISSION_DENIED (run) | OTHER (run) | The category (OTHER) and the phase are right. The classifier has no rule for `PermissionError`, so the OTHER gets no name; the label names it PERMISSION_DENIED (the quoted line is `Permission denied: '/workspace/home/.openml/config'`). The docs/PILOT_WEEK2.md rule asks for every OTHER to be named by hand; the classifier does not. |
+No wrong answer among the real runs.
 
 ## 3. Count by label (real runs)
 
@@ -45,19 +41,19 @@ Wrong answers:
 
 Invented error lines, labeled by the category definitions. They are not part of the numbers of section 2.
 
-Category correct: 9 / 12 (75.0%); name correct: 3 / 5 (60.0%); all levels: 7 / 12 (58.3%).
+Category correct: 12 / 12 (100.0%); name correct: 5 / 5 (100.0%); all levels: 12 / 12 (100.0%).
 
 | Id | Last line | Label | Classifier | Right? | Why, if wrong |
 |---|---|---|---|---|---|
-| S01 | `RuntimeError: CUDA out of memory. Tried to allocate 2.00 GiB (GPU 0; 8.00 GiB total capaci` | OTHER / GPU_OUT_OF_MEMORY (run) | OTHER (run) | no | The category (OTHER) and the phase are right. There is no rule for a GPU running out of memory: `GPU_PATTERNS` holds `cuda error` and `cudaerror`, not `cuda out of memory`, so the line is an unnamed OTHER. The label names it GPU_OUT_OF_MEMORY. Whether that should be HARDWARE_GPU_REQUIRED is a definition question that the categories do not settle. |
+| S01 | `RuntimeError: CUDA out of memory. Tried to allocate 2.00 GiB (GPU 0; 8.00 GiB total capaci` | OTHER / GPU_OUT_OF_MEMORY (run) | OTHER / GPU_OUT_OF_MEMORY (run) | yes |  |
 | S02 | `AssertionError: Torch not compiled with CUDA enabled` | HARDWARE_GPU_REQUIRED (run) | HARDWARE_GPU_REQUIRED (run) | yes |  |
 | S03 | `ImportError: cannot import name 'Foo' from 'bar' (/workspace/deps/bar/__init__.py)` | MISSING_DEPENDENCY (run) | MISSING_DEPENDENCY (run) | yes |  |
 | S04 | `ModuleNotFoundError: No module named 'src'` | MISSING_DEPENDENCY (run) | MISSING_DEPENDENCY (run) | yes |  |
 | S05 | `FileNotFoundError: [Errno 2] No such file or directory: 'config/model.yaml'` | OTHER / MISSING_FILE (run) | OTHER / MISSING_FILE (run) | yes |  |
-| S06 | `FileNotFoundError: [Errno 2] No such file or directory: 'checkpoints/pretrained.pt'` | DATA_NOT_ACCESSIBLE (run) | OTHER / MISSING_FILE (run) | no | The classifier treats a missing file as data only when its path contains `data` or ends with an extension of the list `DATA_EXTENSIONS`; `.pt` is not in the list and `checkpoints/pretrained.pt` has no `data`, so it is named MISSING_FILE. The label calls a missing pretrained weight file data that the sandbox did not provide. |
-| S07 | `OSError: [Errno 28] No space left on device` | OTHER / NO_SPACE_LEFT (run) | OTHER (run) | no | The category (OTHER) and the phase are right. No rule names `No space left on device`; the OTHER stays unnamed. The label names it NO_SPACE_LEFT. |
-| S08 | `urllib.error.HTTPError: HTTP Error 404: Not Found` | DATA_NOT_ACCESSIBLE (run) | OTHER (run) | no | `NETWORK_PATTERNS` lists `urlerror` and connection errors but not `HTTPError`; a failed download that reaches a server and gets 404 is therefore OTHER. The label counts a failed data download as DATA_NOT_ACCESSIBLE (docs/PILOT_WEEK2.md section 7: a data download fails). |
-| S09 | `ConnectionRefusedError: [Errno 111] Connection refused` | DATA_NOT_ACCESSIBLE (run) | OTHER (run) | no | `NETWORK_PATTERNS` holds `connectionerror` (as in requests' ConnectionError); `ConnectionRefusedError` does not contain that word, so the line is OTHER. The label counts it as a failed network access (DATA_NOT_ACCESSIBLE). |
+| S06 | `FileNotFoundError: [Errno 2] No such file or directory: 'checkpoints/pretrained.pt'` | DATA_NOT_ACCESSIBLE (run) | DATA_NOT_ACCESSIBLE (run) | yes |  |
+| S07 | `OSError: [Errno 28] No space left on device` | OTHER / NO_SPACE_LEFT (run) | OTHER / NO_SPACE_LEFT (run) | yes |  |
+| S08 | `urllib.error.HTTPError: HTTP Error 404: Not Found` | DATA_NOT_ACCESSIBLE (run) | DATA_NOT_ACCESSIBLE (run) | yes |  |
+| S09 | `ConnectionRefusedError: [Errno 111] Connection refused` | DATA_NOT_ACCESSIBLE (run) | DATA_NOT_ACCESSIBLE (run) | yes |  |
 | S10 | `ValueError: could not convert string to float: 'abc'` | OTHER (run) | OTHER (run) | yes |  |
 | S11 | `RuntimeError: CUDA error: no kernel image is available for execution on the device` | HARDWARE_GPU_REQUIRED (run) | HARDWARE_GPU_REQUIRED (run) | yes |  |
 | S12 | `OSError: [Errno 30] Read-only file system: '/workspace/repo/out.txt'` | OTHER / WRITE_TO_READ_ONLY_REPOSITORY (run) | OTHER / WRITE_TO_READ_ONLY_REPOSITORY (run) | yes |  |

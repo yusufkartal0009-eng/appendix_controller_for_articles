@@ -966,7 +966,7 @@
       },
       "predicted": {
         "category": "OTHER",
-        "name": null,
+        "name": "PERMISSION_DENIED",
         "phase": "run"
       },
       "evidence_quoted_by_classifier": {
@@ -976,9 +976,9 @@
       },
       "match": {
         "category": true,
-        "name": false,
+        "name": true,
         "phase": true,
-        "all": false
+        "all": true
       }
     },
     {
@@ -1118,14 +1118,14 @@
       },
       "predicted": {
         "category": "OTHER",
-        "name": null,
+        "name": "GPU_OUT_OF_MEMORY",
         "phase": "run"
       },
       "match": {
         "category": true,
-        "name": false,
+        "name": true,
         "phase": true,
-        "all": false
+        "all": true
       }
     },
     {
@@ -1217,15 +1217,15 @@
         "phase": "run"
       },
       "predicted": {
-        "category": "OTHER",
-        "name": "MISSING_FILE",
+        "category": "DATA_NOT_ACCESSIBLE",
+        "name": null,
         "phase": "run"
       },
       "match": {
-        "category": false,
+        "category": true,
         "name": null,
         "phase": true,
-        "all": false
+        "all": true
       }
     },
     {
@@ -1238,14 +1238,14 @@
       },
       "predicted": {
         "category": "OTHER",
-        "name": null,
+        "name": "NO_SPACE_LEFT",
         "phase": "run"
       },
       "match": {
         "category": true,
-        "name": false,
+        "name": true,
         "phase": true,
-        "all": false
+        "all": true
       }
     },
     {
@@ -1257,15 +1257,15 @@
         "phase": "run"
       },
       "predicted": {
-        "category": "OTHER",
+        "category": "DATA_NOT_ACCESSIBLE",
         "name": null,
         "phase": "run"
       },
       "match": {
-        "category": false,
+        "category": true,
         "name": null,
         "phase": true,
-        "all": false
+        "all": true
       }
     },
     {
@@ -1277,15 +1277,15 @@
         "phase": "run"
       },
       "predicted": {
-        "category": "OTHER",
+        "category": "DATA_NOT_ACCESSIBLE",
         "name": null,
         "phase": "run"
       },
       "match": {
-        "category": false,
+        "category": true,
         "name": null,
         "phase": true,
-        "all": false
+        "all": true
       }
     },
     {
@@ -1357,7 +1357,7 @@
         "of": 46
       },
       "name": {
-        "correct": 9,
+        "correct": 10,
         "of": 10
       },
       "phase": {
@@ -1365,21 +1365,19 @@
         "of": 36
       },
       "all": {
-        "correct": 45,
+        "correct": 46,
         "of": 46
       },
-      "wrong": [
-        "R41"
-      ]
+      "wrong": []
     },
     "synthetic": {
       "n": 12,
       "category": {
-        "correct": 9,
+        "correct": 12,
         "of": 12
       },
       "name": {
-        "correct": 3,
+        "correct": 5,
         "of": 5
       },
       "phase": {
@@ -1387,16 +1385,10 @@
         "of": 12
       },
       "all": {
-        "correct": 7,
+        "correct": 12,
         "of": 12
       },
-      "wrong": [
-        "S01",
-        "S06",
-        "S07",
-        "S08",
-        "S09"
-      ]
+      "wrong": []
     }
   }
 }
