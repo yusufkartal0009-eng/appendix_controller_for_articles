@@ -93,7 +93,7 @@ def summarize(items: list[dict[str, Any]]) -> dict[str, Any]:
             "wrong": [i["id"] for i in items if not i["match"]["all"]]}
 
 
-def render(results: dict[str, Any], analysis: dict[str, str]) -> str:
+def render(results: dict[str, Any], analysis: dict[str, str], closed: dict[str, str] | None = None) -> str:
     def pct(r: dict[str, Any]) -> str:
         return f"{r['correct']} / {r['of']}" + (f" ({r['correct'] / r['of']:.1%})" if r["of"] else "")
 
@@ -133,7 +133,15 @@ def render(results: dict[str, Any], analysis: dict[str, str]) -> str:
         out.append(f"| {r['id']} | `{r['last_line'][:90]}` | {fmt(r['label'])} | {fmt(r['predicted'])} | "
                    f"{'yes' if r['match']['all'] else 'no'} | {'' if r['match']['all'] else analysis.get(r['id'], '(no analysis written)')} |")
     papers = {re.search(r"paper_\d+", r["run_dir"]).group(0) for r in results["real"]}
-    out += ["", "## 5. What this does not show", "",
+    if closed:
+        out += ["", "## 5. Gaps closed after the first evaluation (#424)", "",
+                ("These answers were wrong when the set was first evaluated (45 of 46 real runs and 7 of 12 probes right at all "
+                 "levels). A rule was added for each in `src/diagnosis/classifier.py`, and the labels were not edited. Because the "
+                 "rules were written from these very lines, the numbers above no longer measure anything about new logs; they show "
+                 "only that the rules and the labels agree. `tests/test_diagnosis_gaps.py` holds the lines as unit tests."), "",
+                "| Id | What was missing (the analysis written at the first evaluation) |", "|---|---|"]
+        out += [f"| {k} | {v} |" for k, v in sorted(closed.items())]
+    out += ["", "## 6. What this does not show" if closed else "## 5. What this does not show", "",
             (f"- Accuracy on papers outside these logs. The real set is small, comes from {len(papers)} papers, and is "
              "dominated by missing packages."),
             ("- That a category is the *cause*. The classifier reads the deciding line; a missing package can itself be the "

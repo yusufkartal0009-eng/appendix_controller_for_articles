@@ -718,15 +718,15 @@ The classifier was checked against labels written by hand from the error lines o
 
 | Set | Items | Category correct | Name of an OTHER correct | Phase correct | All levels correct | Wrong |
 |---|---|---|---|---|---|---|
-| Real runs | 46 | 46 / 46 | 9 / 10 | 36 / 36 | 45 / 46 | R41 |
-| Synthetic probes | 12 | 9 / 12 | 3 / 5 | 12 / 12 | 7 / 12 | S01, S06, S07, S08, S09 |
+| Real runs | 46 | 46 / 46 | 10 / 10 | 36 / 36 | 46 / 46 | none |
+| Synthetic probes | 12 | 12 / 12 | 5 / 5 | 12 / 12 | 12 / 12 | none |
 <!-- numbers:diagnosisvalidation:end -->
 
 The labels are not blind (the labeler had read the classifier's rules), the real runs are the logs the rules came from, and the set
 is dominated by missing packages, so the first row is an upper bound for new papers. The probes were written to find gaps and
 found them: the rules have no name for a permission error, a GPU out of memory, or a full disk, they treat a missing `.pt` file as
 a plain missing file and not as data, and they do not count an HTTP error or a refused connection as a network failure
-(`docs/DIAGNOSIS_VALIDATION.md` gives the reason for each). The gaps were reported, not fixed. No real language model was used, so
+(`docs/DIAGNOSIS_VALIDATION.md` gives the reason for each). The table above is from after #424 closed those six gaps with one rule each, without editing the labels (before: real runs 45 / 46, probes 7 / 12 at all levels); because the rules were written from these very lines, the table now only shows that rules and labels agree. No real language model was used, so
 nothing is claimed about the quality of a model-written restatement.
 
 ## 7. Limitations and threats to validity
@@ -763,7 +763,7 @@ nothing is claimed about the quality of a model-written restatement.
 - **Field analysis.** Twelve papers from two differently chosen sub-pools, definitions written after the pilot outcomes were known,
   and an autonomy rate that counts only human actions that left a file (section 6.6): exploratory, no test, no relationship claimed.
 - **Diagnosis layer.** Rule-based and tested on stored runs of this project; the hand labels are not blind, the real runs are the logs
-  the rules came from, and the probes found gaps that were not fixed (section 6.7). No real language model was used.
+  the rules came from, and the probes found gaps that were closed afterwards with rules written from those same lines (section 6.7). No real language model was used.
 - **GPU.** One synthetic paper only; no real paper was run with the GPU, and the seed papers pin PyTorch 1.x, which the GPU cannot use.
 - **External reference.** The ReScience C selection found no article that the pipeline could run (section 6.5a), so the score has no
   outside reference yet.
@@ -842,8 +842,8 @@ rubric's agreement tier and stability tier work on real results.
 3. Repeat the blind second pass with another model, or with the owner starting it, so that the two passes are also independent in model.
 4. Run more seeds per paper, and on more papers than the two that complete, so that the stability tier (#48) rests on more than three
    runs; decide whether the metric with the largest CV should decide (section 6.4a).
-5. Try the optional language-model step of the diagnosis layer with a real model, and fix the gaps the probes found in the classifier
-   (section 6.7), before anything is said about either.
+5. Try the optional language-model step of the diagnosis layer with a real model, and label new, unseen failure logs to measure the
+   classifier again (section 6.7: its six known gaps are closed, so the stored set no longer measures it), before anything is said about either.
 6. Decide what outside reference to use for the score now that the ReScience C selection found none (section 6.5a).
 
 - **Sources:** sections 6 and 7 of this report and the records they cite; `docs/PROGRESS.md` for the dashboard (D1 to D4,

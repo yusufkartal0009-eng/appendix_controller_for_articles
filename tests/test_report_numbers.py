@@ -165,7 +165,7 @@ def test_the_blocks_added_for_the_final_pass_render_their_stored_facts():
     gpu = rn.render("gpucheck")
     assert "2.8.0+cu128 / 12.8" in gpu and "cuda:0; result equal to the CPU result: True" in gpu and "Checks passed | 8 of 8" in gpu
     validation = rn.render("diagnosisvalidation")
-    assert "| Real runs | 46 | 46 / 46 | 9 / 10 | 36 / 36 | 45 / 46 | R41 |" in validation
+    assert "| Real runs | 46 | 46 / 46 | 10 / 10 | 36 / 36 | 46 / 46 | none |" in validation
     field = rn.render("fieldanalysis")
     assert "| all 12 papers | final | 9 / 12 | 4 / 12 | 3 / 12 | 5 / 12 | 1 / 12 |" in field
     assert "evaluated: 65; selected: 0" in rn.render("rescience")
