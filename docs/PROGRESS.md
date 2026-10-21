@@ -39,6 +39,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: list of pending steps, owner decisions and open work (2026-10-22 00:40 +03:00, Issue #429)
+- New `docs/PENDING.md`: eight owner decisions (repository access, gold set 2, demo claims, `paper_004` and `paper_005`, ReScience, demo papers, the Tier 3 rule, questions for the mentors), five tasks that need no decision, the state of every open issue, what the project does not do, known limits, and how to start a long job without it being cut.
+- Evidence: every item names its source (documents, issue comments, records). Test and lint results are in the pull request.
+- Not verified: the document is a snapshot of 2026-10-22; the owner's own state (forms, decisions) was taken from the assistants' records, not from the owner.
+
 ### docs: the path of one paper through the tool, with times (2026-10-22 00:10 +03:00, Issue #427)
 - New `docs/WORKFLOW.md`: 13 steps from adding a paper to the dashboard, who does each step, and how long it takes. Each time is marked measured (with the record it comes from) or estimate. Examples: `paper_102` about 6 to 7 min of machine time, `paper_003` 2,660 s cold and 1,549 s with the environment cache.
 - Not verified: the estimated steps (adding a paper, source check, data fetch, claim extraction, claim acceptance) were not timed; the build phase has no recorded time.
