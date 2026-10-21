@@ -1,0 +1,34 @@
+usage: injecagent_runner.py [-h] [--base-url BASE_URL] [--model MODEL]
+                            [--family {glm,llama,oss,qwen,seed}]
+                            [--tokenizer TOKENIZER] [--data DATA]
+                            [--tools TOOLS] [--arms ARMS] [--n N]
+                            [--seed SEED] [--concurrency CONCURRENCY]
+                            [--max-tokens MAX_TOKENS] [--no-think]
+                            [--protected-probe PROTECTED_PROBE] [--out OUT]
+                            [--save-text] [--offset OFFSET]
+                            [--lookalike-file LOOKALIKE_FILE]
+                            [--payload-variant PAYLOAD_VARIANT]
+
+options:
+  -h, --help            show this help message and exit
+  --base-url BASE_URL
+  --model MODEL
+  --family {glm,llama,oss,qwen,seed}
+  --tokenizer TOKENIZER
+                        override the tokenizer path for the selected family
+  --data DATA
+  --tools TOOLS
+  --arms ARMS
+  --n N
+  --seed SEED
+  --concurrency CONCURRENCY
+  --max-tokens MAX_TOKENS
+  --no-think            disable optional reasoning blocks in the chat template
+  --protected-probe PROTECTED_PROBE
+                        comma-separated control surfaces for the atomic arm;
+                        defaults to Qwen ChatML markers
+  --out OUT
+  --save-text
+  --offset OFFSET
+  --lookalike-file LOOKALIKE_FILE
+  --payload-variant PAYLOAD_VARIANT

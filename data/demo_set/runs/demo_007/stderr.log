@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/main.py", line 27, in <module>
+    raise ValueError(
+ValueError: OPENAI_API_KEY is missing. Set environment variable OPENAI_API_KEY or set Config.OPENAI_API_KEY in src/config/config.py.

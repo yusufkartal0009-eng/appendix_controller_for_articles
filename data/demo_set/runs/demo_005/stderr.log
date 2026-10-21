@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/repo/benchmarks/catchbench_parity/run_parity.py", line 108, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/repo/benchmarks/catchbench_parity/run_parity.py", line 44, in main
+    env = check_environment()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/benchmarks/catchbench_parity/_env.py", line 26, in check_environment
+    raise ParityEnvironmentError(
+catchbench_parity._env.ParityEnvironmentError: run the harness with PYTHONHASHSEED=0 (the CatchBench board is scored that way)

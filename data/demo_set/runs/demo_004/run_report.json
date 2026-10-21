@@ -1,0 +1,240 @@
+{
+  "paper_id": "demo_004",
+  "source": "https://github.com/Atlamtiz/Sonar-TS",
+  "commit_hash": "99866c43cd7ceb91a929de745e9f49cea92962e5",
+  "target_script": "scripts/download_dataset.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 2.001,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\demo_004",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.673,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 30035968,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.19"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "choreographer",
+      "version": "1.4.0"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.0"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "huggingface_hub",
+      "version": "2.2.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "kaleido",
+      "version": "1.5.0"
+    },
+    {
+      "name": "logistro",
+      "version": "2.0.1"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "3.0.6"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.13.5"
+    },
+    {
+      "name": "plotly",
+      "version": "7.1.0"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "simplejson",
+      "version": "4.2.0"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy>=1.24",
+      "name": "numpy",
+      "requested": ">=1.24",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=2.0",
+      "name": "pandas",
+      "requested": ">=2.0",
+      "installed": "3.0.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "PyYAML>=6.0",
+      "name": "PyYAML",
+      "requested": ">=6.0",
+      "installed": "6.0.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "tqdm>=4.65",
+      "name": "tqdm",
+      "requested": ">=4.65",
+      "installed": "4.70.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "requests>=2.31",
+      "name": "requests",
+      "requested": ">=2.31",
+      "installed": "2.34.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "plotly>=5.18",
+      "name": "plotly",
+      "requested": ">=5.18",
+      "installed": "7.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "kaleido>=0.2",
+      "name": "kaleido",
+      "requested": ">=0.2",
+      "installed": "1.5.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "huggingface_hub>=0.20",
+      "name": "huggingface_hub",
+      "requested": ">=0.20",
+      "installed": "2.2.0",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/download_dataset.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 1.673s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/download_dataset.py\", line 59, in <module>\n    main()\n  File \"/workspace/repo/scripts/download_dataset.py\", line 44, in main\n    _TARGET_DIR.mkdir(parents=True, exist_ok=True)\n  File \"/usr/local/lib/python3.11/pathlib.py\", line 1116, in mkdir\n    os.mkdir(self, mode)\nOSError: [Errno 30] Read-only file system: '/workspace/repo/nlqtsbench/ts_data'\n"
+}

@@ -1,0 +1,49 @@
+======================================================================
+Bayesian Learning Benchmark: PDM and Alternative Methods
+======================================================================
+
+True post-break alpha: 1.5
+Expert 1 (pioneer): 20 obs/period  |  Experts 2-3: 5 obs/period
+
+Expert estimates (first 10 periods):
+    exp1   exp2   exp3
+0 2.4456 2.9528 2.8207
+1 2.2824 2.9397 2.6941
+2 1.9016 2.7295 2.6137
+3 1.8870 2.7395 2.3275
+4 1.8019 2.7054 2.0187
+5 1.7570 2.6444 1.8948
+6 1.7378 2.3667 1.8319
+7 1.7314 2.3956 1.8027
+8 1.7017 2.0792 1.8250
+9 1.6704 1.9858 1.7611
+
+======================================================================
+RMSE relative to true alpha (lower is better)
+======================================================================
+
+Method                              RMSE  Relative
+--------------------------------------------------
+PDM (angles)                      0.6620      1.00
+PDM (distances)                   0.6620      1.00
+Multivar. Regression              0.7173      1.08
+Lagged Correlation                0.7505      1.13
+Granger Causality                 0.7642      1.15
+Linear Pooling                    0.7642      1.15
+Median Pooling                    0.7678      1.16
+Transfer Entropy                  0.9217      1.39
+
+======================================================================
+Monte Carlo: average RMSE over 100 simulations
+======================================================================
+
+Method                           Mean RMSE       Std  Relative
+------------------------------------------------------------
+PDM (angles)                        0.7853    0.1097      1.00
+PDM (distances)                     0.7853    0.1097      1.00
+Transfer Entropy                    0.8255    0.1445      1.05
+Multivar. Regression                0.8258    0.1141      1.05
+Lagged Correlation                  0.8265    0.1037      1.05
+Granger Causality                   0.8271    0.1053      1.05
+Linear Pooling                      0.8271    0.1053      1.05
+Median Pooling                      0.8281    0.1079      1.05

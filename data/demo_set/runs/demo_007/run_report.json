@@ -1,0 +1,584 @@
+{
+  "paper_id": "demo_007",
+  "source": "https://github.com/USC-FORTIS/AD-AGENT",
+  "commit_hash": "f14a9c065ca84e21dd78abf95db7d96b9460c2ba",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.932,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\demo_007",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.596,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 22134784,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "annotated-types",
+      "version": "0.7.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.13.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.2.25"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.7"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0"
+    },
+    {
+      "name": "filelock",
+      "version": "3.25.2"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "idna",
+      "version": "3.11"
+    },
+    {
+      "name": "jiter",
+      "version": "0.14.0"
+    },
+    {
+      "name": "jsonpatch",
+      "version": "1.33"
+    },
+    {
+      "name": "jsonpointer",
+      "version": "3.1.1"
+    },
+    {
+      "name": "langchain",
+      "version": "1.2.15"
+    },
+    {
+      "name": "langchain-core",
+      "version": "1.2.29"
+    },
+    {
+      "name": "langchain-openai",
+      "version": "1.1.12"
+    },
+    {
+      "name": "langgraph",
+      "version": "1.1.6"
+    },
+    {
+      "name": "langgraph-checkpoint",
+      "version": "4.0.1"
+    },
+    {
+      "name": "langgraph-prebuilt",
+      "version": "1.0.9"
+    },
+    {
+      "name": "langgraph-sdk",
+      "version": "0.3.13"
+    },
+    {
+      "name": "langsmith",
+      "version": "0.7.31"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.4"
+    },
+    {
+      "name": "openai",
+      "version": "2.31.0"
+    },
+    {
+      "name": "orjson",
+      "version": "3.11.8"
+    },
+    {
+      "name": "ormsgpack",
+      "version": "1.12.2"
+    },
+    {
+      "name": "packaging",
+      "version": "26.0"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.0"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.46.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "regex",
+      "version": "2026.4.4"
+    },
+    {
+      "name": "requests",
+      "version": "2.33.1"
+    },
+    {
+      "name": "requests-toolbelt",
+      "version": "1.0.0"
+    },
+    {
+      "name": "setuptools",
+      "version": "82.0.1"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.1.4"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.12.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.67.3"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.15.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.2"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.6.3"
+    },
+    {
+      "name": "uuid_utils",
+      "version": "0.14.1"
+    },
+    {
+      "name": "wheel",
+      "version": "0.46.3"
+    },
+    {
+      "name": "xxhash",
+      "version": "3.6.0"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "annotated-types==0.7.0",
+      "name": "annotated-types",
+      "requested": "==0.7.0",
+      "installed": "0.7.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "anyio==4.13.0",
+      "name": "anyio",
+      "requested": "==4.13.0",
+      "installed": "4.13.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2026.2.25",
+      "name": "certifi",
+      "requested": "==2026.2.25",
+      "installed": "2026.2.25",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==3.4.7",
+      "name": "charset-normalizer",
+      "requested": "==3.4.7",
+      "installed": "3.4.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "distro==1.9.0",
+      "name": "distro",
+      "requested": "==1.9.0",
+      "installed": "1.9.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "filelock==3.25.2",
+      "name": "filelock",
+      "requested": "==3.25.2",
+      "installed": "3.25.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "h11==0.16.0",
+      "name": "h11",
+      "requested": "==0.16.0",
+      "installed": "0.16.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "httpcore==1.0.9",
+      "name": "httpcore",
+      "requested": "==1.0.9",
+      "installed": "1.0.9",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx==0.28.1",
+      "name": "httpx",
+      "requested": "==0.28.1",
+      "installed": "0.28.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.11",
+      "name": "idna",
+      "requested": "==3.11",
+      "installed": "3.11",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jiter==0.14.0",
+      "name": "jiter",
+      "requested": "==0.14.0",
+      "installed": "0.14.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonpatch==1.33",
+      "name": "jsonpatch",
+      "requested": "==1.33",
+      "installed": "1.33",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonpointer==3.1.1",
+      "name": "jsonpointer",
+      "requested": "==3.1.1",
+      "installed": "3.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain==1.2.15",
+      "name": "langchain",
+      "requested": "==1.2.15",
+      "installed": "1.2.15",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-core==1.2.29",
+      "name": "langchain-core",
+      "requested": "==1.2.29",
+      "installed": "1.2.29",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-openai==1.1.12",
+      "name": "langchain-openai",
+      "requested": "==1.1.12",
+      "installed": "1.1.12",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph==1.1.6",
+      "name": "langgraph",
+      "requested": "==1.1.6",
+      "installed": "1.1.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph-checkpoint==4.0.1",
+      "name": "langgraph-checkpoint",
+      "requested": "==4.0.1",
+      "installed": "4.0.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph-prebuilt==1.0.9",
+      "name": "langgraph-prebuilt",
+      "requested": "==1.0.9",
+      "installed": "1.0.9",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph-sdk==0.3.13",
+      "name": "langgraph-sdk",
+      "requested": "==0.3.13",
+      "installed": "0.3.13",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "langsmith==0.7.31",
+      "name": "langsmith",
+      "requested": "==0.7.31",
+      "installed": "0.7.31",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.4.4",
+      "name": "numpy",
+      "requested": "==2.4.4",
+      "installed": "2.4.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==2.31.0",
+      "name": "openai",
+      "requested": "==2.31.0",
+      "installed": "2.31.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "orjson==3.11.8",
+      "name": "orjson",
+      "requested": "==3.11.8",
+      "installed": "3.11.8",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ormsgpack==1.12.2",
+      "name": "ormsgpack",
+      "requested": "==1.12.2",
+      "installed": "1.12.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==26.0",
+      "name": "packaging",
+      "requested": "==26.0",
+      "installed": "26.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.13.0",
+      "name": "pydantic",
+      "requested": "==2.13.0",
+      "installed": "2.13.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic_core==2.46.0",
+      "name": "pydantic_core",
+      "requested": "==2.46.0",
+      "installed": "2.46.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.3",
+      "name": "PyYAML",
+      "requested": "==6.0.3",
+      "installed": "6.0.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "regex==2026.4.4",
+      "name": "regex",
+      "requested": "==2026.4.4",
+      "installed": "2026.4.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.33.1",
+      "name": "requests",
+      "requested": "==2.33.1",
+      "installed": "2.33.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-toolbelt==1.0.0",
+      "name": "requests-toolbelt",
+      "requested": "==1.0.0",
+      "installed": "1.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "setuptools==82.0.1",
+      "name": "setuptools",
+      "requested": "==82.0.1",
+      "installed": "82.0.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "sniffio==1.3.1",
+      "name": "sniffio",
+      "requested": "==1.3.1",
+      "installed": "1.3.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tenacity==9.1.4",
+      "name": "tenacity",
+      "requested": "==9.1.4",
+      "installed": "9.1.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tiktoken==0.12.0",
+      "name": "tiktoken",
+      "requested": "==0.12.0",
+      "installed": "0.12.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.67.3",
+      "name": "tqdm",
+      "requested": "==4.67.3",
+      "installed": "4.67.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "typing-inspection==0.4.2",
+      "name": "typing-inspection",
+      "requested": "==0.4.2",
+      "installed": "0.4.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.15.0",
+      "name": "typing_extensions",
+      "requested": "==4.15.0",
+      "installed": "4.15.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==2.6.3",
+      "name": "urllib3",
+      "requested": "==2.6.3",
+      "installed": "2.6.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "uuid_utils==0.14.1",
+      "name": "uuid_utils",
+      "requested": "==0.14.1",
+      "installed": "0.14.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "wheel==0.46.3",
+      "name": "wheel",
+      "requested": "==0.46.3",
+      "installed": "0.46.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "xxhash==3.6.0",
+      "name": "xxhash",
+      "requested": "==3.6.0",
+      "installed": "3.6.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "zstandard==0.25.0",
+      "name": "zstandard",
+      "requested": "==0.25.0",
+      "installed": "0.25.0",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 0.596s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 27, in <module>\n    raise ValueError(\nValueError: OPENAI_API_KEY is missing. Set environment variable OPENAI_API_KEY or set Config.OPENAI_API_KEY in src/config/config.py.\n"
+}

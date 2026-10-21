@@ -1,0 +1,132 @@
+{
+  "paper_id": "demo_009",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1298c62760acb75328cd0af59206849dc9569a54",
+  "started_at": "2026-10-21T18:06:13+00:00",
+  "repo_url": "https://github.com/ClimSocAna/tecb-de",
+  "pinned_commit": "81b56bd7b42d7727bddeefef285590d02c71b1fd",
+  "target_script": "scripts/run_cteb_de.py",
+  "container_command": "python /workspace/repo/scripts/run_cteb_de.py --reddit-flag",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/run_cteb_de.py --reddit-flag",
+    "readme_url": "https://github.com/ClimSocAna/tecb-de/blob/81b56bd7b42d7727bddeefef285590d02c71b1fd/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "81b56bd7b42d7727bddeefef285590d02c71b1fd",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.088
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 1,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\demo_009_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "hdbscan==0.8.29",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for hdbscan==0.8.29"
+      },
+      {
+        "requirement": "numba==0.56.4",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for numba==0.56.4"
+      },
+      {
+        "requirement": "river==0.14.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for river==0.14.0"
+      },
+      {
+        "requirement": "sentence-transformers==2.2.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for sentence-transformers==2.2.2"
+      },
+      {
+        "requirement": "umap-learn==0.5.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for umap-learn==0.5.3"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement hdbscan==0.8.29 (from versions: 0.8.34rc1, 0.8.36, 0.8.37, 0.8.38.post1, 0.8.38.post2, 0.8.39, 0.8.40, 0.8.42, 0.8.43, 0.8.44)\nERROR: No matching distribution found for hdbscan==0.8.29\n",
+    "duration_seconds": 8.397
+  },
+  "sandbox_duration_seconds": 2.171,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.616,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 15560704
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.562,
+    "peak_memory_bytes": 38957056
+  },
+  "finished_at": "2026-10-21T18:06:25+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/compute_fidelity.py", line 42, in <module>
+    from synthesize.benchmarking._utils import js_divergence
+  File "/workspace/repo/src/synthesize/benchmarking/__init__.py", line 28, in <module>
+    from synthesize.models import DatasetItem
+  File "/workspace/repo/src/synthesize/models.py", line 14, in <module>
+    from pydantic import BaseModel, ConfigDict, Field
+ModuleNotFoundError: No module named 'pydantic'

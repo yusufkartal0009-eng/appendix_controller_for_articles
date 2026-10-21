@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/download_dataset.py", line 59, in <module>
+    main()
+  File "/workspace/repo/scripts/download_dataset.py", line 44, in main
+    _TARGET_DIR.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/workspace/repo/nlqtsbench/ts_data'

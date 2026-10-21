@@ -1,0 +1,20 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/anthropic-2.0.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/anyio-4.15.1-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/docstring_parser-0.18.0-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/httpx2-2.16.0-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/jiter-0.17.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/opentelemetry_api-1.45.1-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/pydantic-2.14.1-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/sniffio-1.3.1-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/typing_extensions-4.16.0-py3-none-any.whl (from anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/idna-3.20-py3-none-any.whl (from anyio<5,>=4.1.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/httpcore2-2.16.0-py3-none-any.whl (from httpx2<3,>=2.0.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/truststore-0.10.5-py3-none-any.whl (from httpx2<3,>=2.0.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/h11-0.16.0-py3-none-any.whl (from httpcore2==2.16.0->httpx2<3,>=2.0.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/annotated_types-0.8.0-py3-none-any.whl (from pydantic<3,>=1.10.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/pydantic_core-2.50.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from pydantic<3,>=1.10.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/typing_inspection-0.4.4-py3-none-any.whl (from pydantic<3,>=1.10.0->anthropic>=0.40->-r /workspace/repo/requirements.txt (line 2))
+Installing collected packages: typing-extensions, truststore, sniffio, jiter, idna, h11, docstring-parser, annotated-types, typing-inspection, pydantic-core, opentelemetry-api, httpcore2, anyio, pydantic, httpx2, anthropic
+
+Successfully installed annotated-types-0.8.0 anthropic-2.0.0 anyio-4.15.1 docstring-parser-0.18.0 h11-0.16.0 httpcore2-2.16.0 httpx2-2.16.0 idna-3.20 jiter-0.17.0 opentelemetry-api-1.45.1 pydantic-2.14.1 pydantic-core-2.50.1 sniffio-1.3.1 truststore-0.10.5 typing-extensions-4.16.0 typing-inspection-0.4.4

@@ -39,6 +39,13 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): demo set run and results (2026-10-21 22:34 +03:00, Issue #421)
+- `scripts/demo_set.py report` (results section generator) and the run itself: `data/demo_set/{pool.json, evaluation.json, papers.json, runs/}`, `docs/DEMO_SET.md` section 7.
+- Result (from `evaluation.json`): the pool of 464 candidates was checked up to the 2.5-hour limit (416 checked), 22 candidates passed S1 to S6 and were run once, and 1 passed K1: `demo_020` (`skimeur/pioneer-detection-method`, arXiv 2511.16760). The set is smaller than five. This is a hand-picked demo set, not a success rate.
+- `demo_020` passed on a setup value (`True post-break alpha: 1.5`); none of its 48 printed decimals (three or more decimals) was found in the paper's text, so a match with a paper table is not verified.
+- Evidence: full suite below; `ruff check .` clean.
+- Not verified: that any output number equals a number of the paper.
+
 ### feat(corpus): demo set script (S1 to S6 and the run test K1) (2026-10-21 19:48 +03:00, Issue #421)
 - `scripts/demo_set.py` (`pool` and `run`), 26 tests in `tests/test_demo_set.py`; `scripts/corpus_expansion.py` gets one option (`stated_size_rule`, default unchanged) so that the demo set can skip the README size statement that `docs/DEMO_SET.md` does not have. The run uses `run_pilot.run_paper(pilot4=True)` with `--memory 50%`, 4 CPUs, and a 600 s run limit.
 - Evidence: full suite 954 passed, 9 skipped; `ruff check .` clean.

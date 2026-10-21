@@ -1,0 +1,512 @@
+{
+  "paper_id": "demo_002",
+  "source": "https://github.com/Sajib-006/PerturbGraph",
+  "commit_hash": "694030dc5bb3a10722d6cbebf51d2f23805b9d32",
+  "target_script": "stable_shift_bench.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 43.028,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\demo_002",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 42.694,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 769236992,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "anndata",
+      "version": "0.12.19"
+    },
+    {
+      "name": "array-api-compat",
+      "version": "1.15.0"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.19"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "donfig",
+      "version": "0.8.1.post1"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0"
+    },
+    {
+      "name": "formulaic",
+      "version": "1.2.2"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "gensim",
+      "version": "4.4.0"
+    },
+    {
+      "name": "google-crc32c",
+      "version": "1.9.0"
+    },
+    {
+      "name": "h5py",
+      "version": "3.16.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "interface_meta",
+      "version": "2.0.1"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1"
+    },
+    {
+      "name": "legacy-api-wrap",
+      "version": "1.5"
+    },
+    {
+      "name": "lightgbm",
+      "version": "4.5.0"
+    },
+    {
+      "name": "llvmlite",
+      "version": "0.50.0"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.9.2"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "multidict",
+      "version": "7.1.0"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "natsort",
+      "version": "8.4.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.3"
+    },
+    {
+      "name": "node2vec",
+      "version": "0.5.0"
+    },
+    {
+      "name": "numba",
+      "version": "0.68.0"
+    },
+    {
+      "name": "numcodecs",
+      "version": "0.16.6"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    {
+      "name": "nvidia-cublas-cu12",
+      "version": "12.1.3.1"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cudnn-cu12",
+      "version": "9.1.0.70"
+    },
+    {
+      "name": "nvidia-cufft-cu12",
+      "version": "11.0.2.54"
+    },
+    {
+      "name": "nvidia-curand-cu12",
+      "version": "10.3.2.106"
+    },
+    {
+      "name": "nvidia-cusolver-cu12",
+      "version": "11.4.5.107"
+    },
+    {
+      "name": "nvidia-cusparse-cu12",
+      "version": "12.1.0.106"
+    },
+    {
+      "name": "nvidia-nccl-cu12",
+      "version": "2.20.5"
+    },
+    {
+      "name": "nvidia-nvjitlink-cu12",
+      "version": "12.9.86"
+    },
+    {
+      "name": "nvidia-nvtx-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.3"
+    },
+    {
+      "name": "patsy",
+      "version": "1.0.3"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "name": "pynndescent",
+      "version": "0.6.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "pytz",
+      "version": "2026.5"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "scanpy",
+      "version": "1.10.3"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.5.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.13.1"
+    },
+    {
+      "name": "scverse-misc",
+      "version": "0.0.3"
+    },
+    {
+      "name": "seaborn",
+      "version": "0.13.2"
+    },
+    {
+      "name": "session_info",
+      "version": "1.0.1"
+    },
+    {
+      "name": "session-info2",
+      "version": "0.4.1"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "smart_open",
+      "version": "8.0.4"
+    },
+    {
+      "name": "statsmodels",
+      "version": "0.15.0"
+    },
+    {
+      "name": "stdlib-list",
+      "version": "0.12.0"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "torch",
+      "version": "2.4.1"
+    },
+    {
+      "name": "torch-geometric",
+      "version": "2.6.1"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.66.6"
+    },
+    {
+      "name": "triton",
+      "version": "3.0.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "umap-learn",
+      "version": "0.5.7"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "wrapt",
+      "version": "2.5.1"
+    },
+    {
+      "name": "xgboost",
+      "version": "2.1.1"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    },
+    {
+      "name": "zarr",
+      "version": "3.1.5"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy==1.26.4",
+      "name": "numpy",
+      "requested": "==1.26.4",
+      "installed": "1.26.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.2.3",
+      "name": "pandas",
+      "requested": "==2.2.3",
+      "installed": "2.2.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.13.1",
+      "name": "scipy",
+      "requested": "==1.13.1",
+      "installed": "1.13.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.5.2",
+      "name": "scikit-learn",
+      "requested": "==1.5.2",
+      "installed": "1.5.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scanpy==1.10.3",
+      "name": "scanpy",
+      "requested": "==1.10.3",
+      "installed": "1.10.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.9.2",
+      "name": "matplotlib",
+      "requested": "==3.9.2",
+      "installed": "3.9.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==3.3",
+      "name": "networkx",
+      "requested": "==3.3",
+      "installed": "3.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.4.1",
+      "name": "torch",
+      "requested": "==2.4.1",
+      "installed": "2.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torch-geometric==2.6.1",
+      "name": "torch-geometric",
+      "requested": "==2.6.1",
+      "installed": "2.6.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "node2vec==0.5.0",
+      "name": "node2vec",
+      "requested": "==0.5.0",
+      "installed": "0.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "xgboost==2.1.1",
+      "name": "xgboost",
+      "requested": "==2.1.1",
+      "installed": "2.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "lightgbm==4.5.0",
+      "name": "lightgbm",
+      "requested": "==4.5.0",
+      "installed": "4.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.6",
+      "name": "tqdm",
+      "requested": "==4.66.6",
+      "installed": "4.66.6",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/stable_shift_bench.py --help\n==================================================\nusage: stable_shift_bench.py [-h] --h5ad H5AD --string_links STRING_LINKS\n                             --string_info STRING_INFO\n                             [--dorothea_file DOROTHEA_FILE] [--outdir OUTDIR]\n                             [--obs_gene_col OBS_GENE_COL]\n                             [--var_gene_col VAR_GENE_COL]\n                             [--ctrl_label CTRL_LABEL]\n                             [--min_cells_per_pert MIN_CELLS_PER_PERT]\n                             [--model_type {mean,knn,ridge,mlp,gcn}]\n                             [--graph_type {none,STRING_only,COEXPR_only,STRING_plus_COEXPR,TF_only,STRING_plus_TF}]\n                             [--use_bio_features] [--svd_dim SVD_DIM]\n                             [--node2vec_dim NODE2VEC_DIM]\n                             [--hidden_dim HIDDEN_DIM] [--dropout DROPOUT]\n                             [--lr LR] [--weight_decay WEIGHT_DECAY]\n                             [--epochs EPOCHS] [--patience PATIENCE]\n                             [--test_frac TEST_FRAC] [--val_frac VAL_FRAC]\n                             [--string_min_score STRING_MIN_SCORE]\n                             [--coexpr_top_k COEXPR_TOP_K]\n                             [--coexpr_min_abs_corr COEXPR_MIN_ABS_CORR]\n                             [--max_ctrl_cells MAX_CTRL_CELLS]\n                             [--positive_only]\n                             [--dorothea_mode {curated_clean,curated_plus,all_noisy,signed_only}]\n                             [--dorothea_min_support DOROTHEA_MIN_SUPPORT]\n                             [--knn_k KNN_K] [--ridge_alpha RIDGE_ALPHA]\n                             [--seed",
+  "stderr_preview": "/workspace/deps/scanpy/_utils/__init__.py:27: FutureWarning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead.\n  from anndata import __version__ as anndata_version\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_csv from `anndata` is deprecated. Import anndata.io.read_csv instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_excel from `anndata` is deprecated. Import anndata.io.read_excel instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_hdf from `anndata` is deprecated. Import anndata.io.read_hdf instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_loom from `anndata` is deprecated. Import anndata.io.read_loom instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_mtx from `anndata` is deprecated. Import anndata.io.read_mtx instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_text from `anndata` is deprecated. Import anndata.io.read_text instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n/workspace/deps/anndata/__init__.py:70: FutureWarning: Importing read_umi_tools from `anndata` is deprecated. Import anndata.io.read_umi_tools instead.\n  return module_get_attr_redirect(attr_name, deprecated_mapping=_DEPRECATED)\n"
+}

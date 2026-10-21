@@ -1,0 +1,10 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/absl_py-2.5.0-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 1))
+Processing /workspace/packages/ale_py-0.12.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements-lock.txt (line 2))
+Processing /workspace/packages/annotated_types-0.8.0-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 3))
+Processing /workspace/packages/certifi-2026.7.22-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 4))
+Processing /workspace/packages/charset_normalizer-3.5.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements-lock.txt (line 5))
+Processing /workspace/packages/click-8.5.0-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 6))
+Processing /workspace/packages/cloudpickle-3.1.2-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 7))
+ERROR: Could not find a version that satisfies the requirement contourpy==1.4.0 (from versions: none)
+ERROR: No matching distribution found for contourpy==1.4.0

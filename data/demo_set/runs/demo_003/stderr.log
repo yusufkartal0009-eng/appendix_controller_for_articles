@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/repo/run_genrep_dcase2023.py", line 61, in <module>
+    os.makedirs(save_dir, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  [Previous line repeated 1 more time]
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: 'out'

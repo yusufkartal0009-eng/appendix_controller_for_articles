@@ -1,0 +1,8 @@
+============================================================
+SYNTHETIC FINANCIAL DATABASE GENERATOR
+============================================================
+
+Database: toy_finance.sqlite
+Transactions: 1000
+Seed: 1234 (for deterministic reproduction)
+

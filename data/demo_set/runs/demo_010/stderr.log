@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/example.py", line 1, in <module>
+    from semantic_components.sca import SCA
+  File "/workspace/repo/semantic_components/sca.py", line 1, in <module>
+    from semantic_components.representation import CTFIDFRepresenter, MedoidRepresenter
+  File "/workspace/repo/semantic_components/representation.py", line 24, in <module>
+    import jieba
+ModuleNotFoundError: No module named 'jieba'
