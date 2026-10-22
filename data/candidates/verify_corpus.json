@@ -1,0 +1,756 @@
+[
+  {
+    "paper_id": "cand_001",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: xunzheng/notears"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "notears/linear.py exists at 4a9ab19fe502"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_002",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: cbg-ethz/BnpC"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "run_BnpC.py exists at edb1ddb1beb1"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_003",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: ariaattar/CASM-PyTorch"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "main.py exists at 4db243d77ade"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_004",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: jsw7460/IDTD"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "scripts/examples/linear_dynamics.py exists at b47eed10adb4"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_005",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: charmlab/recourse"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "main.py exists at 130d72a5b51b"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_006",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: tum-pbs/CRAFT"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "main_train.py exists at 3efb091fa85f"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_007",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: PeterHUistyping/ml-cpu-sched"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "src/sim/simulator.py exists at c33fbd418d1f"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_008",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: matthewchen132/Gradient-Learning-Bayes-Opt"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "research/run_sweep.py exists at 325c9475b4a7"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_009",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: LamNgo1/moca-hesp"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "test-mocahesp.py exists at 022181858311"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_010",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: katiana22/latent-deeponet"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "code/brittle-fracture/AE.py exists at ff73aeaf3c56"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_011",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: Raminghorbanii/PATE"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "experiments/Synthetic_Data_Experiments/main_synthetic_data.py exists at 2d358ce1b065"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_012",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: edgarschnfld/CADA-VAE-PyTorch"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "model/single_experiment.py exists at 26f0085fe5e5"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_013",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: WxxShirley/KDD2024ProCom"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "code/run.py exists at fcfe72fe997f"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_014",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: StefOe/selection-masks"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "BSD-2-Clause"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "create_mask.py exists at e59487bffe3c"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_015",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: bdy9527/SDCN"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "sdcn.py exists at da6bb007b7d0"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_016",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: munshisanowarraihan/nerf-meta"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "tourism_train.py exists at dbb97431b613"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_017",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: johncai117/Meta-Fine-Tuning"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "finetune.py exists at e32102c23a4e"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_018",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: xmootoo/sss-official"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "main.py exists at 00c5ee476df5"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_019",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: AlejandroDopico2/CIFNet"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "main.py exists at 75c73e0e1401"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_020",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: amrhssn/teneNCE"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "main.py exists at 89e5856a8a8b"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_021",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: twinkle0331/LGTM"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "run_glue.py exists at e9b615fb0cef"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_022",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: thecml/ball-bearing-survival"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "run_cross_validation.py exists at c7bec7d85ef2"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_023",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: ymgw55/Axis-Tour"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "save_axistour_embeddings.py exists at 866354586638"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_024",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: thuml/Transfer-Learning-Library"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "examples/domain_adaptation/image_classification/dann.py exists at c4aa59eb5656"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_025",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: radrumond/timehetnet"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "generate_test_set.py exists at 179214337094"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_026",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: theresiavr/stairway-to-fairness"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "RecAI/RecLM-eval/preprocess/generate_data.py exists at ff2b7a8c7fb8"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_027",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: Cecile-hi/Regularized-Adaptive-Weight-Modification"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "Apache-2.0"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "parse_log_to_result.py exists at bb663ee083d8"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_028",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: lbynum/metadentify"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "src/metadentify/launch_sweep.py exists at 01ad90548ce5"
+      }
+    ]
+  },
+  {
+    "paper_id": "cand_029",
+    "ok": true,
+    "checks": [
+      {
+        "name": "paper",
+        "ok": true,
+        "detail": "title matches (1.00)"
+      },
+      {
+        "name": "repo",
+        "ok": true,
+        "detail": "exists: mommi84/horn-concerto"
+      },
+      {
+        "name": "license",
+        "ok": true,
+        "detail": "MIT"
+      },
+      {
+        "name": "script",
+        "ok": true,
+        "detail": "horn_concerto_parallel.py exists at 07791afd192f"
+      }
+    ]
+  }
+]
