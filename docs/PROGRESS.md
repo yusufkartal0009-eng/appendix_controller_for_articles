@@ -39,6 +39,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): 29 candidate papers from the owner's lists, checked but not run (2026-10-23 00:30 +03:00, Issue #433)
+- New `data/candidates/` (`input.json` from the lists, `papers.json` in the seed format, `evaluation.json`, `verify_corpus.json`), `scripts/candidates_build.py`, and the generated `docs/CANDIDATES.md`. For each of the 29 candidates the head commit, license, size and archive/fork state were read from GitHub, the paper title and year from the paper's page, and the README was searched for the paper's id: all 29 READMEs name the paper. `scripts/verify_corpus.py` on the candidates file: 29 of 29 passed (paper page, repository, allowed license, script at the pinned commit).
+- Status given by the lists: ready 9, fixable 4, two_step 1, risky 11, excluded 4. They are NOT in `data/seed_papers.json` (the evaluation set of the pilots; its tests expect 6 papers from 2020 to 2024).
+- Not verified: no candidate was run; run time, offline installation, writes into the read-only repository, and the table of the paper that the output matches are unknown for all of them.
+
 ### docs: publication readiness audit (2026-10-22 23:50 +03:00, Issue #431)
 - New `docs/PUBLIC_READINESS.md`: a scan of 1,045 tracked files, 423 commits, 220 issues and 210 pull requests for keys, tokens, e-mail addresses, local paths, large files and copyrighted files. No key, token or private key was found; no local path is left in the current files. The owner's e-mail address is in the metadata of 228 commits (a decision, since only a history rewrite or a new repository removes it). A table lists what to decide before publishing.
 - Nothing was changed in the history, the account settings, or the visibility of the repository.
