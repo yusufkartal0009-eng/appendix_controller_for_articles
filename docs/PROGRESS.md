@@ -39,6 +39,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: publication readiness audit (2026-10-22 23:50 +03:00, Issue #431)
+- New `docs/PUBLIC_READINESS.md`: a scan of 1,045 tracked files, 423 commits, 220 issues and 210 pull requests for keys, tokens, e-mail addresses, local paths, large files and copyrighted files. No key, token or private key was found; no local path is left in the current files. The owner's e-mail address is in the metadata of 228 commits (a decision, since only a history rewrite or a new repository removes it). A table lists what to decide before publishing.
+- Nothing was changed in the history, the account settings, or the visibility of the repository.
+- Not verified: no dedicated secret scanner was run; issue and pull request comments and 11 of 12 screenshots were not read; the size of the stored paper quotes was not measured.
+
 ### docs: list of pending steps, owner decisions and open work (2026-10-22 00:40 +03:00, Issue #429)
 - New `docs/PENDING.md`: eight owner decisions (repository access, gold set 2, demo claims, `paper_004` and `paper_005`, ReScience, demo papers, the Tier 3 rule, questions for the mentors), five tasks that need no decision, the state of every open issue, what the project does not do, known limits, and how to start a long job without it being cut.
 - Evidence: every item names its source (documents, issue comments, records). Test and lint results are in the pull request.
