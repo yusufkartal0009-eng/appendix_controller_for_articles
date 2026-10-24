@@ -1,0 +1,152 @@
+{
+  "paper_id": "a3_002",
+  "source": "https://github.com/joisino/private-recsys",
+  "commit_hash": "7be7a5254ad397648bc3458425f0049b46f62c47",
+  "target_script": "evaluate.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 2.303,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_002",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.955,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 55373824,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "implicit",
+      "version": "0.7.3"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.0"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy>=1.21.0",
+      "name": "numpy",
+      "requested": ">=1.21.0",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.5.4",
+      "name": "scipy",
+      "requested": ">=1.5.4",
+      "installed": "1.17.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "implicit>=0.4.4",
+      "name": "implicit",
+      "requested": ">=0.4.4",
+      "installed": "0.7.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=0.23.4",
+      "name": "pandas",
+      "requested": ">=0.23.4",
+      "installed": "3.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "requests>=2.23.0",
+      "name": "requests",
+      "requested": ">=2.23.0",
+      "installed": "2.34.2",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/evaluate.py --data 100k --prov cosine --sensitive popularity\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 1.955s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/evaluate.py\", line 6, in <module>\n    from implicit.bpr import BayesianPersonalizedRanking\n  File \"/workspace/deps/implicit/__init__.py\", line 1, in <module>\n    from . import als, approximate_als, bpr, lmf, nearest_neighbours\n  File \"/workspace/deps/implicit/als.py\", line 3, in <module>\n    import implicit.cpu.als\n  File \"/workspace/deps/implicit/cpu/als.py\", line 14, in <module>\n    from . import _als\nImportError: libgomp.so.1: cannot open shared object file: No such file or directory\n"
+}

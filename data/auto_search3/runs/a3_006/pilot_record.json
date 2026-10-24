@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_006",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "d5cad922780f32cf9f5df006fb49d0499c5cdaf7",
+  "started_at": "2026-10-24T21:21:30+00:00",
+  "repo_url": "https://github.com/joisino/twinpaper",
+  "pinned_commit": "5186f86ad90ab9187dc40eb525dcd581abf356f1",
+  "target_script": "assumptions.py",
+  "container_command": "python /workspace/repo/assumptions.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python assumptions.py",
+    "readme_url": "https://github.com/joisino/twinpaper/blob/5186f86ad90ab9187dc40eb525dcd581abf356f1/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "5186f86ad90ab9187dc40eb525dcd581abf356f1",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.006
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 12,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_006_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "x_2_28_x86_64.whl\nSaved ./a3_006_packages/matplotlib-3.11.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl\nSaved ./a3_006_packages/contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a3_006_packages/cycler-0.12.1-py3-none-any.whl\nSaved ./a3_006_packages/fonttools-4.67.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl\nSaved ./a3_006_packages/kiwisolver-1.5.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl\nSaved ./a3_006_packages/packaging-26.3-py3-none-any.whl\nSaved ./a3_006_packages/pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a3_006_packages/pyparsing-3.3.3-py3-none-any.whl\nSaved ./a3_006_packages/python_dateutil-3.0.0-py2.py3-none-any.whl\nSaved ./a3_006_packages/six-1.17.0-py2.py3-none-any.whl\nSaved ./a3_006_packages/tzdata-2026.5-py2.py3-none-any.whl\nSuccessfully downloaded numpy matplotlib contourpy cycler fonttools kiwisolver packaging pillow pyparsing python-dateutil six tzdata\n",
+    "stderr": "",
+    "duration_seconds": 3.456
+  },
+  "sandbox_duration_seconds": 85.932,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.061,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 63668224
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 81.907,
+    "peak_memory_bytes": 80486400
+  },
+  "finished_at": "2026-10-24T21:23:00+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

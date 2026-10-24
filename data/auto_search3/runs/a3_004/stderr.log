@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/notebook/eval_linear.py", line 17, in <module>
+    from simulation import MultiSourceSimulator
+  File "/workspace/repo/notebook/simulation.py", line 2, in <module>
+    import matplotlib.pyplot as plt
+ModuleNotFoundError: No module named 'matplotlib'

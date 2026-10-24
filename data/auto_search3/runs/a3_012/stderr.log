@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/repo/roll.py", line 46, in <module>
+    with open("class.txt","rb") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'class.txt'

@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/workspace/repo/examples/demo.py", line 2, in <module>
+    from bio_firewall import screen
+  File "/workspace/repo/bio_firewall/__init__.py", line 13, in <module>
+    from bio_firewall.intercept.spine import screen          # noqa: F401  the public entry point
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/bio_firewall/intercept/__init__.py", line 2, in <module>
+    from bio_firewall.intercept.spine import screen          # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/bio_firewall/intercept/spine.py", line 10, in <module>
+    from bio_firewall.calibrate import calibrate
+  File "/workspace/repo/bio_firewall/calibrate/__init__.py", line 2, in <module>
+    from bio_firewall.calibrate.confidence import calibrate          # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/bio_firewall/calibrate/confidence.py", line 10, in <module>
+    from bio_firewall.hazard.finding import SEVERITY
+  File "/workspace/repo/bio_firewall/hazard/__init__.py", line 6, in <module>
+    from bio_firewall.hazard.edit_type import screen_edit
+  File "/workspace/repo/bio_firewall/hazard/edit_type.py", line 6, in <module>
+    from bio_firewall.data import is_oncogenic_fusion
+  File "/workspace/repo/bio_firewall/data.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
