@@ -1,0 +1,53 @@
+{
+  "cand_002": {
+    "fp_rate": {
+      "status": "found",
+      "reason": "Simulation setting (FP rate fixed in simulated data on which BnpC was benchmarked); the paper reports no estimated FP rate. Running text gives the same as 0.001.",
+      "claim": {
+        "metric_name": "false_positive_rate",
+        "value_as_printed": "0.1%",
+        "unit": "percent",
+        "dataset": "simulated datasets (350 mutations, 1250 or 2500 cells)",
+        "model_variant": "BnpC",
+        "split": "not_stated",
+        "higher_is_better": false,
+        "table_or_figure": "Figure 2",
+        "page": 4,
+        "source_quote": "For all datasets, the FN rate was fixed at 30%, the FP rate at 0.1% and the missing value fraction at 20%.",
+        "confidence": 0.4
+      }
+    },
+    "fn_rate": {
+      "status": "found",
+      "reason": "Simulation setting (FN rate fixed in simulated data on which BnpC was benchmarked); the paper reports no estimated FN rate.",
+      "claim": {
+        "metric_name": "false_negative_rate",
+        "value_as_printed": "30%",
+        "unit": "percent",
+        "dataset": "simulated datasets (350 mutations, 1250 or 2500 cells)",
+        "model_variant": "BnpC",
+        "split": "not_stated",
+        "higher_is_better": false,
+        "table_or_figure": "Figure 2",
+        "page": 4,
+        "source_quote": "For all datasets, the FN rate was fixed at 30%, the FP rate at 0.1% and the missing value fraction at 20%.",
+        "confidence": 0.4
+      }
+    },
+    "crp_alpha": {
+      "status": "not_found",
+      "reason": "The paper says the concentration parameter is learned (Escobar and West) but prints no value for it.",
+      "claim": null
+    },
+    "n_clusters": {
+      "status": "not_found",
+      "reason": "No total number of inferred clones is printed for any named data set; only partial counts (e.g. three clones in tissue C2) and simulated cluster numbers.",
+      "claim": null
+    },
+    "psrf": {
+      "status": "not_found",
+      "reason": "A Gelman-Rubin style diagnostic is mentioned but no PSRF value is printed in the text.",
+      "claim": null
+    }
+  }
+}

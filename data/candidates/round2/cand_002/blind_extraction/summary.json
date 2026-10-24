@@ -1,0 +1,101 @@
+{
+  "paper_id": "cand_002",
+  "method": "three independent fresh 'claude -p' passes (tools Read, Write, Edit, Glob, Grep; no history, no repository access) over a blind packet built by scripts/auto_extract.py build_packet; the paper text is the Europe PMC full-text XML of PMC7750970 flattened to section chunks (the PDF could not be downloaded), so 'page' in the answers is the chunk number, not a PDF page",
+  "questions_derive_from": "the metric lines of the round-2 run output (FP, FN, CRP a_0, number of clusters, Lugsail PSRF)",
+  "passes": [
+    {
+      "pass": 1,
+      "seconds": 39.4,
+      "cost_usd": 0.0964602,
+      "models": [
+        "claude-sonnet-5-5"
+      ]
+    },
+    {
+      "pass": 2,
+      "seconds": 17.3,
+      "cost_usd": 0.0859682,
+      "models": [
+        "claude-sonnet-5-5"
+      ]
+    },
+    {
+      "pass": 3,
+      "seconds": 36.5,
+      "cost_usd": 0.0864442,
+      "models": [
+        "claude-sonnet-5-5"
+      ]
+    }
+  ],
+  "checks": {
+    "1": {
+      "fp_rate": [
+        "found",
+        null
+      ],
+      "fn_rate": [
+        "found",
+        null
+      ],
+      "crp_alpha": [
+        "not_found",
+        null
+      ],
+      "n_clusters": [
+        "not_found",
+        null
+      ],
+      "psrf": [
+        "not_found",
+        null
+      ]
+    },
+    "2": {
+      "fp_rate": [
+        "not_found",
+        null
+      ],
+      "fn_rate": [
+        "not_found",
+        null
+      ],
+      "crp_alpha": [
+        "not_found",
+        null
+      ],
+      "n_clusters": [
+        "not_found",
+        null
+      ],
+      "psrf": [
+        "not_found",
+        null
+      ]
+    },
+    "3": {
+      "fp_rate": [
+        "not_found",
+        null
+      ],
+      "fn_rate": [
+        "not_found",
+        null
+      ],
+      "crp_alpha": [
+        "not_found",
+        null
+      ],
+      "n_clusters": [
+        "not_found",
+        null
+      ],
+      "psrf": [
+        "not_found",
+        null
+      ]
+    }
+  },
+  "outcome": "no question has two agreeing passes with a value; pass 1 found the simulation settings FP 0.1% and FN 30% (settings fixed by the authors for simulated data, not results); passes 2 and 3 answered not_found for all five; no claim candidate exists",
+  "accepted_claims": 0
+}
