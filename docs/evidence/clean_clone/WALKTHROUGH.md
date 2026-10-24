@@ -44,3 +44,49 @@ fresh database, `python cli.py score paper_006 --from-run data/pilot3_runs/paper
 Tier 2 = 0 (the Arcene metrics are not found in a run on another dataset), status Needs Review, 58.2, instead of the neutral
 baseline. Point 3 above describes the state before this fix.
 
+
+## Update 2 (2026-10-24, issue #441): a fresh run from a clean clone completed
+
+A fresh `git clone` of the public repository at commit `9b35d5c` into an empty folder, then the README steps in the order of its
+Quickstart, on the same machine (Docker Desktop, 12 CPUs and 15.5 GiB visible). The six sandbox images were already on the machine
+(rebuilt from scratch earlier the same day, `docs/ENVIRONMENT.md`, #435), so no image was built in this walk-through. Every step was timed by a
+script with `date`; the console log is kept outside the repository because it holds local paths. Other work (tests, document edits) ran on the
+same machine while the paper trained, so the times are not those of an idle machine.
+
+| Step | Command | Result | Time |
+|---|---|---|---|
+| clone | `git clone <public URL> <folder>` | exit 0 | 2 s |
+| venv, pip | `py -3.11 -m venv .venv`, `pip install -r requirements-dev.txt` | exit 0 | 55 s |
+| 3 | `python cli.py init-db` | exit 0, `Restored 13 claims that a person accepted (data/claims/review_decisions.json); 0 already reviewed here, 0 not accepted and ignored.` | 1 s |
+| 4 | `python cli.py list-papers` | exit 0, 6 papers | under 1 s |
+| 6 | `python scripts/preflight.py` | exit 0, 7 checks passed | 1 s |
+| 7 | `python scripts/fetch_data.py paper_006` | exit 0, `openml_1461` FETCHED (3,688,243 bytes) | 8 s |
+| 7 | `python cli.py score paper_006 --cpus 8 --timeout 7200` | exit 0; run COMPLETED, exit code 0, run phase 1,092.54 s; stage STAGED, build BUILT, install INSTALLED | **2,423 s** |
+| 7a | `python cli.py diagnose sandbox_runs/score/paper_006` | exit 0, "The classifier found no failure", metrics `accuracy 0.8886, auroc 0.892` | 1 s |
+
+Total from the clone to the end of `diagnose`: **2,490 s** (41.5 minutes). Of the 2,423 s of `cli.py score`, 1,092.54 s are the run phase; the rest is
+staging, the build of wheels and the install phase (the split of the remaining 1,330 s was not measured separately).
+
+**Result of the score** (`cli.py score` printed, before the display fix of #450, `61.2` for the total; the stored value is 61.25):
+
+| Tier | Score |
+|---|---|
+| Tier 1 (build) | 100 |
+| Tier 2 (metrics) | 0 |
+| Tier 3 (stability) | 75 (single-run baseline) |
+| Tier 4 (artifacts) | 100 (the staged repository was present, so its README counts) |
+| Total | 61.25, status Needs Review |
+
+**Accepted claims used: 2** (`arcene_auroc`, `xgboost_arcene_auroc`, both accepted by the owner). **Neither was found in the output** (the program
+printed `accuracy` and `auroc` of the Bank dataset, 1461, while the claims concern Arcene), so Tier 2 = 0 is "nothing was compared", and the
+summary says so: "claimed metrics not found in the output (nothing was compared)". This run reproduces the numbers of the earlier completed runs of
+this paper (`accuracy 0.8886`, `auroc 0.892`).
+
+### What this shows, and what it does not
+
+- Shows: a person who clones the public repository can follow the README to a fresh, completed run of a real paper (`paper_006`) with the 8-CPU
+  setting and the 7,200 s limit given on the command line, and to a score that uses the owner's accepted claims restored by `init-db`.
+- Does **not** show: that a claim of the paper is reproduced (no accepted claim was compared), that the default settings of `cli.py score`
+  (2 CPUs, 3,600 s) are enough (they were not enough in the walk-through of 2026-10-17; this run changed both, so it is not a protocol run, and the
+  record says so), or that other papers complete (`paper_008` still needs a dataset downloaded by hand).
+- Not verified: the time on an idle machine, on another operating system, or with the images built in the same walk-through.

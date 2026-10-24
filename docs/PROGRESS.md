@@ -39,6 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(devops): a fresh run from a clean clone completed, paper_006 end to end (2026-10-24 21:04 +03:00, Issue #441)
+- `docs/evidence/clean_clone/WALKTHROUGH.md` Update 2: a clone of the public repository followed through the README to `cli.py score paper_006 --cpus 8 --timeout 7200` and `cli.py diagnose`. `init-db` restored 13 accepted claims; the run COMPLETED (exit 0, run phase 1,092.54 s, `accuracy 0.8886`, `auroc 0.892`); the score used 2 accepted claims, none found in the output, so Tier 2 = 0 ("nothing was compared") and the total is 61.25, Needs Review. The whole walk-through took 2,490 s. Not a protocol run (CPUs and time limit set by hand); no accepted claim was reproduced.
+
 ### docs: bug hunt, three proven bugs fixed, seven suspicions listed (2026-10-24 20:37 +03:00, Issue #447)
 - `docs/BUG_HUNT.md`: what was read, the three proven bugs with their pull requests (#448 time-metric names, #449 substring number match, #450 half-even score display; each with a test that failed on the old code first), and seven suspicions that could not be proven without a decision of the owner (the 0.05 absolute allowance for small values, the substring test of the quote guard, the `data` rule of the classifier, the dashboard's score and latest run of different runs, Tier 3 never fed by `cli.py score`, the README read at the head commit, the text pattern of the pass rule). Not every line of every file was traced.
 
