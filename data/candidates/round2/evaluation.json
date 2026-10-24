@@ -1,5 +1,5 @@
 {
-  "written_at": "2026-10-24T20:23:58+00:00",
+  "written_at": "2026-10-24T20:35:05+00:00",
   "protocol": "docs/CANDIDATE_RUNS_ROUND2.md",
   "note": "selected list of candidates, not a sample; the share that passed is not a success rate",
   "results": [
@@ -244,6 +244,39 @@
       "table_match": null
     },
     {
+      "paper_id": "cand_011",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 1,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements_file",
+          "reason": "README (Install Dependencies): pip install -r synthetic_exp_requirements.txt, for the synthetic experiment that the command runs. The repository has three requirement files that pin joblib 1.4.0 and 1.4.2, and installing them together is impossible.",
+          "log_line": "ERROR: Cannot install joblib==1.4.0 and joblib==1.4.2 because these package versions have conflicting dependencies.",
+          "change": "only synthetic_exp_requirements.txt is installed"
+        },
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "README (Environment Setup): conda create --name pate_env python=3.8; the 3.8 image is the version the README states.",
+          "log_line": "ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts",
+          "change": "python_version 3.8 (image)"
+        }
+      ],
+      "final_category": "no_metric_line",
+      "final_log_line": "{'original_F1Score': 0.5, 'pa_precision': 0.67, 'pa_recall': 1.0, 'pa_f_score': 0.8, 'Rbased_precision': 0.6, 'Rbased_recall': 0.6, 'Rbased_f1score': 0.6, 'eTaPR_precision': 0.75, 'eTaPR_recall': 0.75, 'eTaPR_f1_score': 0.75, 'Affiliation precision': 0.97, 'Affiliation recall': 0.99, 'Affliation F1s",
+      "stopped": {
+        "status": "no_metric_line",
+        "at_attempt": 1,
+        "log_line": "{'original_F1Score': 0.5, 'pa_precision': 0.67, 'pa_recall': 1.0, 'pa_f_score': 0.8, 'Rbased_precision': 0.6, 'Rbased_recall': 0.6, 'Rbased_f1score': 0.6, 'eTaPR_precision': 0.75, 'eTaPR_recall': 0.75, 'eTaPR_f1_score': 0.75, 'Affiliation precision': 0.97, 'Affiliation recall': 0.99, 'Affliation F1s",
+        "reason": "The repaired run completed (install INSTALLED, run COMPLETED, exit 0, 12.3 s) and printed a Python dict of numeric values ({'original_F1Score': 0.5, 'pa_precision': 0.67, ...}), but no line has the form 'name: number' or 'name = number' that the pass definition (round 1 section 5, round 2 section 5) requires, so by the protocol it did NOT pass. This is a limit of the text pattern, noted here and not applied after the result: the pattern is not changed, the command is not changed, and no second repair applies (nothing failed). The owner may judge the output by hand. Not verified: whether the printed values correspond to a table of the paper (PATE is a metric; the output compares metrics on one synthetic series)."
+      },
+      "table_match": null
+    },
+    {
       "paper_id": "cand_012",
       "in_round_1": true,
       "round1_passed": false,
@@ -276,6 +309,24 @@
         "log_line": "command_incomplete: the README line holds only placeholders (DATASET_NAME, YOUR_RUN_TIMES, PARAMETER_LAMBDA)",
         "reason": "Section 2 of the protocol: choosing a dataset name or a parameter value is not one of the five repairs, so the candidate stays command_incomplete and counts as not passed. No attempt was made.",
         "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_020",
+      "in_round_1": false,
+      "round1_passed": null,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "at_attempt": 0,
+        "log_line": "torch_scatter==2.1.2, torch_sparse==0.6.18, torch_cluster==1.6.3, torch_spline_conv==1.2.2 (requirements.txt)",
+        "reason": "requirements.txt pins four packages that PyPI publishes only as source distributions (read from the PyPI metadata of each pin: one .tar.gz file and no wheel). The README gets their wheels from the extra wheel index https://data.pyg.org/whl/torch-2.3.0+cpu.html. The install phase installs binary wheels from PyPI only; an extra wheel index and a source build are not among the five repair kinds (plus requirements_file) of the protocol, and a pin cannot be changed. No attempt was made. Not verified: that the sandbox would run the model once those wheels were present."
       },
       "table_match": null
     },

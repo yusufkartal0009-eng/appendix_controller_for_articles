@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): repair round closed: 1 of 14 passed after repair (2026-10-25 00:30 +03:00, Issue #457)
+- cand_020 recorded as not repairable (four pins exist only as source distributions on PyPI; the README takes them from an extra wheel index). The round-2 evaluation (`python scripts/candidate_round2.py summary`, `data/candidates/round2/evaluation.json`): 15 repair logs (the 14 of round 1 and cand_020); passed: cand_002 only. cand_011 ran to exit 0 but printed no `name: number` line. No other risky candidate qualified.
+- Not verified: any table match for cand_002 (none found in the paper text).
+
 ### data(corpus): eligibility of the risky candidates for the repair round (2026-10-25 00:20 +03:00, Issue #457)
 - `data/candidates/round2/eligibility.json`, written before any risky candidate is run: of the 11 risky candidates one is eligible (cand_020, data inside the repository), two are `command_incomplete` (cand_015, cand_016), and eight are not eligible, each with the reason (no README address, an account needed, a 5.3 GB file, a client that is not available, a compile step). Download total: 0 GB of the 20 GB.
 - Not verified: sizes of cand_016, cand_017 and cand_022 (not found).
