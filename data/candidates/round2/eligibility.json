@@ -1,0 +1,75 @@
+{
+  "written": "2026-10-24",
+  "protocol": "docs/CANDIDATE_RUNS_ROUND2.md sections 2 and 4",
+  "note": "Written before any risky candidate is run. A size is read from the README, a HEAD request or the Google Drive page; 'not found' means it was not found out.",
+  "downloads_total_limit_gb": 20,
+  "single_file_limit_gb": 3,
+  "candidates": [
+    {
+      "paper_id": "cand_014",
+      "decision": "not_eligible",
+      "reason": "The README gives no download command or address: MNIST and the other data sets are fetched implicitly by the training library, which is not an address named in the README.",
+      "download_size": null
+    },
+    {
+      "paper_id": "cand_015",
+      "decision": "command_incomplete",
+      "reason": "The data is named (Google Drive: graph file about 2 MB, data file about 111 MB, sizes read from the Drive pages), but the README command is 'python sdcn.py --name [usps|hhar|reut|acm|dblp|cite]': a list of alternatives, not one concrete value. The protocol does not choose values (section 2), so the command is not run.",
+      "download_size": "about 113 MB (two files)"
+    },
+    {
+      "paper_id": "cand_016",
+      "decision": "command_incomplete",
+      "reason": "The README commands use a variable ('--config ./configs/tourism/$landmark.json'), not a concrete value, and the data (image-matching-challenge images and a Google Drive folder of poses) has no size that was found out. Not run.",
+      "download_size": "not found"
+    },
+    {
+      "paper_id": "cand_017",
+      "decision": "not_eligible",
+      "reason": "The data for the listed command (--test_dataset CropDisease) is fetched with the Kaggle command line ('kaggle datasets download -d plant-disease/data'), which needs an account; miniImageNet and the models are Dropbox links of unknown size.",
+      "download_size": "not found"
+    },
+    {
+      "paper_id": "cand_018",
+      "decision": "not_eligible",
+      "reason": "The data is one Google Drive file of 5.3 GB (size read from the Drive page), above the 3 GB limit for a single file; the README command is also 'python main.py <model>' (a placeholder).",
+      "download_size": "5.3 GB"
+    },
+    {
+      "paper_id": "cand_019",
+      "decision": "not_eligible",
+      "reason": "The README says the CIFAR data is downloaded automatically by torchvision; it names no address or command that fetches it.",
+      "download_size": "not applicable"
+    },
+    {
+      "paper_id": "cand_020",
+      "decision": "eligible",
+      "reason": "The data sets (enron, facebook, colab) are files of the repository itself (datasets/raw_data/), so there is nothing to download (0 GB). The README command 'python main.py --dataset_name enron' is concrete (README, Running the Code).",
+      "download_size": "0 (in the repository)"
+    },
+    {
+      "paper_id": "cand_021",
+      "decision": "not_eligible",
+      "reason": "The README names no data address: the GLUE data and the model weights are fetched implicitly from Hugging Face.",
+      "download_size": "not applicable"
+    },
+    {
+      "paper_id": "cand_022",
+      "decision": "not_eligible",
+      "reason": "The data is a mega.nz link; no download tool for mega.nz is available on this machine and its size was not found out.",
+      "download_size": "not found"
+    },
+    {
+      "paper_id": "cand_023",
+      "decision": "not_eligible",
+      "reason": "The listed command needs an earlier step of the README (save_pca_and_ica_embeddings.py) and files under output/ in the repository (read-only in the sandbox), GloVe (822 MB, nlp.stanford.edu) and a downloaded and compiled LKH solver; compiling third-party code is not an allowed repair.",
+      "download_size": "about 0.8 GB for GloVe"
+    },
+    {
+      "paper_id": "cand_024",
+      "decision": "not_eligible",
+      "reason": "The README says the data sets are downloaded automatically and refers to DATASETS.md for broken links; it names no address or command for the data of the listed command.",
+      "download_size": "not applicable"
+    }
+  ]
+}

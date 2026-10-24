@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): eligibility of the risky candidates for the repair round (2026-10-25 00:20 +03:00, Issue #457)
+- `data/candidates/round2/eligibility.json`, written before any risky candidate is run: of the 11 risky candidates one is eligible (cand_020, data inside the repository), two are `command_incomplete` (cand_015, cand_016), and eight are not eligible, each with the reason (no README address, an account needed, a 5.3 GB file, a client that is not available, a compile step). Download total: 0 GB of the 20 GB.
+- Not verified: sizes of cand_016, cand_017 and cand_022 (not found).
+
 ### data(corpus): repair round, cand_011; requirements_file filter fixed (2026-10-25 00:10 +03:00, Issue #457)
 - cand_011 ran with the README's Python 3.8 and requirements file: install INSTALLED, run COMPLETED, exit 0, but the output is a dict of values with no 'name: number' line, so by the protocol it did not pass (recorded as `no_metric_line`, noted as a limit of the pattern). The first attempt was a harness fault (the install phase read all requirement files) and is kept as `attempt_1_harness_fault`, not counted; `FilteredStager` now removes the unnamed files from the staged copy (section 11 of the protocol).
 - Not verified: a table match for cand_011.
