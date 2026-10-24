@@ -1,0 +1,14 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/h5py-3.16.0-cp311-cp311-manylinux_2_28_x86_64.whl
+Processing /workspace/packages/ipykernel-7.3.0-py3-none-any.whl
+Processing /workspace/packages/joblib-1.5.3-py3-none-any.whl
+Processing /workspace/packages/jupyterlab-4.6.1-py3-none-any.whl
+Processing /workspace/packages/matplotlib-3.11.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
+Processing /workspace/packages/nbconvert-7.17.1-py3-none-any.whl
+Processing /workspace/packages/pillow-12.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+Processing /workspace/packages/pytest-9.1.1-py3-none-any.whl
+Processing /workspace/packages/pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
+Processing /workspace/packages/threadpoolctl-3.6.0-py3-none-any.whl
+Installing collected packages: threadpoolctl, pyyaml, pytest, pillow, nbconvert, matplotlib, jupyterlab, joblib, ipykernel, h5py
+
+Successfully installed h5py-3.16.0 ipykernel-7.3.0 joblib-1.5.3 jupyterlab-4.6.1 matplotlib-3.11.0 nbconvert-7.17.1 pillow-12.3.0 pytest-9.1.1 pyyaml-6.0.3 threadpoolctl-3.6.0

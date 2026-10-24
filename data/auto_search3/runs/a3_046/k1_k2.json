@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_046",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'pyparsing'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.111,
+    "metric_lines": []
+  },
+  "k2": null
+}

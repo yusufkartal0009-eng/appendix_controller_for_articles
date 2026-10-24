@@ -1,0 +1,200 @@
+{
+  "paper_id": "a3_046",
+  "source": "https://github.com/rspence821505/Data-Consistent-Filtering",
+  "commit_hash": "81711d101fb16e5e3a2c974f62a308f0f02a36cb",
+  "target_script": "scripts/reproduce_figures.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.111,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_046",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.781,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 28508160,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "h5py",
+      "version": "3.16.0"
+    },
+    {
+      "name": "ipykernel",
+      "version": "7.3.0"
+    },
+    {
+      "name": "joblib",
+      "version": "1.5.3"
+    },
+    {
+      "name": "jupyterlab",
+      "version": "4.6.1"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.0"
+    },
+    {
+      "name": "nbconvert",
+      "version": "7.17.1"
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.6.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy==2.5.1",
+      "name": "numpy",
+      "requested": "==2.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.18.0",
+      "name": "scipy",
+      "requested": "==1.18.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyyaml==6.0.3",
+      "name": "pyyaml",
+      "requested": "==6.0.3",
+      "installed": "6.0.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.5.3",
+      "name": "joblib",
+      "requested": "==1.5.3",
+      "installed": "1.5.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==3.6.0",
+      "name": "threadpoolctl",
+      "requested": "==3.6.0",
+      "installed": "3.6.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.11.0",
+      "name": "matplotlib",
+      "requested": "==3.11.0",
+      "installed": "3.11.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "freetype==2.14.3",
+      "name": "freetype",
+      "requested": "==2.14.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==12.3.0",
+      "name": "pillow",
+      "requested": "==12.3.0",
+      "installed": "12.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "h5py==3.16.0",
+      "name": "h5py",
+      "requested": "==3.16.0",
+      "installed": "3.16.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyterlab==4.6.1",
+      "name": "jupyterlab",
+      "requested": "==4.6.1",
+      "installed": "4.6.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ipykernel==7.3.0",
+      "name": "ipykernel",
+      "requested": "==7.3.0",
+      "installed": "7.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nbconvert==7.17.1",
+      "name": "nbconvert",
+      "requested": "==7.17.1",
+      "installed": "7.17.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytest==9.1.1",
+      "name": "pytest",
+      "requested": "==9.1.1",
+      "installed": "9.1.1",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/reproduce_figures.py --compare\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 0.781s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/reproduce_figures.py\", line 30, in <module>\n    from src.figures import FIGURES, figure_module, outputs, render  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/src/figures/__init__.py\", line 22, in <module>\n    import matplotlib.pyplot as plt\n  File \"/workspace/deps/matplotlib/__init__.py\", line 161, in <module>\n    from . import _api, _version, cbook, rcsetup\n  File \"/workspace/deps/matplotlib/rcsetup.py\", line 35, in <module>\n    from matplotlib._fontconfig_pattern import parse_fontconfig_pattern\n  File \"/workspace/deps/matplotlib/_fontconfig_pattern.py\", line 15, in <module>\n    from pyparsing import (\nModuleNotFoundError: No module named 'pyparsing'\n"
+}
