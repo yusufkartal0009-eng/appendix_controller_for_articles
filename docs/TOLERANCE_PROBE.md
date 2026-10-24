@@ -8,7 +8,7 @@ Issue #440. **These are hand-made claims, not an error of a real paper. The fals
 Tolerance `t = DEFAULT_TOLERANCE = 0.05` (`src/config.py`). For each claim that is found in the run's output (matched by its question ID, never guessed), with `claimed` and `reproduced`:
 
 - `abs_diff = |reproduced - claimed|`, `rel_error = abs_diff / max(|claimed|, 1e-6)`: the error is relative to the **claimed** value.
-- A metric whose name contains one of `sec`, `second`, `time`, `latency`, `ms`, `runtime`, `duration` (substring, lower case) is a time metric: 1 point if `rel_error <= t`, 0.5 point if `rel_error <= 2t`, else 0.
+- A metric whose name contains `second`, `time`, `latency`, `runtime` or `duration`, or has `sec`, `secs`, `ms` or `msec` as a whole part of its name (`latency_ms`; not `rmse` or `params`), is a time metric: 1 point if `rel_error <= t`, 0.5 point if `rel_error <= 2t`, else 0.
 - Any other metric: 1 point if `rel_error <= t`, or if the claimed value is in [0, 1] and `abs_diff <= t`; 0.5 point if `rel_error <= 2t`, or if the claimed value is in [0, 1] and `abs_diff <= 2t`; else 0.
 - Tier 2 = points earned / number of claims x 100. A claim whose name is not in the output earns 0; no claims gives the neutral 70.0; claims with an empty output give 0.
 - Composite = 0.35 Tier 1 + 0.35 Tier 2 + 0.15 Tier 3 + 0.15 Tier 4. Status (`calculate_composite_score`): Failed if Tier 1 < 50 or the run failed; Verified if total >= 85, Tier 2 >= 80 and Tier 1 >= 90; Partially Verified if total >= 60 (Needs Review instead when Tier 2 < 50 and Tier 1 >= 80); otherwise Needs Review when Tier 1 >= 75, else Failed.
@@ -32,21 +32,21 @@ Metrics of the run (as printed): loss = 0.106, rmse = 0.473
 | +1 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
 | -2 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
 | +2 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
-| -5 % | 75.0 | 1 | 1 | 0 | 84.5 | Partially Verified |
+| -5 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
 | +5 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
-| -10 % | 50.0 | 1 | 0 | 1 | 75.75 | Partially Verified |
-| +10 % | 75.0 | 1 | 1 | 0 | 84.5 | Partially Verified |
-| -20 % | 50.0 | 1 | 0 | 1 | 75.75 | Partially Verified |
-| +20 % | 50.0 | 1 | 0 | 1 | 75.75 | Partially Verified |
+| -10 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
+| +10 % | 100.0 | 2 | 0 | 0 | 93.25 | Verified |
+| -20 % | 75.0 | 1 | 1 | 0 | 84.5 | Partially Verified |
+| +20 % | 75.0 | 1 | 1 | 0 | 84.5 | Partially Verified |
 
-First deviation that changes the status of the true claim: downward -5 % (Verified -> Partially Verified); upward +10 % (Verified -> Partially Verified).
+First deviation that changes the status of the true claim: downward -20 % (Verified -> Partially Verified); upward +20 % (Verified -> Partially Verified).
 
 Each metric alone: the largest tested deviation at which it still earns a full point (MATCHED); a metric whose value is between 0 and 1 is judged by the absolute difference as well, which makes a small value lenient.
 
 | Metric | Value | Largest MATCHED deviation, claim moved down | Largest MATCHED deviation, claim moved up |
 |---|---|---|---|
 | loss | 0.106 | -20 % | +20 % |
-| rmse | 0.473 | -2 % | +5 % |
+| rmse | 0.473 | -10 % | +10 % |
 
 ### 2.2 paper_006
 

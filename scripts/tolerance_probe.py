@@ -182,8 +182,9 @@ def render(data: dict[str, Any]) -> str:
          "(matched by its question ID, never guessed), with `claimed` and `reproduced`:"), "",
         ("- `abs_diff = |reproduced - claimed|`, `rel_error = abs_diff / max(|claimed|, 1e-6)`: the error is relative to the "
          "**claimed** value."),
-        ("- A metric whose name contains one of `sec`, `second`, `time`, `latency`, `ms`, `runtime`, `duration` (substring, lower "
-         "case) is a time metric: 1 point if `rel_error <= t`, 0.5 point if `rel_error <= 2t`, else 0."),
+        ("- A metric whose name contains `second`, `time`, `latency`, `runtime` or `duration`, or has `sec`, `secs`, `ms` or `msec` as "
+         "a whole part of its name (`latency_ms`; not `rmse` or `params`), is a time metric: 1 point if `rel_error <= t`, 0.5 point "
+         "if `rel_error <= 2t`, else 0."),
         ("- Any other metric: 1 point if `rel_error <= t`, or if the claimed value is in [0, 1] and `abs_diff <= t`; 0.5 point if "
          "`rel_error <= 2t`, or if the claimed value is in [0, 1] and `abs_diff <= 2t`; else 0."),
         ("- Tier 2 = points earned / number of claims x 100. A claim whose name is not in the output earns 0; no claims gives the "
