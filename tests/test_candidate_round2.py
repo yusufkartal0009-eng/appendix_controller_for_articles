@@ -83,3 +83,23 @@ def test_run_attempt_records_the_attempt_and_never_runs_it_twice(tmp_path):
     assert not (tmp_path / paper_id / "_work_1").exists()
     with pytest.raises(ValueError, match="already has a result"):
         r2.run_attempt(paper_id, 1, runner=runner, root=tmp_path, staging_dir=tmp_path / "s")
+
+
+def test_a_requirements_file_repair_is_explained_by_its_kind_and_reaches_the_entry():
+    attempt = _attempt(setup={"requirements_files": ["a.txt"]}, repairs=[dict(REPAIR, kind="requirements_file")])
+    r2.validate_attempt({"attempts": []}, attempt, risky=False)
+    paper, step = next((p, s) for p, s in candidate_runs.load_plan() if s["runnable"])
+    assert r2.corpus_entry(paper, step, {"requirements_files": ["a.txt"]})["round2_requirements_files"] == ["a.txt"]
+    with pytest.raises(ValueError, match="no repair of the attempt explains"):
+        r2.validate_attempt({"attempts": []}, _attempt(setup={"requirements_files": ["a.txt"]}), risky=False)
+
+
+def test_the_filtered_stager_keeps_only_the_named_files_and_refuses_unknown_ones(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    manifest = SimpleNamespace(requirements_files=["a.txt", "b.txt"])
+    staged = SimpleNamespace(manifest=manifest)
+    monkeypatch.setattr(r2.RepoStager, "stage_repository", lambda self, *a, **k: staged)
+    assert r2.FilteredStager(staging_root=tmp_path, requirements_files=["b.txt"]).stage_repository("p", "s").manifest.requirements_files == ["b.txt"]
+    with pytest.raises(ValueError, match="not found"):
+        r2.FilteredStager(staging_root=tmp_path, requirements_files=["c.txt"]).stage_repository("p", "s")

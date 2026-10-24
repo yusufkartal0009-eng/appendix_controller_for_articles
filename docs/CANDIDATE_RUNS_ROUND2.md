@@ -153,3 +153,18 @@ table match. Every number comes from a script and a stored record.
 
 The sentence that goes with all of it: **"This is a selected list of candidates, not a representative sample; K / N is not a
 success rate."**
+
+## 10. Amendment of 2026-10-24 (before the run of cand_011): a sixth repair kind
+
+Round 1 showed that the install phase installs **every** requirements file of a repository together. `cand_011` holds three
+(`Real_exp_requirements.txt` and `synthetic_exp_requirements.txt` pin `joblib==1.4.0`, `requirements_pate.txt` pins
+`joblib==1.4.2`), and the install fails with `ResolutionImpossible`. Its README says to install `synthetic_exp_requirements.txt`
+for the command that is run. The amendment adds one kind to the table of section 3:
+
+| Kind | What it is | Where it is applied |
+|---|---|---|
+| `requirements_file` | only the requirement file(s) that the README names for the command are installed, instead of every requirement file of the repository. The files are not edited and no pin is changed | `repair_log.json` setup key `requirements_files` (a list of repository paths), applied by `FilteredStager` in `scripts/candidate_round2.py` |
+
+Everything else in this document, including the forbidden list, the limit of two repairs, and the 20 GB and 3 GB data limits,
+is unchanged. No round-2 run has been made under this kind before this section was merged, and the 12 candidates already
+closed were closed under the five kinds; none of them is re-opened by this kind (their reasons do not involve conflicting files).

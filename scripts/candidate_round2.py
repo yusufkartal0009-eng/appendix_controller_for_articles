@@ -35,7 +35,7 @@ if str(project_root) not in sys.path:
 
 from scripts import candidate_runs, demo_set
 from src.config import DATA_CACHE_DIR
-from src.sandbox.stager import remove_tree
+from src.sandbox.stager import RepoStager, remove_tree
 
 ROUND2_DIR = candidate_runs.CANDIDATES_DIR / "round2"
 ROUND1_DIR = candidate_runs.RUNS_DIR
@@ -44,12 +44,13 @@ INSTALL_TIMEOUT_SECONDS = 1800
 MEMORY = candidate_runs.MEMORY
 CPUS = candidate_runs.CPUS
 MAX_REPAIRS = 2
-KINDS = ("requirements", "readme_pin", "output_redirect", "working_dir", "data")
+KINDS = ("requirements", "readme_pin", "output_redirect", "working_dir", "data", "requirements_file")
 # the keys of a cumulative setup; `writable_repo` is deliberately absent (section 3: the repository stays read-only)
-SETUP_KEYS = ("extra_requirements", "constraints", "constraints_source", "python_version", "working_dir", "env", "data", "args_add")
+SETUP_KEYS = ("extra_requirements", "constraints", "constraints_source", "python_version", "working_dir", "env", "data", "args_add", "requirements_files")
 KIND_KEYS = {"requirements": {"extra_requirements", "constraints", "constraints_source", "python_version"},
              "readme_pin": {"extra_requirements", "constraints", "constraints_source", "python_version"},
-             "output_redirect": {"args_add", "env"}, "working_dir": {"working_dir"}, "data": {"data"}}
+             "output_redirect": {"args_add", "env"}, "working_dir": {"working_dir"}, "data": {"data"},
+             "requirements_file": {"requirements_files"}}
 NOTE = "selected list of candidates, not a sample; the share that passed is not a success rate"
 
 Runner = Callable[[dict[str, Any], dict[str, Any], Path, Path, Path], dict[str, Any]]
@@ -118,7 +119,27 @@ def effective_command(step: dict[str, Any], target_script: str, setup: dict[str,
 
 def corpus_entry(paper: dict[str, Any], step: dict[str, Any], setup: dict[str, Any]) -> dict[str, Any]:
     command, working_dir = effective_command(step, paper["target_script"], setup)
-    return candidate_runs.corpus_entry(paper, {**step, "command": command, "working_dir": working_dir})
+    entry = candidate_runs.corpus_entry(paper, {**step, "command": command, "working_dir": working_dir})
+    if setup.get("requirements_files"):
+        entry["round2_requirements_files"] = list(setup["requirements_files"])
+    return entry
+
+
+class FilteredStager(RepoStager):
+    """A stager that installs only the requirement files the README names (kind `requirements_file`, section 10 of the
+    protocol), when the repository holds several files whose pins conflict. The files are not edited."""
+
+    def __init__(self, *args: Any, requirements_files: list[str], **kwargs: Any):
+        super().__init__(*args, **kwargs)
+        self.requirements_files = requirements_files
+
+    def stage_repository(self, *args: Any, **kwargs: Any):
+        staged = super().stage_repository(*args, **kwargs)
+        unknown = [n for n in self.requirements_files if n not in staged.manifest.requirements_files]
+        if unknown:
+            raise ValueError(f"requirement files not found in the repository: {unknown}")
+        staged.manifest.requirements_files = list(self.requirements_files)
+        return staged
 
 
 def correction_of(attempt: dict[str, Any]) -> dict[str, Any] | None:
@@ -149,9 +170,11 @@ def sandbox_runner(entry: dict[str, Any], correction: dict[str, Any] | None, cor
     from scripts import run_pilot
 
     paper_id = entry["paper_id"]
+    files = entry.get("round2_requirements_files")
+    stager = FilteredStager(staging_root=staging_dir, bundle_in_docker=True, requirements_files=files) if files else None
     try:
         with install_limit(INSTALL_TIMEOUT_SECONDS):
-            record = run_pilot.run_paper(paper_id, staging_dir, pilot4=True, corpus_path=corpus_path, memory_limit=MEMORY,
+            record = run_pilot.run_paper(paper_id, staging_dir, stager=stager, pilot4=True, corpus_path=corpus_path, memory_limit=MEMORY,
                                          cpus=CPUS, run_timeout=RUN_TIMEOUT_SECONDS, record_root=record_root,
                                          correction=correction)
     except Exception as exc:  # noqa: BLE001 - a harness error is recorded as the attempt's result
