@@ -40,6 +40,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): sixth repair kind of the repair round, requirements_file (2026-10-24 23:40 +03:00, Issue #457)
+- Section 10 of `docs/CANDIDATE_RUNS_ROUND2.md` (dated amendment, written before the run of cand_011) and `FilteredStager` in `scripts/candidate_round2.py`: only the requirement file the README names is installed, the files are not edited. Two tests. 1,039 tests pass, 9 skipped.
+
 ### data(corpus): repair round, first 11 candidates (cand_001 to cand_010 and cand_013) (2026-10-24 23:30 +03:00, Issue #457)
 - Records under `data/candidates/round2/` (a `repair_log.json` per candidate). cand_002 passed after one repair (Python 3.9 image); cand_009 stopped at the third error; cand_001, 003, 004, 005, 006, 007, 008, 010 and 012 are not repairable by the five allowed repairs, each with the log line and the reason; cand_013 stays `command_incomplete`. cand_011 is not in this batch. `summary` also reports the `stopped` entry.
 - Not verified: that cand_002's output is comparable with any table of its paper (no printed value occurs in a table).
