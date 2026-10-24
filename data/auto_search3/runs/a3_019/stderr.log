@@ -1,0 +1,5 @@
+usage: Official evaluation script for single language MKQA.
+       [-h] -a mkqa.jsonl.gz -p preds.json -l
+       {ar,da,de,en,es,fi,fr,he,hu,it,ja,km,ko,ms,nl,no,pl,pt,ru,sv,th,tr,vi,zh_cn,zh_hk,zh_tw}
+       [-o results/] [-v] [--print_metrics]
+Official evaluation script for single language MKQA.: error: unrecognized arguments: (--out_dir <optional output directory for saving metrics and pr curves>, --verbose)

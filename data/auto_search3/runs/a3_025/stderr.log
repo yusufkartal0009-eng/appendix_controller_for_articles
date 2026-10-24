@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/mnist.py", line 11, in <module>
+    import haiku as hk
+ModuleNotFoundError: No module named 'haiku'

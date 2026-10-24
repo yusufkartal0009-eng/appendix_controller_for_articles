@@ -1,0 +1,85 @@
+{
+  "paper_id": "a3_025",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "d5cad922780f32cf9f5df006fb49d0499c5cdaf7",
+  "started_at": "2026-10-24T22:09:05+00:00",
+  "repo_url": "https://github.com/jacobjinkelly/easy-neural-ode",
+  "pinned_commit": "72adcc0f3b3e3dcc514340b41c977515db18adfa",
+  "target_script": "mnist.py",
+  "container_command": "python /workspace/repo/mnist.py --reg r3 --lam 6e-5",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python mnist.py --reg r3 --lam 6e-5",
+    "readme_url": "https://github.com/jacobjinkelly/easy-neural-ode/blob/72adcc0f3b3e3dcc514340b41c977515db18adfa/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "72adcc0f3b3e3dcc514340b41c977515db18adfa",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 6.937
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_025_packages",
+    "duration_seconds": 0.001
+  },
+  "sandbox_duration_seconds": 0.747,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.528,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 13811712
+  },
+  "finished_at": "2026-10-24T22:09:12+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

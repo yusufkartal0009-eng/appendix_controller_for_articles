@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/workspace/repo/preprocess.py", line 9, in <module>
+    from keras.preprocessing.sequence import pad_sequences
+  File "/workspace/deps/keras/__init__.py", line 7, in <module>
+    from keras import _tf_keras as _tf_keras
+  File "/workspace/deps/keras/_tf_keras/__init__.py", line 1, in <module>
+    from keras._tf_keras import keras
+  File "/workspace/deps/keras/_tf_keras/keras/__init__.py", line 7, in <module>
+    from keras import activations as activations
+  File "/workspace/deps/keras/activations/__init__.py", line 7, in <module>
+    from keras.src.activations import deserialize as deserialize
+  File "/workspace/deps/keras/src/__init__.py", line 1, in <module>
+    from keras.src import activations
+  File "/workspace/deps/keras/src/activations/__init__.py", line 3, in <module>
+    from keras.src.activations.activations import celu
+  File "/workspace/deps/keras/src/activations/activations.py", line 1, in <module>
+    from keras.src import backend
+  File "/workspace/deps/keras/src/backend/__init__.py", line 1, in <module>
+    from keras.src.backend.config import backend
+  File "/workspace/deps/keras/src/backend/config.py", line 463, in <module>
+    set_nnx_enabled(_NNX_ENABLED)
+  File "/workspace/deps/keras/src/backend/config.py", line 249, in set_nnx_enabled
+    from keras.src.backend.common import global_state
+  File "/workspace/deps/keras/src/backend/common/__init__.py", line 2, in <module>
+    from keras.src.backend.common.dtypes import result_type
+  File "/workspace/deps/keras/src/backend/common/dtypes.py", line 5, in <module>
+    from keras.src.backend.common.variables import standardize_dtype
+  File "/workspace/deps/keras/src/backend/common/variables.py", line 11, in <module>
+    from keras.src.utils.module_utils import tensorflow as tf
+  File "/workspace/deps/keras/src/utils/__init__.py", line 1, in <module>
+    from keras.src.utils.audio_dataset_utils import audio_dataset_from_directory
+  File "/workspace/deps/keras/src/utils/audio_dataset_utils.py", line 4, in <module>
+    from keras.src.utils import dataset_utils
+  File "/workspace/deps/keras/src/utils/dataset_utils.py", line 10, in <module>
+    from keras.src import tree
+  File "/workspace/deps/keras/src/tree/__init__.py", line 1, in <module>
+    from keras.src.tree.tree_api import assert_same_paths
+  File "/workspace/deps/keras/src/tree/tree_api.py", line 13, in <module>
+    from keras.src.tree import optree_impl as tree_impl
+  File "/workspace/deps/keras/src/tree/optree_impl.py", line 13, in <module>
+    from tensorflow.python.trackable.data_structures import ListWrapper
+ModuleNotFoundError: No module named 'tensorflow'

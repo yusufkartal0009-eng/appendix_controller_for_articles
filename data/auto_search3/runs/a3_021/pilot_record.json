@@ -1,0 +1,112 @@
+{
+  "paper_id": "a3_021",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "d5cad922780f32cf9f5df006fb49d0499c5cdaf7",
+  "started_at": "2026-10-24T21:52:46+00:00",
+  "repo_url": "https://github.com/cranesun1226/ttm-btcusdt-research",
+  "pinned_commit": "065f63c656c16593edc09a89e0399d2b9568f9a6",
+  "target_script": "trader/bt_trader.py",
+  "container_command": "python /workspace/repo/trader/bt_trader.py --model saved_models/highest_accuracy/model.pth --duration 10",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python trader/bt_trader.py --model saved_models/highest_accuracy/model.pth --duration 10",
+    "readme_url": "https://github.com/cranesun1226/ttm-btcusdt-research/blob/065f63c656c16593edc09a89e0399d2b9568f9a6/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "065f63c656c16593edc09a89e0399d2b9568f9a6",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.722
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 13,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_021_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "tsfm-public>=0.1.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for tsfm-public>=0.1.0"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "om -r /staging/a3_021/requirements.txt (line 2))\n  Using cached pandas-3.1.0-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (18 kB)\nCollecting matplotlib>=3.7.0 (from -r /staging/a3_021/requirements.txt (line 3))\n  Using cached matplotlib-3.11.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)\nCollecting plotly>=5.15.0 (from -r /staging/a3_021/requirements.txt (line 4))\n  Downloading plotly-7.1.0-py3-none-any.whl.metadata (8.8 kB)\nCollecting scikit-learn>=1.3.0 (from -r /staging/a3_021/requirements.txt (line 5))\n  Using cached scikit_learn-1.9.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.3 kB)\nCollecting scikit-optimize>=0.9.0 (from -r /staging/a3_021/requirements.txt (line 6))\n  Downloading scikit_optimize-0.10.2-py2.py3-none-any.whl.metadata (9.7 kB)\nCollecting torch>=2.0.0 (from -r /staging/a3_021/requirements.txt (line 7))\n  Using cached torch-2.14.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (37 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement tsfm-public>=0.1.0 (from versions: none)\nERROR: No matching distribution found for tsfm-public>=0.1.0\n",
+    "duration_seconds": 29.32
+  },
+  "sandbox_duration_seconds": 4.858,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.188,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 88768512
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.8,
+    "peak_memory_bytes": 49741824
+  },
+  "finished_at": "2026-10-24T21:53:22+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
