@@ -136,3 +136,17 @@ def test_the_document_without_a_pass_says_none_and_without_results_it_says_nothi
     assert "None of them has been run" in candidates_build.render_doc(*args)
     with_runs = candidates_build.render_doc(*args, run_results=_runs("passed") | {"results": _runs("passed")["results"] * 14})
     assert "# Candidate papers\n" in with_runs and "## Run results" in with_runs and "None of them has been run" not in with_runs
+
+
+def test_the_cause_of_a_failure_comes_from_the_classifier_rules_on_the_deciding_line():
+    base = {"passed": False, "log_line": ""}
+    assert candidates_build.failure_cause({**base, "category": "command_incomplete"}) == "COMMAND_INCOMPLETE"
+    assert candidates_build.failure_cause({**base, "category": "install"}).startswith("MISSING_DEPENDENCY")
+    cases = {"ModuleNotFoundError: No module named 'x'": "MISSING_DEPENDENCY",
+             "OSError: [Errno 30] Read-only file system: 'out'": "WRITE_TO_READ_ONLY_REPOSITORY",
+             "FileNotFoundError: [Errno 2] No such file or directory: 'a/b.png'": "MISSING_FILE",
+             "FileNotFoundError: [Errno 2] No such file or directory: '/x/data/y.npy'": "DATA_NOT_ACCESSIBLE"}
+    for line, cause in cases.items():
+        assert candidates_build.failure_cause({**base, "category": "run", "log_line": line}) == cause
+    text = "\n".join(candidates_build.render_run_results(_runs("run", "install")))
+    assert "### Cause of the failures by the rules of the failure classifier" in text

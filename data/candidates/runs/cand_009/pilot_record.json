@@ -1,0 +1,85 @@
+{
+  "paper_id": "cand_009",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "9066f413885d31f13653a6c5a10665736cf245a8",
+  "started_at": "2026-10-24T17:11:47+00:00",
+  "repo_url": "https://github.com/LamNgo1/moca-hesp",
+  "pinned_commit": "02218185831122cfa70256197cec883172be5a37",
+  "target_script": "test-mocahesp.py",
+  "container_command": "python /workspace/repo/test-mocahesp.py --solver bo -f ackley20c -n 400 --seed 1",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 1800
+  },
+  "pilot4": {
+    "run_command": "python test-mocahesp.py --solver bo -f ackley20c -n 400 --seed 1",
+    "readme_url": null,
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 1800,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "02218185831122cfa70256197cec883172be5a37",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.111
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\cand_009_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 0.888,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.669,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 23183360
+  },
+  "finished_at": "2026-10-24T17:11:49+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

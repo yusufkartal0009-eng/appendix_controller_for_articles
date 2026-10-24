@@ -34,6 +34,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from scripts.verify_corpus import CROSSREF_API, GITHUB_API, UrlHttp, _extract_page_title
+from src.diagnosis.classifier import classify_exception
 
 INPUT_PATH = project_root / "data" / "candidates" / "input.json"
 PAPERS_PATH = project_root / "data" / "candidates" / "papers.json"
@@ -144,6 +145,16 @@ def _cell(text: Any) -> str:
     return str(text).replace("|", "/").replace("`", "'").replace("\n", " ")
 
 
+def failure_cause(result: dict[str, Any]) -> str:
+    """The cause of a failed run by the rules of the failure classifier (`src/diagnosis/classifier.py`) on the deciding line."""
+    if result["category"] == "command_incomplete":
+        return "COMMAND_INCOMPLETE"
+    if result["category"] == "install":
+        return "MISSING_DEPENDENCY (the installation failed)"
+    category, other_name = classify_exception(result["log_line"])
+    return other_name or category
+
+
 def render_run_results(document: dict[str, Any]) -> list[str]:
     """The `Run results` section from data/candidates/runs/evaluation.json (docs/CANDIDATE_RUNS.md), all numbers computed."""
     results = document["results"]
@@ -177,6 +188,15 @@ def render_run_results(document: dict[str, Any]) -> list[str]:
             categories.setdefault(r["category"] or "none", []).append(r["paper_id"])
     for category in sorted(categories, key=lambda c: (-len(categories[c]), c)):
         lines.append(f"| {category} | {len(categories[category])} | {', '.join(categories[category])} |")
+    causes: dict[str, list[str]] = {}
+    for r in results:
+        if not r["passed"]:
+            causes.setdefault(failure_cause(r), []).append(r["paper_id"])
+    lines += ["", "### Cause of the failures by the rules of the failure classifier", "",
+              "The deciding log line of each failed run classified by `classify_exception` (the rules of `cli.py diagnose`); no model.", "",
+              "| Cause | Candidates | Ids |", "|---|---|---|"]
+    for cause in sorted(causes, key=lambda c: (-len(causes[c]), c)):
+        lines.append(f"| {cause} | {len(causes[cause])} | {', '.join(causes[cause])} |")
     lines += ["", "### Every run", "",
               "| Id | Repository | Install | Run | Exit | Seconds | Outcome | Deciding log line |", "|---|---|---|---|---|---|---|---|"]
     for r in results:

@@ -1,0 +1,35 @@
+########## argument sheet ########################################
+#       data_dir  :  ~/data 
+#      split_dir  :  ./splits 
+#          min_f  :  5 
+#          max_f  :  10 
+#         min_ft  :  5 
+#         max_ft  :  10 
+#        q_shots  :  20 
+#        s_shots  :  20 
+#       t_length  :  100 
+#    tmax_length  :  100 
+# normalize_data  :  True 
+#    better_norm  :  True 
+#      grad_clip  :  0.0 
+#            key  :   
+#           dims  :  [32,32,32] 
+#      dims_pred  :  [32,32,32] 
+#       hetmodel  :  time 
+#      batchnorm  :  False 
+#          block  :  gru,conv,conv,gru 
+#   control_mode  :  True 
+#  control_steps  :  80 
+#             lr  :  0.001 
+#          split  :  0 
+#     num_epochs  :  15000 
+# early_stopping  :  True 
+#       patience  :  1500 
+#   best_weights  :  True 
+#           name  :  2026-10-24_17:19:44.700017 
+#        res_dir  :  ./results/ 
+#   save_weights  :  True 
+##################################################################
+split:  0 5 5
+Working on SPLIT: 0
+Loading data ...

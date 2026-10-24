@@ -1,0 +1,575 @@
+{
+  "paper_id": "cand_005",
+  "source": "https://github.com/charmlab/recourse",
+  "commit_hash": "130d72a5b51bc14b5e0a66e99d471a5145f7de7f",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.475,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\cand_005",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.164,
+    "timeout_limit_seconds": 1800,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 12382208,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "absl-py==0.9.0",
+      "name": "absl-py",
+      "requested": "==0.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "appnope==0.1.0",
+      "name": "appnope",
+      "requested": "==0.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "attrdict==2.0.1",
+      "name": "attrdict",
+      "requested": "==2.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "autograd==1.3",
+      "name": "autograd",
+      "requested": "==1.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "backcall==0.1.0",
+      "name": "backcall",
+      "requested": "==0.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cachetools==4.1.0",
+      "name": "cachetools",
+      "requested": "==4.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "causalgraphicalmodels==0.0.4",
+      "name": "causalgraphicalmodels",
+      "requested": "==0.0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2020.4.5.1",
+      "name": "certifi",
+      "requested": "==2020.4.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "chardet==3.0.4",
+      "name": "chardet",
+      "requested": "==3.0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cvxopt==1.2.5",
+      "name": "cvxopt",
+      "requested": "==1.2.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cycler==0.10.0",
+      "name": "cycler",
+      "requested": "==0.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "decorator==4.4.2",
+      "name": "decorator",
+      "requested": "==4.4.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "future==0.18.2",
+      "name": "future",
+      "requested": "==0.18.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-auth==1.14.3",
+      "name": "google-auth",
+      "requested": "==1.14.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-auth-oauthlib==0.4.1",
+      "name": "google-auth-oauthlib",
+      "requested": "==0.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "GPy==1.9.9",
+      "name": "GPy",
+      "requested": "==1.9.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "graphviz==0.14",
+      "name": "graphviz",
+      "requested": "==0.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "grpcio==1.29.0",
+      "name": "grpcio",
+      "requested": "==1.29.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==2.9",
+      "name": "idna",
+      "requested": "==2.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib-metadata==1.6.0",
+      "name": "importlib-metadata",
+      "requested": "==1.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipython==7.13.0",
+      "name": "ipython",
+      "requested": "==7.13.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipython-genutils==0.2.0",
+      "name": "ipython-genutils",
+      "requested": "==0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jedi==0.16.0",
+      "name": "jedi",
+      "requested": "==0.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==0.14.1",
+      "name": "joblib",
+      "requested": "==0.14.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "kiwisolver==1.1.0",
+      "name": "kiwisolver",
+      "requested": "==1.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Markdown==3.2.2",
+      "name": "Markdown",
+      "requested": "==3.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.2.1",
+      "name": "matplotlib",
+      "requested": "==3.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==2.4",
+      "name": "networkx",
+      "requested": "==2.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.18.2",
+      "name": "numpy",
+      "requested": "==1.18.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "oauthlib==3.1.0",
+      "name": "oauthlib",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.0.3",
+      "name": "pandas",
+      "requested": "==1.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "paramz==0.9.5",
+      "name": "paramz",
+      "requested": "==0.9.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "parso==0.6.2",
+      "name": "parso",
+      "requested": "==0.6.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pexpect==4.8.0",
+      "name": "pexpect",
+      "requested": "==4.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pickleshare==0.7.5",
+      "name": "pickleshare",
+      "requested": "==0.7.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==7.1.2",
+      "name": "Pillow",
+      "requested": "==7.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pip==20.3.3",
+      "name": "pip",
+      "requested": "==20.3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "prompt-toolkit==3.0.5",
+      "name": "prompt-toolkit",
+      "requested": "==3.0.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==3.12.0",
+      "name": "protobuf",
+      "requested": "==3.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ptyprocess==0.6.0",
+      "name": "ptyprocess",
+      "requested": "==0.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyasn1==0.4.8",
+      "name": "pyasn1",
+      "requested": "==0.4.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyasn1-modules==0.2.8",
+      "name": "pyasn1-modules",
+      "requested": "==0.2.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pygments==2.6.1",
+      "name": "Pygments",
+      "requested": "==2.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==2.4.6",
+      "name": "pyparsing",
+      "requested": "==2.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.8.1",
+      "name": "python-dateutil",
+      "requested": "==2.8.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2019.3",
+      "name": "pytz",
+      "requested": "==2019.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.23.0",
+      "name": "requests",
+      "requested": "==2.23.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-oauthlib==1.3.0",
+      "name": "requests-oauthlib",
+      "requested": "==1.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rsa==4.0",
+      "name": "rsa",
+      "requested": "==4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==0.22.2.post1",
+      "name": "scikit-learn",
+      "requested": "==0.22.2.post1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.4.1",
+      "name": "scipy",
+      "requested": "==1.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.10.0",
+      "name": "seaborn",
+      "requested": "==0.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "setuptools==51.0.0",
+      "name": "setuptools",
+      "requested": "==51.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.14.0",
+      "name": "six",
+      "requested": "==1.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard==2.2.1",
+      "name": "tensorboard",
+      "requested": "==2.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard-plugin-wit==1.6.0.post3",
+      "name": "tensorboard-plugin-wit",
+      "requested": "==1.6.0.post3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.5.0",
+      "name": "torch",
+      "requested": "==1.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.6.0",
+      "name": "torchvision",
+      "requested": "==0.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.44.1",
+      "name": "tqdm",
+      "requested": "==4.44.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "traitlets==4.3.3",
+      "name": "traitlets",
+      "requested": "==4.3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==1.25.9",
+      "name": "urllib3",
+      "requested": "==1.25.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wcwidth==0.1.9",
+      "name": "wcwidth",
+      "requested": "==0.1.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Werkzeug==1.0.1",
+      "name": "Werkzeug",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wheel==0.36.2",
+      "name": "wheel",
+      "requested": "==0.36.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zipp==3.1.0",
+      "name": "zipp",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 1800s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py --scm_class sanity-3-lin --classifier_class lr --lambda_lcb 2. --optimization_approach grad_descent --grad_descent_epochs 1000 --batch_number 0 --sample_count 100\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.164s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 3, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

@@ -1,0 +1,95 @@
+{
+  "paper_id": "cand_002",
+  "source": "https://github.com/cbg-ethz/BnpC",
+  "commit_hash": "edb1ddb1beb1bf977d44aede4c50e6bf985e06a8",
+  "target_script": "run_BnpC.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.8,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\cand_002",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.454,
+    "timeout_limit_seconds": 1800,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 22089728,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "Bottleneck==1.3.5",
+      "name": "Bottleneck",
+      "requested": "==1.3.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.5.0",
+      "name": "pandas",
+      "requested": "==1.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.5.0",
+      "name": "scikit-learn",
+      "requested": "==1.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.10.1",
+      "name": "scipy",
+      "requested": "==1.10.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.12.0",
+      "name": "seaborn",
+      "requested": "==0.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 1800s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/run_BnpC.py example_data/data.csv -o /workspace/output\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.454s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/libs/MCMC.py\", line 12, in <module>\n    import libs.utils as ut\n  File \"/workspace/repo/libs/utils.py\", line 6, in <module>\n    import bottleneck as bn\nModuleNotFoundError: No module named 'bottleneck'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/workspace/repo/run_BnpC.py\", line 6, in <module>\n    from libs.MCMC import MCMC as MCMC\n  File \"/workspace/repo/libs/MCMC.py\", line 17, in <module>\n    import utils as ut\n  File \"/workspace/repo/libs/utils.py\", line 6, in <module>\n    import bottleneck as bn\nModuleNotFoundError: No module named 'bottleneck'\n"
+}

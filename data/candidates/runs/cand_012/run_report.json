@@ -1,0 +1,95 @@
+{
+  "paper_id": "cand_012",
+  "source": "https://github.com/edgarschnfld/CADA-VAE-PyTorch",
+  "commit_hash": "26f0085fe5e5911dc06fe767f90965c47885dee1",
+  "target_script": "model/single_experiment.py",
+  "command": null,
+  "working_dir": "model",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.489,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\cand_012",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.172,
+    "timeout_limit_seconds": 1800,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 8753152,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch==0.4.1",
+      "name": "torch",
+      "requested": "==0.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.14.3",
+      "name": "numpy",
+      "requested": "==1.14.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.1.0",
+      "name": "scipy",
+      "requested": "==1.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit_learn==0.20.3",
+      "name": "scikit_learn",
+      "requested": "==0.20.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==1.11",
+      "name": "networkx",
+      "requested": "==1.11",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo/model\nTimeout Limit : 1800s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/model/single_experiment.py --dataset CUB --num_shots 0 --generalized True\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.172s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/model/single_experiment.py\", line 4, in <module>\n    from vaemodel import Model\n  File \"/workspace/repo/model/vaemodel.py\", line 3, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

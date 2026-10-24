@@ -1,0 +1,110 @@
+{
+  "paper_id": "cand_007",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "9066f413885d31f13653a6c5a10665736cf245a8",
+  "started_at": "2026-10-24T16:57:55+00:00",
+  "repo_url": "https://github.com/PeterHUistyping/ml-cpu-sched",
+  "pinned_commit": "c33fbd418d1faad01c77ca70f765d0c5537dc9da",
+  "target_script": "src/sim/simulator.py",
+  "container_command": "sh -c export PYTHONPATH=\"$(pwd)/src:$PYTHONPATH\"; python src/sim/simulator.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 1800
+  },
+  "pilot4": {
+    "run_command": "export PYTHONPATH=\"$(pwd)/src:$PYTHONPATH\"; python src/sim/simulator.py",
+    "readme_url": null,
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 1800,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "c33fbd418d1faad01c77ca70f765d0c5537dc9da",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.604
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": [
+      "sh",
+      "-c",
+      "export PYTHONPATH=\"$(pwd)/src:$PYTHONPATH\"; python src/sim/simulator.py"
+    ],
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 68,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\cand_007_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "Saved ./cand_007_packages/typing_inspect-0.9.0-py3-none-any.whl\nSaved ./cand_007_packages/mypy_extensions-1.1.0-py3-none-any.whl\nSaved ./cand_007_packages/tzdata-2026.5-py2.py3-none-any.whl\nSuccessfully downloaded matplotlib numpy simpy hydra-core omegaconf optuna optuna-integration optuna-dashboard botorch alembic bottle contourpy cycler fonttools gpytorch mpmath kiwisolver linear_operator packaging pillow pyparsing python-dateutil scipy six sqlalchemy torch cuda-toolkit nvidia-cudnn-cu13 nvidia-cusparselt-cu13 nvidia-nccl-cu13 nvidia-nvshmem-cu13 cuda-bindings nvidia-cublas nvidia-cuda-cupti nvidia-cuda-nvrtc nvidia-cuda-runtime nvidia-cufft nvidia-cufile nvidia-curand nvidia-cusolver nvidia-cusparse nvidia-nvjitlink nvidia-nvtx triton cuda-pathfinder fsspec networkx setuptools sympy typing_extensions colorlog filelock jinja2 MarkupSafe Mako multipledispatch ninja pyre_extensions PyYAML scikit-learn joblib cloudpickle narwhals threadpoolctl tqdm typing-inspect mypy-extensions tzdata\n",
+    "stderr": "o use this version.\nWARNING: Ignoring version 2.0.6 of omegaconf since it has invalid metadata:\nRequested omegaconf<2.1,>=2.0.5 from https://files.pythonhosted.org/packages/d0/eb/9d63ce09dd8aa85767c65668d5414958ea29648a0eec80a4a7d311ec2684/omegaconf-2.0.6-py3-none-any.whl (from hydra-core->-r /staging/cand_007/requirements.txt (line 4)) has invalid metadata: .* suffix can only be used with `==` or `!=` operators\n    PyYAML (>=5.1.*)\n            ~~~~~~^\nPlease use pip<24.1 if you need to use this version.\nWARNING: Ignoring version 2.0.5 of omegaconf since it has invalid metadata:\nRequested omegaconf<2.1,>=2.0.5 from https://files.pythonhosted.org/packages/e5/f6/043b6d255dd6fbf2025110cea35b87f4c5100a181681d8eab496269f0d5b/omegaconf-2.0.5-py3-none-any.whl (from hydra-core->-r /staging/cand_007/requirements.txt (line 4)) has invalid metadata: .* suffix can only be used with `==` or `!=` operators\n    PyYAML (>=5.1.*)\n            ~~~~~~^\nPlease use pip<24.1 if you need to use this version.\n",
+    "duration_seconds": 65.062
+  },
+  "sandbox_duration_seconds": 738.84,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.611,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 62517248
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 733.772,
+    "peak_memory_bytes": 139714560
+  },
+  "finished_at": "2026-10-24T17:11:21+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
