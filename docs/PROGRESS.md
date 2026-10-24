@@ -41,6 +41,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): script of the automatic search of round 3 with the K2 match test (2026-10-25 00:40 +03:00, Issue #471)
+- `scripts/auto_search3.py` (`pool`, `run`, `report`) and `tests/test_auto_search3.py` (84 cases): the two-stage pool without the repositories of earlier rounds; S1 to S6 and K1 from `scripts/demo_set.py`; K2 (meaningful numbers of `stdout.log`, same-spelling match on the PDF pages, at least 2 different numbers and one on a `Table <n>` page); arXiv requests at most once in 3 seconds; static checks of the next candidates run in a thread while the sandbox is busy; cleanup of the staging, wheel and sandbox output folders of a candidate after its run; the stop conditions of `docs/AUTO_SEARCH_ROUND3.md` section 6; a second start skips candidates that have a result. No run was made.
+- Evidence: ruff clean; 1,123 passed, 9 skipped.
+- Not verified: the script against the real GitHub search, a real PDF and a real sandbox run (the first real use is the search itself).
+
 ### docs(corpus): protocol of the automatic search of round 3, written before any pool was searched (2026-10-25 00:05 +03:00, Issue #469)
 - `docs/AUTO_SEARCH_ROUND3.md`: GitHub pool by topic (two stages) in SHA-256 order, static rules S1 to S6 as in `docs/DEMO_SET.md`, run test K1 (install limit 1200 s, run limit 600 s), the new match test K2 (at least 2 different meaningful numbers of the run output found in the paper's text, one of them on a page with a `Table <n>` line), stop conditions (9 hours, 150 runs, 8 passing both, free disk under 30 GB), reporting with Wilson intervals. Written without looking at any candidate list. A K2 pass is a match candidate, never verified; the list is selected and not a success rate.
 - Evidence: documentation only; no run, no pool, no candidate.
