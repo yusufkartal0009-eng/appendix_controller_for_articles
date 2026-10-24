@@ -39,6 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(corpus): a printed number is looked up as a whole number in the paper's text (2026-10-24 20:35 +03:00, Issue #447)
+- Found by the bug hunt: `scripts/demo_set.py` (`locate_numbers`) looked a printed number up with a plain substring search, so `1.5` matched inside `21.55`, `10.5`, `1.52` or a version `1.5.2`. Proven first (`tests/test_demo_set.py`, written before the fix; it failed on the old code). New `pages_with_number`: the number must not be part of a longer number. For `demo_020` (arXiv 2511.16760) the number `1.5` is on PDF pages 23, 39 and 40 with the new rule, not on page 41 (checked against the downloaded PDF). The generated block of `docs/DEMO_SET.md` 7.3 was not regenerated and carries a dated correction note; the run records of the demo set are untouched.
+
 ### fix(scoring): a metric is a time metric by the words of its name, not by letters inside other words (2026-10-24 20:33 +03:00, Issue #447)
 - Found by the bug hunt: `Tier2MetricsEvaluator` took any metric whose name contains the letters `ms` or `sec` as a time metric, so `rmse`, `num_params` and `n_items` were judged by the relative rule only and lost the absolute allowance that any other metric between 0 and 1 gets. Proven first: with claimed 0.5 and reproduced 0.54, `accuracy` is MATCHED and `rmse` is PARTIAL. New `is_time_metric` (long words anywhere in the name; `sec`, `secs`, `ms`, `msec` only as a whole part of the name); `tests/test_time_metric_names.py` (22 cases, written first). No stored real score changes (no accepted claim is named like these metrics). The tolerance probe was regenerated: for `paper_003` (`rmse` 0.473) the status now leaves Verified at -20 % / +20 % instead of -5 % / +10 % (the numbers of the earlier #442 entry for `paper_003` are superseded); `paper_006` and `paper_102` are unchanged.
 
