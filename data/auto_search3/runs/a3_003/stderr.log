@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/repo/run_relay.py", line 1, in <module>
+    from utils_env import shuffle_context, load_sample, get_initial_context, run_single_edit, load_distractor_context, merge_distractor
+  File "/workspace/repo/utils_env.py", line 12, in <module>
+    from domains import get_domain
+  File "/workspace/repo/domains/__init__.py", line 3, in <module>
+    from .domain_base import DomainBase
+  File "/workspace/repo/domains/domain_base.py", line 2, in <module>
+    from model_openai import generate
+  File "/workspace/repo/model_openai.py", line 8, in <module>
+    from openai import OpenAI, AzureOpenAI
+ModuleNotFoundError: No module named 'openai'

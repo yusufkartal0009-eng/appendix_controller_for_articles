@@ -1,0 +1,51 @@
+{
+  "paper_id": "a3_007",
+  "source": "https://github.com/ahmedanees-m/bio-firewall",
+  "commit_hash": "3eb72b5dc3728205f9e180432e036ef958db0d78",
+  "target_script": "examples/demo.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.819,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_007",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.494,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 16216064,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/examples/demo.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : SKIPPED\nDuration      : 0.494s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/examples/demo.py\", line 2, in <module>\n    from bio_firewall import screen\n  File \"/workspace/repo/bio_firewall/__init__.py\", line 13, in <module>\n    from bio_firewall.intercept.spine import screen          # noqa: F401  the public entry point\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/bio_firewall/intercept/__init__.py\", line 2, in <module>\n    from bio_firewall.intercept.spine import screen          # noqa: F401\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/bio_firewall/intercept/spine.py\", line 10, in <module>\n    from bio_firewall.calibrate import calibrate\n  File \"/workspace/repo/bio_firewall/calibrate/__init__.py\", line 2, in <module>\n    from bio_firewall.calibrate.confidence import calibrate          # noqa: F401\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/bio_firewall/calibrate/confidence.py\", line 10, in <module>\n    from bio_firewall.hazard.finding import SEVERITY\n  File \"/workspace/repo/bio_firewall/hazard/__init__.py\", line 6, in <module>\n    from bio_firewall.hazard.edit_type import screen_edit\n  File \"/workspace/repo/bio_firewall/hazard/edit_type.py\", line 6, in <module>\n    from bio_firewall.data import is_oncogenic_fusion\n  File \"/workspace/repo/bio_firewall/data.py\", line 9, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'\n"
+}

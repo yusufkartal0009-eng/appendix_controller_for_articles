@@ -41,6 +41,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): automatic search of round 3, runs a3_001 to a3_014 (2026-10-25 00:42 +03:00, Issue #473)
+- 14 new runs from `data/auto_search3/` (snapshot of the search that started 2026-10-24T20:59:14+00:00; 442 candidates checked in all so far, 14 run, K1 passed 0, K2 passed 0, both 0). Outcomes of this batch: install 4, run 10. K2 passed in this batch: none.
+- Protocol: `docs/AUTO_SEARCH_ROUND3.md`. Selected, non-representative list, not a success rate; a K2 pass is a match candidate, not a verified result. Local paths replaced by `<REPO>` and `<HOME>`.
+- Evidence: ruff and pytest below in the pull request.
+- Not verified: that any matched number means the same thing as the paper's number.
+
 ### feat(corpus): script of the automatic search of round 3 with the K2 match test (2026-10-25 00:40 +03:00, Issue #471)
 - `scripts/auto_search3.py` (`pool`, `run`, `report`) and `tests/test_auto_search3.py` (84 cases): the two-stage pool without the repositories of earlier rounds; S1 to S6 and K1 from `scripts/demo_set.py`; K2 (meaningful numbers of `stdout.log`, same-spelling match on the PDF pages, at least 2 different numbers and one on a `Table <n>` page); arXiv requests at most once in 3 seconds; static checks of the next candidates run in a thread while the sandbox is busy; cleanup of the staging, wheel and sandbox output folders of a candidate after its run; the stop conditions of `docs/AUTO_SEARCH_ROUND3.md` section 6; a second start skips candidates that have a result. No run was made.
 - Evidence: ruff clean; 1,123 passed, 9 skipped.

@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_010",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "OSError: [Errno 30] Read-only file system: '/workspace/repo/results/dimension_scaling.csv'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.194,
+    "metric_lines": []
+  },
+  "k2": null
+}
