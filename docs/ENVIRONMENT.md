@@ -86,6 +86,25 @@ cat sandbox_runs/smoke/execution_meta.json
 `dependency_install_status` is `INSTALLED` or `FAILED` when the runner installed offline wheels in its
 separate install phase (see `docs/SANDBOX_GUIDE.md`); a `FAILED` install does not stop the run.
 
+### Rebuild from scratch: time and size (2026-10-24, #435)
+
+All six images of the README section "Build the Sandbox Image" were built with `docker build --no-cache` (Docker Desktop 29.8.2, Windows 11, 12 CPUs
+visible to Docker, one build after the other). The build log of `latest` shows the layers of `python:3.11-slim` being downloaded, so its time includes that download; the logs of the other five builds show no download, because their base layers were already on the machine.
+The time is the wall-clock time of one `docker build` command, measured with `date +%s` before and after it. The size is the `SIZE` column of
+`docker images` at the end of the session. One build per image; the times are one measurement each, not an average, and they depend on the speed of the
+network and of the package mirrors at that hour. Every build exited with code 0.
+
+| Image | Command (after `docker build --no-cache -f docker/Dockerfile.sandbox`) | Exit code | Time (s) | Size |
+|---|---|---|---|---|
+| `repro-radar-sandbox:latest` | `-t repro-radar-sandbox:latest .` | 0 | 55 | 712 MB |
+| `repro-radar-sandbox:build` | `--target build -t repro-radar-sandbox:build .` | 0 | 85 | 1.14 GB |
+| `repro-radar-sandbox:py3.8` | `--build-arg PYTHON_VERSION=3.8 -t repro-radar-sandbox:py3.8 .` | 0 | 43 | 629 MB |
+| `repro-radar-sandbox:py3.8-build` | `--build-arg PYTHON_VERSION=3.8 --target build -t repro-radar-sandbox:py3.8-build .` | 0 | 70 | 1.07 GB |
+| `repro-radar-sandbox:py3.9` | `--build-arg PYTHON_VERSION=3.9 -t repro-radar-sandbox:py3.9 .` | 0 | 58 | 680 MB |
+| `repro-radar-sandbox:py3.9-build` | `--build-arg PYTHON_VERSION=3.9 --target build -t repro-radar-sandbox:py3.9-build .` | 0 | 90 | 1.15 GB |
+
+Total: 401 s (6 min 41 s) for the six builds. Not verified: the time of a build on a machine that has none of the base images (the pull of `python:3.8-slim` and `python:3.9-slim` is then added to their times), and the time on Linux or macOS.
+
 ### Local GPU (opt-in, #169)
 
 A run gets the local NVIDIA GPU only when `SandboxConfig.gpus` is set (`"all"`, a count, or `"device=0[,1]"`). It
