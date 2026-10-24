@@ -39,6 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: bug hunt, three proven bugs fixed, seven suspicions listed (2026-10-24 20:37 +03:00, Issue #447)
+- `docs/BUG_HUNT.md`: what was read, the three proven bugs with their pull requests (#448 time-metric names, #449 substring number match, #450 half-even score display; each with a test that failed on the old code first), and seven suspicions that could not be proven without a decision of the owner (the 0.05 absolute allowance for small values, the substring test of the quote guard, the `data` rule of the classifier, the dashboard's score and latest run of different runs, Tier 3 never fed by `cli.py score`, the README read at the head commit, the text pattern of the pass rule). Not every line of every file was traced.
+
 ### fix(cli): the printed score is the stored score (2026-10-24 20:36 +03:00, Issue #447)
 - Found by the bug hunt (seen in the demo output): `cli.py score` printed the tiers and the total with one decimal, which rounds half to even, so a stored 58.25 was printed as 58.2 (and 93.25 as 93.2, 91.75 as 91.8) while the summary line, the database and the dashboard say 58.25. Proven first (`tests/test_cli_score.py`, written before the fix; it failed on the old code). The breakdown now prints two decimals. The demo script's step 5 output was re-captured. No stored score changed.
 
