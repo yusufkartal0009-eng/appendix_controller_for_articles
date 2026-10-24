@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/workspace/repo/analysis/power_simulation.py", line 81, in <module>
+    main()
+  File "/workspace/repo/analysis/power_simulation.py", line 66, in main
+    result = simulate_power(
+             ^^^^^^^^^^^^^^^
+  File "/workspace/repo/analysis/power_simulation.py", line 51, in simulate_power
+    p_value = 1.0 if discordant == 0 else exact_two_sided_binom_p(min(b, c), discordant)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/analysis/power_simulation.py", line 14, in exact_two_sided_binom_p
+    probs = np.array([_binom_pmf(i, n, p) for i in range(n + 1)])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/analysis/power_simulation.py", line 14, in <listcomp>
+    probs = np.array([_binom_pmf(i, n, p) for i in range(n + 1)])
+                      ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/analysis/power_simulation.py", line 22, in _binom_pmf
+    return comb(n, k) * (p**k) * ((1 - p) ** (n - k))
+           ~~~~~~~~~~~^~~~~~~~
+OverflowError: int too large to convert to float

@@ -1,0 +1,2 @@
+Training on: CartPole-v0, Device: cpu, Seed: 0
+Episode: 316, Step: 5000, Reward mean: 179.80, Reward std: 23.17, Loss: 4.5358, Eps: 0.455

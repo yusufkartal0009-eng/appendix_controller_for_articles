@@ -1,0 +1,2 @@
+Could not reach SkillHub at https://skillhub.evermind.ai: <urlopen error [Errno -3] Temporary failure in name resolution>
+Override with:  export SKILLHUB_URL=https://your-host

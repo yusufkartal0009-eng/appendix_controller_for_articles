@@ -1,0 +1,123 @@
+{
+  "paper_id": "a3_029",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "db6a14770f5587e39edfd7ca347a965408d34c18",
+  "started_at": "2026-10-24T22:39:16+00:00",
+  "repo_url": "https://github.com/IC3Net/IC3Net",
+  "pinned_commit": "69b7e0ce51a79def593abfef1a976f43e5e13f75",
+  "target_script": "main.py",
+  "container_command": "python /workspace/repo/main.py --env_name predator_prey --nagents 3 --nprocesses 16 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --ic3net --vision 0 --recurrent",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python main.py --env_name predator_prey --nagents 3 --nprocesses 16 --num_epochs 2000 --hid_size 128 --detach_gap 10 --lrate 0.001 --dim 5 --max_steps 20 --ic3net --vision 0 --recurrent",
+    "readme_url": "https://github.com/IC3Net/IC3Net/blob/69b7e0ce51a79def593abfef1a976f43e5e13f75/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "69b7e0ce51a79def593abfef1a976f43e5e13f75",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.039
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_029_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "numpy==1.13.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for numpy==1.13.3"
+      },
+      {
+        "requirement": "visdom==0.1.4",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for visdom==0.1.4"
+      },
+      {
+        "requirement": "torch==0.4.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torch==0.4.0"
+      },
+      {
+        "requirement": "Pillow==6.2.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for Pillow==6.2.0"
+      },
+      {
+        "requirement": "gym==0.9.6",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for gym==0.9.6"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "ERROR: Ignored the following yanked versions: 2.4.0\nERROR: Could not find a version that satisfies the requirement numpy==1.13.3 (from versions: 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.26.1, 1.26.2, 1.26.3, 1.26.4, 2.0.0, 2.0.1, 2.0.2, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.3.5, 2.4.0rc1, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.4.5, 2.4.6)\nERROR: No matching distribution found for numpy==1.13.3\n",
+    "duration_seconds": 6.761
+  },
+  "sandbox_duration_seconds": 0.955,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.747,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 59641856
+  },
+  "finished_at": "2026-10-24T22:39:25+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

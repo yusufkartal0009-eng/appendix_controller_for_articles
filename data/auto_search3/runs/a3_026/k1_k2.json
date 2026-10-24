@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_026",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "Override with:  export SKILLHUB_URL=https://your-host",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.707,
+    "metric_lines": []
+  },
+  "k2": null
+}

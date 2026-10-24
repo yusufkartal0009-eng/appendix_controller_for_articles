@@ -1,0 +1,3 @@
+Looking in links: /workspace/packages
+ERROR: Could not find a version that satisfies the requirement fire~=0.5.0 (from versions: none)
+ERROR: No matching distribution found for fire~=0.5.0

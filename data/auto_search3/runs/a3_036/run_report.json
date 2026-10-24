@@ -1,0 +1,151 @@
+{
+  "paper_id": "a3_036",
+  "source": "https://github.com/canturan10/satellighte",
+  "commit_hash": "3635fabdcb60789fc5e38fdda34d8d19315ca779",
+  "target_script": "training/eurosat_training.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.542,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_036",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.202,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 12177408,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "fire~=0.5.0",
+      "name": "fire",
+      "requested": "~=0.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "imageio~=2.30.0",
+      "name": "imageio",
+      "requested": "~=2.30.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy~=1.24.3",
+      "name": "numpy",
+      "requested": "~=1.24.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pytorch_lightning~=1.8.0",
+      "name": "pytorch_lightning",
+      "requested": "~=1.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "PyYAML~=6.0",
+      "name": "PyYAML",
+      "requested": "~=6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "rich~=13.3.5",
+      "name": "rich",
+      "requested": "~=13.3.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-learn~=1.2.2",
+      "name": "scikit-learn",
+      "requested": "~=1.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "setuptools==67.8.0",
+      "name": "setuptools",
+      "requested": "==67.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch~=1.13.1",
+      "name": "torch",
+      "requested": "~=1.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torchmetrics~=0.9.3",
+      "name": "torchmetrics",
+      "requested": "~=0.9.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torchvision~=0.14.1",
+      "name": "torchvision",
+      "requested": "~=0.14.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "uniplot~=0.10.0",
+      "name": "uniplot",
+      "requested": "~=0.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/training/eurosat_training.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.202s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/training/eurosat_training.py\", line 3, in <module>\n    import pytorch_lightning as pl\nModuleNotFoundError: No module named 'pytorch_lightning'\n"
+}

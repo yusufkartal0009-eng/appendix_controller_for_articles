@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_027",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "db6a14770f5587e39edfd7ca347a965408d34c18",
+  "started_at": "2026-10-24T22:16:12+00:00",
+  "repo_url": "https://github.com/KAVentures/clinical-evidence-sufficiency-llm",
+  "pinned_commit": "b5e5818aa704200f6491779157bde4f1eba2990e",
+  "target_script": "analysis/power_simulation.py",
+  "container_command": "python /workspace/repo/analysis/power_simulation.py --n-items 200 --n-models 4 --n-perturbations 4 --n-sims 200",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python analysis/power_simulation.py --n-items 200 --n-models 4 --n-perturbations 4 --n-sims 200",
+    "readme_url": "https://github.com/KAVentures/clinical-evidence-sufficiency-llm/blob/b5e5818aa704200f6491779157bde4f1eba2990e/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "b5e5818aa704200f6491779157bde4f1eba2990e",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 12.819
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 85,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_027_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "/tzdata-2026.5-py2.py3-none-any.whl\nSaved ./a3_027_packages/xxhash-4.0.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSuccessfully downloaded pandas numpy scipy statsmodels scikit-learn datasets dill fsspec huggingface-hub click hf-xet httpx2 httpcore2 multiprocess pydantic pydantic-core tqdm matplotlib seaborn openai anyio jiter typing-extensions anthropic docstring-parser opentelemetry-api sniffio google-genai distro google-auth httpx httpcore requests charset_normalizer idna tenacity urllib3 websockets python-dotenv pytest pluggy openpyxl aiohttp multidict yarl aiohappyeyeballs aiosignal annotated-types attrs certifi contourpy cryptography cffi cycler filelock fonttools formulaic frozenlist h11 iniconfig interface-meta joblib cloudpickle kiwisolver narwhals packaging patsy pillow propcache pyarrow pyasn1-modules pyasn1 pygments pyparsing python-dateutil pyyaml six threadpoolctl truststore typing-inspection wrapt et-xmlfile pycparser tzdata xxhash\n",
+    "stderr": "",
+    "duration_seconds": 26.343
+  },
+  "sandbox_duration_seconds": 711.303,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.747,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 108699648
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 705.998,
+    "peak_memory_bytes": 89387008
+  },
+  "finished_at": "2026-10-24T22:28:42+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

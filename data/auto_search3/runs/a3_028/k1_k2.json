@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_028",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "RuntimeError: [enforce fail at inline_container.cc:747] . open file failed with strerror: Read-only file system",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 36.139,
+    "metric_lines": []
+  },
+  "k2": null
+}

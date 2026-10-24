@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_032",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "db6a14770f5587e39edfd7ca347a965408d34c18",
+  "started_at": "2026-10-24T22:39:39+00:00",
+  "repo_url": "https://github.com/htmoges/Lite-STGNN",
+  "pinned_commit": "c952fb5064c500b658f14c90e12ad5a3b5d3b1e8",
+  "target_script": "src/lite_stgnn_modular.py",
+  "container_command": "python /workspace/repo/src/lite_stgnn_modular.py --dataset electricity --data-root ./data --seq-len 96 --pred-len 720 --epochs 50 --learning-rate 5e-4 --adj-rank 16 --adj-topk 10 --adj-tau 1.2 --use-input-residual --use-temporal-head --temporal-head-ratio 0.5 --residual-dropout 0.1 --gate-mode band --prop-orders 2",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python src/lite_stgnn_modular.py --dataset electricity --data-root ./data --seq-len 96 --pred-len 720 --epochs 50 --learning-rate 5e-4 --adj-rank 16 --adj-topk 10 --adj-tau 1.2 --use-input-residual --use-temporal-head --temporal-head-ratio 0.5 --residual-dropout 0.1 --gate-mode band --prop-orders 2",
+    "readme_url": "https://github.com/htmoges/Lite-STGNN/blob/c952fb5064c500b658f14c90e12ad5a3b5d3b1e8/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "c952fb5064c500b658f14c90e12ad5a3b5d3b1e8",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.203
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 55,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_032_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "ng_extensions-4.16.0-py3-none-any.whl\nSaved ./a3_032_packages/filelock-4.2.4-py3-none-any.whl\nSaved ./a3_032_packages/jinja2-3.1.6-py3-none-any.whl\nSaved ./a3_032_packages/markupsafe-3.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a3_032_packages/tzdata-2026.5-py2.py3-none-any.whl\nSuccessfully downloaded torch cuda-toolkit nvidia-cudnn-cu13 nvidia-cusparselt-cu13 nvidia-nccl-cu13 nvidia-nvshmem-cu13 cuda-bindings nvidia-cublas nvidia-cuda-cupti nvidia-cuda-nvrtc nvidia-cuda-runtime nvidia-cufft nvidia-cufile nvidia-curand nvidia-cusolver nvidia-cusparse nvidia-nvjitlink nvidia-nvtx triton pytorch-lightning numpy pandas scikit-learn pyyaml cuda-pathfinder fsspec aiohttp multidict yarl aiohappyeyeballs aiosignal attrs frozenlist idna joblib cloudpickle lightning-utilities narwhals networkx packaging propcache python-dateutil scipy setuptools six sympy mpmath threadpoolctl torchmetrics tqdm typing-extensions filelock jinja2 MarkupSafe tzdata\n",
+    "stderr": "",
+    "duration_seconds": 51.603
+  },
+  "sandbox_duration_seconds": 753.25,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 40.904,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 943894528
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 710.816,
+    "peak_memory_bytes": 139665408
+  },
+  "finished_at": "2026-10-24T22:53:05+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

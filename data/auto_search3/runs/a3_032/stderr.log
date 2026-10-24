@@ -1,0 +1,31 @@
+Seed set to 42
+Traceback (most recent call last):
+  File "/workspace/repo/src/lite_stgnn_modular.py", line 93, in <module>
+    main()
+  File "/workspace/repo/src/lite_stgnn_modular.py", line 25, in main
+    train_loader, val_loader, test_loader, (train_ds, val_ds, test_ds) = create_dataloaders(
+                                                                         ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/src/datasets.py", line 352, in create_dataloaders
+    train_dataset = dataset_class(data_root, flag='train', seq_len=seq_len, pred_len=pred_len)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/src/datasets.py", line 39, in __init__
+    self.__read_data__()
+  File "/workspace/repo/src/datasets.py", line 44, in __read_data__
+    df_raw = pd.read_csv(os.path.join(self.root_path, 'electricity.csv'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 1866, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 423, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 2721, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/parsers/readers.py", line 2988, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/common.py", line 948, in get_handle
+    handle = open(handle, ioargs.mode)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './data/electricity.csv'
