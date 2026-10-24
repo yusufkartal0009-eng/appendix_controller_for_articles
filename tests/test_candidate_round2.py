@@ -98,8 +98,11 @@ def test_the_filtered_stager_keeps_only_the_named_files_and_refuses_unknown_ones
     from types import SimpleNamespace
 
     manifest = SimpleNamespace(requirements_files=["a.txt", "b.txt"])
-    staged = SimpleNamespace(manifest=manifest)
+    staged = SimpleNamespace(manifest=manifest, staged_path=tmp_path)
+    (tmp_path / "a.txt").write_text("x")
+    (tmp_path / "b.txt").write_text("y")
     monkeypatch.setattr(r2.RepoStager, "stage_repository", lambda self, *a, **k: staged)
     assert r2.FilteredStager(staging_root=tmp_path, requirements_files=["b.txt"]).stage_repository("p", "s").manifest.requirements_files == ["b.txt"]
+    assert not (tmp_path / "a.txt").exists() and (tmp_path / "b.txt").exists()
     with pytest.raises(ValueError, match="not found"):
         r2.FilteredStager(staging_root=tmp_path, requirements_files=["c.txt"]).stage_repository("p", "s")

@@ -1,0 +1,75 @@
+{
+  "paper_id": "cand_011",
+  "round": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements_file",
+          "reason": "README (Install Dependencies): pip install -r synthetic_exp_requirements.txt, for the synthetic experiment that the command runs. The repository has three requirement files that pin joblib 1.4.0 and 1.4.2, and installing them together is impossible.",
+          "log_line": "ERROR: Cannot install joblib==1.4.0 and joblib==1.4.2 because these package versions have conflicting dependencies.",
+          "change": "only synthetic_exp_requirements.txt is installed"
+        },
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "README (Environment Setup): conda create --name pate_env python=3.8; the 3.8 image is the version the README states.",
+          "log_line": "ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts",
+          "change": "python_version 3.8 (image)"
+        }
+      ],
+      "setup": {
+        "requirements_files": [
+          "synthetic_exp_requirements.txt"
+        ],
+        "python_version": "3.8"
+      },
+      "command": "python main_synthetic_data.py",
+      "working_dir": "experiments/Synthetic_Data_Experiments",
+      "started_at": "2026-10-24T20:26:50+00:00",
+      "finished_at": "2026-10-24T20:33:29+00:00",
+      "record": "attempt_1",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": false,
+        "category": "no_metric_line",
+        "log_line": "{'original_F1Score': 0.5, 'pa_precision': 0.67, 'pa_recall': 1.0, 'pa_f_score': 0.8, 'Rbased_precision': 0.6, 'Rbased_recall': 0.6, 'Rbased_f1score': 0.6, 'eTaPR_precision': 0.75, 'eTaPR_recall': 0.75, 'eTaPR_f1_score': 0.75, 'Affiliation precision': 0.97, 'Affiliation recall': 0.99, 'Affliation F1s",
+        "install_status": "INSTALLED",
+        "run_status": "COMPLETED",
+        "exit_code": 0,
+        "duration_seconds": 12.344,
+        "metric_lines": []
+      }
+    }
+  ],
+  "round1_error": {
+    "category": "install",
+    "log_line": "ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts"
+  },
+  "harness_faults": [
+    {
+      "record": "attempt_1_harness_fault",
+      "note": "The install phase of the container read all requirement files; the filter of the first implementation of the requirements_file kind only applied to the bundling (docs/CANDIDATE_RUNS_ROUND2.md section 11). Not counted as a repair.",
+      "log_line": "ERROR: No matching distribution found for absl-py==2.1.0",
+      "setup": {
+        "requirements_files": [
+          "synthetic_exp_requirements.txt"
+        ],
+        "python_version": "3.8"
+      }
+    }
+  ],
+  "stopped": {
+    "status": "no_metric_line",
+    "at_attempt": 1,
+    "log_line": "{'original_F1Score': 0.5, 'pa_precision': 0.67, 'pa_recall': 1.0, 'pa_f_score': 0.8, 'Rbased_precision': 0.6, 'Rbased_recall': 0.6, 'Rbased_f1score': 0.6, 'eTaPR_precision': 0.75, 'eTaPR_recall': 0.75, 'eTaPR_f1_score': 0.75, 'Affiliation precision': 0.97, 'Affiliation recall': 0.99, 'Affliation F1s",
+    "reason": "The repaired run completed (install INSTALLED, run COMPLETED, exit 0, 12.3 s) and printed a Python dict of numeric values ({'original_F1Score': 0.5, 'pa_precision': 0.67, ...}), but no line has the form 'name: number' or 'name = number' that the pass definition (round 1 section 5, round 2 section 5) requires, so by the protocol it did NOT pass. This is a limit of the text pattern, noted here and not applied after the result: the pattern is not changed, the command is not changed, and no second repair applies (nothing failed). The owner may judge the output by hand. Not verified: whether the printed values correspond to a table of the paper (PATE is a metric; the output compares metrics on one synthetic series)."
+  }
+}

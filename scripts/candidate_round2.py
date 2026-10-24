@@ -138,6 +138,11 @@ class FilteredStager(RepoStager):
         unknown = [n for n in self.requirements_files if n not in staged.manifest.requirements_files]
         if unknown:
             raise ValueError(f"requirement files not found in the repository: {unknown}")
+        # The entrypoint of the install phase installs every *requirements*.txt it finds in the repository folder, so the
+        # files that are not named are removed from the staged copy (never from the repository) for the install to skip them.
+        for name in staged.manifest.requirements_files:
+            if name not in self.requirements_files:
+                (staged.staged_path / name).unlink(missing_ok=True)
         staged.manifest.requirements_files = list(self.requirements_files)
         return staged
 

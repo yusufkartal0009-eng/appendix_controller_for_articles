@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): repair round, cand_011; requirements_file filter fixed (2026-10-25 00:10 +03:00, Issue #457)
+- cand_011 ran with the README's Python 3.8 and requirements file: install INSTALLED, run COMPLETED, exit 0, but the output is a dict of values with no 'name: number' line, so by the protocol it did not pass (recorded as `no_metric_line`, noted as a limit of the pattern). The first attempt was a harness fault (the install phase read all requirement files) and is kept as `attempt_1_harness_fault`, not counted; `FilteredStager` now removes the unnamed files from the staged copy (section 11 of the protocol).
+- Not verified: a table match for cand_011.
+
 ### feat(corpus): sixth repair kind of the repair round, requirements_file (2026-10-24 23:40 +03:00, Issue #457)
 - Section 10 of `docs/CANDIDATE_RUNS_ROUND2.md` (dated amendment, written before the run of cand_011) and `FilteredStager` in `scripts/candidate_round2.py`: only the requirement file the README names is installed, the files are not edited. Two tests. 1,039 tests pass, 9 skipped.
 
