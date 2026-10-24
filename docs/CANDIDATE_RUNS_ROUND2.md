@@ -168,3 +168,12 @@ for the command that is run. The amendment adds one kind to the table of section
 Everything else in this document, including the forbidden list, the limit of two repairs, and the 20 GB and 3 GB data limits,
 is unchanged. No round-2 run has been made under this kind before this section was merged, and the 12 candidates already
 closed were closed under the five kinds; none of them is re-opened by this kind (their reasons do not involve conflicting files).
+
+## 11. Clarification of 2026-10-24 to section 10
+
+The first implementation of `requirements_file` filtered only the host-side bundling; the install phase of the container installs
+every `*requirements*.txt` in the repository folder, so it still read the conflicting files (the first attempt of `cand_011` failed
+on `absl-py==2.1.0` of a file the README does not name). That attempt is a **fault of the harness, not a result of the candidate**:
+its record is kept as `attempt_1_harness_fault` and is not counted as a repair. The fix: the requirement files that are not named
+are removed from the **staged copy** (the clone made for the run, never the repository on GitHub) before the bundling, so that both
+phases see the same list. Nothing else in the staged copy is changed.

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/repo/experiments/Synthetic_Data_Experiments/main_synthetic_data.py", line 6, in <module>
+    from utils_Synthetic_exp import evaluate_all_metrics, synthetic_generator
+  File "/workspace/repo/experiments/Synthetic_Data_Experiments/utils_Synthetic_exp.py", line 21, in <module>
+    from metrics.AUC import * # Range AUC
+  File "/workspace/repo/metrics/AUC.py", line 5, in <module>
+    from metrics.evaluate_utils import find_length,range_convers_new
+  File "/workspace/repo/metrics/evaluate_utils.py", line 2, in <module>
+    from statsmodels.tsa.stattools import acf
+ModuleNotFoundError: No module named 'statsmodels'
