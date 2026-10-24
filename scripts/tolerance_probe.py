@@ -39,6 +39,9 @@ DEVIATION_PERCENTS = (0.0, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0)
 # (paper id, stored run folder relative to the repository root): completed runs of the repository, read only
 RUNS: tuple[tuple[str, str], ...] = (
     ("paper_003", "data/pilot3_runs/paper_003"),
+    ("paper_003", "data/memory_runs/paper_003"),
+    ("paper_003", "data/memory_runs/paper_003_run2"),
+    ("paper_003", "data/cpu_runs/paper_003"),
     ("paper_006", "data/pilot2_runs/paper_006"),
     ("paper_006", "data/pilot3_runs/paper_006"),
     ("paper_006", "data/cpu_runs/paper_006"),
