@@ -183,3 +183,17 @@ def test_the_results_section_counts_the_output_numbers_found_in_the_paper():
     text = ds.render_results(document, papers, {"demo_001": []}, {"demo_001": hits})
     assert "printed anywhere in `stdout.log`: 2; found in the paper's text by the same string match: 1." in text
     assert "| 0.6620 | 0.6620 (as printed) | 1 | Table 1 |" in text
+
+
+def test_a_printed_number_is_not_found_inside_a_longer_number_of_the_paper():
+    # 1.5 is not 21.55, 10.5 or 1.52, and 0.912 is not 0.9123; a version number such as 1.5.2 is not the number 1.5 either
+    pdf = FakePdf(["scores 21.55 and 10.5 and 1.52 and 0.9123", "release 1.5.2 of the code"])
+    for printed in ("acc: 1.5", "acc: 0.912"):
+        hit = ds.locate_numbers([printed], pdf)[0]
+        assert hit["pages"] == [] and hit["form"] is None, printed
+
+
+def test_a_printed_number_is_still_found_next_to_punctuation_and_signs():
+    pdf = FakePdf(["(1.5), -0.25; and 1.5.", "x = 3.14159"])
+    hits = ds.locate_numbers(["a: 1.5", "b: -0.25", "c: 3.14159"], pdf)
+    assert [h["pages"] for h in hits] == [[1], [1], [2]]

@@ -209,3 +209,8 @@ Notes (by hand, from the generated part):
 - The page text of the paper was read by `pypdf`; the table captions are the `Table <n>` lines at the start of a line, so a
   prose line that starts with "Table 5 reports" counts as a caption for rule S5 (the paper's own captions are in capitals).
 
+- **Correction of the page match (2026-10-24, #447).** The generated table in 7.3 was made when a printed number was looked up as a
+  plain substring of the page text, so `1.5` also matched inside longer numbers. With the corrected rule (the number must not be part
+  of a longer number or a version such as `1.5.2`; `scripts/demo_set.py`, `pages_with_number`) `1.5` of `demo_020` occurs on the PDF
+  pages 23, 39 and 40, not on page 41. The generated block above was **not** regenerated (the run records are kept as they are); the
+  counts of numbers with three or more decimals found in the paper (0 of 48) were not recomputed with the new rule.

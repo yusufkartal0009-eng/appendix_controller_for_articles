@@ -236,6 +236,13 @@ def table_captions_on(text: str) -> list[str]:
     return sorted({m.group(0) for m in re.finditer(r"^Table \d+", text, re.MULTILINE)}, key=lambda c: int(c.split()[1]))
 
 
+def pages_with_number(form: str, pdf: Any) -> list[int]:
+    """The PDF pages (1-based) that print `form` as a whole number: not inside a longer number (`1.5` is not in `21.55`,
+    `1.52` or the version `1.5.2`), but next to punctuation, a sign, or a bracket."""
+    pattern = re.compile(r"(?<![\d.])" + re.escape(form) + r"(?!\d|\.\d)")
+    return [number for number, text in enumerate(pdf.pages, start=1) if pattern.search(text)]
+
+
 def locate_numbers(lines: list[str], pdf: Any) -> list[dict[str, Any]]:
     """For each decimal number of the metric lines: the PDF pages of the paper that hold the same string, and the table
     captions on those pages. A string match only; that the number means the same thing is not checked."""
@@ -244,7 +251,7 @@ def locate_numbers(lines: list[str], pdf: Any) -> list[dict[str, Any]]:
         for raw in dict.fromkeys(re.findall(r"-?\d+\.\d+", line)):
             hit: dict[str, Any] = {"line": line, "number": raw, "pages": [], "form": None, "captions": []}
             for form, label in number_forms(raw):
-                pages = pdf.find(form)
+                pages = pages_with_number(form, pdf)
                 if pages:
                     hit.update(pages=pages, form=f"{form} ({label})",
                                captions=sorted({c for n in pages for c in table_captions_on(pdf.page(n))}))
