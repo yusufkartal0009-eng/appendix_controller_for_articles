@@ -87,7 +87,8 @@ def test_the_document_is_generated_from_the_data_files():
         json.loads((CANDIDATES / "papers.json").read_text(encoding="utf-8")), evaluation["candidates"],
         json.loads((CANDIDATES / "verify_corpus.json").read_text(encoding="utf-8")), evaluation["excluded_without_entry"],
         evaluation["retrieved_at"][:10],
-        json.loads(RUNS.read_text(encoding="utf-8")) if RUNS.is_file() else None)
+        json.loads(RUNS.read_text(encoding="utf-8")) if RUNS.is_file() else None,
+        candidates_build.render_round2_results(json.loads(RUNS.read_text(encoding="utf-8"))))
     committed = (DATA_DIR.parent / "docs" / "CANDIDATES.md").read_text(encoding="utf-8").replace("\r\n", "\n")
     assert text == committed
 

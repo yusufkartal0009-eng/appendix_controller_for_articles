@@ -72,16 +72,17 @@ decision. **Not verified** means a statement in the project that has no evidence
 - Which claim should the final report defend: a **rate** (how many papers install and run; with 12 papers the 95% interval is wide, 1 of 6 gives 3% to 56%) or the
   **correctness of the verdict** on papers with a known answer? This decides how many papers are enough.
 
-### D9. The candidate papers (new, 2026-10-24)
+### D9. The candidate papers (new, 2026-10-24; round 2 done 2026-10-25)
 - **State:** 29 candidates were collected (`docs/CANDIDATES.md`). The 14 that the lists call ready, fixable or two-step were run once each by a protocol
   written before the runs (`docs/CANDIDATE_RUNS.md`): **0 of 14 passed** (13 run, 1 not run because its listed command holds only placeholders), Wilson 95 %
   interval 0.0 % to 21.5 %. Causes: installation failed 6, a module missing 3, a write into the read-only repository 2, a data file 1, a file path 1, an
   incomplete command 1 (`data/candidates/runs/evaluation.json`). The 11 risky and 4 excluded were not run. None is in `data/seed_papers.json`.
-- **Decide:** (a) whether to write a second protocol, before any run, that allows a fixed list of repairs (a Python version, an extra requirement, a writable
+- **Round 2 (repair round, 2026-10-25, #455, #457, #464):** option (a) was done, as a separate labeled round by `docs/CANDIDATE_RUNS_ROUND2.md` (merged before the first run; two dated amendments, sections 10 and 11). First attempt 0 of 14; **with repair 1 of 14** (`cand_002`, Wilson 95 % interval 1.3 % to 31.5 %); of the 11 risky candidates one qualified (`cand_020`, then not repairable) (`docs/CANDIDATES.md`, Round 2 results). The pass printed numbers that occur in no table of its paper (`metric exists, no table match`), and a blind extraction of three passes found no value to propose; no claim is accepted. `cand_011` ran to exit 0 but printed a dict, so by the pattern it did not pass (the pattern misses such output; the rule was not bent after the result).
+- **Decide (still open):** (a, done) whether to write a second protocol, before any run, that allows a fixed list of repairs (a Python version, an extra requirement, a writable
   copy of the repository, a data file fetched beforehand) and run the 14 again as a separate, labeled round; (b) whether to run some of the 11 risky ones
   after their data is fetched by hand; (c) whether to stop adding papers and use the evidence that exists (D6, option C). Nothing moves into the seed corpus without
   a decision of the owner.
-- **Not done:** no PDF was fetched and no claim extraction was made for the candidates, because none passed.
+- **Not done:** no PDF of a candidate paper could be fetched (the one passing candidate's paper only as Europe PMC XML); whether the pass of `cand_002` is comparable with a table of its paper is not verified. New open items: (e) whether the pass pattern should also accept a printed dict of numbers (`cand_011`), decided for future runs only; (f) whether a source build of sdist-only pins (`cand_005`, `cand_020`) and an extra wheel index are allowed repairs in a further round.
 
 ### D10. Two rules of the scorer to confirm (new, from the bug hunt, `docs/BUG_HUNT.md` section 2)
 - **The absolute allowance of 0.05 for a value between 0 and 1** makes small values lenient (0.0167 matches a reproduced 0.06). Keep it, or use it only for
@@ -116,7 +117,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 
 ### W6. Open work after 2026-10-24 (no decision needed)
 - Fill the form of the demo paper (D3) and of gold set 2 (D2) when the owner has the time; both are outside the repository.
-- If D9 (a) is chosen: write the second protocol first, then run.
+- D9 (a) is done (round 2); the open items (e) and (f) of D9 need a decision before a third round.
 - The suspicions 2, 3, 4 and 6 of `docs/BUG_HUNT.md` are small and can be tested one by one once the intended rule is known.
 
 ## 3. Open issues and their state
@@ -149,7 +150,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
   failures of Pilots 1 and 2 and says nothing about new papers. No rate over 12 papers is claimed.
 - **Clean clone:** one paper (`paper_006`) completed a fresh run from a clean clone of the public repository (Update 2 of the walk-through); it used set CPU and time limits, so
   it is not a protocol run, and no accepted claim was reproduced. `paper_008` still cannot complete from a clean clone (a dataset downloaded by hand).
-- **Candidate papers:** 0 of the 14 selected candidates passed (D9); the list was chosen by others for being easy, so this is not a success rate and it does not say that the papers cannot be reproduced.
+- **Candidate papers:** 0 of the 14 selected candidates passed a first attempt and 1 of 14 after repair (D9); the list was chosen by others for being easy, so this is not a success rate and it does not say that the papers cannot be reproduced.
 - **Tolerance probe:** its claims are hand-made, not errors of real papers; the rates of false positives and false negatives of the scorer in the real world have not been measured.
 - **Tier 2 has still never compared an accepted claim with a result of a real run.**
 - **The diagnosis classifier:** its validation set (46 real and 12 synthetic runs) was labeled by hand but not blind; after the gaps were closed (PR #425) the
