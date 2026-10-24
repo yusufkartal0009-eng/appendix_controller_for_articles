@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_008",
+  "round": 2,
+  "round1_error": {
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for python>=3.9.6"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "ERROR: No matching distribution found for python>=3.9.6",
+    "reason": "The repository's only requirements file, requirements.txt, lists the line 'python>=3.9.6' (with numpy>=2.0, torch>=2.8.0, gpytorch>=1.13). 'python' is not a package that pip can install, so the install phase of the repository's own requirement file fails whatever is added to it. Extra requirements and constraints are added next to that file and cannot remove a line from it; removing the line is an edit of the repository, forbidden by section 3 of the protocol. No attempt was made. Not verified: that the README's own smoke test would then run (the README also mentions cvxpy, which the file does not list).",
+    "at_attempt": 0
+  }
+}

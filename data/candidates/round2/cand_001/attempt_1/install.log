@@ -1,0 +1,9 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/igraph-1.0.0-cp39-abi3-manylinux_2_28_x86_64.whl
+Processing /workspace/packages/numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+Processing /workspace/packages/python_igraph-1.0.0-py3-none-any.whl
+Processing /workspace/packages/scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+Processing /workspace/packages/texttable-1.7.2-py2.py3-none-any.whl
+Installing collected packages: texttable, scipy, python-igraph, numpy, igraph
+
+Successfully installed igraph-1.0.0 numpy-2.4.6 python-igraph-1.0.0 scipy-1.17.1 texttable-1.7.2

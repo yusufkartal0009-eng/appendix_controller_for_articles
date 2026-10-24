@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): repair round, first 11 candidates (cand_001 to cand_010 and cand_013) (2026-10-24 23:30 +03:00, Issue #457)
+- Records under `data/candidates/round2/` (a `repair_log.json` per candidate). cand_002 passed after one repair (Python 3.9 image); cand_009 stopped at the third error; cand_001, 003, 004, 005, 006, 007, 008, 010 and 012 are not repairable by the five allowed repairs, each with the log line and the reason; cand_013 stays `command_incomplete`. cand_011 is not in this batch. `summary` also reports the `stopped` entry.
+- Not verified: that cand_002's output is comparable with any table of its paper (no printed value occurs in a table).
+
 ### feat(corpus): run mechanism of the candidate repair round (2026-10-24 22:35 +03:00, Issue #457)
 - `scripts/candidate_round2.py` (`fetch`, `run`, `summary`) and `tests/test_candidate_round2.py`: one repair attempt per call, from the `repair_log.json` of the candidate; the rules of `docs/CANDIDATE_RUNS_ROUND2.md` are checked in code (allowed repair kinds, a log line for every repair, at most two repairs, no writable copy of the repository, an attempt is never run twice, round 1 records are not touched). Run limit 3600 s, install 1800 s, `--memory 50% --cpus 4`. 1,037 tests pass, 9 skipped.
 - Not verified: the runner against a real container (the first real attempt is the check).

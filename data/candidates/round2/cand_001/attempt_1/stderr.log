@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/repo/notears/linear.py", line 96, in <module>
+    np.savetxt('W_true.csv', W_true, delimiter=',')
+  File "/workspace/deps/numpy/lib/_npyio_impl.py", line 1552, in savetxt
+    open(fname, 'wt').close()
+    ^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: 'W_true.csv'

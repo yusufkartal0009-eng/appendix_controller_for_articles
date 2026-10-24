@@ -1,0 +1,69 @@
+{
+  "paper_id": "cand_002",
+  "round": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements",
+          "reason": "The repository's own requirements.txt pins Bottleneck==1.3.5, pandas==1.5.0, scikit-learn==1.5.0, scipy==1.10.1, seaborn==0.12.0 (README: install with pip install -r requirements.txt, Python 3.X). PyPI metadata shows Bottleneck 1.3.5 has wheels only up to cp310, and the install phase uses binary wheels only; cp39 is the Python version for which all four compiled pins have a wheel (Bottleneck cp39, pandas cp39, scikit-learn cp39, scipy cp39). No pin is changed.",
+          "log_line": "ERROR: No matching distribution found for Bottleneck==1.3.5",
+          "change": "python_version 3.9 (image); the pins of requirements.txt are kept as they are"
+        }
+      ],
+      "setup": {
+        "python_version": "3.9"
+      },
+      "command": "python run_BnpC.py example_data/data.csv -o /workspace/output",
+      "working_dir": "",
+      "started_at": "2026-10-24T19:19:52+00:00",
+      "finished_at": "2026-10-24T19:26:09+00:00",
+      "record": "attempt_1",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": true,
+        "category": null,
+        "log_line": "",
+        "install_status": "INSTALLED",
+        "run_status": "COMPLETED",
+        "exit_code": 0,
+        "duration_seconds": 60.594,
+        "metric_lines": [
+          "Split/merge:\t0.33",
+          "CRP a_0 update:\t0.25",
+          "Errors update:\t0.25",
+          "Clustering time:\t0:00:45.736686\t(0.01 secs. per MCMC step)\tLugsail PSRF:\t\t1.00368",
+          "CRP a_0:\t35.1 +- 10.1",
+          "FP (model|genotypes): 1.9E-04 +- 1.4E-04\t|\t1.0E-03",
+          "FN (model|genotypes): 0.060   +- 0.007\t|\t0.090"
+        ]
+      }
+    }
+  ],
+  "round1_error": {
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for Bottleneck==1.3.5"
+  },
+  "table_match": {
+    "outcome": "metric_no_table_match",
+    "paper_text": "Europe PMC full text XML of PMC7750970 (the DOI's open-access version; saved ignored by git as data/pdfs/cand_002.xml; the PDF itself was not downloaded)",
+    "searched_values": [
+      "0.060",
+      "0.090",
+      "1.9E-04",
+      "0.007",
+      "35.1",
+      "10.1",
+      "0.33"
+    ],
+    "finding": "None of the printed result values occurs in a table of the paper. 35.1 and 10.1 occur only inside reference identifiers. The run is the README example on the repository's example_data (100 cells, 100 mutations); the paper reports simulated data sets with other sizes. Whether any figure of the paper is comparable is not verified.",
+    "verified_by_person": false
+  }
+}

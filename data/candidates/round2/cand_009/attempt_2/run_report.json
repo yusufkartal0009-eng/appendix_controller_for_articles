@@ -1,0 +1,199 @@
+{
+  "paper_id": "cand_009",
+  "source": "https://github.com/LamNgo1/moca-hesp",
+  "commit_hash": "02218185831122cfa70256197cec883172be5a37",
+  "target_script": "test-mocahesp.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 17.671,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\cand_009",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 17.317,
+    "timeout_limit_seconds": 3600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 406335488,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "botorch",
+      "version": "0.8.5"
+    },
+    {
+      "name": "category-encoders",
+      "version": "2.6.3"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "cma",
+      "version": "3.3.0"
+    },
+    {
+      "name": "Cython",
+      "version": "3.0.6"
+    },
+    {
+      "name": "decorator",
+      "version": "5.1.1"
+    },
+    {
+      "name": "gin-config",
+      "version": "0.5.0"
+    },
+    {
+      "name": "gpytorch",
+      "version": "1.10"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0"
+    },
+    {
+      "name": "linear-operator",
+      "version": "0.4.0"
+    },
+    {
+      "name": "multipledispatch",
+      "version": "1.0.0"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    {
+      "name": "nvidia-cublas-cu11",
+      "version": "11.10.3.66"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu11",
+      "version": "11.7.99"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu11",
+      "version": "11.7.99"
+    },
+    {
+      "name": "nvidia-cudnn-cu11",
+      "version": "8.5.0.96"
+    },
+    {
+      "name": "opt_einsum",
+      "version": "3.4.0"
+    },
+    {
+      "name": "packaging",
+      "version": "23.2"
+    },
+    {
+      "name": "pandas",
+      "version": "1.5.2"
+    },
+    {
+      "name": "patsy",
+      "version": "0.5.6"
+    },
+    {
+      "name": "pyro-api",
+      "version": "0.1.2"
+    },
+    {
+      "name": "pyro-ppl",
+      "version": "1.8.6"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "pytz",
+      "version": "2026.5"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.3.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.1"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "statsmodels",
+      "version": "0.14.1"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "torch",
+      "version": "1.13.1"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "wheel",
+      "version": "0.45.1"
+    },
+    {
+      "name": "xgboost",
+      "version": "2.0.2"
+    }
+  ],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/test-mocahesp.py --solver bo -f ackley20c -n 400 --seed 1\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 17.317s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/test-mocahesp.py\", line 10, in <module>\n    from _benchmark_problems.utils import get_arguments, set_seed\n  File \"/workspace/repo/_benchmark_problems/utils.py\", line 15, in <module>\n    from mocahesp.function_wrapper import *\n  File \"/workspace/repo/mocahesp/function_wrapper.py\", line 1, in <module>\n    from _benchmark_problems.antibody_design.cdrh3_design import BaseAntibodyDesgin\n  File \"/workspace/repo/_benchmark_problems/antibody_design/__init__.py\", line 10, in <module>\n    from _benchmark_problems.antibody_design.cdrh3_design import CDRH3Design\n  File \"/workspace/repo/_benchmark_problems/antibody_design/cdrh3_design.py\", line 18, in <module>\n    from _benchmark_problems.antibody_design.utils import (\n  File \"/workspace/repo/_benchmark_problems/antibody_design/utils.py\", line 21, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+}

@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_007",
+  "round": 2,
+  "round1_error": {
+    "category": "run",
+    "log_line": "OSError: [Errno 30] Read-only file system: '../../outputs'"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "OSError: [Errno 30] Read-only file system: '../../outputs'",
+    "reason": "src/utils/logging.py create_logger() opens the log at the fixed path '../../outputs/simulation_<args>.log' relative to the current folder, and src/sim/simulator.py writes its results to 'outputs/' (write_results_html and write_analysis_file default arguments). The command takes no argument and the code reads no environment variable for these paths. From the repository root the path is /outputs; from any folder inside the repository it still points into the read-only repository or above it, and working_dir cannot leave the repository. Making the write possible needs a writable repository or an edit of the source, both forbidden by section 3 of the protocol. No attempt was made.",
+    "at_attempt": 0
+  }
+}

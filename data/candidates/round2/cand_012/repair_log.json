@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_012",
+  "round": 2,
+  "round1_error": {
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for torch==0.4.1"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "ERROR: No matching distribution found for torch==0.4.1",
+    "reason": "The repository's requirements.txt pins torch==0.4.1, numpy==1.14.3, scipy==1.1.0, scikit_learn==0.20.3 and networkx==1.11, and the README says the code was implemented with Python 3.5.6. PyPI has no torch 0.4.1 at all (the metadata request returns 404), and numpy 1.14.3 and scipy 1.1.0 have wheels only up to cp37 (PyPI metadata). The sandbox images are Python 3.8, 3.9 and 3.11, so the pinned versions cannot be installed in any image, and changing a pin is not an allowed repair. No attempt was made. Not verified: the data, a Dropbox folder named in the README (its size was not found out).",
+    "at_attempt": 0
+  }
+}

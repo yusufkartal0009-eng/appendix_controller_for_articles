@@ -1,0 +1,117 @@
+{
+  "paper_id": "cand_001",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1a7ba079efacd21b975d62a1cfab00ee48171fa1",
+  "started_at": "2026-10-24T19:17:15+00:00",
+  "repo_url": "https://github.com/xunzheng/notears",
+  "pinned_commit": "4a9ab19fe502e392503da331773c5223d82d3666",
+  "target_script": "notears/linear.py",
+  "container_command": "python /workspace/repo/notears/linear.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1800,
+    "run_timeout_seconds": 3600
+  },
+  "pilot4": {
+    "run_command": "python notears/linear.py",
+    "readme_url": null,
+    "attempt": "correction",
+    "correction": {
+      "extra_requirements": [
+        "numpy",
+        "scipy",
+        "python-igraph"
+      ],
+      "changes": [
+        {
+          "change": "extra requirements numpy, scipy, python-igraph (unpinned, as the README lists them)",
+          "log_line": "ModuleNotFoundError: No module named 'igraph'"
+        }
+      ]
+    }
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 3600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "4a9ab19fe502e392503da331773c5223d82d3666",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.032
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [
+      "numpy",
+      "scipy",
+      "python-igraph"
+    ],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "source": "extra_requirements",
+    "python_version": "3.11",
+    "wheel_count": 5,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\cand_001_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [
+      "numpy",
+      "scipy",
+      "python-igraph"
+    ],
+    "duration_seconds": 4.942
+  },
+  "sandbox_duration_seconds": 104.489,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 4.237,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 142929920
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 99.264,
+    "peak_memory_bytes": 84795392
+  },
+  "finished_at": "2026-10-24T19:19:06+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

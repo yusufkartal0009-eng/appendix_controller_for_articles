@@ -1,0 +1,192 @@
+{
+  "paper_id": "cand_002",
+  "source": "https://github.com/cbg-ethz/BnpC",
+  "commit_hash": "edb1ddb1beb1bf977d44aede4c50e6bf985e06a8",
+  "target_script": "run_BnpC.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.9",
+  "image": "repro-radar-sandbox:py3.9",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 60.594,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\cand_002",
+  "generated_files": [
+    "args.txt",
+    "assignment.txt",
+    "errors.txt",
+    "execution_meta.json",
+    "genoCluster_posterior_mean.pdf",
+    "genotypes_cont_posterior_mean.tsv",
+    "genotypes_posterior_mean.tsv",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "Posterior_similarity_mean.pdf",
+    "stderr.log",
+    "stdout.log",
+    "Traces.pdf"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 60.199,
+    "timeout_limit_seconds": 3600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 309788672,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "Bottleneck",
+      "version": "1.3.5"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.0"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.60.2"
+    },
+    {
+      "name": "importlib_resources",
+      "version": "6.5.2"
+    },
+    {
+      "name": "joblib",
+      "version": "1.5.3"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.4.7"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.9.4"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "1.5.0"
+    },
+    {
+      "name": "pillow",
+      "version": "11.3.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "pytz",
+      "version": "2026.5"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.5.0"
+    },
+    {
+      "name": "scipy",
+      "version": "1.10.1"
+    },
+    {
+      "name": "seaborn",
+      "version": "0.12.0"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "zipp",
+      "version": "3.23.1"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "Bottleneck==1.3.5",
+      "name": "Bottleneck",
+      "requested": "==1.3.5",
+      "installed": "1.3.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.5.0",
+      "name": "pandas",
+      "requested": "==1.5.0",
+      "installed": "1.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.5.0",
+      "name": "scikit-learn",
+      "requested": "==1.5.0",
+      "installed": "1.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.10.1",
+      "name": "scipy",
+      "requested": "==1.10.1",
+      "installed": "1.10.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.12.0",
+      "name": "seaborn",
+      "requested": "==0.12.0",
+      "installed": "0.12.0",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 3600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/run_BnpC.py example_data/data.csv -o /workspace/output\n==================================================\n\nDPMM with:\n\t100 cells\n\t100 mutations\n\tlearning errors\n\n\tPriors:\n\tparams.:\tBeta(0.25,0.25)\n\tCRP a_0:\tGamma(10.00,1)\n\tFP:\t\ttrunc norm(0.01,0.01)\n\tFN:\t\ttrunc norm(0.2,0.1)\n\nMove probabilitites:\n\tSplit/merge:\t0.33\n\t\tsplit/merge ratio:\t[0.75, 0.25]\n\t\tintermediate Gibbs:\t3\n\tCRP a_0 update:\t0.25\n\tErrors update:\t0.25\n\nRun MCMC with (1 chains for 5000 steps):\n\nClustering time:\t0:00:45.736686\t(0.01 secs. per MCMC step)\tLugsail PSRF:\t\t1.00368\n\nChain mean - posterior clusters\t(#5):\n\tA:    0,   11,   21,   25,   35,   39,   52,   66,   67,   73,   78,   84,   94,   95\n\tB:    1,   10,   13,   15,   16,   19,   20,   26,   29,   31,   43,   44,   47,   54,   55,   60,   69,   74,   80,   86,   87,   89\n\tC:    2,    6,    7,   18,   23,   30,   34,   41,   42,   53,   57,   59,   61,   68,   70,   79,   83,   88,   90,   93,   97\n\tD:    3,   14,   24,   27,   28,   32,   36,   37,   38,   46,   48,   49,   50,   56,   63,   64,   71,   72,   75,   81,   91,   92,   98\n\tE:    4,    5,    8,    9,   12,   17,   22,   33,   40,   45,   51,   58,   62,   65,   76,   77,   82,   85,   96,   99\n\nInferred latent variables\t--\tchain mean - posterior\n\tCRP a_0:\t35.1 +- 10.1\n\tFP (model|genotypes): 1.9E-04 +- 1.4E-04\t|\t1.0E-03\n\tFN (model|genotypes): 0.060   +- 0.007\t|\t0.090\n\nWriting output to: /workspace/output\n\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : INSTALLED\nDuration      : 60.199s\n==================================================\n",
+  "stderr_preview": ""
+}
