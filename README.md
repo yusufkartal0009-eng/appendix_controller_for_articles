@@ -9,13 +9,14 @@
 
 ---
 
-## 📍 Current Status (2026-10-20)
+## 📍 Current Status (2026-10-24)
 
 - **Built and checked:** the Docker sandbox (its isolation is checked against a real Docker daemon in CI, [`docs/SANDBOX_ACCEPTANCE.md`](docs/SANDBOX_ACCEPTANCE.md)), the corpus verification, claim extraction with a verbatim-quote guard and a person's review of every claim, `cli.py score` for a stored or a fresh real run, and a local dashboard.
 - **Pilots:** four pilots ran 12 papers in total ([`docs/report/REPORT.md`](docs/report/REPORT.md) section 6, [`docs/FIELD_ANALYSIS.md`](docs/FIELD_ANALYSIS.md)). The success rate is low, and the run setups of Pilots 2 and 3 were written by us (see *What a Result Means* below).
 - **Tier 3 (seed stability) now runs real seed runs** (#48, [`docs/MULTI_SEED.md`](docs/MULTI_SEED.md)): `paper_003` and `paper_006` were run with three seeds each (`data/multi_seed_runs/`, not protocol runs). Tier 3 is 65.0 for `paper_003` (its training loss varies more between seeds than its RMSE, which alone would score 100.0) and 100.0 for `paper_006`; no claim was compared, so Tier 2 is untouched.
 - **AI Decision Layer:** implemented as a rule-based diagnosis (`python cli.py diagnose <run directory>`, [`docs/DIAGNOSIS.md`](docs/DIAGNOSIS.md)). An optional language-model step is off by default and was tested only with a mock client, never with a real model.
 - **GPU:** opt-in (`--gpus all`). One synthetic paper with a modern PyTorch ran on the RTX 5070 through the real pipeline (`data/gpu_check/`); no real paper was run with the GPU.
+- **Since 2026-10-20:** the six sandbox images were rebuilt from scratch and timed ([`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md)); a clone of the public repository followed this README to a completed run of `paper_006` (2,490 s, [`docs/evidence/clean_clone/WALKTHROUGH.md`](docs/evidence/clean_clone/WALKTHROUGH.md) Update 2); of the 14 candidate papers that the owner's lists call ready or fixable, **0 passed** a single run each under a protocol written before the runs ([`docs/CANDIDATE_RUNS.md`](docs/CANDIDATE_RUNS.md), [`docs/CANDIDATES.md`](docs/CANDIDATES.md); a selected list, not a success rate); a tolerance probe moves hand-made claims away from the values of real runs ([`docs/TOLERANCE_PROBE.md`](docs/TOLERANCE_PROBE.md); not an error of a real paper, and the real-world false-positive and false-negative rates have not been measured); a demo script uses only examples with evidence ([`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md)); a bug hunt fixed three bugs and listed seven suspicions ([`docs/BUG_HUNT.md`](docs/BUG_HUNT.md)). Open decisions: [`docs/PENDING.md`](docs/PENDING.md).
 - **Not done:** no run has reproduced an accepted claim, so Tier 2 has not been exercised on a real result; no release is tagged (#45); the selection of external reference articles from ReScience C found none usable ([`docs/EXTERNAL_VALIDATION.md`](docs/EXTERNAL_VALIDATION.md)).
 
 ---

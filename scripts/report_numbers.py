@@ -34,6 +34,10 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 - `diagnosisvalidation`: the failure classifier against hand-written labels (`data/diagnosis_validation/results.json`; #36)
 - `fieldanalysis`: the week 6 field analysis over 12 papers (`data/field_analysis/result.json`; #413)
 - `rescience`: the selection of external-validation articles (`data/external_validation/evaluation.json`; #400)
+- `candidateruns`: the 14 selected candidate papers run once in the sandbox: tried, passed, Wilson interval, causes
+  (`data/candidates/runs/evaluation.json`; #437)
+- `toleranceprobe`: where the Tier 2 decision changes when a hand-made claim is moved away from a real run's value
+  (`data/tolerance_probe/results.json`; #442)
 
 Nothing in a block is typed by hand: a hand edit makes `--check` (and its test) fail.
 """
@@ -51,7 +55,8 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from scripts import memory_runs, run_stability
+from scripts import memory_runs, run_stability, tolerance_probe
+from scripts.candidates_build import failure_cause, wilson_interval
 
 REPORT_PATH = project_root / "docs" / "report" / "REPORT.md"
 DATA = project_root / "data"
@@ -344,7 +349,40 @@ def rescience_block(data: Path = DATA) -> str:
                       f"Rule that stopped each article (the first failed rule): {by_rule}.")])
 
 
-BLOCKS = {"multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+def candidateruns_block(data: Path = DATA) -> str:
+    results = _load(data / "candidates" / "runs" / "evaluation.json")["results"]
+    ran = [r for r in results if r["category"] != "command_incomplete"]
+    passed = [r for r in results if r["passed"]]
+    low, high = wilson_interval(len(passed), len(results))
+    causes: dict[str, int] = {}
+    for r in results:
+        if not r["passed"]:
+            causes[failure_cause(r)] = causes.get(failure_cause(r), 0) + 1
+    by_cause = ", ".join(f"{name} {count}" for name, count in sorted(causes.items(), key=lambda kv: (-kv[1], kv[0])))
+    names = ", ".join(r["paper_id"] for r in passed) or "none"
+    return "\n".join([HEADER.format(sources="data/candidates/runs/evaluation.json (scripts/candidate_runs.py)"), "",
+                      (f"Selected candidates: {len(results)}; run once in the sandbox: {len(ran)}; passed: {len(passed)} ({names}). "
+                       f"Pilot ratio {len(passed)} / {len(results)}, Wilson 95 % interval {100 * low:.1f} % to {100 * high:.1f} %. "
+                       f"Cause of the failures (rules of the failure classifier): {by_cause}. "
+                       "This is a selected list, not a sample; it is not a success rate.")])
+
+
+def toleranceprobe_block(data: Path = DATA) -> str:
+    probe = _load(data / "tolerance_probe" / "results.json")
+    lines = [HEADER.format(sources="data/tolerance_probe/results.json (scripts/tolerance_probe.py)"), "",
+             (f"Tolerance {probe['tolerance']}. Hand-made claims moved from the value of a real run; first deviation at which the "
+              "status of the true claim changes:"), "", "| Paper | Runs | Metrics | Downward | Upward |", "|---|---|---|---|---|"]
+    for group in tolerance_probe._group(probe["runs"]):
+        first = group[0]
+        lines.append(f"| {', '.join(sorted({r['paper_id'] for r in group}))} | {len(group)} | {len(first['metrics'])} | "
+                     f"{tolerance_probe._first_change(first['rows'], -1)} | {tolerance_probe._first_change(first['rows'], 1)} |")
+    matching = len(probe["accepted_claims_matching_a_probed_run"])
+    lines += ["", (f"Accepted claims of the owner that match a probed run by question ID: {matching} "
+                   f"of {probe['accepted_claims_total']}.")]
+    return "\n".join(lines)
+
+
+BLOCKS = {"candidateruns": candidateruns_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
           "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,

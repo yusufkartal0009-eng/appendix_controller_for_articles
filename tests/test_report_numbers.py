@@ -169,3 +169,14 @@ def test_the_blocks_added_for_the_final_pass_render_their_stored_facts():
     field = rn.render("fieldanalysis")
     assert "| all 12 papers | final | 9 / 12 | 4 / 12 | 3 / 12 | 5 / 12 | 1 / 12 |" in field
     assert "evaluated: 65; selected: 0" in rn.render("rescience")
+
+
+def test_the_candidate_and_probe_blocks_render_their_stored_facts_and_the_warnings():
+    runs = rn.render("candidateruns")
+    assert "Selected candidates: 14; run once in the sandbox: 13; passed: 0 (none)" in runs
+    assert "Wilson 95 % interval 0.0 % to 21.5 %" in runs and "not a sample; it is not a success rate" in runs
+    probe = rn.render("toleranceprobe")
+    assert "| paper_006 | 4 | 2 | -10 % (Verified -> Partially Verified) | +10 % (Verified -> Partially Verified) |" in probe
+    assert "match a probed run by question ID: 0 of 13" in probe
+    report = (rn.REPORT_PATH.read_text(encoding="utf-8")).replace("\r\n", "\n")
+    assert "hand-made claims, not an error of a real paper" in report and "have not been measured" in report
