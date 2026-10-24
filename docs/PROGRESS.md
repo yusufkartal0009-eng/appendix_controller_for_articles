@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): protocol of the candidate repair round, written before any round-2 run (2026-10-24 22:15 +03:00, Issue #455)
+- `docs/CANDIDATE_RUNS_ROUND2.md`: scope (the 14 round-1 candidates and the risky candidates whose README data can be downloaded within 20 GB, 3 GB per file), the five allowed repairs and the forbidden ones, at most two repair rounds per candidate, the pass definition of round 1 plus the paper-table match, limits (run 3600 s, install 1800 s, one sandbox run at a time), and the three separate counts with Wilson intervals from a script. Round 1 and its records are not touched.
+- Not verified: nothing has been run in round 2 yet.
+
 ### docs: status documents and the report brought up to date (2026-10-24 21:06 +03:00, Issue #452)
 - `docs/PENDING.md` (done items marked with their pull requests; new D9 candidate papers and D10 two scorer rules; the repository is public), the Current Status of `README.md` and of this file, and two new sections of `docs/report/REPORT.md` (6.8 candidate runs, 6.9 tolerance probe) whose numbers are generated blocks (`candidateruns`, `toleranceprobe` in `scripts/report_numbers.py`; `--check` passes). 1,028 tests pass, 9 skipped.
 - Not verified: that the owner's summary outside the repository says the same; that every other document that quotes a number (for example the introduction document) is current.
