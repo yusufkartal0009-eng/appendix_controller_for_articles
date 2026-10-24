@@ -127,7 +127,7 @@ docker build -f docker/Dockerfile.sandbox -t repro-radar-sandbox:latest .
 ```
 The sandbox image is built on your machine; it is not downloaded from anywhere, so without this step the first run stops with `pull access denied for repro-radar-sandbox`. `cli.py score` runs a preflight check first (`python scripts/preflight.py` runs it alone) and, if the image is missing, prints this command.
 
-Some papers need more images. Build them when a run asks for them (the commands follow `docker/Dockerfile.sandbox`; the compiler and Python 3.8/3.9 commands have not been run from this README yet):
+Some papers need more images. Build them when a run asks for them (the commands follow `docker/Dockerfile.sandbox`; all six images were built from scratch with these commands on 2026-10-24, each exit code 0, 43 to 90 s per image; the table is in `docs/ENVIRONMENT.md`, #435):
 
 ```bash
 # compiler image, used by the build phase when a paper's dependencies must be compiled

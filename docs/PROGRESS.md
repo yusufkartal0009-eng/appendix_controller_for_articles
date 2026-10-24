@@ -39,6 +39,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(devops): the six sandbox images rebuilt from scratch, with time and size (2026-10-24 19:20 +03:00, Issue #435)
+- All six images of the README section "Build the Sandbox Image" were built with `docker build --no-cache`; every build exited with code 0, 43 to 90 s each, 401 s in total. The table (time, size, command) is in `docs/ENVIRONMENT.md`; the README no longer says that the compiler and Python 3.8/3.9 commands have not been run.
+- Not verified: the build time on a machine without the base images, and on Linux or macOS. One measurement per image.
+
 ### data(corpus): 29 candidate papers from the owner's lists, checked but not run (2026-10-23 00:30 +03:00, Issue #433)
 - New `data/candidates/` (`input.json` from the lists, `papers.json` in the seed format, `evaluation.json`, `verify_corpus.json`), `scripts/candidates_build.py`, and the generated `docs/CANDIDATES.md`. For each of the 29 candidates the head commit, license, size and archive/fork state were read from GitHub, the paper title and year from the paper's page, and the README was searched for the paper's id: all 29 READMEs name the paper. `scripts/verify_corpus.py` on the candidates file: 29 of 29 passed (paper page, repository, allowed license, script at the pinned commit).
 - Status given by the lists: ready 9, fixable 4, two_step 1, risky 11, excluded 4. They are NOT in `data/seed_papers.json` (the evaluation set of the pilots; its tests expect 6 papers from 2020 to 2024).
