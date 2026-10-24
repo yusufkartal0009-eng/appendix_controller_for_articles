@@ -39,6 +39,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: demo script with proven examples only (2026-10-24 20:29 +03:00, Issue #444)
+- New `docs/DEMO_SCRIPT.md` (9 steps, about 4 min 40 s): dashboard, the synthetic true/false claim (91.75 / 56.75), four stored runs of `paper_003` and `paper_006` with the same metrics, Tier 3 (three seeds of `paper_006`), a stored run scored as "nothing was compared", `cli.py diagnose`, the tolerance probe, the candidate runs (0 of 14, so no candidate example), and the limits with Wilson intervals (Pilot 4 = 1 of 6, 3.0 % to 56.4 %; ReScience C 0 of 65). Every command was run for real and its output is pasted; each step says what it shows and does not show. Two dashboard screenshots are in `docs/evidence/demo/` (headless Chrome, localhost only).
+- Found while preparing it: the dashboard page of `paper_006` shows the score of the stored Pilot 3 run next to the "Latest run" of the Pilot 1 record in the database, so the two do not belong to the same run (the database loads the Pilot 1 records only). The demo says so. Running `cli.py score ... --from-run` stored one score row in the local, git-ignored database. Not verified: how the dashboard looks in another browser.
+
 ### fix(scoring): tolerance probe covers all four stored runs of paper_003 (2026-10-24 20:26 +03:00, Issue #442)
 - The first version probed one of the four stored completed runs of `paper_003` (the stability table lists four, as for `paper_006`). `scripts/tolerance_probe.py` now probes all four; their metrics are identical, so the tables of `docs/TOLERANCE_PROBE.md` are unchanged and the document lists the four run folders. No other number changed.
 
