@@ -8087,7 +8087,19 @@
         "run_command": "python train.py",
         "readme_url": "https://github.com/lucidrains/x-ppo/blob/595b02df092cabb05bedb0361b8df16670176b56/README.md"
       },
-      "paper_id": "a3_039"
+      "paper_id": "a3_039",
+      "k1": {
+        "started_at": "2026-10-24T23:13:19+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for box2d-py",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.518,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "snap-stanford/relgt",
@@ -8170,7 +8182,19 @@
         "run_command": "python run_benchmark.py --model DecisionTreeClassifier --data 0",
         "readme_url": "https://github.com/Karim-53/pdll/blob/eb1017aa7f35a310f3ecb0fc567726baa55b0052/README.md"
       },
-      "paper_id": "a3_040"
+      "paper_id": "a3_040",
+      "k1": {
+        "started_at": "2026-10-24T23:13:56+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for openml~=0.14.2",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.879,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "CoderPat/OpenGNN",
@@ -8192,15 +8216,1610 @@
       "passed": false,
       "failed_rule": "S2",
       "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "The-FinAI/FinBen",
+      "hash": "66f86590fe4374eff8f94856f3a2b04350e5d485128550e25331e1668edd48b7",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "htcr/sam_road",
+      "hash": "678817a2dddb76fad1457fd6929c8758729b2eebc83f74ddb95735dc4037e99c",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Pervasive-AI-Lab/crlmaze",
+      "hash": "67b7c2b59622aedf780db3f10c3f6fda0ad2ec4ffb167eb81a06148d9697521d",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "hamishs/JAX-RL",
+      "hash": "683d7b66e05ac7fccd0389158f9c21f31c52852832e91a5e7ee815b2884d37a6",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "kraina-ai/srai",
+      "hash": "69d03f363841e41daed1507e9d7e52ccc29f02a0a6e54dc0d48f1a35494676ea",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "google-deepmind/acme",
+      "hash": "6a7b9b2d21dc2bb14fca48fb6834e081b8a5b0d466a5f565dc8e9892662da5bc",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "basiralab/MultigraphGNet",
+      "hash": "6add608f05cd4f7fac89cf511ddbba6a46f48b2766fd6621f805bd500dd41f8a",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "ferreirafabio/learningdynamics",
+      "hash": "6bcbfc5f0c1af67ae8fc2e123a864fe38577ed65cc640de455aff5fdc965935f",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "jtkim-kaist/ram_modified",
+      "hash": "6be8ebe490ebfa82d247e7d66c87b9fcfe7f131af522112f1157bf3327d73c6b",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "scut-aitcm/Competitive-Inner-Imaging-SENet",
+      "hash": "6d1191f7cfcb4de80c3625bb19d5208ca203df81998d9a68d236f941f243d89b",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "spinov001-art/api-scraping-templates",
+      "hash": "6e1a4d4bd23a1c353763528843375da9d56ecb6b517109eb9c4539fe6eee59fe",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "mlfoundations/open_flamingo",
+      "hash": "6eeaac366a47f05b0e0ffcb94bd6ab2f99ff27c839545fa253c649006513ff8f",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "PASSIONLab/OpenEquivariance",
+      "hash": "6f1c836a24ca32a74b87e4a4c1fdcfc1728a703a7e2fa062df6fe4328093f111",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "AI4Science-WestlakeU/beno",
+      "hash": "6f1f6ecf3560bb4e10328f223a29730ec4c73112663adc56a4af27dcadca5c8e",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "jsikyoon/svpg_tensorflow",
+      "hash": "6f9aa2fed5525e7b79797960dc5d53c5befdb1c101ac754513320005da1af5f4",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "X-PLUG/WritingBench",
+      "hash": "6f9b3bb24bee755448b8f084f5914dcc7e766af3e45e9e31267f0e8031820ecc",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "google-research/rigl",
+      "hash": "6fb65b9d0f0a01e38fd62e528836d3661cb31288564f21f001a8a1aff6cbe356",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in rigl/requirements.txt, rigl/rl/requirements.txt"
+    },
+    {
+      "full_name": "avos-rnd/vlm-bench",
+      "hash": "704f8b9f070119449cd13d518cc3cb4519de1788df5c4707fbc729058b5acea9",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "sapientinc/HRM",
+      "hash": "709b6ecbf4b2eae114fcc6e45b0eccb8c884acf2e7936b74706165375eda79bc",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "AlexandruPascu/screen-stereotypes",
+      "hash": "70d7df3f7a589c1f85e27266d59090ffc96e2db1eb8c7431b5a4ffe740b44849",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "dmanuel64/codablellm",
+      "hash": "71172edf6e691deb4e9bb4d79f9faf6a2181c7f440f890eb8a17507e9a45a257",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "jakartaresearch/receipt-ocr",
+      "hash": "714eb0b5806770ff770aee652ab3bb71d007ad19b2f08d5f3b03a4a3be70b23d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Emo-gml/EmoBench-M",
+      "hash": "71c8eca9338d2fa3bd72c133ef7a9728ee878829b29bc5b1b20d0ffa5e7d4ce6",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Nik-V9/AirObject",
+      "hash": "7352dc328b2b5f93011ec69a58929653afeccad5850bfd5b7a6b8c87de2b4dfb",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "nicklashansen/newt",
+      "hash": "73654966343884fed8fd8f0955ca942c5da26270823e90e6506b9c613b22bc14",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "NUAA-AL/ALiPy",
+      "hash": "7406b64575c8eab7d0f065fa4224afa76398d69826160dab2fd3c51520ad8c23",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "radekd91/emoca",
+      "hash": "74c740249b8aaf6ce2a86c4ee63b6f461c4a7d21e448c5c662088fad857d0c5e",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "jacobgil/pytorch-tensor-decompositions",
+      "hash": "74de6aea91dfc1281fd81dfabd06df46bcc3c1307871fb1900f5d465fb373289",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "PSRben/VisionHOPE",
+      "hash": "74ea8b9fc5793d5b65bf819b30dac782dc1bcad485bcfdb395ddd0dd5aefb970",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "grananqvist/reinforcement-learning-super-mario-A3C",
+      "hash": "750c680a8ad801b9f5365a0c9cfd97441a3bfbf6eb4ad74e57b09a37166ca52e",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "johnnyhuangcs/benchtemp",
+      "hash": "7518039cfd991db77f4b9d046e410909626711d9cf9b37692f7022c678d42e02",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "saluca-labs/gfe-unitary-fork",
+      "hash": "755a6c2299809ac1d8318cac6abd54c109f29c3650d64d7299da7b396df2184d",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "no arXiv link in the README"
+    },
+    {
+      "full_name": "tdavchev/option-critic",
+      "hash": "757fb36898f98d92e035082f8ce7a9f73fc6219f2a868956c9ca6f7647c9475e",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "GeoPandas-AI/geopandas-ai",
+      "hash": "75c0ed2348e706a26d5971c43bcf7312a0092cf36ea28f409fb7167036a360a6",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "QwQ2000/WSDM26-Graph-Unlearning-Inversion",
+      "hash": "75e3fe59714ff7fea36c0bf7497e283ecbd8d30344f8c9b0be8084d12c62a5c2",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "6 table captions, 854 decimal numbers",
+      "entry": {
+        "title": "Unlearning Inversion Attacks for Graph Neural Networks",
+        "year": 2025,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/QwQ2000/WSDM26-Graph-Unlearning-Inversion",
+        "repo_commit": "3bfc1f17e82a3a9fad9b1cc3ef28281a1323ea16",
+        "paper_url": "https://arxiv.org/abs/2506.00808",
+        "license": "Apache-2.0",
+        "target_script": "main.py",
+        "run_command": "python main.py --dataset_name cora --target_model=GCN --exp Inversion --method GIF --unlearn_ratio 0.05 --attack_method=trend_steal --num_runs=5 --is_gen_unlearn_request=True --is_gen_unlearned_probs=True",
+        "readme_url": "https://github.com/QwQ2000/WSDM26-Graph-Unlearning-Inversion/blob/3bfc1f17e82a3a9fad9b1cc3ef28281a1323ea16/README.md"
+      },
+      "paper_id": "a3_041",
+      "k1": {
+        "started_at": "2026-10-24T23:15:02+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'torch'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.516,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "UCSC-VLAA/o1_medical",
+      "hash": "7670ab77857531e8d95cb6b36c1ed6bb42cc8989e92d846b8dd73f5f669996ce",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "cai-lw/KBGAN",
+      "hash": "7751507f9bfd11ff4d7f0b25d7fbf5ba58d96be9cff0bf87b9ed457f90e792ec",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ahmetgunduz/Real-time-GesRec",
+      "hash": "775834390f4fccef3185e0a55386f2d14b58fa91204740663d34b0782eb35221",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "lucidrains/imagen-pytorch",
+      "hash": "77a0f27c6aa7b42e35c0ab3db897db6a97aa4006f96d0b51fac654abf0bc9be2",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "zpeng27/GMI",
+      "hash": "77f3faa63cf8e7a5b17e2bc653b5d5d00b093af757520679b2f05042bc9ab4b2",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "agr78/SpectralViT",
+      "hash": "781f589461493f494ee3c231e868f6da9a1306974c9c366dc77593d342d04a2d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "UCSC-VLAA/vllm-safety-benchmark",
+      "hash": "78616b7b218505e591cde466d45aea59da2eda6e5cb8e122cfa519bfc39fa1f9",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "chi2liu/ABC-GRPO",
+      "hash": "78b30b31d9b61c55227d36580bd3b03f9a97eea75f93fb17262ba24687cfab94",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ntucllab/libact",
+      "hash": "790950d3eb0bf31fc19bb8473c36107e36c997fc0ca2bb5b99aadff1bd181071",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Karl1109/SCSegamba",
+      "hash": "7950c26e0060cdcb7ef6d09d691d59885173692b168fe2851399d90eedca7a54",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "12 table captions, 599 decimal numbers",
+      "entry": {
+        "title": "SCSegamba: Lightweight Structure-Aware Vision Mamba for Crack Segmentation in Structures",
+        "year": 2025,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/Karl1109/SCSegamba",
+        "repo_commit": "cc74c4606f03bc308b1ef1c07ef6229f9123c519",
+        "paper_url": "https://arxiv.org/abs/2503.01113",
+        "license": "Apache-2.0",
+        "target_script": "main.py",
+        "run_command": "python main.py",
+        "readme_url": "https://github.com/Karl1109/SCSegamba/blob/cc74c4606f03bc308b1ef1c07ef6229f9123c519/README.md"
+      },
+      "paper_id": "a3_042",
+      "k1": {
+        "started_at": "2026-10-24T23:15:25+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'torch'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.725,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "latticetower/storybear",
+      "hash": "7a0d17074e4283f0d56d5921bc5f0399e9a7913327bf79f26a5bbe2ddc5c1c47",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "snap-research/graphless-neural-networks",
+      "hash": "7a95fc03755a94b6b7d345f99678b459bff761f654d5af8a893ae0f1f2bfb994",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "philtabor/Multi-Agent-Deep-Deterministic-Policy-Gradients",
+      "hash": "7b7dda68e0b825fee7cac41db35502fc3e93c5dd27e647e547cfe4ad7fbb6cbb",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "Junjue-Wang/Rank1-Ali-Tianchi-Real-World-Image-Forgery-Localization-Challenge",
+      "hash": "7c02aafd3498300693ae2eae00a4e82a50290daaf98944ac0ed32067f0281d58",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "HealthRex/PhysicianBench",
+      "hash": "7d9fd5cf19789b6c02dc75ba89492a70d8bb8c688a5b0a23ea4e2908ce5766fa",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "RifleZhang/CORD_CPD",
+      "hash": "7e2f181ef830abdfd1d611c040efc841953299cc06007808bac9e3e399b06733",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Jybbs/chalkline",
+      "hash": "7e3c347c620cc9234ce6960f121a557b8c431416db924f600dc370e5e4720864",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "cmavro/ReaRev_KGQA",
+      "hash": "7e5b37e8587971a240f427e1079c50535b438979d31d6a6939e57526574e15c2",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "9 table captions, 174 decimal numbers",
+      "entry": {
+        "title": "ReaRev: Adaptive Reasoning for Question Answering over Knowledge Graphs",
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/cmavro/ReaRev_KGQA",
+        "repo_commit": "7d2a7786870c6b7a20d7c295bff7b8790cf41c03",
+        "paper_url": "https://arxiv.org/abs/2210.13650",
+        "license": "MIT",
+        "target_script": "main.py",
+        "run_command": "python main.py ReaRev --entity_dim 50 --num_epoch 200 --batch_size 8 --eval_every 2 --data_folder data/webqsp/ --lm sbert --num_iter 3 --num_ins 2 --num_gnn 2 --relation_word_emb True --experiment_name Webqsp322 --name webqsp",
+        "readme_url": "https://github.com/cmavro/ReaRev_KGQA/blob/7d2a7786870c6b7a20d7c295bff7b8790cf41c03/README.md"
+      },
+      "paper_id": "a3_043",
+      "k1": {
+        "started_at": "2026-10-24T23:15:43+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for Base==1.0.4",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.55,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "teles-eliandro/polymer-analysis-toolkit",
+      "hash": "7e75f0a281999670a6728bc47700b6d4adc4bbe8b36e6e868593bb95f3028bb9",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "no arXiv link in the README"
+    },
+    {
+      "full_name": "OpenBMB/InfiniteBench",
+      "hash": "7e7d79b401fdbb17cf3c6b4976f4d8c3a948c246b0c4eab9723727c71d4ab550",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "lucidrains/DALLE2-pytorch",
+      "hash": "7eb57ceadef6ce8995eb16309a3a2d3a598870ab3657673954963e64f6d0e25d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "shamim-hussain/tgt",
+      "hash": "7ed2886c807c56d15a6b9fee69d95974730fad1a8ff96dec0bf6ea2f8618957f",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, environment.yml"
+    },
+    {
+      "full_name": "HPCSys-Lab/simwave",
+      "hash": "7f384d7764d0a2610334db584eaf8f868775f879ad02526f093009ab9e70a82e",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license GPL-3.0"
+    },
+    {
+      "full_name": "hustvl/AlphaDrive",
+      "hash": "7f9e7de65880d39e69ba303dca5b536a9a80438e327b5c8384ab59a9c631e2cc",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "VITA-Group/Orthogonality-in-CNNs",
+      "hash": "7fcbe660f8708ebc2588121fc1f2c438e238bbe5153cd61ad9fc69b952682c61",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "torchmd/torchmd",
+      "hash": "807534a69350296d59f10ad78ef4abe2f9f09f6ffcba4b8731f460dded1a7dfa",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "raphischer/efficient-tsc",
+      "hash": "813d79eb8bc773560bcbce83b366f437d21d7a505af46f7b97d5eb54b75c2dd1",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "openclimatefix/graph_weather",
+      "hash": "81b0bbedf572d5d18b30849615bd805c8e1796ea105d56271383b9d51f50a313",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "kauziishere/lowLightImageEnhancement",
+      "hash": "82d07e64c79e2af95c120f6a7349bf43ed3de2a426bf0a81fa7b0623810f9bab",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "NSLab-CUK/MVCIB",
+      "hash": "83747fd11f5a70cc6bfd3bd1fa2d857da60209e1f6859a9141e2c3006fa34d8b",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "49mg/easy-search",
+      "hash": "83d9299bd3c67dd3d3536d94ea69b4803da1af8c48c7034f494f30a1357088cc",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "spinov001-art/python-data-scripts",
+      "hash": "84e9b2b4edbef614adb55ec00345fb5e96555173a46980cc56a9f641511c9a6e",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "KaiWU5/Awesome-AI4AI",
+      "hash": "84ee3759aa6d0b21897bbe45d5d176690160ccd295c60d6c9773d45797226ebc",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "czh-98/REALY",
+      "hash": "86400df5569a199e36ad00ee941efa3b31d2c3d28fa20ba0c4eb8b97d4d7c23b",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "CoIR-team/coir",
+      "hash": "8648c1f5e7cf983aded36cd501b0b9062bb72626f1e169fe7f5fb58c36dd1df9",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ibaiGorordo/ONNX-CREStereo-Depth-Estimation",
+      "hash": "873fff9520ffb0ce0c271aa7a9691d5c8acf89141076e07bf2a2fa2d8b889ff4",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "taizhenC/when-directional-accuracy-lies",
+      "hash": "886f296001872e1cc26927efc124c4f743004189f3e14de0e879c9ec29c16bde",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "tianyi-lab/HallusionBench",
+      "hash": "88d28f2ce69b8c9aa8038cd54ba7ac97441ed203e848b2e0f2110ea90ebb31ce",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "14 table captions, 813 decimal numbers",
+      "entry": {
+        "title": "AutoHallusion: Automatic Generation of Hallucination Benchmarks for Vision-Language Models",
+        "year": 2024,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/tianyi-lab/HallusionBench",
+        "repo_commit": "744007c232c292942c7f80eb61edb2465482da31",
+        "paper_url": "https://arxiv.org/abs/2406.10900",
+        "license": "BSD-3-Clause",
+        "target_script": "evaluation.py",
+        "run_command": "python evaluation.py",
+        "readme_url": "https://github.com/tianyi-lab/HallusionBench/blob/744007c232c292942c7f80eb61edb2465482da31/README.md"
+      },
+      "paper_id": "a3_044",
+      "k1": {
+        "started_at": "2026-10-24T23:16:31+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'tqdm'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.5,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "LARS-research/DiffMG",
+      "hash": "88fabd203628807d10592891903aad3a04caf0b2dcc0041544ef3596fdcaea64",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "sii-pilab/LiDAR4D",
+      "hash": "89b8923e33a121d39c43352370b16935c024153bf7df46b32cdd581143c5f535",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "basiralab/DGN",
+      "hash": "89fb1f1544507b186b61fa74b5e6d093d7a3db32771149acca1835c044879371",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "eloialonso/diamond",
+      "hash": "8a672d5084683464d745cf84055385df1a8094e04b2c8e581f7dfc7013d45693",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "mseitzer/pytorch-fid",
+      "hash": "8aa93dec02882ca02830fa809b2cb7839b0242fec4906a9d0f8e81c52444e653",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "lucidrains/musiclm-pytorch",
+      "hash": "8af67aefd798a5d5a544644d7566371024096abbece4b113e944180d60cb6068",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "CarlosZamG/spanish-math-problems-dataset",
+      "hash": "8b147348a9bc612cf608d715252cf81140ff0e2fb2a1c46610ae08ac7dd33366",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "thunderbolt215/UniPercept",
+      "hash": "8b40dbf7b7b211eb9bafd51b7af76ab3b01b3196ff9d3607728b7d23ea714379",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "ZethWang/CreativeBench",
+      "hash": "8c0702c91b6167899e940ed59ebd212ec1519c7342c656d0592902df658b21ef",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "mbzuai-oryx/Awesome-LLM-Post-training",
+      "hash": "8c099a142bcb36a5967358920fe5a4b035d6c9172e50457793a746c5702ff8aa",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "Humanity-s-Last-Code-Exam/HLCE",
+      "hash": "8d4fca9c16585838d91afef7f41744827d72e8145a6378c519e6d04218ca19e9",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "hukenovs/hagrid",
+      "hash": "8d54b512af9c7782925fbbcf6a4e23fcc14a8a40284639cc5675ca2b5427def1",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "microsoft/Graphormer",
+      "hash": "8d9f82039e2fee2804405e1aec61cd868ef9f8edb8f464d7f71a8a0e3b1af67e",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "ai-forever/ru-gpts",
+      "hash": "8e256fd650cb26974042dd576ef81c48d5dbf1f818061184cf4b1d6713cf176d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Nat-D/FeatureControlHRL",
+      "hash": "8e26223b3ca5688bf834afe96f64e46c6f5ef267798162bf12f6a9ef2a060d83",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "adobe-research/NoLiMa",
+      "hash": "8e6e7f3eb4ab8dff75f5955d4e7d6834e1a74988acd7e8c50a9e2ee7188ac3a0",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "hkchengrex/MiVOS",
+      "hash": "8f4d92575a2a2d3ac53441431587c40a987c8cbc1adaeb1afda3c050d981002c",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ImprintLab/Medical-Graph-RAG",
+      "hash": "8f4e65fe06a28ed7f28ccda64379c56d43001223c4db62035d1a8e4a8dbf4924",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "meituan-longcat/AMO-Bench",
+      "hash": "8f5bdb2af1c2375bc170f6232b8e5e6a95c990291b27dcba4579924c83bcec72",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "1 table captions and 461 decimal numbers in the paper's text"
+    },
+    {
+      "full_name": "nick-jhlee/optimal-mixture-markov",
+      "hash": "906d09ccbc363e810e0225ca3a07089c6b45a29e018ebe0acc19b319c49c7435",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "mitmul/chainer-nri",
+      "hash": "90a39f389221174599bd6bc15bdad166fc31b5f22b58ab2cfab4e462250ff1fe",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "KaiyangZhou/deep-person-reid",
+      "hash": "9108fe1196e07d87dd2b8c9441c807322f2cc6a031039c79646c9a0e58697268",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Motphys/UniLab",
+      "hash": "9110f1019d2f248ff221a18838b57906baa5e7d860316a0a223b7ecebe90744a",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Agnuxo1/Neuro3D-Lab",
+      "hash": "913a084abefbf4cf1e72dc1b6f04004979e366f3f72dfa8e1bdbe33c04945fa7",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, environments/requirements-cuda124-py313-windows.txt, requirements-completion.txt"
+    },
+    {
+      "full_name": "tsurumeso/vocal-remover",
+      "hash": "91749c68a8470d723f3355d8fa7de8828e2e79620300220cade8ada9f9c3cb9e",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "lpiccinelli-eth/UniDepth",
+      "hash": "919db9a0dc84504115b46f28af8a3b60a4f1a4b1ed9906fa1d3dc103c8759327",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "FengheTan9/U-Bench",
+      "hash": "922adaa44ca7dc4621ce61ce890f58fe50395075d9567ba78464bbe5c67c7be9",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, requirements.txt"
+    },
+    {
+      "full_name": "mlfoundations/open_clip",
+      "hash": "92ba15a49afa3f4a808d43081e00be7d89ce4ba4946801438351cfcbe2b20741",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "VITA-Group/GradientGCN",
+      "hash": "93244bca34fa4c8029f7087efe659b4d263b42669bcb2d6ee13e4c2c5175ea20",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "SitaoLuan/ACM-GNN",
+      "hash": "932e3f20b2fa1e4ded74cc699384e1f0f0c27dbe039de0ab2bb486fba7b66457",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "PolyAI-LDN/conversational-datasets",
+      "hash": "936589f02ddb00592d498a44a42ae5ee5c455b40c9aacc41ab0e5ed06d976178",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "3 table captions, 51 decimal numbers",
+      "entry": {
+        "title": "Customized Nonlinear Bandits for Online Response Selection in Neural Conversation Models",
+        "year": 2017,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/PolyAI-LDN/conversational-datasets",
+        "repo_commit": "50f626ad0d0e825835bd054f6a58006afa95a8e5",
+        "paper_url": "https://arxiv.org/abs/1711.08493",
+        "license": "Apache-2.0",
+        "target_script": "tools/tfrutil.py",
+        "run_command": "python tools/tfrutil.py size data/reddit-test",
+        "readme_url": "https://github.com/PolyAI-LDN/conversational-datasets/blob/50f626ad0d0e825835bd054f6a58006afa95a8e5/README.md"
+      },
+      "paper_id": "a3_045",
+      "k1": {
+        "started_at": "2026-10-24T23:17:31+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for absl-py==0.7.0",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.487,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "lucidrains/dreamer4",
+      "hash": "93b05a934f728adaefdde8c9fdfa1f4520408dd0434baf22c2aeda6a82655b09",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "IvanDrokin/torch-conv-kan",
+      "hash": "9432788373e30edb1f16354dcea5cc3394355277e29bb3e2c672cbd9b4dee2be",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "jacobgil/pytorch-zssr",
+      "hash": "946ca73a45e6c5f502405c81b8ecf0ae6d7e6f9b59eeb02a7030e618756b5c99",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "lt-asset/REPOCOD",
+      "hash": "94a778c8a80accbc487006999c453f851ff3afbb7eb4fac0774306c211b9c93d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "olivesgatech/Estimation-of-acoustic-impedance-from-seismic-data-using-temporal-convolutional-network",
+      "hash": "9576dd960860584966b1888444cb6996ded68006d79e74072d1672490a917b61",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "2 table captions and 14 decimal numbers in the paper's text"
+    },
+    {
+      "full_name": "saikatbsk/Vincent-AI-Artist",
+      "hash": "95e0a8a1fbf1da778d1197c4b06706f3edcd5e67f4aca39dd47ea732246f8059",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "rspence821505/Data-Consistent-Filtering",
+      "hash": "95e1c204782c9f555315cf729d123019e1de7ecbe22171bdd4de516948607a0e",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "2 table captions, 293 decimal numbers",
+      "entry": {
+        "title": "A Data-Consistent Approach to Ensemble Filtering",
+        "year": 2026,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/rspence821505/Data-Consistent-Filtering",
+        "repo_commit": "81711d101fb16e5e3a2c974f62a308f0f02a36cb",
+        "paper_url": "https://arxiv.org/abs/2605.11282",
+        "license": "MIT",
+        "target_script": "scripts/reproduce_figures.py",
+        "run_command": "python scripts/reproduce_figures.py --compare",
+        "readme_url": "https://github.com/rspence821505/Data-Consistent-Filtering/blob/81711d101fb16e5e3a2c974f62a308f0f02a36cb/README.md"
+      },
+      "paper_id": "a3_046",
+      "k1": {
+        "started_at": "2026-10-24T23:19:33+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'pyparsing'",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 1.111,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "jhare96/reinforcement-learning",
+      "hash": "9601d51c5067679de299a64ac4d24c3657e37d35d0c3512d3f45d1617db13cb6",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "thu-ml/MLA-Trust",
+      "hash": "9626723f6168913dff22b3c49f501fae108875ecd840905361c26360561432c0",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in pyproject.toml"
+    },
+    {
+      "full_name": "una-dinosauria/human-motion-prediction",
+      "hash": "98204e6275099eddd875da6fdafb373c23dd7d31ec1d6129ed0d855fcdb911e2",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "2 table captions, 471 decimal numbers",
+      "entry": {
+        "title": "On human motion prediction using recurrent neural networks",
+        "year": 2017,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/una-dinosauria/human-motion-prediction",
+        "repo_commit": "b8f0cb57846e9d2d5688a3e30ab7d8840bb65f38",
+        "paper_url": "https://arxiv.org/abs/1705.02445",
+        "license": "MIT",
+        "target_script": "src/translate.py",
+        "run_command": "python src/translate.py --action walking --seq_length_out 25 --iterations 10000",
+        "readme_url": "https://github.com/una-dinosauria/human-motion-prediction/blob/b8f0cb57846e9d2d5688a3e30ab7d8840bb65f38/README.md"
+      },
+      "paper_id": "a3_047",
+      "k1": {
+        "started_at": "2026-10-24T23:20:55+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'h5py'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.466,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "xuanyuzhou98/SqueezeSegV2",
+      "hash": "984fdf90654eabf9cf08aae285c4fe948928a38bbc61106045c67b52cf4fa9f2",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, requirements.txt"
+    },
+    {
+      "full_name": "snap-stanford/ViRel",
+      "hash": "98a4f5301e9eb015eccc00ecb099688c5a3954819242a9dc771ec560d80a31f2",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "NSLab-CUK/Unified-Graph-Transformer",
+      "hash": "995d1045f09478b59c2906eb3788fadbba245bde35f77e3edb9002c5fcd87c36",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "tushar2704/ColabMixtral",
+      "hash": "99fb95862c1cf6eca3f8562400218b581ecafb2da1a6e24a685a5129673a9fa9",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "CR-Gjx/LeakGAN",
+      "hash": "9a00ab2cbf164fe53ec67a32d3a7e4c84f399d42aa5cb417492bf295b0d96027",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "Thesimpleex/dutchbook",
+      "hash": "9a142c8a02b15a4e09e97ed0ae4cee592ce793b3cde1fd41d4a231c7fad546ad",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "no arXiv link in the README"
+    },
+    {
+      "full_name": "pyg-team/pytorch_geometric",
+      "hash": "9ad722b99a937fc504ff2021dbe8b1eba2a7e87b9d82fde14690204c3096d648",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "xahidbuffon/SVAM-Net",
+      "hash": "9afc706881b99988fa4b4181e3809a29e491e5c77298fd59740760962f330591",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license GPL-3.0"
+    },
+    {
+      "full_name": "etaoxing/multigame-dt",
+      "hash": "9d71bfb734b46708a6aef48d4accb5ff9b419bc13b25d4d806acde4c2f3b9ca9",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "3 table captions, 251 decimal numbers",
+      "entry": {
+        "title": "Multi-Game Decision Transformers",
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/etaoxing/multigame-dt",
+        "repo_commit": "2af29d3811bfa38c6cba03eecc81dc7d46578540",
+        "paper_url": "https://arxiv.org/abs/2205.15241",
+        "license": "MIT",
+        "target_script": "scripts/download_weights.py",
+        "run_command": "python scripts/download_weights.py",
+        "readme_url": "https://github.com/etaoxing/multigame-dt/blob/2af29d3811bfa38c6cba03eecc81dc7d46578540/README.md"
+      },
+      "paper_id": "a3_048",
+      "k1": {
+        "started_at": "2026-10-24T23:20:57+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for gym==0.25.2",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.527,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "molmod/stacie",
+      "hash": "9dc6bdcf96c735b15bdf42098b850c2994a9fe851d477fc2eb702e3fb0b9d14c",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license LGPL-3.0"
+    },
+    {
+      "full_name": "AlexiaJM/Deep-learning-with-cats",
+      "hash": "9e35250865a8f11253cdd84153aa8664b84a4beba0d7ba88359e69a15e1cd469",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license GPL-3.0"
+    },
+    {
+      "full_name": "HySonLab/EquiHGNN",
+      "hash": "9e53c6ca9f13fff006928b1e7e8149d1dcb5bcd67ba72d91cfb760a475131a9f",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "aidevveloper/Image-Classification-on-small-datasets-in-Pytorch",
+      "hash": "9f28176367a50ec8915b66b03a4a297f90d90b675f6c19d7f6618933714be5ea",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "lucidrains/byol-pytorch",
+      "hash": "a009881543eb3a9441729e852c62630b060ca2f94d832e8c6a7517352fccd8bd",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Zebreu/ConvolutionalEmotion",
+      "hash": "a07ab6dfd3fb6bcb10553311574ffb56c68283509f5afaa3f77f574379d6adce",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "knodle/knodle",
+      "hash": "a07f5eb5a8a09885be6c3c06735797a18ed097d8f465dbd4ec2b9dfde7bde93a",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ternaus/imread_benchmark",
+      "hash": "a1c47cd9544cbe24107472072ef3eeddc0ea1a5e3c6704a354b18a098a25148d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "yifanjiang19/Pedestrian-Synthesis-GAN",
+      "hash": "a2b957d57a5e4721546b0075579e044c9eb188879010be99074cdefb57bc2269",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "nrontsis/PILCO",
+      "hash": "a2bd54c66f2ea3fa763bb6cd4450bec2397f640ebdad1012a1659328a134d4f9",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, setup.py"
+    },
+    {
+      "full_name": "KAIST-VICLab/SplineGS",
+      "hash": "a2ef31c8d240f8d78f1ef44e9b39f6b05d75a17fa02d2374dd36f7458e58ab96",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "automl/Auto-PyTorch",
+      "hash": "a34aebbcb1b723fa2861a434f240de114783983e4559d2da2a00dd7a34b53228",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "machinecurve/extra_keras_datasets",
+      "hash": "a4ada6670bc57dbef6cc35894b8168a079e7b07971cee89a8b4afd1340342039",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "vene/sparse-structured-attention",
+      "hash": "a578e33eb819615c16d9677cbe54bccade72421c5abf1d4618d6b7ff1d5ed52d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "VlSomers/bpbreid",
+      "hash": "a65e05101e6c96ec3fb9c3be132637eca96df1bf943447d829a5d0b7b7627208",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "kamenbliznashki/normalizing_flows",
+      "hash": "a68243176fa844c3366b07cd15c9ccc9ed281f8dd210f7fb6932340d6abe1f3b",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "geoelements/gns",
+      "hash": "a6b183e5abcf988d1963912d6804f7dce1113e130addcdb1ed1bb83259218782",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "myfavouritekk/T-CNN",
+      "hash": "a77436befeedfcbd3a2bb3ee45c159cfb977b27c5adb33d9090bb805a1f525f5",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "no arXiv link in the README"
+    },
+    {
+      "full_name": "INVOKERer/DeepRFT",
+      "hash": "a8571a60e7863bb0876734ce0aa06b4033e9ddf5b6f92d9b515a6488db4d2da3",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "theo-andrieux/spectral_galerkin_heat",
+      "hash": "a904248901a3013fec8c541a7eafc69ef715e87db82c30133f4ccf84eb20466d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "DataManagementLab/ParaphraseBench",
+      "hash": "a99cae36c68742f7afedd6556ce6bc9dd8d23a0b923f9c3676710c36e707c834",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "lucidrains/alphafold3-pytorch",
+      "hash": "a9bb52acaae32a9a6ba94aa534122a731bd36637f6c3d83520c616f720e9dd02",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "lgalke/vec4ir",
+      "hash": "aa081ec281fd6be85d4b48da8fbb39cad9f82b562b639712883c1aefadfadc1e",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "raoyongming/HorNet",
+      "hash": "aaaf3bb216db363be2a6bd71d8337077ae18ad1a0b3b84ec6da9fde029e066fa",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Rebeka-P/MIDAL-Dataset",
+      "hash": "aaf57299f1cc55123255b6bd16b0b316c8920432b5c4714c805ddf0ab263100e",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "simantalahkar/lammpskit",
+      "hash": "ab48434af2d06300af2b739a65c5c58109f2650811075313a88fc4a4dee10845",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license GPL-3.0"
+    },
+    {
+      "full_name": "cf020031308/LinkDist",
+      "hash": "ab6a8806007ae4928052dd69e5d7d2c221e942e2a0270773e59fbee30b53bc16",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "Rishit-dagli/CPPE-Dataset",
+      "hash": "ac0f0ba68e47e71df7ac944c7824c60d143b19de0d667cc25a24fe071ced4aed",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "google/qkeras",
+      "hash": "ac5bfcd58ee892864ac725d65b8e413b56b47364b73d42508617b13dc2c25f95",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Lilac-Lee/Neural_Scene_Flow_Prior",
+      "hash": "acc9ad57f1fda9f802c3c8f059d91f46c6f16f3b8eb2fe9a9d5acc9f43122997",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "VITA-Group/Deep_GCN_Benchmarking",
+      "hash": "ad83c3d0dad9cc2e05b5e9e9813cd3d08ad9d3038185eb2f502b63be8ca09265",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "lucidrains/vector-quantize-pytorch",
+      "hash": "afd9abc7788d4aa89e2714678afc5ee6606cdb0aead1613fe04e14ec4f0d5e38",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "j-min/CLIP-Caption-Reward",
+      "hash": "b04ad10e1e4d8f66992db95cddf9d9ef6483bbbf81fff20003b7f9c3f1ae4196",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "lucidrains/vit-pytorch",
+      "hash": "b0adafebfb3dea956164c55fa21be294c738a136551732147a1082b32dad47b9",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "veronicachelu/meta-learning",
+      "hash": "b12b2e973d83ec478c318598a5a61ac734ba5cf4200a0291050022aa8c4fc546",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "GRAPH-0/JODO",
+      "hash": "b19d25e494130b573a659773f7afa0f0e0058093b1edf28473a5d0e70615d967",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "Westlake-AI/openmixup",
+      "hash": "b1d79cc4dedcf18013967dc03b0fe2fd91d54058ac5368b58507e39017e47578",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "PyGCL/PyGCL",
+      "hash": "b27e0dee92ea884457c31d85f04f98a6f5ef3914447dc5f22439645e590d2ac5",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "CLUEbenchmark/CLUE",
+      "hash": "b2ee0a60577e8daed0a1164111c2e7b22f1ad5f41545eadeccfe656f9e618597",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "venomouscyanide/ScaLed",
+      "hash": "b309134df8bd0efda9cc87b620e84449527fd078a40096a9a9a433023aaacb98",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "d-r-o-w-e/mvf",
+      "hash": "b36221e6c8b1eaee268422b1937358503b10f759935a4c5270119a6ab2086878",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "wasidennis/AdaptSegNet",
+      "hash": "b3bc29768165bfac7da262f13a7c4e97ad4c0164160d584b1b00228c38e5af61",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "ilayluz/learning-amg",
+      "hash": "b3fa85b8d3a4b32db29029d0e82eb6bbd14085a1d7cada8c18dc84c5f955d824",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "takuseno/ppo",
+      "hash": "b48b54d8c39c8d15c1329407bfa399024c30c56e63f1ca06bbe90403e328fd53",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "7 table captions, 212 decimal numbers",
+      "entry": {
+        "title": "Proximal Policy Optimization Algorithms",
+        "year": 2017,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/takuseno/ppo",
+        "repo_commit": "7147f9ae28ffbb1223b44b6eba7d70f1f08b981b",
+        "paper_url": "https://arxiv.org/abs/1707.06347",
+        "license": "MIT",
+        "target_script": "train.py",
+        "run_command": "python train.py [--env env-id] [--render] [--logdir log-name]",
+        "readme_url": "https://github.com/takuseno/ppo/blob/7147f9ae28ffbb1223b44b6eba7d70f1f08b981b/README.md"
+      },
+      "paper_id": "a3_049",
+      "k1": {
+        "started_at": "2026-10-24T23:21:18+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'cv2'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.514,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "JieFeng-cse/Stable-DDPG-for-voltage-control",
+      "hash": "b4975d9faf895aa744c65f25e8d6997afc6d943ee132bffe3f5c593d9a2f61ca",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "MicheleDiSabato/BayesianOptimizationKG",
+      "hash": "b4d3b080c09cbc7c8b5088d59ae9b3e6f16a502ef1b36ea2389c1c4dd8ac0604",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "rajammanabrolu/Q-BERT",
+      "hash": "b6584162dd573dc55e4a2b55d03e5c2ca269b35795519c6a6d6d74e4b21322fa",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "jsikyoon/visual-interaction-networks_tensorflow",
+      "hash": "b7a03a5c18752b1532961301e126ecbb1bf590d2eb752dc4ed40108e50ceb6ae",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "leduckhai/wav2graph",
+      "hash": "b7cc34d615fdab33b5f078d5bb979c7883220265ca850fc1ba7d0f1f4f45a712",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Commonwealth-Bank-of-Australia/PSAO-IJCAI-release",
+      "hash": "b8cab87be0a257a784ff4d8ff1d61c8b6266909c02757a83f767db704509fcf0",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "17 table captions, 277 decimal numbers",
+      "entry": {
+        "title": "Prompt Segmentation and Annotation Optimisation: Controlling LLM Behaviour via Optimised Segment-Level Annotations",
+        "year": 2026,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/Commonwealth-Bank-of-Australia/PSAO-IJCAI-release",
+        "repo_commit": "9f6d3b7713ba15b9fef649d09ddc9191cc9c20b4",
+        "paper_url": "https://arxiv.org/abs/2605.14561",
+        "license": "MIT",
+        "target_script": "app.py",
+        "run_command": "python app.py --config gpt4o/psaollm_5sent.yaml --verbose",
+        "readme_url": "https://github.com/Commonwealth-Bank-of-Australia/PSAO-IJCAI-release/blob/9f6d3b7713ba15b9fef649d09ddc9191cc9c20b4/README.md"
+      },
+      "paper_id": "a3_050"
+    },
+    {
+      "full_name": "songlab-cal/tape-neurips2019",
+      "hash": "b91a8fc0e3ed9aeef478bb82f7a55c9f105b9d56eb1c20c47d2a2d97536ea81c",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "JeffersonQin/YuzuMarker.FontDetection",
+      "hash": "b95d5695b1a8d510a9dfb768e447fdf35bd40dde8f169354316e1081da767802",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "basveeling/pcam",
+      "hash": "b96cabb8bd9faf46f8ce545e62bfc8f68e2e5da130bcaffc67279f0a6ebd4af9",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "lucidrains/pi-zero-pytorch",
+      "hash": "b9cf3a51435b169f8f9be771879cbc4037454dc164ece7e7de675632164f180c",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ibaiGorordo/ONNX-HybridNets-Multitask-Road-Detection",
+      "hash": "ba392f5358f26528148a8aa2d7e73948012bf3e818b6d83b718ea1ce177c86a3",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in requirements.txt"
+    },
+    {
+      "full_name": "Privatris/AgentLeak",
+      "hash": "bb8469b606e9665092695a4f1e8e4fd82f760eb4ab64df26d4515d1e61212671",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "NSLab-CUK/S-CGIB",
+      "hash": "bba7bfea00a099f865cb4e35f371a71b5c8b3fdf604f2ecf9ed424744cf8810b",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "burning-cost/insurance-fairness",
+      "hash": "bbd3d2e8209eb5f156ae916ead5d257745a33d307eb24fa82257b11276a9b142",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "zli12321/Vision-SR1",
+      "hash": "bc33bff289fd59ecacfa0e0b905556fecb47bd79fa876d2853d778a3434a2be4",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "Confusezius/Deep-Metric-Learning-Baselines",
+      "hash": "bc75ca08379a191e2195d853cf40648fb10b6bb2000f8deadff815d75baa1730",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, requirements.txt"
+    },
+    {
+      "full_name": "BoLiu-USTC/HGPTrans",
+      "hash": "bc8e875a017decbd3114159838d1e7a7a7ee5195e901389f44a01d5b62e4516c",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README, requirements.txt"
+    },
+    {
+      "full_name": "jacobgil/keras-dcgan",
+      "hash": "bceb4b681d0ad659299cd5d5666c535efae175d4c811e43e80607cb2db48fc06",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "joisino/laf",
+      "hash": "bcef64742dd565d6dd4d52946fd903c0a9516a9224d8b450be2179ec262881a4",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "jieyilong/tree-of-thought-puzzle-solver",
+      "hash": "bd5c801f20372db12d644a51a587578ad993fcdbd6f0bce460d461bd8ec5e8a3",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "0 table captions and 25 decimal numbers in the paper's text"
+    },
+    {
+      "full_name": "tranhungnghiep/AnalyzeKGE",
+      "hash": "bdb1792ae29e544a031394e9ea0884159eb8363dc14757babc773b7e59acc134",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "mujocolab/mjlab_playground",
+      "hash": "bdc29e077a2f4860936ad72bdf407b78e789667418052b5cb6281a8de8924dd0",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "cyber-shuttle/cybershuttle-ai4science-foundry",
+      "hash": "bde1fd6a0f5114a8fd84a2aca87a3c96d11a7c08b937bdf425fb04c1702dbd05",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "tomekkorbak/pretraining-with-human-feedback",
+      "hash": "beadd978defad9915d3a76334c634cfc9a8262c3f68d16b68915adf3c4129ef0",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "10 table captions, 615 decimal numbers",
+      "entry": {
+        "title": "Pretraining Language Models with Human Preferences",
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/tomekkorbak/pretraining-with-human-feedback",
+        "repo_commit": "152e6b656790d182d0d13a912ece6560c7a287ae",
+        "paper_url": "https://arxiv.org/abs/2302.08582",
+        "license": "MIT",
+        "target_script": "train.py",
+        "run_command": "python train.py --task configs/toxicity/pretrain.yml --method configs/toxicity/mle.yml",
+        "readme_url": "https://github.com/tomekkorbak/pretraining-with-human-feedback/blob/152e6b656790d182d0d13a912ece6560c7a287ae/README.md"
+      },
+      "paper_id": "a3_051"
+    },
+    {
+      "full_name": "leduckhai/MultiMed",
+      "hash": "bec7f7249c04e8a9ed026526bfc3a10539699b8767a471362827248e13be157f",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
     }
   ],
   "started_epoch": 1792875554.0,
   "started_at": "2026-10-24T20:59:14+00:00",
-  "written_at": "2026-10-24T23:13:54+00:00",
+  "written_at": "2026-10-24T23:21:55+00:00",
   "rules": "docs/AUTO_SEARCH_ROUND3.md",
   "note": "selected, non-representative list; not a success rate; K2 passers are match candidates, not verified",
-  "evaluated": 1031,
-  "runs": 38,
+  "evaluated": 1223,
+  "runs": 49,
   "k1_passed": 0,
   "k2_passed": 0,
   "both_passed": 0,

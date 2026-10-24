@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/reproduce_figures.py", line 30, in <module>
+    from src.figures import FIGURES, figure_module, outputs, render  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/src/figures/__init__.py", line 22, in <module>
+    import matplotlib.pyplot as plt
+  File "/workspace/deps/matplotlib/__init__.py", line 161, in <module>
+    from . import _api, _version, cbook, rcsetup
+  File "/workspace/deps/matplotlib/rcsetup.py", line 35, in <module>
+    from matplotlib._fontconfig_pattern import parse_fontconfig_pattern
+  File "/workspace/deps/matplotlib/_fontconfig_pattern.py", line 15, in <module>
+    from pyparsing import (
+ModuleNotFoundError: No module named 'pyparsing'
