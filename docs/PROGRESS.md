@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): blind claim extraction for cand_002, the one candidate that passed (2026-10-25 00:50 +03:00, Issue #464)
+- Three independent fresh `claude -p` passes (tools Read, Write, Edit, Glob, Grep) over a blind packet asked for the paper values that match the five metrics of the run output; stored under `data/candidates/round2/cand_002/blind_extraction/`. No question has two agreeing passes with a value; one pass found only the simulation settings (FP 0.1 %, FN 30 %), which are settings and not results. No claim candidate exists and no claim is accepted. The form for the owner is outside the repository.
+- Not verified: the paper PDF (not downloadable; the Europe PMC full-text XML was used, so `page` is a text chunk number).
+
 ### data(corpus): repair round closed: 1 of 14 passed after repair (2026-10-25 00:30 +03:00, Issue #457)
 - cand_020 recorded as not repairable (four pins exist only as source distributions on PyPI; the README takes them from an extra wheel index). The round-2 evaluation (`python scripts/candidate_round2.py summary`, `data/candidates/round2/evaluation.json`): 15 repair logs (the 14 of round 1 and cand_020); passed: cand_002 only. cand_011 ran to exit 0 but printed no `name: number` line. No other risky candidate qualified.
 - Not verified: any table match for cand_002 (none found in the paper text).

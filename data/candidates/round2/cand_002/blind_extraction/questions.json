@@ -1,0 +1,25 @@
+{
+  "paper_id": "cand_002",
+  "queries": [
+    {
+      "query_id": "fp_rate",
+      "question": "The false positive rate (FP, error rate of the single-cell mutation calls) that the paper reports for its own method on simulated or real data."
+    },
+    {
+      "query_id": "fn_rate",
+      "question": "The false negative rate (FN) that the paper reports for its own method on simulated or real data."
+    },
+    {
+      "query_id": "crp_alpha",
+      "question": "A value of the concentration parameter of the Chinese restaurant process (CRP a_0 / alpha) that the paper reports or uses."
+    },
+    {
+      "query_id": "n_clusters",
+      "question": "The number of clusters (clones) that the paper's method infers on a data set, with the data set named."
+    },
+    {
+      "query_id": "psrf",
+      "question": "A value of the Lugsail PSRF (or Gelman-Rubin) convergence statistic that the paper reports."
+    }
+  ]
+}

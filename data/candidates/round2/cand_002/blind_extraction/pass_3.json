@@ -1,0 +1,29 @@
+{
+  "cand_002": {
+    "fp_rate": {
+      "status": "not_found",
+      "reason": "The paper only gives the FP rate (0.001) as a fixed simulation setting, not an FP rate estimated or reported for BnpC's own calls; no inferred FP rate is printed.",
+      "claim": null
+    },
+    "fn_rate": {
+      "status": "not_found",
+      "reason": "The paper only gives the FN rate (0.3) as a fixed simulation setting, not an FN rate estimated or reported for BnpC's own calls; no inferred FN rate is printed.",
+      "claim": null
+    },
+    "crp_alpha": {
+      "status": "not_found",
+      "reason": "The concentration parameter alpha0 is said to be learned (Escobar and West) but no value is reported in the text.",
+      "claim": null
+    },
+    "n_clusters": {
+      "status": "not_found",
+      "reason": "No total number of clones inferred by BnpC on a named data set is stated; only qualitative statements or per-tissue counts (three clones in tissue C2) are given.",
+      "claim": null
+    },
+    "psrf": {
+      "status": "not_found",
+      "reason": "The Gelman-Rubin diagnostic is mentioned as implemented but no PSRF value is reported in the text.",
+      "claim": null
+    }
+  }
+}
