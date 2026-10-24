@@ -4,7 +4,7 @@
 
 ---
 
-## Current Status (2026-10-24 21:06 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
+## Current Status (2026-10-25 01:30 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
 
 - **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). The stages are recorded in the entries below; the final report is `docs/report/REPORT.md` and its numbers are generated (`python scripts/report_numbers.py --check`).
 - **Pilots** (12 papers: 6 seed papers in Pilots 1 to 3, 6 new papers in Pilot 4): pilot success 0 / 6 (Pilot 1), 1 / 6 (Pilot 2), 2 / 6 (Pilot 3, with four settings chosen after Pilot 2's failures), and 1 / 6 for the new papers at their first attempt (Pilot 4). `docs/FIELD_ANALYSIS.md` section 8 (generated) has the pool-wide rates, the human-intervention table, the autonomy rate, and a descriptive factor table (exploratory, n = 12).
@@ -15,6 +15,7 @@
 - **External reference:** the ReScience C selection evaluated 65 articles and selected none (`docs/EXTERNAL_VALIDATION.md`); no external run was made.
 - **Open:** the release (#45), the old M3 issues (#19 to #24), #34 and #35, the standing issue #115, and `docs/PLAN_2026-10-01.md` question Y2 (the AI-attribution rule; issue #165 does not exist in this repository).
 - **Since 2026-10-20 (issues #435 to #452):** the six images rebuilt from scratch with time and size (`docs/ENVIRONMENT.md`); the protocol of the candidate runs written before the runs and the 14 candidates run once each, **0 of 14 passed** (`docs/CANDIDATE_RUNS.md`, `docs/CANDIDATES.md`; a selected list, not a success rate); a fresh run of `paper_006` from a clean clone of the public repository completed (2,490 s, Update 2 of the walk-through); the tolerance probe (`docs/TOLERANCE_PROBE.md`; hand-made claims, not a real error); the demo script (`docs/DEMO_SCRIPT.md`); the bug hunt (three bugs fixed in #448 to #450, seven suspicions in `docs/BUG_HUNT.md`); the report has two new generated sections (6.8 and 6.9). Open: `docs/PENDING.md` (D9 candidate papers and D10 two scorer rules are new).
+- **Candidate repair round (2026-10-25, #455 to #465):** a separate round with a protocol written before the runs (`docs/CANDIDATE_RUNS_ROUND2.md`): first attempt 0 of 14, with repair 1 of 14 (`cand_002`; its output matches no table of its paper); the others stopped because the failure needs a forbidden repair. Selected list, not a success rate. No claim accepted.
 - **Tests:** 1,028 passed, 9 skipped locally (2026-10-24) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
 
 ---
@@ -39,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### docs: Round 2 results in the candidate documents, PENDING, README and the report (2026-10-25 01:30 +03:00, Issue #465)
+- `scripts/candidates_build.py --doc` now also writes the generated Round 2 results (tables, Wilson intervals, outcomes) into `docs/CANDIDATES.md` and section 12 of `docs/CANDIDATE_RUNS_ROUND2.md`; `scripts/report_numbers.py` has the block `candidateround2` (`--check` passes); PENDING D9, README and this file updated.
+- Not verified: any table match of the passing candidate.
 
 ### data(corpus): blind claim extraction for cand_002, the one candidate that passed (2026-10-25 00:50 +03:00, Issue #464)
 - Three independent fresh `claude -p` passes (tools Read, Write, Edit, Glob, Grep) over a blind packet asked for the paper values that match the five metrics of the run output; stored under `data/candidates/round2/cand_002/blind_extraction/`. No question has two agreeing passes with a value; one pass found only the simulation settings (FP 0.1 %, FN 30 %), which are settings and not results. No claim candidate exists and no claim is accepted. The form for the owner is outside the repository.

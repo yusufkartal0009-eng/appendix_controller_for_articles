@@ -36,6 +36,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 - `rescience`: the selection of external-validation articles (`data/external_validation/evaluation.json`; #400)
 - `candidateruns`: the 14 selected candidate papers run once in the sandbox: tried, passed, Wilson interval, causes
   (`data/candidates/runs/evaluation.json`; #437)
+- `candidateround2`: the repair round of the candidates: first attempt, with repair, considered, run, Wilson intervals
+  (`data/candidates/round2/*/repair_log.json`; #457)
 - `toleranceprobe`: where the Tier 2 decision changes when a hand-made claim is moved away from a real run's value
   (`data/tolerance_probe/results.json`; #442)
 
@@ -56,7 +58,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from scripts import memory_runs, run_stability, tolerance_probe
-from scripts.candidates_build import failure_cause, wilson_interval
+from scripts.candidates_build import failure_cause, round2_numbers, wilson_interval
 
 REPORT_PATH = project_root / "docs" / "report" / "REPORT.md"
 DATA = project_root / "data"
@@ -367,6 +369,21 @@ def candidateruns_block(data: Path = DATA) -> str:
                        "This is a selected list, not a sample; it is not a success rate.")])
 
 
+def candidateround2_block(data: Path = DATA) -> str:
+    n = round2_numbers(_load(data / "candidates" / "runs" / "evaluation.json"), data / "candidates" / "round2")
+    lo1, hi1 = wilson_interval(n["first_passed"], n["first_total"])
+    lo2, hi2 = wilson_interval(len(n["repaired_passed"]), n["repaired_total"])
+    lo3, hi3 = wilson_interval(len(n["passed"]), len(n["considered"]))
+    names = ", ".join(n["passed"]) or "none"
+    return "\n".join([HEADER.format(sources="data/candidates/round2/*/repair_log.json (scripts/candidate_round2.py)"), "",
+                      (f"First attempt without repair (round 1): {n['first_passed']} of {n['first_total']}, Wilson 95 % interval "
+                       f"{100 * lo1:.1f} % to {100 * hi1:.1f} %. With repair (round 2, the same {n['repaired_total']}): "
+                       f"{len(n['repaired_passed'])} of {n['repaired_total']}, {100 * lo2:.1f} % to {100 * hi2:.1f} % ({names}). "
+                       f"Considered in round 2 (those and the risky candidates that qualified): {len(n['passed'])} of "
+                       f"{len(n['considered'])}, {100 * lo3:.1f} % to {100 * hi3:.1f} %; run in the sandbox at least once: "
+                       f"{len(n['ran'])}. This is a selected list, not a sample; it is not a success rate.")])
+
+
 def toleranceprobe_block(data: Path = DATA) -> str:
     probe = _load(data / "tolerance_probe" / "results.json")
     lines = [HEADER.format(sources="data/tolerance_probe/results.json (scripts/tolerance_probe.py)"), "",
@@ -382,7 +399,7 @@ def toleranceprobe_block(data: Path = DATA) -> str:
     return "\n".join(lines)
 
 
-BLOCKS = {"candidateruns": candidateruns_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+BLOCKS = {"candidateruns": candidateruns_block, "candidateround2": candidateround2_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
           "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
