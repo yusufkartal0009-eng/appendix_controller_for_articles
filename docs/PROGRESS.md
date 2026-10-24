@@ -40,6 +40,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): run mechanism of the candidate repair round (2026-10-24 22:35 +03:00, Issue #457)
+- `scripts/candidate_round2.py` (`fetch`, `run`, `summary`) and `tests/test_candidate_round2.py`: one repair attempt per call, from the `repair_log.json` of the candidate; the rules of `docs/CANDIDATE_RUNS_ROUND2.md` are checked in code (allowed repair kinds, a log line for every repair, at most two repairs, no writable copy of the repository, an attempt is never run twice, round 1 records are not touched). Run limit 3600 s, install 1800 s, `--memory 50% --cpus 4`. 1,037 tests pass, 9 skipped.
+- Not verified: the runner against a real container (the first real attempt is the check).
+
 ### docs(corpus): protocol of the candidate repair round, written before any round-2 run (2026-10-24 22:15 +03:00, Issue #455)
 - `docs/CANDIDATE_RUNS_ROUND2.md`: scope (the 14 round-1 candidates and the risky candidates whose README data can be downloaded within 20 GB, 3 GB per file), the five allowed repairs and the forbidden ones, at most two repair rounds per candidate, the pass definition of round 1 plus the paper-table match, limits (run 3600 s, install 1800 s, one sandbox run at a time), and the three separate counts with Wilson intervals from a script. Round 1 and its records are not touched.
 - Not verified: nothing has been run in round 2 yet.
