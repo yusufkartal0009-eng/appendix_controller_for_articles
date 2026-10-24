@@ -135,12 +135,12 @@ Run: stage=STAGED build=BUILT install=INSTALLED run=COMPLETED exit_code=0
   [tier4] Structured output artifacts / execution logs captured (+20)
 
 ----------------- SCORING BREAKDOWN -----------------
-Tier 1 (Build & Environment)  : 100.0 / 100 (Weight: 35%)
-Tier 2 (Metrics Alignment)    :   0.0 / 100 (Weight: 35%)
-Tier 3 (Seed Stability)       :  75.0 / 100 (Weight: 15%)
-Tier 4 (Artifacts & License)  :  80.0 / 100 (Weight: 15%)
+Tier 1 (Build & Environment)  : 100.00 / 100 (Weight: 35%)
+Tier 2 (Metrics Alignment)    :   0.00 / 100 (Weight: 35%)
+Tier 3 (Seed Stability)       :  75.00 / 100 (Weight: 15%)
+Tier 4 (Artifacts & License)  :  80.00 / 100 (Weight: 15%)
 -----------------------------------------------------
-TOTAL COMPOSITE SCORE         :  58.2 / 100
+TOTAL COMPOSITE SCORE         :  58.25 / 100
 STATUS CLASSIFICATION         : [Needs Review]
 SUMMARY / AI RATIONALE        : Needs Review (Total: 58.25/100). Code executed cleanly, but claimed metrics not found in the output (nothing was compared).
 -----------------------------------------------------

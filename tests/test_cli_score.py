@@ -161,3 +161,15 @@ def test_consensus_candidates_are_used_only_when_asked_for_and_the_score_says_so
     assert "auto-consensus candidates that nobody reviewed" in out and "ft_transformer_rmse" in out
     labeled = [s for s in saved_scores(session) if "auto-consensus" in (s.summary or "")]
     assert len(labeled) == 1 and labeled[0].summary.startswith("[claims: auto-consensus candidates, not accepted by a person]")
+
+
+def test_the_printed_scores_show_the_stored_value_and_not_a_half_even_rounding_of_it(capsys):
+    from src.models import ScoreBreakdown
+
+    # 58.25 is stored (and shown by the dashboard and in the summary); "%.1f" would print 58.2, and 93.25 would print 93.2
+    for total in (58.25, 93.25, 91.75):
+        cli.print_breakdown(ScoreBreakdown(tier1_build=100.0, tier2_metrics=12.25, tier3_stability=75.0, tier4_artifacts=80.0,
+                                           total_score=total, status_label="Needs Review", summary="s"))
+        out = capsys.readouterr().out
+        assert f"{total:.2f} / 100" in out, total
+        assert "12.25 / 100" in out
