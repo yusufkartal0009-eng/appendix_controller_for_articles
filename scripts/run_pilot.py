@@ -43,6 +43,7 @@ import argparse
 import copy
 import json
 import os
+import posixpath
 import shlex
 import shutil
 import subprocess
@@ -147,16 +148,27 @@ def pilot4_entry(paper_id: str, corpus_path: Path | None = None, correction: dic
     """The corpus entry with the run setup of docs/PILOT_4.md: the README command as written (section 3), plus the one
     correction round when given (section 4). The entry in the corpus file is not modified."""
     entry = copy.deepcopy(load_entry(paper_id, corpus_path or CORPUS_EXPANSION_PATH))
-    tokens = shlex.split(entry["run_command"])
-    if len(tokens) < 2 or tokens[0] != "python" or tokens[1].startswith("-"):
-        raise ValueError(f"{paper_id}: the run command must be `python <script> <arguments>`: {entry['run_command']!r}")
-    if tokens[1].removeprefix("./") != entry["target_script"]:
-        raise ValueError(f"{paper_id}: the script of the run command is not the target script")
+    # A corpus entry may name the folder the command is run in (`working_dir`, relative to the repository root) and, for a
+    # README that says `export ...; python ...` or two commands in order, a `shell_command` that `sh -c` runs as written
+    # (the candidate runs, docs/CANDIDATE_RUNS.md). No corpus of the seed or the expansion has either key.
+    working_dir = entry.get("working_dir") or ""
+    shell_command = entry.get("shell_command")
+    if shell_command:
+        args: list[str] = []
+    else:
+        tokens = shlex.split(entry["run_command"])
+        if len(tokens) < 2 or tokens[0] != "python" or tokens[1].startswith("-"):
+            raise ValueError(f"{paper_id}: the run command must be `python <script> <arguments>`: {entry['run_command']!r}")
+        if posixpath.join(working_dir, tokens[1].removeprefix("./")) != entry["target_script"]:
+            raise ValueError(f"{paper_id}: the script of the run command is not the target script")
+        args = tokens[2:]
     setup: dict[str, Any] = {
         "decision": "report_as_is", "reason": "Pilot 4: the README command as written (docs/PILOT_4.md section 3)",
-        "args": tokens[2:], "env": {}, "working_dir": "", "writable_repo": False, "data": [],
+        "args": args, "env": {}, "working_dir": working_dir, "writable_repo": False, "data": [],
         "extra_requirements": [], "constraints": [], "build": None, "open_items": [],
     }
+    if shell_command:
+        setup["command"] = ["sh", "-c", shell_command]
     if correction:
         validate_correction(correction)
         for key in ("extra_requirements", "constraints", "constraints_source", "working_dir", "writable_repo", "env", "data"):

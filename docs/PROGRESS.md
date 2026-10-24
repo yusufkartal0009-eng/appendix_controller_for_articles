@@ -39,6 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): run mechanism for the candidate runs (2026-10-24 19:27 +03:00, Issue #437)
+- `scripts/run_pilot.py` (`pilot4_entry`): a corpus entry may name a `working_dir` and a `shell_command` (run by `sh -c`); none of the existing corpora has either key, so their behavior does not change. New `scripts/candidate_runs.py` runs the candidates of `data/candidates/run_plan.json` once each with the limits of `docs/CANDIDATE_RUNS.md` (50% memory, 4 CPUs, 1800 s run limit), classifies each run with `classify_run` of the demo set, shortens long logs, replaces local paths, and never runs a candidate that already has a result. 9 new tests; no candidate has been run by this change.
+
 ### docs(corpus): protocol of the candidate runs, written before any run (2026-10-24 19:25 +03:00, Issue #437)
 - New `docs/CANDIDATE_RUNS.md` and `data/candidates/run_plan.json`: the 14 candidates of status ready, fixable and two_step are run once each in the sandbox (`--memory 50% --cpus 4`, run limit 1800 s, no network, no retry, no correction after a result); the 11 risky and 4 excluded are not run. The commands are the lists' commands; a placeholder is completed only from the README at the pinned commit, and `cand_013` (README gives only placeholders) is recorded as `command_incomplete` and not run. Pass = install INSTALLED/SKIPPED, run COMPLETED with exit 0, and a numeric metric line.
 - Not verified: no candidate has been run yet; whether the printed numbers match a table of a paper is decided later by string match plus a person.
