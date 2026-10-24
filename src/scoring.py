@@ -15,6 +15,7 @@ Generates composite scores (0-100) and neutral status classifications:
 
 import math
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +36,21 @@ from src.config import (
 from src.models import ScoreBreakdown
 
 NOTHING_COMPARED_TEXT = "claimed metrics not found in the output (nothing was compared)"
+
+# A time or latency metric is judged on its relative error only (no absolute allowance). It is recognized by the words of
+# its name: the long words anywhere in the name, the short ones (`ms` would also be inside `rmse`, `params`, `items`) only
+# as a whole part of the name (`latency_ms`, `inferenceMs`).
+TIME_METRIC_WORDS = ("second", "time", "latency", "runtime", "duration")
+TIME_METRIC_PARTS = ("sec", "secs", "ms", "msec", "msecs")
+_NAME_PARTS = re.compile(r"[A-Z]+(?![a-z])|[A-Z]?[a-z]+|[0-9]+")
+
+
+def is_time_metric(metric_name: str) -> bool:
+    """True if the name of a metric says that it is a time, latency, or duration."""
+    lowered = metric_name.lower()
+    if any(word in lowered for word in TIME_METRIC_WORDS):
+        return True
+    return any(part.lower() in TIME_METRIC_PARTS for part in _NAME_PARTS.findall(metric_name))
 
 
 class Tier1BuildEvaluator:
@@ -120,12 +136,7 @@ class Tier2MetricsEvaluator:
             rel_error = abs_diff / denom
 
             # Differentiate tolerance logic by metric category
-            is_time_metric = any(
-                k in metric_name.lower()
-                for k in ("sec", "second", "time", "latency", "ms", "runtime", "duration")
-            )
-
-            if is_time_metric:
+            if is_time_metric(metric_name):
                 # Time / latency metrics must strictly evaluate relative tolerance
                 # to prevent the absolute tolerance trap (e.g. 0.02s taking 0.06s is 200% error)
                 if rel_error <= tolerance:

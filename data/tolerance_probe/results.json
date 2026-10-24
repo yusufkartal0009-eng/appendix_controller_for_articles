@@ -15,8 +15,8 @@
           "up": 20.0
         },
         "rmse": {
-          "down": 2.0,
-          "up": 5.0
+          "down": 10.0,
+          "up": 10.0
         }
       },
       "rows": [
@@ -106,15 +106,15 @@
         },
         {
           "deviation_percent": -5.0,
-          "tier2": 75.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 1,
+            "MATCHED": 2,
+            "PARTIAL": 0,
             "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 84.5,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 5.0,
@@ -130,18 +130,30 @@
         },
         {
           "deviation_percent": -10.0,
-          "tier2": 50.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
+            "MATCHED": 2,
             "PARTIAL": 0,
-            "DIVERGED": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 10.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -20.0,
           "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
@@ -153,27 +165,15 @@
           "status": "Partially Verified"
         },
         {
-          "deviation_percent": -20.0,
-          "tier2": 50.0,
-          "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
-            "NOT FOUND": 0
-          },
-          "total": 75.75,
-          "status": "Partially Verified"
-        },
-        {
           "deviation_percent": 20.0,
-          "tier2": 50.0,
+          "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
+          "total": 84.5,
           "status": "Partially Verified"
         }
       ]
@@ -191,8 +191,8 @@
           "up": 20.0
         },
         "rmse": {
-          "down": 2.0,
-          "up": 5.0
+          "down": 10.0,
+          "up": 10.0
         }
       },
       "rows": [
@@ -282,15 +282,15 @@
         },
         {
           "deviation_percent": -5.0,
-          "tier2": 75.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 1,
+            "MATCHED": 2,
+            "PARTIAL": 0,
             "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 84.5,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 5.0,
@@ -306,18 +306,30 @@
         },
         {
           "deviation_percent": -10.0,
-          "tier2": 50.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
+            "MATCHED": 2,
             "PARTIAL": 0,
-            "DIVERGED": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 10.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -20.0,
           "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
@@ -329,27 +341,15 @@
           "status": "Partially Verified"
         },
         {
-          "deviation_percent": -20.0,
-          "tier2": 50.0,
-          "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
-            "NOT FOUND": 0
-          },
-          "total": 75.75,
-          "status": "Partially Verified"
-        },
-        {
           "deviation_percent": 20.0,
-          "tier2": 50.0,
+          "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
+          "total": 84.5,
           "status": "Partially Verified"
         }
       ]
@@ -367,8 +367,8 @@
           "up": 20.0
         },
         "rmse": {
-          "down": 2.0,
-          "up": 5.0
+          "down": 10.0,
+          "up": 10.0
         }
       },
       "rows": [
@@ -458,15 +458,15 @@
         },
         {
           "deviation_percent": -5.0,
-          "tier2": 75.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 1,
+            "MATCHED": 2,
+            "PARTIAL": 0,
             "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 84.5,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 5.0,
@@ -482,18 +482,30 @@
         },
         {
           "deviation_percent": -10.0,
-          "tier2": 50.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
+            "MATCHED": 2,
             "PARTIAL": 0,
-            "DIVERGED": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 10.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -20.0,
           "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
@@ -505,27 +517,15 @@
           "status": "Partially Verified"
         },
         {
-          "deviation_percent": -20.0,
-          "tier2": 50.0,
-          "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
-            "NOT FOUND": 0
-          },
-          "total": 75.75,
-          "status": "Partially Verified"
-        },
-        {
           "deviation_percent": 20.0,
-          "tier2": 50.0,
+          "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
+          "total": 84.5,
           "status": "Partially Verified"
         }
       ]
@@ -543,8 +543,8 @@
           "up": 20.0
         },
         "rmse": {
-          "down": 2.0,
-          "up": 5.0
+          "down": 10.0,
+          "up": 10.0
         }
       },
       "rows": [
@@ -634,15 +634,15 @@
         },
         {
           "deviation_percent": -5.0,
-          "tier2": 75.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 1,
+            "MATCHED": 2,
+            "PARTIAL": 0,
             "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 84.5,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 5.0,
@@ -658,18 +658,30 @@
         },
         {
           "deviation_percent": -10.0,
-          "tier2": 50.0,
+          "tier2": 100.0,
           "labels": {
-            "MATCHED": 1,
+            "MATCHED": 2,
             "PARTIAL": 0,
-            "DIVERGED": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
-          "status": "Partially Verified"
+          "total": 93.25,
+          "status": "Verified"
         },
         {
           "deviation_percent": 10.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -20.0,
           "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
@@ -681,27 +693,15 @@
           "status": "Partially Verified"
         },
         {
-          "deviation_percent": -20.0,
-          "tier2": 50.0,
-          "labels": {
-            "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
-            "NOT FOUND": 0
-          },
-          "total": 75.75,
-          "status": "Partially Verified"
-        },
-        {
           "deviation_percent": 20.0,
-          "tier2": 50.0,
+          "tier2": 75.0,
           "labels": {
             "MATCHED": 1,
-            "PARTIAL": 0,
-            "DIVERGED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 75.75,
+          "total": 84.5,
           "status": "Partially Verified"
         }
       ]
