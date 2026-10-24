@@ -1,0 +1,136 @@
+{
+  "paper_id": "a3_023",
+  "source": "https://github.com/YerevaNN/DIIN-in-Keras",
+  "commit_hash": "eba9fa442c57305bd385ff87c723ab9761baf21e",
+  "target_script": "preprocess.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.757,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_023",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.398,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 31715328,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "absl-py",
+      "version": "2.5.1"
+    },
+    {
+      "name": "h5py",
+      "version": "3.16.0"
+    },
+    {
+      "name": "keras",
+      "version": "3.15.1"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2"
+    },
+    {
+      "name": "ml_dtypes",
+      "version": "0.6.0"
+    },
+    {
+      "name": "namex",
+      "version": "0.1.0"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "optree",
+      "version": "0.20.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "tqdm",
+      "name": "tqdm",
+      "requested": "any",
+      "installed": "4.70.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "keras",
+      "name": "keras",
+      "requested": "any",
+      "installed": "3.15.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/preprocess.py --p 32 --h 32 --chars_per_word 16 --save_dir data/ --dataset snli --word_vec_save_path data/word-vectors.npy\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 1.398s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/preprocess.py\", line 9, in <module>\n    from keras.preprocessing.sequence import pad_sequences\n  File \"/workspace/deps/keras/__init__.py\", line 7, in <module>\n    from keras import _tf_keras as _tf_keras\n  File \"/workspace/deps/keras/_tf_keras/__init__.py\", line 1, in <module>\n    from keras._tf_keras import keras\n  File \"/workspace/deps/keras/_tf_keras/keras/__init__.py\", line 7, in <module>\n    from keras import activations as activations\n  File \"/workspace/deps/keras/activations/__init__.py\", line 7, in <module>\n    from keras.src.activations import deserialize as deserialize\n  File \"/workspace/deps/keras/src/__init__.py\", line 1, in <module>\n    from keras.src import activations\n  File \"/workspace/deps/keras/src/activations/__init__.py\", line 3, in <module>\n    from keras.src.activations.activations import celu\n  File \"/workspace/deps/keras/src/activations/activations.py\", line 1, in <module>\n    from keras.src import backend\n  File \"/workspace/deps/keras/src/backend/__init__.py\", line 1, in <module>\n    from keras.src.backend.config import backend\n  File \"/workspace/deps/keras/src/backend/config.py\", line 463, in <module>\n    set_nnx_enabled(_NNX_ENABLED)\n  File \"/workspace/deps/keras/src/backend/config.py\", line 249, in set_nnx_enabled\n    from keras.src.backend.common import global_state\n  File \"/workspace/deps/keras/src/backend/common/__init__.py\", line 2, in <module>\n    from keras.src.backend.common.dtypes import result_type\n  File \"/workspace/deps/keras/src/backend/common/dtypes.py\", line 5, in <module>\n    from keras.src.backend.common.variables import standardize_dtype\n  File \"/workspace/deps/keras/src/backend/common/variables.py\", line 11, in <module>\n    from keras.src.utils.module_utils import tensorflow as tf\n  File \"/workspace/deps/keras/src/utils/__init__.py\", line 1, in <module>\n    from keras.src.utils.audio_dataset_utils import audio_dataset_from_directory\n  File \"/workspace/deps/keras/"
+}

@@ -1,0 +1,5 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/programasweights-0.4.14-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+INFO: pip is looking at multiple versions of programasweights to determine which version is compatible with other requirements. This could take a while.
+ERROR: Could not find a version that satisfies the requirement httpx<1.0,>=0.27.0 (from programasweights) (from versions: none)
+ERROR: No matching distribution found for httpx<1.0,>=0.27.0

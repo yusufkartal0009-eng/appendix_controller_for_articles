@@ -1,0 +1,18 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/tqdm-4.70.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/keras-3.15.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/absl_py-2.5.1-py3-none-any.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/rich-15.0.0-py3-none-any.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/namex-0.1.0-py3-none-any.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/h5py-3.16.0-cp311-cp311-manylinux_2_28_x86_64.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/optree-0.20.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/ml_dtypes-0.6.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/packaging-26.3-py3-none-any.whl (from keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/typing_extensions-4.16.0-py3-none-any.whl (from optree->keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/markdown_it_py-4.2.0-py3-none-any.whl (from rich->keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/pygments-2.21.0-py3-none-any.whl (from rich->keras->-r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/mdurl-0.1.2-py3-none-any.whl (from markdown-it-py>=2.2.0->rich->keras->-r /workspace/repo/requirements.txt (line 2))
+Installing collected packages: namex, typing-extensions, tqdm, pygments, packaging, numpy, mdurl, absl-py, optree, ml-dtypes, markdown-it-py, h5py, rich, keras
+
+Successfully installed absl-py-2.5.1 h5py-3.16.0 keras-3.15.1 markdown-it-py-4.2.0 mdurl-0.1.2 ml-dtypes-0.6.0 namex-0.1.0 numpy-2.4.6 optree-0.20.0 packaging-26.3 pygments-2.21.0 rich-15.0.0 tqdm-4.70.1 typing-extensions-4.16.0

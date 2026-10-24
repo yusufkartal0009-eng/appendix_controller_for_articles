@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_019",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "Official evaluation script for single language MKQA.: error: unrecognized arguments: (--out_dir <optional output directory for saving metrics and pr curves>, --verbose)",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 2.936,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,132 @@
+{
+  "paper_id": "a3_024",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "d5cad922780f32cf9f5df006fb49d0499c5cdaf7",
+  "started_at": "2026-10-24T22:08:46+00:00",
+  "repo_url": "https://github.com/jadore801120/attention-is-all-you-need-pytorch",
+  "pinned_commit": "132907dd272e2cc92e3c10e6c4e783a87ff8893d",
+  "target_script": "preprocess.py",
+  "container_command": "python /workspace/repo/preprocess.py -lang_src de -lang_trg en -share_vocab -save_data m30k_deen_shr.pkl",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python preprocess.py -lang_src de -lang_trg en -share_vocab -save_data m30k_deen_shr.pkl",
+    "readme_url": "https://github.com/jadore801120/attention-is-all-you-need-pytorch/blob/132907dd272e2cc92e3c10e6c4e783a87ff8893d/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "132907dd272e2cc92e3c10e6c4e783a87ff8893d",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.126
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 5,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_024_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "msgpack-python==1.0.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for msgpack-python==1.0.2"
+      },
+      {
+        "requirement": "python==3.6.12",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for python==3.6.12"
+      },
+      {
+        "requirement": "pytorch==1.3.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pytorch==1.3.1"
+      },
+      {
+        "requirement": "spacy==2.3.5",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for spacy==2.3.5"
+      },
+      {
+        "requirement": "tensorflow==1.14.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for tensorflow==1.14.0"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "Collecting dill==0.3.3 (from -r /staging/a3_024/requirements.txt (line 1))\n  Downloading dill-0.3.3-py2.py3-none-any.whl.metadata (6.8 kB)\nCollecting msgpack-numpy==0.4.7.1 (from -r /staging/a3_024/requirements.txt (line 2))\n  Downloading msgpack_numpy-0.4.7.1-py2.py3-none-any.whl.metadata (4.6 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement msgpack-python==1.0.2 (from versions: 0.5.0)\nERROR: No matching distribution found for msgpack-python==1.0.2\n",
+    "duration_seconds": 15.343
+  },
+  "sandbox_duration_seconds": 2.15,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.545,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 13135872
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.608,
+    "peak_memory_bytes": 39993344
+  },
+  "finished_at": "2026-10-24T22:09:04+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
