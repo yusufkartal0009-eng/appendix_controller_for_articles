@@ -4,10 +4,13 @@ import base64
 import json
 import re
 
+import pytest
+
 from scripts import candidates_build
 from src.config import ALLOWED_LICENSES, DATA_DIR
 
 CANDIDATES = DATA_DIR / "candidates"
+RUNS = CANDIDATES / "runs" / "evaluation.json"
 SHA = "a" * 40
 
 
@@ -83,6 +86,53 @@ def test_the_document_is_generated_from_the_data_files():
     text = candidates_build.render_doc(
         json.loads((CANDIDATES / "papers.json").read_text(encoding="utf-8")), evaluation["candidates"],
         json.loads((CANDIDATES / "verify_corpus.json").read_text(encoding="utf-8")), evaluation["excluded_without_entry"],
-        evaluation["retrieved_at"][:10])
+        evaluation["retrieved_at"][:10],
+        json.loads(RUNS.read_text(encoding="utf-8")) if RUNS.is_file() else None)
     committed = (DATA_DIR.parent / "docs" / "CANDIDATES.md").read_text(encoding="utf-8").replace("\r\n", "\n")
     assert text == committed
+
+
+def test_the_wilson_interval_matches_known_values_and_refuses_impossible_input():
+    low, high = candidates_build.wilson_interval(5, 10)
+    assert (round(low, 4), round(high, 4)) == (0.2366, 0.7634)
+    low, high = candidates_build.wilson_interval(0, 14)
+    assert low == 0.0 and round(high, 4) == 0.2153
+    low, high = candidates_build.wilson_interval(1, 6)
+    assert (round(low, 4), round(high, 4)) == (0.0301, 0.5635)
+    for passed, total in ((1, 0), (-1, 5), (6, 5)):
+        with pytest.raises(ValueError):
+            candidates_build.wilson_interval(passed, total)
+
+
+RESULT = {"repository": "https://github.com/o/r", "command": "python a.py", "working_dir": "", "install_status": "INSTALLED",
+          "run_status": "COMPLETED", "exit_code": 0, "duration_seconds": 3.5, "metric_lines": ["acc: 0.91"], "log_line": ""}
+
+
+def _runs(*outcomes):
+    results = []
+    for index, outcome in enumerate(outcomes, start=1):
+        passed = outcome == "passed"
+        results.append({**RESULT, "paper_id": f"cand_{index:03d}", "passed": passed, "category": None if passed else outcome})
+    return {"written_at": "2026-10-24T20:00:00+00:00", "limits": {"memory": "50%", "cpus": 4.0, "run_timeout_seconds": 1800},
+            "results": results}
+
+
+def test_the_run_results_count_pass_and_fail_from_the_records_and_say_it_is_not_a_success_rate():
+    text = "\n".join(candidates_build.render_run_results(_runs("passed", "run", "install", "command_incomplete")))
+    assert "Selected candidates (status ready, fixable, two_step): **4**" in text
+    assert "Not run because the listed command is incomplete (`command_incomplete`): 1" in text
+    assert "Run once in the sandbox: 3" in text and "Passed" in text and "**1**" in text
+    assert "1 of 4 selected candidates, Wilson 95 % interval 4.6 % to 69.9 %" in text
+    assert "1 of 3, Wilson 95 % interval 6.1 % to 79.2 %" in text
+    assert "not a representative sample" in text and "not a success rate" in text
+    assert "`acc: 0.91`" in text and "| run | 1 | cand_002 |" in text
+
+
+def test_the_document_without_a_pass_says_none_and_without_results_it_says_nothing_was_run():
+    assert "None." in "\n".join(candidates_build.render_run_results(_runs("run", "run")))
+    evaluation = json.loads((CANDIDATES / "evaluation.json").read_text(encoding="utf-8"))
+    args = (json.loads((CANDIDATES / "papers.json").read_text(encoding="utf-8")), evaluation["candidates"],
+            json.loads((CANDIDATES / "verify_corpus.json").read_text(encoding="utf-8")), evaluation["excluded_without_entry"], "2026-10-22")
+    assert "None of them has been run" in candidates_build.render_doc(*args)
+    with_runs = candidates_build.render_doc(*args, run_results=_runs("passed") | {"results": _runs("passed")["results"] * 14})
+    assert "# Candidate papers\n" in with_runs and "## Run results" in with_runs and "None of them has been run" not in with_runs
