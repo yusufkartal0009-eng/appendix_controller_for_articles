@@ -1,0 +1,301 @@
+{
+  "written_at": "2026-10-24T20:23:58+00:00",
+  "protocol": "docs/CANDIDATE_RUNS_ROUND2.md",
+  "note": "selected list of candidates, not a sample; the share that passed is not a success rate",
+  "results": [
+    {
+      "paper_id": "cand_001",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 1,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements",
+          "reason": "Round 1 failed with a missing module; the README section Requirements names numpy, scipy and python-igraph, and the repository has no requirements file, so the install was skipped",
+          "log_line": "ModuleNotFoundError: No module named 'igraph'",
+          "change": "extra requirements numpy, scipy, python-igraph (unpinned, as the README lists them)"
+        }
+      ],
+      "final_category": "run",
+      "final_log_line": "OSError: [Errno 30] Read-only file system: 'W_true.csv'",
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "OSError: [Errno 30] Read-only file system: 'W_true.csv'",
+        "reason": "The script writes W_true.csv, X.csv and W_est.csv to the current folder with fixed relative names (notears/linear.py, main block). The repository is read-only, the command takes no output argument, and the code reads no environment variable for the folder. A working_dir repair is relative to the repository root and cannot point at /workspace/output. The remaining ways (a writable copy of the repository, editing the file) are forbidden by section 3 of the protocol.",
+        "at_attempt": 1
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_002",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 1,
+      "passed": true,
+      "passed_at_attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements",
+          "reason": "The repository's own requirements.txt pins Bottleneck==1.3.5, pandas==1.5.0, scikit-learn==1.5.0, scipy==1.10.1, seaborn==0.12.0 (README: install with pip install -r requirements.txt, Python 3.X). PyPI metadata shows Bottleneck 1.3.5 has wheels only up to cp310, and the install phase uses binary wheels only; cp39 is the Python version for which all four compiled pins have a wheel (Bottleneck cp39, pandas cp39, scikit-learn cp39, scipy cp39). No pin is changed.",
+          "log_line": "ERROR: No matching distribution found for Bottleneck==1.3.5",
+          "change": "python_version 3.9 (image); the pins of requirements.txt are kept as they are"
+        }
+      ],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": null,
+      "table_match": {
+        "outcome": "metric_no_table_match",
+        "paper_text": "Europe PMC full text XML of PMC7750970 (the DOI's open-access version; saved ignored by git as data/pdfs/cand_002.xml; the PDF itself was not downloaded)",
+        "searched_values": [
+          "0.060",
+          "0.090",
+          "1.9E-04",
+          "0.007",
+          "35.1",
+          "10.1",
+          "0.33"
+        ],
+        "finding": "None of the printed result values occurs in a table of the paper. 35.1 and 10.1 occur only inside reference identifiers. The run is the README example on the repository's example_data (100 cells, 100 mutations); the paper reports simulated data sets with other sizes. Whether any figure of the paper is comparable is not verified.",
+        "verified_by_person": false
+      }
+    },
+    {
+      "paper_id": "cand_003",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "OSError: [Errno 30] Read-only file system: 'data/Tmall_train'",
+        "reason": "main.py creates the output folder args.dataset + '_' + args.train_dir (default data/Tmall_train) and writes args.txt and log.txt into it; the data itself is read as data/<name>.txt, which the README produces by unzip data/Tmall.zip -d data (also a write into the repository). The output folder is the data path plus a suffix, so it cannot be moved to /workspace/output by --dataset or --train_dir (utils.data_partition_tmall prepends data/ to any other path, and a '..' through the missing folder data/Tmall_ fails). The only way to make data/ writable is a writable copy of the repository or of the data, which section 3 of the protocol forbids. No attempt was made.",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_004",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "FileNotFoundError: [Errno 2] No such file or directory: './SysID/scripts/examples/toy_sysid_cmaes.png'",
+        "reason": "scripts/examples/linear_dynamics.py ends with plt.savefig(\"./SysID/scripts/examples/toy_sysid_cmaes.png\") and a .pdf next to it (lines 291 and 293 at the pinned commit): a fixed path relative to the current folder, which is the read-only repository, in a folder the repository does not contain. The command takes no argument and the code reads no environment variable for it; a working_dir repair stays inside the repository. Making the write possible needs a writable repository or an edit of the script, both forbidden by section 3. No attempt was made.",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_005",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "ERROR: No matching distribution found for absl-py==0.9.0",
+        "reason": "The only requirements file, pip_requirements.txt, is a full 2020 freeze of 66 pins. PyPI metadata (read for each pin) shows five pins that have no wheel for any Python version, only a source distribution: absl-py==0.9.0, autograd==1.3, backcall==0.1.0, future==0.18.2, paramz==0.9.5. The install phase installs binary wheels only, so these pins cannot be installed whatever the Python image is. Changing a pin would depart from the pins the repository states, and building source distributions (the build phase of the run setup) is not one of the five repair kinds of section 3 of the protocol. No attempt was made. Not verified: whether a source build of the five packages would have made the installation succeed.",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_006",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 1,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements",
+          "reason": "The repository has no requirements file and its README names no dependency, so the install was skipped and the first import failed. The third-party modules imported by the repository's own .py files at the pinned commit are torch, torchvision, numpy, omegaconf, pytz, yaml, matplotlib, PIL and datasets (read with a scan of every import line); they are added unpinned, because nothing in the repository pins a version.",
+          "log_line": "ModuleNotFoundError: No module named 'torch'",
+          "change": "extra requirements torch, torchvision, numpy, omegaconf, pytz, pyyaml, matplotlib, pillow, datasets"
+        }
+      ],
+      "final_category": "run",
+      "final_log_line": "urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+        "at_attempt": 1,
+        "reason": "After repair 1 the run reached the data step and tried to download the data set named in utils/config.yaml (dataset: cifar10) through torchvision; the run phase has no network. The README names no data and no download address (it only gives the command), so the data repair, which needs an open download that the README names, does not apply. The data folder cannot be redirected: the config keys dataset_root and results_root are read from the YAML file in the repository (no command-line flag, no environment variable), and a changed config would be an edit of the repository. Not verified: the run time of the 500 rounds on CPU."
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_007",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "OSError: [Errno 30] Read-only file system: '../../outputs'",
+        "reason": "src/utils/logging.py create_logger() opens the log at the fixed path '../../outputs/simulation_<args>.log' relative to the current folder, and src/sim/simulator.py writes its results to 'outputs/' (write_results_html and write_analysis_file default arguments). The command takes no argument and the code reads no environment variable for these paths. From the repository root the path is /outputs; from any folder inside the repository it still points into the read-only repository or above it, and working_dir cannot leave the repository. Making the write possible needs a writable repository or an edit of the source, both forbidden by section 3 of the protocol. No attempt was made.",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_008",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "ERROR: No matching distribution found for python>=3.9.6",
+        "reason": "The repository's only requirements file, requirements.txt, lists the line 'python>=3.9.6' (with numpy>=2.0, torch>=2.8.0, gpytorch>=1.13). 'python' is not a package that pip can install, so the install phase of the repository's own requirement file fails whatever is added to it. Extra requirements and constraints are added next to that file and cannot remove a line from it; removing the line is an edit of the repository, forbidden by section 3 of the protocol. No attempt was made. Not verified: that the README's own smoke test would then run (the README also mentions cvxpy, which the file does not list).",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_009",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 2,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "(repair 1, as above)",
+          "log_line": "ModuleNotFoundError: No module named 'botorch'",
+          "change": "extra requirements from the pip section of mocahesp.yml, python_version 3.9"
+        },
+        {
+          "repair_number": 2,
+          "kind": "readme_pin",
+          "reason": "The new error is a SyntaxError at 'match self.type:' in bounce_mocahesp/bounce/util/benchmark.py: structural pattern matching needs Python 3.10 or newer. mocahesp.yml asks for python=3.10; no 3.10 image exists, so the 3.11 image is used (the closest available version that is not older). torchvision==0.14.1 has no cp311 wheel (PyPI metadata), so it is left out of the pins; torch 1.13.1 has a cp311 wheel. All other pins stay.",
+          "log_line": "SyntaxError: invalid syntax (line 171, match self.type:)",
+          "change": "python_version 3.11 (image); torchvision==0.14.1 removed from the extra requirements"
+        }
+      ],
+      "final_category": "run",
+      "final_log_line": "ModuleNotFoundError: No module named 'requests'",
+      "stopped": {
+        "status": "third_error",
+        "at_attempt": 2,
+        "log_lines": [
+          "ModuleNotFoundError: No module named 'botorch' (round 1)",
+          "SyntaxError: invalid syntax (match self.type:, after repair 1)",
+          "ModuleNotFoundError: No module named 'requests' (after repair 2; reached through _benchmark_problems/antibody_design, which the README says needs install-antibody-lib.sh)"
+        ],
+        "reason": "Third error: by section 5 of the protocol the candidate stops and is recorded as not run even with repair."
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_010",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 1,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "Round 1 installed with the 3.11 image and found no tensorflow==2.4.0 (it has no wheel for Python 3.11). The README says to create an environment with 'conda create -n latent_don python==3.8.13' and then 'pip install -r requirements.txt', so the 3.8 image is the version the README states. The requirements file is unchanged.",
+          "log_line": "ERROR: No matching distribution found for tensorflow==2.4.0",
+          "change": "python_version 3.8 (image)"
+        }
+      ],
+      "final_category": "install",
+      "final_log_line": "ERROR: No matching distribution found for tf-nightly",
+      "stopped": {
+        "status": "not_repairable",
+        "at_attempt": 1,
+        "log_line": "ERROR: No matching distribution found for tf-nightly",
+        "reason": "With the 3.8 image the pins of requirements.txt were resolved up to the line 'tf-nightly' (unpinned). PyPI metadata (every release of tf-nightly) lists wheels only for cp310 to cp314, while tensorflow==2.4.0, pinned in the same file, has wheels only up to cp38. No image satisfies both lines of the repository's file, and removing a line is an edit of the repository."
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_012",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "ERROR: No matching distribution found for torch==0.4.1",
+        "reason": "The repository's requirements.txt pins torch==0.4.1, numpy==1.14.3, scipy==1.1.0, scikit_learn==0.20.3 and networkx==1.11, and the README says the code was implemented with Python 3.5.6. PyPI has no torch 0.4.1 at all (the metadata request returns 404), and numpy 1.14.3 and scipy 1.1.0 have wheels only up to cp37 (PyPI metadata). The sandbox images are Python 3.8, 3.9 and 3.11, so the pinned versions cannot be installed in any image, and changing a pin is not an allowed repair. No attempt was made. Not verified: the data, a Dropbox folder named in the README (its size was not found out).",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_013",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "command_incomplete",
+        "log_line": "command_incomplete: the README line holds only placeholders (DATASET_NAME, YOUR_RUN_TIMES, PARAMETER_LAMBDA)",
+        "reason": "Section 2 of the protocol: choosing a dataset name or a parameter value is not one of the five repairs, so the candidate stays command_incomplete and counts as not passed. No attempt was made.",
+        "at_attempt": 0
+      },
+      "table_match": null
+    },
+    {
+      "paper_id": "cand_025",
+      "in_round_1": true,
+      "round1_passed": false,
+      "attempts": 0,
+      "passed": false,
+      "passed_at_attempt": null,
+      "repairs": [],
+      "final_category": null,
+      "final_log_line": null,
+      "stopped": {
+        "status": "not_repairable",
+        "log_line": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/home/data/UEA_multivariate/x/EigenWorms_x.npy'",
+        "reason": "The README (readme.md and metadataset/readme.md) says the data sets must be acquired and pre-processed with the repository's own scripts (metadataset/uea.py, monash.py, kaggle.py) into ~/data with a fixed folder structure: PeekDB, Informer, Monash (Zenodo), UEA (arff archive) and Kaggle data sets (the Kaggle downloads need an account). The pre-processing would run third-party code, which is never done on the host, and the Kaggle files cannot be downloaded without a login; the protocol allows only an open download done beforehand and mounted read-only. No attempt was made. Not verified: the sizes of the data sets.",
+        "at_attempt": 0
+      },
+      "table_match": null
+    }
+  ]
+}

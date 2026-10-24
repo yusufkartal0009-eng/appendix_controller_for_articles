@@ -5,7 +5,8 @@
     python scripts/candidate_round2.py run cand_003 --attempt 1     # run the attempt in the sandbox and record the result
     python scripts/candidate_round2.py summary                      # data/candidates/round2/evaluation.json from the repair logs
 
-The authority of a candidate is `data/candidates/round2/<paper_id>/repair_log.json`. Before a run, the log gets the attempt:
+A candidate whose failure none of the allowed repairs can address is closed with a `stopped` entry in the log
+(`not_repairable`, with the log line and the reason); no attempt is made for it. The authority of a candidate is `data/candidates/round2/<paper_id>/repair_log.json`. Before a run, the log gets the attempt:
 the repairs (each with its kind, reason, the log line that motivated it, and the change) and the cumulative `setup` they make
 (only the keys the protocol allows). The runner refuses anything else: a third repair, a repair without a log line, a writable
 copy of the repository, a source change. The record of the attempt is `<paper_id>/attempt_<n>/`; attempt 0 of a round-1 candidate
@@ -46,7 +47,7 @@ MAX_REPAIRS = 2
 KINDS = ("requirements", "readme_pin", "output_redirect", "working_dir", "data")
 # the keys of a cumulative setup; `writable_repo` is deliberately absent (section 3: the repository stays read-only)
 SETUP_KEYS = ("extra_requirements", "constraints", "constraints_source", "python_version", "working_dir", "env", "data", "args_add")
-KIND_KEYS = {"requirements": {"extra_requirements", "constraints", "constraints_source"},
+KIND_KEYS = {"requirements": {"extra_requirements", "constraints", "constraints_source", "python_version"},
              "readme_pin": {"extra_requirements", "constraints", "constraints_source", "python_version"},
              "output_redirect": {"args_add", "env"}, "working_dir": {"working_dir"}, "data": {"data"}}
 NOTE = "selected list of candidates, not a sample; the share that passed is not a success rate"
@@ -225,7 +226,7 @@ def summarize(root: Path = ROUND2_DIR, round1_dir: Path = ROUND1_DIR) -> dict[st
                         "repairs": [r for a in attempts[-1:] for r in a["repairs"]] if attempts else [],
                         "final_category": None if passing else (attempts[-1]["result"].get("category") if attempts else None),
                         "final_log_line": None if passing else (attempts[-1]["result"].get("log_line") if attempts else None),
-                        "table_match": log.get("table_match")})
+                        "stopped": log.get("stopped"), "table_match": log.get("table_match")})
     document = {"written_at": datetime.now(UTC).isoformat(timespec="seconds"), "protocol": "docs/CANDIDATE_RUNS_ROUND2.md",
                 "note": NOTE, "results": results}
     (root / "evaluation.json").write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")

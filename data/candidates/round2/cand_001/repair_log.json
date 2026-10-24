@@ -1,0 +1,56 @@
+{
+  "paper_id": "cand_001",
+  "round": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements",
+          "reason": "Round 1 failed with a missing module; the README section Requirements names numpy, scipy and python-igraph, and the repository has no requirements file, so the install was skipped",
+          "log_line": "ModuleNotFoundError: No module named 'igraph'",
+          "change": "extra requirements numpy, scipy, python-igraph (unpinned, as the README lists them)"
+        }
+      ],
+      "setup": {
+        "extra_requirements": [
+          "numpy",
+          "scipy",
+          "python-igraph"
+        ]
+      },
+      "command": "python notears/linear.py",
+      "working_dir": "",
+      "started_at": "2026-10-24T19:17:15+00:00",
+      "finished_at": "2026-10-24T19:19:06+00:00",
+      "record": "attempt_1",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": false,
+        "category": "run",
+        "log_line": "OSError: [Errno 30] Read-only file system: 'W_true.csv'",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 4.237,
+        "metric_lines": []
+      }
+    }
+  ],
+  "round1_error": {
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'igraph'"
+  },
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "OSError: [Errno 30] Read-only file system: 'W_true.csv'",
+    "reason": "The script writes W_true.csv, X.csv and W_est.csv to the current folder with fixed relative names (notears/linear.py, main block). The repository is read-only, the command takes no output argument, and the code reads no environment variable for the folder. A working_dir repair is relative to the repository root and cannot point at /workspace/output. The remaining ways (a writable copy of the repository, editing the file) are forbidden by section 3 of the protocol.",
+    "at_attempt": 1
+  }
+}

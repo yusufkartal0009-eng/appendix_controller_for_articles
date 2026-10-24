@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_003",
+  "round": 2,
+  "round1_error": {
+    "category": "run",
+    "log_line": "OSError: [Errno 30] Read-only file system: 'data/Tmall_train'"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "OSError: [Errno 30] Read-only file system: 'data/Tmall_train'",
+    "reason": "main.py creates the output folder args.dataset + '_' + args.train_dir (default data/Tmall_train) and writes args.txt and log.txt into it; the data itself is read as data/<name>.txt, which the README produces by unzip data/Tmall.zip -d data (also a write into the repository). The output folder is the data path plus a suffix, so it cannot be moved to /workspace/output by --dataset or --train_dir (utils.data_partition_tmall prepends data/ to any other path, and a '..' through the missing folder data/Tmall_ fails). The only way to make data/ writable is a writable copy of the repository or of the data, which section 3 of the protocol forbids. No attempt was made.",
+    "at_attempt": 0
+  }
+}

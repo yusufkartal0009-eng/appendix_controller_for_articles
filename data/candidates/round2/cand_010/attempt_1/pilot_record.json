@@ -1,0 +1,120 @@
+{
+  "paper_id": "cand_010",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1a7ba079efacd21b975d62a1cfab00ee48171fa1",
+  "started_at": "2026-10-24T19:58:43+00:00",
+  "repo_url": "https://github.com/katiana22/latent-deeponet",
+  "pinned_commit": "ff73aeaf3c56542f2277272a1909bfefc623f8d2",
+  "target_script": "code/brittle-fracture/AE.py",
+  "container_command": "python /workspace/repo/code/brittle-fracture/AE.py --method MLAE --latent_dim 16 --n_samples 800 --n_epochs 1000 --ood 1 --noise 1",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1800,
+    "run_timeout_seconds": 3600
+  },
+  "pilot4": {
+    "run_command": "python AE.py --method MLAE --latent_dim 16 --n_samples 800 --n_epochs 1000 --ood 1 --noise 1",
+    "readme_url": null,
+    "attempt": "correction",
+    "correction": {
+      "python_version": "3.8",
+      "changes": [
+        {
+          "change": "python_version 3.8 (image)",
+          "log_line": "ERROR: No matching distribution found for tensorflow==2.4.0"
+        }
+      ]
+    }
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 3600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "ff73aeaf3c56542f2277272a1909bfefc623f8d2",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": true,
+    "duration_seconds": 1.825
+  },
+  "python_version": "3.8",
+  "run_setup": {
+    "command": null,
+    "working_dir": "code/brittle-fracture",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.8",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 9,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\cand_010_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "tf-nightly",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for tf-nightly"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "Collecting numpy (from -r /staging/cand_010/requirements.txt (line 1))\n  Downloading numpy-1.24.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.6 kB)\nCollecting matplotlib (from -r /staging/cand_010/requirements.txt (line 2))\n  Downloading matplotlib-3.7.5-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (5.7 kB)\nCollecting seaborn (from -r /staging/cand_010/requirements.txt (line 3))\n  Using cached seaborn-0.13.2-py3-none-any.whl.metadata (5.4 kB)\nCollecting scikit-learn (from -r /staging/cand_010/requirements.txt (line 4))\n  Downloading scikit_learn-1.3.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)\nCollecting tensorflow==2.4.0 (from -r /staging/cand_010/requirements.txt (line 5))\n  Downloading tensorflow-2.4.0-cp38-cp38-manylinux2010_x86_64.whl.metadata (2.7 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement tf-nightly (from versions: none)\nERROR: No matching distribution found for tf-nightly\n",
+    "duration_seconds": 688.776
+  },
+  "sandbox_duration_seconds": 4.204,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.547,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 8847360
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.455,
+    "peak_memory_bytes": 44085248
+  },
+  "finished_at": "2026-10-24T20:10:18+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

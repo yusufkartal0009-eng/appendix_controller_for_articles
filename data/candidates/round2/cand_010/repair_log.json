@@ -1,0 +1,52 @@
+{
+  "paper_id": "cand_010",
+  "round": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "Round 1 installed with the 3.11 image and found no tensorflow==2.4.0 (it has no wheel for Python 3.11). The README says to create an environment with 'conda create -n latent_don python==3.8.13' and then 'pip install -r requirements.txt', so the 3.8 image is the version the README states. The requirements file is unchanged.",
+          "log_line": "ERROR: No matching distribution found for tensorflow==2.4.0",
+          "change": "python_version 3.8 (image)"
+        }
+      ],
+      "setup": {
+        "python_version": "3.8"
+      },
+      "command": "python AE.py --method MLAE --latent_dim 16 --n_samples 800 --n_epochs 1000 --ood 1 --noise 1",
+      "working_dir": "code/brittle-fracture",
+      "started_at": "2026-10-24T19:58:43+00:00",
+      "finished_at": "2026-10-24T20:10:18+00:00",
+      "record": "attempt_1",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for tf-nightly",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.547,
+        "metric_lines": []
+      }
+    }
+  ],
+  "round1_error": {
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for tensorflow==2.4.0"
+  },
+  "stopped": {
+    "status": "not_repairable",
+    "at_attempt": 1,
+    "log_line": "ERROR: No matching distribution found for tf-nightly",
+    "reason": "With the 3.8 image the pins of requirements.txt were resolved up to the line 'tf-nightly' (unpinned). PyPI metadata (every release of tf-nightly) lists wheels only for cp310 to cp314, while tensorflow==2.4.0, pinned in the same file, has wheels only up to cp38. No image satisfies both lines of the repository's file, and removing a line is an edit of the repository."
+  }
+}

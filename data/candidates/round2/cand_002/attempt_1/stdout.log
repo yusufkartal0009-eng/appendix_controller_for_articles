@@ -1,0 +1,37 @@
+
+DPMM with:
+	100 cells
+	100 mutations
+	learning errors
+
+	Priors:
+	params.:	Beta(0.25,0.25)
+	CRP a_0:	Gamma(10.00,1)
+	FP:		trunc norm(0.01,0.01)
+	FN:		trunc norm(0.2,0.1)
+
+Move probabilitites:
+	Split/merge:	0.33
+		split/merge ratio:	[0.75, 0.25]
+		intermediate Gibbs:	3
+	CRP a_0 update:	0.25
+	Errors update:	0.25
+
+Run MCMC with (1 chains for 5000 steps):
+
+Clustering time:	0:00:45.736686	(0.01 secs. per MCMC step)	Lugsail PSRF:		1.00368
+
+Chain mean - posterior clusters	(#5):
+	A:    0,   11,   21,   25,   35,   39,   52,   66,   67,   73,   78,   84,   94,   95
+	B:    1,   10,   13,   15,   16,   19,   20,   26,   29,   31,   43,   44,   47,   54,   55,   60,   69,   74,   80,   86,   87,   89
+	C:    2,    6,    7,   18,   23,   30,   34,   41,   42,   53,   57,   59,   61,   68,   70,   79,   83,   88,   90,   93,   97
+	D:    3,   14,   24,   27,   28,   32,   36,   37,   38,   46,   48,   49,   50,   56,   63,   64,   71,   72,   75,   81,   91,   92,   98
+	E:    4,    5,    8,    9,   12,   17,   22,   33,   40,   45,   51,   58,   62,   65,   76,   77,   82,   85,   96,   99
+
+Inferred latent variables	--	chain mean - posterior
+	CRP a_0:	35.1 +- 10.1
+	FP (model|genotypes): 1.9E-04 +- 1.4E-04	|	1.0E-03
+	FN (model|genotypes): 0.060   +- 0.007	|	0.090
+
+Writing output to: /workspace/output
+

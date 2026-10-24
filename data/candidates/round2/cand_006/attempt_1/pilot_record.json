@@ -1,0 +1,135 @@
+{
+  "paper_id": "cand_006",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "1a7ba079efacd21b975d62a1cfab00ee48171fa1",
+  "started_at": "2026-10-24T19:28:43+00:00",
+  "repo_url": "https://github.com/tum-pbs/CRAFT",
+  "pinned_commit": "3efb091fa85f0887ba9ed4c0f368f2836506c1e7",
+  "target_script": "main_train.py",
+  "container_command": "python /workspace/repo/main_train.py --cfg utils/config.yaml",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1800,
+    "run_timeout_seconds": 3600
+  },
+  "pilot4": {
+    "run_command": "python main_train.py --cfg utils/config.yaml",
+    "readme_url": null,
+    "attempt": "correction",
+    "correction": {
+      "extra_requirements": [
+        "torch",
+        "torchvision",
+        "numpy",
+        "omegaconf",
+        "pytz",
+        "pyyaml",
+        "matplotlib",
+        "pillow",
+        "datasets"
+      ],
+      "changes": [
+        {
+          "change": "extra requirements torch, torchvision, numpy, omegaconf, pytz, pyyaml, matplotlib, pillow, datasets",
+          "log_line": "ModuleNotFoundError: No module named 'torch'"
+        }
+      ]
+    }
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 3600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "3efb091fa85f0887ba9ed4c0f368f2836506c1e7",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.414
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [
+      "torch",
+      "torchvision",
+      "numpy",
+      "omegaconf",
+      "pytz",
+      "pyyaml",
+      "matplotlib",
+      "pillow",
+      "datasets"
+    ],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "source": "extra_requirements",
+    "python_version": "3.11",
+    "wheel_count": 69,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\cand_006_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [
+      "torch",
+      "torchvision",
+      "numpy",
+      "omegaconf",
+      "pytz",
+      "pyyaml",
+      "matplotlib",
+      "pillow",
+      "datasets"
+    ],
+    "duration_seconds": 72.333
+  },
+  "sandbox_duration_seconds": 779.951,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 42.156,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 975421440
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 736.224,
+    "peak_memory_bytes": 144568320
+  },
+  "finished_at": "2026-10-24T19:42:57+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

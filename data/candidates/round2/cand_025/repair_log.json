@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_025",
+  "round": 2,
+  "round1_error": {
+    "category": "run",
+    "log_line": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/home/data/UEA_multivariate/x/EigenWorms_x.npy'"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/home/data/UEA_multivariate/x/EigenWorms_x.npy'",
+    "reason": "The README (readme.md and metadataset/readme.md) says the data sets must be acquired and pre-processed with the repository's own scripts (metadataset/uea.py, monash.py, kaggle.py) into ~/data with a fixed folder structure: PeekDB, Informer, Monash (Zenodo), UEA (arff archive) and Kaggle data sets (the Kaggle downloads need an account). The pre-processing would run third-party code, which is never done on the host, and the Kaggle files cannot be downloaded without a login; the protocol allows only an open download done beforehand and mounted read-only. No attempt was made. Not verified: the sizes of the data sets.",
+    "at_attempt": 0
+  }
+}

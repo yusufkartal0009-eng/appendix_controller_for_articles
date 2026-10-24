@@ -1,0 +1,132 @@
+{
+  "paper_id": "cand_009",
+  "round": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "The README says to install the environment from mocahesp.yml (conda), so the sandbox, which has no conda, installed nothing. The pip section of mocahesp.yml gives the versions: torch==1.13.1, torchvision==0.14.1, gpytorch==1.10, botorch==0.8.5, pandas==1.5.2, scikit-learn 1.3.2 (written with a single '=' in the file, written here as ==1.3.2), category-encoders==2.6.3, cma==3.3.0, cython==3.0.6, decorator==5.1.1, gin-config==0.5.0, packaging==23.2, patsy==0.5.6, statsmodels==0.14.1, xgboost==2.0.2. torchaudio==0.13.1, gpy==1.10.0 and paramz==0.9.5 are left out: paramz has no wheel (PyPI metadata), gpy needs it, and the main file for the bo solver imports none of them at the failing line (not verified for the rest of the run). The file asks for python=3.10; there is no 3.10 image (only 3.8, 3.9, 3.11), and torchvision==0.14.1 has no cp311 wheel (PyPI metadata) while torch, torchvision, pandas, scikit-learn and statsmodels at these pins all have cp39 wheels, so the 3.9 image is used.",
+          "log_line": "ModuleNotFoundError: No module named 'botorch'",
+          "change": "extra requirements and constraints from the pip section of mocahesp.yml, as listed; python_version 3.9 (image)"
+        }
+      ],
+      "setup": {
+        "extra_requirements": [
+          "torch==1.13.1",
+          "torchvision==0.14.1",
+          "gpytorch==1.10",
+          "botorch==0.8.5",
+          "pandas==1.5.2",
+          "scikit-learn==1.3.2",
+          "category-encoders==2.6.3",
+          "cma==3.3.0",
+          "cython==3.0.6",
+          "decorator==5.1.1",
+          "gin-config==0.5.0",
+          "packaging==23.2",
+          "patsy==0.5.6",
+          "statsmodels==0.14.1",
+          "xgboost==2.0.2"
+        ],
+        "python_version": "3.9"
+      },
+      "command": "python test-mocahesp.py --solver bo -f ackley20c -n 400 --seed 1",
+      "working_dir": "",
+      "started_at": "2026-10-24T19:43:09+00:00",
+      "finished_at": "2026-10-24T19:58:42+00:00",
+      "record": "attempt_1",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": false,
+        "category": "run",
+        "log_line": "SyntaxError: invalid syntax",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 20.915,
+        "metric_lines": []
+      }
+    },
+    {
+      "attempt": 2,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "readme_pin",
+          "reason": "(repair 1, as above)",
+          "log_line": "ModuleNotFoundError: No module named 'botorch'",
+          "change": "extra requirements from the pip section of mocahesp.yml, python_version 3.9"
+        },
+        {
+          "repair_number": 2,
+          "kind": "readme_pin",
+          "reason": "The new error is a SyntaxError at 'match self.type:' in bounce_mocahesp/bounce/util/benchmark.py: structural pattern matching needs Python 3.10 or newer. mocahesp.yml asks for python=3.10; no 3.10 image exists, so the 3.11 image is used (the closest available version that is not older). torchvision==0.14.1 has no cp311 wheel (PyPI metadata), so it is left out of the pins; torch 1.13.1 has a cp311 wheel. All other pins stay.",
+          "log_line": "SyntaxError: invalid syntax (line 171, match self.type:)",
+          "change": "python_version 3.11 (image); torchvision==0.14.1 removed from the extra requirements"
+        }
+      ],
+      "setup": {
+        "python_version": "3.11",
+        "extra_requirements": [
+          "torch==1.13.1",
+          "gpytorch==1.10",
+          "botorch==0.8.5",
+          "pandas==1.5.2",
+          "scikit-learn==1.3.2",
+          "category-encoders==2.6.3",
+          "cma==3.3.0",
+          "cython==3.0.6",
+          "decorator==5.1.1",
+          "gin-config==0.5.0",
+          "packaging==23.2",
+          "patsy==0.5.6",
+          "statsmodels==0.14.1",
+          "xgboost==2.0.2"
+        ]
+      },
+      "command": "python test-mocahesp.py --solver bo -f ackley20c -n 400 --seed 1",
+      "working_dir": "",
+      "started_at": "2026-10-24T20:10:39+00:00",
+      "finished_at": "2026-10-24T20:23:30+00:00",
+      "record": "attempt_2",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'requests'",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 17.671,
+        "metric_lines": []
+      }
+    }
+  ],
+  "round1_error": {
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'botorch'"
+  },
+  "stopped": {
+    "status": "third_error",
+    "at_attempt": 2,
+    "log_lines": [
+      "ModuleNotFoundError: No module named 'botorch' (round 1)",
+      "SyntaxError: invalid syntax (match self.type:, after repair 1)",
+      "ModuleNotFoundError: No module named 'requests' (after repair 2; reached through _benchmark_problems/antibody_design, which the README says needs install-antibody-lib.sh)"
+    ],
+    "reason": "Third error: by section 5 of the protocol the candidate stops and is recorded as not run even with repair."
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "paper_id": "cand_006",
+  "round": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "repairs": [
+        {
+          "repair_number": 1,
+          "kind": "requirements",
+          "reason": "The repository has no requirements file and its README names no dependency, so the install was skipped and the first import failed. The third-party modules imported by the repository's own .py files at the pinned commit are torch, torchvision, numpy, omegaconf, pytz, yaml, matplotlib, PIL and datasets (read with a scan of every import line); they are added unpinned, because nothing in the repository pins a version.",
+          "log_line": "ModuleNotFoundError: No module named 'torch'",
+          "change": "extra requirements torch, torchvision, numpy, omegaconf, pytz, pyyaml, matplotlib, pillow, datasets"
+        }
+      ],
+      "setup": {
+        "extra_requirements": [
+          "torch",
+          "torchvision",
+          "numpy",
+          "omegaconf",
+          "pytz",
+          "pyyaml",
+          "matplotlib",
+          "pillow",
+          "datasets"
+        ]
+      },
+      "command": "python main_train.py --cfg utils/config.yaml",
+      "working_dir": "",
+      "started_at": "2026-10-24T19:28:43+00:00",
+      "finished_at": "2026-10-24T19:42:57+00:00",
+      "record": "attempt_1",
+      "limits": {
+        "memory": "50%",
+        "cpus": 4.0,
+        "run_timeout_seconds": 3600,
+        "install_timeout_seconds": 1800
+      },
+      "result": {
+        "passed": false,
+        "category": "run",
+        "log_line": "urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 42.156,
+        "metric_lines": []
+      }
+    }
+  ],
+  "round1_error": {
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'torch'"
+  },
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "at_attempt": 1,
+    "reason": "After repair 1 the run reached the data step and tried to download the data set named in utils/config.yaml (dataset: cifar10) through torchvision; the run phase has no network. The README names no data and no download address (it only gives the command), so the data repair, which needs an open download that the README names, does not apply. The data folder cannot be redirected: the config keys dataset_root and results_root are read from the YAML file in the repository (no command-line flag, no environment variable), and a changed config would be an edit of the repository. Not verified: the run time of the 500 rounds on CPU."
+  }
+}

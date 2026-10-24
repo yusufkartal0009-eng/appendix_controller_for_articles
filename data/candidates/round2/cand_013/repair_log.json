@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_013",
+  "round": 2,
+  "round1_error": {
+    "category": "command_incomplete",
+    "log_line": "command_incomplete: the README line holds only placeholders (DATASET_NAME, YOUR_RUN_TIMES, PARAMETER_LAMBDA)"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "command_incomplete",
+    "log_line": "command_incomplete: the README line holds only placeholders (DATASET_NAME, YOUR_RUN_TIMES, PARAMETER_LAMBDA)",
+    "reason": "Section 2 of the protocol: choosing a dataset name or a parameter value is not one of the five repairs, so the candidate stays command_incomplete and counts as not passed. No attempt was made.",
+    "at_attempt": 0
+  }
+}

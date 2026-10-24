@@ -1,0 +1,13 @@
+/workspace/deps/cma/s.py:13: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+Traceback (most recent call last):
+  File "/workspace/repo/test-mocahesp.py", line 13, in <module>
+    from mocahesp.mocahesp_bounce import MOCAHESPBounce
+  File "/workspace/repo/mocahesp/mocahesp_bounce.py", line 21, in <module>
+    from bounce_mocahesp.bounce.benchmarks import *
+  File "/workspace/repo/bounce_mocahesp/bounce/benchmarks.py", line 31, in <module>
+    from bounce_mocahesp.bounce.util.benchmark import Parameter, ParameterType, eval_singularity_benchmark
+  File "/workspace/repo/bounce_mocahesp/bounce/util/benchmark.py", line 171
+    match self.type:
+          ^
+SyntaxError: invalid syntax

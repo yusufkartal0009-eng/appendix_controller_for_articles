@@ -1,0 +1,15 @@
+{
+  "paper_id": "cand_004",
+  "round": 2,
+  "round1_error": {
+    "category": "run",
+    "log_line": "FileNotFoundError: [Errno 2] No such file or directory: './SysID/scripts/examples/toy_sysid_cmaes.png'"
+  },
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "log_line": "FileNotFoundError: [Errno 2] No such file or directory: './SysID/scripts/examples/toy_sysid_cmaes.png'",
+    "reason": "scripts/examples/linear_dynamics.py ends with plt.savefig(\"./SysID/scripts/examples/toy_sysid_cmaes.png\") and a .pdf next to it (lines 291 and 293 at the pinned commit): a fixed path relative to the current folder, which is the read-only repository, in a folder the repository does not contain. The command takes no argument and the code reads no environment variable for it; a working_dir repair stays inside the repository. Making the write possible needs a writable repository or an edit of the script, both forbidden by section 3. No attempt was made.",
+    "at_attempt": 0
+  }
+}
