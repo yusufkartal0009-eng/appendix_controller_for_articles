@@ -39,6 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(cli): the printed score is the stored score (2026-10-24 20:36 +03:00, Issue #447)
+- Found by the bug hunt (seen in the demo output): `cli.py score` printed the tiers and the total with one decimal, which rounds half to even, so a stored 58.25 was printed as 58.2 (and 93.25 as 93.2, 91.75 as 91.8) while the summary line, the database and the dashboard say 58.25. Proven first (`tests/test_cli_score.py`, written before the fix; it failed on the old code). The breakdown now prints two decimals. The demo script's step 5 output was re-captured. No stored score changed.
+
 ### fix(corpus): a printed number is looked up as a whole number in the paper's text (2026-10-24 20:35 +03:00, Issue #447)
 - Found by the bug hunt: `scripts/demo_set.py` (`locate_numbers`) looked a printed number up with a plain substring search, so `1.5` matched inside `21.55`, `10.5`, `1.52` or a version `1.5.2`. Proven first (`tests/test_demo_set.py`, written before the fix; it failed on the old code). New `pages_with_number`: the number must not be part of a longer number. For `demo_020` (arXiv 2511.16760) the number `1.5` is on PDF pages 23, 39 and 40 with the new rule, not on page 41 (checked against the downloaded PDF). The generated block of `docs/DEMO_SET.md` 7.3 was not regenerated and carries a dated correction note; the run records of the demo set are untouched.
 
