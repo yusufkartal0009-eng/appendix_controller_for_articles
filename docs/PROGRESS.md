@@ -41,6 +41,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): protocol of the automatic search of round 3, written before any pool was searched (2026-10-25 00:05 +03:00, Issue #469)
+- `docs/AUTO_SEARCH_ROUND3.md`: GitHub pool by topic (two stages) in SHA-256 order, static rules S1 to S6 as in `docs/DEMO_SET.md`, run test K1 (install limit 1200 s, run limit 600 s), the new match test K2 (at least 2 different meaningful numbers of the run output found in the paper's text, one of them on a page with a `Table <n>` line), stop conditions (9 hours, 150 runs, 8 passing both, free disk under 30 GB), reporting with Wilson intervals. Written without looking at any candidate list. A K2 pass is a match candidate, never verified; the list is selected and not a success rate.
+- Evidence: documentation only; no run, no pool, no candidate.
+- Not verified: that K2 is a good filter (not tested on any run yet).
+
 ### docs: Round 2 results in the candidate documents, PENDING, README and the report (2026-10-24 23:40 +03:00, Issue #465)
 - `scripts/candidates_build.py --doc` now also writes the generated Round 2 results (tables, Wilson intervals, outcomes) into `docs/CANDIDATES.md` and section 12 of `docs/CANDIDATE_RUNS_ROUND2.md`; `scripts/report_numbers.py` has the block `candidateround2` (`--check` passes); PENDING D9, README and this file updated.
 - Not verified: any table match of the passing candidate.
