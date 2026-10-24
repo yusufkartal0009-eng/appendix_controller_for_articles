@@ -1,0 +1,11 @@
+{
+  "paper_id": "cand_020",
+  "round": 2,
+  "attempts": [],
+  "stopped": {
+    "status": "not_repairable",
+    "at_attempt": 0,
+    "log_line": "torch_scatter==2.1.2, torch_sparse==0.6.18, torch_cluster==1.6.3, torch_spline_conv==1.2.2 (requirements.txt)",
+    "reason": "requirements.txt pins four packages that PyPI publishes only as source distributions (read from the PyPI metadata of each pin: one .tar.gz file and no wheel). The README gets their wheels from the extra wheel index https://data.pyg.org/whl/torch-2.3.0+cpu.html. The install phase installs binary wheels from PyPI only; an extra wheel index and a source build are not among the five repair kinds (plus requirements_file) of the protocol, and a pin cannot be changed. No attempt was made. Not verified: that the sandbox would run the model once those wheels were present."
+  }
+}
