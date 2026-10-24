@@ -39,6 +39,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): protocol of the candidate runs, written before any run (2026-10-24 19:25 +03:00, Issue #437)
+- New `docs/CANDIDATE_RUNS.md` and `data/candidates/run_plan.json`: the 14 candidates of status ready, fixable and two_step are run once each in the sandbox (`--memory 50% --cpus 4`, run limit 1800 s, no network, no retry, no correction after a result); the 11 risky and 4 excluded are not run. The commands are the lists' commands; a placeholder is completed only from the README at the pinned commit, and `cand_013` (README gives only placeholders) is recorded as `command_incomplete` and not run. Pass = install INSTALLED/SKIPPED, run COMPLETED with exit 0, and a numeric metric line.
+- Not verified: no candidate has been run yet; whether the printed numbers match a table of a paper is decided later by string match plus a person.
+
 ### docs(devops): the six sandbox images rebuilt from scratch, with time and size (2026-10-24 19:20 +03:00, Issue #435)
 - All six images of the README section "Build the Sandbox Image" were built with `docker build --no-cache`; every build exited with code 0, 43 to 90 s each, 401 s in total. The table (time, size, command) is in `docs/ENVIRONMENT.md`; the README no longer says that the compiler and Python 3.8/3.9 commands have not been run.
 - Not verified: the build time on a machine without the base images, and on Linux or macOS. One measurement per image.
