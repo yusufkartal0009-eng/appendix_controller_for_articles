@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/repo/src/sim/simulator.py", line 46, in <module>
+    logging = create_logger(extra_args=extra_args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/src/utils/logging.py", line 11, in create_logger
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '../../outputs'

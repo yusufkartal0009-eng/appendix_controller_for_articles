@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/examples/linear_dynamics.py", line 291, in <module>
+    plt.savefig("./SysID/scripts/examples/toy_sysid_cmaes.png",
+  File "/workspace/deps/matplotlib/pyplot.py", line 1346, in savefig
+    res = fig.savefig(fname, **kwargs)  # type: ignore[func-returns-value]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/figure.py", line 3515, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/workspace/deps/matplotlib/backend_bases.py", line 2289, in print_figure
+    result = print_method(
+             ^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/backend_bases.py", line 2146, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+                                                                 ^^^^^
+  File "/workspace/deps/matplotlib/backends/backend_agg.py", line 537, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+  File "/workspace/deps/matplotlib/backends/backend_agg.py", line 486, in _print_pil
+    mpl.image.imsave(
+  File "/workspace/deps/matplotlib/image.py", line 1729, in imsave
+    image.save(fname, **pil_kwargs)
+  File "/workspace/deps/PIL/Image.py", line 2707, in save
+    fp = builtins.open(filename, "w+b")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './SysID/scripts/examples/toy_sysid_cmaes.png'

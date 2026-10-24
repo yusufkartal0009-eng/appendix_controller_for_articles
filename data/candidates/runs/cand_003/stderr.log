@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/repo/main.py", line 49, in <module>
+    os.makedirs(args.dataset + '_' + args.train_dir)
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: 'data/Tmall_train'

@@ -39,6 +39,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): the 14 candidate papers run once in the sandbox, 0 of 14 passed (2026-10-24 20:25 +03:00, Issue #437)
+- Protocol `docs/CANDIDATE_RUNS.md` (#438), mechanism `scripts/candidate_runs.py` (#439). Result (`data/candidates/runs/evaluation.json`, records in `data/candidates/runs/<id>/`): 14 selected candidates, 1 not run because its listed command holds only placeholders (cand_013), 13 run once, **0 passed**; Wilson 95 % interval of 0 / 14 is 0.0 % to 21.5 % (0 / 13: 0.0 % to 22.8 %), computed by `scripts/candidates_build.py --doc`. Failures: 6 installation failed (pinned versions not available for Python 3.11 or unresolvable), 3 module missing at run time (the installation status was SKIPPED, that is, no requirements file was found), 2 wrote into the read-only repository, 1 data file missing, 1 file path missing (a .png path), 1 command incomplete.
+- `docs/CANDIDATES.md` now has a generated Run results section (counts, causes by the classifier rules, every run). This is a selected list, not a sample, and not a success rate. Not verified: whether a repair (extra requirements, Python version, a writable copy) would make any of them run; the protocol forbids repairing.
+- No candidate passed, so no PDF was fetched and no blind claim extraction was made for the candidates (step d of the task is not applicable).
+
 ### feat(corpus): run mechanism for the candidate runs (2026-10-24 19:27 +03:00, Issue #437)
 - `scripts/run_pilot.py` (`pilot4_entry`): a corpus entry may name a `working_dir` and a `shell_command` (run by `sh -c`); none of the existing corpora has either key, so their behavior does not change. New `scripts/candidate_runs.py` runs the candidates of `data/candidates/run_plan.json` once each with the limits of `docs/CANDIDATE_RUNS.md` (50% memory, 4 CPUs, 1800 s run limit), classifies each run with `classify_run` of the demo set, shortens long logs, replaces local paths, and never runs a candidate that already has a result. 9 new tests; no candidate has been run by this change.
 

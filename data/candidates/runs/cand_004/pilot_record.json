@@ -1,0 +1,106 @@
+{
+  "paper_id": "cand_004",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "9066f413885d31f13653a6c5a10665736cf245a8",
+  "started_at": "2026-10-24T16:44:27+00:00",
+  "repo_url": "https://github.com/jsw7460/IDTD",
+  "pinned_commit": "b47eed10adb4ea3d1987fc4211a9251f5de18ea6",
+  "target_script": "scripts/examples/linear_dynamics.py",
+  "container_command": "python /workspace/repo/scripts/examples/linear_dynamics.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 3600,
+    "run_timeout_seconds": 1800
+  },
+  "pilot4": {
+    "run_command": "python scripts/examples/linear_dynamics.py",
+    "readme_url": null,
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 1800,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "b47eed10adb4ea3d1987fc4211a9251f5de18ea6",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.148
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 74,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\cand_004_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "ully downloaded numpy torch cuda-toolkit nvidia-cudnn-cu13 nvidia-cusparselt-cu13 nvidia-nccl-cu13 nvidia-nvshmem-cu13 cuda-bindings nvidia-cublas nvidia-cuda-cupti nvidia-cuda-nvrtc nvidia-cuda-runtime nvidia-cufft nvidia-cufile nvidia-curand nvidia-cusolver nvidia-cusparse nvidia-nvjitlink nvidia-nvtx triton cma colorama matplotlib wandb cwevals anyio distro httpx httpcore protobuf pydantic pydantic-core requests charset_normalizer idna typing-extensions urllib3 annotated-types certifi click contourpy cuda-pathfinder cycler fonttools fsspec h11 kiwisolver networkx opentelemetry-api opentelemetry-exporter-otlp-proto-http opentelemetry-exporter-http-transport opentelemetry-exporter-otlp-common opentelemetry-exporter-otlp-proto-common opentelemetry-proto googleapis-common-protos opentelemetry-sdk opentelemetry-semantic-conventions packaging pillow pyparsing python-dateutil setuptools six sympy mpmath typing-inspection xxhash filelock jinja2 MarkupSafe platformdirs pyyaml sniffio tzdata\n",
+    "stderr": "",
+    "duration_seconds": 62.79
+  },
+  "sandbox_duration_seconds": 642.352,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 15.018,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 173129728
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 625.785,
+    "peak_memory_bytes": 140234752
+  },
+  "finished_at": "2026-10-24T16:56:13+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

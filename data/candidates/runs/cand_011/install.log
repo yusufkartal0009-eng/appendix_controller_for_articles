@@ -1,0 +1,80 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/absl_py-2.1.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 1))
+Processing /workspace/packages/astunparse-1.6.3-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 2))
+Processing /workspace/packages/cachetools-5.3.3-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 3))
+Processing /workspace/packages/certifi-2024.2.2-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 4))
+Processing /workspace/packages/charset_normalizer-3.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 5))
+Processing /workspace/packages/cloudpickle-3.0.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 6))
+Processing /workspace/packages/contourpy-1.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 7))
+Processing /workspace/packages/cycler-0.12.1-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 8))
+Processing /workspace/packages/flatbuffers-24.3.25-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 9))
+Processing /workspace/packages/fonttools-4.51.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 10))
+Processing /workspace/packages/gast-0.4.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 11))
+Processing /workspace/packages/google_auth-2.29.0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 12))
+Processing /workspace/packages/google_auth_oauthlib-1.0.0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 13))
+Processing /workspace/packages/google_pasta-0.2.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 14))
+Processing /workspace/packages/grpcio-1.62.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 15))
+Processing /workspace/packages/h5py-3.11.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 16))
+Processing /workspace/packages/idna-3.7-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 17))
+Processing /workspace/packages/importlib_metadata-7.1.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 18))
+Processing /workspace/packages/importlib_resources-6.4.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 19))
+Processing /workspace/packages/joblib-1.4.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 20))
+Processing /workspace/packages/keras-2.13.1-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 21))
+Processing /workspace/packages/kiwisolver-1.4.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 22))
+Processing /workspace/packages/libclang-18.1.1-py2.py3-none-manylinux2010_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 23))
+Processing /workspace/packages/llvmlite-0.41.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 24))
+Processing /workspace/packages/Markdown-3.6-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 25))
+Processing /workspace/packages/MarkupSafe-2.1.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 26))
+Processing /workspace/packages/matplotlib-3.7.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 27))
+Processing /workspace/packages/numba-0.58.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 28))
+Processing /workspace/packages/numpy-1.24.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 29))
+Processing /workspace/packages/oauthlib-3.2.2-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 30))
+Processing /workspace/packages/opt_einsum-3.3.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 31))
+Processing /workspace/packages/packaging-24.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 32))
+Processing /workspace/packages/pandas-2.0.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 33))
+Processing /workspace/packages/patsy-0.5.6-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 34))
+Processing /workspace/packages/pillow-10.3.0-cp311-cp311-manylinux_2_28_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 35))
+Processing /workspace/packages/protobuf-4.25.3-cp37-abi3-manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 36))
+Processing /workspace/packages/prts-1.0.0.3-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 37))
+Processing /workspace/packages/pyasn1-0.6.0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 38))
+Processing /workspace/packages/pyasn1_modules-0.4.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 39))
+Processing /workspace/packages/pyparsing-3.1.2-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 40))
+Processing /workspace/packages/python_dateutil-2.9.0.post0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 41))
+Processing /workspace/packages/pytz-2024.1-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 42))
+Processing /workspace/packages/requests-2.31.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 43))
+Processing /workspace/packages/requests_oauthlib-2.0.0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 44))
+Processing /workspace/packages/rsa-4.9-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 45))
+Processing /workspace/packages/scikit_learn-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 46))
+Processing /workspace/packages/scipy-1.10.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 47))
+Processing /workspace/packages/six-1.16.0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 48))
+Processing /workspace/packages/statsmodels-0.14.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 49))
+Processing /workspace/packages/stumpy-1.12.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 50))
+Processing /workspace/packages/tensorboard-2.13.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 51))
+Processing /workspace/packages/tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 52))
+Processing /workspace/packages/tensorflow-2.13.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 53))
+Processing /workspace/packages/tensorflow_estimator-2.13.0-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 54))
+Processing /workspace/packages/tensorflow_io_gcs_filesystem-0.34.0-cp311-cp311-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 55))
+Processing /workspace/packages/termcolor-2.4.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 56))
+Processing /workspace/packages/threadpoolctl-3.4.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 57))
+Processing /workspace/packages/tqdm-4.66.2-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 58))
+Processing /workspace/packages/tsfresh-0.20.2-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 59))
+Processing /workspace/packages/typing_extensions-4.5.0-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 60))
+Processing /workspace/packages/tzdata-2024.1-py2.py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 61))
+Processing /workspace/packages/urllib3-2.2.1-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 62))
+Processing /workspace/packages/werkzeug-3.0.2-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 63))
+Processing /workspace/packages/wrapt-1.16.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 64))
+Processing /workspace/packages/zipp-3.18.1-py3-none-any.whl (from -r /workspace/repo/Real_exp_requirements.txt (line 65))
+ERROR: Cannot install joblib==1.4.0 and joblib==1.4.2 because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    The user requested joblib==1.4.0
+    The user requested joblib==1.4.2
+
+Additionally, some packages in these conflicts have no matching distributions available for your environment:
+    joblib
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip to attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts

@@ -1,0 +1,55 @@
+{
+  "paper_id": "cand_025",
+  "source": "https://github.com/radrumond/timehetnet",
+  "commit_hash": "1792143370942be9a5b1198b980f8612893a8e35",
+  "target_script": "generate_test_set.py",
+  "command": [
+    "sh",
+    "-c",
+    "python generate_test_set.py && python experiment.py"
+  ],
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.804,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\cand_025",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.488,
+    "timeout_limit_seconds": 1800,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 25059328,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 1800s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : sh -c python generate_test_set.py && python experiment.py\n==================================================\n########## argument sheet ########################################\n#       data_dir  :  ~/data \n#      split_dir  :  ./splits \n#          min_f  :  5 \n#          max_f  :  10 \n#         min_ft  :  5 \n#         max_ft  :  10 \n#        q_shots  :  20 \n#        s_shots  :  20 \n#       t_length  :  100 \n#    tmax_length  :  100 \n# normalize_data  :  True \n#    better_norm  :  True \n#      grad_clip  :  0.0 \n#            key  :   \n#           dims  :  [32,32,32] \n#      dims_pred  :  [32,32,32] \n#       hetmodel  :  time \n#      batchnorm  :  False \n#          block  :  gru,conv,conv,gru \n#   control_mode  :  True \n#  control_steps  :  80 \n#             lr  :  0.001 \n#          split  :  0 \n#     num_epochs  :  15000 \n# early_stopping  :  True \n#       patience  :  1500 \n#   best_weights  :  True \n#           name  :  2026-10-24_17:19:44.700017 \n#        res_dir  :  ./results/ \n#   save_weights  :  True \n##################################################################\nsplit:  0 5 5\nWorking on SPLIT: 0\nLoading data ...\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : SKIPPED\nDuration      : 0.488s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/generate_test_set.py\", line 55, in <module>\n    _, _, test_gen, _ = getGens(args,model_type,load_test=True,onlyTest=True)       \n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/data_sampling/load_gens.py\", line 10, in getGens\n    data_loader = Task_Sampler(args.data_dir,splits)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/data_sampling/data_gen_ts.py\", line 45, in __init__\n    data.append(openTimeSeries(f\"{os.path.expanduser(self.datasets_folder)}{folder}\"))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/data_sampling/time_sampling.py\", line 27, in openTimeSeries\n    return np.nan_to_num(np.load(path))\n                         ^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py\", line 454, in load\n    fid = stack.enter_context(open(os.fspath(file), \"rb\"))\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/workspace/home/data/UEA_multivariate/x/EigenWorms_x.npy'\n"
+}

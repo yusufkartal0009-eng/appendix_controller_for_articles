@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/notears/linear.py", line 90, in <module>
+    from notears import utils
+  File "/workspace/repo/notears/utils.py", line 3, in <module>
+    import igraph as ig
+ModuleNotFoundError: No module named 'igraph'

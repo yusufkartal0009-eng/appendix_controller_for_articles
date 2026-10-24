@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/workspace/repo/generate_test_set.py", line 55, in <module>
+    _, _, test_gen, _ = getGens(args,model_type,load_test=True,onlyTest=True)       
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/data_sampling/load_gens.py", line 10, in getGens
+    data_loader = Task_Sampler(args.data_dir,splits)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/data_sampling/data_gen_ts.py", line 45, in __init__
+    data.append(openTimeSeries(f"{os.path.expanduser(self.datasets_folder)}{folder}"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/data_sampling/time_sampling.py", line 27, in openTimeSeries
+    return np.nan_to_num(np.load(path))
+                         ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py", line 454, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/home/data/UEA_multivariate/x/EigenWorms_x.npy'

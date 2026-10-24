@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/workspace/repo/libs/MCMC.py", line 12, in <module>
+    import libs.utils as ut
+  File "/workspace/repo/libs/utils.py", line 6, in <module>
+    import bottleneck as bn
+ModuleNotFoundError: No module named 'bottleneck'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/repo/run_BnpC.py", line 6, in <module>
+    from libs.MCMC import MCMC as MCMC
+  File "/workspace/repo/libs/MCMC.py", line 17, in <module>
+    import utils as ut
+  File "/workspace/repo/libs/utils.py", line 6, in <module>
+    import bottleneck as bn
+ModuleNotFoundError: No module named 'bottleneck'
