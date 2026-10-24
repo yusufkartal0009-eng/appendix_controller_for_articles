@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/bench/scripts/run_eval.py", line 796, in <module>
+    main()
+  File "/workspace/repo/bench/scripts/run_eval.py", line 494, in main
+    os.makedirs(out_dir, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: 'outputs'

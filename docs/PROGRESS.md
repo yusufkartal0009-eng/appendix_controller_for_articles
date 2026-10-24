@@ -41,6 +41,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): automatic search of round 3, runs a3_026 to a3_038 (2026-10-25 02:13 +03:00, Issue #473)
+- 13 new runs from `data/auto_search3/` (snapshot of the search that started 2026-10-24T20:59:14+00:00; 1031 candidates checked in all so far, 38 run, K1 passed 0, K2 passed 0, both 0). Outcomes of this batch: install 1, run 12. K2 passed in this batch: none.
+- Protocol: `docs/AUTO_SEARCH_ROUND3.md`. Selected, non-representative list, not a success rate; a K2 pass is a match candidate, not a verified result. Local paths replaced by `<REPO>` and `<HOME>`.
+- Evidence: ruff and pytest below in the pull request.
+- Not verified: that any matched number means the same thing as the paper's number.
+
 ### data(corpus): automatic search of round 3, runs a3_015 to a3_025 (2026-10-25 01:11 +03:00, Issue #473)
 - 11 new runs from `data/auto_search3/` (snapshot of the search that started 2026-10-24T20:59:14+00:00; 794 candidates checked in all so far, 25 run, K1 passed 0, K2 passed 0, both 0). Outcomes of this batch: install 3, run 8. K2 passed in this batch: none.
 - Protocol: `docs/AUTO_SEARCH_ROUND3.md`. Selected, non-representative list, not a success rate; a K2 pass is a match candidate, not a verified result. Local paths replaced by `<REPO>` and `<HOME>`.
