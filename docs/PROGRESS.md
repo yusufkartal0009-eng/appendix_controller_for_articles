@@ -4,7 +4,7 @@
 
 ---
 
-## Current Status (2026-10-25 01:30 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
+## Current Status (2026-10-24 23:40 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
 
 - **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). The stages are recorded in the entries below; the final report is `docs/report/REPORT.md` and its numbers are generated (`python scripts/report_numbers.py --check`).
 - **Pilots** (12 papers: 6 seed papers in Pilots 1 to 3, 6 new papers in Pilot 4): pilot success 0 / 6 (Pilot 1), 1 / 6 (Pilot 2), 2 / 6 (Pilot 3, with four settings chosen after Pilot 2's failures), and 1 / 6 for the new papers at their first attempt (Pilot 4). `docs/FIELD_ANALYSIS.md` section 8 (generated) has the pool-wide rates, the human-intervention table, the autonomy rate, and a descriptive factor table (exploratory, n = 12).
@@ -15,7 +15,7 @@
 - **External reference:** the ReScience C selection evaluated 65 articles and selected none (`docs/EXTERNAL_VALIDATION.md`); no external run was made.
 - **Open:** the release (#45), the old M3 issues (#19 to #24), #34 and #35, the standing issue #115, and `docs/PLAN_2026-10-01.md` question Y2 (the AI-attribution rule; issue #165 does not exist in this repository).
 - **Since 2026-10-20 (issues #435 to #452):** the six images rebuilt from scratch with time and size (`docs/ENVIRONMENT.md`); the protocol of the candidate runs written before the runs and the 14 candidates run once each, **0 of 14 passed** (`docs/CANDIDATE_RUNS.md`, `docs/CANDIDATES.md`; a selected list, not a success rate); a fresh run of `paper_006` from a clean clone of the public repository completed (2,490 s, Update 2 of the walk-through); the tolerance probe (`docs/TOLERANCE_PROBE.md`; hand-made claims, not a real error); the demo script (`docs/DEMO_SCRIPT.md`); the bug hunt (three bugs fixed in #448 to #450, seven suspicions in `docs/BUG_HUNT.md`); the report has two new generated sections (6.8 and 6.9). Open: `docs/PENDING.md` (D9 candidate papers and D10 two scorer rules are new).
-- **Candidate repair round (2026-10-25, #455 to #465):** a separate round with a protocol written before the runs (`docs/CANDIDATE_RUNS_ROUND2.md`): first attempt 0 of 14, with repair 1 of 14 (`cand_002`; its output matches no table of its paper); the others stopped because the failure needs a forbidden repair. Selected list, not a success rate. No claim accepted.
+- **Candidate repair round (2026-10-24, #455 to #465):** a separate round with a protocol written before the runs (`docs/CANDIDATE_RUNS_ROUND2.md`): first attempt 0 of 14, with repair 1 of 14 (`cand_002`; its output matches no table of its paper); the others stopped because the failure needs a forbidden repair. Selected list, not a success rate. No claim accepted.
 - **Tests:** 1,028 passed, 9 skipped locally (2026-10-24) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
 
 ---
@@ -41,38 +41,38 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
-### docs: Round 2 results in the candidate documents, PENDING, README and the report (2026-10-25 01:30 +03:00, Issue #465)
+### docs: Round 2 results in the candidate documents, PENDING, README and the report (2026-10-24 23:40 +03:00, Issue #465)
 - `scripts/candidates_build.py --doc` now also writes the generated Round 2 results (tables, Wilson intervals, outcomes) into `docs/CANDIDATES.md` and section 12 of `docs/CANDIDATE_RUNS_ROUND2.md`; `scripts/report_numbers.py` has the block `candidateround2` (`--check` passes); PENDING D9, README and this file updated.
 - Not verified: any table match of the passing candidate.
 
-### data(corpus): blind claim extraction for cand_002, the one candidate that passed (2026-10-25 00:50 +03:00, Issue #464)
+### data(corpus): blind claim extraction for cand_002, the one candidate that passed (2026-10-24 23:38 +03:00, Issue #464)
 - Three independent fresh `claude -p` passes (tools Read, Write, Edit, Glob, Grep) over a blind packet asked for the paper values that match the five metrics of the run output; stored under `data/candidates/round2/cand_002/blind_extraction/`. No question has two agreeing passes with a value; one pass found only the simulation settings (FP 0.1 %, FN 30 %), which are settings and not results. No claim candidate exists and no claim is accepted. The form for the owner is outside the repository.
 - Not verified: the paper PDF (not downloadable; the Europe PMC full-text XML was used, so `page` is a text chunk number).
 
-### data(corpus): repair round closed: 1 of 14 passed after repair (2026-10-25 00:30 +03:00, Issue #457)
+### data(corpus): repair round closed: 1 of 14 passed after repair (2026-10-24 23:35 +03:00, Issue #457)
 - cand_020 recorded as not repairable (four pins exist only as source distributions on PyPI; the README takes them from an extra wheel index). The round-2 evaluation (`python scripts/candidate_round2.py summary`, `data/candidates/round2/evaluation.json`): 15 repair logs (the 14 of round 1 and cand_020); passed: cand_002 only. cand_011 ran to exit 0 but printed no `name: number` line. No other risky candidate qualified.
 - Not verified: any table match for cand_002 (none found in the paper text).
 
-### data(corpus): eligibility of the risky candidates for the repair round (2026-10-25 00:20 +03:00, Issue #457)
+### data(corpus): eligibility of the risky candidates for the repair round (2026-10-24 23:35 +03:00, Issue #457)
 - `data/candidates/round2/eligibility.json`, written before any risky candidate is run: of the 11 risky candidates one is eligible (cand_020, data inside the repository), two are `command_incomplete` (cand_015, cand_016), and eight are not eligible, each with the reason (no README address, an account needed, a 5.3 GB file, a client that is not available, a compile step). Download total: 0 GB of the 20 GB.
 - Not verified: sizes of cand_016, cand_017 and cand_022 (not found).
 
-### data(corpus): repair round, cand_011; requirements_file filter fixed (2026-10-25 00:10 +03:00, Issue #457)
+### data(corpus): repair round, cand_011; requirements_file filter fixed (2026-10-24 23:34 +03:00, Issue #457)
 - cand_011 ran with the README's Python 3.8 and requirements file: install INSTALLED, run COMPLETED, exit 0, but the output is a dict of values with no 'name: number' line, so by the protocol it did not pass (recorded as `no_metric_line`, noted as a limit of the pattern). The first attempt was a harness fault (the install phase read all requirement files) and is kept as `attempt_1_harness_fault`, not counted; `FilteredStager` now removes the unnamed files from the staged copy (section 11 of the protocol).
 - Not verified: a table match for cand_011.
 
-### feat(corpus): sixth repair kind of the repair round, requirements_file (2026-10-24 23:40 +03:00, Issue #457)
+### feat(corpus): sixth repair kind of the repair round, requirements_file (2026-10-24 23:25 +03:00, Issue #457)
 - Section 10 of `docs/CANDIDATE_RUNS_ROUND2.md` (dated amendment, written before the run of cand_011) and `FilteredStager` in `scripts/candidate_round2.py`: only the requirement file the README names is installed, the files are not edited. Two tests. 1,039 tests pass, 9 skipped.
 
-### data(corpus): repair round, first 11 candidates (cand_001 to cand_010 and cand_013) (2026-10-24 23:30 +03:00, Issue #457)
+### data(corpus): repair round, first 11 candidates (cand_001 to cand_010 and cand_013) (2026-10-24 23:24 +03:00, Issue #457)
 - Records under `data/candidates/round2/` (a `repair_log.json` per candidate). cand_002 passed after one repair (Python 3.9 image); cand_009 stopped at the third error; cand_001, 003, 004, 005, 006, 007, 008, 010 and 012 are not repairable by the five allowed repairs, each with the log line and the reason; cand_013 stays `command_incomplete`. cand_011 is not in this batch. `summary` also reports the `stopped` entry.
 - Not verified: that cand_002's output is comparable with any table of its paper (no printed value occurs in a table).
 
-### feat(corpus): run mechanism of the candidate repair round (2026-10-24 22:35 +03:00, Issue #457)
+### feat(corpus): run mechanism of the candidate repair round (2026-10-24 22:16 +03:00, Issue #457)
 - `scripts/candidate_round2.py` (`fetch`, `run`, `summary`) and `tests/test_candidate_round2.py`: one repair attempt per call, from the `repair_log.json` of the candidate; the rules of `docs/CANDIDATE_RUNS_ROUND2.md` are checked in code (allowed repair kinds, a log line for every repair, at most two repairs, no writable copy of the repository, an attempt is never run twice, round 1 records are not touched). Run limit 3600 s, install 1800 s, `--memory 50% --cpus 4`. 1,037 tests pass, 9 skipped.
 - Not verified: the runner against a real container (the first real attempt is the check).
 
-### docs(corpus): protocol of the candidate repair round, written before any round-2 run (2026-10-24 22:15 +03:00, Issue #455)
+### docs(corpus): protocol of the candidate repair round, written before any round-2 run (2026-10-24 22:14 +03:00, Issue #455)
 - `docs/CANDIDATE_RUNS_ROUND2.md`: scope (the 14 round-1 candidates and the risky candidates whose README data can be downloaded within 20 GB, 3 GB per file), the five allowed repairs and the forbidden ones, at most two repair rounds per candidate, the pass definition of round 1 plus the paper-table match, limits (run 3600 s, install 1800 s, one sandbox run at a time), and the three separate counts with Wilson intervals from a script. Round 1 and its records are not touched.
 - Not verified: nothing has been run in round 2 yet.
 
