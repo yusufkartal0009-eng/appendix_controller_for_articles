@@ -39,6 +39,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(scoring): tolerance probe covers all four stored runs of paper_003 (2026-10-24 20:26 +03:00, Issue #442)
+- The first version probed one of the four stored completed runs of `paper_003` (the stability table lists four, as for `paper_006`). `scripts/tolerance_probe.py` now probes all four; their metrics are identical, so the tables of `docs/TOLERANCE_PROBE.md` are unchanged and the document lists the four run folders. No other number changed.
+
 ### feat(scoring): tolerance probe on real runs with hand-moved claims (2026-10-24 20:25 +03:00, Issue #442)
 - New `scripts/tolerance_probe.py`, `data/tolerance_probe/results.json`, `docs/TOLERANCE_PROBE.md` (generated; `--check` compares the files with the stored runs). The stored runs of paper_003, paper_006 (four runs, identical values) and paper_102 are scored by the Tier 2 calculation of `src/scoring.py` with the run's own value (a true claim) and with every metric moved by 0.5, 1, 2, 5, 10 and 20 % up and down. For paper_006 the status leaves Verified at -10 % / +10 %; for paper_003 at -5 % / +10 %; for paper_102 at -10 % / +10 % (read from the generated tables). A small value between 0 and 1 (for example `boundary_conflict` = 0.0167) stays MATCHED at 20 % because of the absolute allowance.
 - The claims are hand-made, not an error of a real paper; the real-world false-positive and false-negative rates are not measured. No accepted claim of the owner has the question ID of a metric of any probed run, so there is no row with a real accepted claim (not verified whether a run's value belongs to one). 7 new tests.

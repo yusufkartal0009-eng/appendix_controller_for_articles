@@ -179,6 +179,534 @@
       ]
     },
     {
+      "paper_id": "paper_003",
+      "run_dir": "data/memory_runs/paper_003",
+      "metrics": {
+        "loss": 0.106,
+        "rmse": 0.473
+      },
+      "matched_limits": {
+        "loss": {
+          "down": 20.0,
+          "up": 20.0
+        },
+        "rmse": {
+          "down": 2.0,
+          "up": 5.0
+        }
+      },
+      "rows": [
+        {
+          "deviation_percent": 0.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -0.5,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 0.5,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -1.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 1.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -2.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 2.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -5.0,
+          "tier2": 75.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 84.5,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 5.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -10.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 10.0,
+          "tier2": 75.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 84.5,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": -20.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 20.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        }
+      ]
+    },
+    {
+      "paper_id": "paper_003",
+      "run_dir": "data/memory_runs/paper_003_run2",
+      "metrics": {
+        "loss": 0.106,
+        "rmse": 0.473
+      },
+      "matched_limits": {
+        "loss": {
+          "down": 20.0,
+          "up": 20.0
+        },
+        "rmse": {
+          "down": 2.0,
+          "up": 5.0
+        }
+      },
+      "rows": [
+        {
+          "deviation_percent": 0.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -0.5,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 0.5,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -1.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 1.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -2.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 2.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -5.0,
+          "tier2": 75.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 84.5,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 5.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -10.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 10.0,
+          "tier2": 75.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 84.5,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": -20.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 20.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        }
+      ]
+    },
+    {
+      "paper_id": "paper_003",
+      "run_dir": "data/cpu_runs/paper_003",
+      "metrics": {
+        "loss": 0.106,
+        "rmse": 0.473
+      },
+      "matched_limits": {
+        "loss": {
+          "down": 20.0,
+          "up": 20.0
+        },
+        "rmse": {
+          "down": 2.0,
+          "up": 5.0
+        }
+      },
+      "rows": [
+        {
+          "deviation_percent": 0.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -0.5,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 0.5,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -1.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 1.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -2.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": 2.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -5.0,
+          "tier2": 75.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 84.5,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 5.0,
+          "tier2": 100.0,
+          "labels": {
+            "MATCHED": 2,
+            "PARTIAL": 0,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 93.25,
+          "status": "Verified"
+        },
+        {
+          "deviation_percent": -10.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 10.0,
+          "tier2": 75.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 1,
+            "DIVERGED": 0,
+            "NOT FOUND": 0
+          },
+          "total": 84.5,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": -20.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        },
+        {
+          "deviation_percent": 20.0,
+          "tier2": 50.0,
+          "labels": {
+            "MATCHED": 1,
+            "PARTIAL": 0,
+            "DIVERGED": 1,
+            "NOT FOUND": 0
+          },
+          "total": 75.75,
+          "status": "Partially Verified"
+        }
+      ]
+    },
+    {
       "paper_id": "paper_006",
       "run_dir": "data/pilot2_runs/paper_006",
       "metrics": {

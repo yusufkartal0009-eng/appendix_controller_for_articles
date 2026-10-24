@@ -19,7 +19,7 @@ Every row moves **all** metrics of the run by the same share at once. The claim 
 
 ### 2.1 paper_003
 
-Runs: `data/pilot3_runs/paper_003`
+Runs: `data/pilot3_runs/paper_003`, `data/memory_runs/paper_003`, `data/memory_runs/paper_003_run2`, `data/cpu_runs/paper_003` (identical metrics, identical rows)
 
 Metrics of the run (as printed): loss = 0.106, rmse = 0.473
 
