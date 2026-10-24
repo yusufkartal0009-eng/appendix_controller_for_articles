@@ -4,7 +4,7 @@
 
 ---
 
-## Current Status (2026-10-20 06:03 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; External Reference and Two Issues Open
+## Current Status (2026-10-24 21:06 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
 
 - **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). The stages are recorded in the entries below; the final report is `docs/report/REPORT.md` and its numbers are generated (`python scripts/report_numbers.py --check`).
 - **Pilots** (12 papers: 6 seed papers in Pilots 1 to 3, 6 new papers in Pilot 4): pilot success 0 / 6 (Pilot 1), 1 / 6 (Pilot 2), 2 / 6 (Pilot 3, with four settings chosen after Pilot 2's failures), and 1 / 6 for the new papers at their first attempt (Pilot 4). `docs/FIELD_ANALYSIS.md` section 8 (generated) has the pool-wide rates, the human-intervention table, the autonomy rate, and a descriptive factor table (exploratory, n = 12).
@@ -14,7 +14,8 @@
 - **GPU:** one synthetic paper with `torch==2.8.0` (CUDA 12.8) ran with `--gpus all` on the RTX 5070 through the real pipeline (`data/gpu_check/`, `docs/ENVIRONMENT.md`); no real paper was run with the GPU.
 - **External reference:** the ReScience C selection evaluated 65 articles and selected none (`docs/EXTERNAL_VALIDATION.md`); no external run was made.
 - **Open:** the release (#45), the old M3 issues (#19 to #24), #34 and #35, the standing issue #115, and `docs/PLAN_2026-10-01.md` question Y2 (the AI-attribution rule; issue #165 does not exist in this repository).
-- **Tests:** 928 passed, 9 skipped locally (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
+- **Since 2026-10-20 (issues #435 to #452):** the six images rebuilt from scratch with time and size (`docs/ENVIRONMENT.md`); the protocol of the candidate runs written before the runs and the 14 candidates run once each, **0 of 14 passed** (`docs/CANDIDATE_RUNS.md`, `docs/CANDIDATES.md`; a selected list, not a success rate); a fresh run of `paper_006` from a clean clone of the public repository completed (2,490 s, Update 2 of the walk-through); the tolerance probe (`docs/TOLERANCE_PROBE.md`; hand-made claims, not a real error); the demo script (`docs/DEMO_SCRIPT.md`); the bug hunt (three bugs fixed in #448 to #450, seven suspicions in `docs/BUG_HUNT.md`); the report has two new generated sections (6.8 and 6.9). Open: `docs/PENDING.md` (D9 candidate papers and D10 two scorer rules are new).
+- **Tests:** 1,028 passed, 9 skipped locally (2026-10-24) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
 
 ---
 
@@ -38,6 +39,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### docs: status documents and the report brought up to date (2026-10-24 21:06 +03:00, Issue #452)
+- `docs/PENDING.md` (done items marked with their pull requests; new D9 candidate papers and D10 two scorer rules; the repository is public), the Current Status of `README.md` and of this file, and two new sections of `docs/report/REPORT.md` (6.8 candidate runs, 6.9 tolerance probe) whose numbers are generated blocks (`candidateruns`, `toleranceprobe` in `scripts/report_numbers.py`; `--check` passes). 1,028 tests pass, 9 skipped.
+- Not verified: that the owner's summary outside the repository says the same; that every other document that quotes a number (for example the introduction document) is current.
 
 ### docs(devops): a fresh run from a clean clone completed, paper_006 end to end (2026-10-24 21:04 +03:00, Issue #441)
 - `docs/evidence/clean_clone/WALKTHROUGH.md` Update 2: a clone of the public repository followed through the README to `cli.py score paper_006 --cpus 8 --timeout 7200` and `cli.py diagnose`. `init-db` restored 13 accepted claims; the run COMPLETED (exit 0, run phase 1,092.54 s, `accuracy 0.8886`, `auroc 0.892`); the score used 2 accepted claims, none found in the output, so Tier 2 = 0 ("nothing was compared") and the total is 61.25, Needs Review. The whole walk-through took 2,490 s. Not a protocol run (CPUs and time limit set by hand); no accepted claim was reproduced.
