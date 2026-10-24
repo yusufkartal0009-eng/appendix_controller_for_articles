@@ -52,6 +52,9 @@ STAGE_TOPICS: dict[int, list[str]] = {
     2: ["numerical-methods", "monte-carlo", "differential-equations", "econometrics", "bioinformatics", "chemistry",
         "neuroscience", "ecology", "epidemiology", "game-theory", "information-theory", "kernel-methods",
         "ensemble-learning", "time-series-forecasting", "topic-modeling", "nlp"],
+    3: ["machine-learning", "deep-learning", "data-science", "scientific-computing", "reinforcement-learning", "computer-vision",
+        "graph-neural-networks", "forecasting", "clustering", "classification", "anomaly-detection", "scikit-learn", "tabular-data",
+        "time-series", "benchmark", "reproducibility"],
 }
 ID_PREFIX = "a3_"
 MAX_SECONDS = 9 * 3600
