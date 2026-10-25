@@ -171,6 +171,15 @@ pytest tests/ -v
 ```bash
 python -m src.web                  # http://127.0.0.1:8000 (use --port to change it)
 ```
+To see the dashboard with the real stored runs instead of an empty database, build a separate database file and start the
+dashboard on it (the project database `data/repro_radar.db` is not touched, and `data/dashboard_demo.db` is not committed):
+```bash
+python scripts/build_demo_db.py
+python -m src.web --db-url sqlite:///data/dashboard_demo.db
+```
+The script scores every stored run with the accepted claims and keeps the best record of each paper; the score's summary says
+which run and setting it is. Screenshots: [`docs/evidence/demo2/`](docs/evidence/demo2/).
+
 The dashboard runs on **localhost only** (`127.0.0.1`, `docs/DECISIONS.md` D-006) and reads the project database (`data/repro_radar.db`, created by `cli.py init-db`); it never shows a number that is not stored there. Use `--db-url` to point it at another SQLAlchemy database.
 
 | Address | What it shows |
