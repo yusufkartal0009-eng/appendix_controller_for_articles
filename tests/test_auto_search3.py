@@ -342,3 +342,46 @@ def test_the_report_says_when_no_candidate_passed_k2(tmp_path):
     walk, _, _ = search(tmp_path, ["o/a"], [FAILED])
     walk.run()
     assert "No candidate passed K2." in a3.command_report(tmp_path)
+
+
+# ---- cleanup and a crash of the runner
+
+
+def test_force_remove_falls_back_when_the_normal_delete_fails(tmp_path, monkeypatch):
+    folder = tmp_path / "a3_001"
+    (folder / "deps").mkdir(parents=True)
+    (folder / "deps" / "f.txt").write_text("x", encoding="utf-8")
+
+    def broken(path):
+        raise FileNotFoundError("path too long")
+
+    monkeypatch.setattr(a3, "remove_tree", broken)
+    assert a3.force_remove(folder) is True and not folder.exists()
+
+
+def test_cleanup_removes_only_the_folders_of_the_candidate(tmp_path, monkeypatch):
+    monkeypatch.setattr(a3, "SANDBOX_RUNS_DIR", tmp_path / "sandbox_runs")
+    for name in ("sandbox_runs/a3_001", "sandbox_runs/a3_001.build", "sandbox_runs/a3_002", "staging/a3_001", "staging/a3_001_packages",
+                 "staging/a3_002"):
+        (tmp_path / name).mkdir(parents=True)
+    assert a3.cleanup_run("a3_001", tmp_path / "staging") == []
+    assert sorted(p.name for p in tmp_path.rglob("a3_*") if p.is_dir()) == ["a3_002", "a3_002"]
+
+
+def test_a_crash_of_the_runner_is_recorded_as_a_harness_result_and_the_walk_goes_on(tmp_path):
+    calls = []
+
+    def runner(entry, corpus, record_root):
+        calls.append(entry["paper_id"])
+        if len(calls) == 1:
+            raise FileNotFoundError("path too long")
+        return dict(FAILED)
+
+    names = ["o/a", "o/b"]
+    fetcher = Fetcher({n: {} for n in names})
+    fetcher.ids = {"o/a": 1, "o/b": 2}
+    walk = a3.Search(names, fetcher, set(), set(), tmp_path, runner, lambda e, d: K2_FAIL, started_at=1000.0, now=lambda: 1000.0,
+                     free=lambda: 10**12)
+    summary = walk.run()
+    first = stored(tmp_path)["candidates"][0]["k1"]
+    assert summary["runs"] == 2 and first["category"] == "harness" and "path too long" in first["log_line"]
