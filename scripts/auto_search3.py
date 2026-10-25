@@ -63,6 +63,10 @@ STAGE_TOPICS: dict[int, list[str]] = {
     5: ["pytorch", "neural-network", "bayesian-inference", "gaussian-processes", "stochastic-processes", "sampling",
         "linear-algebra", "scipy", "xgboost", "lightgbm", "random-forest", "svm", "deep-reinforcement-learning",
         "generative-model", "explainable-ai", "interpretability"],
+    6: ["tensorflow", "keras", "transformers", "natural-language-processing", "data-mining", "optimization-algorithms",
+        "evolutionary-algorithms", "genetic-algorithm", "federated-learning", "graph-theory", "time-series-analysis",
+        "bayesian-optimization", "hyperparameter-optimization", "uncertainty-quantification", "machine-learning-algorithms",
+        "deep-neural-networks"],
 }
 ID_PREFIX = "a3_"
 MAX_SECONDS = 9 * 3600
