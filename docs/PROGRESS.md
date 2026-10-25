@@ -42,6 +42,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### test: the seven suspicions of the bug hunt, outcome (2026-10-25 20:19 +03:00, Issue #498)
+- `docs/BUG_HUNT.md` section 3: for each suspicion a failing test was tried first. None was disproved; three were real bugs and are fixed (#499 quote guard, #500 classifier path rule, #501 README at the pinned commit); suspicion 4 is real but its fix is an interface decision (a strict `xfail` test, `tests/test_bug_hunt_suspicions.py`); suspicions 1, 5 and 7 are owner decisions and were not touched.
+- Not verified: that any of the three fixed bugs ever changed a stored result.
 ### fix(corpus): the README of a candidate is read at its pinned commit (2026-10-25 20:18 +03:00, Issue #498, suspicion 6 of the bug hunt)
 - `scripts/candidates_build.py` (`read_repo`) read the README of the head of the default branch, also when the list supplied a commit, so "the README names the paper" could describe a newer README than the one at the pinned commit. Proven first (two new cases in `tests/test_candidates.py` failed on the old code); the README is now requested with `?ref=<commit>`. The stored candidate records (`data/candidates/`) were not regenerated: they were made with the old rule, and a re-run would need the network.
 - Also corrected here: the times of the entries of #494, #496, #498 (suspicions 2 and 3) in this file were estimates; they now follow the merge times of the pull requests.

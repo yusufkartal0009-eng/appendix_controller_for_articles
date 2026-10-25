@@ -20,7 +20,7 @@ listed below as **suspected, not proven** and is not changed.
 No stored score, record or accepted claim changed. The tolerance probe (`docs/TOLERANCE_PROBE.md`) was regenerated after #448: for
 `paper_003` the status now leaves Verified at -20 % / +20 % instead of -5 % / +10 %.
 
-## 2. Suspected, not proven
+## 2. Suspected, not proven (first pass; see section 3 for the outcome of each)
 
 Each of these was seen in the code or in an output and could not be turned into a failing test without deciding what the rule
 should be. They are for the owner.
@@ -47,3 +47,21 @@ should be. They are for the owner.
 7. **The K1 and pass rules read a text pattern** (a name, `:` or `=`, a decimal number): a setup value or a warning line can pass it
    (`demo_020` passed on `True post-break alpha: 1.5`). The protocols say so; it is listed here because the candidate protocol
    (`docs/CANDIDATE_RUNS.md`) uses the same pattern.
+
+## 3. Second pass over the seven suspicions (2026-10-25, issue #498)
+
+For each suspicion a failing test was tried first. A failing test is a real bug (fixed in a small pull request, at most five
+fixes); a passing test would have disproved the suspicion; a suspicion whose fix is a decision about scoring semantics or
+the interface was not touched. Result: **none was disproved**, three were real bugs and are fixed, four are left to the owner.
+
+| # | Suspicion | Outcome | Evidence |
+|---|---|---|---|
+| 1 | Absolute allowance of 0.05 for values between 0 and 1 | **Owner decision.** It is the implemented rule; a test would only restate it. Not touched. | `docs/TOLERANCE_PROBE.md` |
+| 2 | `quote_guard` finds a value as a substring | **Real bug, fixed in #499.** `0.5` was found inside `10.55`, `0.52` and `1.5.2`; the value must now be a whole number. The 36 stored answers give the same result as before. | three cases in `tests/test_quote_guard.py` failed on the old code |
+| 3 | `classify_exception` takes `data` anywhere in a path | **Real bug, fixed in #500.** `metadata_utils/config.yaml`, `database.yml` and `src/metadata.py` were classified as missing data files; `data`/`dataset(s)` must now be a word of the path. | three cases in `tests/test_diagnosis_classifier.py` failed on the old code |
+| 4 | The dashboard can show a score and the "Latest run" of two different runs | **Real, owner decision (interface).** After `cli.py score --from-run` the score row has no `run_id` and the page shows another run beside it. A fix changes which run the page shows, so it is not made. | `tests/test_bug_hunt_suspicions.py` (`xfail`, strict: it fails on `assert stored.run_id is not None`; it will fail the suite when the behavior changes) |
+| 5 | `cli.py score` never gives Tier 3 the multi-seed runs | **Owner decision.** Whether the link is wanted changes what Tier 3 means for scored papers. Not touched. | - |
+| 6 | `candidates_build.py` reads the README at the head of the default branch | **Real bug, fixed in #501.** The README is now requested at the pinned commit. The stored candidate records were not regenerated (they would need the network). | two cases in `tests/test_candidates.py` failed on the old code |
+| 7 | K1 and pass rules read a text pattern | **Owner decision.** The pattern is defined by the protocols (`docs/CANDIDATE_RUNS.md`, `docs/AUTO_SEARCH_ROUND3.md`); changing it would change the stored pass counts. Not touched. | - |
+
+Not verified: that bugs 2, 3 and 6 ever changed a stored result (none is known to have).
