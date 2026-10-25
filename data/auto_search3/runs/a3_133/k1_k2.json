@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_133",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "AttributeError: module 'typing' has no attribute '_ClassVar'. Did you mean: 'ClassVar'?",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.817,
+    "metric_lines": []
+  },
+  "k2": null
+}
