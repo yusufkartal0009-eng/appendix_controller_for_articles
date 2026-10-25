@@ -38,6 +38,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
   (`data/candidates/runs/evaluation.json`; #437)
 - `candidateround2`: the repair round of the candidates: first attempt, with repair, considered, run, Wilson intervals
   (`data/candidates/round2/*/repair_log.json`; #457)
+- `autosearch3`: the automatic search of round 3: checked, run, K1, K2 and both with Wilson intervals, causes of the failures
+  (`data/auto_search3/evaluation.json`; #473)
 - `toleranceprobe`: where the Tier 2 decision changes when a hand-made claim is moved away from a real run's value
   (`data/tolerance_probe/results.json`; #442)
 
@@ -384,6 +386,32 @@ def candidateround2_block(data: Path = DATA) -> str:
                        f"{len(n['ran'])}. This is a selected list, not a sample; it is not a success rate.")])
 
 
+def autosearch3_block(data: Path = DATA) -> str:
+    document = _load(data / "auto_search3" / "evaluation.json")
+    ran = [c for c in document["candidates"] if c.get("k1")]
+    total = len(ran)
+    k1 = [c for c in ran if c["k1"]["k1_passed"]]
+    k2 = [c for c in ran if (c.get("k2") or {}).get("passed")]
+    both = [c for c in k1 if (c.get("k2") or {}).get("passed")]
+
+    def interval(count: int) -> str:
+        low, high = wilson_interval(count, total)
+        return f"{count} of {total}, Wilson 95 % interval {100 * low:.1f} % to {100 * high:.1f} %"
+
+    causes: dict[str, int] = {}
+    for c in ran:
+        if not c["k1"]["k1_passed"]:
+            causes[c["k1"]["category"]] = causes.get(c["k1"]["category"], 0) + 1
+    by_cause = ", ".join(f"{name} {count}" for name, count in sorted(causes.items(), key=lambda kv: (-kv[1], kv[0])))
+    names = ", ".join(c["paper_id"] for c in both) or "none"
+    return "\n".join([HEADER.format(sources="data/auto_search3/evaluation.json (scripts/auto_search3.py)"), "",
+                      (f"Candidates checked against the static rules: {len(document['candidates'])}; run once in the sandbox: {total}. "
+                       f"Passed K1 (the run test): {interval(len(k1))}. Passed K2 (numbers of the output found in the paper's text): "
+                       f"{interval(len(k2))}. Passed both: {interval(len(both))} ({names}). Cause of the K1 failures: {by_cause}. "
+                       f"The search stopped because: {document['stopped_because']}. This is a selected, non-representative list; "
+                       "it is not a success rate, and a K2 pass would be a match candidate, not a verified result.")])
+
+
 def toleranceprobe_block(data: Path = DATA) -> str:
     probe = _load(data / "tolerance_probe" / "results.json")
     lines = [HEADER.format(sources="data/tolerance_probe/results.json (scripts/tolerance_probe.py)"), "",
@@ -399,7 +427,7 @@ def toleranceprobe_block(data: Path = DATA) -> str:
     return "\n".join(lines)
 
 
-BLOCKS = {"candidateruns": candidateruns_block, "candidateround2": candidateround2_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+BLOCKS = {"candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "candidateround2": candidateround2_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
           "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
