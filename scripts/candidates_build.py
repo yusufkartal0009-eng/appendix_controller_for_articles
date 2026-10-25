@@ -87,7 +87,7 @@ def read_repo(full_name: str, supplied_commit: str | None, http) -> dict[str, An
             return {"error": f"GitHub HTTP {status} for the head commit of {full_name}@{branch}"}
         commit, head_date = head["sha"], (head.get("commit", {}).get("committer") or {}).get("date")
     readme = ""
-    status, data = _json(http, f"{GITHUB_API}/repos/{full_name}/readme")
+    status, data = _json(http, f"{GITHUB_API}/repos/{full_name}/readme?ref={commit}")  # the README of the pinned commit (#498)
     if data and data.get("content"):
         readme = base64.b64decode(data["content"]).decode("utf-8", "replace")
     return {"full_name": repo.get("full_name", full_name), "default_branch": branch, "commit": commit,
