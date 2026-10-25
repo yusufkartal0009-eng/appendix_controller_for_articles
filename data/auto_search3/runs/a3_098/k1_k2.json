@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_098",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "tutorial_train.py: error: unrecognized arguments: data path] output path]",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 43.359,
+    "metric_lines": []
+  },
+  "k2": null
+}

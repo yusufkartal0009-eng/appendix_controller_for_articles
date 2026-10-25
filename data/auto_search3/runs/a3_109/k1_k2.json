@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_109",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for imread-from-url",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.452,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_098",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "56bf9ca5152071e13cd3604e54936850b46053a6",
+  "started_at": "2026-10-25T02:55:41+00:00",
+  "repo_url": "https://github.com/jwmao1/MedSegFactory",
+  "pinned_commit": "b227c6b5f0ff6b02d6046a1cdf57fc47cb74ae96",
+  "target_script": "tutorial_train.py",
+  "container_command": "python /workspace/repo/tutorial_train.py --data_root_path [your data path] --output_dir [your output path]",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python tutorial_train.py --data_root_path [your data path] --output_dir [your output path]",
+    "readme_url": "https://github.com/jwmao1/MedSegFactory/blob/b227c6b5f0ff6b02d6046a1cdf57fc47cb74ae96/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "b227c6b5f0ff6b02d6046a1cdf57fc47cb74ae96",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.834
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 66,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_098_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "s/certifi-2026.10.23-py3-none-any.whl\nSaved ./a3_098_packages/sympy-1.14.0-py3-none-any.whl\nSaved ./a3_098_packages/mpmath-1.3.0-py3-none-any.whl\nSaved ./a3_098_packages/tzdata-2026.5-py2.py3-none-any.whl\nSuccessfully downloaded accelerate bitsandbytes torch braceexpand diffusers h5py huggingface_hub matplotlib nibabel numpy packaging Pillow safetensors SimpleITK scikit-image tqdm transformers webdataset torchvision torchaudio nvidia-cublas-cu12 nvidia-cuda-cupti-cu12 nvidia-cuda-nvrtc-cu12 nvidia-cuda-runtime-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-curand-cu12 nvidia-cusolver-cu12 nvidia-cusparse-cu12 nvidia-nccl-cu12 nvidia-nvtx-cu12 triton tokenizers contourpy cycler fonttools fsspec imageio importlib-resources kiwisolver lazy_loader networkx pyparsing python-dateutil PyWavelets pyyaml regex scipy six tifffile typing-extensions filelock importlib-metadata zipp jinja2 MarkupSafe nvidia-nvjitlink-cu12 psutil requests charset_normalizer idna urllib3 certifi sympy mpmath tzdata\n",
+    "stderr": "",
+    "duration_seconds": 516.02
+  },
+  "sandbox_duration_seconds": 737.636,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 43.359,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 589127680
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 692.842,
+    "peak_memory_bytes": 128417792
+  },
+  "finished_at": "2026-10-25T03:16:37+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

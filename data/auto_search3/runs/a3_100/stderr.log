@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/main.py", line 3, in <module>
+    from solver import Solver
+  File "/workspace/repo/solver.py", line 1, in <module>
+    from model import Generator
+  File "/workspace/repo/model.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

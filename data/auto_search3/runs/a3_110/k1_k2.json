@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_110",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "^ (from line 1 of /workspace/repo/requirements.txt)",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.488,
+    "metric_lines": []
+  },
+  "k2": null
+}
