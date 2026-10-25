@@ -67,6 +67,9 @@ STAGE_TOPICS: dict[int, list[str]] = {
         "evolutionary-algorithms", "genetic-algorithm", "federated-learning", "graph-theory", "time-series-analysis",
         "bayesian-optimization", "hyperparameter-optimization", "uncertainty-quantification", "machine-learning-algorithms",
         "deep-neural-networks"],
+    7: ["astronomy", "geoscience", "climate", "finance", "economics", "genomics", "medical-imaging", "healthcare",
+        "materials-science", "quantum", "robotics", "control-theory", "social-network-analysis", "computational-physics",
+        "image-processing", "speech"],
 }
 ID_PREFIX = "a3_"
 MAX_SECONDS = 9 * 3600
