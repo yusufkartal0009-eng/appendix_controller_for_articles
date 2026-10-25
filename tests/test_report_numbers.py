@@ -180,3 +180,18 @@ def test_the_candidate_and_probe_blocks_render_their_stored_facts_and_the_warnin
     assert "match a probed run by question ID: 0 of 13" in probe
     report = (rn.REPORT_PATH.read_text(encoding="utf-8")).replace("\r\n", "\n")
     assert "hand-made claims, not an error of a real paper" in report and "have not been measured" in report
+
+
+def test_the_autosearch3_block_counts_runs_k1_k2_and_both_with_wilson_intervals(tmp_path):
+    (tmp_path / "auto_search3").mkdir()
+    passed = {"k1_passed": True, "category": None}
+    failed = {"k1_passed": False, "category": "run"}
+    candidates = [{"paper_id": "a3_001", "k1": passed, "k2": {"passed": True}}, {"paper_id": "a3_002", "k1": failed, "k2": None},
+                  {"paper_id": "a3_003", "k1": passed, "k2": {"passed": False}}, {"full_name": "o/static", "passed": False}]
+    (tmp_path / "auto_search3" / "evaluation.json").write_text(
+        json.dumps({"candidates": candidates, "stopped_because": "time_limit_9h"}), encoding="utf-8")
+    block = rn.render("autosearch3", tmp_path)
+    assert "checked against the static rules: 4; run once in the sandbox: 3" in block
+    assert "Passed K1 (the run test): 2 of 3, Wilson 95 % interval 20.8 % to 93.9 %" in block
+    assert "Passed both: 1 of 3, Wilson 95 % interval 6.1 % to 79.2 % (a3_001)" in block
+    assert "run 1" in block and "time_limit_9h" in block and "not a success rate" in block

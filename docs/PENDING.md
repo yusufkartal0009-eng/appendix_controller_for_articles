@@ -84,6 +84,16 @@ decision. **Not verified** means a statement in the project that has no evidence
   a decision of the owner.
 - **Not done:** no PDF of a candidate paper could be fetched (the one passing candidate's paper only as Europe PMC XML); whether the pass of `cand_002` is comparable with a table of its paper is not verified. New open items: (e) whether the pass pattern should also accept a printed dict of numbers (`cand_011`), decided for future runs only; (f) whether a source build of sdist-only pins (`cand_005`, `cand_020`) and an extra wheel index are allowed repairs in a further round.
 
+### D11. The automatic search of round 3 (new, 2026-10-25; done 2026-10-25)
+- **State:** the protocol (`docs/AUTO_SEARCH_ROUND3.md`, merged before the first search) was run with `scripts/auto_search3.py` over seven topic stages: 3,399 candidates checked
+  against the static rules and 135 run once in the sandbox. K1 (run test) passed 2, K2 (numbers of the output found in the paper's text) passed 0, both 0 (results section of the
+  document, generated; report section 6.10). The search ended because the pool of stage 7 was used up, before the 9-hour limit. The two K1 passes are `a3_095` (one meaningful
+  number in the output, so K2 could not pass) and `a3_096` (207 numbers, none in its paper). No claim was extracted for this round: nothing passed both tests.
+- **Decide (open):** (a) whether to run a stage 8 with other topics, or to stop adding papers (D6, option C); (b) whether K1 may allow help of the kind that the failures need (a module missing
+  from the requirement files, a writable output folder) as a separate, labeled round; (c) whether a known positive case (a paper whose table is known to be reproducible) should be used to
+  test whether K2 can pass at all.
+- **Not done:** no match candidate exists, so no form (`aday_iddia_formu_3.md`) was made; whether the numbers of `a3_096` come from a simulation is not verified.
+
 ### D10. Two rules of the scorer to confirm (new, from the bug hunt, `docs/BUG_HUNT.md` section 2)
 - **The absolute allowance of 0.05 for a value between 0 and 1** makes small values lenient (0.0167 matches a reproduced 0.06). Keep it, or use it only for
   named bounded metrics (accuracy, AUC, F1, precision, recall)?
@@ -118,6 +128,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 ### W6. Open work after 2026-10-24 (no decision needed)
 - Fill the form of the demo paper (D3) and of gold set 2 (D2) when the owner has the time; both are outside the repository.
 - D9 (a) is done (round 2); the open items (e) and (f) of D9 need a decision before a third round.
+- D11 (the automatic search of round 3) is done; its open decisions (a) to (c) need the owner.
 - The suspicions 2, 3, 4 and 6 of `docs/BUG_HUNT.md` are small and can be tested one by one once the intended rule is known.
 
 ## 3. Open issues and their state
@@ -150,6 +161,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
   failures of Pilots 1 and 2 and says nothing about new papers. No rate over 12 papers is claimed.
 - **Clean clone:** one paper (`paper_006`) completed a fresh run from a clean clone of the public repository (Update 2 of the walk-through); it used set CPU and time limits, so
   it is not a protocol run, and no accepted claim was reproduced. `paper_008` still cannot complete from a clean clone (a dataset downloaded by hand).
+- **Automatic search (round 3):** **0 of 135** candidates of the automatic search of round 3 passed both the run test and the match of the output to the paper's text (K1 passed by 2 of 135, K2 by 0 of 135; Wilson 95 % intervals in the report, section 6.10); a selected, non-representative list, not a success rate (D11).
 - **Candidate papers:** 0 of the 14 selected candidates passed a first attempt and 1 of 14 after repair (D9); the list was chosen by others for being easy, so this is not a success rate and it does not say that the papers cannot be reproduced.
 - **Tolerance probe:** its claims are hand-made, not errors of real papers; the rates of false positives and false negatives of the scorer in the real world have not been measured.
 - **Tier 2 has still never compared an accepted claim with a result of a real run.**
