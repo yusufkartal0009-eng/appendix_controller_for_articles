@@ -42,6 +42,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(corpus): the quote guard finds a value as a whole number (2026-10-25 21:10 +03:00, Issue #498, suspicion 2 of the bug hunt)
+- `src/quote_guard.py`: `value_as_printed` was looked up as a plain substring of the page, so `0.5` was 'found' inside `10.55`, `0.52` or `1.5.2`. Proven first (three new cases in `tests/test_quote_guard.py` failed on the old code); now `find_value_on_page` requires a whole number (the quote itself is still a verbatim substring). Whole values, values with a spread, percents and numbers split before the decimal point still pass (five positive cases).
+- Evidence that nothing stored changed: the guard was re-run on all 36 answers of `data/claims/paper_*.json` against `data/pdfs/`; status and value match are identical to `data/claims/guard_report.json` (not rewritten).
+- Not verified: that the old rule ever let a wrong claim through (the owner's review of every claim is the other safeguard).
 ### feat(web): a dashboard database built from the real stored runs (2026-10-25 20:40 +03:00, Issue #496)
 - `scripts/build_demo_db.py` writes `data/dashboard_demo.db` (ignored by git; the project database is not touched): 12 papers and the synthetic control (a known-answer test, labeled as such), one score each, the best of the stored runs scored with `src/score_run.py` against the accepted claims; the run ID names the directory and the summary names the setting. Start it with `python -m src.web --db-url sqlite:///data/dashboard_demo.db`. Tests: `tests/test_build_demo_db.py` (an empty directory gives an empty database; one best record per paper). Screenshots of the list, three detail pages, a badge and a report: `docs/evidence/demo2/`.
 - What the rows are: the scorer's output, not a validation. Because claims are matched by question ID, Tier 2 is 0 for every paper with accepted claims (`docs/REAL_VERDICTS.md` section 2).

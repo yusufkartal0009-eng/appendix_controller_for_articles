@@ -5,7 +5,8 @@ extracted from. Everything else stays `UNVERIFIED` and must not be used in scori
 `scorable_claims()`. Rules (docs/CLAIM_SCHEMA.md section 5):
 
 1. The claim set's `pdf_sha256` equals the hash of the text's PDF, and the cited page exists.
-2. `source_quote` and `value_as_printed` occur on the cited page. Characters must be identical; the only tolerances
+2. `source_quote` and `value_as_printed` occur on the cited page (the value as a whole number: `0.5` is not found inside
+   `10.55`, #498). Characters must be identical; the only tolerances
    are that any run of whitespace counts as one space (the extracted text breaks lines where a quote may use a
    space), and that numbers the extraction split before their decimal point are joined on both sides first
    (`0 .859` = `0.859`, #162). The mode that matched is recorded.
@@ -42,6 +43,27 @@ def find_on_page(needle: str, page_text: str) -> str | None:
     repaired = repair_split_numbers(squashed)
     if repaired and repaired in repair_split_numbers(_squash(page_text)):
         return "split_numbers_repaired"
+    return None
+
+
+def _whole_number(needle: str) -> re.Pattern[str]:
+    """`needle` where it is not part of a longer number: not preceded by a digit or a decimal point, and not followed by a digit
+    or by a decimal point and a digit (`0.5` is not in `10.55`, `0.52` or `1.5.2`). A needle that starts with a decimal point
+    (`.859`) may follow a single `0`."""
+    head = r"(?:(?<![\d.])0?|(?<!\d))" if needle.startswith(".") else r"(?<![\d.])"
+    return re.compile(head + re.escape(needle) + r"(?!\d|\.\d)")
+
+
+def find_value_on_page(value: str, page_text: str) -> str | None:
+    """Like `find_on_page`, but the value must be printed as a whole number: a value that only occurs inside a longer number
+    (`0.5` inside `10.55`) is not found (bug hunt suspicion 2, #498). Same three modes."""
+    if not value:
+        return None
+    candidates = [("exact", value, page_text), ("whitespace_normalized", _squash(value), _squash(page_text)),
+                  ("split_numbers_repaired", repair_split_numbers(_squash(value)), repair_split_numbers(_squash(page_text)))]
+    for mode, needle, text in candidates:
+        if needle and _whole_number(needle).search(text):
+            return mode
     return None
 
 
@@ -83,7 +105,7 @@ def verify_claim(claim: ExtractedClaim, pdf: PdfText, pdf_sha256: str) -> GuardR
         # claims are flagged; the owner reviews them in W7 (#134) even when the quote matches.
         checks["from_table"] = bool(claim.table_or_figure) and claim.table_or_figure.lower().startswith("table")
         checks["quote_match"] = find_on_page(claim.source_quote, page_text)
-        checks["value_match"] = find_on_page(claim.value_as_printed, page_text)
+        checks["value_match"] = find_value_on_page(claim.value_as_printed, page_text)
         if checks["quote_match"] is None:
             reasons.append(f"source_quote does not occur on page {claim.page}")
         if checks["value_match"] is None:
