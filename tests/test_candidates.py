@@ -20,7 +20,7 @@ class FakeHttp:
 
     def get(self, url):
         self.urls.append(url)
-        if url.endswith("/readme"):
+        if "/readme" in url:
             return 200, json.dumps({"content": base64.b64encode(self.readme.encode()).decode()})
         if "/commits/" in url:
             return 200, json.dumps({"sha": SHA, "commit": {"committer": {"date": "2026-10-01T00:00:00Z"}}})
@@ -151,3 +151,18 @@ def test_the_cause_of_a_failure_comes_from_the_classifier_rules_on_the_deciding_
         assert candidates_build.failure_cause({**base, "category": "run", "log_line": line}) == cause
     text = "\n".join(candidates_build.render_run_results(_runs("run", "install")))
     assert "### Cause of the failures by the rules of the failure classifier" in text
+
+
+# Bug hunt suspicion 6 (#498): the README was read at the head of the default branch, also when the list supplied a commit
+def test_the_readme_is_read_at_the_pinned_commit_when_the_list_supplies_one():
+    http = FakeHttp()
+    candidates_build.build_entry(1, {**ITEM, "supplied_commit": "b" * 40}, http, sleep=lambda s: None)
+    (url,) = [u for u in http.urls if "/readme" in u]
+    assert url.endswith("/readme?ref=" + "b" * 40)
+
+
+def test_the_readme_is_read_at_the_head_commit_that_was_recorded_when_none_is_supplied():
+    http = FakeHttp()
+    entry, _ = candidates_build.build_entry(1, ITEM, http, sleep=lambda s: None)
+    (url,) = [u for u in http.urls if "/readme" in u]
+    assert entry["repo_commit"] == SHA and url.endswith("/readme?ref=" + SHA)
