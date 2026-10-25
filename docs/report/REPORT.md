@@ -990,6 +990,10 @@ not full texts; the tables name what was read, and what was not verified.
   before a run, `scripts/fetch_data.py`), the live responses of Crossref and arXiv, and any result that depends on the
   speed or memory of the machine.
 
+### AI assistance statement
+
+This work was compiled with AI assistance. The software, the experiments and the text of this report were prepared with an AI assistant (Claude, Anthropic). The AI assistant did not decide which claims enter the scoring: only claims that a person accepted are scored. Every number in the results comes from a stored record through a script (`scripts/report_numbers.py`), and what could not be verified is listed in the limitations (section 7).
+
 - **Sources:** `docs/INTRODUCTION_SOURCES.md`, `docs/report/RELATED_WORK_SOURCES.md`,
   `docs/report/related_work_verification.json`, `README.md`.
 - **Status:** written.
