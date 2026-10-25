@@ -1,9 +1,9 @@
-# Pending steps (2026-10-24)
+# Pending steps (2026-10-25)
 
 This document lists what is still open: decisions that only the owner can make, work that an assistant can do, open
 issues, and things that were done only partly or not verified. It is a snapshot. The evidence for each item is named; when
 an item is closed, its entry is removed or marked in the same pull request that closes it. State of `main` when this was
-written (updated 2026-10-24): no open pull request, 1,027 tests passed and 9 skipped, `ruff check .` clean. Items that were done since 2026-10-22
+written (updated 2026-10-25): no open pull request, 1,165 tests passed, 9 skipped and 1 expected failure, `ruff check .` clean. Items that were done since 2026-10-22
 are marked **DONE** with the pull request that closed them.
 
 How to read it: **Decision** means a choice that belongs to the owner. **Work** means a task that can be done without a
@@ -94,6 +94,15 @@ decision. **Not verified** means a statement in the project that has no evidence
   test whether K2 can pass at all.
 - **Not done:** no match candidate exists, so no form (`aday_iddia_formu_3.md`) was made; whether the numbers of `a3_096` come from a simulation is not verified.
 
+### D12. How the claims meet the run's metrics (new, 2026-10-25, `docs/REAL_VERDICTS.md`)
+- **State:** `cli.py score` keys a claim by its question ID (`ft_transformer_rmse`) and the run's metrics by the name the extractor found (`rmse`), so no real
+  claim is ever compared: Tier 2 is 0.0 and the label `Needs Review` for every stored real run that has accepted claims. Aligned by hand, `paper_003`
+  (FT-Transformer, California Housing) is close to its claim; the claims of `paper_006` belong to another dataset, and the stored metrics of `paper_004` are hyperparameters.
+- **Decide:** how a claim should be tied to a run's metric (a mapping written beside each paper's run setup, a metric name in the claim, or a manual pairing as in
+  `scripts/real_verdicts.py`). Until then the dashboard shows Tier 2 = 0 for every paper with accepted claims.
+- **Also open:** the scorer gives a paper without an accepted claim a neutral Tier 2 of 70 and the label `Partially Verified` from the build tiers alone (`paper_102`);
+  K2 has no positive control (no real run prints a table value of its paper); the dashboard shows another run beside a score (suspicion 4 of the bug hunt).
+
 ### D10. Two rules of the scorer to confirm (new, from the bug hunt, `docs/BUG_HUNT.md` section 2)
 - **The absolute allowance of 0.05 for a value between 0 and 1** makes small values lenient (0.0167 matches a reproduced 0.06). Keep it, or use it only for
   named bounded metrics (accuracy, AUC, F1, precision, recall)?
@@ -129,7 +138,10 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 - Fill the form of the demo paper (D3) and of gold set 2 (D2) when the owner has the time; both are outside the repository.
 - D9 (a) is done (round 2); the open items (e) and (f) of D9 need a decision before a third round.
 - D11 (the automatic search of round 3) is done; its open decisions (a) to (c) need the owner.
-- The suspicions 2, 3, 4 and 6 of `docs/BUG_HUNT.md` are small and can be tested one by one once the intended rule is known.
+- The bug hunt suspicions were tried on 2026-10-25 (`docs/BUG_HUNT.md` section 3): 2, 3 and 6 were real and are fixed (#499, #500, #501); 4 is real and needs a decision
+  on what the dashboard shows (a strict `xfail` test holds it); 1, 5 and 7 are decisions of the owner (D10 twice, and the K1 pattern of the protocols).
+- **DONE 2026-10-25:** the verdicts on the real stored runs (`docs/REAL_VERDICTS.md`, #495), the dashboard database from the stored runs (`scripts/build_demo_db.py`, #497),
+  the second pass of the bug hunt (#499, #500, #501, #502), the report in its final state and `docs/PAPER_STATUS.md` (#504). What the paper still needs from the owner is in `docs/PAPER_STATUS.md`.
 
 ## 3. Open issues and their state
 
