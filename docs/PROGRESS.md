@@ -42,6 +42,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(diagnosis): a missing path is a data file only when it has the word data (2026-10-25 21:25 +03:00, Issue #498, suspicion 3 of the bug hunt)
+- `src/diagnosis/classifier.py` (`classify_exception`): `data` anywhere in a missing path made it DATA_NOT_ACCESSIBLE, so `metadata_utils/config.yaml`, `database.yml` and `src/metadata.py` were classified as missing data files. Proven first (three cases in `tests/test_diagnosis_classifier.py` failed on the old code); the rule now needs `data`, `dataset` or `datasets` as a word of the path (`data/x`, `datasets/a`, `data_dir`); the extension rule is unchanged. Eight positive cases and the tests against the stored categories of Pilots 1 to 4 still pass, so no stored category changes.
+- Not verified: that any stored run was misclassified by the old rule (none is known).
 ### fix(corpus): the quote guard finds a value as a whole number (2026-10-25 21:10 +03:00, Issue #498, suspicion 2 of the bug hunt)
 - `src/quote_guard.py`: `value_as_printed` was looked up as a plain substring of the page, so `0.5` was 'found' inside `10.55`, `0.52` or `1.5.2`. Proven first (three new cases in `tests/test_quote_guard.py` failed on the old code); now `find_value_on_page` requires a whole number (the quote itself is still a verbatim substring). Whole values, values with a spread, percents and numbers split before the decimal point still pass (five positive cases).
 - Evidence that nothing stored changed: the guard was re-run on all 36 answers of `data/claims/paper_*.json` against `data/pdfs/`; status and value match are identical to `data/claims/guard_report.json` (not rewritten).
