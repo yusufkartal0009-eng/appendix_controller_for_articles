@@ -43,6 +43,13 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
 - `toleranceprobe`: where the Tier 2 decision changes when a hand-made claim is moved away from a real run's value
   (`data/tolerance_probe/results.json`; #442)
 
+- `realverdicts`: what the scorer decides on the real stored runs next to the accepted claims, and the K2 control
+  (`data/real_verdicts/verdicts.json`, `scripts/real_verdicts.py`; #494)
+- `pilotintervals`: pilot success of the seed papers, the new papers and all twelve, with Wilson intervals
+  (`data/field_analysis/result.json`; #503)
+- `cleanclone`: the fresh run of `paper_006` from a clean clone, read from the walk-through document
+  (`docs/evidence/clean_clone/WALKTHROUGH.md`, Update 2; #441, #503)
+
 Nothing in a block is typed by hand: a hand edit makes `--check` (and its test) fail.
 """
 
@@ -427,7 +434,98 @@ def toleranceprobe_block(data: Path = DATA) -> str:
     return "\n".join(lines)
 
 
-BLOCKS = {"candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "candidateround2": candidateround2_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+def realverdicts_block(data: Path = DATA) -> str:
+    doc = _load(data / "real_verdicts" / "verdicts.json")
+    rows, k2 = doc["rows"], doc["k2"]
+    real = [r for r in rows if r["paper_id"] != "synthetic_control"]
+
+    def runs_of(paper: str) -> set[str]:
+        return {r["run"] for r in real if r["paper_id"] == paper}
+
+    with_claims = [r for r in real if r["query_id"]]
+    cli_runs = {(r["paper_id"], r["run"]) for r in with_claims}
+    cli_zero = {(r["paper_id"], r["run"]) for r in with_claims if r["cli_tier2"] == 0.0}
+    p3 = [r for r in real if r["paper_id"] == "paper_003" and r["comparable"]]
+    p6 = [r for r in real if r["paper_id"] == "paper_006"]
+    p4 = [r for r in real if r["paper_id"] == "paper_004"]
+    p102 = [r for r in real if r["paper_id"] == "paper_102"]
+    syn = [r for r in rows if r["paper_id"] == "synthetic_control"]
+    syn_true = [r for r in syn if r["query_id"] == "true_claim"]
+    syn_false = [r for r in syn if r["query_id"] == "false_claim"]
+
+    def k2_of(paper: str) -> str:
+        items = [k for k in k2 if k["paper_id"] == paper and k["available"]]
+        return f"{sum(1 for k in items if k['passed'])} of {len(items)} runs"
+
+    first = p3[0]
+    p3k2 = next(k for k in k2 if k["paper_id"] == "paper_003" and k["available"])
+    final = next(m for m in p3k2["run_metrics_in_paper"] if m["metric"] == "rmse")
+    claim = next(c for c in p3k2["claim_values"] if c["query_id"] == first["query_id"])
+    lines = [HEADER.format(sources="data/real_verdicts/verdicts.json (scripts/real_verdicts.py)"), "",
+             "| Paper | Stored runs scored | What the scorer says | Meaning of the decision |", "|---|---|---|---|",
+             (f"| `paper_003` | {len(runs_of('paper_003'))} | CLI path (claims by question ID): Tier 2 0.0 in "
+              f"{sum(1 for k in cli_zero if k[0] == 'paper_003')} of {len(runs_of('paper_003'))}; aligned by hand to the same model, dataset "
+              f"and metric: claimed {first['claimed']}, reproduced {first['reproduced']}, relative difference {first['rel_diff'] * 100:.2f} %, "
+              f"Tier 2 {first['aligned_tier2']:g}, `{first['aligned_status']}` in {len(p3)} of {len(runs_of('paper_003'))} runs | "
+              "comparable for one of three claims (the run trains FT-Transformer only) |"),
+             (f"| `paper_006` | {len(runs_of('paper_006'))} | Tier 2 0.0 in {sum(1 for k in cli_zero if k[0] == 'paper_006')} of "
+              f"{len(runs_of('paper_006'))} | none comparable: {sum(1 for r in p6 if not r['comparable'])} of {len(p6)} claim rows are Arcene numbers, "
+              "the run reads another dataset |"),
+             (f"| `paper_004` | {len(runs_of('paper_004'))} | Tier 2 0.0 | none comparable: the stored metrics are hyperparameters "
+              f"({', '.join(p4[0]['run_metrics'])}) |"),
+             (f"| `paper_102` | {len(runs_of('paper_102'))} | no accepted claim; Tier 2 {p102[0]['cli_tier2']:g} (neutral baseline), "
+              f"`{p102[0]['cli_status']}` | no comparison was made |"),
+             (f"| synthetic control (known answer) | {len({r['run'] for r in syn})} | true claim: Tier 2 "
+              f"{syn_true[0]['aligned_tier2']:g}, `{syn_true[0]['aligned_status']}` in {len(syn_true)} of {len(syn_true)} runs; false claim: Tier 2 "
+              f"{syn_false[0]['aligned_tier2']:g}, `{syn_false[0]['aligned_status']}` in {len(syn_false)} of {len(syn_false)} runs | "
+              "the only known-answer rows |"),
+             "",
+             (f"Through the CLI path the claims never match a run's metrics: Tier 2 is 0.0 in {len(cli_zero)} of the {len(cli_runs)} real "
+              "runs that have accepted claims (question IDs against extracted metric names). "
+              f"K2 (numbers of the output found in the paper's text) passed {k2_of('paper_003')} of `paper_003`, {k2_of('paper_006')} of "
+              f"`paper_006`, {k2_of('paper_102')} of `paper_102` and {k2_of('paper_004')} of `paper_004`. For `paper_003` the claimed value "
+              f"{claim['value']} is {'printed' if claim['found'] else 'not printed'} in the paper (page {claim['page']}), while the run's final "
+              f"{final['metric']} {final['value']} is {'printed' if final['found'] else 'not printed'} in it.")]
+    return "\n".join(lines)
+
+
+def pilotintervals_block(data: Path = DATA) -> str:
+    result = _load(data / "field_analysis" / "result.json")
+    lines = [HEADER.format(sources="data/field_analysis/result.json (scripts/field_analysis.py); Wilson intervals by scripts/candidates_build.py"), "",
+             "| Pool | Run | Pilot success | Wilson 95 % interval |", "|---|---|---|---|"]
+    for pool, runs in result["rates"].items():
+        for which in ("first", "final"):
+            k, n = runs[which]["pilot_success"]["k"], runs[which]["pilot_success"]["n"]
+            low, high = wilson_interval(k, n)
+            lines.append(f"| {pool} | {which} | {k} / {n} | {100 * low:.1f} % to {100 * high:.1f} % |")
+    return "\n".join(lines)
+
+
+def cleanclone_block(data: Path = DATA) -> str:
+    text = (data.parent / "docs" / "evidence" / "clean_clone" / "WALKTHROUGH.md").read_text(encoding="utf-8")
+    section = text[text.index("## Update 2"):]
+
+    def grab(pattern: str) -> re.Match[str]:
+        match = re.search(pattern, section)
+        if match is None:
+            raise ValueError(f"the walk-through no longer holds: {pattern}")
+        return match
+
+    total = grab(r"Total from the clone to the end of `diagnose`: \*\*([\d,]+) s\*\*").group(1)
+    run_phase = grab(r"run phase ([\d,.]+) s").group(1)
+    metrics = grab(r"metrics `([^`]+)`").group(1)
+    tier2 = grab(r"\| Tier 2 \(metrics\) \| (\d+)").group(1)
+    total_score = grab(r"\| Total \| ([\d.]+), status ([A-Za-z ]+)").groups()
+    used = grab(r"\*\*Accepted claims used: (\d+)\*\*").group(1)
+    source = ("docs/evidence/clean_clone/WALKTHROUGH.md (Update 2; a hand-kept transcript of timed console steps, "
+              "the run record itself is not in the repository)")
+    return "\n".join([HEADER.format(sources=source), "",
+                      (f"A fresh clone of the public repository followed through the README for `paper_006`: the run completed; total time from "
+                       f"the clone to the end of `diagnose` {total} s, run phase {run_phase} s; metrics `{metrics}`; accepted claims used: {used}, "
+                       f"none found in the output (the run reads another dataset); Tier 2 {tier2}, total {total_score[0]}, status {total_score[1].strip()}.")])
+
+
+BLOCKS = {"realverdicts": realverdicts_block, "pilotintervals": pilotintervals_block, "cleanclone": cleanclone_block, "candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "candidateround2": candidateround2_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
           "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
