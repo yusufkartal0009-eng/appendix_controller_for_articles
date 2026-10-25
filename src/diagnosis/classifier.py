@@ -29,6 +29,9 @@ GPU_PATTERNS = ("no cuda gpus are available", "torch not compiled with cuda", "c
 NETWORK_PATTERNS = ("network is unreachable", "temporary failure in name resolution", "name or service not known",
                     "urlerror", "connectionerror", "max retries exceeded", "failed to establish a new connection",
                     "httperror", "connectionrefusederror", "connection refused")
+# "data" or "dataset(s)" as a word of the path, not inside another word: `data/x`, `datasets/a`, `data_dir`, but not `metadata_utils` or
+# `database.yml` (bug hunt suspicion 3, #498)
+DATA_WORD = re.compile(r"(?<![a-z])data(?:sets?)?(?![a-z])")
 DATA_EXTENSIONS = (".csv", ".tsv", ".npy", ".npz", ".pkl", ".pickle", ".parquet", ".arff", ".fasta", ".tar", ".gz",
                    ".zip", ".h5", ".hdf5", ".json", ".txt", ".svm", ".libsvm", ".pt")
 
@@ -82,7 +85,7 @@ def classify_exception(line: str) -> tuple[str, str | None]:
     missing = re.search(r"(FileNotFoundError|No such file or directory).*?'([^']+)'", line)
     if missing:
         path = missing.group(2).lower()
-        if "data" in path or path.endswith(DATA_EXTENSIONS):
+        if DATA_WORD.search(path) or path.endswith(DATA_EXTENSIONS):
             return "DATA_NOT_ACCESSIBLE", None
         return "OTHER", "MISSING_FILE"
     return "OTHER", None

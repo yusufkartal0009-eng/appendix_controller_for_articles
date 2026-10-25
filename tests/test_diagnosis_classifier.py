@@ -6,7 +6,12 @@ from pathlib import Path
 import pytest
 
 import scripts.categorize_pilot_failures as cpf
-from src.diagnosis.classifier import CATEGORIES, classify_log_text, classify_run
+from src.diagnosis.classifier import (
+    CATEGORIES,
+    classify_exception,
+    classify_log_text,
+    classify_run,
+)
 
 REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "data"
@@ -98,3 +103,17 @@ def test_it_agrees_with_the_stored_categories_of_pilot_4():
         stored = json.loads((folder / "failure_category.json").read_text(encoding="utf-8"))
         got = classify_run(folder)
         assert (got.category, got.other_name, got.phase) == (stored["category"], stored["other_name"], stored["phase"])
+
+
+# Bug hunt suspicion 3 (#498): "data" anywhere in a missing path made it a data file
+@pytest.mark.parametrize("path", ["metadata_utils/config.yaml", "database.yml", "src/metadata.py"])
+def test_a_missing_path_that_only_contains_the_letters_data_is_not_a_missing_data_file(path):
+    line = f"FileNotFoundError: [Errno 2] No such file or directory: '{path}'"
+    assert classify_exception(line) == ("OTHER", "MISSING_FILE")
+
+
+@pytest.mark.parametrize("path", ["./data/forest_cover_type/forest-cover-type.csv", "data/x", "/workspace/repo/datasets/a/b",
+                                  "../data_dir/foo", "output/Data/x", "x/dataset", "x/train.csv", "weights.npz"])
+def test_a_missing_data_path_is_still_a_missing_data_file(path):
+    line = f"FileNotFoundError: [Errno 2] No such file or directory: '{path}'"
+    assert classify_exception(line) == ("DATA_NOT_ACCESSIBLE", None)
