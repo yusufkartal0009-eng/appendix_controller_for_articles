@@ -42,6 +42,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(report): the report brought to its final state, and a paper status page (2026-10-25 20:26 +03:00, Issue #503)
+- `docs/report/REPORT.md`: new generated blocks `realverdicts`, `pilotintervals` and `cleanclone` in `scripts/report_numbers.py` (tests added); new section 6.11 (what the scorer decides on real runs, K2 control, the pilot as an estimate with Wilson intervals) and a clean-clone paragraph in 6.4; the abstract states the two claims (a right decision on a known example; how many papers run); nine contradictions and stale sentences fixed; three limitations added (README commands mostly do not produce the paper's table, a label without a comparison, no K2 positive control). `python scripts/report_numbers.py --check`, `python scripts/verify_sources.py --check` and the tests pass.
+- `docs/PAPER_STATUS.md`: which sections are final, what waits for the owner, and the result of the consistency scan.
+- Not verified: that no stale sentence remains outside the phrases the scan searched for; the clean-clone numbers are read from the walk-through document, because the run record is not in the repository.
 ### test: the seven suspicions of the bug hunt, outcome (2026-10-25 20:19 +03:00, Issue #498)
 - `docs/BUG_HUNT.md` section 3: for each suspicion a failing test was tried first. None was disproved; three were real bugs and are fixed (#499 quote guard, #500 classifier path rule, #501 README at the pinned commit); suspicion 4 is real but its fix is an interface decision (a strict `xfail` test, `tests/test_bug_hunt_suspicions.py`); suspicions 1, 5 and 7 are owner decisions and were not touched.
 - Not verified: that any of the three fixed bugs ever changed a stored result.

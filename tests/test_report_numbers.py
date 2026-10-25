@@ -195,3 +195,23 @@ def test_the_autosearch3_block_counts_runs_k1_k2_and_both_with_wilson_intervals(
     assert "Passed K1 (the run test): 2 of 3, Wilson 95 % interval 20.8 % to 93.9 %" in block
     assert "Passed both: 1 of 3, Wilson 95 % interval 6.1 % to 79.2 % (a3_001)" in block
     assert "run 1" in block and "time_limit_9h" in block and "not a success rate" in block
+
+
+def test_the_real_verdict_pilot_interval_and_clean_clone_blocks_render_their_stored_facts():
+    verdicts = rn.render("realverdicts")
+    assert "claimed 0.459, reproduced 0.473, relative difference 3.05 %, Tier 2 100, `Verified` in 6 of 6 runs" in verdicts
+    assert "Tier 2 is 0.0 in 10 of the 10 real runs that have accepted claims" in verdicts
+    assert "passed 6 of 6 runs of `paper_003`, 0 of 3 runs of `paper_006`, 0 of 1 runs of `paper_102`" in verdicts
+    assert "the run's final rmse 0.473 is not printed in it" in verdicts
+    assert "| all 12 papers | final | 3 / 12 | 8.9 % to 53.2 % |" in rn.render("pilotintervals")
+    clean = rn.render("cleanclone")
+    assert "2,490 s" in clean and "run phase 1,092.54 s" in clean and "`accuracy 0.8886, auroc 0.892`" in clean
+    assert "status Needs Review." in clean
+
+
+def test_the_clean_clone_block_fails_loudly_when_the_walkthrough_changes(tmp_path):
+    folder = tmp_path / "docs" / "evidence" / "clean_clone"
+    folder.mkdir(parents=True)
+    (folder / "WALKTHROUGH.md").write_text("## Update 2\n\nnothing of the expected lines\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="no longer holds"):
+        rn.render("cleanclone", tmp_path / "data")
