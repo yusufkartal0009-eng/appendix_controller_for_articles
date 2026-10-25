@@ -101,3 +101,7 @@ data/llm_cache/
 
 # Installed-environment cache (src/sandbox/env_cache.py, #380)
 .sandbox_cache/
+
+# Dashboard database built from the stored runs (scripts/build_demo_db.py, #496); rebuilt on demand
+data/dashboard_demo.db
+data/dashboard_demo.db-*

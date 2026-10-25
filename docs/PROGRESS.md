@@ -42,6 +42,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(web): a dashboard database built from the real stored runs (2026-10-25 20:40 +03:00, Issue #496)
+- `scripts/build_demo_db.py` writes `data/dashboard_demo.db` (ignored by git; the project database is not touched): 12 papers and the synthetic control (a known-answer test, labeled as such), one score each, the best of the stored runs scored with `src/score_run.py` against the accepted claims; the run ID names the directory and the summary names the setting. Start it with `python -m src.web --db-url sqlite:///data/dashboard_demo.db`. Tests: `tests/test_build_demo_db.py` (an empty directory gives an empty database; one best record per paper). Screenshots of the list, three detail pages, a badge and a report: `docs/evidence/demo2/`.
+- What the rows are: the scorer's output, not a validation. Because claims are matched by question ID, Tier 2 is 0 for every paper with accepted claims (`docs/REAL_VERDICTS.md` section 2).
+- Not verified: the layout was not changed (UI decisions are the owner's); no other browser than headless Chrome was used.
+
 ### docs(scoring): verdicts on the real stored runs and the K2 positive control (2026-10-25 20:15 +03:00, Issue #494)
 - `scripts/real_verdicts.py` scores the stored runs of `paper_003` (six conditions), `paper_004`, `paper_006` (three conditions), `paper_102` and the synthetic control with `src/score_run.py` (no database is written) and applies K2 to their outputs; `docs/REAL_VERDICTS.md` is rendered from `data/real_verdicts/verdicts.json`. Tests: `tests/test_real_verdicts.py`.
 - Findings (all in the document): the CLI path never matches a real claim (claims are keyed by question ID, metrics by extracted name: Tier 2 0.0 everywhere); `paper_003` aligned by hand is 0.473 against 0.459 (3.05%, Tier 2 100, `Verified`); the `paper_006` claims are Arcene numbers and the run reads bank-marketing (meaningless); `paper_102` has no accepted claim yet gets `Partially Verified`; K2 passed `paper_003` only by coincidence of dense numbers and failed `paper_006` (fraction against percent scale) and `paper_102` (its quick start uses random toy data). The expected K2 positive control was not obtained.
