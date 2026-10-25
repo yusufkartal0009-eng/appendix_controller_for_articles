@@ -1,0 +1,4 @@
+  File "/workspace/repo/main.py", line 104
+    targets = Variable(tars.cuda(async=True))
+                                 ^^^^^
+SyntaxError: invalid syntax

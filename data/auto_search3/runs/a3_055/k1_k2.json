@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_055",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/repo/config.yaml'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 24.083,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,4 @@
+2026-10-24 23:29:06 - src.utils.cli - INFO - Centralised logging system configured
+2026-10-24 23:29:06 - src.utils.cli - INFO - Console logging enabled
+2026-10-24 23:29:06 - src.utils.cli - INFO - Command-line arguments: Namespace(config='gpt4o/psaollm_5sent.yaml', data_path=None, verbose=True, quiet=False, log_file=None)
+Unexpected error: [Errno 30] Read-only file system: 'output'

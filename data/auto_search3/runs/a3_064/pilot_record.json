@@ -1,0 +1,112 @@
+{
+  "paper_id": "a3_064",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "57f440d14eaf49b6ebc7c72db55436c61848376b",
+  "started_at": "2026-10-25T00:00:21+00:00",
+  "repo_url": "https://github.com/RUC-NLPIR/WebThinker",
+  "pinned_commit": "db387eb3261de9b5e2db7d2d7fb20af2aceb7882",
+  "target_script": "scripts/run_web_thinker.py",
+  "container_command": "python /workspace/repo/scripts/run_web_thinker.py --single_question What is OpenAI Deep Research? --search_engine serper --serper_api_key YOUR_GOOGLE_SERPER_API --api_base_url YOUR_API_BASE_URL --model_name QwQ-32B --aux_api_base_url YOUR_AUX_API_BASE_URL --aux_model_name Qwen2.5-32B-Instruct --tokenizer_path PATH_TO_YOUR_TOKENIZER --aux_tokenizer_path PATH_TO_YOUR_AUX_TOKENIZER",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/run_web_thinker.py --single_question \"What is OpenAI Deep Research?\" --search_engine \"serper\" --serper_api_key \"YOUR_GOOGLE_SERPER_API\" --api_base_url \"YOUR_API_BASE_URL\" --model_name \"QwQ-32B\" --aux_api_base_url \"YOUR_AUX_API_BASE_URL\" --aux_model_name \"Qwen2.5-32B-Instruct\" --tokenizer_path \"PATH_TO_YOUR_TOKENIZER\" --aux_tokenizer_path \"PATH_TO_YOUR_AUX_TOKENIZER\"",
+    "readme_url": "https://github.com/RUC-NLPIR/WebThinker/blob/db387eb3261de9b5e2db7d2d7fb20af2aceb7882/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "db387eb3261de9b5e2db7d2d7fb20af2aceb7882",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.804
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 7,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_064_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "pyext==0.7",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pyext==0.7"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "Collecting torch==2.5.1 (from -r /staging/a3_064/requirements.txt (line 1))\n  Downloading torch-2.5.1-cp311-cp311-manylinux1_x86_64.whl.metadata (28 kB)\nCollecting transformers==4.46.1 (from -r /staging/a3_064/requirements.txt (line 2))\n  Downloading transformers-4.46.1-py3-none-any.whl.metadata (44 kB)\nCollecting sentencepiece==0.2.0 (from -r /staging/a3_064/requirements.txt (line 3))\n  Downloading sentencepiece-0.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.7 kB)\nCollecting vllm==0.6.4 (from -r /staging/a3_064/requirements.txt (line 4))\n  Downloading vllm-0.6.4-cp38-abi3-manylinux1_x86_64.whl.metadata (10 kB)\nCollecting tqdm==4.67.0 (from -r /staging/a3_064/requirements.txt (line 5))\n  Downloading tqdm-4.67.0-py3-none-any.whl.metadata (57 kB)\nCollecting nltk==3.9.1 (from -r /staging/a3_064/requirements.txt (line 6))\n  Downloading nltk-3.9.1-py3-none-any.whl.metadata (2.9 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement pyext==0.7 (from versions: none)\nERROR: No matching distribution found for pyext==0.7\n",
+    "duration_seconds": 138.426
+  },
+  "sandbox_duration_seconds": 6.048,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.541,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 13139968
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 4.519,
+    "peak_memory_bytes": 51642368
+  },
+  "finished_at": "2026-10-25T00:02:48+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

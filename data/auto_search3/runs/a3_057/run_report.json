@@ -1,0 +1,396 @@
+{
+  "paper_id": "a3_057",
+  "source": "https://github.com/ByteDance-BandAI/ReportBench",
+  "commit_hash": "ca3d65b9ff3136fd7e6107955eeb711b2a7fd894",
+  "target_script": "openai_processor.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.734,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_057",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.417,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 20611072,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0"
+    },
+    {
+      "name": "firecrawl-py",
+      "version": "4.54.0"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "httpx-sse",
+      "version": "0.4.3"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "jiter",
+      "version": "0.18.0"
+    },
+    {
+      "name": "jsonpatch",
+      "version": "1.37"
+    },
+    {
+      "name": "jsonpointer",
+      "version": "3.5"
+    },
+    {
+      "name": "langchain-classic",
+      "version": "1.0.8"
+    },
+    {
+      "name": "langchain-community",
+      "version": "0.4.2"
+    },
+    {
+      "name": "langchain-core",
+      "version": "1.7.0"
+    },
+    {
+      "name": "langchain-openai",
+      "version": "1.7.2"
+    },
+    {
+      "name": "langchain-protocol",
+      "version": "0.0.20"
+    },
+    {
+      "name": "langchain-text-splitters",
+      "version": "1.1.3"
+    },
+    {
+      "name": "langsmith",
+      "version": "0.14.12"
+    },
+    {
+      "name": "multidict",
+      "version": "7.2.1"
+    },
+    {
+      "name": "nest-asyncio",
+      "version": "1.6.0"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "openai",
+      "version": "3.37.0"
+    },
+    {
+      "name": "orjson",
+      "version": "3.13.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.0"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1"
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.16.1"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "requests-toolbelt",
+      "version": "1.0.0"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "soupsieve",
+      "version": "3.0.4"
+    },
+    {
+      "name": "SQLAlchemy",
+      "version": "2.1.6"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.2.1"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.14.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "uuid_utils",
+      "version": "0.18.0"
+    },
+    {
+      "name": "websockets",
+      "version": "17.3"
+    },
+    {
+      "name": "xxhash",
+      "version": "4.0.2"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "pandas>=1.3.0",
+      "name": "pandas",
+      "requested": ">=1.3.0",
+      "installed": "3.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pyyaml>=6.0",
+      "name": "pyyaml",
+      "requested": ">=6.0",
+      "installed": "6.0.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-openai>=0.1.0",
+      "name": "langchain-openai",
+      "requested": ">=0.1.0",
+      "installed": "1.7.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-community>=0.2.0",
+      "name": "langchain-community",
+      "requested": ">=0.2.0",
+      "installed": "0.4.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-core>=0.2.0",
+      "name": "langchain-core",
+      "requested": ">=0.2.0",
+      "installed": "1.7.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "requests>=2.25.0",
+      "name": "requests",
+      "requested": ">=2.25.0",
+      "installed": "2.34.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "tenacity>=8.0.0",
+      "name": "tenacity",
+      "requested": ">=8.0.0",
+      "installed": "9.2.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "tqdm>=4.60.0",
+      "name": "tqdm",
+      "requested": ">=4.60.0",
+      "installed": "4.70.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "beautifulsoup4>=4.9.0",
+      "name": "beautifulsoup4",
+      "requested": ">=4.9.0",
+      "installed": "4.15.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "firecrawl-py>=0.0.1",
+      "name": "firecrawl-py",
+      "requested": ">=0.0.1",
+      "installed": "4.54.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "python-dotenv>=0.19.0",
+      "name": "python-dotenv",
+      "requested": ">=0.19.0",
+      "installed": "1.2.4",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/openai_processor.py --input=captured_data_dir --output=parsed_output_dir --markdown\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 0.417s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/openai_processor.py\", line 68, in <module>\n    file_logger = FileLogger()\n                  ^^^^^^^^^^^^\n  File \"/workspace/repo/openai_processor.py\", line 33, in __init__\n    os.makedirs(log_dir, exist_ok=True)\n  File \"<frozen os>\", line 225, in makedirs\nOSError: [Errno 30] Read-only file system: 'logs'\n"
+}

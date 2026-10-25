@@ -1,0 +1,68 @@
+{
+  "paper_id": "a3_061",
+  "source": "https://github.com/alloevil/AI-Paper-Daily",
+  "commit_hash": "29dd271dd43a64c57e2ef41e065518571a839663",
+  "target_script": "scripts/main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 0.94,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_061",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 0.615,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 23863296,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "pyyaml>=6.0.3",
+      "name": "pyyaml",
+      "requested": ">=6.0.3",
+      "installed": "6.0.3",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/main.py\n==================================================\n=== AI Paper Daily 2026-10-25 07:59 ===\nFetch window: 3 days\n[arXiv] Fetching: https://export.arxiv.org/api/query?search_query=%28all%3A%22LLM+agent%22+OR+all%3A%22knowledge+graph%22+OR+all%3A%22know...\n[arXiv] Error: <urlopen error [Errno -3] Temporary failure in name resolution>\n[HuggingFace] Error: <urlopen error [Errno -3] Temporary failure in name resolution>\nNo papers found, exiting\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : INSTALLED\nDuration      : 0.615s\n==================================================\n",
+  "stderr_preview": ""
+}

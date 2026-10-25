@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/openai_processor.py", line 68, in <module>
+    file_logger = FileLogger()
+                  ^^^^^^^^^^^^
+  File "/workspace/repo/openai_processor.py", line 33, in __init__
+    os.makedirs(log_dir, exist_ok=True)
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: 'logs'

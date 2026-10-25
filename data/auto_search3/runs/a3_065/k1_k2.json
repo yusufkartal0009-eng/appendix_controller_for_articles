@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_065",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ImportError: pyarrow requires NumPy 2.0 or newer, found 1.25.2",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.933,
+    "metric_lines": []
+  },
+  "k2": null
+}

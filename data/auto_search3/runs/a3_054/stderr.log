@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/run_fit.py", line 318, in <module>
+    main()
+  File "/workspace/repo/scripts/run_fit.py", line 193, in main
+    output_dir = create_run_output_dir(project_root, spectrum_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/src/pals/reports.py", line 21, in create_run_output_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/workspace/repo/outputs/simulated_spectrum_W_20261024_233917'

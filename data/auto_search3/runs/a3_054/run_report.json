@@ -1,0 +1,172 @@
+{
+  "paper_id": "a3_054",
+  "source": "https://github.com/gepavlou/fitPALSpectra",
+  "commit_hash": "970515b770597c8376b9eb84ead5318280bc1d01",
+  "target_script": "scripts/run_fit.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 70.334,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_054",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 70.027,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 108843008,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "contourpy",
+      "version": "1.3.3"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.2"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.0"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "plotly",
+      "version": "7.1.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "seaborn",
+      "version": "0.13.2"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy>=1.24",
+      "name": "numpy",
+      "requested": ">=1.24",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.10",
+      "name": "scipy",
+      "requested": ">=1.10",
+      "installed": "1.17.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "matplotlib>=3.7",
+      "name": "matplotlib",
+      "requested": ">=3.7",
+      "installed": "3.11.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=2.0",
+      "name": "pandas",
+      "requested": ">=2.0",
+      "installed": "3.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "plotly>=5.15",
+      "name": "plotly",
+      "requested": ">=5.15",
+      "installed": "7.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "seaborn>=0.12",
+      "name": "seaborn",
+      "requested": ">=0.12",
+      "installed": "0.13.2",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/run_fit.py\n==================================================\n\nLoaded metadata:\n  title: SIMULATED_simulated_spectrum_W.txt,total_counts_2e+06\n  dt: 0.0065\n  meta3: 2\n  fwhm_guess: 0.27\nstart=2980, peak=3000, end=4500\n\n=== Running LM/TRF refinement ===\nCondition number of JTJ: 5.284e+07\nPALS fit results\n================\n\nChi^2:        1479.947679\nDOF:          1512\nChi^2_red:    0.978801\n\nParameters:\n  name                value         error        fitted\n  ----                -----         -----        ------\n  s_source                    0.5             0    0\n  I_source_1             0.951009    0.00144917    1\n  I_source_2            0.0489911    0.00144588    1\n  tau_source_1                0.5             0    0\n  tau_source_2                2.5             0    0\n  s_sample                    0.5             0    0\n  I_sample_1             0.704112     0.0128305    1\n  I_sample_2             0.295887     0.0128305    1\n  tau_sample_1           0.111689    0.00328988    1\n  tau_sample_2           0.352128    0.00965429    1\n  T0                            0             0    0\n  Delta_p_1            -0.0104148   0.000963399    1\n  omega_p_1                     1             0    0\n  FWHM_p_1               0.269255    0.00135562    1\n  BG                       99.375      0.506501    1\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 70.027s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/run_fit.py\", line 318, in <module>\n    main()\n  File \"/workspace/repo/scripts/run_fit.py\", line 193, in main\n    output_dir = create_run_output_dir(project_root, spectrum_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/src/pals/reports.py\", line 21, in create_run_output_dir\n    out_dir.mkdir(parents=True, exist_ok=True)\n  File \"/usr/local/lib/python3.11/pathlib.py\", line 1116, in mkdir\n    os.mkdir(self, mode)\nOSError: [Errno 30] Read-only file system: '/workspace/repo/outputs/simulated_spectrum_W_20261024_233917'\n"
+}
