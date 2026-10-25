@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_129",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "install_status": "SKIPPED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.629,
+    "metric_lines": []
+  },
+  "k2": null
+}

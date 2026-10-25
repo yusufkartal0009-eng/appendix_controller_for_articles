@@ -1,0 +1,17 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/azure_identity-1.26.0-py3-none-any.whl
+Processing /workspace/packages/openai-3.37.0-py3-none-any.whl
+Processing /workspace/packages/opencv_python_headless-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl
+Processing /workspace/packages/pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+Processing /workspace/packages/pyannote_audio-4.0.7-py3-none-any.whl
+Processing /workspace/packages/pydantic-2.14.1-py3-none-any.whl
+Processing /workspace/packages/scenedetect-0.7.2-py3-none-any.whl
+Processing /workspace/packages/torch-2.4.1-cp311-cp311-manylinux1_x86_64.whl
+Processing /workspace/packages/torchaudio-2.4.1-cp311-cp311-manylinux1_x86_64.whl
+Processing /workspace/packages/torchvision-0.19.1-cp311-cp311-manylinux1_x86_64.whl
+Processing /workspace/packages/transformers-5.20.2-py3-none-any.whl
+Processing /workspace/packages/whisperx-3.8.6-py3-none-any.whl
+Processing /workspace/packages/yt_dlp-2026.10.21-py3-none-any.whl
+Installing collected packages: torchaudio, yt-dlp, whisperx, transformers, torchvision, torch, scenedetect, pydantic, pyannote-audio, pillow, opencv-python-headless, openai, azure-identity
+
+Successfully installed azure-identity-1.26.0 openai-3.37.0 opencv-python-headless-5.0.0.93 pillow-13.0.0 pyannote-audio-4.0.7 pydantic-2.14.1 scenedetect-0.7.2 torch-2.4.1 torchaudio-2.4.1 torchvision-0.19.1 transformers-5.20.2 whisperx-3.8.6 yt-dlp-2026.10.21

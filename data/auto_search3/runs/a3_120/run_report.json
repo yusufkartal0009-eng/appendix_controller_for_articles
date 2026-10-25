@@ -1,0 +1,128 @@
+{
+  "paper_id": "a3_120",
+  "source": "https://github.com/Garfield-kh/FastVLA",
+  "commit_hash": "0cb8693d333d4168f875c711bbf0aa1f9e0c527d",
+  "target_script": "scripts/serve.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.185,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_120",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.862,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 25931776,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "h5py",
+      "version": "3.16.0"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "opencv-python-headless",
+      "version": "5.0.0.93"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pyyaml",
+      "name": "pyyaml",
+      "requested": "any",
+      "installed": "6.0.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "safetensors",
+      "name": "safetensors",
+      "requested": "any",
+      "installed": "0.8.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pillow",
+      "name": "pillow",
+      "requested": "any",
+      "installed": "13.0.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "opencv-python-headless",
+      "name": "opencv-python-headless",
+      "requested": "any",
+      "installed": "5.0.0.93",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "h5py",
+      "name": "h5py",
+      "requested": "any",
+      "installed": "3.16.0",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/serve.py --model checkpoints/fastvla-robotwin --port 8765\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 0.862s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/serve.py\", line 18, in <module>\n    from fastvla.policy import FastVLAPolicy  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/fastvla/policy.py\", line 13, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

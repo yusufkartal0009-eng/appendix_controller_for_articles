@@ -1,0 +1,157 @@
+{
+  "paper_id": "a3_131",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "c6de1d75cf0856c823af8a7c4f27a7b97b1a1759",
+  "started_at": "2026-10-25T05:17:19+00:00",
+  "repo_url": "https://github.com/StefanDenn3r/Spatio-temporal-MS-Lesion-Segmentation",
+  "pinned_commit": "04790fd304f595d51db7ddba080c92c1eba5c302",
+  "target_script": "train.py",
+  "container_command": "python /workspace/repo/train.py --resume path/to/checkpoint",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python train.py --resume path/to/checkpoint",
+    "readme_url": "https://github.com/StefanDenn3r/Spatio-temporal-MS-Lesion-Segmentation/blob/04790fd304f595d51db7ddba080c92c1eba5c302/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "04790fd304f595d51db7ddba080c92c1eba5c302",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.03
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 8,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_131_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "future==0.18.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for future==0.18.2"
+      },
+      {
+        "requirement": "h5py==2.10.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for h5py==2.10.0"
+      },
+      {
+        "requirement": "numpy==1.19.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for numpy==1.19.2"
+      },
+      {
+        "requirement": "opencv-python==4.4.0.44",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for opencv-python==4.4.0.44"
+      },
+      {
+        "requirement": "pandas==1.1.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pandas==1.1.2"
+      },
+      {
+        "requirement": "Pillow==7.2.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for Pillow==7.2.0"
+      },
+      {
+        "requirement": "scikit-learn==0.23.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scikit-learn==0.23.2"
+      },
+      {
+        "requirement": "scipy==1.5.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scipy==1.5.2"
+      },
+      {
+        "requirement": "torch==1.6.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torch==1.6.0"
+      },
+      {
+        "requirement": "torchvision==0.7.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torchvision==0.7.0"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement future==0.18.2 (from versions: 1.0.0)\nERROR: No matching distribution found for future==0.18.2\n",
+    "duration_seconds": 25.042
+  },
+  "sandbox_duration_seconds": 2.064,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.656,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 20783104
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.576,
+    "peak_memory_bytes": 39227392
+  },
+  "finished_at": "2026-10-25T05:17:48+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

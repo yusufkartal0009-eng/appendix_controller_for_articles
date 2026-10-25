@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/serve.py", line 18, in <module>
+    from fastvla.policy import FastVLAPolicy  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/fastvla/policy.py", line 13, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

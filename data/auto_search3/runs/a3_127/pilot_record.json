@@ -1,0 +1,139 @@
+{
+  "paper_id": "a3_127",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "c6de1d75cf0856c823af8a7c4f27a7b97b1a1759",
+  "started_at": "2026-10-25T05:06:49+00:00",
+  "repo_url": "https://github.com/AnqiLi24/OpenTumorBoard",
+  "pinned_commit": "012eed37ec602bc7a6c8389ee0c7d666ee4247f9",
+  "target_script": "src/search.py",
+  "container_command": "python /workspace/repo/src/search.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python src/search.py",
+    "readme_url": "https://github.com/AnqiLi24/OpenTumorBoard/blob/012eed37ec602bc7a6c8389ee0c7d666ee4247f9/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "012eed37ec602bc7a6c8389ee0c7d666ee4247f9",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": true,
+    "duration_seconds": 1.332
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "source": "conda_env",
+    "python_version": "3.11",
+    "env_python_versions": [
+      "3.10"
+    ],
+    "conda_env_files": [
+      "environment.yml"
+    ],
+    "converted": 15,
+    "downloaded": [
+      "torch==2.4.1",
+      "torchvision==0.19.1",
+      "torchaudio==2.4.1",
+      "whisperx",
+      "pyannote.audio",
+      "opencv-python-headless",
+      "scenedetect[opencv]",
+      "transformers",
+      "Pillow",
+      "yt-dlp",
+      "openai",
+      "azure-identity",
+      "pydantic>=2.0"
+    ],
+    "conda_only": [
+      {
+        "requirement": "sam2",
+        "reason": "ERROR: No matching distribution found for sam2"
+      },
+      {
+        "requirement": "groundingdino-py",
+        "reason": "ERROR: No matching distribution found for groundingdino-py"
+      }
+    ],
+    "skipped": [
+      {
+        "package": "pip",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "--extra-index-url https://download.pytorch.org/whl/cu124",
+        "reason": "pip option, not a package"
+      }
+    ],
+    "wheel_count": 13,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_127_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [],
+    "duration_seconds": 37.196
+  },
+  "sandbox_duration_seconds": 550.638,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.883,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 39112704
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 547.636,
+    "peak_memory_bytes": 125595648
+  },
+  "finished_at": "2026-10-25T05:16:38+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

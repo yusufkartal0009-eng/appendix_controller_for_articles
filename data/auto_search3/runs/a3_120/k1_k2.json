@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_120",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'torch'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.185,
+    "metric_lines": []
+  },
+  "k2": null
+}

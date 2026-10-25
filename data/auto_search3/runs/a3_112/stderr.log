@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'results/synth1d'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/run_experiment.py", line 30, in <module>
+    main()
+  File "/workspace/repo/scripts/run_experiment.py", line 22, in main
+    run_experiment(cfg)
+  File "/workspace/repo/cocp/experiment.py", line 45, in run_experiment
+    out_root = ensure_dir(resolved_out_dir(cfg))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/cocp/utils.py", line 27, in ensure_dir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1120, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: 'results'

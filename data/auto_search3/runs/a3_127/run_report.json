@@ -1,0 +1,228 @@
+{
+  "paper_id": "a3_127",
+  "source": "https://github.com/AnqiLi24/OpenTumorBoard",
+  "commit_hash": "012eed37ec602bc7a6c8389ee0c7d666ee4247f9",
+  "target_script": "src/search.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.883,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_127",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.571,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 39112704,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "azure-identity",
+      "version": "1.26.0"
+    },
+    {
+      "name": "openai",
+      "version": "3.37.0"
+    },
+    {
+      "name": "opencv-python-headless",
+      "version": "5.0.0.93"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "pyannote-audio",
+      "version": "4.0.7"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "scenedetect",
+      "version": "0.7.2"
+    },
+    {
+      "name": "torch",
+      "version": "2.4.1"
+    },
+    {
+      "name": "torchaudio",
+      "version": "2.4.1"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.19.1"
+    },
+    {
+      "name": "transformers",
+      "version": "5.20.2"
+    },
+    {
+      "name": "whisperx",
+      "version": "3.8.6"
+    },
+    {
+      "name": "yt-dlp",
+      "version": "2026.10.21"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch==2.4.1",
+      "name": "torch",
+      "requested": "==2.4.1",
+      "installed": "2.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.19.1",
+      "name": "torchvision",
+      "requested": "==0.19.1",
+      "installed": "0.19.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torchaudio==2.4.1",
+      "name": "torchaudio",
+      "requested": "==2.4.1",
+      "installed": "2.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "whisperx",
+      "name": "whisperx",
+      "requested": "any",
+      "installed": "3.8.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pyannote.audio",
+      "name": "pyannote.audio",
+      "requested": "any",
+      "installed": "4.0.7",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "opencv-python-headless",
+      "name": "opencv-python-headless",
+      "requested": "any",
+      "installed": "5.0.0.93",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scenedetect[opencv]",
+      "name": "scenedetect",
+      "requested": "any",
+      "installed": "0.7.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "transformers",
+      "name": "transformers",
+      "requested": "any",
+      "installed": "5.20.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "Pillow",
+      "name": "Pillow",
+      "requested": "any",
+      "installed": "13.0.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "sam2",
+      "name": "sam2",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "groundingdino-py",
+      "name": "groundingdino-py",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "yt-dlp",
+      "name": "yt-dlp",
+      "requested": "any",
+      "installed": "2026.10.21",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "openai",
+      "name": "openai",
+      "requested": "any",
+      "installed": "3.37.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "azure-identity",
+      "name": "azure-identity",
+      "requested": "any",
+      "installed": "1.26.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pydantic>=2.0",
+      "name": "pydantic",
+      "requested": ">=2.0",
+      "installed": "2.14.1",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/src/search.py\n==================================================\nSearching YouTube for 'tumor board' videos. This may take a moment...\n[youtube:search] Extracting URL: ytsearchall:\"tumor board\"\n[download] Downloading playlist: \"tumor board\"\n[youtube:search] query \"\"tumor board\"\": Downloading web client config\n[youtube:search] query \"\"tumor board\"\": Downloading web client config\n[youtube:search] query \"\"tumor board\"\": Downloading web client config\n[youtube:search] query \"\"tumor board\"\": Downloading web client config\n[youtube:search] query \"\"tumor board\"\" page 1: Downloading API JSON\n[youtube:search] query \"\"tumor board\"\" page 1: Downloading API JSON\n[youtube:search] query \"\"tumor board\"\" page 1: Downloading API JSON\n[youtube:search] query \"\"tumor board\"\" page 1: Downloading API JSON\n[youtube:search] Playlist \"tumor board\": Downloading 1 items\n[download] Finished downloading playlist: \"tumor board\"\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 1.571s\n==================================================\n",
+  "stderr_preview": "WARNING: [youtube:search] [Errno -3] Temporary failure in name resolution. Retrying (1/3)...\nWARNING: [youtube:search] [Errno -3] Temporary failure in name resolution. Retrying (2/3)...\nWARNING: [youtube:search] [Errno -3] Temporary failure in name resolution. Retrying (3/3)...\nWARNING: [youtube:search] query \"\"tumor board\"\": Unable to download webpage: [Errno -3] Temporary failure in name resolution (caused by TransportError('[Errno -3] Temporary failure in name resolution')). Giving up after 3 retries\nWARNING: [youtube:search] [Errno -3] Temporary failure in name resolution. Retrying (1/3)...\nWARNING: [youtube:search] [Errno -3] Temporary failure in name resolution. Retrying (2/3)...\nWARNING: [youtube:search] [Errno -3] Temporary failure in name resolution. Retrying (3/3)...\nERROR: query \"\"tumor board\"\" page 1: Unable to download API page: [Errno -3] Temporary failure in name resolution (caused by TransportError('[Errno -3] Temporary failure in name resolution'))\nTraceback (most recent call last):\n  File \"/workspace/repo/src/search.py\", line 55, in <module>\n    get_youtube_ids(keyword=\"tumor board\", min_duration_minutes=12)\n  File \"/workspace/repo/src/search.py\", line 46, in get_youtube_ids\n    with open(output_csv, mode='w', newline='', encoding='utf-8') as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: 'searched_videos.csv'\n"
+}
