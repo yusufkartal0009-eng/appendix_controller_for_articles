@@ -1,0 +1,199 @@
+{
+  "paper_id": "a3_131",
+  "source": "https://github.com/StefanDenn3r/Spatio-temporal-MS-Lesion-Segmentation",
+  "commit_hash": "04790fd304f595d51db7ddba080c92c1eba5c302",
+  "target_script": "train.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.656,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_131",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.347,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 20783104,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "future==0.18.2",
+      "name": "future",
+      "requested": "==0.18.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "h5py==2.10.0",
+      "name": "h5py",
+      "requested": "==2.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==0.17.0",
+      "name": "joblib",
+      "requested": "==0.17.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nibabel==3.1.1",
+      "name": "nibabel",
+      "requested": "==3.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.19.2",
+      "name": "numpy",
+      "requested": "==1.19.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opencv-python==4.4.0.44",
+      "name": "opencv-python",
+      "requested": "==4.4.0.44",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==20.4",
+      "name": "packaging",
+      "requested": "==20.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.1.2",
+      "name": "pandas",
+      "requested": "==1.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==7.2.0",
+      "name": "Pillow",
+      "requested": "==7.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==2.4.7",
+      "name": "pyparsing",
+      "requested": "==2.4.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.8.1",
+      "name": "python-dateutil",
+      "requested": "==2.8.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2020.1",
+      "name": "pytz",
+      "requested": "==2020.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==0.23.2",
+      "name": "scikit-learn",
+      "requested": "==0.23.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.5.2",
+      "name": "scipy",
+      "requested": "==1.5.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.15.0",
+      "name": "six",
+      "requested": "==1.15.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==2.1.0",
+      "name": "threadpoolctl",
+      "requested": "==2.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.6.0",
+      "name": "torch",
+      "requested": "==1.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.7.0",
+      "name": "torchvision",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/train.py --resume path/to/checkpoint\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.347s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/train.py\", line 7, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

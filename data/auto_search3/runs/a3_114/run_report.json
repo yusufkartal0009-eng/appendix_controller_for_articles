@@ -1,0 +1,120 @@
+{
+  "paper_id": "a3_114",
+  "source": "https://github.com/joisino/wordtour",
+  "commit_hash": "de6c20e3e6c26f61a5b7cb0a5317cff582e53637",
+  "target_script": "generate_order_file.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 6.039,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_114",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 5.742,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 149585920,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "POT",
+      "version": "0.9.7.post1"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy>=1.21.0",
+      "name": "numpy",
+      "requested": ">=1.21.0",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.5.4",
+      "name": "scipy",
+      "requested": ">=1.5.4",
+      "installed": "1.17.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-learn>=0.22.1",
+      "name": "scikit-learn",
+      "requested": ">=0.22.1",
+      "installed": "1.9.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pot>=0.7.0",
+      "name": "pot",
+      "requested": ">=0.7.0",
+      "installed": "0.9.7.post1",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/generate_order_file.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 5.742s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/generate_order_file.py\", line 133, in <module>\n    main()\n  File \"/workspace/repo/generate_order_file.py\", line 125, in main\n    words, lkh, rand_proj, pca1, pca4, emb = load_ordering()\n                                             ^^^^^^^^^^^^^^^\n  File \"/workspace/repo/generate_order_file.py\", line 7, in load_ordering\n    with open('LKH-3.0.6/wordtour.out') as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'LKH-3.0.6/wordtour.out'\n"
+}

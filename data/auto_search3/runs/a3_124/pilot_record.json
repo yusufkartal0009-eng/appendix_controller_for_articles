@@ -1,0 +1,157 @@
+{
+  "paper_id": "a3_124",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "c6de1d75cf0856c823af8a7c4f27a7b97b1a1759",
+  "started_at": "2026-10-25T05:04:53+00:00",
+  "repo_url": "https://github.com/etetteh/OoD_Gen-Chest_Xray",
+  "pinned_commit": "cc0cf6e78d20c601c65600b99e8a9991c27bbd49",
+  "target_script": "chest_quantize.py",
+  "container_command": "python /workspace/repo/chest_quantize.py --dataset_dir <data dir> --train_datas cx pc --val_data mc --seed 0",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python chest_quantize.py --dataset_dir <data dir> --train_datas cx pc --val_data mc --seed 0",
+    "readme_url": "https://github.com/etetteh/OoD_Gen-Chest_Xray/blob/cc0cf6e78d20c601c65600b99e8a9991c27bbd49/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "cc0cf6e78d20c601c65600b99e8a9991c27bbd49",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.163
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 51,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_124_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "markupsafe==2.1.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for markupsafe==2.1.1"
+      },
+      {
+        "requirement": "pathtools==0.1.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pathtools==0.1.2"
+      },
+      {
+        "requirement": "promise==2.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for promise==2.3"
+      },
+      {
+        "requirement": "psutil==5.9.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for psutil==5.9.2"
+      },
+      {
+        "requirement": "scikit-image==0.19.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scikit-image==0.19.3"
+      },
+      {
+        "requirement": "scikit-learn==1.1.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scikit-learn==1.1.2"
+      },
+      {
+        "requirement": "scipy==1.9.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scipy==1.9.1"
+      },
+      {
+        "requirement": "torch==1.12.1+cu113",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torch==1.12.1+cu113"
+      },
+      {
+        "requirement": "torchaudio==0.12.1+cu113",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torchaudio==0.12.1+cu113"
+      },
+      {
+        "requirement": "torchvision==0.13.1+cu113",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torchvision==0.13.1+cu113"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "ents.txt (line 9))\n  Downloading google_auth_oauthlib-0.4.6-py2.py3-none-any.whl.metadata (2.7 kB)\nCollecting google-auth==2.12.0 (from -r /staging/a3_124/requirements.txt (line 10))\n  Downloading google_auth-2.12.0-py2.py3-none-any.whl.metadata (3.8 kB)\nCollecting grpcio==1.49.1 (from -r /staging/a3_124/requirements.txt (line 11))\n  Downloading grpcio-1.49.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.9 kB)\nCollecting idna==3.4 (from -r /staging/a3_124/requirements.txt (line 12))\n  Downloading idna-3.4-py3-none-any.whl.metadata (9.8 kB)\nCollecting imageio==2.22.0 (from -r /staging/a3_124/requirements.txt (line 13))\n  Downloading imageio-2.22.0-py3-none-any.whl.metadata (4.9 kB)\nCollecting joblib==1.2.0 (from -r /staging/a3_124/requirements.txt (line 14))\n  Using cached joblib-1.2.0-py3-none-any.whl.metadata (5.3 kB)\nCollecting markdown==3.4.1 (from -r /staging/a3_124/requirements.txt (line 15))\n  Downloading Markdown-3.4.1-py3-none-any.whl.metadata (4.6 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement markupsafe==2.1.1 (from versions: 2.1.2, 2.1.3, 2.1.4, 2.1.5, 3.0.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4)\nERROR: No matching distribution found for markupsafe==2.1.1\n",
+    "duration_seconds": 107.085
+  },
+  "sandbox_duration_seconds": 2.21,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.449,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 8134656
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.778,
+    "peak_memory_bytes": 40722432
+  },
+  "finished_at": "2026-10-25T05:06:43+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

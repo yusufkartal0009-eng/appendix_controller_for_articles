@@ -1,0 +1,14 @@
+{
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 24.006,
+  "timeout_limit_seconds": 600,
+  "killed_before_timeout": false,
+  "dependency_install_status": "INSTALLED",
+  "peak_memory_bytes": 826425344,
+  "gpu_requested": false,
+  "gpu_devices": [],
+  "gpu_peak_memory_used_mib": null,
+  "user_id": 1000,
+  "group_id": 1000
+}

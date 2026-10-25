@@ -1,0 +1,543 @@
+{
+  "paper_id": "a3_124",
+  "source": "https://github.com/etetteh/OoD_Gen-Chest_Xray",
+  "commit_hash": "cc0cf6e78d20c601c65600b99e8a9991c27bbd49",
+  "target_script": "chest_quantize.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.449,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_124",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.144,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 8134656,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "absl-py==1.2.0",
+      "name": "absl-py",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cachetools==5.2.0",
+      "name": "cachetools",
+      "requested": "==5.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2022.9.14",
+      "name": "certifi",
+      "requested": "==2022.9.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==2.1.1",
+      "name": "charset-normalizer",
+      "requested": "==2.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "click==8.1.3",
+      "name": "click",
+      "requested": "==8.1.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "docker-pycreds==0.4.0",
+      "name": "docker-pycreds",
+      "requested": "==0.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gitdb==4.0.9",
+      "name": "gitdb",
+      "requested": "==4.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gitpython==3.1.27",
+      "name": "gitpython",
+      "requested": "==3.1.27",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-auth-oauthlib==0.4.6",
+      "name": "google-auth-oauthlib",
+      "requested": "==0.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-auth==2.12.0",
+      "name": "google-auth",
+      "requested": "==2.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "grpcio==1.49.1",
+      "name": "grpcio",
+      "requested": "==1.49.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.4",
+      "name": "idna",
+      "requested": "==3.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "imageio==2.22.0",
+      "name": "imageio",
+      "requested": "==2.22.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.2.0",
+      "name": "joblib",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markdown==3.4.1",
+      "name": "markdown",
+      "requested": "==3.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markupsafe==2.1.1",
+      "name": "markupsafe",
+      "requested": "==2.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==2.8.6",
+      "name": "networkx",
+      "requested": "==2.8.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.23.3",
+      "name": "numpy",
+      "requested": "==1.23.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "oauthlib==3.2.1",
+      "name": "oauthlib",
+      "requested": "==3.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==21.3",
+      "name": "packaging",
+      "requested": "==21.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.5.0",
+      "name": "pandas",
+      "requested": "==1.5.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pathtools==0.1.2",
+      "name": "pathtools",
+      "requested": "==0.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==9.2.0",
+      "name": "pillow",
+      "requested": "==9.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pip==22.2.2",
+      "name": "pip",
+      "requested": "==22.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "promise==2.3",
+      "name": "promise",
+      "requested": "==2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==3.19.6",
+      "name": "protobuf",
+      "requested": "==3.19.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "psutil==5.9.2",
+      "name": "psutil",
+      "requested": "==5.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyasn1-modules==0.2.8",
+      "name": "pyasn1-modules",
+      "requested": "==0.2.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyasn1==0.4.8",
+      "name": "pyasn1",
+      "requested": "==0.4.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.0.9",
+      "name": "pyparsing",
+      "requested": "==3.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.8.2",
+      "name": "python-dateutil",
+      "requested": "==2.8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2022.2.1",
+      "name": "pytz",
+      "requested": "==2022.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pywavelets==1.4.1",
+      "name": "pywavelets",
+      "requested": "==1.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyyaml==6.0",
+      "name": "pyyaml",
+      "requested": "==6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-oauthlib==1.3.1",
+      "name": "requests-oauthlib",
+      "requested": "==1.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.28.1",
+      "name": "requests",
+      "requested": "==2.28.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rsa==4.9",
+      "name": "rsa",
+      "requested": "==4.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-image==0.19.3",
+      "name": "scikit-image",
+      "requested": "==0.19.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.1.2",
+      "name": "scikit-learn",
+      "requested": "==1.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.9.1",
+      "name": "scipy",
+      "requested": "==1.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sentry-sdk==1.9.9",
+      "name": "sentry-sdk",
+      "requested": "==1.9.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "setproctitle==1.3.2",
+      "name": "setproctitle",
+      "requested": "==1.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "setuptools==63.4.1",
+      "name": "setuptools",
+      "requested": "==63.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "shortuuid==1.0.9",
+      "name": "shortuuid",
+      "requested": "==1.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.16.0",
+      "name": "six",
+      "requested": "==1.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "smmap==5.0.0",
+      "name": "smmap",
+      "requested": "==5.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard-data-server==0.6.1",
+      "name": "tensorboard-data-server",
+      "requested": "==0.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard-plugin-wit==1.8.1",
+      "name": "tensorboard-plugin-wit",
+      "requested": "==1.8.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard==2.10.1",
+      "name": "tensorboard",
+      "requested": "==2.10.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==3.1.0",
+      "name": "threadpoolctl",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tifffile==2022.8.12",
+      "name": "tifffile",
+      "requested": "==2022.8.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.12.1+cu113",
+      "name": "torch",
+      "requested": "==1.12.1+cu113",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchaudio==0.12.1+cu113",
+      "name": "torchaudio",
+      "requested": "==0.12.1+cu113",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.13.1+cu113",
+      "name": "torchvision",
+      "requested": "==0.13.1+cu113",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchxrayvision==0.0.38",
+      "name": "torchxrayvision",
+      "requested": "==0.0.38",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.64.1",
+      "name": "tqdm",
+      "requested": "==4.64.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing-extensions==4.3.0",
+      "name": "typing-extensions",
+      "requested": "==4.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==1.26.12",
+      "name": "urllib3",
+      "requested": "==1.26.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wandb==0.13.3",
+      "name": "wandb",
+      "requested": "==0.13.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "werkzeug==2.2.2",
+      "name": "werkzeug",
+      "requested": "==2.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wheel==0.37.1",
+      "name": "wheel",
+      "requested": "==0.37.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/chest_quantize.py --dataset_dir <data dir> --train_datas cx pc --val_data mc --seed 0\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.144s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/chest_quantize.py\", line 1, in <module>\n    import torch.multiprocessing\nModuleNotFoundError: No module named 'torch'\n"
+}

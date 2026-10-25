@@ -41,6 +41,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): automatic search of round 3, runs a3_112 to a3_131 (2026-10-25 08:28 +03:00, Issue #473)
+- 20 new runs from `data/auto_search3/` (snapshot of the search that started 2026-10-24T20:59:14+00:00; 3375 candidates checked in all so far, 131 run, K1 passed 2, K2 passed 0, both 0). Outcomes of this batch: install 4, run 16. K2 passed in this batch: none.
+- Protocol: `docs/AUTO_SEARCH_ROUND3.md`. Selected, non-representative list, not a success rate; a K2 pass is a match candidate, not a verified result. Local paths replaced by `<REPO>` and `<HOME>`.
+- Evidence: ruff and pytest below in the pull request.
+- Not verified: that any matched number means the same thing as the paper's number.
+
 ### docs(corpus): stage 7 topics for the automatic search of round 3 (2026-10-25 07:30 +03:00, Issue #473)
 - Stages 1 to 6 were used up (2,992 candidates checked, 118 run, 2 passed K1, none K2). The protocol gets a seventh stage of 16 domain topics, added before its search and without looking at any candidate; `scripts/auto_search3.py` lists them. Rules unchanged. Correction: the stage 6 paragraph of the protocol says it was added at 06:45; the pull request was made at about 06:30.
 - Evidence: ruff and pytest in the pull request.

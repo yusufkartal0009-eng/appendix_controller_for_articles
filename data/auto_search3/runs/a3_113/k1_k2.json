@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_113",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "run.py: error: unrecognized arguments: --config configs/webqsp.yaml",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 67.971,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/code/TrainAtlas.py", line 4, in <module>
+    from atlasDataModule import AtlasDataModule
+  File "/workspace/repo/code/atlasDataModule.py", line 16, in <module>
+    import atlas_utils as atlasUtils
+  File "/workspace/repo/code/atlas_utils.py", line 7, in <module>
+    import matplotlib.pyplot as plt
+ModuleNotFoundError: No module named 'matplotlib'

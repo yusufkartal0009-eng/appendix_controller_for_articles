@@ -1,0 +1,364 @@
+{
+  "paper_id": "a3_121",
+  "source": "https://github.com/ToFec/AtlasRegistration",
+  "commit_hash": "33cac0b952f7a9227628b878065f6cfb07ca3fc6",
+  "target_script": "code/TrainAtlas.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 24.523,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_121",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 24.183,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 583221248,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "absl-py",
+      "version": "2.5.1"
+    },
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0"
+    },
+    {
+      "name": "cmake",
+      "version": "4.4.4"
+    },
+    {
+      "name": "Deprecated",
+      "version": "1.3.1"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "grpcio",
+      "version": "1.84.1"
+    },
+    {
+      "name": "humanize",
+      "version": "4.16.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "importlib_resources",
+      "version": "7.1.0"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "lightning-bolts",
+      "version": "0.7.0"
+    },
+    {
+      "name": "lightning-utilities",
+      "version": "0.15.3"
+    },
+    {
+      "name": "lit",
+      "version": "23.1.4"
+    },
+    {
+      "name": "Markdown",
+      "version": "3.11.2"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "multidict",
+      "version": "7.2.1"
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1"
+    },
+    {
+      "name": "nibabel",
+      "version": "5.3.3"
+    },
+    {
+      "name": "numpy",
+      "version": "1.23.5"
+    },
+    {
+      "name": "nvidia-cublas-cu11",
+      "version": "11.10.3.66"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu11",
+      "version": "11.7.101"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu11",
+      "version": "11.7.99"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu11",
+      "version": "11.7.99"
+    },
+    {
+      "name": "nvidia-cudnn-cu11",
+      "version": "8.5.0.96"
+    },
+    {
+      "name": "nvidia-cufft-cu11",
+      "version": "10.9.0.58"
+    },
+    {
+      "name": "nvidia-curand-cu11",
+      "version": "10.2.10.91"
+    },
+    {
+      "name": "nvidia-cusolver-cu11",
+      "version": "11.4.0.1"
+    },
+    {
+      "name": "nvidia-cusparse-cu11",
+      "version": "11.7.4.91"
+    },
+    {
+      "name": "nvidia-nccl-cu11",
+      "version": "2.14.3"
+    },
+    {
+      "name": "nvidia-nvtx-cu11",
+      "version": "11.7.91"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2"
+    },
+    {
+      "name": "pytorch-lightning",
+      "version": "1.8.6"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.15.3"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.1"
+    },
+    {
+      "name": "SimpleITK",
+      "version": "2.3.1"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "tensorboard",
+      "version": "2.21.0"
+    },
+    {
+      "name": "tensorboard-data-server",
+      "version": "0.7.2"
+    },
+    {
+      "name": "tensorboardX",
+      "version": "2.6.5"
+    },
+    {
+      "name": "torch",
+      "version": "2.0.1"
+    },
+    {
+      "name": "torchio",
+      "version": "0.18.84"
+    },
+    {
+      "name": "torchmetrics",
+      "version": "1.9.0"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.15.2"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "triton",
+      "version": "2.0.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "Werkzeug",
+      "version": "3.1.9"
+    },
+    {
+      "name": "wheel",
+      "version": "0.48.0"
+    },
+    {
+      "name": "wrapt",
+      "version": "2.5.1"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "lightning-bolts==0.7.0",
+      "name": "lightning-bolts",
+      "requested": "==0.7.0",
+      "installed": "0.7.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.23.5",
+      "name": "numpy",
+      "requested": "==1.23.5",
+      "installed": "1.23.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytorch_lightning==1.8.6",
+      "name": "pytorch_lightning",
+      "requested": "==1.8.6",
+      "installed": "1.8.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "SimpleITK==2.3.1",
+      "name": "SimpleITK",
+      "requested": "==2.3.1",
+      "installed": "2.3.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.0.1",
+      "name": "torch",
+      "requested": "==2.0.1",
+      "installed": "2.0.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torchio==0.18.84",
+      "name": "torchio",
+      "requested": "==0.18.84",
+      "installed": "0.18.84",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/code/TrainAtlas.py -c ./Path/to/your/config/file.json\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 24.183s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/code/TrainAtlas.py\", line 4, in <module>\n    from atlasDataModule import AtlasDataModule\n  File \"/workspace/repo/code/atlasDataModule.py\", line 16, in <module>\n    import atlas_utils as atlasUtils\n  File \"/workspace/repo/code/atlas_utils.py\", line 7, in <module>\n    import matplotlib.pyplot as plt\nModuleNotFoundError: No module named 'matplotlib'\n"
+}
