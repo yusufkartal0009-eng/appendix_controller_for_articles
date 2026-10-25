@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_075",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for langgraph-checkpoint<4.0.0,>=2.1.0",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.594,
+    "metric_lines": []
+  },
+  "k2": null
+}

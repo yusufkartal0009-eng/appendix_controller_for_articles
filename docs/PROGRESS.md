@@ -41,6 +41,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### data(corpus): automatic search of round 3, runs a3_068 to a3_087 (2026-10-25 04:49 +03:00, Issue #473)
+- 20 new runs from `data/auto_search3/` (snapshot of the search that started 2026-10-24T20:59:14+00:00; 1924 candidates checked in all so far, 87 run, K1 passed 0, K2 passed 0, both 0). Outcomes of this batch: install 2, no_metric_line 2, run 16. K2 passed in this batch: none.
+- Protocol: `docs/AUTO_SEARCH_ROUND3.md`. Selected, non-representative list, not a success rate; a K2 pass is a match candidate, not a verified result. Local paths replaced by `<REPO>` and `<HOME>`.
+- Evidence: ruff and pytest below in the pull request.
+- Not verified: that any matched number means the same thing as the paper's number.
+
 ### fix(corpus): the search survives a folder that cannot be deleted and a crash of the runner (2026-10-25 04:40 +03:00, Issue #473)
 - The search stopped after 76 runs: deleting the installed packages of candidate a3_077 failed (`FileNotFoundError`, a path longer than Windows allows) in `cleanup_run`, and the error ended the process. `force_remove` now falls back to emptying the folder with robocopy; a folder that still cannot be deleted is reported and the search goes on; an exception of the runner is recorded as a `harness` result. The candidate a3_077 had no stored result, so it is run again from the start (it never produced a result). Tests for the three cases.
 - Evidence: ruff and pytest in the pull request.

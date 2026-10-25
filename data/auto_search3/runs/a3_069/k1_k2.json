@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_069",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "RuntimeError: No API key. Set CLARIFY_API_KEY (and CLARIFY_BASE_URL) or pass api_key=.",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 5.693,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,23 @@
+{
+  "paper_id": "a3_084",
+  "k1": {
+    "k1_passed": false,
+    "category": "no_metric_line",
+    "log_line": "Note: codex is not on PATH; install or open that agent before using the skills.",
+    "install_status": "INSTALLED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 1.654,
+    "metric_lines": []
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 0,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 20,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "arxiv_id": "2608.31076"
+  }
+}

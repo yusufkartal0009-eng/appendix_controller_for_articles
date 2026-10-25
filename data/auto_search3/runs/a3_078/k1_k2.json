@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_078",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'yaml'",
+    "install_status": "SKIPPED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.162,
+    "metric_lines": []
+  },
+  "k2": null
+}

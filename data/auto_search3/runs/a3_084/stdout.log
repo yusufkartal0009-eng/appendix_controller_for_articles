@@ -1,0 +1,4 @@
+Verified all 8 skills and bundled resources in /workspace/home/.agents/skills
+File verification only (generic). Open a new agent session to check skill discovery.
+Next: use the Python environment with requirements.txt installed, restart your agent, and ask: Use AutoSciRub on my research task.
+Note: codex is not on PATH; install or open that agent before using the skills.

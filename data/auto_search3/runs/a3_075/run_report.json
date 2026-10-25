@@ -1,0 +1,167 @@
+{
+  "paper_id": "a3_075",
+  "source": "https://github.com/najmulhasan-code/dpbench",
+  "commit_hash": "f62fd594e69db56838db5fdbe0cfb9f814ff7788",
+  "target_script": "experiments/scripts/run.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.594,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_075",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.265,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 14163968,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy==1.26.4",
+      "name": "numpy",
+      "requested": "==1.26.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.12.0",
+      "name": "scipy",
+      "requested": "==1.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph==1.0.5",
+      "name": "langgraph",
+      "requested": "==1.0.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-openai==0.2.14",
+      "name": "langchain-openai",
+      "requested": "==0.2.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-core==0.3.29",
+      "name": "langchain-core",
+      "requested": "==0.3.29",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.0.1",
+      "name": "python-dotenv",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==1.58.1",
+      "name": "openai",
+      "requested": "==1.58.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx==0.28.1",
+      "name": "httpx",
+      "requested": "==0.28.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.10.4",
+      "name": "pydantic",
+      "requested": "==2.10.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy>=1.24.0",
+      "name": "numpy",
+      "requested": ">=1.24.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.10.0",
+      "name": "scipy",
+      "requested": ">=1.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "langgraph>=0.2.0",
+      "name": "langgraph",
+      "requested": ">=0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-openai>=0.2.0",
+      "name": "langchain-openai",
+      "requested": ">=0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "python-dotenv>=1.0.0",
+      "name": "python-dotenv",
+      "requested": ">=1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/experiments/scripts/run.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.265s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/experiments/scripts/run.py\", line 18, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'\n"
+}

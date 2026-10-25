@@ -1,0 +1,268 @@
+{
+  "paper_id": "a3_077",
+  "source": "https://github.com/shayme92/Titans-NNX",
+  "commit_hash": "f0e8442c7813c81768578955e1580ba7a956f9fa",
+  "target_script": "training/train_mac.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 2,
+  "duration_seconds": 7.434,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_077",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 7.141,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 164417536,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "absl-py",
+      "version": "2.5.1"
+    },
+    {
+      "name": "aiofiles",
+      "version": "25.1.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "chex",
+      "version": "0.1.92"
+    },
+    {
+      "name": "dacite",
+      "version": "1.9.2"
+    },
+    {
+      "name": "etils",
+      "version": "1.14.0"
+    },
+    {
+      "name": "flax",
+      "version": "0.11.1"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "humanize",
+      "version": "4.16.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "jax",
+      "version": "0.7.1"
+    },
+    {
+      "name": "jaxlib",
+      "version": "0.7.1"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2"
+    },
+    {
+      "name": "ml_dtypes",
+      "version": "0.6.0"
+    },
+    {
+      "name": "msgpack",
+      "version": "1.2.3"
+    },
+    {
+      "name": "numpy",
+      "version": "2.3.2"
+    },
+    {
+      "name": "opt_einsum",
+      "version": "3.4.0"
+    },
+    {
+      "name": "optax",
+      "version": "0.2.5"
+    },
+    {
+      "name": "orbax-checkpoint",
+      "version": "0.12.8"
+    },
+    {
+      "name": "prometheus_client",
+      "version": "0.26.0"
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.2"
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "simplejson",
+      "version": "4.2.0"
+    },
+    {
+      "name": "tensorstore",
+      "version": "0.1.85"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.11.0"
+    },
+    {
+      "name": "toolz",
+      "version": "1.2.0"
+    },
+    {
+      "name": "treescope",
+      "version": "0.1.10"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "uvloop",
+      "version": "0.23.0"
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.2"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "jax==0.7.1",
+      "name": "jax",
+      "requested": "==0.7.1",
+      "installed": "0.7.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "flax==0.11.1",
+      "name": "flax",
+      "requested": "==0.11.1",
+      "installed": "0.11.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "optax==0.2.5",
+      "name": "optax",
+      "requested": "==0.2.5",
+      "installed": "0.2.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.2",
+      "name": "PyYAML",
+      "requested": "==6.0.2",
+      "installed": "6.0.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.3.2",
+      "name": "numpy",
+      "requested": "==2.3.2",
+      "installed": "2.3.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tiktoken==0.11.0",
+      "name": "tiktoken",
+      "requested": "==0.11.0",
+      "installed": "0.11.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "dacite==1.9.2",
+      "name": "dacite",
+      "requested": "==1.9.2",
+      "installed": "1.9.2",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/training/train_mac.py --config configs/mac.yaml --train_path /path/to/train/data --val_path /path/to/val/data\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 2)\nDependencies  : INSTALLED\nDuration      : 7.141s\n==================================================\n",
+  "stderr_preview": "usage: train_mac.py [-h] [--config_path CONFIG_PATH]\n                    [--train_data_path TRAIN_DATA_PATH]\n                    [--val_data_path VAL_DATA_PATH]\ntrain_mac.py: error: unrecognized arguments: --train_path /path/to/train/data --val_path /path/to/val/data\n"
+}

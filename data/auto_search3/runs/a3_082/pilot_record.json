@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_082",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "56bf9ca5152071e13cd3604e54936850b46053a6",
+  "started_at": "2026-10-25T01:38:42+00:00",
+  "repo_url": "https://github.com/isaacus-dev/legal-rag-bench",
+  "pinned_commit": "9e30a36d1ef58cd35ec4ed724ef3e5edc6b0d00b",
+  "target_script": "db.py",
+  "container_command": "python /workspace/repo/db.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python db.py",
+    "readme_url": "https://github.com/isaacus-dev/legal-rag-bench/blob/9e30a36d1ef58cd35ec4ed724ef3e5edc6b0d00b/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "9e30a36d1ef58cd35ec4ed724ef3e5edc6b0d00b",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.062
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 90,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_082_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "hon-dotenv datasets dill fsspec huggingface-hub click hf-xet httpx2 httpcore2 multiprocess tqdm httpx httpcore jsonpatch langsmith anyio distro pydantic pydantic-core pyyaml tenacity typing-extensions uuid-utils langchain-isaacus langchain-core langchain-community aiohttp dataclasses-json httpx-sse isaacus langchain langchain-text-splitters marshmallow multidict packaging pydantic-settings requests charset_normalizer idna sqlalchemy typing-inspect urllib3 yarl langchain-openai openai jiter tiktoken langchain-google-genai filetype google-ai-generativelanguage google-api-core google-auth googleapis-common-protos grpcio grpcio-status opentelemetry-api proto-plus protobuf faiss-cpu aiohappyeyeballs aiosignal annotated-types attrs certifi cryptography cffi filelock frozenlist h11 jsonpointer mypy-extensions numpy orjson propcache pyarrow pyasn1-modules pyasn1 requests-toolbelt truststore typing-inspection websockets xxhash zstandard pandas python-dateutil six pycparser regex sniffio tzdata\n",
+    "stderr": "",
+    "duration_seconds": 42.616
+  },
+  "sandbox_duration_seconds": 513.614,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 21.608,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 244051968
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 490.443,
+    "peak_memory_bytes": 88645632
+  },
+  "finished_at": "2026-10-25T01:47:59+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

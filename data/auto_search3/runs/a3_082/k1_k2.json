@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_082",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ValueError: ISAACUS_API_KEY not set in .env",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 21.608,
+    "metric_lines": []
+  },
+  "k2": null
+}
