@@ -9,7 +9,11 @@ from sqlalchemy import select
 
 from src.models import RunORM, ScoreORM
 from src.web.pages import render_detail
-from tests.test_cli_score import db, make_run, score  # noqa: F401  (the fixture and helpers of the score tests)
+from tests.test_cli_score import (  # noqa: F401  (the fixture and helpers of the score tests)
+    db,
+    make_run,
+    score,
+)
 
 
 @pytest.mark.xfail(strict=True, reason="suspicion 4: the score of a stored run is not linked to a run row; owner decision (UI)")
