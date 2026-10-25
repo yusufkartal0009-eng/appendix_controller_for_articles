@@ -1,0 +1,3 @@
+ERROR: Invalid requirement: '* SHAP': Expected package name at the start of dependency specifier
+    * SHAP
+    ^ (from line 1 of /workspace/repo/requirements.txt)

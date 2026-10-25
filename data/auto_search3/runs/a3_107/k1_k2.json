@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_107",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ImportError: cannot import name 'bigvgan' from 'BigVGAN' (unknown location)",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 13.015,
+    "metric_lines": []
+  },
+  "k2": null
+}

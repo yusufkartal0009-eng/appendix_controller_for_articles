@@ -1,0 +1,480 @@
+{
+  "paper_id": "a3_098",
+  "source": "https://github.com/jwmao1/MedSegFactory",
+  "commit_hash": "b227c6b5f0ff6b02d6046a1cdf57fc47cb74ae96",
+  "target_script": "tutorial_train.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 2,
+  "duration_seconds": 43.359,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_098",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 43.057,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 589127680,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "accelerate",
+      "version": "0.28.0"
+    },
+    {
+      "name": "bitsandbytes",
+      "version": "0.45.2"
+    },
+    {
+      "name": "braceexpand",
+      "version": "0.1.7"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "diffusers",
+      "version": "0.27.2"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "h5py",
+      "version": "3.12.1"
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "0.26.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "ImageIO",
+      "version": "2.38.1"
+    },
+    {
+      "name": "importlib_metadata",
+      "version": "10.1.0"
+    },
+    {
+      "name": "importlib_resources",
+      "version": "7.1.0"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1"
+    },
+    {
+      "name": "lazy-loader",
+      "version": "0.6"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.10.0"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1"
+    },
+    {
+      "name": "nibabel",
+      "version": "5.3.2"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.3"
+    },
+    {
+      "name": "nvidia-cublas-cu12",
+      "version": "12.1.3.1"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cudnn-cu12",
+      "version": "8.9.2.26"
+    },
+    {
+      "name": "nvidia-cufft-cu12",
+      "version": "11.0.2.54"
+    },
+    {
+      "name": "nvidia-curand-cu12",
+      "version": "10.3.2.106"
+    },
+    {
+      "name": "nvidia-cusolver-cu12",
+      "version": "11.4.5.107"
+    },
+    {
+      "name": "nvidia-cusparse-cu12",
+      "version": "12.1.0.106"
+    },
+    {
+      "name": "nvidia-nccl-cu12",
+      "version": "2.19.3"
+    },
+    {
+      "name": "nvidia-nvjitlink-cu12",
+      "version": "12.9.86"
+    },
+    {
+      "name": "nvidia-nvtx-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "packaging",
+      "version": "24.2"
+    },
+    {
+      "name": "pillow",
+      "version": "11.1.0"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "PyWavelets",
+      "version": "1.9.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "safetensors",
+      "version": "0.5.2"
+    },
+    {
+      "name": "scikit-image",
+      "version": "0.21.0"
+    },
+    {
+      "name": "scipy",
+      "version": "1.16.3"
+    },
+    {
+      "name": "SimpleITK",
+      "version": "2.4.1"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "tifffile",
+      "version": "2026.3.3"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.21.4"
+    },
+    {
+      "name": "torch",
+      "version": "2.2.2+cu121"
+    },
+    {
+      "name": "torchaudio",
+      "version": "2.2.2+cu121"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.17.2+cu121"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.67.1"
+    },
+    {
+      "name": "transformers",
+      "version": "4.49.0"
+    },
+    {
+      "name": "triton",
+      "version": "2.2.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "webdataset",
+      "version": "0.2.110"
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.2"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "accelerate==0.28.0",
+      "name": "accelerate",
+      "requested": "==0.28.0",
+      "installed": "0.28.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "bitsandbytes==0.45.2",
+      "name": "bitsandbytes",
+      "requested": "==0.45.2",
+      "installed": "0.45.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "braceexpand==0.1.7",
+      "name": "braceexpand",
+      "requested": "==0.1.7",
+      "installed": "0.1.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "diffusers==0.27.2",
+      "name": "diffusers",
+      "requested": "==0.27.2",
+      "installed": "0.27.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "h5py==3.12.1",
+      "name": "h5py",
+      "requested": "==3.12.1",
+      "installed": "3.12.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "huggingface_hub==0.26.0",
+      "name": "huggingface_hub",
+      "requested": "==0.26.0",
+      "installed": "0.26.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.10.0",
+      "name": "matplotlib",
+      "requested": "==3.10.0",
+      "installed": "3.10.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nibabel==5.3.2",
+      "name": "nibabel",
+      "requested": "==5.3.2",
+      "installed": "5.3.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.26.3",
+      "name": "numpy",
+      "requested": "==1.26.3",
+      "installed": "1.26.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==24.2",
+      "name": "packaging",
+      "requested": "==24.2",
+      "installed": "24.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==11.1.0",
+      "name": "Pillow",
+      "requested": "==11.1.0",
+      "installed": "11.1.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "safetensors==0.5.2",
+      "name": "safetensors",
+      "requested": "==0.5.2",
+      "installed": "0.5.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "SimpleITK==2.4.1",
+      "name": "SimpleITK",
+      "requested": "==2.4.1",
+      "installed": "2.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-image==0.21.0",
+      "name": "scikit-image",
+      "requested": "==0.21.0",
+      "installed": "0.21.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.67.1",
+      "name": "tqdm",
+      "requested": "==4.67.1",
+      "installed": "4.67.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.49.0",
+      "name": "transformers",
+      "requested": "==4.49.0",
+      "installed": "4.49.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "webdataset==0.2.110",
+      "name": "webdataset",
+      "requested": "==0.2.110",
+      "installed": "0.2.110",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.2.2",
+      "name": "torch",
+      "requested": "==2.2.2",
+      "installed": "2.2.2+cu121",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.17.2",
+      "name": "torchvision",
+      "requested": "==0.17.2",
+      "installed": "0.17.2+cu121",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torchaudio==2.2.2",
+      "name": "torchaudio",
+      "requested": "==2.2.2",
+      "installed": "2.2.2+cu121",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/tutorial_train.py --data_root_path [your data path] --output_dir [your output path]\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 2)\nDependencies  : INSTALLED\nDuration      : 43.057s\n==================================================\n",
+  "stderr_preview": "usage: tutorial_train.py [-h]\n                         [--pretrained_model_name_or_path PRETRAINED_MODEL_NAME_OR_PATH]\n                         [--data_root_path DATA_ROOT_PATH]\n                         [--output_dir OUTPUT_DIR] [--logging_dir LOGGING_DIR]\n                         [--mode {strach,finetune}] [--resolution RESOLUTION]\n                         [--learning_rate LEARNING_RATE]\n                         [--weight_decay WEIGHT_DECAY]\n                         [--num_train_epochs NUM_TRAIN_EPOCHS]\n                         [--train_batch_size TRAIN_BATCH_SIZE]\n                         [--dataloader_num_workers DATALOADER_NUM_WORKERS]\n                         [--save_steps SAVE_STEPS]\n                         [--mixed_precision {no,fp16,bf16}]\n                         [--report_to REPORT_TO] [--local_rank LOCAL_RANK]\ntutorial_train.py: error: unrecognized arguments: data path] output path]\n"
+}

@@ -1,0 +1,215 @@
+{
+  "paper_id": "a3_106",
+  "source": "https://github.com/lazaratan/meta-flow-matching",
+  "commit_hash": "8b4c6f04490016e12129a5b14b22bda3a727befc",
+  "target_script": "train.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.449,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_106",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.141,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 9863168,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "hydra-core==1.3.2",
+      "name": "hydra-core",
+      "requested": "==1.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "hydra-colorlog==1.2.0",
+      "name": "hydra-colorlog",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "hydra-joblib-launcher==1.2.0",
+      "name": "hydra-joblib-launcher",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "hydra-submitit-launcher==1.2.0",
+      "name": "hydra-submitit-launcher",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.8.1",
+      "name": "matplotlib",
+      "requested": "==3.8.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.26.1",
+      "name": "numpy",
+      "requested": "==1.26.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "omegaconf==2.3.0",
+      "name": "omegaconf",
+      "requested": "==2.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.0.3",
+      "name": "pandas",
+      "requested": "==2.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==10.1.0",
+      "name": "Pillow",
+      "requested": "==10.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "POT==0.9.1",
+      "name": "POT",
+      "requested": "==0.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytorch_lightning==1.9.5",
+      "name": "pytorch_lightning",
+      "requested": "==1.9.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.2",
+      "name": "PyYAML",
+      "requested": "==6.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rich==13.7.1",
+      "name": "rich",
+      "requested": "==13.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit_learn==1.3.2",
+      "name": "scikit_learn",
+      "requested": "==1.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch_geometric==2.5.3",
+      "name": "torch_geometric",
+      "requested": "==2.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch-cluster==1.6.3",
+      "name": "torch-cluster",
+      "requested": "==1.6.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchdyn==1.0.6",
+      "name": "torchdyn",
+      "requested": "==1.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.1",
+      "name": "tqdm",
+      "requested": "==4.66.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wandb==0.16.0",
+      "name": "wandb",
+      "requested": "==0.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.0.1",
+      "name": "python-dotenv",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/train.py experiment=experiment_name.yaml\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.141s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/train.py\", line 1, in <module>\n    import dotenv\nModuleNotFoundError: No module named 'dotenv'\n"
+}

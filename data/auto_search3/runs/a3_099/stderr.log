@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/main.py", line 9, in <module>
+    from utils.logger import logger, configure_logging
+  File "/workspace/repo/utils/__init__.py", line 7, in <module>
+    from .conversation import (
+  File "/workspace/repo/utils/conversation.py", line 1, in <module>
+    from fastchat.model import get_conversation_template
+ModuleNotFoundError: No module named 'fastchat'

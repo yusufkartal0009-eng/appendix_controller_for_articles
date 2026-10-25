@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/repo/demo.py", line 237, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/repo/demo.py", line 202, in main
+    launcher = _build_launcher(f"demo_{int(time.time())}")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/demo.py", line 56, in _build_launcher
+    _require_frontend_configuration()
+  File "/workspace/repo/demo.py", line 45, in _require_frontend_configuration
+    raise RuntimeError(f"missing required environment variables: {', '.join(missing)}")
+RuntimeError: missing required environment variables: LLM_BASE_URL, LLM_API_KEY

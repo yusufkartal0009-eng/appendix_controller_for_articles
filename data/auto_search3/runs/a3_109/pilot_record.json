@@ -1,0 +1,112 @@
+{
+  "paper_id": "a3_109",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "d10fe9ce964c7f2c771ee08e5e2d3b0865716c78",
+  "started_at": "2026-10-25T03:47:18+00:00",
+  "repo_url": "https://github.com/ibaiGorordo/HITNET-Stereo-Depth-estimation",
+  "pinned_commit": "a64564954bfa2eb141bda709e942952a9c3be80f",
+  "target_script": "imageDepthEstimation.py",
+  "container_command": "python /workspace/repo/imageDepthEstimation.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python imageDepthEstimation.py",
+    "readme_url": "https://github.com/ibaiGorordo/HITNET-Stereo-Depth-estimation/blob/a64564954bfa2eb141bda709e942952a9c3be80f/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "a64564954bfa2eb141bda709e942952a9c3be80f",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 2.374
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 3,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_109_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "imread-from-url",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for imread-from-url"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "Collecting tensorflow>=2.6 (from -r /staging/a3_109/requirements.txt (line 1))\n  Using cached tensorflow-2.21.0-cp311-cp311-manylinux_2_27_x86_64.whl.metadata (4.4 kB)\nCollecting opencv-python (from -r /staging/a3_109/requirements.txt (line 2))\n  Using cached opencv_python-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (19 kB)\nCollecting numpy (from -r /staging/a3_109/requirements.txt (line 3))\n  Using cached numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)\n",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement imread-from-url (from versions: none)\nERROR: No matching distribution found for imread-from-url\n",
+    "duration_seconds": 14.653
+  },
+  "sandbox_duration_seconds": 4.498,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.452,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 7745536
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.062,
+    "peak_memory_bytes": 61128704
+  },
+  "finished_at": "2026-10-25T03:47:40+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

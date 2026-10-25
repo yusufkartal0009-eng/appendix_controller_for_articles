@@ -1,0 +1,159 @@
+{
+  "paper_id": "a3_099",
+  "source": "https://github.com/gentlyzhao/Hijacking",
+  "commit_hash": "55b72943dd99804cd8c31fd9de6e181d52df6469",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.537,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_099",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.215,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 12451840,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "anthropic==0.60.0",
+      "name": "anthropic",
+      "requested": "==0.60.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==1.98.0",
+      "name": "openai",
+      "requested": "==1.98.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "google-generativeai==0.8.5",
+      "name": "google-generativeai",
+      "requested": "==0.8.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "litellm==1.74.8",
+      "name": "litellm",
+      "requested": "==1.74.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.7.1",
+      "name": "torch",
+      "requested": "==2.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.54.1",
+      "name": "transformers",
+      "requested": "==4.54.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "accelerate==1.9.0",
+      "name": "accelerate",
+      "requested": "==1.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "peft==0.17.0",
+      "name": "peft",
+      "requested": "==0.17.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "datasets==4.0.0",
+      "name": "datasets",
+      "requested": "==4.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.3.1",
+      "name": "pandas",
+      "requested": "==2.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wandb==0.21.0",
+      "name": "wandb",
+      "requested": "==0.21.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fschat==0.2.23",
+      "name": "fschat",
+      "requested": "==0.2.23",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.1.1",
+      "name": "python-dotenv",
+      "requested": "==1.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py --target-model claude-4-sonnet\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.215s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 9, in <module>\n    from utils.logger import logger, configure_logging\n  File \"/workspace/repo/utils/__init__.py\", line 7, in <module>\n    from .conversation import (\n  File \"/workspace/repo/utils/conversation.py\", line 1, in <module>\n    from fastchat.model import get_conversation_template\nModuleNotFoundError: No module named 'fastchat'\n"
+}

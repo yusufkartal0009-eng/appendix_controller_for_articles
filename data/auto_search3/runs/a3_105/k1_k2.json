@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_105",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "RuntimeError: missing required environment variables: LLM_BASE_URL, LLM_API_KEY",
+    "install_status": "SKIPPED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.548,
+    "metric_lines": []
+  },
+  "k2": null
+}
