@@ -25,7 +25,7 @@ def numbers(text):
 
 def test_the_queries_hold_the_common_part_and_the_topic_in_the_order_of_the_document():
     stage1 = a3.queries(1)
-    assert len(stage1) == 16 and len(a3.queries(2)) == 16 and len(a3.queries(3)) == 16 and len(a3.queries(4)) == 16
+    assert len(stage1) == 16 and len(a3.queries(2)) == 16 and len(a3.queries(3)) == 16 and len(a3.queries(4)) == 16 and len(a3.queries(5)) == 16
     assert stage1[0] == "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:statistics"
     assert stage1[-1].endswith("topic:probabilistic-programming") and a3.queries(2)[-1].endswith("topic:nlp")
 
