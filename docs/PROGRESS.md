@@ -4,11 +4,11 @@
 
 ---
 
-## Current Status (2026-10-25 08:55 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
+## Current Status (2026-10-25 20:27 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
 
 - **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). The stages are recorded in the entries below; the final report is `docs/report/REPORT.md` and its numbers are generated (`python scripts/report_numbers.py --check`).
 - **Pilots** (12 papers: 6 seed papers in Pilots 1 to 3, 6 new papers in Pilot 4): pilot success 0 / 6 (Pilot 1), 1 / 6 (Pilot 2), 2 / 6 (Pilot 3, with four settings chosen after Pilot 2's failures), and 1 / 6 for the new papers at their first attempt (Pilot 4). `docs/FIELD_ANALYSIS.md` section 8 (generated) has the pool-wide rates, the human-intervention table, the autonomy rate, and a descriptive factor table (exploratory, n = 12).
-- **Claim extraction:** 13 claims accepted by the owner. No run has reproduced an accepted claim, so Tier 2 has not been exercised on a real result (REPORT section 6.3).
+- **Claim extraction:** 13 claims accepted by the owner. No run has been shown to reproduce an accepted claim: through `cli.py score` the claims (question IDs) never match the run's metrics (names), and aligned by hand only `paper_003` is close to one claim (`docs/REAL_VERDICTS.md`, REPORT section 6.11).
 - **Tier 3 (stability):** implemented (#48, `docs/MULTI_SEED.md`): a paper with a seed parameter of its own is run once per seed. Two synthetic papers check the path against values computed on the host; `paper_003` and `paper_006` ran with three seeds each (`data/multi_seed_runs/`; not protocol runs). Tier 3 is 65.0 for `paper_003` (decided by its training loss; `rmse` alone would give 100.0) and 100.0 for `paper_006`.
 - **AI Decision Layer:** a rule-based diagnosis (#31 to #36, `docs/DIAGNOSIS.md`, `python cli.py diagnose <run dir>`): input schema, failure classifier, template report, run comparison, optional model backends, and a hand-labeled validation. #34 and #35 stay open with a done/left comment. Not tried with a real language model.
 - **GPU:** one synthetic paper with `torch==2.8.0` (CUDA 12.8) ran with `--gpus all` on the RTX 5070 through the real pipeline (`data/gpu_check/`, `docs/ENVIRONMENT.md`); no real paper was run with the GPU.
@@ -17,7 +17,8 @@
 - **Since 2026-10-20 (issues #435 to #452):** the six images rebuilt from scratch with time and size (`docs/ENVIRONMENT.md`); the protocol of the candidate runs written before the runs and the 14 candidates run once each, **0 of 14 passed** (`docs/CANDIDATE_RUNS.md`, `docs/CANDIDATES.md`; a selected list, not a success rate); a fresh run of `paper_006` from a clean clone of the public repository completed (2,490 s, Update 2 of the walk-through); the tolerance probe (`docs/TOLERANCE_PROBE.md`; hand-made claims, not a real error); the demo script (`docs/DEMO_SCRIPT.md`); the bug hunt (three bugs fixed in #448 to #450, seven suspicions in `docs/BUG_HUNT.md`); the report has two new generated sections (6.8 and 6.9). Open: `docs/PENDING.md` (D9 candidate papers and D10 two scorer rules are new).
 - **Automatic search of round 3 (2026-10-25, #469 to #473):** protocol merged before the first search (`docs/AUTO_SEARCH_ROUND3.md`), then `scripts/auto_search3.py`; seven topic stages; 3,399 candidates checked, 135 run once; K1 passed 2, K2 (output numbers found in the paper's text) 0, both 0 (Wilson intervals in the report, section 6.10, generated). Selected, non-representative list, not a success rate. Nothing accepted; no match candidate.
 - **Candidate repair round (2026-10-24, #455 to #465):** a separate round with a protocol written before the runs (`docs/CANDIDATE_RUNS_ROUND2.md`): first attempt 0 of 14, with repair 1 of 14 (`cand_002`; its output matches no table of its paper); the others stopped because the failure needs a forbidden repair. Selected list, not a success rate. No claim accepted.
-- **Tests:** 1,028 passed, 9 skipped locally (2026-10-24) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
+- **Night 5 (2026-10-25, issues #494 to #505):** verdicts on the real stored runs and the K2 positive control (`docs/REAL_VERDICTS.md`, #494; the expected K2 positive control was not obtained); a dashboard database from the stored runs (`scripts/build_demo_db.py`, #496, screenshots in `docs/evidence/demo2/`); the seven bug-hunt suspicions tried (#498: three real bugs fixed in #499, #500 and #501, one real and left to the owner, three owner decisions); the report brought to its final state with a new section 6.11 and `docs/PAPER_STATUS.md` (#503).
+- **Tests:** 1,165 passed, 9 skipped, 1 expected failure (a strict `xfail`, `tests/test_bug_hunt_suspicions.py`) locally (2026-10-25) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
 
 ---
 
@@ -42,6 +43,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs: status documents updated after night 5 (2026-10-25 20:28 +03:00, Issue #505)
+- `docs/PENDING.md` (new D12 on how claims meet a run's metrics; the bug-hunt item and the done list updated), the Current Status of `README.md` and of this file.
+- Not verified: that the owner's summary outside the repository says the same.
 ### docs(report): the report brought to its final state, and a paper status page (2026-10-25 20:26 +03:00, Issue #503)
 - `docs/report/REPORT.md`: new generated blocks `realverdicts`, `pilotintervals` and `cleanclone` in `scripts/report_numbers.py` (tests added); new section 6.11 (what the scorer decides on real runs, K2 control, the pilot as an estimate with Wilson intervals) and a clean-clone paragraph in 6.4; the abstract states the two claims (a right decision on a known example; how many papers run); nine contradictions and stale sentences fixed; three limitations added (README commands mostly do not produce the paper's table, a label without a comparison, no K2 positive control). `python scripts/report_numbers.py --check`, `python scripts/verify_sources.py --check` and the tests pass.
 - `docs/PAPER_STATUS.md`: which sections are final, what waits for the owner, and the result of the consistency scan.
