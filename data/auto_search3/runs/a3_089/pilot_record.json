@@ -1,0 +1,480 @@
+{
+  "paper_id": "a3_089",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "56bf9ca5152071e13cd3604e54936850b46053a6",
+  "started_at": "2026-10-25T02:05:25+00:00",
+  "repo_url": "https://github.com/AlphaPav/mem-kk-logic",
+  "pinned_commit": "35385cf80740dab8fa2940a5c4313807ddf8c0c6",
+  "target_script": "data_prep/data_gen_kk.py",
+  "container_command": "python /workspace/repo/data_prep/data_gen_kk.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python data_prep/data_gen_kk.py",
+    "readme_url": "https://github.com/AlphaPav/mem-kk-logic/blob/35385cf80740dab8fa2940a5c4313807ddf8c0c6/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "35385cf80740dab8fa2940a5c4313807ddf8c0c6",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": true,
+    "duration_seconds": 1.342
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "source": "conda_env",
+    "python_version": "3.11",
+    "env_python_versions": [
+      "3.9"
+    ],
+    "conda_env_files": [
+      "environment.yaml"
+    ],
+    "converted": 188,
+    "downloaded": [
+      "asttokens==2.4.1",
+      "backcall==0.2.0",
+      "comm==0.2.2",
+      "debugpy==1.6.7",
+      "decorator==5.1.1",
+      "entrypoints==0.4",
+      "executing==2.1.0",
+      "filelock==3.13.1",
+      "ipykernel==6.29.5",
+      "ipython==8.12.0",
+      "jedi==0.19.1",
+      "jinja2==3.1.4",
+      "jupyter_client==7.3.4",
+      "jupyter_core==5.7.2",
+      "markupsafe==2.1.3",
+      "matplotlib-inline==0.1.7",
+      "mpmath==1.3.0",
+      "nest-asyncio==1.6.0",
+      "networkx==3.2.1",
+      "packaging==24.1",
+      "parso==0.8.4",
+      "pexpect==4.9.0",
+      "pickleshare==0.7.5",
+      "platformdirs==4.2.2",
+      "prompt-toolkit==3.0.47",
+      "prompt_toolkit==3.0.47",
+      "ptyprocess==0.7.0",
+      "pure_eval==0.2.3",
+      "pygments==2.18.0",
+      "pyyaml==6.0.1",
+      "setuptools==72.1.0",
+      "six==1.16.0",
+      "stack_data==0.6.2",
+      "sympy==1.12",
+      "tbb==2021.8.0",
+      "traitlets==5.14.3",
+      "typing_extensions==4.11.0",
+      "wcwidth==0.2.13",
+      "wheel==0.43.0",
+      "accelerate==0.33.0",
+      "aiohappyeyeballs==2.3.5",
+      "aiohttp==3.10.3",
+      "aiosignal==1.3.1",
+      "annotated-types==0.7.0",
+      "anthropic==0.34.2",
+      "anyio==4.4.0",
+      "async-timeout==4.0.3",
+      "attrs==24.2.0",
+      "bitsandbytes==0.44.1",
+      "certifi==2024.7.4",
+      "charset-normalizer==3.3.2",
+      "click==8.1.7",
+      "cloudpickle==3.0.0",
+      "cmake==3.30.2",
+      "contourpy==1.3.0",
+      "cycler==0.12.1",
+      "datasets==2.20.0",
+      "dill==0.3.8",
+      "diskcache==5.6.3",
+      "distro==1.9.0",
+      "docker-pycreds==0.4.0",
+      "docstring-parser==0.16",
+      "eval-type-backport==0.2.0",
+      "evaluate==0.4.3",
+      "exceptiongroup==1.2.2",
+      "fastapi==0.112.0",
+      "fonttools==4.53.1",
+      "frozenlist==1.4.1",
+      "fsspec==2024.5.0",
+      "gitdb==4.0.11",
+      "gitpython==3.1.43",
+      "h11==0.14.0",
+      "httpcore==1.0.5",
+      "httptools==0.6.1",
+      "httpx==0.27.0",
+      "huggingface-hub==0.24.5",
+      "idna==3.7",
+      "importlib-resources==6.4.4",
+      "interegular==0.3.3",
+      "jiter==0.5.0",
+      "joblib==1.4.2",
+      "jsonschema==4.23.0",
+      "jsonschema-specifications==2023.12.1",
+      "kiwisolver==1.4.5",
+      "lark==1.2.1",
+      "llvmlite==0.43.0",
+      "lm-format-enforcer==0.10.1",
+      "markdown-it-py==3.0.0",
+      "matplotlib==3.9.2",
+      "mdurl==0.1.2",
+      "msgpack==1.0.8",
+      "multidict==6.0.5",
+      "multiprocess==0.70.16",
+      "ninja==1.11.1.1",
+      "nltk==3.9.1",
+      "numba==0.60.0",
+      "numpy==1.26.4",
+      "nvidia-cublas-cu12==12.1.3.1",
+      "nvidia-cuda-cupti-cu12==12.1.105",
+      "nvidia-cuda-nvrtc-cu12==12.1.105",
+      "nvidia-cuda-runtime-cu12==12.1.105",
+      "nvidia-cudnn-cu12==8.9.2.26",
+      "nvidia-cufft-cu12==11.0.2.54",
+      "nvidia-curand-cu12==10.3.2.106",
+      "nvidia-cusolver-cu12==11.4.5.107",
+      "nvidia-cusparse-cu12==12.1.0.106",
+      "nvidia-ml-py==12.555.43",
+      "nvidia-nccl-cu12==2.20.5",
+      "nvidia-nvjitlink-cu12==12.6.20",
+      "nvidia-nvtx-cu12==12.1.105",
+      "openai==1.43.0",
+      "outlines==0.0.46",
+      "pandas==2.2.2",
+      "peft==0.12.0",
+      "pillow==10.4.0",
+      "prometheus-client==0.20.0",
+      "prometheus-fastapi-instrumentator==7.0.0",
+      "protobuf==5.27.3",
+      "psutil==6.0.0",
+      "py-cpuinfo==9.0.0",
+      "pyarrow==17.0.0",
+      "pyarrow-hotfix==0.6",
+      "pycountry==24.6.1",
+      "pydantic==2.8.2",
+      "pydantic-core==2.20.1",
+      "pyparsing==3.1.4",
+      "python-dateutil==2.9.0.post0",
+      "python-dotenv==1.0.1",
+      "pytz==2024.1",
+      "pyzmq==26.1.0",
+      "ray==2.34.0",
+      "referencing==0.35.1",
+      "regex==2024.7.24",
+      "requests==2.32.3",
+      "rich==13.9.2",
+      "rpds-py==0.20.0",
+      "safetensors==0.4.4",
+      "scienceplots==2.1.1",
+      "scikit-learn==1.5.2",
+      "scipy==1.13.1",
+      "seaborn==0.13.2",
+      "sentencepiece==0.2.0",
+      "sentry-sdk==2.17.0",
+      "setproctitle==1.3.3",
+      "shtab==1.7.1",
+      "smmap==5.0.1",
+      "sniffio==1.3.1",
+      "starlette==0.37.2",
+      "threadpoolctl==3.5.0",
+      "tiktoken==0.7.0",
+      "tokenizers==0.19.1",
+      "torch==2.3.0",
+      "torchvision==0.18.0",
+      "tqdm==4.66.5",
+      "triton==2.3.0",
+      "trl==0.11.4",
+      "tyro==0.8.13",
+      "tzdata==2024.1",
+      "urllib3==2.2.2",
+      "uvicorn==0.30.6",
+      "uvloop==0.19.0",
+      "vllm==0.5.1",
+      "vllm-flash-attn==2.5.9",
+      "wandb==0.18.5",
+      "watchfiles==0.23.0",
+      "websockets==12.0",
+      "xformers==0.0.26.post1",
+      "xxhash==3.4.1",
+      "yarl==1.9.4",
+      "zipp==3.20.1"
+    ],
+    "conda_only": [
+      {
+        "requirement": "gmp==6.2.1",
+        "reason": "ERROR: No matching distribution found for gmp==6.2.1"
+      },
+      {
+        "requirement": "gmpy2==2.1.2",
+        "reason": "ERROR: No matching distribution found for gmpy2==2.1.2"
+      },
+      {
+        "requirement": "llvm-openmp==14.0.6",
+        "reason": "ERROR: No matching distribution found for llvm-openmp==14.0.6"
+      },
+      {
+        "requirement": "mpc==1.1.0",
+        "reason": "ERROR: No matching distribution found for mpc==1.1.0"
+      },
+      {
+        "requirement": "mpfr==4.0.2",
+        "reason": "ERROR: No matching distribution found for mpfr==4.0.2"
+      },
+      {
+        "requirement": "ncurses==6.4",
+        "reason": "ERROR: No matching distribution found for ncurses==6.4"
+      },
+      {
+        "requirement": "python_abi==3.9",
+        "reason": "ERROR: No matching distribution found for python_abi==3.9"
+      },
+      {
+        "requirement": "pytorch-mutex==1.0",
+        "reason": "ERROR: No matching distribution found for pytorch-mutex==1.0"
+      },
+      {
+        "requirement": "readline==8.2",
+        "reason": "ERROR: No matching distribution found for readline==8.2"
+      },
+      {
+        "requirement": "sqlite==3.45.3",
+        "reason": "ERROR: No matching distribution found for sqlite==3.45.3"
+      },
+      {
+        "requirement": "tk==8.6.14",
+        "reason": "ERROR: No matching distribution found for tk==8.6.14"
+      },
+      {
+        "requirement": "tornado==6.1",
+        "reason": "ERROR: No matching distribution found for tornado==6.1"
+      },
+      {
+        "requirement": "xz==5.4.6",
+        "reason": "ERROR: No matching distribution found for xz==5.4.6"
+      },
+      {
+        "requirement": "yaml==0.2.5",
+        "reason": "ERROR: No matching distribution found for yaml==0.2.5"
+      },
+      {
+        "requirement": "zeromq==4.3.5",
+        "reason": "ERROR: No matching distribution found for zeromq==4.3.5"
+      },
+      {
+        "requirement": "zlib==1.2.13",
+        "reason": "ERROR: No matching distribution found for zlib==1.2.13"
+      },
+      {
+        "requirement": "pyairports==2.1.1",
+        "reason": "ERROR: No matching distribution found for pyairports==2.1.1"
+      },
+      {
+        "requirement": "transformers==4.45.0.dev0",
+        "reason": "ERROR: No matching distribution found for transformers==4.45.0.dev0"
+      }
+    ],
+    "skipped": [
+      {
+        "package": "_libgcc_mutex=0.1=main",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "_openmp_mutex=5.1=1_gnu",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "blas=1.0=mkl",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "ca-certificates=2024.8.30=hbcca054_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-cudart=12.1.105=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-cupti=12.1.105=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-libraries=12.1.0=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-nvrtc=12.1.105=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-nvtx=12.1.105=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-opencl=12.6.37=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-runtime=12.1.0=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "cuda-version=12.6=3",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "intel-openmp=2023.1.0=hdb19cb5_46306",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "ld_impl_linux-64=2.38=h1181459_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcublas=12.1.0.26=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcufft=11.0.2.4=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcufile=1.11.0.15=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcurand=10.3.7.37=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcusolver=11.4.4.55=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libcusparse=12.0.2.55=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libffi=3.4.4=h6a678d5_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgcc-ng=11.2.0=h1234567_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libgomp=11.2.0=h1234567_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnpp=12.0.2.50=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnvjitlink=12.1.105=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libnvjpeg=12.1.1.14=0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libsodium=1.0.18=h36c2ea0_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "libstdcxx-ng=11.2.0=h1234567_1",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "mkl=2023.1.0=h213fc3f_46344",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "openssl=3.0.14=h5eee18b_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "pip=24.2=py39h06a4308_0",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      },
+      {
+        "package": "pytorch-cuda=12.1=ha16c6d3_5",
+        "reason": "system, CUDA, or packaging library; not pip-installed"
+      }
+    ],
+    "wheel_count": 169,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_089_packages",
+    "needs_sdist_build": [],
+    "extra_requirements": [],
+    "duration_seconds": 1001.994
+  },
+  "sandbox_duration_seconds": 1209.659,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 21.153,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 493346816
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 1186.135,
+    "peak_memory_bytes": 135016448
+  },
+  "finished_at": "2026-10-25T02:42:18+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

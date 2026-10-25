@@ -1,0 +1,2236 @@
+{
+  "paper_id": "a3_089",
+  "source": "https://github.com/AlphaPav/mem-kk-logic",
+  "commit_hash": "35385cf80740dab8fa2940a5c4313807ddf8c0c6",
+  "target_script": "data_prep/data_gen_kk.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 21.153,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_089",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 20.804,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 493346816,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "accelerate",
+      "version": "0.33.0"
+    },
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.3.5"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.10.3"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.3.1"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.7.0"
+    },
+    {
+      "name": "anthropic",
+      "version": "0.34.2"
+    },
+    {
+      "name": "anyio",
+      "version": "4.4.0"
+    },
+    {
+      "name": "asttokens",
+      "version": "2.4.1"
+    },
+    {
+      "name": "async-timeout",
+      "version": "4.0.3"
+    },
+    {
+      "name": "attrs",
+      "version": "24.2.0"
+    },
+    {
+      "name": "backcall",
+      "version": "0.2.0"
+    },
+    {
+      "name": "bitsandbytes",
+      "version": "0.44.1"
+    },
+    {
+      "name": "certifi",
+      "version": "2024.7.4"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.3.2"
+    },
+    {
+      "name": "click",
+      "version": "8.1.7"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.0.0"
+    },
+    {
+      "name": "cmake",
+      "version": "3.30.2"
+    },
+    {
+      "name": "comm",
+      "version": "0.2.2"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.0"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "datasets",
+      "version": "2.20.0"
+    },
+    {
+      "name": "debugpy",
+      "version": "1.6.7"
+    },
+    {
+      "name": "decorator",
+      "version": "5.1.1"
+    },
+    {
+      "name": "dill",
+      "version": "0.3.8"
+    },
+    {
+      "name": "diskcache",
+      "version": "5.6.3"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0"
+    },
+    {
+      "name": "docker-pycreds",
+      "version": "0.4.0"
+    },
+    {
+      "name": "docstring_parser",
+      "version": "0.16"
+    },
+    {
+      "name": "entrypoints",
+      "version": "0.4"
+    },
+    {
+      "name": "eval_type_backport",
+      "version": "0.2.0"
+    },
+    {
+      "name": "evaluate",
+      "version": "0.4.3"
+    },
+    {
+      "name": "exceptiongroup",
+      "version": "1.2.2"
+    },
+    {
+      "name": "executing",
+      "version": "2.1.0"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.112.0"
+    },
+    {
+      "name": "filelock",
+      "version": "3.13.1"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.53.1"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.4.1"
+    },
+    {
+      "name": "fsspec",
+      "version": "2024.5.0"
+    },
+    {
+      "name": "gitdb",
+      "version": "4.0.11"
+    },
+    {
+      "name": "GitPython",
+      "version": "3.1.43"
+    },
+    {
+      "name": "h11",
+      "version": "0.14.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.5"
+    },
+    {
+      "name": "httptools",
+      "version": "0.6.1"
+    },
+    {
+      "name": "httpx",
+      "version": "0.27.0"
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "0.24.5"
+    },
+    {
+      "name": "idna",
+      "version": "3.7"
+    },
+    {
+      "name": "importlib_resources",
+      "version": "6.4.4"
+    },
+    {
+      "name": "interegular",
+      "version": "0.3.3"
+    },
+    {
+      "name": "ipykernel",
+      "version": "6.29.5"
+    },
+    {
+      "name": "ipython",
+      "version": "8.12.0"
+    },
+    {
+      "name": "jedi",
+      "version": "0.19.1"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.4"
+    },
+    {
+      "name": "jiter",
+      "version": "0.5.0"
+    },
+    {
+      "name": "joblib",
+      "version": "1.4.2"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.23.0"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2023.12.1"
+    },
+    {
+      "name": "jupyter-client",
+      "version": "7.3.4"
+    },
+    {
+      "name": "jupyter_core",
+      "version": "5.7.2"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.4.5"
+    },
+    {
+      "name": "lark",
+      "version": "1.2.1"
+    },
+    {
+      "name": "llvmlite",
+      "version": "0.43.0"
+    },
+    {
+      "name": "lm-format-enforcer",
+      "version": "0.10.1"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "3.0.0"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "2.1.3"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.9.2"
+    },
+    {
+      "name": "matplotlib-inline",
+      "version": "0.1.7"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "msgpack",
+      "version": "1.0.8"
+    },
+    {
+      "name": "multidict",
+      "version": "6.0.5"
+    },
+    {
+      "name": "multiprocess",
+      "version": "0.70.16"
+    },
+    {
+      "name": "nest-asyncio",
+      "version": "1.6.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.2.1"
+    },
+    {
+      "name": "ninja",
+      "version": "1.11.1.1"
+    },
+    {
+      "name": "nltk",
+      "version": "3.9.1"
+    },
+    {
+      "name": "numba",
+      "version": "0.60.0"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    {
+      "name": "nvidia-cublas-cu12",
+      "version": "12.1.3.1"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "nvidia-cudnn-cu12",
+      "version": "8.9.2.26"
+    },
+    {
+      "name": "nvidia-cufft-cu12",
+      "version": "11.0.2.54"
+    },
+    {
+      "name": "nvidia-curand-cu12",
+      "version": "10.3.2.106"
+    },
+    {
+      "name": "nvidia-cusolver-cu12",
+      "version": "11.4.5.107"
+    },
+    {
+      "name": "nvidia-cusparse-cu12",
+      "version": "12.1.0.106"
+    },
+    {
+      "name": "nvidia-ml-py",
+      "version": "12.555.43"
+    },
+    {
+      "name": "nvidia-nccl-cu12",
+      "version": "2.20.5"
+    },
+    {
+      "name": "nvidia-nvjitlink-cu12",
+      "version": "12.6.20"
+    },
+    {
+      "name": "nvidia-nvtx-cu12",
+      "version": "12.1.105"
+    },
+    {
+      "name": "openai",
+      "version": "1.43.0"
+    },
+    {
+      "name": "outlines",
+      "version": "0.0.46"
+    },
+    {
+      "name": "packaging",
+      "version": "24.1"
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.2"
+    },
+    {
+      "name": "parso",
+      "version": "0.8.4"
+    },
+    {
+      "name": "peft",
+      "version": "0.12.0"
+    },
+    {
+      "name": "pexpect",
+      "version": "4.9.0"
+    },
+    {
+      "name": "pickleshare",
+      "version": "0.7.5"
+    },
+    {
+      "name": "pillow",
+      "version": "10.4.0"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.2.2"
+    },
+    {
+      "name": "prometheus_client",
+      "version": "0.20.0"
+    },
+    {
+      "name": "prometheus-fastapi-instrumentator",
+      "version": "7.0.0"
+    },
+    {
+      "name": "prompt_toolkit",
+      "version": "3.0.47"
+    },
+    {
+      "name": "protobuf",
+      "version": "5.27.3"
+    },
+    {
+      "name": "psutil",
+      "version": "6.0.0"
+    },
+    {
+      "name": "ptyprocess",
+      "version": "0.7.0"
+    },
+    {
+      "name": "pure_eval",
+      "version": "0.2.3"
+    },
+    {
+      "name": "py-cpuinfo",
+      "version": "9.0.0"
+    },
+    {
+      "name": "pyarrow",
+      "version": "17.0.0"
+    },
+    {
+      "name": "pyarrow-hotfix",
+      "version": "0.6"
+    },
+    {
+      "name": "pycountry",
+      "version": "24.6.1"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.8.2"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.20.1"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.18.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.1.4"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.0.1"
+    },
+    {
+      "name": "pytz",
+      "version": "2024.1"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.1"
+    },
+    {
+      "name": "pyzmq",
+      "version": "26.1.0"
+    },
+    {
+      "name": "ray",
+      "version": "2.34.0"
+    },
+    {
+      "name": "referencing",
+      "version": "0.35.1"
+    },
+    {
+      "name": "regex",
+      "version": "2024.7.24"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.3"
+    },
+    {
+      "name": "rich",
+      "version": "13.9.2"
+    },
+    {
+      "name": "rpds-py",
+      "version": "0.20.0"
+    },
+    {
+      "name": "safetensors",
+      "version": "0.4.4"
+    },
+    {
+      "name": "SciencePlots",
+      "version": "2.1.1"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.5.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.13.1"
+    },
+    {
+      "name": "seaborn",
+      "version": "0.13.2"
+    },
+    {
+      "name": "sentencepiece",
+      "version": "0.2.0"
+    },
+    {
+      "name": "sentry-sdk",
+      "version": "2.17.0"
+    },
+    {
+      "name": "setproctitle",
+      "version": "1.3.3"
+    },
+    {
+      "name": "setuptools",
+      "version": "72.1.0"
+    },
+    {
+      "name": "shtab",
+      "version": "1.7.1"
+    },
+    {
+      "name": "six",
+      "version": "1.16.0"
+    },
+    {
+      "name": "smmap",
+      "version": "5.0.1"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "stack-data",
+      "version": "0.6.2"
+    },
+    {
+      "name": "starlette",
+      "version": "0.37.2"
+    },
+    {
+      "name": "sympy",
+      "version": "1.12"
+    },
+    {
+      "name": "tbb",
+      "version": "2021.8.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.5.0"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.7.0"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.19.1"
+    },
+    {
+      "name": "torch",
+      "version": "2.3.0"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.18.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.66.5"
+    },
+    {
+      "name": "traitlets",
+      "version": "5.14.3"
+    },
+    {
+      "name": "triton",
+      "version": "2.3.0"
+    },
+    {
+      "name": "trl",
+      "version": "0.11.4"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.11.0"
+    },
+    {
+      "name": "tyro",
+      "version": "0.8.13"
+    },
+    {
+      "name": "tzdata",
+      "version": "2024.1"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.2.2"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.30.6"
+    },
+    {
+      "name": "uvloop",
+      "version": "0.19.0"
+    },
+    {
+      "name": "vllm",
+      "version": "0.5.1"
+    },
+    {
+      "name": "vllm-flash-attn",
+      "version": "2.5.9"
+    },
+    {
+      "name": "wandb",
+      "version": "0.18.5"
+    },
+    {
+      "name": "watchfiles",
+      "version": "0.23.0"
+    },
+    {
+      "name": "wcwidth",
+      "version": "0.2.13"
+    },
+    {
+      "name": "websockets",
+      "version": "12.0"
+    },
+    {
+      "name": "wheel",
+      "version": "0.43.0"
+    },
+    {
+      "name": "xformers",
+      "version": "0.0.26.post1"
+    },
+    {
+      "name": "xxhash",
+      "version": "3.4.1"
+    },
+    {
+      "name": "yarl",
+      "version": "1.9.4"
+    },
+    {
+      "name": "zipp",
+      "version": "3.20.1"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "asttokens==2.4.1",
+      "name": "asttokens",
+      "requested": "==2.4.1",
+      "installed": "2.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "backcall==0.2.0",
+      "name": "backcall",
+      "requested": "==0.2.0",
+      "installed": "0.2.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "comm==0.2.2",
+      "name": "comm",
+      "requested": "==0.2.2",
+      "installed": "0.2.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "debugpy==1.6.7",
+      "name": "debugpy",
+      "requested": "==1.6.7",
+      "installed": "1.6.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "decorator==5.1.1",
+      "name": "decorator",
+      "requested": "==5.1.1",
+      "installed": "5.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "entrypoints==0.4",
+      "name": "entrypoints",
+      "requested": "==0.4",
+      "installed": "0.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "executing==2.1.0",
+      "name": "executing",
+      "requested": "==2.1.0",
+      "installed": "2.1.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "filelock==3.13.1",
+      "name": "filelock",
+      "requested": "==3.13.1",
+      "installed": "3.13.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "gmp==6.2.1",
+      "name": "gmp",
+      "requested": "==6.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gmpy2==2.1.2",
+      "name": "gmpy2",
+      "requested": "==2.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ipykernel==6.29.5",
+      "name": "ipykernel",
+      "requested": "==6.29.5",
+      "installed": "6.29.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ipython==8.12.0",
+      "name": "ipython",
+      "requested": "==8.12.0",
+      "installed": "8.12.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jedi==0.19.1",
+      "name": "jedi",
+      "requested": "==0.19.1",
+      "installed": "0.19.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jinja2==3.1.4",
+      "name": "jinja2",
+      "requested": "==3.1.4",
+      "installed": "3.1.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_client==7.3.4",
+      "name": "jupyter_client",
+      "requested": "==7.3.4",
+      "installed": "7.3.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jupyter_core==5.7.2",
+      "name": "jupyter_core",
+      "requested": "==5.7.2",
+      "installed": "5.7.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "llvm-openmp==14.0.6",
+      "name": "llvm-openmp",
+      "requested": "==14.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markupsafe==2.1.3",
+      "name": "markupsafe",
+      "requested": "==2.1.3",
+      "installed": "2.1.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib-inline==0.1.7",
+      "name": "matplotlib-inline",
+      "requested": "==0.1.7",
+      "installed": "0.1.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "mpc==1.1.0",
+      "name": "mpc",
+      "requested": "==1.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mpfr==4.0.2",
+      "name": "mpfr",
+      "requested": "==4.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mpmath==1.3.0",
+      "name": "mpmath",
+      "requested": "==1.3.0",
+      "installed": "1.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ncurses==6.4",
+      "name": "ncurses",
+      "requested": "==6.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nest-asyncio==1.6.0",
+      "name": "nest-asyncio",
+      "requested": "==1.6.0",
+      "installed": "1.6.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==3.2.1",
+      "name": "networkx",
+      "requested": "==3.2.1",
+      "installed": "3.2.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==24.1",
+      "name": "packaging",
+      "requested": "==24.1",
+      "installed": "24.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "parso==0.8.4",
+      "name": "parso",
+      "requested": "==0.8.4",
+      "installed": "0.8.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pexpect==4.9.0",
+      "name": "pexpect",
+      "requested": "==4.9.0",
+      "installed": "4.9.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pickleshare==0.7.5",
+      "name": "pickleshare",
+      "requested": "==0.7.5",
+      "installed": "0.7.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "platformdirs==4.2.2",
+      "name": "platformdirs",
+      "requested": "==4.2.2",
+      "installed": "4.2.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "prompt-toolkit==3.0.47",
+      "name": "prompt-toolkit",
+      "requested": "==3.0.47",
+      "installed": "3.0.47",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "prompt_toolkit==3.0.47",
+      "name": "prompt_toolkit",
+      "requested": "==3.0.47",
+      "installed": "3.0.47",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ptyprocess==0.7.0",
+      "name": "ptyprocess",
+      "requested": "==0.7.0",
+      "installed": "0.7.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pure_eval==0.2.3",
+      "name": "pure_eval",
+      "requested": "==0.2.3",
+      "installed": "0.2.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pygments==2.18.0",
+      "name": "pygments",
+      "requested": "==2.18.0",
+      "installed": "2.18.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "python_abi==3.9",
+      "name": "python_abi",
+      "requested": "==3.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytorch-mutex==1.0",
+      "name": "pytorch-mutex",
+      "requested": "==1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyyaml==6.0.1",
+      "name": "pyyaml",
+      "requested": "==6.0.1",
+      "installed": "6.0.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "readline==8.2",
+      "name": "readline",
+      "requested": "==8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "setuptools==72.1.0",
+      "name": "setuptools",
+      "requested": "==72.1.0",
+      "installed": "72.1.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.16.0",
+      "name": "six",
+      "requested": "==1.16.0",
+      "installed": "1.16.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "sqlite==3.45.3",
+      "name": "sqlite",
+      "requested": "==3.45.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "stack_data==0.6.2",
+      "name": "stack_data",
+      "requested": "==0.6.2",
+      "installed": "0.6.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "sympy==1.12",
+      "name": "sympy",
+      "requested": "==1.12",
+      "installed": "1.12",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tbb==2021.8.0",
+      "name": "tbb",
+      "requested": "==2021.8.0",
+      "installed": "2021.8.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tk==8.6.14",
+      "name": "tk",
+      "requested": "==8.6.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tornado==6.1",
+      "name": "tornado",
+      "requested": "==6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "traitlets==5.14.3",
+      "name": "traitlets",
+      "requested": "==5.14.3",
+      "installed": "5.14.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.11.0",
+      "name": "typing_extensions",
+      "requested": "==4.11.0",
+      "installed": "4.11.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "wcwidth==0.2.13",
+      "name": "wcwidth",
+      "requested": "==0.2.13",
+      "installed": "0.2.13",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "wheel==0.43.0",
+      "name": "wheel",
+      "requested": "==0.43.0",
+      "installed": "0.43.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "xz==5.4.6",
+      "name": "xz",
+      "requested": "==5.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "yaml==0.2.5",
+      "name": "yaml",
+      "requested": "==0.2.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zeromq==4.3.5",
+      "name": "zeromq",
+      "requested": "==4.3.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zlib==1.2.13",
+      "name": "zlib",
+      "requested": "==1.2.13",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "accelerate==0.33.0",
+      "name": "accelerate",
+      "requested": "==0.33.0",
+      "installed": "0.33.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "aiohappyeyeballs==2.3.5",
+      "name": "aiohappyeyeballs",
+      "requested": "==2.3.5",
+      "installed": "2.3.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "aiohttp==3.10.3",
+      "name": "aiohttp",
+      "requested": "==3.10.3",
+      "installed": "3.10.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "aiosignal==1.3.1",
+      "name": "aiosignal",
+      "requested": "==1.3.1",
+      "installed": "1.3.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "annotated-types==0.7.0",
+      "name": "annotated-types",
+      "requested": "==0.7.0",
+      "installed": "0.7.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "anthropic==0.34.2",
+      "name": "anthropic",
+      "requested": "==0.34.2",
+      "installed": "0.34.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "anyio==4.4.0",
+      "name": "anyio",
+      "requested": "==4.4.0",
+      "installed": "4.4.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "async-timeout==4.0.3",
+      "name": "async-timeout",
+      "requested": "==4.0.3",
+      "installed": "4.0.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "attrs==24.2.0",
+      "name": "attrs",
+      "requested": "==24.2.0",
+      "installed": "24.2.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "bitsandbytes==0.44.1",
+      "name": "bitsandbytes",
+      "requested": "==0.44.1",
+      "installed": "0.44.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2024.7.4",
+      "name": "certifi",
+      "requested": "==2024.7.4",
+      "installed": "2024.7.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==3.3.2",
+      "name": "charset-normalizer",
+      "requested": "==3.3.2",
+      "installed": "3.3.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "click==8.1.7",
+      "name": "click",
+      "requested": "==8.1.7",
+      "installed": "8.1.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "cloudpickle==3.0.0",
+      "name": "cloudpickle",
+      "requested": "==3.0.0",
+      "installed": "3.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "cmake==3.30.2",
+      "name": "cmake",
+      "requested": "==3.30.2",
+      "installed": "3.30.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "contourpy==1.3.0",
+      "name": "contourpy",
+      "requested": "==1.3.0",
+      "installed": "1.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "cycler==0.12.1",
+      "name": "cycler",
+      "requested": "==0.12.1",
+      "installed": "0.12.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "datasets==2.20.0",
+      "name": "datasets",
+      "requested": "==2.20.0",
+      "installed": "2.20.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "dill==0.3.8",
+      "name": "dill",
+      "requested": "==0.3.8",
+      "installed": "0.3.8",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "diskcache==5.6.3",
+      "name": "diskcache",
+      "requested": "==5.6.3",
+      "installed": "5.6.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "distro==1.9.0",
+      "name": "distro",
+      "requested": "==1.9.0",
+      "installed": "1.9.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "docker-pycreds==0.4.0",
+      "name": "docker-pycreds",
+      "requested": "==0.4.0",
+      "installed": "0.4.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "docstring-parser==0.16",
+      "name": "docstring-parser",
+      "requested": "==0.16",
+      "installed": "0.16",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "eval-type-backport==0.2.0",
+      "name": "eval-type-backport",
+      "requested": "==0.2.0",
+      "installed": "0.2.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "evaluate==0.4.3",
+      "name": "evaluate",
+      "requested": "==0.4.3",
+      "installed": "0.4.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "exceptiongroup==1.2.2",
+      "name": "exceptiongroup",
+      "requested": "==1.2.2",
+      "installed": "1.2.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "fastapi==0.112.0",
+      "name": "fastapi",
+      "requested": "==0.112.0",
+      "installed": "0.112.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "fonttools==4.53.1",
+      "name": "fonttools",
+      "requested": "==4.53.1",
+      "installed": "4.53.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "frozenlist==1.4.1",
+      "name": "frozenlist",
+      "requested": "==1.4.1",
+      "installed": "1.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "fsspec==2024.5.0",
+      "name": "fsspec",
+      "requested": "==2024.5.0",
+      "installed": "2024.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "gitdb==4.0.11",
+      "name": "gitdb",
+      "requested": "==4.0.11",
+      "installed": "4.0.11",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "gitpython==3.1.43",
+      "name": "gitpython",
+      "requested": "==3.1.43",
+      "installed": "3.1.43",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "h11==0.14.0",
+      "name": "h11",
+      "requested": "==0.14.0",
+      "installed": "0.14.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "httpcore==1.0.5",
+      "name": "httpcore",
+      "requested": "==1.0.5",
+      "installed": "1.0.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "httptools==0.6.1",
+      "name": "httptools",
+      "requested": "==0.6.1",
+      "installed": "0.6.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx==0.27.0",
+      "name": "httpx",
+      "requested": "==0.27.0",
+      "installed": "0.27.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "huggingface-hub==0.24.5",
+      "name": "huggingface-hub",
+      "requested": "==0.24.5",
+      "installed": "0.24.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.7",
+      "name": "idna",
+      "requested": "==3.7",
+      "installed": "3.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib-resources==6.4.4",
+      "name": "importlib-resources",
+      "requested": "==6.4.4",
+      "installed": "6.4.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "interegular==0.3.3",
+      "name": "interegular",
+      "requested": "==0.3.3",
+      "installed": "0.3.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jiter==0.5.0",
+      "name": "jiter",
+      "requested": "==0.5.0",
+      "installed": "0.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.4.2",
+      "name": "joblib",
+      "requested": "==1.4.2",
+      "installed": "1.4.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonschema==4.23.0",
+      "name": "jsonschema",
+      "requested": "==4.23.0",
+      "installed": "4.23.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonschema-specifications==2023.12.1",
+      "name": "jsonschema-specifications",
+      "requested": "==2023.12.1",
+      "installed": "2023.12.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "kiwisolver==1.4.5",
+      "name": "kiwisolver",
+      "requested": "==1.4.5",
+      "installed": "1.4.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "lark==1.2.1",
+      "name": "lark",
+      "requested": "==1.2.1",
+      "installed": "1.2.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "llvmlite==0.43.0",
+      "name": "llvmlite",
+      "requested": "==0.43.0",
+      "installed": "0.43.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "lm-format-enforcer==0.10.1",
+      "name": "lm-format-enforcer",
+      "requested": "==0.10.1",
+      "installed": "0.10.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "markdown-it-py==3.0.0",
+      "name": "markdown-it-py",
+      "requested": "==3.0.0",
+      "installed": "3.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.9.2",
+      "name": "matplotlib",
+      "requested": "==3.9.2",
+      "installed": "3.9.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "mdurl==0.1.2",
+      "name": "mdurl",
+      "requested": "==0.1.2",
+      "installed": "0.1.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "msgpack==1.0.8",
+      "name": "msgpack",
+      "requested": "==1.0.8",
+      "installed": "1.0.8",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "multidict==6.0.5",
+      "name": "multidict",
+      "requested": "==6.0.5",
+      "installed": "6.0.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "multiprocess==0.70.16",
+      "name": "multiprocess",
+      "requested": "==0.70.16",
+      "installed": "0.70.16",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ninja==1.11.1.1",
+      "name": "ninja",
+      "requested": "==1.11.1.1",
+      "installed": "1.11.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nltk==3.9.1",
+      "name": "nltk",
+      "requested": "==3.9.1",
+      "installed": "3.9.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numba==0.60.0",
+      "name": "numba",
+      "requested": "==0.60.0",
+      "installed": "0.60.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.26.4",
+      "name": "numpy",
+      "requested": "==1.26.4",
+      "installed": "1.26.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cublas-cu12==12.1.3.1",
+      "name": "nvidia-cublas-cu12",
+      "requested": "==12.1.3.1",
+      "installed": "12.1.3.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cuda-cupti-cu12==12.1.105",
+      "name": "nvidia-cuda-cupti-cu12",
+      "requested": "==12.1.105",
+      "installed": "12.1.105",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cuda-nvrtc-cu12==12.1.105",
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "requested": "==12.1.105",
+      "installed": "12.1.105",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cuda-runtime-cu12==12.1.105",
+      "name": "nvidia-cuda-runtime-cu12",
+      "requested": "==12.1.105",
+      "installed": "12.1.105",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cudnn-cu12==8.9.2.26",
+      "name": "nvidia-cudnn-cu12",
+      "requested": "==8.9.2.26",
+      "installed": "8.9.2.26",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cufft-cu12==11.0.2.54",
+      "name": "nvidia-cufft-cu12",
+      "requested": "==11.0.2.54",
+      "installed": "11.0.2.54",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-curand-cu12==10.3.2.106",
+      "name": "nvidia-curand-cu12",
+      "requested": "==10.3.2.106",
+      "installed": "10.3.2.106",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cusolver-cu12==11.4.5.107",
+      "name": "nvidia-cusolver-cu12",
+      "requested": "==11.4.5.107",
+      "installed": "11.4.5.107",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-cusparse-cu12==12.1.0.106",
+      "name": "nvidia-cusparse-cu12",
+      "requested": "==12.1.0.106",
+      "installed": "12.1.0.106",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-ml-py==12.555.43",
+      "name": "nvidia-ml-py",
+      "requested": "==12.555.43",
+      "installed": "12.555.43",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-nccl-cu12==2.20.5",
+      "name": "nvidia-nccl-cu12",
+      "requested": "==2.20.5",
+      "installed": "2.20.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-nvjitlink-cu12==12.6.20",
+      "name": "nvidia-nvjitlink-cu12",
+      "requested": "==12.6.20",
+      "installed": "12.6.20",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nvidia-nvtx-cu12==12.1.105",
+      "name": "nvidia-nvtx-cu12",
+      "requested": "==12.1.105",
+      "installed": "12.1.105",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==1.43.0",
+      "name": "openai",
+      "requested": "==1.43.0",
+      "installed": "1.43.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "outlines==0.0.46",
+      "name": "outlines",
+      "requested": "==0.0.46",
+      "installed": "0.0.46",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.2.2",
+      "name": "pandas",
+      "requested": "==2.2.2",
+      "installed": "2.2.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "peft==0.12.0",
+      "name": "peft",
+      "requested": "==0.12.0",
+      "installed": "0.12.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==10.4.0",
+      "name": "pillow",
+      "requested": "==10.4.0",
+      "installed": "10.4.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "prometheus-client==0.20.0",
+      "name": "prometheus-client",
+      "requested": "==0.20.0",
+      "installed": "0.20.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "prometheus-fastapi-instrumentator==7.0.0",
+      "name": "prometheus-fastapi-instrumentator",
+      "requested": "==7.0.0",
+      "installed": "7.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==5.27.3",
+      "name": "protobuf",
+      "requested": "==5.27.3",
+      "installed": "5.27.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "psutil==6.0.0",
+      "name": "psutil",
+      "requested": "==6.0.0",
+      "installed": "6.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "py-cpuinfo==9.0.0",
+      "name": "py-cpuinfo",
+      "requested": "==9.0.0",
+      "installed": "9.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pyairports==2.1.1",
+      "name": "pyairports",
+      "requested": "==2.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyarrow==17.0.0",
+      "name": "pyarrow",
+      "requested": "==17.0.0",
+      "installed": "17.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pyarrow-hotfix==0.6",
+      "name": "pyarrow-hotfix",
+      "requested": "==0.6",
+      "installed": "0.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pycountry==24.6.1",
+      "name": "pycountry",
+      "requested": "==24.6.1",
+      "installed": "24.6.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.8.2",
+      "name": "pydantic",
+      "requested": "==2.8.2",
+      "installed": "2.8.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic-core==2.20.1",
+      "name": "pydantic-core",
+      "requested": "==2.20.1",
+      "installed": "2.20.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.1.4",
+      "name": "pyparsing",
+      "requested": "==3.1.4",
+      "installed": "3.1.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.9.0.post0",
+      "name": "python-dateutil",
+      "requested": "==2.9.0.post0",
+      "installed": "2.9.0.post0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.0.1",
+      "name": "python-dotenv",
+      "requested": "==1.0.1",
+      "installed": "1.0.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2024.1",
+      "name": "pytz",
+      "requested": "==2024.1",
+      "installed": "2024.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pyzmq==26.1.0",
+      "name": "pyzmq",
+      "requested": "==26.1.0",
+      "installed": "26.1.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ray==2.34.0",
+      "name": "ray",
+      "requested": "==2.34.0",
+      "installed": "2.34.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "referencing==0.35.1",
+      "name": "referencing",
+      "requested": "==0.35.1",
+      "installed": "0.35.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "regex==2024.7.24",
+      "name": "regex",
+      "requested": "==2024.7.24",
+      "installed": "2024.7.24",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.32.3",
+      "name": "requests",
+      "requested": "==2.32.3",
+      "installed": "2.32.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "rich==13.9.2",
+      "name": "rich",
+      "requested": "==13.9.2",
+      "installed": "13.9.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "rpds-py==0.20.0",
+      "name": "rpds-py",
+      "requested": "==0.20.0",
+      "installed": "0.20.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "safetensors==0.4.4",
+      "name": "safetensors",
+      "requested": "==0.4.4",
+      "installed": "0.4.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scienceplots==2.1.1",
+      "name": "scienceplots",
+      "requested": "==2.1.1",
+      "installed": "2.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.5.2",
+      "name": "scikit-learn",
+      "requested": "==1.5.2",
+      "installed": "1.5.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.13.1",
+      "name": "scipy",
+      "requested": "==1.13.1",
+      "installed": "1.13.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.13.2",
+      "name": "seaborn",
+      "requested": "==0.13.2",
+      "installed": "0.13.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "sentencepiece==0.2.0",
+      "name": "sentencepiece",
+      "requested": "==0.2.0",
+      "installed": "0.2.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "sentry-sdk==2.17.0",
+      "name": "sentry-sdk",
+      "requested": "==2.17.0",
+      "installed": "2.17.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "setproctitle==1.3.3",
+      "name": "setproctitle",
+      "requested": "==1.3.3",
+      "installed": "1.3.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "shtab==1.7.1",
+      "name": "shtab",
+      "requested": "==1.7.1",
+      "installed": "1.7.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "smmap==5.0.1",
+      "name": "smmap",
+      "requested": "==5.0.1",
+      "installed": "5.0.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "sniffio==1.3.1",
+      "name": "sniffio",
+      "requested": "==1.3.1",
+      "installed": "1.3.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "starlette==0.37.2",
+      "name": "starlette",
+      "requested": "==0.37.2",
+      "installed": "0.37.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==3.5.0",
+      "name": "threadpoolctl",
+      "requested": "==3.5.0",
+      "installed": "3.5.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tiktoken==0.7.0",
+      "name": "tiktoken",
+      "requested": "==0.7.0",
+      "installed": "0.7.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tokenizers==0.19.1",
+      "name": "tokenizers",
+      "requested": "==0.19.1",
+      "installed": "0.19.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.3.0",
+      "name": "torch",
+      "requested": "==2.3.0",
+      "installed": "2.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.18.0",
+      "name": "torchvision",
+      "requested": "==0.18.0",
+      "installed": "0.18.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.5",
+      "name": "tqdm",
+      "requested": "==4.66.5",
+      "installed": "4.66.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.45.0.dev0",
+      "name": "transformers",
+      "requested": "==4.45.0.dev0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "triton==2.3.0",
+      "name": "triton",
+      "requested": "==2.3.0",
+      "installed": "2.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "trl==0.11.4",
+      "name": "trl",
+      "requested": "==0.11.4",
+      "installed": "0.11.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tyro==0.8.13",
+      "name": "tyro",
+      "requested": "==0.8.13",
+      "installed": "0.8.13",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tzdata==2024.1",
+      "name": "tzdata",
+      "requested": "==2024.1",
+      "installed": "2024.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==2.2.2",
+      "name": "urllib3",
+      "requested": "==2.2.2",
+      "installed": "2.2.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "uvicorn==0.30.6",
+      "name": "uvicorn",
+      "requested": "==0.30.6",
+      "installed": "0.30.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "uvloop==0.19.0",
+      "name": "uvloop",
+      "requested": "==0.19.0",
+      "installed": "0.19.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "vllm==0.5.1",
+      "name": "vllm",
+      "requested": "==0.5.1",
+      "installed": "0.5.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "vllm-flash-attn==2.5.9",
+      "name": "vllm-flash-attn",
+      "requested": "==2.5.9",
+      "installed": "2.5.9",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "wandb==0.18.5",
+      "name": "wandb",
+      "requested": "==0.18.5",
+      "installed": "0.18.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "watchfiles==0.23.0",
+      "name": "watchfiles",
+      "requested": "==0.23.0",
+      "installed": "0.23.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "websockets==12.0",
+      "name": "websockets",
+      "requested": "==12.0",
+      "installed": "12.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "xformers==0.0.26.post1",
+      "name": "xformers",
+      "requested": "==0.0.26.post1",
+      "installed": "0.0.26.post1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "xxhash==3.4.1",
+      "name": "xxhash",
+      "requested": "==3.4.1",
+      "installed": "3.4.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "yarl==1.9.4",
+      "name": "yarl",
+      "requested": "==1.9.4",
+      "installed": "1.9.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "zipp==3.20.1",
+      "name": "zipp",
+      "requested": "==3.20.1",
+      "installed": "3.20.1",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/data_prep/data_gen_kk.py\n==================================================\nElapsed time: 0.09327840805053711 seconds\n300 valid problems generated\nElapsed time: 0.13085556030273438 seconds\n300 perturbed (statement) problems generated\nElapsed time: 2.571535348892212 seconds\n300 perturbed (leaf) problems generated\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 20.804s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/data_prep/data_gen_kk.py\", line 375, in <module>\n    generate_data(num_samples_test=100,num_samples_train=200,num_samples_val=0,\n  File \"/workspace/repo/data_prep/data_gen_kk.py\", line 162, in generate_data\n    os.makedirs(output_folder, exist_ok=True)\n  File \"<frozen os>\", line 215, in makedirs\n  File \"<frozen os>\", line 215, in makedirs\n  File \"<frozen os>\", line 225, in makedirs\nOSError: [Errno 30] Read-only file system: 'data'\n"
+}

@@ -1,0 +1,25 @@
+{
+  "paper_id": "a3_095",
+  "k1": {
+    "k1_passed": true,
+    "category": null,
+    "log_line": "",
+    "install_status": "INSTALLED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 4.212,
+    "metric_lines": [
+      "Estimated full score: 41.7%"
+    ]
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 1,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 15,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "arxiv_id": "2610.24611"
+  }
+}

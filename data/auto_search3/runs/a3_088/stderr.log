@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/cli_get_prompt_mode_paper.py", line 6, in <module>
+    from core.smart_paper_core import SmartPaper
+ModuleNotFoundError: No module named 'core'
