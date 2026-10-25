@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_132",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "inference_qwen2_audio_mcqa.py: error: unrecognized arguments: [OPTIONS]",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 59.335,
+    "metric_lines": []
+  },
+  "k2": null
+}

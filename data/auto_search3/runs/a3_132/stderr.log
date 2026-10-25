@@ -1,0 +1,6 @@
+usage: inference_qwen2_audio_mcqa.py [-h] --test-dataset-path
+                                     TEST_DATASET_PATH [--enable-partial-yarn]
+                                     [--interpolation-start-dim INTERPOLATION_START_DIM]
+                                     [--attention-temperature ATTENTION_TEMPERATURE]
+                                     [--model-path MODEL_PATH]
+inference_qwen2_audio_mcqa.py: error: unrecognized arguments: [OPTIONS]

@@ -1,0 +1,59 @@
+{
+  "paper_id": "a3_134",
+  "source": "https://github.com/J0Jng/own_trading_agants",
+  "commit_hash": "c16a1ee275afbf02f2ffa1f9069139a44af01535",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.624,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_134",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.306,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 11644928,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": ".",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : SKIPPED\nDuration      : 0.306s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 2, in <module>\n    from tradingagents.graph.trading_graph import TradingAgentsGraph\n  File \"/workspace/repo/tradingagents/graph/__init__.py\", line 3, in <module>\n    from .conditional_logic import ConditionalLogic\n  File \"/workspace/repo/tradingagents/graph/conditional_logic.py\", line 3, in <module>\n    from tradingagents.agents.utils.agent_states import AgentState\n  File \"/workspace/repo/tradingagents/agents/__init__.py\", line 1, in <module>\n    from .analysts.fundamentals_analyst import create_fundamentals_analyst\n  File \"/workspace/repo/tradingagents/agents/analysts/fundamentals_analyst.py\", line 1, in <module>\n    from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder\nModuleNotFoundError: No module named 'langchain_core'\n"
+}

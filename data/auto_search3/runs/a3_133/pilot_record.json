@@ -1,0 +1,108 @@
+{
+  "paper_id": "a3_133",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "c6de1d75cf0856c823af8a7c4f27a7b97b1a1759",
+  "started_at": "2026-10-25T05:34:26+00:00",
+  "repo_url": "https://github.com/radiuma-com/PySERA",
+  "pinned_commit": "dd50147adc4492560543556ca5bbcb60f0e32bcc",
+  "target_script": "radiomics_standalone.py",
+  "container_command": "python /workspace/repo/radiomics_standalone.py --image-input image.nii.gz --mask-input mask.nii.gz --output ./results",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python radiomics_standalone.py --image-input image.nii.gz --mask-input mask.nii.gz --output ./results",
+    "readme_url": "https://github.com/radiuma-com/PySERA/blob/dd50147adc4492560543556ca5bbcb60f0e32bcc/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "dd50147adc4492560543556ca5bbcb60f0e32bcc",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements-library.txt",
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 2.678
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 31,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_133_packages",
+    "requirements_files": [
+      "requirements-library.txt",
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "none-any.whl\nSaved ./a3_133_packages/packaging-26.3-py3-none-any.whl\nSaved ./a3_133_packages/pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a3_133_packages/python_dateutil-3.0.0-py2.py3-none-any.whl\nSaved ./a3_133_packages/six-1.17.0-py2.py3-none-any.whl\nSaved ./a3_133_packages/threadpoolctl-3.7.0-py3-none-any.whl\nSaved ./a3_133_packages/tifffile-2026.3.3-py3-none-any.whl\nSaved ./a3_133_packages/typing_extensions-4.16.0-py3-none-any.whl\nSaved ./a3_133_packages/dataclasses-0.6-py3-none-any.whl\nSaved ./a3_133_packages/et_xmlfile-2.0.0-py3-none-any.whl\nSaved ./a3_133_packages/tzdata-2026.5-py2.py3-none-any.whl\nSuccessfully downloaded rt-utils numpy pandas scipy SimpleITK nibabel pydicom pynrrd opencv-python scikit-image connected-components-3d scikit-learn openpyxl psutil imageio importlib-resources joblib cloudpickle lazy-loader narwhals networkx packaging pillow python-dateutil six threadpoolctl tifffile typing-extensions dataclasses et-xmlfile tzdata\n",
+    "stderr": "",
+    "duration_seconds": 22.928
+  },
+  "sandbox_duration_seconds": 311.344,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.817,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 64180224
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 307.543,
+    "peak_memory_bytes": 176836608
+  },
+  "finished_at": "2026-10-25T05:40:03+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

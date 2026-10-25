@@ -1,0 +1,671 @@
+{
+  "paper_id": "a3_133",
+  "source": "https://github.com/radiuma-com/PySERA",
+  "commit_hash": "dd50147adc4492560543556ca5bbcb60f0e32bcc",
+  "target_script": "radiomics_standalone.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 2.817,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_133",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 2.508,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 64180224,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy>=2.0.0",
+      "name": "numpy",
+      "requested": ">=2.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=2.3.1",
+      "name": "pandas",
+      "requested": ">=2.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.15.3",
+      "name": "scipy",
+      "requested": ">=1.15.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "SimpleITK>=2.5.2",
+      "name": "SimpleITK",
+      "requested": ">=2.5.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "nibabel>=5.3.2",
+      "name": "nibabel",
+      "requested": ">=5.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pydicom>=3.0.1",
+      "name": "pydicom",
+      "requested": ">=3.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pynrrd>=1.1.3",
+      "name": "pynrrd",
+      "requested": ">=1.1.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "opencv-python>=4.11.0.86",
+      "name": "opencv-python",
+      "requested": ">=4.11.0.86",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-image>=0.25.2",
+      "name": "scikit-image",
+      "requested": ">=0.25.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "connected-components-3d>=3.25.0",
+      "name": "connected-components-3d",
+      "requested": ">=3.25.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-learn>=1.7",
+      "name": "scikit-learn",
+      "requested": ">=1.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "openpyxl>=3.1.5",
+      "name": "openpyxl",
+      "requested": ">=3.1.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "psutil>=7.0.0",
+      "name": "psutil",
+      "requested": ">=7.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "rt-utils==1.2.7",
+      "name": "rt-utils",
+      "requested": "==1.2.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000n\u0000u\u0000m\u0000p\u0000y\u0000>\u0000=\u00002\u0000.\u00000\u0000.\u00000\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000p\u0000a\u0000n\u0000d\u0000a\u0000s\u0000>\u0000=\u00002\u0000.\u00003\u0000.\u00001\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000s\u0000c\u0000i\u0000p\u0000y\u0000>\u0000=\u00001\u0000.\u00001\u00005\u0000.\u00003\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000M\u0000e\u0000d\u0000i\u0000c\u0000a\u0000l\u0000 \u0000i\u0000m\u0000a\u0000g\u0000i\u0000n\u0000g\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000S\u0000i\u0000m\u0000p\u0000l\u0000e\u0000I\u0000T\u0000K\u0000>\u0000=\u00002\u0000.\u00005\u0000.\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000n\u0000i\u0000b\u0000a\u0000b\u0000e\u0000l\u0000>\u0000=\u00005\u0000.\u00003\u0000.\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000p\u0000y\u0000d\u0000i\u0000c\u0000o\u0000m\u0000>\u0000=\u00003\u0000.\u00000\u0000.\u00001\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000p\u0000y\u0000n\u0000r\u0000r\u0000d\u0000>\u0000=\u00001\u0000.\u00001\u0000.\u00003\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000 \u0000p\u0000r\u0000o\u0000c\u0000e\u0000s\u0000s\u0000i\u0000n\u0000g\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000o\u0000p\u0000e\u0000n\u0000c\u0000v\u0000-\u0000p\u0000y\u0000t\u0000h\u0000o\u0000n\u0000>\u0000=\u00004\u0000.\u00001\u00001\u0000.\u00000\u0000.\u00008\u00006\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000s\u0000c\u0000i\u0000k\u0000i\u0000t\u0000-\u0000i\u0000m\u0000a\u0000g\u0000e\u0000>\u0000=\u00000\u0000.\u00002\u00005\u0000.\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000P\u0000y\u0000W\u0000a\u0000v\u0000e\u0000l\u0000e\u0000t\u0000s\u0000>\u0000=\u00001\u0000.\u00008\u0000.\u00000\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000c\u0000o\u0000n\u0000n\u0000e\u0000c\u0000t\u0000e\u0000d\u0000-\u0000c\u0000o\u0000m\u0000p\u0000o\u0000n\u0000e\u0000n\u0000t\u0000s\u0000-\u00003\u0000d\u0000>\u0000=\u00003\u0000.\u00002\u00005\u0000.\u00000\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000M\u0000a\u0000c\u0000h\u0000i\u0000n\u0000e\u0000 \u0000l\u0000e\u0000a\u0000r\u0000n\u0000i\u0000n\u0000g\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000s\u0000c\u0000i\u0000k\u0000i\u0000t\u0000-\u0000l\u0000e\u0000a\u0000r\u0000n\u0000>\u0000=\u00001\u0000.\u00007\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000V\u0000i\u0000s\u0000u\u0000a\u0000l\u0000i\u0000z\u0000a\u0000t\u0000i\u0000o\u0000n\u0000 \u0000a\u0000n\u0000d\u0000 \u0000I\u0000/\u0000O\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000m\u0000a\u0000t\u0000p\u0000l\u0000o\u0000t\u0000l\u0000i\u0000b\u0000>\u0000=\u00003\u0000.\u00001\u00000\u0000.\u00005\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000P\u0000i\u0000l\u0000l\u0000o\u0000w\u0000>\u0000=\u00001\u00001\u0000.\u00003\u0000.\u00000\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000o\u0000p\u0000e\u0000n\u0000p\u0000y\u0000x\u0000l\u0000>\u0000=\u00003\u0000.\u00001\u0000.\u00005\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000S\u0000y\u0000s\u0000t\u0000e\u0000m\u0000 \u0000u\u0000t\u0000i\u0000l\u0000i\u0000t\u0000i\u0000e\u0000s\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000p\u0000s\u0000u\u0000t\u0000i\u0000l\u0000>\u0000=\u00007\u0000.\u00000\u0000.\u00000\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000F\u0000u\u0000l\u0000l\u0000 \u0000f\u0000e\u0000a\u0000t\u0000u\u0000r\u0000e\u0000 \u0000d\u0000e\u0000p\u0000e\u0000n\u0000d\u0000e\u0000n\u0000c\u0000i\u0000e\u0000s\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000v\u0000t\u0000k\u0000=\u0000=\u00009\u0000.\u00005\u0000.\u00000\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000i\u0000t\u0000k\u0000=\u0000=\u00005\u0000.\u00004\u0000.\u00004\u0000.\u0000p\u0000o\u0000s\u0000t\u00001\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000r\u0000t\u0000-\u0000u\u0000t\u0000i\u0000l\u0000s\u0000=\u0000=\u00001\u0000.\u00002\u0000.\u00007\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000d\u0000c\u0000m\u0000r\u0000t\u0000s\u0000t\u0000r\u0000u\u0000c\u0000t\u00002\u0000n\u0000i\u0000i\u0000=\u0000=\u00005\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000R\u0000e\u0000l\u0000i\u0000e\u0000f\u0000F\u0000=\u0000=\u00000\u0000.\u00001\u0000.\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000s\u0000k\u0000l\u0000e\u0000a\u0000r\u0000n\u0000-\u0000r\u0000e\u0000l\u0000i\u0000e\u0000f\u0000=\u0000=\u00001\u0000.\u00000\u0000.\u00000\u0000b\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000s\u0000c\u0000i\u0000k\u0000i\u0000t\u0000-\u0000o\u0000p\u0000t\u0000i\u0000m\u0000i\u0000z\u0000e\u0000=\u0000=\u00000\u0000.\u00001\u00000\u0000.\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "\u0000#\u0000 \u0000k\u0000m\u0000o\u0000d\u0000e\u0000s\u0000=\u0000=\u00000\u0000.\u00001\u00002\u0000.\u00002\u0000",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/radiomics_standalone.py --image-input image.nii.gz --mask-input mask.nii.gz --output ./results\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 2.508s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/radiomics_standalone.py\", line 62, in <module>\n    from pysera._cli import main\n  File \"/workspace/repo/pysera/__init__.py\", line 10, in <module>\n    from .processing.radiomics_processor import RadiomicsProcessor\n  File \"/workspace/repo/pysera/processing/radiomics_processor.py\", line 10, in <module>\n    import pandas as pd\n  File \"/workspace/deps/pandas/__init__.py\", line 46, in <module>\n    from pandas.core.api import (\n  File \"/workspace/deps/pandas/core/api.py\", line 46, in <module>\n    from pandas.core.groupby import (\n  File \"/workspace/deps/pandas/core/groupby/__init__.py\", line 1, in <module>\n    from pandas.core.groupby.generic import (\n  File \"/workspace/deps/pandas/core/groupby/generic.py\", line 62, in <module>\n    from pandas.core.frame import DataFrame\n  File \"/workspace/deps/pandas/core/frame.py\", line 150, in <module>\n    from pandas.core.generic import NDFrame\n  File \"/workspace/deps/pandas/core/generic.py\", line 123, in <module>\n    from pandas.core.methods.describe import describe_ndframe\n  File \"/workspace/deps/pandas/core/methods/describe.py\", line 38, in <module>\n    from pandas.io.formats.format import format_percentiles\n  File \"/workspace/deps/pandas/io/formats/format.py\", line 89, in <module>\n    from pandas.io.common import (\n  File \"/workspace/deps/pandas/io/common.py\", line 93, in <module>\n    @dataclasses.dataclass\n     ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/dataclasses.py\", line 958, in dataclass\n    return wrap(_cls)\n           ^^^^^^^^^^\n  File \"/workspace/deps/dataclasses.py\", line 950, in wrap\n    return _process_class(cls, init, repr, eq, order, unsafe_hash, frozen)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/dataclasses.py\", line 800, in _process_class\n    cls_fields = [_get_field(cls, name, type)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/deps/dataclasses.py\", line 800, in <listcomp>\n    cls"
+}

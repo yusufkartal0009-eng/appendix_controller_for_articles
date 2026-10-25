@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/workspace/repo/radiomics_standalone.py", line 62, in <module>
+    from pysera._cli import main
+  File "/workspace/repo/pysera/__init__.py", line 10, in <module>
+    from .processing.radiomics_processor import RadiomicsProcessor
+  File "/workspace/repo/pysera/processing/radiomics_processor.py", line 10, in <module>
+    import pandas as pd
+  File "/workspace/deps/pandas/__init__.py", line 46, in <module>
+    from pandas.core.api import (
+  File "/workspace/deps/pandas/core/api.py", line 46, in <module>
+    from pandas.core.groupby import (
+  File "/workspace/deps/pandas/core/groupby/__init__.py", line 1, in <module>
+    from pandas.core.groupby.generic import (
+  File "/workspace/deps/pandas/core/groupby/generic.py", line 62, in <module>
+    from pandas.core.frame import DataFrame
+  File "/workspace/deps/pandas/core/frame.py", line 150, in <module>
+    from pandas.core.generic import NDFrame
+  File "/workspace/deps/pandas/core/generic.py", line 123, in <module>
+    from pandas.core.methods.describe import describe_ndframe
+  File "/workspace/deps/pandas/core/methods/describe.py", line 38, in <module>
+    from pandas.io.formats.format import format_percentiles
+  File "/workspace/deps/pandas/io/formats/format.py", line 89, in <module>
+    from pandas.io.common import (
+  File "/workspace/deps/pandas/io/common.py", line 93, in <module>
+    @dataclasses.dataclass
+     ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/dataclasses.py", line 958, in dataclass
+    return wrap(_cls)
+           ^^^^^^^^^^
+  File "/workspace/deps/dataclasses.py", line 950, in wrap
+    return _process_class(cls, init, repr, eq, order, unsafe_hash, frozen)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/dataclasses.py", line 800, in _process_class
+    cls_fields = [_get_field(cls, name, type)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/dataclasses.py", line 800, in <listcomp>
+    cls_fields = [_get_field(cls, name, type)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/dataclasses.py", line 659, in _get_field
+    if (_is_classvar(a_type, typing)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/dataclasses.py", line 550, in _is_classvar
+    return type(a_type) is typing._ClassVar
+                           ^^^^^^^^^^^^^^^^
+AttributeError: module 'typing' has no attribute '_ClassVar'. Did you mean: 'ClassVar'?

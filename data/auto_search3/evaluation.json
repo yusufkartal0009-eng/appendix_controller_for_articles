@@ -26500,7 +26500,19 @@
         "run_command": "python inference_qwen2_audio_mcqa.py --test-dataset-path <path_to_your_data.json> [OPTIONS]",
         "readme_url": "https://github.com/yophis/partial-yarn/blob/4e6e13499b91ee7f7ff893ed297b5710babb55f1/README.md"
       },
-      "paper_id": "a3_132"
+      "paper_id": "a3_132",
+      "k1": {
+        "started_at": "2026-10-25T05:19:41+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "inference_qwen2_audio_mcqa.py: error: unrecognized arguments: [OPTIONS]",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 2,
+        "duration_seconds": 59.335,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "en970/archival-discovery-search",
@@ -26583,7 +26595,19 @@
         "run_command": "python radiomics_standalone.py --image-input image.nii.gz --mask-input mask.nii.gz --output ./results",
         "readme_url": "https://github.com/radiuma-com/PySERA/blob/dd50147adc4492560543556ca5bbcb60f0e32bcc/README.md"
       },
-      "paper_id": "a3_133"
+      "paper_id": "a3_133",
+      "k1": {
+        "started_at": "2026-10-25T05:34:26+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "AttributeError: module 'typing' has no attribute '_ClassVar'. Did you mean: 'ClassVar'?",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 2.817,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "Diego-WenHao/Mamba_for_Star-Galaxy_Classification",
@@ -26743,7 +26767,19 @@
         "run_command": "python main.py",
         "readme_url": "https://github.com/J0Jng/own_trading_agants/blob/c16a1ee275afbf02f2ffa1f9069139a44af01535/README.md"
       },
-      "paper_id": "a3_134"
+      "paper_id": "a3_134",
+      "k1": {
+        "started_at": "2026-10-25T05:40:06+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'langchain_core'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.624,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "0xcodemate/Med-annotation",
@@ -27036,18 +27072,198 @@
         "run_command": "python experiments/walker/train.py",
         "readme_url": "https://github.com/BricksRL/bricksrl/blob/bc250aeaa3b9ab9d718601fced38325f3621c8a3/README.md"
       },
-      "paper_id": "a3_135"
+      "paper_id": "a3_135",
+      "k1": {
+        "started_at": "2026-10-25T05:40:11+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'hydra'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.452,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
+      "full_name": "CIntellifusion/MultiWorld",
+      "hash": "ef1fae87e7e6b551a7ff247c9cd967832de41b92c5bd68ebd41e412f000da0f4",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "Anya-Louni/Galaxy-Compass",
+      "hash": "ef55370bd90b8f4c82f22a9556fe0655cee2cdc7883ca8cd389b234e0f7d0336",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "synkathairo/portfolio_opt",
+      "hash": "ef91e1353436c79015591d4ea8afea3a1c23a6ea356536aa3209367cc749dbcb",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ucb-bar/steamvr-bridge",
+      "hash": "efc3d9c577e1dd5678b209e94c3da0e3c0b13c96de173b3b76737bada2ae17c9",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "ubi-coro/MagBotSim",
+      "hash": "f0a7a4d3b981e33a57576770ae83c37ba1bf358cd2cda1423f9c86575f7e56ce",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license GPL-3.0"
+    },
+    {
+      "full_name": "mbzuai-oryx/BiMediX2",
+      "hash": "f1526893085bf2129c985807f703037651246695e149697d23d4d2106302ccbc",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "030108ming/STRMSR",
+      "hash": "f1b743992edbf4296686c020ffe5da75b999a0a026868c52a51f9090f0b557ae",
+      "passed": false,
+      "failed_rule": "S3",
+      "detail": "gpu or cuda mentioned in README"
+    },
+    {
+      "full_name": "slyncrafty/DL4H-PRJ-UniXGen",
+      "hash": "f21da085ab617237eb6e219f015afb844a84a565b25c34f66eeaf6cbeca4cabe",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "aim-uofa/StaMo",
+      "hash": "f2296db7842e454749fe6bb584055eb84cfc2b8f5bb300ed96dbaa83afe6364d",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "jan-o-e/RL4qcWpc",
+      "hash": "f3d8d9fc0124d2064b948bd7a1e8585d89772c7e6c67df919b8bdd5754c97f69",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "RiceWorm17/restormer-image-restoration",
+      "hash": "f6fb095a17fd29940c42e8436b71f520b20706be2144690f016523076db5beb6",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license NOASSERTION"
+    },
+    {
+      "full_name": "IliaLarchenko/behavior-1k-solution",
+      "hash": "f706480bd431ce0236b885c26ab189e19722a9070e3939b3899195c42ee165fb",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "norabolig/odc_sky_impacts",
+      "hash": "f71eaeccea047a3f353b75d0dbca55b7fec82963357b4dc6ed983342eb9c306e",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "sujeet-bhalerao/ci-riemannian-optimization",
+      "hash": "f7f6ffe8963ffa2c2652ef816c11cb90ba315724b9d4d877846abd0252d7b47b",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "manuelpenazuniga/Clinibrium",
+      "hash": "f8a1b4c0297cc9ae216097d9fa3094305a7682625f09de0aaa0cd8347ce6db4d",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "George0828Zhang/torch_cif",
+      "hash": "f9c4e203fb6819ebe21d1d78c6f74cb8943b45d8b7c9d9fbe61ea0520c1098ad",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "frankkramer-lab/covid19.MIScnn",
+      "hash": "fb39b91a23037c02cc67d7d9a4121d6494b270c37e3378673ee11777972cd6f2",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license GPL-3.0"
+    },
+    {
+      "full_name": "trinhtuanvubk/ASR-based-KWS",
+      "hash": "fcd79553bb2499276429b17c1d3638e26d35787dbd121058d644366504251974",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "demaxiya567/llm-catalysis-agent",
+      "hash": "fcdb1f16f042a9f31781cc9cec7c453c78821c6cb6d91cae978c2ea28b4258f4",
+      "passed": false,
+      "failed_rule": "S5",
+      "detail": "no arXiv link in the README"
+    },
+    {
+      "full_name": "RivaldoTimoty/trading-agents-lite",
+      "hash": "fd1e3230cf635aa9edaedfdf6f318c9c9b8d826ff77ea6d5e1b2cf5af18061ea",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "aru71727/Secure-Communication-using-QKD",
+      "hash": "fd6363fcd7c7eb42cf7c33befba6202515212a65093f17151cb5b50a390667d6",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "njPlanck/ganmodel_extract_spatial_filtering",
+      "hash": "fda03d9b8d7c10b1ebb4c3f06feec399a7fd2098f69b8a0e0d8073799e75b498",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "yusufbender/research-radar",
+      "hash": "fecbcaf1ee1f55d706eae191ed631a556a6c37efa162e50ca400778ec07ebda4",
+      "passed": false,
+      "failed_rule": "S1",
+      "detail": "license None"
+    },
+    {
+      "full_name": "mazurowski-lab/RaD",
+      "hash": "ffd3c37cee1b84d0f76c4c99b5a22e72434dacdf96234174750ee40c44f0d317",
+      "passed": false,
+      "failed_rule": "S2",
+      "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
     }
   ],
   "started_epoch": 1792875554.0,
   "started_at": "2026-10-24T20:59:14+00:00",
-  "written_at": "2026-10-25T05:21:37+00:00",
+  "written_at": "2026-10-25T05:40:13+00:00",
   "rules": "docs/AUTO_SEARCH_ROUND3.md",
   "note": "selected, non-representative list; not a success rate; K2 passers are match candidates, not verified",
-  "evaluated": 3375,
-  "runs": 131,
+  "evaluated": 3399,
+  "runs": 135,
   "k1_passed": 2,
   "k2_passed": 0,
   "both_passed": 0,
-  "stopped_because": ""
+  "stopped_because": "pool_used_up"
 }
