@@ -40,10 +40,12 @@ stored unchanged, with the date and the exact query strings, in `data/auto_searc
 
 - **Stage 4** (added on 2026-10-25 at 02:35, after stages 1 to 3 were used up with 1,381 candidates checked, 54 run and none passing K1; general and paper-related topics, chosen without looking at any candidate; the same rules apply; used only when stage 3 is used up before a stop condition of section 6 holds): `arxiv`, `paper`, `research`, `research-paper`, `paper-implementation`, `official-implementation`, `reproducible-research`, `python`, `numpy`, `pandas`, `jax`, `matplotlib`, `algorithm`, `mathematics`, `data-analysis`, `evaluation`.
 
+- **Stage 5** (added on 2026-10-25 at 04:00, before stage 4 is used up, with 76 candidates run and none passing K1; method and library topics chosen without looking at any candidate; the same rules apply; used only when stage 4 is used up before a stop condition of section 6 holds): `pytorch`, `neural-network`, `bayesian-inference`, `gaussian-processes`, `stochastic-processes`, `sampling`, `linear-algebra`, `scipy`, `xgboost`, `lightgbm`, `random-forest`, `svm`, `deep-reinforcement-learning`, `generative-model`, `explainable-ai`, `interpretability`.
+
 Duplicates are removed (case-insensitive). The repositories of earlier rounds are **removed from the pool before ordering**: every
 repository in `data/demo_set/pool.json` (the whole pool of the demo set, evaluated or not), in `data/candidates/` (all files),
 in `data/seed_papers.json` and in `data/corpus_expansion/papers.json`. The remaining candidates are ordered by the **SHA-256 hash of the
-lower-case `owner/name`**, ascending. Stages 2 to 4 are searched and stored as further blocks of the same file only when it is needed; its
+lower-case `owner/name`**, ascending. Stages 2 to 5 are searched and stored as further blocks of the same file only when it is needed; its
 candidates are ordered the same way and come after all candidates of stage 1. No other ordering is used: not stars, not date, not
 content.
 

@@ -58,6 +58,9 @@ STAGE_TOPICS: dict[int, list[str]] = {
     4: ["arxiv", "paper", "research", "research-paper", "paper-implementation", "official-implementation",
         "reproducible-research", "python", "numpy", "pandas", "jax", "matplotlib", "algorithm", "mathematics", "data-analysis",
         "evaluation"],
+    5: ["pytorch", "neural-network", "bayesian-inference", "gaussian-processes", "stochastic-processes", "sampling",
+        "linear-algebra", "scipy", "xgboost", "lightgbm", "random-forest", "svm", "deep-reinforcement-learning",
+        "generative-model", "explainable-ai", "interpretability"],
 }
 ID_PREFIX = "a3_"
 MAX_SECONDS = 9 * 3600
