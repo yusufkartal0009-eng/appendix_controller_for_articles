@@ -41,6 +41,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(corpus): the search survives a folder that cannot be deleted and a crash of the runner (2026-10-25 04:40 +03:00, Issue #473)
+- The search stopped after 76 runs: deleting the installed packages of candidate a3_077 failed (`FileNotFoundError`, a path longer than Windows allows) in `cleanup_run`, and the error ended the process. `force_remove` now falls back to emptying the folder with robocopy; a folder that still cannot be deleted is reported and the search goes on; an exception of the runner is recorded as a `harness` result. The candidate a3_077 had no stored result, so it is run again from the start (it never produced a result). Tests for the three cases.
+- Evidence: ruff and pytest in the pull request.
+- Not verified: other causes of an ended process.
+
 ### docs(corpus): stage 5 topics for the automatic search of round 3 (2026-10-25 04:00 +03:00, Issue #473)
 - 76 candidates were run and none passed K1; stage 4 is nearly used up. The protocol gets a fifth stage of 16 method and library topics, added before its search and without looking at any candidate; `scripts/auto_search3.py` lists them. Rules unchanged.
 - Evidence: ruff and pytest in the pull request.

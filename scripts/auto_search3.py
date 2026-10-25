@@ -22,7 +22,9 @@ import os
 import queue
 import re
 import shutil
+import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
@@ -324,12 +326,31 @@ def k2_for_run(entry: dict[str, Any], record_dir: Path, throttle: Throttle | Non
 # ---------------------------------------------------------------- the runs
 
 
-def cleanup_run(paper_id: str, staging_dir: Path) -> None:
-    """Delete the staging, wheel and sandbox output folders that this candidate's run created (and nothing else)."""
+def force_remove(folder: Path) -> bool:
+    """Delete a folder tree. Installed packages can have paths longer than Windows allows (#473): when the normal delete fails,
+    the folder is emptied by mirroring an empty folder onto it (robocopy handles long paths) and then removed. Returns False
+    when the folder is still there; the caller goes on (a leftover folder is reported, it does not stop the search)."""
+    try:
+        remove_tree(folder)
+    except OSError:
+        if sys.platform == "win32":
+            with tempfile.TemporaryDirectory() as empty:
+                subprocess.run(["robocopy", empty, str(folder), "/MIR", "/NFL", "/NDL", "/NJH", "/NJS", "/NP"],
+                               capture_output=True, check=False, timeout=600)
+            shutil.rmtree(folder, ignore_errors=True)
+    return not folder.exists()
+
+
+def cleanup_run(paper_id: str, staging_dir: Path) -> list[str]:
+    """Delete the staging, wheel and sandbox output folders that this candidate's run created (and nothing else). Returns
+    the folders that could not be deleted."""
+    left = []
     for folder in (staging_dir / paper_id, staging_dir / f"{paper_id}_packages", SANDBOX_RUNS_DIR / paper_id,
                    SANDBOX_RUNS_DIR / f"{paper_id}.build"):
-        if folder.exists():
-            remove_tree(folder)
+        if folder.exists() and not force_remove(folder):
+            left.append(str(folder))
+            print(f"could not delete {folder}", file=sys.stderr)
+    return left
 
 
 def sandbox_runner(entry: dict[str, Any], corpus_path: Path, record_root: Path, staging_dir: Path) -> dict[str, Any]:
@@ -495,9 +516,13 @@ class Search:
         entry = next(p for p in self.papers if p["paper_id"] == paper_id)
         runs_dir = self.out_dir / "runs"
         if (runs_dir / paper_id).exists():
-            remove_tree(runs_dir / paper_id)  # a partial record of a run that never stored its result
+            force_remove(runs_dir / paper_id)  # a partial record of a run that never stored its result
         started = datetime.now(UTC).isoformat(timespec="seconds")
-        k1 = self.runner(entry, self.out_dir / "papers.json", runs_dir)
+        try:
+            k1 = self.runner(entry, self.out_dir / "papers.json", runs_dir)
+        except Exception as exc:  # noqa: BLE001 - a crash of the mechanism is recorded as the candidate's result; the search goes on
+            k1 = {"k1_passed": False, "category": "harness", "log_line": f"{type(exc).__name__}: {exc}"[:300],
+                  "install_status": None, "run_status": None, "exit_code": None, "duration_seconds": None, "metric_lines": []}
         k2 = None
         if k1.get("run_status") == "COMPLETED" and k1.get("exit_code") == 0 and k1.get("category") != "harness":
             try:
