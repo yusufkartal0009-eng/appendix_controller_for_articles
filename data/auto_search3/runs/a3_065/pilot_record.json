@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_065",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "57f440d14eaf49b6ebc7c72db55436c61848376b",
+  "started_at": "2026-10-25T00:02:48+00:00",
+  "repo_url": "https://github.com/ryuryukke/MINT",
+  "pinned_commit": "105e6301ced589191c6527c251492f899dd0470c",
+  "target_script": "run.py",
+  "container_command": "python /workspace/repo/run.py --task mia --domain arxiv --methods all --model_name pythia-160m",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python run.py --task mia --domain arxiv --methods all --model_name pythia-160m",
+    "readme_url": "https://github.com/ryuryukke/MINT/blob/105e6301ced589191c6527c251492f899dd0470c/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "105e6301ced589191c6527c251492f899dd0470c",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.639
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 72,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_065_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "ux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a3_065_packages/xxhash-4.0.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSuccessfully downloaded datasets matplotlib numpy pandas raid-bench scikit-learn requests tiktoken torch tqdm transformers accelerate zstandard nvidia-cublas-cu12 nvidia-cuda-cupti-cu12 nvidia-cuda-nvrtc-cu12 nvidia-cuda-runtime-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-curand-cu12 nvidia-cusolver-cu12 nvidia-cusparse-cu12 nvidia-nccl-cu12 nvidia-nvjitlink-cu12 nvidia-nvtx-cu12 sympy triton charset-normalizer dill fsspec huggingface-hub hf-xet idna mpmath multiprocess tokenizers urllib3 aiohttp multidict yarl aiohappyeyeballs aiosignal attrs certifi contourpy cycler fonttools frozenlist joblib cloudpickle kiwisolver packaging pillow propcache pyarrow pyparsing python-dateutil pytz pyyaml regex safetensors scipy six threadpoolctl typing-extensions tzdata filelock jinja2 MarkupSafe networkx psutil xxhash\n",
+    "stderr": "",
+    "duration_seconds": 270.316
+  },
+  "sandbox_duration_seconds": 791.305,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.933,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 102879232
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 785.82,
+    "peak_memory_bytes": 141033472
+  },
+  "finished_at": "2026-10-25T00:20:31+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

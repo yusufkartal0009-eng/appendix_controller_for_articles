@@ -1,0 +1,119 @@
+{
+  "paper_id": "a3_064",
+  "source": "https://github.com/RUC-NLPIR/WebThinker",
+  "commit_hash": "db387eb3261de9b5e2db7d2d7fb20af2aceb7882",
+  "target_script": "scripts/run_web_thinker.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.541,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_064",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.208,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 13139968,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch==2.5.1",
+      "name": "torch",
+      "requested": "==2.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.46.1",
+      "name": "transformers",
+      "requested": "==4.46.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sentencepiece==0.2.0",
+      "name": "sentencepiece",
+      "requested": "==0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "vllm==0.6.4",
+      "name": "vllm",
+      "requested": "==0.6.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.67.0",
+      "name": "tqdm",
+      "requested": "==4.67.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nltk==3.9.1",
+      "name": "nltk",
+      "requested": "==3.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyext==0.7",
+      "name": "pyext",
+      "requested": "==0.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rank_bm25",
+      "name": "rank_bm25",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/run_web_thinker.py --single_question What is OpenAI Deep Research? --search_engine serper --serper_api_key YOUR_GOOGLE_SERPER_API --api_base_url YOUR_API_BASE_URL --model_name QwQ-32B --aux_api_base_url YOUR_AUX_API_BASE_URL --aux_model_name Qwen2.5-32B-Instruct --tokenizer_path PATH_TO_YOUR_TOKENIZER --aux_tokenizer_path PATH_TO_YOUR_AUX_TOKENIZER\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.208s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/run_web_thinker.py\", line 6, in <module>\n    from tqdm import tqdm\nModuleNotFoundError: No module named 'tqdm'\n"
+}

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/repo/code/data/CSV+QA.py", line 43, in <module>
+    translated_df_copy.to_csv(f"CSV/{game}/{filename}.csv", index=False)
+  File "/workspace/deps/pandas/core/generic.py", line 3902, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/formats/format.py", line 1152, in to_csv
+    csv_formatter.save()
+  File "/workspace/deps/pandas/io/formats/csvs.py", line 247, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "/workspace/deps/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+OSError: [Errno 30] Read-only file system: 'CSV/Viktor_Axelsen_Ng_Ka_Long_Angus_YONEX_Thailand_Open_2021_Finals/set1.csv'

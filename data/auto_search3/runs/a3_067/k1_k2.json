@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_067",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "OSError: [Errno 30] Read-only file system: 'CSV/Viktor_Axelsen_Ng_Ka_Long_Angus_YONEX_Thailand_Open_2021_Finals/set1.csv'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 6.546,
+    "metric_lines": []
+  },
+  "k2": null
+}

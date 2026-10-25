@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/run_benchmark.py", line 1, in <module>
+    from transformers import HfArgumentParser
+ModuleNotFoundError: No module named 'transformers'

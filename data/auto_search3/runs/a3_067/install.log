@@ -1,0 +1,35 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/annotated_types-0.6.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/anyio-4.2.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/blinker-1.7.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/certifi-2023.11.17-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/click-8.1.7-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/distro-1.9.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 6))
+Processing /workspace/packages/exceptiongroup-1.2.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/flask-3.0.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 8))
+Processing /workspace/packages/h11-0.14.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 9))
+Processing /workspace/packages/httpcore-1.0.2-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 10))
+Processing /workspace/packages/httpx-0.26.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 11))
+Processing /workspace/packages/idna-3.6-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 12))
+Processing /workspace/packages/itsdangerous-2.1.2-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 13))
+Processing /workspace/packages/Jinja2-3.1.3-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 14))
+Processing /workspace/packages/MarkupSafe-2.1.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 15))
+Processing /workspace/packages/numpy-1.26.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 16))
+Processing /workspace/packages/openai-1.7.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 17))
+Processing /workspace/packages/pandas-2.1.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 18))
+Processing /workspace/packages/pydantic-2.5.3-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 19))
+Processing /workspace/packages/pydantic_core-2.14.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 20))
+Processing /workspace/packages/python_dateutil-2.8.2-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 21))
+Processing /workspace/packages/python_dotenv-1.0.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 22))
+Processing /workspace/packages/pytz-2023.3.post1-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 23))
+Processing /workspace/packages/six-1.16.0-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 24))
+Processing /workspace/packages/sniffio-1.3.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 25))
+Processing /workspace/packages/tqdm-4.66.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 26))
+Processing /workspace/packages/typing_extensions-4.9.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 27))
+Processing /workspace/packages/tzdata-2023.4-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 28))
+Processing /workspace/packages/werkzeug-3.0.1-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 29))
+Installing collected packages: pytz, tzdata, typing_extensions, tqdm, sniffio, six, python-dotenv, numpy, MarkupSafe, itsdangerous, idna, h11, exceptiongroup, distro, click, certifi, blinker, annotated-types, Werkzeug, python-dateutil, pydantic_core, Jinja2, httpcore, anyio, pydantic, pandas, httpx, Flask, openai
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+scipy 1.17.1 requires numpy<2.7,>=1.26.4, but you have numpy 1.26.3 which is incompatible.
+Successfully installed Flask-3.0.0 Jinja2-3.1.3 MarkupSafe-2.1.3 Werkzeug-3.0.1 annotated-types-0.6.0 anyio-4.2.0 blinker-1.7.0 certifi-2023.11.17 click-8.1.7 distro-1.9.0 exceptiongroup-1.2.1 h11-0.14.0 httpcore-1.0.2 httpx-0.26.0 idna-3.6 itsdangerous-2.1.2 numpy-1.26.3 openai-1.7.1 pandas-2.1.4 pydantic-2.5.3 pydantic_core-2.14.6 python-dateutil-2.8.2 python-dotenv-1.0.0 pytz-2023.3.post1 six-1.16.0 sniffio-1.3.0 tqdm-4.66.1 typing_extensions-4.9.0 tzdata-2023.4

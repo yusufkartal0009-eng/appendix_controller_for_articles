@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/repo/run.py", line 8, in <module>
+    from datasets import load_dataset
+  File "/workspace/deps/datasets/__init__.py", line 17, in <module>
+    from .arrow_dataset import Dataset
+  File "/workspace/deps/datasets/arrow_dataset.py", line 60, in <module>
+    import pyarrow as pa
+  File "/workspace/deps/pyarrow/__init__.py", line 59, in <module>
+    from pyarrow.lib import (BuildInfo, CppBuildInfo, RuntimeInfo, set_timezone_db_path,
+  File "pyarrow/lib.pyx", line 42, in init pyarrow.lib
+ImportError: pyarrow requires NumPy 2.0 or newer, found 1.25.2

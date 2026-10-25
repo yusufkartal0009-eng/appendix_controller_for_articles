@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_066",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'jax'",
+    "install_status": "SKIPPED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.538,
+    "metric_lines": []
+  },
+  "k2": null
+}

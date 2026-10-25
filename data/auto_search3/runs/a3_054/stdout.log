@@ -1,0 +1,35 @@
+
+Loaded metadata:
+  title: SIMULATED_simulated_spectrum_W.txt,total_counts_2e+06
+  dt: 0.0065
+  meta3: 2
+  fwhm_guess: 0.27
+start=2980, peak=3000, end=4500
+
+=== Running LM/TRF refinement ===
+Condition number of JTJ: 5.284e+07
+PALS fit results
+================
+
+Chi^2:        1479.947679
+DOF:          1512
+Chi^2_red:    0.978801
+
+Parameters:
+  name                value         error        fitted
+  ----                -----         -----        ------
+  s_source                    0.5             0    0
+  I_source_1             0.951009    0.00144917    1
+  I_source_2            0.0489911    0.00144588    1
+  tau_source_1                0.5             0    0
+  tau_source_2                2.5             0    0
+  s_sample                    0.5             0    0
+  I_sample_1             0.704112     0.0128305    1
+  I_sample_2             0.295887     0.0128305    1
+  tau_sample_1           0.111689    0.00328988    1
+  tau_sample_2           0.352128    0.00965429    1
+  T0                            0             0    0
+  Delta_p_1            -0.0104148   0.000963399    1
+  omega_p_1                     1             0    0
+  FWHM_p_1               0.269255    0.00135562    1
+  BG                       99.375      0.506501    1

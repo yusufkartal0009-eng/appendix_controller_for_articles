@@ -1,0 +1,282 @@
+{
+  "paper_id": "a3_051",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "db6a14770f5587e39edfd7ca347a965408d34c18",
+  "started_at": "2026-10-24T23:29:09+00:00",
+  "repo_url": "https://github.com/tomekkorbak/pretraining-with-human-feedback",
+  "pinned_commit": "152e6b656790d182d0d13a912ece6560c7a287ae",
+  "target_script": "train.py",
+  "container_command": "python /workspace/repo/train.py --task configs/toxicity/pretrain.yml --method configs/toxicity/mle.yml",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python train.py --task configs/toxicity/pretrain.yml --method configs/toxicity/mle.yml",
+    "readme_url": "https://github.com/tomekkorbak/pretraining-with-human-feedback/blob/152e6b656790d182d0d13a912ece6560c7a287ae/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "152e6b656790d182d0d13a912ece6560c7a287ae",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.118
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 111,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_051_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "aiohttp==3.8.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for aiohttp==3.8.1"
+      },
+      {
+        "requirement": "blis==0.7.6",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for blis==0.7.6"
+      },
+      {
+        "requirement": "cymem==2.0.6",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for cymem==2.0.6"
+      },
+      {
+        "requirement": "frozenlist==1.3.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for frozenlist==1.3.0"
+      },
+      {
+        "requirement": "kiwisolver==1.4.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for kiwisolver==1.4.0"
+      },
+      {
+        "requirement": "MarkupSafe==2.1.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for MarkupSafe==2.1.1"
+      },
+      {
+        "requirement": "matplotlib==3.5.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for matplotlib==3.5.1"
+      },
+      {
+        "requirement": "multidict==6.0.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for multidict==6.0.2"
+      },
+      {
+        "requirement": "murmurhash==1.0.6",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for murmurhash==1.0.6"
+      },
+      {
+        "requirement": "numpy==1.22.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for numpy==1.22.2"
+      },
+      {
+        "requirement": "pandas==1.4.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pandas==1.4.1"
+      },
+      {
+        "requirement": "pathtools==0.1.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pathtools==0.1.2"
+      },
+      {
+        "requirement": "Pillow==9.0.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for Pillow==9.0.1"
+      },
+      {
+        "requirement": "preshed==3.0.6",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for preshed==3.0.6"
+      },
+      {
+        "requirement": "promise==2.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for promise==2.3"
+      },
+      {
+        "requirement": "psutil==5.9.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for psutil==5.9.0"
+      },
+      {
+        "requirement": "pyarrow==7.0.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pyarrow==7.0.0"
+      },
+      {
+        "requirement": "pycosat==0.6.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pycosat==0.6.3"
+      },
+      {
+        "requirement": "pyrsistent==0.18.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pyrsistent==0.18.1"
+      },
+      {
+        "requirement": "pyzmq==22.3.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pyzmq==22.3.0"
+      },
+      {
+        "requirement": "regex==2022.3.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for regex==2022.3.2"
+      },
+      {
+        "requirement": "scipy==1.8.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scipy==1.8.0"
+      },
+      {
+        "requirement": "sentencepiece==0.1.96",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for sentencepiece==0.1.96"
+      },
+      {
+        "requirement": "setproctitle==1.2.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for setproctitle==1.2.2"
+      },
+      {
+        "requirement": "spacy==3.2.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for spacy==3.2.3"
+      },
+      {
+        "requirement": "srsly==2.4.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for srsly==2.4.2"
+      },
+      {
+        "requirement": "termcolor==1.1.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for termcolor==1.1.0"
+      },
+      {
+        "requirement": "thinc==8.0.15",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for thinc==8.0.15"
+      },
+      {
+        "requirement": "tokenizers==0.11.6",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for tokenizers==0.11.6"
+      },
+      {
+        "requirement": "torch==1.10.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torch==1.10.2"
+      },
+      {
+        "requirement": "tornado==6.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for tornado==6.1"
+      },
+      {
+        "requirement": "xxhash==3.0.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for xxhash==3.0.0"
+      },
+      {
+        "requirement": "yarl==1.7.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for yarl==1.7.2"
+      },
+      {
+        "requirement": "zstandard==0.17.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for zstandard==0.17.0"
+      },
+      {
+        "requirement": "openai==0.26.5",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for openai==0.26.5"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "a1, 3.6.0a2, 3.6.0a3, 3.6.0a4, 3.6.0a5, 3.6.0a6, 3.6.0a7, 3.6.0a8, 3.6.0a9, 3.6.0a11, 3.6.0a12, 3.6.0b0, 3.6.0, 3.6.2a0, 3.6.2a1, 3.6.2a2, 3.6.2, 3.8.3, 3.8.4, 3.8.5, 3.8.6, 3.9.0b0, 3.9.0b1, 3.9.0rc0, 3.9.0, 3.9.1, 3.9.2, 3.9.3, 3.9.4rc0, 3.9.4, 3.9.5, 3.10.0b1, 3.10.0rc0, 3.10.0, 3.10.1, 3.10.2, 3.10.3, 3.10.4, 3.10.5, 3.10.6rc0, 3.10.6rc1, 3.10.6rc2, 3.10.6, 3.10.7, 3.10.8, 3.10.9, 3.10.10, 3.10.11rc0, 3.10.11, 3.11.0b0, 3.11.0b1, 3.11.0b2, 3.11.0b3, 3.11.0b4, 3.11.0b5, 3.11.0rc0, 3.11.0rc1, 3.11.0rc2, 3.11.0, 3.11.1, 3.11.2, 3.11.3, 3.11.4, 3.11.5, 3.11.6, 3.11.7, 3.11.8, 3.11.9, 3.11.10, 3.11.11, 3.11.12, 3.11.15, 3.11.16, 3.11.18, 3.12.0b0, 3.12.0b1, 3.12.0b2, 3.12.0b3, 3.12.0rc0, 3.12.0rc1, 3.12.0, 3.12.1rc0, 3.12.2, 3.12.3, 3.12.4, 3.12.6, 3.12.7rc0, 3.12.7, 3.12.8, 3.12.9, 3.12.10, 3.12.11, 3.12.12, 3.12.13, 3.12.14, 3.12.15, 3.13.0, 3.13.1, 3.13.2, 3.13.3, 3.13.4, 3.13.5, 3.14.0, 3.14.1, 3.14.2, 3.14.3, 3.14.4, 3.14.5)\nERROR: No matching distribution found for aiohttp==3.8.1\n",
+    "duration_seconds": 213.339
+  },
+  "sandbox_duration_seconds": 2.103,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.537,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 14422016
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.6,
+    "peak_memory_bytes": 39186432
+  },
+  "finished_at": "2026-10-24T23:32:46+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
