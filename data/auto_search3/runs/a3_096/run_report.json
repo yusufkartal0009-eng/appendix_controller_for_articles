@@ -1,0 +1,208 @@
+{
+  "paper_id": "a3_096",
+  "source": "https://github.com/fless-lab/rsi-framework",
+  "commit_hash": "60f5de9036b5b23c7d007554e2a80dc509a36004",
+  "target_script": "experiments/togo-fiscal/run.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 28.231,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_096",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 27.924,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 196976640,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.2"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "nvidia-nccl-cu12",
+      "version": "2.32.3"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.0"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "seaborn",
+      "version": "0.13.2"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "xgboost",
+      "version": "3.2.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy>=1.24",
+      "name": "numpy",
+      "requested": ">=1.24",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=2.0",
+      "name": "pandas",
+      "requested": ">=2.0",
+      "installed": "3.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy>=1.10",
+      "name": "scipy",
+      "requested": ">=1.10",
+      "installed": "1.17.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-learn>=1.3",
+      "name": "scikit-learn",
+      "requested": ">=1.3",
+      "installed": "1.9.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "xgboost>=2.0",
+      "name": "xgboost",
+      "requested": ">=2.0",
+      "installed": "3.2.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "matplotlib>=3.7",
+      "name": "matplotlib",
+      "requested": ">=3.7",
+      "installed": "3.11.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "seaborn>=0.12",
+      "name": "seaborn",
+      "requested": ">=0.12",
+      "installed": "0.13.2",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/experiments/togo-fiscal/run.py\n==================================================\n======================================================================\n  RSI Togo Fiscal \u2014 Experiments (v2)\n======================================================================\n\n[0] Loading MCAR dataset...\n\n  [MCAR]\n  Enterprises: 2000\n  Periods: [np.int64(1), np.int64(2)]\n  Segments: {'informal': 900, 'small_formal': 500, 'medium': 360, 'large': 240}\n\n  Rules:\n    R1_TVA:   570 app (28%),  362 NC (64%),  105 miss (18%) [P(m|NC)=19% P(m|C)=18%]\n    R2_IS:   372 app (19%),  138 NC (37%),   76 miss (20%) [P(m|NC)=17% P(m|C)=22%]\n    R3_IMF:   570 app (28%),   17 NC ( 3%),  120 miss (21%) [P(m|NC)=18% P(m|C)=21%]\n    R4_TPU:  1430 app (72%), 1115 NC (78%),  252 miss (18%) [P(m|NC)=18% P(m|C)=16%]\n    R5_IRPP:   872 app (44%),  270 NC (31%),  161 miss (18%) [P(m|NC)=18% P(m|C)=19%]\n    R6_PAT:   872 app (44%),  525 NC (60%),  147 miss (17%) [P(m|NC)=17% P(m|C)=17%]\n    R7_DECL:  2000 app (100%),  430 NC (22%),  360 miss (18%) [P(m|NC)=20% P(m|C)=18%]\n    R8_BANK:  2000 app (100%), 1020 NC (51%),  383 miss (19%) [P(m|NC)=19% P(m|C)=20%]\n\n  Rules per entity: {3: 1128, 5: 302, 6: 198, 7: 372}\n\n  Ground truth c_true:\n    R1_TVA: 0.426 (prior E[c]=0.70)\n    R2_IS: 0.564 (prior E[c]=0.60)\n    R3_IMF: 0.876 (prior E[c]=0.70)\n    R4_TPU: 0.345 (prior E[c]=0.50)\n    R5_IRPP: 0.610 (prior E[c]=0.60)\n    R6_PAT: 0.440 (prior E[c]=0.70)\n    R7_DECL: 0.666 (prior E[c]=0.60)\n    R8_BANK: 0.491 (prior E[c]=0.50)\n\n======================================================================\nEXP-1: Per-Rule Performance + Population Calibration\n======================================================================\n\n  Per-Rule Metrics:\n  Rule  ",
+  "stderr_preview": "",
+  "metrics": {
+    "f1": 0.791,
+    "auroc": 0.867,
+    "informal": 900.0,
+    "small_formal": 500.0,
+    "medium": 360.0,
+    "large": 240.0
+  }
+}

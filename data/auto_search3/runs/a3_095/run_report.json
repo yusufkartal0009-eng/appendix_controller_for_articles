@@ -1,0 +1,80 @@
+{
+  "paper_id": "a3_095",
+  "source": "https://github.com/wanyichen06/HSPR",
+  "commit_hash": "733a84424f60969c3af563c1961c64f80dea5c04",
+  "target_script": "example.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 4.212,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_095",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 3.9,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 107749376,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "numpy==1.26.4",
+      "name": "numpy",
+      "requested": "==1.26.4",
+      "installed": "1.26.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.17.1",
+      "name": "scipy",
+      "requested": "==1.17.1",
+      "installed": "1.17.1",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/example.py\n==================================================\nSynthetic example\nQueried task indices: [2, 10, 11, 6]\nEstimated full score: 41.7%\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : INSTALLED\nDuration      : 3.9s\n==================================================\n",
+  "stderr_preview": ""
+}

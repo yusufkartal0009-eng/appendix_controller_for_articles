@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/repo/data_prep/data_gen_kk.py", line 375, in <module>
+    generate_data(num_samples_test=100,num_samples_train=200,num_samples_val=0,
+  File "/workspace/repo/data_prep/data_gen_kk.py", line 162, in generate_data
+    os.makedirs(output_folder, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: 'data'

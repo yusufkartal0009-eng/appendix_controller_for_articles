@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_088",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "56bf9ca5152071e13cd3604e54936850b46053a6",
+  "started_at": "2026-10-25T01:49:15+00:00",
+  "repo_url": "https://github.com/sanbuphy/SmartPaper",
+  "pinned_commit": "9033062c47654ecb34baf490df2dc3c861898ca5",
+  "target_script": "cli_get_prompt_mode_paper.py",
+  "container_command": "python /workspace/repo/cli_get_prompt_mode_paper.py https://arxiv.org/pdf/2312.12456.pdf",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python cli_get_prompt_mode_paper.py https://arxiv.org/pdf/2312.12456.pdf",
+    "readme_url": "https://github.com/sanbuphy/SmartPaper/blob/9033062c47654ecb34baf490df2dc3c861898ca5/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "9033062c47654ecb34baf490df2dc3c861898ca5",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.971
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 132,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_088_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": " anyio jiter zhipuai pyjwt python-docx python-pptx openpyxl pytesseract beautifulsoup4 pandas python-dotenv arxiv lxml tqdm markitdown magika loguru pre-commit black pytokens isort flake8 mccabe pycodestyle pyflakes flake8-docstrings streamlit Pillow altair click httptools itsdangerous protobuf pyarrow pydeck python-multipart starlette toml uvicorn watchdog websockets pymupdf pymupdf-layout pymupdf4llm langchain_openai openai distro tiktoken modelscope aiohappyeyeballs aiosignal annotated-types attrs cachetools certifi cfgv frozenlist h11 identify jinja2 jsonpointer jsonschema jsonschema-specifications MarkupSafe modelscope-hub cryptography cffi filelock mypy-extensions narwhals nodeenv onnxruntime pathspec platformdirs propcache pydocstyle python-dateutil pytz referencing rpds-py six snowballstemmer soupsieve typing-inspection tzdata virtualenv distlib python-discovery XlsxWriter defusedxml et-xmlfile flatbuffers markdownify networkx psutil pycparser regex setuptools sniffio tabulate\n",
+    "stderr": "",
+    "duration_seconds": 213.761
+  },
+  "sandbox_duration_seconds": 748.566,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.839,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 20992000
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 745.921,
+    "peak_memory_bytes": 178507776
+  },
+  "finished_at": "2026-10-25T02:05:20+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

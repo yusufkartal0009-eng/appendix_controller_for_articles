@@ -1,0 +1,8 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 2))
+Installing collected packages: numpy, scipy
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+pandas 3.1.0 requires numpy>=2.0.2; python_version < "3.14", but you have numpy 1.26.4 which is incompatible.
+Successfully installed numpy-1.26.4 scipy-1.17.1

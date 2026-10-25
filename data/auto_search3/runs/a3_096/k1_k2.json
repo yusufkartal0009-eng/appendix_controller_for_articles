@@ -1,0 +1,44 @@
+{
+  "paper_id": "a3_096",
+  "k1": {
+    "k1_passed": true,
+    "category": null,
+    "log_line": "",
+    "install_status": "INSTALLED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 28.231,
+    "metric_lines": [
+      "R1_TVA: 0.426 (prior E[c]=0.70)",
+      "R2_IS: 0.564 (prior E[c]=0.60)",
+      "R3_IMF: 0.876 (prior E[c]=0.70)",
+      "R4_TPU: 0.345 (prior E[c]=0.50)",
+      "R5_IRPP: 0.610 (prior E[c]=0.60)",
+      "R6_PAT: 0.440 (prior E[c]=0.70)",
+      "R7_DECL: 0.666 (prior E[c]=0.60)",
+      "R8_BANK: 0.491 (prior E[c]=0.50)",
+      "Mean: RSI F1=0.741 AUC=0.859 | RBS F1=0.700 | D=+0.041",
+      "RSI (min-agg): F1=0.967 AUC=0.742 (no labels)",
+      "RBS:           F1=0.913 (no labels)",
+      "LR:            F1=0.966 (supervised, 70% labeled)",
+      "XGBoost:       F1=0.957 (supervised, 309ms)",
+      "MLP:           F1=0.966 (supervised, 68ms)",
+      "ELBO: prior=-5207.60 -> post=-4392.66 Gain=+814.94",
+      "RSI: 0.0007 ms",
+      "R1_TVA: 1.863",
+      "R4_TPU: 2.032",
+      "R7_DECL: 1.980",
+      "R8_BANK: 1.978"
+    ]
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 207,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 18,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "arxiv_id": "2603.21610"
+  }
+}
