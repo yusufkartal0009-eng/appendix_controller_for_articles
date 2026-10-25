@@ -1,0 +1,4 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/opencv_python-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl (from -r /workspace/repo/requirements.txt (line 1))
+ERROR: Could not find a version that satisfies the requirement imread-from-url (from versions: none)
+ERROR: No matching distribution found for imread-from-url

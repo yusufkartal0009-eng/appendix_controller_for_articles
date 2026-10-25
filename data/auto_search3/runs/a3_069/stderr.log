@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/run_eval.py", line 63, in <module>
+    main()
+  File "/workspace/repo/scripts/run_eval.py", line 41, in main
+    client = make_client(api_key=args.api_key, base_url=args.base_url)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/clarifycodebench/llm.py", line 43, in make_client
+    raise RuntimeError(
+RuntimeError: No API key. Set CLARIFY_API_KEY (and CLARIFY_BASE_URL) or pass api_key=.

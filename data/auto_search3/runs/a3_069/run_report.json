@@ -1,0 +1,184 @@
+{
+  "paper_id": "a3_069",
+  "source": "https://github.com/fangz-cs/ClarifyCodeBench",
+  "commit_hash": "5e2d5b5ce6259daa034cebb69f65e5e4c6dec3e9",
+  "target_script": "scripts/run_eval.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 5.693,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_069",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 5.365,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 43683840,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "jiter",
+      "version": "0.18.0"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "openai",
+      "version": "3.37.0"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "openai>=1.0.0",
+      "name": "openai",
+      "requested": ">=1.0.0",
+      "installed": "3.37.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "httpx>=0.24.0",
+      "name": "httpx",
+      "requested": ">=0.24.0",
+      "installed": "0.28.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy>=1.20.0",
+      "name": "numpy",
+      "requested": ">=1.20.0",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-learn>=1.0.0",
+      "name": "scikit-learn",
+      "requested": ">=1.0.0",
+      "installed": "1.9.1",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/run_eval.py --data data/ClarifyCodeBench.jsonl --model gpt-4o --out results/gpt-4o.jsonl\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 5.365s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/run_eval.py\", line 63, in <module>\n    main()\n  File \"/workspace/repo/scripts/run_eval.py\", line 41, in main\n    client = make_client(api_key=args.api_key, base_url=args.base_url)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/clarifycodebench/llm.py\", line 43, in make_client\n    raise RuntimeError(\nRuntimeError: No API key. Set CLARIFY_API_KEY (and CLARIFY_BASE_URL) or pass api_key=.\n"
+}

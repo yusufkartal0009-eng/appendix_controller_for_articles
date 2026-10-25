@@ -1,0 +1,106 @@
+{
+  "paper_id": "a3_068",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "57f440d14eaf49b6ebc7c72db55436c61848376b",
+  "started_at": "2026-10-25T00:23:36+00:00",
+  "repo_url": "https://github.com/Ganesh-403/image-colorization-project",
+  "pinned_commit": "dcb48bccc751cae8d57fb3ebf8aa3179c1033f2b",
+  "target_script": "download_models.py",
+  "container_command": "python /workspace/repo/download_models.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python download_models.py",
+    "readme_url": "https://github.com/Ganesh-403/image-colorization-project/blob/dcb48bccc751cae8d57fb3ebf8aa3179c1033f2b/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "dcb48bccc751cae8d57fb3ebf8aa3179c1033f2b",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.173
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 42,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_068_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a3_068_packages/narwhals-2.27.1-py3-none-any.whl\nSaved ./a3_068_packages/packaging-26.3-py3-none-any.whl\nSaved ./a3_068_packages/pyparsing-3.3.3-py3-none-any.whl\nSaved ./a3_068_packages/python_dateutil-3.0.0-py2.py3-none-any.whl\nSaved ./a3_068_packages/referencing-0.37.0-py3-none-any.whl\nSaved ./a3_068_packages/rpds_py-2026.9.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl\nSaved ./a3_068_packages/six-1.17.0-py2.py3-none-any.whl\nSaved ./a3_068_packages/tzdata-2026.5-py2.py3-none-any.whl\nSuccessfully downloaded opencv-python numpy matplotlib streamlit Pillow altair anyio click itsdangerous pandas protobuf pyarrow pydeck python-multipart requests charset_normalizer idna starlette typing-extensions urllib3 uvicorn watchdog websockets certifi contourpy cycler fonttools h11 jinja2 jsonschema attrs jsonschema-specifications kiwisolver MarkupSafe narwhals packaging pyparsing python-dateutil referencing rpds-py six tzdata\n",
+    "stderr": "",
+    "duration_seconds": 27.916
+  },
+  "sandbox_duration_seconds": 243.969,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.322,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 35160064
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 241.267,
+    "peak_memory_bytes": 84111360
+  },
+  "finished_at": "2026-10-25T00:28:09+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

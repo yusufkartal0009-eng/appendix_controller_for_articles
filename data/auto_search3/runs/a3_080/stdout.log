@@ -1,0 +1,32 @@
+===== case_000 (order ab, project) =====
+`/project` is the current state of a research project. You need to think about what to do next.
+
+Read idea.md first, then proposal.md, then STATE.md, and then other files if you think it is necessary.
+
+Below are two candidate plans. Please choose the one you think is better.
+
+<option_A>
+(A) Goal: Write a MATH-500 near-side fingerprint paper for NeurIPS Findings, the Datasets and Benchmarks track, or a workshop.
+
+Plan: Use the collected Qwen3-4B-Instruct MATH-500 run of 30 clusters and 3 seeds as the only headline cell. Report Game24 as a Stage 0 parser audit and a cap-binding incident note. Send this packet to the reviewer. Place a second model family, a Game24 run on a larger Instruct model, and the frontier AIME four-arm table in later work, with the spent GPU cost of 55 dollars and a 30 to 50 dollar API block treated as the proposal envelope.
+</option_A>
+
+<option_B>
+(B) Goal: Write a NeurIPS main fingerprint paper with at least two model-family by task cells.
+
+Plan: Collect the running Game24 R2v7 seeds and run the joint cluster-bootstrap, mixed-effects, and SMD analysis with MATH-500. Add Qwen3-7B-Instruct on MATH-500 with the eight core arms. If Game24 on Qwen3-4B-Instruct stays cap-bound, run Game24 on Qwen3-7B-Instruct. Run the Stage 5 AIME four-arm table on a frontier API with the proposal API budget. Treat the 800 to 1200 GPU-hour figure as a forecast.
+</option_B>
+
+Output format:
+
+```
+{
+  "argument": "The reason for your choice",
+  "response": "A or B"
+}
+```
+
+Note:
+
+- Only read the contents of `/project`. Do not go to parent directories. Do not access the network.
+

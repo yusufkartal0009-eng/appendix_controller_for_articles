@@ -1,0 +1,488 @@
+{
+  "paper_id": "a3_082",
+  "source": "https://github.com/isaacus-dev/legal-rag-bench",
+  "commit_hash": "9e30a36d1ef58cd35ec4ed724ef3e5edc6b0d00b",
+  "target_script": "db.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 21.608,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_082",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 21.28,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 244051968,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.2"
+    },
+    {
+      "name": "dataclasses-json",
+      "version": "0.6.7"
+    },
+    {
+      "name": "datasets",
+      "version": "5.1.0"
+    },
+    {
+      "name": "dill",
+      "version": "0.4.1"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0"
+    },
+    {
+      "name": "faiss-cpu",
+      "version": "1.15.1"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "filetype",
+      "version": "1.2.0"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.7.0"
+    },
+    {
+      "name": "google-ai-generativelanguage",
+      "version": "0.12.1"
+    },
+    {
+      "name": "google-api-core",
+      "version": "2.43.0"
+    },
+    {
+      "name": "google-auth",
+      "version": "2.62.0"
+    },
+    {
+      "name": "googleapis-common-protos",
+      "version": "1.76.0"
+    },
+    {
+      "name": "grpcio",
+      "version": "1.84.1"
+    },
+    {
+      "name": "grpcio-status",
+      "version": "1.84.1"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "httpx-sse",
+      "version": "0.4.3"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "huggingface_hub",
+      "version": "2.3.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "isaacus",
+      "version": "0.9.1"
+    },
+    {
+      "name": "jiter",
+      "version": "0.18.0"
+    },
+    {
+      "name": "jsonpatch",
+      "version": "1.37"
+    },
+    {
+      "name": "jsonpointer",
+      "version": "3.5"
+    },
+    {
+      "name": "langchain",
+      "version": "0.3.30"
+    },
+    {
+      "name": "langchain-community",
+      "version": "0.3.31"
+    },
+    {
+      "name": "langchain-core",
+      "version": "0.3.86"
+    },
+    {
+      "name": "langchain-google-genai",
+      "version": "2.1.12"
+    },
+    {
+      "name": "langchain-isaacus",
+      "version": "0.1.0"
+    },
+    {
+      "name": "langchain-openai",
+      "version": "0.3.35"
+    },
+    {
+      "name": "langchain-text-splitters",
+      "version": "0.3.11"
+    },
+    {
+      "name": "langsmith",
+      "version": "0.14.12"
+    },
+    {
+      "name": "marshmallow",
+      "version": "3.26.2"
+    },
+    {
+      "name": "multidict",
+      "version": "7.2.1"
+    },
+    {
+      "name": "multiprocess",
+      "version": "0.70.19"
+    },
+    {
+      "name": "mypy_extensions",
+      "version": "1.1.0"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "openai",
+      "version": "2.54.0"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1"
+    },
+    {
+      "name": "orjson",
+      "version": "3.13.0"
+    },
+    {
+      "name": "packaging",
+      "version": "25.0"
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.0"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "proto-plus",
+      "version": "1.29.0"
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2"
+    },
+    {
+      "name": "pyarrow",
+      "version": "26.0.0"
+    },
+    {
+      "name": "pyasn1",
+      "version": "0.6.4"
+    },
+    {
+      "name": "pyasn1_modules",
+      "version": "0.4.2"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.12"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1"
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.16.1"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "requests-toolbelt",
+      "version": "1.0.0"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "SQLAlchemy",
+      "version": "2.1.6"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.2.1"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.14.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspect",
+      "version": "0.9.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "uuid_utils",
+      "version": "0.18.0"
+    },
+    {
+      "name": "websockets",
+      "version": "17.3"
+    },
+    {
+      "name": "xxhash",
+      "version": "4.0.2"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "python-dotenv",
+      "name": "python-dotenv",
+      "requested": "any",
+      "installed": "1.2.4",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "datasets",
+      "name": "datasets",
+      "requested": "any",
+      "installed": "5.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "tqdm",
+      "name": "tqdm",
+      "requested": "any",
+      "installed": "4.70.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-core",
+      "name": "langchain-core",
+      "requested": "any",
+      "installed": "0.3.86",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-community",
+      "name": "langchain-community",
+      "requested": "any",
+      "installed": "0.3.31",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-openai",
+      "name": "langchain-openai",
+      "requested": "any",
+      "installed": "0.3.35",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-google-genai",
+      "name": "langchain-google-genai",
+      "requested": "any",
+      "installed": "2.1.12",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-isaacus",
+      "name": "langchain-isaacus",
+      "requested": "any",
+      "installed": "0.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "faiss-cpu",
+      "name": "faiss-cpu",
+      "requested": "any",
+      "installed": "1.15.1",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/db.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 21.28s\n==================================================\n",
+  "stderr_preview": "/workspace/deps/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.11.17) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2027-10-24). Please upgrade to the latest Python version, or at least Python 3.12, to continue receiving updates for google.api_core past that date.\n  warnings.warn(message, FutureWarning)\n/workspace/deps/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.11.17) which Google will stop supporting in new releases of google.ai.generativelanguage_v1beta once it reaches its end of life (2027-10-24). Please upgrade to the latest Python version, or at least Python 3.12, to continue receiving updates for google.ai.generativelanguage_v1beta past that date.\n  warnings.warn(message, FutureWarning)\nTraceback (most recent call last):\n  File \"/workspace/repo/db.py\", line 21, in <module>\n    from config import DB_DIR, embedding_models\n  File \"/workspace/repo/config.py\", line 38, in <module>\n    ISAACUS_API_KEY = _require_env(\"ISAACUS_API_KEY\")\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/config.py\", line 32, in _require_env\n    raise ValueError(f\"{var_name} not set in .env\")\nValueError: ISAACUS_API_KEY not set in .env\n"
+}

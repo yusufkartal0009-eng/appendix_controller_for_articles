@@ -1,0 +1,134 @@
+{
+  "paper_id": "a3_075",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "57f440d14eaf49b6ebc7c72db55436c61848376b",
+  "started_at": "2026-10-25T00:42:16+00:00",
+  "repo_url": "https://github.com/najmulhasan-code/dpbench",
+  "pinned_commit": "f62fd594e69db56838db5fdbe0cfb9f814ff7788",
+  "target_script": "experiments/scripts/run.py",
+  "container_command": "python /workspace/repo/experiments/scripts/run.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python experiments/scripts/run.py",
+    "readme_url": "https://github.com/najmulhasan-code/dpbench/blob/f62fd594e69db56838db5fdbe0cfb9f814ff7788/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "f62fd594e69db56838db5fdbe0cfb9f814ff7788",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements-lock.txt",
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 5.66
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 14,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a3_075_packages",
+    "requirements_files": [
+      "requirements-lock.txt",
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [
+      {
+        "cannot_install": [
+          "langgraph==1.0.5 (requirements-lock.txt line 10)",
+          "langchain-openai==0.2.14 (requirements-lock.txt line 11)",
+          "langchain-core==0.3.29",
+          "langgraph"
+        ],
+        "caused_by": [
+          "The user requested langchain-core==0.3.29",
+          "langgraph 1.0.5 depends on langchain-core>=0.1",
+          "langchain-openai 0.2.14 depends on langchain-core<0.4.0 and >=0.3.27",
+          "langgraph-prebuilt 1.0.13 depends on langchain-core>=1.3.1",
+          "langgraph-prebuilt 1.0.12 depends on langchain-core>=1.3.1",
+          "langgraph-prebuilt 1.0.11 depends on langchain-core>=1.3.1",
+          "langgraph-prebuilt 1.0.10 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.9 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.8 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.7 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.6 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.5 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.4 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.3 depends on langchain-core>=1.0.0",
+          "langgraph-prebuilt 1.0.2 depends on langchain-core>=1.0.0"
+        ]
+      }
+    ],
+    "stdout": "core>=1.3.1\n    langgraph-prebuilt 1.0.12 depends on langchain-core>=1.3.1\n    langgraph-prebuilt 1.0.11 depends on langchain-core>=1.3.1\n    langgraph-prebuilt 1.0.10 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.9 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.8 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.7 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.6 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.5 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.4 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.3 depends on langchain-core>=1.0.0\n    langgraph-prebuilt 1.0.2 depends on langchain-core>=1.0.0\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    langchain-core\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+    "stderr": "ERROR: Cannot install -r /staging/a3_075/requirements-lock.txt (line 10), -r /staging/a3_075/requirements-lock.txt (line 11), langchain-core==0.3.29 and langgraph because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n",
+    "duration_seconds": 30.845
+  },
+  "sandbox_duration_seconds": 2.453,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.594,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 14163968
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.878,
+    "peak_memory_bytes": 41709568
+  },
+  "finished_at": "2026-10-25T00:42:55+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

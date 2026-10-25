@@ -1,0 +1,96 @@
+/workspace/repo/src/bgigestimator.py:24: RuntimeWarning: divide by zero encountered in divide
+  self.a1 = 2 * ((self.filter.cummax / np.log(x))[-1]) ** (-1)
+/workspace/repo/src/bgigestimator.py:25: RuntimeWarning: divide by zero encountered in divide
+  self.a2 = -2 * ((self.filter.cummin / np.log(x))[-1]) ** (-1)
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:00<00:04,  1.91it/s] 30%|███       | 3/10 [00:00<00:01,  5.07it/s] 50%|█████     | 5/10 [00:00<00:00,  7.80it/s] 70%|███████   | 7/10 [00:00<00:00,  9.66it/s] 90%|█████████ | 9/10 [00:01<00:00, 10.57it/s]100%|██████████| 10/10 [00:01<00:00,  8.47it/s]
+/workspace/repo/src/density.py:39: RuntimeWarning: invalid value encountered in power
+  * x ** (p - 1)
+/workspace/repo/src/density.py:40: RuntimeWarning: overflow encountered in exp
+  * np.exp(-0.5 * (a * x + b / x))
+Traceback (most recent call last):
+  File "/workspace/deps/matplotlib/texmanager.py", line 250, in _run_checked_subprocess
+    report = subprocess.check_output(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/local/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'latex'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/repo/main.py", line 17, in <module>
+    main()
+  File "/workspace/repo/main.py", line 11, in main
+    density.save_calibratd_density()
+  File "/workspace/repo/src/density.py", line 107, in save_calibratd_density
+    plt.savefig("output/calibrated_density.png")
+  File "/workspace/deps/matplotlib/pyplot.py", line 1228, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/figure.py", line 3395, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/workspace/deps/matplotlib/backend_bases.py", line 2175, in print_figure
+    self.figure.draw(renderer)
+  File "/workspace/deps/matplotlib/artist.py", line 95, in draw_wrapper
+    result = draw(artist, renderer, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/artist.py", line 72, in draw_wrapper
+    return draw(artist, renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/figure.py", line 3162, in draw
+    mimage._draw_list_compositing_images(
+  File "/workspace/deps/matplotlib/image.py", line 132, in _draw_list_compositing_images
+    a.draw(renderer)
+  File "/workspace/deps/matplotlib/artist.py", line 72, in draw_wrapper
+    return draw(artist, renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/axes/_base.py", line 3137, in draw
+    mimage._draw_list_compositing_images(
+  File "/workspace/deps/matplotlib/image.py", line 132, in _draw_list_compositing_images
+    a.draw(renderer)
+  File "/workspace/deps/matplotlib/artist.py", line 72, in draw_wrapper
+    return draw(artist, renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/axis.py", line 1424, in draw
+    tlb1, tlb2 = self._get_ticklabel_bboxes(ticks_to_draw, renderer)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/axis.py", line 1351, in _get_ticklabel_bboxes
+    return ([tick.label1.get_window_extent(renderer)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/axis.py", line 1351, in <listcomp>
+    return ([tick.label1.get_window_extent(renderer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/text.py", line 959, in get_window_extent
+    bbox, info, descent = self._get_layout(self._renderer)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/text.py", line 373, in _get_layout
+    _, lp_h, lp_d = _get_text_metrics_with_cache(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/text.py", line 69, in _get_text_metrics_with_cache
+    return _get_text_metrics_with_cache_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/text.py", line 77, in _get_text_metrics_with_cache_impl
+    return renderer_ref().get_text_width_height_descent(text, fontprop, ismath)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/backends/backend_agg.py", line 212, in get_text_width_height_descent
+    return super().get_text_width_height_descent(s, prop, ismath)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/backend_bases.py", line 597, in get_text_width_height_descent
+    return self.get_texmanager().get_text_width_height_descent(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/texmanager.py", line 363, in get_text_width_height_descent
+    dvifile = cls.make_dvi(tex, fontsize)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/matplotlib/texmanager.py", line 295, in make_dvi
+    cls._run_checked_subprocess(
+  File "/workspace/deps/matplotlib/texmanager.py", line 254, in _run_checked_subprocess
+    raise RuntimeError(
+RuntimeError: Failed to process string with tex because latex could not be found

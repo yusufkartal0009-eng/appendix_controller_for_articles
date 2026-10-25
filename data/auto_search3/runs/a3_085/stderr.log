@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/examples/01_minimal_sequential.py", line 1, in <module>
+    from swarms import Agent, AgentRearrange
+ModuleNotFoundError: No module named 'swarms'

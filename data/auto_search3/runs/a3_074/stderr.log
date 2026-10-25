@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/aggregate_bootstrap.py", line 242, in <module>
+    files = aggregate(corpus)
+            ^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/scripts/aggregate_bootstrap.py", line 101, in aggregate
+    out.write_text(json.dumps(summary, indent=2, default=str))
+  File "/usr/local/lib/python3.11/pathlib.py", line 1078, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: '/workspace/repo/results/longmemeval-s_amem_summary.json'

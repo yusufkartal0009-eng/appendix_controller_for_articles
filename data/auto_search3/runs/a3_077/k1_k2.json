@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_077",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "train_mac.py: error: unrecognized arguments: --train_path /path/to/train/data --val_path /path/to/val/data",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 7.434,
+    "metric_lines": []
+  },
+  "k2": null
+}

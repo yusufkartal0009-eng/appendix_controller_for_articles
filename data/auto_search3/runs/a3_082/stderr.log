@@ -1,0 +1,13 @@
+/workspace/deps/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.11.17) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2027-10-24). Please upgrade to the latest Python version, or at least Python 3.12, to continue receiving updates for google.api_core past that date.
+  warnings.warn(message, FutureWarning)
+/workspace/deps/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.11.17) which Google will stop supporting in new releases of google.ai.generativelanguage_v1beta once it reaches its end of life (2027-10-24). Please upgrade to the latest Python version, or at least Python 3.12, to continue receiving updates for google.ai.generativelanguage_v1beta past that date.
+  warnings.warn(message, FutureWarning)
+Traceback (most recent call last):
+  File "/workspace/repo/db.py", line 21, in <module>
+    from config import DB_DIR, embedding_models
+  File "/workspace/repo/config.py", line 38, in <module>
+    ISAACUS_API_KEY = _require_env("ISAACUS_API_KEY")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/config.py", line 32, in _require_env
+    raise ValueError(f"{var_name} not set in .env")
+ValueError: ISAACUS_API_KEY not set in .env

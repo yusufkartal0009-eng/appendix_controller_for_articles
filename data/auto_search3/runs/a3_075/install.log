@@ -1,0 +1,13 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements-lock.txt (line 6))
+Processing /workspace/packages/scipy-1.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements-lock.txt (line 7))
+Processing /workspace/packages/langgraph-1.0.5-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 10))
+Processing /workspace/packages/langchain_openai-0.2.14-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 11))
+Processing /workspace/packages/langchain_core-0.3.29-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 12))
+Processing /workspace/packages/python_dotenv-1.0.1-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 15))
+Processing /workspace/packages/openai-1.58.1-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 18))
+Processing /workspace/packages/httpx-0.28.1-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 19))
+Processing /workspace/packages/pydantic-2.10.4-py3-none-any.whl (from -r /workspace/repo/requirements-lock.txt (line 20))
+INFO: pip is looking at multiple versions of langgraph to determine which version is compatible with other requirements. This could take a while.
+ERROR: Could not find a version that satisfies the requirement langgraph-checkpoint<4.0.0,>=2.1.0 (from langgraph) (from versions: none)
+ERROR: No matching distribution found for langgraph-checkpoint<4.0.0,>=2.1.0

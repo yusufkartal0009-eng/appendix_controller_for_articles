@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/calibrate_execution_model.py", line 5, in <module>
+    from tradearena.tools.calibration import (
+ModuleNotFoundError: No module named 'tradearena'

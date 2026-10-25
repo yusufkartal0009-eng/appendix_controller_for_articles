@@ -1,0 +1,14 @@
+{
+  "paper_id": "a3_083",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='export.arxiv.org', port=443): Max retries exceeded with url: /api/query?search_query=LLM+jailbreaking&id_list=&sortBy=relevance&sortOrder=descending&start=0&max_results=100 (Caused by NameResolutionError(\"HTTPSConnection(host='export.arx",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.98,
+    "metric_lines": []
+  },
+  "k2": null
+}

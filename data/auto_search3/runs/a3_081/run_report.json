@@ -1,0 +1,272 @@
+{
+  "paper_id": "a3_081",
+  "source": "https://github.com/gagazzotti/Bilateral-GIG",
+  "commit_hash": "9fadacd6edf304ecb2f3c4b928cba7c0d279266f",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 7.482,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a3_081",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 7.166,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 138858496,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "contourpy",
+      "version": "1.3.0"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.53.1"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.4.5"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.9.2"
+    },
+    {
+      "name": "numpy",
+      "version": "2.1.0"
+    },
+    {
+      "name": "packaging",
+      "version": "24.1"
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.2"
+    },
+    {
+      "name": "pillow",
+      "version": "10.4.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.1.4"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "pytz",
+      "version": "2024.1"
+    },
+    {
+      "name": "SciencePlots",
+      "version": "2.1.1"
+    },
+    {
+      "name": "scipy",
+      "version": "1.14.1"
+    },
+    {
+      "name": "six",
+      "version": "1.16.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.66.5"
+    },
+    {
+      "name": "tzdata",
+      "version": "2024.1"
+    },
+    {
+      "name": "uv",
+      "version": "0.5.29"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "contourpy==1.3.0",
+      "name": "contourpy",
+      "requested": "==1.3.0",
+      "installed": "1.3.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "cycler==0.12.1",
+      "name": "cycler",
+      "requested": "==0.12.1",
+      "installed": "0.12.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "fonttools==4.53.1",
+      "name": "fonttools",
+      "requested": "==4.53.1",
+      "installed": "4.53.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "kiwisolver==1.4.5",
+      "name": "kiwisolver",
+      "requested": "==1.4.5",
+      "installed": "1.4.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.9.2",
+      "name": "matplotlib",
+      "requested": "==3.9.2",
+      "installed": "3.9.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.1.0",
+      "name": "numpy",
+      "requested": "==2.1.0",
+      "installed": "2.1.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==24.1",
+      "name": "packaging",
+      "requested": "==24.1",
+      "installed": "24.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.2.2",
+      "name": "pandas",
+      "requested": "==2.2.2",
+      "installed": "2.2.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==10.4.0",
+      "name": "pillow",
+      "requested": "==10.4.0",
+      "installed": "10.4.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.1.4",
+      "name": "pyparsing",
+      "requested": "==3.1.4",
+      "installed": "3.1.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.9.0.post0",
+      "name": "python-dateutil",
+      "requested": "==2.9.0.post0",
+      "installed": "2.9.0.post0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2024.1",
+      "name": "pytz",
+      "requested": "==2024.1",
+      "installed": "2024.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "SciencePlots==2.1.1",
+      "name": "SciencePlots",
+      "requested": "==2.1.1",
+      "installed": "2.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.14.1",
+      "name": "scipy",
+      "requested": "==1.14.1",
+      "installed": "1.14.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.16.0",
+      "name": "six",
+      "requested": "==1.16.0",
+      "installed": "1.16.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.5",
+      "name": "tqdm",
+      "requested": "==4.66.5",
+      "installed": "4.66.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tzdata==2024.1",
+      "name": "tzdata",
+      "requested": "==2024.1",
+      "installed": "2024.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "uv==0.5.29",
+      "name": "uv",
+      "requested": "==0.5.29",
+      "installed": "0.5.29",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py\n==================================================\n558.7530777429743 439.90295123392474\nCalibrating...\nCalibrated!\nOrder n\u00b01, Absolute Error: 6.27516e-10 Relative: 4.54084e-06 Empirical moment: 1.38194e-04 Estimated moment: 1.38193e-04\nOrder n\u00b02, Absolute Error: 2.68506e-08 Relative: 2.88752e-04 Empirical moment: 9.29885e-05 Estimated moment: 9.29616e-05\nOrder n\u00b03, Absolute Error: 3.39234e-05 Relative: 1.37748e-04 Empirical moment: -2.46271e-01 Estimated moment: -2.46305e-01\nOrder n\u00b04, Absolute Error: 3.56816e-03 Relative: 1.12834e-03 Empirical moment: 3.16231e+00 Estimated moment: 3.16587e+00\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 7.166s\n==================================================\n",
+  "stderr_preview": "/workspace/repo/src/bgigestimator.py:24: RuntimeWarning: divide by zero encountered in divide\n  self.a1 = 2 * ((self.filter.cummax / np.log(x))[-1]) ** (-1)\n/workspace/repo/src/bgigestimator.py:25: RuntimeWarning: divide by zero encountered in divide\n  self.a2 = -2 * ((self.filter.cummin / np.log(x))[-1]) ** (-1)\n\n  0%|          | 0/10 [00:00<?, ?it/s]\n 10%|\u2588         | 1/10 [00:00<00:04,  1.91it/s]\n 30%|\u2588\u2588\u2588       | 3/10 [00:00<00:01,  5.07it/s]\n 50%|\u2588\u2588\u2588\u2588\u2588     | 5/10 [00:00<00:00,  7.80it/s]\n 70%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588   | 7/10 [00:00<00:00,  9.66it/s]\n 90%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 | 9/10 [00:01<00:00, 10.57it/s]\n100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 10/10 [00:01<00:00,  8.47it/s]\n/workspace/repo/src/density.py:39: RuntimeWarning: invalid value encountered in power\n  * x ** (p - 1)\n/workspace/repo/src/density.py:40: RuntimeWarning: overflow encountered in exp\n  * np.exp(-0.5 * (a * x + b / x))\nTraceback (most recent call last):\n  File \"/workspace/deps/matplotlib/texmanager.py\", line 250, in _run_checked_subprocess\n    report = subprocess.check_output(\n             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/usr/local/lib/python3.11/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: 'latex'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 17, in <module>\n    main()\n  File \"/workspace/repo/main.py\", line 11, in main\n    densit"
+}

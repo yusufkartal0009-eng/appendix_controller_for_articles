@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/agent/run_agent.py", line 15, in <module>
+    from agent.video_recorder import VideoRecorder
+  File "/workspace/repo/agent/video_recorder.py", line 6, in <module>
+    from playwright.async_api import async_playwright, Browser, BrowserContext, Page, Playwright
+ModuleNotFoundError: No module named 'playwright'
