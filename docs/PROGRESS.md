@@ -43,6 +43,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): automatic search round 4 protocol with the K2 v2 match test (2026-10-27 01:55 +03:00, Issue #515)
+- `docs/AUTO_SEARCH_ROUND4.md`, written after the result of round 3 was seen and before any candidate of round 4 was run: K2 v1 unchanged, K2 v2 added (fraction/percent conversion, rounding to 3 significant digits, separator normalisation, a table-page guard for converted matches), stage 8 and 9 topics, the pool (all earlier pools removed), stop conditions.
+- Controls with the stored runs: `paper_006` passes K2 v2 (one scale-converted match, `0.933` as `93.3`, plus the coincidental `256`); `paper_102` does not pass. Not verified: how often K2 v2 matches by chance on a candidate; that is what the round measures.
+
 ### fix(web): the dashboard shows the run that was scored, with its start date (2026-10-27 00:42 +03:00, Issue #513, suspicion 4 of the bug hunt)
 - `cli.py score` records the run it scored as a `runs` row (`scored_run_row` in `src/score_run.py`; the id names the run directory, the start time is the run's own, in UTC) and stores its id in the score; `src/web/pages.py` shows that run under "Run of this score" with a `Started` row, and the latest run when a score names none. The `xfail` of `tests/test_bug_hunt_suspicions.py` was removed and three tests added.
 - One extra row and one heading text on the paper page; no layout, color or font change. The owner may revise it (AGENTS.md rule 9). Label rules, the 0.05 allowance and the synthetic control in the list are unchanged.
