@@ -12,7 +12,7 @@
 Nothing here is simulated. The simulation flags of the CLI keep their own path and are labeled there.
 """
 
-from __future__ import annotationsimport jsonfrom pathlib import Pathfrom typing import Anyfrom src.scoring import ReproducibilityScorer, Tier4ArtifactsEvaluatorRECORD_NAME = "pilot_record.json"
+from __future__ import annotationsimport jsonfrom pathlib import Pathfrom typing import Anyfrom src.claim_metric_map import apply_claim_mapfrom src.scoring import ReproducibilityScorer, Tier4ArtifactsEvaluatorRECORD_NAME = "pilot_record.json"
 REPORT_NAME = "run_report.json"
 
 
@@ -62,21 +62,31 @@ def run_facts(record: dict[str, Any], report: dict[str, Any], run_dir: Path, rep
 
 def score_run(paper_id: str, license_name: str, claims: dict[str, float], record: dict[str, Any],
               report: dict[str, Any], run_dir: Path, repo_dir: Path | None = None,
-              seed_metric_results: dict[str, list[float]] | None = None) -> dict[str, Any]:
+              seed_metric_results: dict[str, list[float]] | None = None,
+              claim_map: dict[str, dict[str, dict[str, Any]]] | None = None) -> dict[str, Any]:
     """Score one stored run. `claims` are the accepted claims only (question ID -> normalized value).
+
+    `claim_map` (src/claim_metric_map.py, docs/CLAIM_METRIC_MAP.md) pairs a claim with the run's metric of the same model,
+    dataset, measure and split, or says that the run has no counterpart for it. A claim without a counterpart does not
+    enter Tier 2 and the output says so. Without a map, or without entries for this paper, claims are matched by their
+    question ID, as before.
 
     `seed_metric_results` (docs/MULTI_SEED.md) gives Tier 3 the seed runs of a multi-seed run; without it Tier 3 is the
     single-run baseline.
     """
     facts = run_facts(record, report, run_dir, repo_dir)
+    scored_claims, mapped, no_counterpart = apply_claim_map(paper_id, claims, claim_map)
     result = ReproducibilityScorer.evaluate_paper_run(
         paper_id=paper_id,
-        claimed_metrics=claims,
+        claimed_metrics=scored_claims,
         license_name=license_name,
         seed_metric_results=seed_metric_results,  # per metric, one value per successful seed run (#48); None: one run
         **facts,
     )
-    result["inputs"] = {**facts, "claims": dict(claims), "run_status": (record.get("run") or {}).get("status"),
+    result["claim_mapping"] = {"mapped": mapped, "no_counterpart": no_counterpart}
+    for query_id, reason in no_counterpart.items():
+        result["diagnostics"]["tier2_notes"].append(f"Claim {query_id} has no counterpart in this run: {reason}")
+    result["inputs"] = {**facts, "claims": dict(scored_claims), "run_status": (record.get("run") or {}).get("status"),
                         "protocol": record.get("protocol"), "repro_radar_commit": record.get("repro_radar_commit")}
     if not claims:
         result["diagnostics"]["tier2_notes"].append(

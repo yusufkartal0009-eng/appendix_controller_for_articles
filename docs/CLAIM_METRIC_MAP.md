@@ -57,7 +57,24 @@ If any of these differs, or the run produced no number at all, the decision is `
 - This is one claim and one number. A 3.05% gap inside the 5% tolerance is not an exact reproduction, and the mapping says
   nothing about whether the tolerance is the right one.
 
-## 5. Limits
+## 5. How the scorer uses it (#509)
+
+`cli.py score` loads `data/claim_metric_map.json` (`--claim-map` points elsewhere) and passes it to `score_run`
+(`src/claim_metric_map.py`, `apply_claim_map`):
+
+- a `map` claim is compared with the run metric under the existing tolerance rule;
+- a `no_counterpart` claim does not enter Tier 2; the output says `Claim X has no counterpart in this run: <reason>`;
+- if no claim is left, Tier 2 is the existing neutral baseline (70.0) with its message. Result for `paper_006`: Tier 2 70.0, total
+  82.75, label `Partially Verified`. That label rests on the build tiers only, as for `paper_102`; whether such a paper should
+  carry a label is the owner's decision (docs/PENDING.md, D10);
+- no map file, or no entry for the paper: behaviour as before (claims matched by question ID); a claim without an entry
+  stays keyed by its question ID;
+- a broken map file stops with a clear error and nothing is saved.
+
+Result for `paper_003` on each of its six stored runs: claim 0.459, reproduced 0.473, 3.05% apart, Tier 2 100.0, `Verified`.
+One claim and one number; it is not an exact reproduction.
+
+## 6. Limits
 
 - The decisions are per paper, not per run: if a future run of a paper reads another dataset, the entry must be revised.
 - `paper_004`: the run's own California result (a test RMSE in its log) is not a claim anyone accepted; it is not mapped.

@@ -127,6 +127,7 @@ def cmd_score_paper(args):
         return cmd_score_simulated(args, paper)
 
     from scripts import preflight, run_pilot
+    from src.claim_metric_map import ClaimMapError, load_claim_map
     from src.config import DATA_CACHE_DIR
     from src.score_run import load_run, score_run
 
@@ -154,7 +155,15 @@ def cmd_score_paper(args):
     else:
         print(f"Accepted claims of this paper (accepted by a person): {len(claims)}")
     repo_dir = Path(args.staging_dir) / paper.paper_id
-    result = score_run(paper.paper_id, paper.license, claims, record, report, run_dir, repo_dir if repo_dir.is_dir() else None)
+    try:
+        claim_map = load_claim_map(args.claim_map)
+        result = score_run(paper.paper_id, paper.license, claims, record, report, run_dir, repo_dir if repo_dir.is_dir() else None,
+                           claim_map=claim_map)
+    except ClaimMapError as exc:
+        print(exc)
+        sys.exit(1)
+    if claim_map is None:
+        print("No claim map found: claims are matched to the run's metrics by question ID.")
 
     bd = result["breakdown"]
     if use_consensus:  # the score must not be read as one on reviewed claims (#381)
@@ -331,6 +340,7 @@ def main():
     p_score.add_argument("--timeout", type=int, default=None, metavar="SECONDS",
                          help="Time limit of the run phase of a real run (default 3600); the record gets `timeout_override`")
     p_score.add_argument("--db-url", default=None, help="Database URL (default: REPRO_RADAR_DB_URL or data/repro_radar.db)")
+    p_score.add_argument("--claim-map", default=None, help="Claim-to-run-metric map (default: data/claim_metric_map.json)")
     p_score.add_argument("--claims", choices=["accepted", "auto-consensus"], default="accepted",
                          help="Which claims the score uses: only the ones a person accepted (default), or those plus the "
                               "auto-consensus candidates of scripts/auto_extract.py; the score is then labeled as unreviewed")

@@ -47,6 +47,9 @@ def make_run(tmp_path, *, stage="STAGED", install="INSTALLED", exit_code=0, buil
 
 
 def score(monkeypatch, url, *args):
+    # these tests are about the question-ID path; the claim map has its own tests (tests/test_score_claim_map.py)
+    if "--claim-map" not in args:
+        args = (*args, "--claim-map", "no_such_claim_map.json")
     monkeypatch.setattr(sys, "argv", ["cli.py", "score", *args, "--db-url", url])
     cli.main()
 
@@ -173,3 +176,34 @@ def test_the_printed_scores_show_the_stored_value_and_not_a_half_even_rounding_o
         out = capsys.readouterr().out
         assert f"{total:.2f} / 100" in out, total
         assert "12.25 / 100" in out
+
+
+def test_a_claim_map_pairs_the_question_id_with_the_run_metric(db, tmp_path, monkeypatch, capsys):
+    url, session = db
+    record_review(session, "paper_003:ft_transformer_rmse", "accepted")
+    session.commit()
+    claim_map = tmp_path / "map.json"
+    claim_map.write_text(json.dumps({"papers": {"paper_003": {"ft_transformer_rmse": {"decision": "map", "run_metric": "rmse"}}}}))
+    run_dir = make_run(tmp_path, metrics={"rmse": 0.46})
+    score(monkeypatch, url, "paper_003", "--from-run", str(run_dir), "--claim-map", str(claim_map))
+    out = capsys.readouterr().out
+    assert "Metric 'rmse' MATCHED" in out and "Tier 2 (Metrics Alignment)    : 100.00" in out
+    assert "No claim map found" not in out
+
+
+def test_a_missing_claim_map_is_said_and_the_question_id_path_is_used(db, tmp_path, monkeypatch, capsys):
+    url, _ = db
+    run_dir = make_run(tmp_path, metrics={"ft_transformer_rmse": 0.46})
+    score(monkeypatch, url, "paper_003", "--from-run", str(run_dir))
+    assert "No claim map found: claims are matched to the run's metrics by question ID." in capsys.readouterr().out
+
+
+def test_a_broken_claim_map_stops_with_a_clear_error_and_saves_nothing(db, tmp_path, monkeypatch, capsys):
+    url, session = db
+    claim_map = tmp_path / "map.json"
+    claim_map.write_text("{not json")
+    run_dir = make_run(tmp_path, metrics={"rmse": 0.46})
+    with pytest.raises(SystemExit):
+        score(monkeypatch, url, "paper_003", "--from-run", str(run_dir), "--claim-map", str(claim_map))
+    assert "cannot be read as JSON" in capsys.readouterr().out
+    assert saved_scores(session) == []
