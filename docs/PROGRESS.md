@@ -43,6 +43,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(corpus): K2 v2 on the stored outputs of the two round 3 K1 passers (2026-10-27 02:35 +03:00, Issue #519)
+- `docs/AUTO_SEARCH_ROUND4.md` section 10, from `python scripts/auto_search4.py reeval`: `wanyichen06/HSPR` (1 meaningful number in the output) and `fless-lab/rsi-framework` (207) pass neither K2 v1 nor K2 v2; no number of either output was found in its paper under any variant. Nothing was run again.
+
 ### feat(corpus): auto_search4 script with K2 v2 (2026-10-27 02:20 +03:00, Issue #517)
 - `scripts/auto_search4.py`: K2 v2 exactly as in `docs/AUTO_SEARCH_ROUND4.md` (fraction/percent conversion, rounding to 3 significant digits, decimal comma, table-page guard), K2 v1 and v2 stored for every run (v2 inside the `k2` record under `v2`), stages 8 and 9, the pool without any earlier pool, stop condition (c) = 5, `report` and `reeval` commands. `scripts/auto_search3.py` got three class attributes and two parameters so that a later round reuses the walk; its behaviour is unchanged.
 - 28 tests in `tests/test_auto_search4.py`, including both controls on the stored runs (and on the real PDFs when present): `paper_006` passes K2 v2, `paper_102` does not. 1,238 passed, 9 skipped.
