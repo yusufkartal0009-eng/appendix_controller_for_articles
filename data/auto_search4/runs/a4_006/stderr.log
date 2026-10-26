@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/repo/preprocess/foggy_data_beta_0.02.py", line 7, in <module>
+    raise FileNotFoundError(f"The folder '{folder_path}' does not exist. Have you already ran the preprocessing? \n")
+FileNotFoundError: The folder './data/foggy_cityscapes/images/leftImg8bit_foggy' does not exist. Have you already ran the preprocessing? 
+

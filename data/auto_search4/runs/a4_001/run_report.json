@@ -1,0 +1,415 @@
+{
+  "paper_id": "a4_001",
+  "source": "https://github.com/yamahigashi/Wav2Vec2FBX",
+  "commit_hash": "d0c15a163553f738a40dfb41121a1d385ee85dbb",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.654,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_001",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.328,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 15126528,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "appdirs==1.4.4",
+      "name": "appdirs",
+      "requested": "==1.4.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "audioread==2.1.9",
+      "name": "audioread",
+      "requested": "==2.1.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2021.10.8",
+      "name": "certifi",
+      "requested": "==2021.10.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cffi==1.14.6",
+      "name": "cffi",
+      "requested": "==1.14.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==2.0.12",
+      "name": "charset-normalizer",
+      "requested": "==2.0.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "click==8.0.3",
+      "name": "click",
+      "requested": "==8.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "colorama==0.4.4",
+      "name": "colorama",
+      "requested": "==0.4.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "decorator==5.1.1",
+      "name": "decorator",
+      "requested": "==5.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "filelock==3.5.1",
+      "name": "filelock",
+      "requested": "==3.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "huggingface-hub==0.4.0",
+      "name": "huggingface-hub",
+      "requested": "==0.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.3",
+      "name": "idna",
+      "requested": "==3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib-metadata==4.11.1",
+      "name": "importlib-metadata",
+      "requested": "==4.11.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.1.0",
+      "name": "joblib",
+      "requested": "==1.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "librosa==0.9.1",
+      "name": "librosa",
+      "requested": "==0.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "llvmlite==0.38.0",
+      "name": "llvmlite",
+      "requested": "==0.38.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numba==0.55.1",
+      "name": "numba",
+      "requested": "==0.55.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.21.5",
+      "name": "numpy",
+      "requested": "==1.21.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==21.3",
+      "name": "packaging",
+      "requested": "==21.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==9.0.1",
+      "name": "Pillow",
+      "requested": "==9.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pooch==1.6.0",
+      "name": "pooch",
+      "requested": "==1.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pycparser==2.20",
+      "name": "pycparser",
+      "requested": "==2.20",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pynng==0.7.1",
+      "name": "pynng",
+      "requested": "==0.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.0.7",
+      "name": "pyparsing",
+      "requested": "==3.0.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0",
+      "name": "PyYAML",
+      "requested": "==6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "regex==2022.1.18",
+      "name": "regex",
+      "requested": "==2022.1.18",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.27.1",
+      "name": "requests",
+      "requested": "==2.27.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "resampy==0.2.2",
+      "name": "resampy",
+      "requested": "==0.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sacremoses==0.0.47",
+      "name": "sacremoses",
+      "requested": "==0.0.47",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.0.2",
+      "name": "scikit-learn",
+      "requested": "==1.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.7.3",
+      "name": "scipy",
+      "requested": "==1.7.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.16.0",
+      "name": "six",
+      "requested": "==1.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sniffio==1.2.0",
+      "name": "sniffio",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "SoundFile==0.10.3.post1",
+      "name": "SoundFile",
+      "requested": "==0.10.3.post1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==3.1.0",
+      "name": "threadpoolctl",
+      "requested": "==3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tokenizers==0.11.5",
+      "name": "tokenizers",
+      "requested": "==0.11.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "toml==0.10.2",
+      "name": "toml",
+      "requested": "==0.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.10.2",
+      "name": "torch",
+      "requested": "==1.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchaudio==0.10.2",
+      "name": "torchaudio",
+      "requested": "==0.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.11.3",
+      "name": "torchvision",
+      "requested": "==0.11.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.62.3",
+      "name": "tqdm",
+      "requested": "==4.62.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.16.2",
+      "name": "transformers",
+      "requested": "==4.16.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.1.1",
+      "name": "typing_extensions",
+      "requested": "==4.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==1.26.8",
+      "name": "urllib3",
+      "requested": "==1.26.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wincertstore==0.2",
+      "name": "wincertstore",
+      "requested": "==0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zipp==3.7.0",
+      "name": "zipp",
+      "requested": "==3.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py input_audio.wav\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.328s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 8, in <module>\n    import src.Wav2Vec2FBX.__main__  # noqa\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/src/Wav2Vec2FBX/__init__.py\", line 1, in <module>\n    from . import (  # pylint: disable=unused-import  # noqa\n  File \"/workspace/repo/src/Wav2Vec2FBX/wav2vec2fbx.py\", line 10, in <module>\n    import toml\nModuleNotFoundError: No module named 'toml'\n"
+}

@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_009",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "sqlite3.OperationalError: unable to open database file",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.429,
+    "metric_lines": []
+  },
+  "k2": null
+}

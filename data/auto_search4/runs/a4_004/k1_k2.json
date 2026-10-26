@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_004",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for absl-py==0.9.0",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.769,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/src/data/create_aligned_vrt.py", line 19, in <module>
+    import rasterio
+ModuleNotFoundError: No module named 'rasterio'
