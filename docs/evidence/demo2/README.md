@@ -17,3 +17,5 @@ Tier 2 is 100 for `paper_003` (one claim compared: 0.459 against 0.473). For a p
 the run (`paper_004`, `paper_006`), and for a paper without an accepted claim, Tier 2 is the neutral 70, so the label rests on
 the build tiers only; this is not a measurement (`docs/REAL_VERDICTS.md` sections 2 and 5). Before the map Tier 2 was 0 for every
 paper that has accepted claims (`docs/REAL_VERDICTS.md` keeps that result). The "Started" time of a run is the start time in its own record.
+
+The detail pages were taken again after #513: the block under the score is headed "Run of this score" and has a `Started` row (the start time of the run's own record, UTC).

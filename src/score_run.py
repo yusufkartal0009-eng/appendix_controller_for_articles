@@ -12,7 +12,7 @@
 Nothing here is simulated. The simulation flags of the CLI keep their own path and are labeled there.
 """
 
-from __future__ import annotationsimport jsonfrom pathlib import Pathfrom typing import Anyfrom src.claim_metric_map import apply_claim_mapfrom src.scoring import ReproducibilityScorer, Tier4ArtifactsEvaluatorRECORD_NAME = "pilot_record.json"
+from __future__ import annotationsimport jsonfrom datetime import UTC, datetimefrom pathlib import Pathfrom typing import Anyfrom src.claim_metric_map import apply_claim_mapfrom src.scoring import ReproducibilityScorer, Tier4ArtifactsEvaluatorRECORD_NAME = "pilot_record.json"
 REPORT_NAME = "run_report.json"
 
 
@@ -93,3 +93,30 @@ def score_run(paper_id: str, license_name: str, claims: dict[str, float], record
             "No claim of this paper has been accepted by a person: the 70.0 of Tier 2 is the scorer's neutral "
             "baseline for 'no claims', not a measurement.")
     return result
+
+
+LOG_CHARS = 20000
+
+
+def scored_run_row(paper_id: str, run_dir: Path, record: dict[str, Any], report: dict[str, Any], root: Path) -> dict[str, Any]:
+    """The `runs` row of the stored run that a score was computed from, so that a page can name that run (bug hunt suspicion 4).
+
+    The id names the run directory relative to `root` (the project directory; `data/pilot3_runs/paper_003`), which tells the
+    setting (the pilot or the re-run) apart. The start time is the one in the run's own record, in UTC, not the time of scoring.
+    """
+    run_dir = Path(run_dir).resolve()
+    try:
+        where = run_dir.relative_to(Path(root).resolve()).as_posix()
+    except ValueError:
+        where = run_dir.name
+    run = record.get("run") or {}
+    started = record.get("started_at")
+
+    def tail(name: str) -> str | None:
+        path = run_dir / name
+        return path.read_text(encoding="utf-8", errors="replace")[-LOG_CHARS:] if path.is_file() else None
+
+    return {"run_id": f"{paper_id}@{where}", "paper_id": paper_id, "status": run.get("status") or "FAILED",
+            "execution_time": report.get("duration_seconds"), "exit_code": run.get("exit_code"),
+            "stdout": tail("stdout.log"), "stderr": tail("stderr.log"),
+            "timestamp": datetime.fromisoformat(started).astimezone(UTC).replace(tzinfo=None) if started else None}

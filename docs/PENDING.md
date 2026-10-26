@@ -3,7 +3,7 @@
 This document lists what is still open: decisions that only the owner can make, work that an assistant can do, open
 issues, and things that were done only partly or not verified. It is a snapshot. The evidence for each item is named; when
 an item is closed, its entry is removed or marked in the same pull request that closes it. State of `main` when this was
-written (updated 2026-10-25): no open pull request, 1,205 tests passed, 9 skipped and 1 expected failure, `ruff check .` clean. Items that were done since 2026-10-22
+written (updated 2026-10-25): no open pull request, 1,210 tests passed, 9 skipped, `ruff check .` clean. Items that were done since 2026-10-22
 are marked **DONE** with the pull request that closed them.
 
 How to read it: **Decision** means a choice that belongs to the owner. **Work** means a task that can be done without a
@@ -105,7 +105,7 @@ decision. **Not verified** means a statement in the project that has no evidence
   `Partially Verified` from the build tiers alone (before: `Needs Review`), like `paper_102`; (2) the same neutral 70 applies to a failed run whose claims all have no counterpart
   (`paper_002`, `paper_005`, `paper_008`), so its total is higher than when Tier 2 was 0 (the label stays `Failed` through Tier 1). Neither rule was changed.
 - **Also open:** the scorer gives a paper without an accepted claim a neutral Tier 2 of 70 and the label `Partially Verified` from the build tiers alone (`paper_102`);
-  K2 has no positive control (no real run prints a table value of its paper); the dashboard shows another run beside a score (suspicion 4 of the bug hunt).
+  K2 has no positive control (no real run prints a table value of its paper).
 
 ### D10. Two rules of the scorer to confirm (new, from the bug hunt, `docs/BUG_HUNT.md` section 2)
 - **The absolute allowance of 0.05 for a value between 0 and 1** makes small values lenient (0.0167 matches a reproduced 0.06). Keep it, or use it only for
@@ -142,8 +142,8 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 - Fill the form of the demo paper (D3) and of gold set 2 (D2) when the owner has the time; both are outside the repository.
 - D9 (a) is done (round 2); the open items (e) and (f) of D9 need a decision before a third round.
 - D11 (the automatic search of round 3) is done; its open decisions (a) to (c) need the owner.
-- The bug hunt suspicions were tried on 2026-10-25 (`docs/BUG_HUNT.md` section 3): 2, 3 and 6 were real and are fixed (#499, #500, #501); 4 is real and needs a decision
-  on what the dashboard shows (a strict `xfail` test holds it); 1, 5 and 7 are decisions of the owner (D10 twice, and the K1 pattern of the protocols).
+- The bug hunt suspicions were tried on 2026-10-25 (`docs/BUG_HUNT.md` section 3): 2, 3 and 6 were real and are fixed (#499, #500, #501); 4 was real and is fixed
+  (#513: the page shows the run that was scored, with its start date); 1, 5 and 7 are decisions of the owner (D10 twice, and the K1 pattern of the protocols).
 - **DONE 2026-10-25:** the verdicts on the real stored runs (`docs/REAL_VERDICTS.md`, #495), the dashboard database from the stored runs (`scripts/build_demo_db.py`, #497),
   the second pass of the bug hunt (#499, #500, #501, #502), the report in its final state and `docs/PAPER_STATUS.md` (#504). What the paper still needs from the owner is in `docs/PAPER_STATUS.md`.
 

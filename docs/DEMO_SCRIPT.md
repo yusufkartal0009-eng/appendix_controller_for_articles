@@ -5,6 +5,15 @@ Issue #444. This flow uses **only examples that have evidence in the repository*
 local paths replaced by `<REPO>` and `<HOME>`; where an output is long it is shortened and says so. Every step says what it
 shows and what it does **not** show. Nothing here is a reproduction of a paper's result.
 
+> **Update 2026-10-27 (#509, #511, #513).** The transcripts below were recorded on 2026-10-24, before the claim map
+> (`data/claim_metric_map.json`, `docs/CLAIM_METRIC_MAP.md`). Today `cli.py score` pairs claims with the run's metrics through that
+> map: `paper_003` gets Tier 2 100 and `Verified` (0.459 against 0.473; one claim, one number), and `paper_006` and `paper_004` have no
+> counterpart for their claims, so their Tier 2 is the neutral 70 (`docs/REAL_VERDICTS.md`, section 2, keeps both results). The
+> "58.25, Needs Review" and "nothing was compared" lines of Steps 1 and 5 are therefore the state **before the map**. Since #513
+> `cli.py score` also stores the run it scored, so the page of a paper shows that run ("Run of this score", with its start date), not
+> another run; the remark in Step 1 that score and latest run do not belong together describes the state at the time of recording.
+> The commands and their output were not recorded again.
+
 Before the talk: `python cli.py init-db` once (loads the 6 papers and the 13 claims that the owner accepted), the virtual environment
 active (`.venv\Scripts\Activate.ps1`), and Docker **not** needed: every step reads stored records.
 
