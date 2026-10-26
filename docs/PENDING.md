@@ -3,7 +3,7 @@
 This document lists what is still open: decisions that only the owner can make, work that an assistant can do, open
 issues, and things that were done only partly or not verified. It is a snapshot. The evidence for each item is named; when
 an item is closed, its entry is removed or marked in the same pull request that closes it. State of `main` when this was
-written (updated 2026-10-25): no open pull request, 1,165 tests passed, 9 skipped and 1 expected failure, `ruff check .` clean. Items that were done since 2026-10-22
+written (updated 2026-10-25): no open pull request, 1,205 tests passed, 9 skipped and 1 expected failure, `ruff check .` clean. Items that were done since 2026-10-22
 are marked **DONE** with the pull request that closed them.
 
 How to read it: **Decision** means a choice that belongs to the owner. **Work** means a task that can be done without a
@@ -95,11 +95,15 @@ decision. **Not verified** means a statement in the project that has no evidence
 - **Not done:** no match candidate exists, so no form (`aday_iddia_formu_3.md`) was made; whether the numbers of `a3_096` come from a simulation is not verified.
 
 ### D12. How the claims meet the run's metrics (new, 2026-10-25, `docs/REAL_VERDICTS.md`)
-- **State:** `cli.py score` keys a claim by its question ID (`ft_transformer_rmse`) and the run's metrics by the name the extractor found (`rmse`), so no real
-  claim is ever compared: Tier 2 is 0.0 and the label `Needs Review` for every stored real run that has accepted claims. Aligned by hand, `paper_003`
-  (FT-Transformer, California Housing) is close to its claim; the claims of `paper_006` belong to another dataset, and the stored metrics of `paper_004` are hyperparameters.
-- **Decide:** how a claim should be tied to a run's metric (a mapping written beside each paper's run setup, a metric name in the claim, or a manual pairing as in
-  `scripts/real_verdicts.py`). Until then the dashboard shows Tier 2 = 0 for every paper with accepted claims.
+- **State: implemented as a mapping file; owner may revise** (#507, #509, #511). `data/claim_metric_map.json` ties each accepted claim (question ID) to the run
+  metric of the same model, dataset, measure and split (`map`: 1 claim, `paper_003` / `ft_transformer_rmse` -> `rmse`) or says that the run has no counterpart
+  (`no_counterpart`: 12 claims); `docs/CLAIM_METRIC_MAP.md` has the rule and the evidence of each row. `cli.py score` uses it; a claim without a counterpart stays out of Tier 2
+  and the output says so. `paper_003`: 0.459 against 0.473, 3.05 %, Tier 2 100, `Verified` (one claim, one number, not a confirmed reproduction). Before the map: Tier 2 0.0 and
+  `Needs Review` for every real run (`docs/REAL_VERDICTS.md` keeps that result as "before the mapping").
+- **Decide (still open):** whether this is the way to tie a claim to a run (the alternatives were a mapping beside each paper's run setup, or a metric name in the claim),
+  and each row of the map. **Two consequences of the map to confirm:** (1) with every claim `no_counterpart` Tier 2 is the neutral 70 and `paper_004` and `paper_006` now get
+  `Partially Verified` from the build tiers alone (before: `Needs Review`), like `paper_102`; (2) the same neutral 70 applies to a failed run whose claims all have no counterpart
+  (`paper_002`, `paper_005`, `paper_008`), so its total is higher than when Tier 2 was 0 (the label stays `Failed` through Tier 1). Neither rule was changed.
 - **Also open:** the scorer gives a paper without an accepted claim a neutral Tier 2 of 70 and the label `Partially Verified` from the build tiers alone (`paper_102`);
   K2 has no positive control (no real run prints a table value of its paper); the dashboard shows another run beside a score (suspicion 4 of the bug hunt).
 
@@ -176,7 +180,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 - **Automatic search (round 3):** **0 of 135** candidates of the automatic search of round 3 passed both the run test and the match of the output to the paper's text (K1 passed by 2 of 135, K2 by 0 of 135; Wilson 95 % intervals in the report, section 6.10); a selected, non-representative list, not a success rate (D11).
 - **Candidate papers:** 0 of the 14 selected candidates passed a first attempt and 1 of 14 after repair (D9); the list was chosen by others for being easy, so this is not a success rate and it does not say that the papers cannot be reproduced.
 - **Tolerance probe:** its claims are hand-made, not errors of real papers; the rates of false positives and false negatives of the scorer in the real world have not been measured.
-- **Tier 2 has still never compared an accepted claim with a result of a real run.**
+- **Tier 2 has compared an accepted claim with a result of a real run once** (`paper_003`, through the claim map: one claim, one number, 3.05 % apart); it has not compared more.
 - **The diagnosis classifier:** its validation set (46 real and 12 synthetic runs) was labeled by hand but not blind; after the gaps were closed (PR #425) the
   set no longer measures anything on new logs (`docs/DIAGNOSIS.md`).
 - **Model paths of the diagnosis layer** (`anthropic`, `local`) were never run against a real model.

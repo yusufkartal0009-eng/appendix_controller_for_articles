@@ -11,7 +11,8 @@ the sandbox and no database is written: `score_run` needs none, so `data/repro_r
 
 Two views are kept apart on purpose:
 
-- *as scored*: the claims are keyed by their question ID, exactly as `cli.py score --from-run` does it;
+- *as scored*: what `cli.py score --from-run` does. Since #509 the claims go through `data/claim_metric_map.json`
+  (`docs/CLAIM_METRIC_MAP.md`); the result *before the mapping* (claims keyed by their question ID) is kept next to it;
 - *aligned*: only where the stored output shows that the run trained the same model on the same dataset, the claim is
   compared with the run's metric of the same name. The pairing and its evidence (a string that must occur in the
   run's `stdout.log`) are written in `PAIRINGS` below; a claim without a pairing is not compared.
@@ -32,6 +33,7 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
+from src.claim_metric_map import load_claim_map
 from src.config import DEFAULT_TOLERANCE
 from src.score_run import load_run, score_run
 
@@ -115,8 +117,8 @@ def evidence_found(run_dir: Path, needles: list[str]) -> bool:
 
 
 def _scored(paper_id: str, license_name: str, claims: dict[str, float], record: dict[str, Any], report: dict[str, Any],
-            run_dir: Path) -> dict[str, Any]:
-    result = score_run(paper_id, license_name, claims, record, report, run_dir, None)
+            run_dir: Path, claim_map: dict[str, Any] | None = None) -> dict[str, Any]:
+    result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=claim_map)
     bd = result["breakdown"]
     return {"tier1": bd.tier1_build, "tier2": bd.tier2_metrics, "total": bd.total_score, "status": bd.status_label}
 
@@ -124,6 +126,7 @@ def _scored(paper_id: str, license_name: str, claims: dict[str, float], record: 
 def verdict_rows(run_root: Path = DATA, claims: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     """One row per (run, accepted claim); a paper without an accepted claim gets one row without a claim."""
     claims = (accepted_claims() if claims is None else claims) + SYNTHETIC_CLAIMS
+    claim_map = load_claim_map()
     rows: list[dict[str, Any]] = []
     for paper_id, label, rel, license_name in RUNS:
         run_dir = run_root / rel
@@ -132,22 +135,27 @@ def verdict_rows(run_root: Path = DATA, claims: list[dict[str, Any]] | None = No
         by_id = {c["query_id"]: c["value"] for c in paper_claims}
         # The synthetic claims are scored one at a time and keyed by metric name (scripts/synthetic_control.py): there is no
         # CLI view for them
-        as_scored = (_scored(paper_id, license_name, by_id, record, report, run_dir) if paper_id != "synthetic_control"
-                     else {"tier2": None, "status": None, "total": None})
+        no_view = {"tier2": None, "status": None, "total": None}
+        as_scored = (_scored(paper_id, license_name, by_id, record, report, run_dir, claim_map) if paper_id != "synthetic_control"
+                     else no_view)
+        before = (_scored(paper_id, license_name, by_id, record, report, run_dir, None) if paper_id != "synthetic_control"
+                  else no_view)
         metrics = {k: float(v) for k, v in (report.get("metrics") or {}).items() if isinstance(v, (int, float))}
         base = {"paper_id": paper_id, "run": label, "run_dir": f"data/{rel}", "run_status": (record.get("run") or {}).get("status"),
                 "run_metrics": metrics, "cli_tier2": as_scored["tier2"], "cli_status": as_scored["status"],
-                "cli_total": as_scored["total"]}
+                "cli_total": as_scored["total"], "before_tier2": before["tier2"], "before_status": before["status"],
+                "before_total": before["total"]}
         if not paper_claims:
-            rows.append({**base, "query_id": None, "claimed": None, "reproduced": None, "abs_diff": None, "rel_diff": None,
-                         "aligned_tier2": None, "aligned_status": None, "comparable": False,
+            rows.append({**base, "query_id": None, "map_decision": None, "claimed": None, "reproduced": None, "abs_diff": None,
+                         "rel_diff": None, "aligned_tier2": None, "aligned_status": None, "comparable": False,
                          "reason": "no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no "
                                    "claims', not a measurement; the status label rests on the build tiers only"})
             continue
         for claim in paper_claims:
             pairing = PAIRINGS.get((paper_id, claim["query_id"]))
-            row = {**base, "query_id": claim["query_id"], "metric_name": claim["metric_name"], "dataset": claim["dataset"],
-                   "model_variant": claim["model_variant"], "claimed": claim["value"], "reproduced": None, "abs_diff": None,
+            decision = ((claim_map or {}).get(paper_id) or {}).get(claim["query_id"], {}).get("decision")
+            row = {**base, "query_id": claim["query_id"], "map_decision": decision, "metric_name": claim["metric_name"],
+                   "dataset": claim["dataset"], "model_variant": claim["model_variant"], "claimed": claim["value"], "reproduced": None, "abs_diff": None,
                    "rel_diff": None, "aligned_tier2": None, "aligned_status": None, "comparable": False}
             if paper_id == "synthetic_control":
                 pairing = {"metric": "accuracy", "evidence": ["accuracy"],
@@ -246,9 +254,10 @@ def render(doc: dict[str, Any]) -> str:
         "## 1. What this document shows and does not show", "",
         "**It shows**", "",
         ("- What the scorer says today on every real, completed, stored run, next to the claims a person accepted, with the "
-        "reason why each decision is meaningful or not."),
+        "reason why each decision is meaningful or not, and what it said before the claim map existed (#507, #509)."),
         ("- That a run whose model, dataset and metric match a claim (`paper_003`, FT-Transformer on California Housing) is "
-        "compared correctly: the numbers are close and the scorer agrees."),
+        "now compared by the CLI path through the claim map: the numbers are close and the scorer agrees. This is one claim and "
+        "one number, not a confirmed reproduction."),
         ("- What the K2 check (numbers of the run's output occur in the paper's text) does on the real runs: it passes "
         "`paper_003` by coincidence of dense numbers, and fails `paper_006` and `paper_102` (section 4). The expected "
         "positive control was not obtained."),
@@ -261,11 +270,16 @@ def render(doc: dict[str, Any]) -> str:
         "hand-made claims of the tolerance probe (`docs/TOLERANCE_PROBE.md`)."),
         "- A success rate. The runs are the ones that happened to complete; they are not a sample.",
         "- Anything about claims nobody accepted. `paper_102` has none, so its Tier 2 is a neutral baseline.", "",
-        "## 2. The scorer as the CLI uses it (claims keyed by question ID)", "",
-        ("`cli.py score --from-run` scores all accepted claims of a paper together, matched by question ID (for example "
-        "`ft_transformer_rmse`). The run's metrics are keyed by the name the extractor found (`rmse`). The two never "
-        "agree, so every real claim is reported as not found. This is the first finding of this document."), "",
-        "| Paper | Run | Run status | Run metrics | Tier 2 | Status label |", "|---|---|---|---|---|---|"]
+        "## 2. The scorer as the CLI uses it, before and with the claim map", "",
+        ("`cli.py score --from-run` scores all accepted claims of a paper together. An accepted claim is keyed by its question ID "
+        "(for example `ft_transformer_rmse`); the run's metrics are keyed by the name the extractor found (`rmse`). **Before the "
+        "mapping** (the state until #509) the two never agreed, so every real claim was reported as not found: Tier 2 was 0 and "
+        "the label `Needs Review`. **With the map** (`data/claim_metric_map.json`, `docs/CLAIM_METRIC_MAP.md`) a claim is compared "
+        "with the run metric of the same model, dataset, measure and split; a claim for which the run has no counterpart does not "
+        "enter Tier 2. When no claim is left, Tier 2 is the neutral baseline of 'no claims'. The 'before' column is kept so that "
+        "the change can be read."), "",
+        ("| Paper | Run | Run status | Run metrics | Before the mapping: Tier 2 / total / label | With the map: Tier 2 / total / label |"),
+        "|---|---|---|---|---|---|"]
     seen = set()
     for r in rows:
         key = (r["paper_id"], r["run"])
@@ -275,15 +289,20 @@ def render(doc: dict[str, Any]) -> str:
         metrics = ", ".join(f"{k}={_f(v)}" for k, v in list(r["run_metrics"].items())[:4]) or "none"
         if len(r["run_metrics"]) > 4:
             metrics += f", ... ({len(r['run_metrics'])} in all)"
-        out.append(f"| {r['paper_id']} | {r['run']} (`{r['run_dir']}`) | {r['run_status']} | {metrics} | {_f(r['cli_tier2'], 1)} | {r['cli_status'] or '- (scored one claim at a time)'} |")
+        if r["cli_status"] is None:
+            before = now = "- (scored one claim at a time)"
+        else:
+            before = f"{_f(r['before_tier2'], 1)} / {_f(r['before_total'], 2)} / {r['before_status']}"
+            now = f"{_f(r['cli_tier2'], 1)} / {_f(r['cli_total'], 2)} / {r['cli_status']}"
+        out.append(f"| {r['paper_id']} | {r['run']} (`{r['run_dir']}`) | {r['run_status']} | {metrics} | {before} | {now} |")
     out += ["", "## 3. Claim by claim", "",
             (f"Tolerance: {DEFAULT_TOLERANCE:.0%} (`DEFAULT_TOLERANCE`). \"Aligned\" is the Tier 2 of that single claim compared with "
             "the run's metric of the same name, only where the pairing is established; `-` means not compared."), "",
-            "| Paper | Run | Claim (question ID) | Claimed | Reproduced | Abs diff | Rel diff | Aligned Tier 2 | Aligned label | Why |",
-            "|---|---|---|---|---|---|---|---|---|---|"]
+            "| Paper | Run | Claim (question ID) | Map decision | Claimed | Reproduced | Abs diff | Rel diff | Aligned Tier 2 | Aligned label | Why |",
+            "|---|---|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
         claim = r["query_id"] or "(none accepted)"
-        out.append(f"| {r['paper_id']} | {r['run']} | {claim} | {_f(r['claimed'])} | {_f(r['reproduced'])} | {_f(r['abs_diff'])} | "
+        out.append(f"| {r['paper_id']} | {r['run']} | {claim} | {r['map_decision'] or '-'} | {_f(r['claimed'])} | {_f(r['reproduced'])} | {_f(r['abs_diff'])} | "
                    f"{_pct(r['rel_diff'])} | {_f(r['aligned_tier2'], 1)} | {r['aligned_status'] or '-'} | {r['reason']} |")
     out += ["", "## 4. K2 positive control", "",
             ("K2 passes when at least 2 different meaningful numbers of the run's output occur in the paper's text and at least "
@@ -317,7 +336,9 @@ def render(doc: dict[str, Any]) -> str:
             for e in k["examples"]:
                 out.append(f"- `{e['number']}` on page {e['page']}: output line `{e['output_line'][:70]}`; paper line `{e['paper_line'][:90]}`")
             break
-    out += ["", doc["k2_reading"], "", FINDINGS, ""]
+    p6 = next((r for r in rows if r["paper_id"] == "paper_006"), None)
+    findings = FINDINGS.replace("@P6@", f"Tier 2 {_f(p6['cli_tier2'], 1)}, total {_f(p6['cli_total'], 2)}, `{p6['cli_status']}`" if p6 else "-")
+    out += ["", doc["k2_reading"], "", findings, ""]
     return "\n".join(out) + "\n"
 
 
@@ -350,21 +371,25 @@ defect that this document fixes."""
 
 FINDINGS = """## 5. Findings
 
-1. **The CLI path never matches a real claim.** Claims are keyed by question ID (`ft_transformer_rmse`), the run's metrics
-   by the extracted name (`rmse`). Section 2: Tier 2 is 0.0 and the label is `Needs Review` for every real run, even where
-   the run printed a number for the claim (`paper_003`). Only a person who aligns the two (section 3, "aligned") gets a
-   comparison. (Tests of `cli.py score` pass because they store the metric under the question ID.)
-2. **`paper_003`, aligned: the decision is meaningful.** Same model, dataset and metric; 0.473 against 0.459 is 3.05% apart,
-   inside the 5% tolerance, so Tier 2 is 100 and the label `Verified`. Whether a 0.014 RMSE gap should count as
-   reproduced is a tolerance question (`docs/TOLERANCE_PROBE.md`), not a fact this document can settle. The ResNet and
-   XGBoost claims of the paper are not produced by the run.
-3. **`paper_006`: claim and run do not match.** Both accepted claims are Arcene numbers; the run reads OpenML dataset 1461
-   (bank-marketing). Any decision on these claims is meaningless. The paper's own table has a SAINT value for Bank (`93.3`,
-   page 7), but nobody accepted it as a claim, so it is not scored here.
+1. **Before the mapping the CLI path never matched a real claim; now it does where the run has a counterpart.** Claims were
+   keyed by question ID (`ft_transformer_rmse`), the run's metrics by the extracted name (`rmse`), so Tier 2 was 0.0 and the
+   label `Needs Review` for every real run, even where the run printed a number for the claim (`paper_003`). With the claim map
+   (section 2, "with the map") the CLI path compares `ft_transformer_rmse` with `rmse`; the other claims are excluded from Tier 2
+   with the reason. The 'before' column keeps the old result. The map is a proposal that the owner may revise.
+2. **`paper_003`, with the map: the decision is meaningful, for one claim.** Same model, dataset and metric; 0.473 against 0.459 is
+   3.05% apart, inside the 5% tolerance, so Tier 2 is 100 and the label `Verified`. It is one claim and one number, not a confirmed
+   reproduction. Whether a 0.014 RMSE gap should count as reproduced is a tolerance question (`docs/TOLERANCE_PROBE.md`), not a
+   fact this document can settle. The ResNet and XGBoost claims of the paper are not produced by the run (`no_counterpart`).
+3. **`paper_006`: claim and run do not match, so the claims are excluded.** Both accepted claims are Arcene numbers; the run reads
+   OpenML dataset 1461 (bank-marketing). With the map nothing is left to compare: @P6@. That label rests on the build tiers only
+   (see finding 6); it is not a measurement. The paper's own table has a SAINT value for Bank (`93.3`, page 7), but nobody
+   accepted it as a claim, so it is not scored here.
 4. **`paper_006`: the stored `auroc` (0.892) is the last logged test line, not the run's "AUROC on best model: 0.929".** The
    extractor keeps the last occurrence of a name; here that is an epoch line. Reported, not changed.
-5. **`paper_004`: the stored metrics are hyperparameters** (`lr`, `weight_decay`); the claims are average ranks. Meaningless.
-6. **`paper_102`: no claim was accepted, and the label is still `Partially Verified`.** With no claims Tier 2 is a neutral
+5. **`paper_004`: the stored metrics are hyperparameters** (`lr`, `weight_decay`); the claims are average ranks, so both claims
+   are excluded (`no_counterpart`) and Tier 2 is the neutral baseline.
+6. **A label without a comparison: `paper_102` (no claim accepted), and with the map every paper whose claims are all
+   `no_counterpart`.** `paper_102`: no claim was accepted, and the label is still `Partially Verified`. With no claims Tier 2 is a neutral
    70.0; with a clean build the total reaches the partial threshold. A reader sees a verdict that rests on no comparison
    (the summary line of the score says so, the label does not). Whether such a paper should get a label at all is a decision
    for the owner.
