@@ -43,6 +43,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(corpus): auto_search4 script with K2 v2 (2026-10-27 02:20 +03:00, Issue #517)
+- `scripts/auto_search4.py`: K2 v2 exactly as in `docs/AUTO_SEARCH_ROUND4.md` (fraction/percent conversion, rounding to 3 significant digits, decimal comma, table-page guard), K2 v1 and v2 stored for every run (v2 inside the `k2` record under `v2`), stages 8 and 9, the pool without any earlier pool, stop condition (c) = 5, `report` and `reeval` commands. `scripts/auto_search3.py` got three class attributes and two parameters so that a later round reuses the walk; its behaviour is unchanged.
+- 28 tests in `tests/test_auto_search4.py`, including both controls on the stored runs (and on the real PDFs when present): `paper_006` passes K2 v2, `paper_102` does not. 1,238 passed, 9 skipped.
+- Not verified: a full run of the new script in the sandbox (the first run is the search itself).
+
 ### docs(corpus): automatic search round 4 protocol with the K2 v2 match test (2026-10-27 01:55 +03:00, Issue #515)
 - `docs/AUTO_SEARCH_ROUND4.md`, written after the result of round 3 was seen and before any candidate of round 4 was run: K2 v1 unchanged, K2 v2 added (fraction/percent conversion, rounding to 3 significant digits, separator normalisation, a table-page guard for converted matches), stage 8 and 9 topics, the pool (all earlier pools removed), stop conditions.
 - Controls with the stored runs: `paper_006` passes K2 v2 (one scale-converted match, `0.933` as `93.3`, plus the coincidental `256`); `paper_102` does not pass. Not verified: how often K2 v2 matches by chance on a candidate; that is what the round measures.
