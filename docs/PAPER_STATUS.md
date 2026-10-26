@@ -24,7 +24,7 @@ item. The owner's open decisions are listed with their long form in `docs/PENDIN
 | 6.8 Candidate papers | Final | **Candidates (D9):** whether to repair further or stop adding papers |
 | 6.9 Tolerance probe | Final | **Scorer rules (D10):** the 0.05 absolute allowance for small values; whether a label may be given to a paper without an accepted claim |
 | 6.10 Automatic search | Final | **Round 3 (D11):** whether to run a stage 8 or to stop |
-| 6.11 Real verdicts and the pilot as an estimate | New, written from the stored files on 2026-10-25 | **Claim matching:** how the question IDs of the claims and the extracted metric names should meet (the command-line path never compares a real claim); the owner should read the section once, because it states that the expected K2 positive control was not obtained |
+| 6.11 Real verdicts and the pilot as an estimate | New, written from the stored files on 2026-10-25 | **Claim matching:** the claim map (`data/claim_metric_map.json`, #507, #509) is a proposal the owner may revise; before it the command-line path never compared a real claim; the owner should read the section once, because it states that the expected K2 positive control was not obtained |
 | 7 Limitations | Final; three bullets added on 2026-10-25 | nothing |
 | 8 Lessons learned | Final; one lesson added and the "what we would change next" list replaced | nothing |
 | 9 Conclusion and future work | Final; the dashboard sentence and the claims were updated | nothing |

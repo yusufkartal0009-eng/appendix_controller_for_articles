@@ -24,11 +24,25 @@ def test_every_run_of_the_list_has_rows_and_a_directory_that_exists():
         assert any(r["run"] == label and r["run_dir"] == f"data/{rel}" for r in rows), rel
 
 
-def test_only_accepted_claims_are_used_and_the_cli_view_never_finds_a_real_claim():
+def test_only_accepted_claims_are_used_and_the_result_before_the_mapping_never_found_a_real_claim():
     accepted = {c["query_id"] for c in rv.accepted_claims()}
     rows = [r for r in rv.verdict_rows() if r["paper_id"] in {"paper_003", "paper_004", "paper_006"}]
     assert {r["query_id"] for r in rows} <= accepted
-    assert all(r["cli_tier2"] == 0.0 for r in rows)  # the keys (question IDs) never equal the extracted metric names
+    # before the mapping the keys (question IDs) never equal the extracted metric names
+    assert all(r["before_tier2"] == 0.0 and r["before_status"] == "Needs Review" for r in rows)
+
+
+def test_with_the_map_paper_003_is_compared_and_the_other_papers_have_nothing_to_compare():
+    rows = rv.verdict_rows()
+    p3 = [r for r in rows if r["paper_id"] == "paper_003"]
+    assert all(r["cli_tier2"] == 100.0 and r["cli_status"] == "Verified" for r in p3)
+    assert {r["query_id"]: r["map_decision"] for r in p3 if r["run"] == "Pilot 3"} == {
+        "ft_transformer_rmse": "map", "resnet_rmse": "no_counterpart", "xgboost_rmse": "no_counterpart"}
+    for r in (r for r in rows if r["paper_id"] in {"paper_004", "paper_006"}):
+        assert r["map_decision"] == "no_counterpart" and r["cli_tier2"] == 70.0  # the neutral baseline, not a measurement
+    # the 'aligned' view of the script and the CLI path with the map agree on the one mapped claim
+    mapped = [r for r in p3 if r["map_decision"] == "map"]
+    assert all(r["aligned_tier2"] == r["cli_tier2"] and r["aligned_status"] == r["cli_status"] for r in mapped)
 
 
 def test_paper_003_is_compared_with_the_same_model_only():

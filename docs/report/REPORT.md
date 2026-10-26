@@ -28,9 +28,9 @@ Install success: 6 / 6 (1.0) (Pilot 1: 1 / 6 (0.167); Pilot 2: 6 / 6 (1.0)). Run
 The third pilot's settings were chosen after the second pilot's failures were seen, so the change in the
 rates measures those settings, not the papers. The stops that remain are the data, the network, and memory. The fourth
 pilot ran six papers that the tool had not seen from their README commands alone, with a lower install rate than Pilots 2 and
-3, whose run setups the project had prepared by hand (section 6.5). No run was shown to reproduce an accepted claim: through the
-command line the agreement tier never matched a real claim, and the one stored run that prints a number for an accepted claim is close
-to it only when a person aligns the two by hand (section 6.11). With six papers and one run each, the results are anecdotal. The contribution is the method, a sandbox checked
+3, whose run setups the project had prepared by hand (section 6.5). No run was shown to reproduce an accepted claim: before the claim map (#507, #509) the agreement tier never matched a real claim
+through the command line; with the map the one stored run that prints a number for an accepted claim (`paper_003`: one claim, one
+number) is compared and is close to it, 3.05 % apart, which is not a confirmed reproduction (section 6.11). With six papers and one run each, the results are anecdotal. The contribution is the method, a sandbox checked
 against real Docker, and a measured list of what stops each paper.
 
 The report makes two claims and keeps them apart. The main claim is that the tool gives the right decision on a known example: on a
@@ -81,8 +81,8 @@ paper's own numerical claims with a verbatim-quote guard against invented matche
 four-tier rubric instead of a single pass/fail. As of this writing, the sandbox and the corpus verification are
 checked, the six papers of the corpus have been run through the sandbox in three pilots (section 6), and
 `cli.py score` scores a stored real run against accepted claims (`docs/gap_analysis.md`, finding GA-2, closed by
-#136); but no run has been shown to reproduce an accepted claim, so the scoring rubric's agreement tier has not yet been exercised
-on real results (sections 6.3 and 6.11). The stability tier has been exercised on real seed runs of two of the papers (section 6.4a). The seed pilots cover tabular
+#136); but no run has been shown to reproduce an accepted claim; the scoring rubric's agreement tier has been exercised on real results
+for one claim only, `paper_003`, through the claim map (#507, #509; sections 6.3 and 6.11). The stability tier has been exercised on real seed runs of two of the papers (section 6.4a). The seed pilots cover tabular
 ML benchmarks only; the later pilot, the candidate lists and the automatic search drift to other kinds of papers (sections 6.5, 6.8 and
 6.10), but no claim is made about other scientific fields.
 
@@ -175,8 +175,9 @@ become 0.06 s, a 200% error, and still pass. The scorer has no per-category tole
 bound for AUROC than for accuracy) and does not separate a hardware difference from a real divergence; a module
 that was meant to do this was never connected to the scorer and was removed (#254). The comparison of two runs in the
 diagnosis layer (section 6.7) lists recorded differences and sizes a metric shift, but the scorer does not use it. A claim is matched with
-the run's metrics by exact name; `cli.py score` keys a claim by its question ID, which is not the name the metric extractor gives the
-metric, so a real claim is reported as not found (section 6.11).
+the run's metrics by exact name; an accepted claim is keyed by its question ID, which is not the name the metric extractor gives the
+metric, so until the claim map (#507, #509) a real claim was reported as not found; `cli.py score` now pairs the two through
+`data/claim_metric_map.json`, and a claim for which the run has no counterpart stays out of Tier 2 (section 6.11).
 Tier 3's stability check uses the coefficient of variation (CV) across seeds: CV ≤ 2% is
 scored as deterministic, ≤ 5% as stable, with the score falling as the variance grows. Since #48 a paper that has a seed
 parameter of its own is run once per seed (`docs/MULTI_SEED.md`, `scripts/run_multi_seed.py`); the metric with the largest CV
@@ -460,8 +461,8 @@ No Pilot 2 run produced a metric that an accepted claim names. `paper_006` compl
 accepted claims concern Arcene; the other five papers stopped before producing results. In Pilot 3 `paper_003` completed too and
 prints a test RMSE under the metric name `rmse`, which three accepted claims also use, but only for FT-Transformer; section 6.11 compares
 it with its claim. `cli.py score` can score a stored run against the accepted claims (`python cli.py score <paper> --from-run <run
-directory>`, #136), but the claims are matched by question ID and the extracted metrics by name, so for these runs its Tier 2 is not a
-measurement; sections 6.1 to 6.3 list no composite scores, and section 6.11 lists them with that caveat. The pilots measure whether the
+directory>`, #136), but until the claim map (#507, #509) the claims were matched by question ID and the extracted metrics by name, so for these runs its
+Tier 2 was not a measurement; sections 6.1 to 6.3 list no composite scores, and section 6.11 lists them before and with the map. The pilots measure whether the
 papers install and run, not whether their numbers reproduce.
 
 - **Sources:** `docs/PILOT_WEEK2.md` section 11 and `docs/PILOT_2.md` section 12 (the generated blocks above are copied
@@ -537,6 +538,9 @@ other work ran on the machine meanwhile, so the times are not those of an idle m
 
 A fresh clone of the public repository followed through the README for `paper_006`: the run completed; total time from the clone to the end of `diagnose` 2,490 s, run phase 1,092.54 s; metrics `accuracy 0.8886, auroc 0.892`; accepted claims used: 2, none found in the output (the run reads another dataset); Tier 2 0, total 61.25, status Needs Review.
 <!-- numbers:cleanclone:end -->
+
+(This walkthrough was recorded before the claim map existed; with the map the same stored run gets Tier 2 70 and `Partially Verified`,
+because both accepted claims have no counterpart in it, section 6.11.)
 
 This shows that the documented steps work end to end for one paper with the 8-CPU setting given on the command line; it does not show
 that the paper's numbers reproduce (its accepted claims belong to another dataset), and it is one paper on one machine.
@@ -838,30 +842,35 @@ under these rules, and are not the reproducibility of a field. No claim is accep
 
 `docs/REAL_VERDICTS.md` (`scripts/real_verdicts.py`, #494) puts the completed stored runs of the real papers next to the claims a person
 accepted and scores them with `src/score_run.py`, without writing a database. The table is its summary; the document holds one row per
-run and claim, with the reason for each decision. "Aligned by hand" means that the claim is compared with the run's metric of the same
-name only where the stored output shows the same model, dataset and metric; the pairing and its evidence are written in the script.
+run and claim, with the reason for each decision. Since #507 and #509 the command line pairs each accepted claim with the run's metric
+through `data/claim_metric_map.json` (`docs/CLAIM_METRIC_MAP.md`), by model, dataset, measure and split and never by the closeness of the
+values: 1 of the 13 accepted claims is mapped, 12 have no counterpart in the stored runs. The document keeps the result before the mapping
+next to the result with it. The map is a proposal that the owner may revise. The pairing of the script (`aligned`) and its evidence
+are written in the script and agree with the map on the one mapped claim.
 
 <!-- numbers:realverdicts:start -->
 <!-- Generated by scripts/report_numbers.py from data/real_verdicts/verdicts.json (scripts/real_verdicts.py); do not edit by hand. -->
 
 | Paper | Stored runs scored | What the scorer says | Meaning of the decision |
 |---|---|---|---|
-| `paper_003` | 6 | CLI path (claims by question ID): Tier 2 0.0 in 6 of 6; aligned by hand to the same model, dataset and metric: claimed 0.459, reproduced 0.473, relative difference 3.05 %, Tier 2 100, `Verified` in 6 of 6 runs | comparable for one of three claims (the run trains FT-Transformer only) |
-| `paper_006` | 3 | Tier 2 0.0 in 3 of 3 | none comparable: 6 of 6 claim rows are Arcene numbers, the run reads another dataset |
-| `paper_004` | 1 | Tier 2 0.0 | none comparable: the stored metrics are hyperparameters (lr, weight_decay) |
+| `paper_003` | 6 | before the claim map (claims by question ID): Tier 2 0.0 in 6 of 6; with the map (same model, dataset and metric): claimed 0.459, reproduced 0.473, relative difference 3.05 %, Tier 2 100, `Verified` in 6 of 6 runs | comparable for one of three claims (the run trains FT-Transformer only); one claim and one number, not a confirmed reproduction |
+| `paper_006` | 3 | before the claim map: Tier 2 0.0 in 3 of 3; with the map: 6 of 6 claim rows have no counterpart (Arcene numbers, the run reads another dataset), Tier 2 70 (neutral baseline), `Partially Verified` | none comparable; the label rests on the build tiers only |
+| `paper_004` | 1 | before the claim map: Tier 2 0.0; with the map: no counterpart, Tier 2 70 (neutral baseline), `Partially Verified` | none comparable: the stored metrics are hyperparameters (lr, weight_decay) |
 | `paper_102` | 1 | no accepted claim; Tier 2 70 (neutral baseline), `Partially Verified` | no comparison was made |
 | synthetic control (known answer) | 2 | true claim: Tier 2 100, `Verified` in 2 of 2 runs; false claim: Tier 2 0, `Needs Review` in 2 of 2 runs | the only known-answer rows |
 
-Through the CLI path the claims never match a run's metrics: Tier 2 is 0.0 in 10 of the 10 real runs that have accepted claims (question IDs against extracted metric names). K2 (numbers of the output found in the paper's text) passed 6 of 6 runs of `paper_003`, 0 of 3 runs of `paper_006`, 0 of 1 runs of `paper_102` and 0 of 1 runs of `paper_004`. For `paper_003` the claimed value 0.459 is printed in the paper (page 7), while the run's final rmse 0.473 is not printed in it.
+Before the claim map the claims never matched a run's metrics: Tier 2 was 0.0 in 10 of the 10 real runs that have accepted claims (question IDs against extracted metric names). With the map a claim is compared in 6 of the 10 runs (the one claim of `paper_003`); in the others no accepted claim has a counterpart in the run and Tier 2 is the neutral baseline. K2 (numbers of the output found in the paper's text) passed 6 of 6 runs of `paper_003`, 0 of 3 runs of `paper_006`, 0 of 1 runs of `paper_102` and 0 of 1 runs of `paper_004`. For `paper_003` the claimed value 0.459 is printed in the paper (page 7), while the run's final rmse 0.473 is not printed in it.
 <!-- numbers:realverdicts:end -->
 
-Read this way. First, the decision path of the command line never compares a real claim: claims are keyed by question ID and the
-extracted metrics by name, so Tier 2 is zero and the label `Needs Review` for every real run that has accepted claims. Second, where a
-person aligns them, the one meaningful comparison is `paper_003`: the same model, dataset and metric, a small difference inside the 5 %
-tolerance, so the label is `Verified`; whether that small a difference should count as reproduced is a tolerance question (section 6.9),
-and this single number is not a confirmed reproduction. Third, the other real runs cannot be compared at all (another dataset,
-hyperparameters stored as metrics, no accepted claim), and `paper_102` still gets the label `Partially Verified` from the build tiers
-alone. Fourth, K2, the check that a run's printed numbers occur in the paper, was expected to pass on `paper_003`, `paper_006` and
+Read this way. First, before the claim map the decision path of the command line never compared a real claim: claims were keyed by
+question ID and the extracted metrics by name, so Tier 2 was zero and the label `Needs Review` for every real run that has accepted
+claims. Second, with the map the one meaningful comparison is `paper_003`: the same model, dataset and metric, a small difference
+(3.05 %) inside the 5 % tolerance, so Tier 2 is 100 and the label `Verified`; whether that small a difference should count as
+reproduced is a tolerance question (section 6.9), and this single claim and single number is not a confirmed reproduction. The
+Six stored runs of it give the same last RMSE line. Third, the other real runs cannot be compared
+at all (another dataset, hyperparameters stored as metrics, no accepted claim): with the map their claims have no counterpart and
+leave Tier 2, which then is the neutral baseline of 70, so `paper_004` and `paper_006` now get the label `Partially Verified` from the
+build tiers alone, as `paper_102` does; that is a label without a comparison, not a result. Fourth, K2, the check that a run's printed numbers occur in the paper, was expected to pass on `paper_003`, `paper_006` and
 `paper_102` as a positive control. It passed on `paper_003` only, and there by coincidence: the numbers it matched are training-log
 values that the paper's tables print for other models, while the run's final value is not printed in the paper. The run of `paper_006`
 prints AUROC as a fraction where its paper prints percent, and the quick start of `paper_102` works on generated toy data, so its output
@@ -915,16 +924,17 @@ hand, and the new papers were chosen by rules from a biased pool. The figures ar
   1.x pins of several papers cannot use.
 - **One platform per pilot.** Pilot 1 ran on Linux runners and Pilot 2 on one Windows machine; some failures may depend
   on the platform, which is also how the Windows-only defects of the tool were found.
-- **No numerical reproduction was confirmed.** Through the command line no run matched an accepted claim (claims are keyed by question
-  ID, the extracted metrics by name), and aligned by hand only one real run, `paper_003`, prints a number for a claim, close to it but
-  not equal (section 6.11). Tier 2 (agreement with the paper's numbers) was therefore exercised on real results only in that one
-  comparison, on the synthetic control paper (section 6.4), which tests the scorer and not a paper, and on hand-made claims (section 6.9).
+- **No numerical reproduction was confirmed.** Before the claim map no run matched an accepted claim through the command line (claims
+  were keyed by question ID, the extracted metrics by name); with the map only one real run, `paper_003`, prints a number for a claim,
+  close to it but not equal (section 6.11). Tier 2 (agreement with the paper's numbers) was therefore exercised on real results only
+  in that one comparison, on the synthetic control paper (section 6.4), which tests the scorer and not a paper, and on hand-made claims (section 6.9).
 - **The README command mostly does not produce the paper's table.** In the automatic search no run's output matched its paper's text,
   and none of the listed candidates, at the first attempt or with repair, printed a table value of its paper (sections 6.8 and 6.10 give
   the counts). A run that completes is therefore usually not an attempt to reproduce a table, and this limits what any pilot rate says:
   it is a finding about README commands in this sandbox, not a measure of how reproducible the papers are.
 - **The scorer gives a label without a comparison.** A paper with no accepted claim gets a neutral Tier 2 and can reach `Partially
-  Verified` from the build tiers alone (`paper_102`, section 6.11). K2 has no positive control: the only pass among the real runs is
+  Verified` from the build tiers alone (`paper_102`, section 6.11), and so does, with the claim map, every paper whose accepted claims
+  all have no counterpart in its run (`paper_004`, `paper_006`). K2 has no positive control: the only pass among the real runs is
   by coincidence of dense numbers. Whether such a label and such a check are acceptable is a decision of the owner.
 - **Stability rests on three seeds of two papers.** The seed runs of section 6.4a are not protocol runs (the CPU and memory limits
   differ from the protocol's), use three seeds each, and cover only the two papers that complete; a CV from three runs is a rough
@@ -976,9 +986,11 @@ hand, and the new papers were chosen by rules from a biased pool. The figures ar
 - **A noisy side number can decide a score.** The first real seed run showed that the metric with the largest CV was a training loss;
   the summary now shows which metric decided and what each metric alone would give (section 6.4a).
 - **Look at what the scorer does with real data before trusting its tests.** The tests of `cli.py score` pass because they store the
-  metric under the question ID; a real run stores it under the name the extractor found, and the two never meet (section 6.11). The
+  metric under the question ID; a real run stores it under the name the extractor found, and before the claim map the two never met
+  (section 6.11). The
   stored runs were scored only when a document asked for them.
-- **What we would change next:** make the claims and the run's metrics meet (the question ID and the extracted name), choose each paper's
+- **What we would change next:** the claims and the run's metrics now meet through a claim map (#507, #509; a proposal the owner may
+  revise); choose each paper's
   command so that it produces the metrics its accepted claims name (`docs/PILOT_2.md` section 12), and find one real run whose output
   prints a table value of its paper, as a positive control for the match test (section 6.11). The four per-paper changes that
   `docs/PILOT_2.md` proposed (a writable data directory for `paper_003`, more memory for `paper_005`, more time for `paper_004`,
@@ -1004,8 +1016,8 @@ The stability tier was run on real seed runs for the first time (section 6.4a) a
 difference between two (section 6.7). The dashboard of the project (`src/web/`) shows stored scores, badges, and audit reports from the database only; a fresh
 database (`python cli.py init-db`) holds no score, so the dashboard shows "Not scored" for every paper until `cli.py score` is run.
 `python scripts/build_demo_db.py` builds a separate database from the stored real runs, in which every paper has the score of its
-best stored run (`docs/evidence/demo2/`); those scores come from the scorer through question IDs, so Tier 2 is zero for a paper with
-accepted claims, and they are not validations (section 6.11).
+best stored run (`docs/evidence/demo2/`); those scores come from the scorer through the claim map: Tier 2 comes from a comparison for `paper_003` only and is the neutral
+baseline for the papers whose accepted claims have no counterpart, and they are not validations (section 6.11).
 
 **What the two claims rest on.** The decision on a known example (the synthetic control and the hand-made claims) is supported; the
 decision on a real paper is not, because no real paper has a known answer in this work and the one real comparison is close but
@@ -1017,8 +1029,9 @@ rubric's agreement tier and stability tier work on real results.
 
 **Future work, in the order the evidence suggests.**
 
-1. Make the question IDs of the claims and the extracted metric names meet, choose each paper's command so that it prints the metrics
-   its accepted claims name, and score such a run with `cli.py score`; this is what would exercise Tier 2 on a real result, and a run
+1. The question IDs of the claims and the extracted metric names now meet through the claim map (#507, #509); choose each paper's
+   command so that it prints the metrics its accepted claims name, and score such a run with `cli.py score`; this is what would exercise
+   Tier 2 on more than one real claim, and a run
    whose output prints a table value of its paper would also serve as the missing positive control of the match test (section 6.11).
 2. Decide how much memory `paper_004` and `paper_005` need (the pilot only shows that the values chosen in advance were
    not enough) and whether `paper_002` may fetch its OpenML data.

@@ -444,7 +444,8 @@ def realverdicts_block(data: Path = DATA) -> str:
 
     with_claims = [r for r in real if r["query_id"]]
     cli_runs = {(r["paper_id"], r["run"]) for r in with_claims}
-    cli_zero = {(r["paper_id"], r["run"]) for r in with_claims if r["cli_tier2"] == 0.0}
+    cli_zero = {(r["paper_id"], r["run"]) for r in with_claims if r["before_tier2"] == 0.0}
+    compared = {(r["paper_id"], r["run"]) for r in with_claims if r["map_decision"] == "map"}
     p3 = [r for r in real if r["paper_id"] == "paper_003" and r["comparable"]]
     p6 = [r for r in real if r["paper_id"] == "paper_006"]
     p4 = [r for r in real if r["paper_id"] == "paper_004"]
@@ -463,15 +464,18 @@ def realverdicts_block(data: Path = DATA) -> str:
     claim = next(c for c in p3k2["claim_values"] if c["query_id"] == first["query_id"])
     lines = [HEADER.format(sources="data/real_verdicts/verdicts.json (scripts/real_verdicts.py)"), "",
              "| Paper | Stored runs scored | What the scorer says | Meaning of the decision |", "|---|---|---|---|",
-             (f"| `paper_003` | {len(runs_of('paper_003'))} | CLI path (claims by question ID): Tier 2 0.0 in "
-              f"{sum(1 for k in cli_zero if k[0] == 'paper_003')} of {len(runs_of('paper_003'))}; aligned by hand to the same model, dataset "
-              f"and metric: claimed {first['claimed']}, reproduced {first['reproduced']}, relative difference {first['rel_diff'] * 100:.2f} %, "
-              f"Tier 2 {first['aligned_tier2']:g}, `{first['aligned_status']}` in {len(p3)} of {len(runs_of('paper_003'))} runs | "
-              "comparable for one of three claims (the run trains FT-Transformer only) |"),
-             (f"| `paper_006` | {len(runs_of('paper_006'))} | Tier 2 0.0 in {sum(1 for k in cli_zero if k[0] == 'paper_006')} of "
-              f"{len(runs_of('paper_006'))} | none comparable: {sum(1 for r in p6 if not r['comparable'])} of {len(p6)} claim rows are Arcene numbers, "
-              "the run reads another dataset |"),
-             (f"| `paper_004` | {len(runs_of('paper_004'))} | Tier 2 0.0 | none comparable: the stored metrics are hyperparameters "
+             (f"| `paper_003` | {len(runs_of('paper_003'))} | before the claim map (claims by question ID): Tier 2 0.0 in "
+              f"{sum(1 for k in cli_zero if k[0] == 'paper_003')} of {len(runs_of('paper_003'))}; with the map (same model, dataset "
+              f"and metric): claimed {first['claimed']}, reproduced {first['reproduced']}, relative difference {first['rel_diff'] * 100:.2f} %, "
+              f"Tier 2 {first['cli_tier2']:g}, `{first['cli_status']}` in {sum(1 for r in p3 if r['cli_status'] == first['cli_status'])} "
+              f"of {len(runs_of('paper_003'))} runs | "
+              "comparable for one of three claims (the run trains FT-Transformer only); one claim and one number, not a confirmed reproduction |"),
+             (f"| `paper_006` | {len(runs_of('paper_006'))} | before the claim map: Tier 2 0.0 in {sum(1 for k in cli_zero if k[0] == 'paper_006')} of "
+              f"{len(runs_of('paper_006'))}; with the map: {sum(1 for r in p6 if r['map_decision'] == 'no_counterpart')} of {len(p6)} claim rows "
+              f"have no counterpart (Arcene numbers, the run reads another dataset), Tier 2 {p6[0]['cli_tier2']:g} (neutral baseline), "
+              f"`{p6[0]['cli_status']}` | none comparable; the label rests on the build tiers only |"),
+             (f"| `paper_004` | {len(runs_of('paper_004'))} | before the claim map: Tier 2 0.0; with the map: no counterpart, Tier 2 "
+              f"{p4[0]['cli_tier2']:g} (neutral baseline), `{p4[0]['cli_status']}` | none comparable: the stored metrics are hyperparameters "
               f"({', '.join(p4[0]['run_metrics'])}) |"),
              (f"| `paper_102` | {len(runs_of('paper_102'))} | no accepted claim; Tier 2 {p102[0]['cli_tier2']:g} (neutral baseline), "
               f"`{p102[0]['cli_status']}` | no comparison was made |"),
@@ -480,8 +484,10 @@ def realverdicts_block(data: Path = DATA) -> str:
               f"{syn_false[0]['aligned_tier2']:g}, `{syn_false[0]['aligned_status']}` in {len(syn_false)} of {len(syn_false)} runs | "
               "the only known-answer rows |"),
              "",
-             (f"Through the CLI path the claims never match a run's metrics: Tier 2 is 0.0 in {len(cli_zero)} of the {len(cli_runs)} real "
-              "runs that have accepted claims (question IDs against extracted metric names). "
+             (f"Before the claim map the claims never matched a run's metrics: Tier 2 was 0.0 in {len(cli_zero)} of the {len(cli_runs)} real "
+              "runs that have accepted claims (question IDs against extracted metric names). With the map a claim is compared in "
+              f"{len(compared)} of the {len(cli_runs)} runs (the one claim of `paper_003`); in the others no accepted claim has a "
+              "counterpart in the run and Tier 2 is the neutral baseline. "
               f"K2 (numbers of the output found in the paper's text) passed {k2_of('paper_003')} of `paper_003`, {k2_of('paper_006')} of "
               f"`paper_006`, {k2_of('paper_102')} of `paper_102` and {k2_of('paper_004')} of `paper_004`. For `paper_003` the claimed value "
               f"{claim['value']} is {'printed' if claim['found'] else 'not printed'} in the paper (page {claim['page']}), while the run's final "

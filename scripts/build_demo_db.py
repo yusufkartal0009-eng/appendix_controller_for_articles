@@ -33,6 +33,7 @@ if str(project_root) not in sys.path:
 
 from sqlalchemy.orm import Session
 
+from src.claim_metric_map import load_claim_map
 from src.claim_review import claims_for_scoring
 from src.claim_store import restore_decisions
 from src.database import get_engine, get_session, init_db, save_score
@@ -124,7 +125,7 @@ def score_all(paper_id: str, license_name: str, claims: dict[str, float], runs: 
     scored = []
     for label, run_dir in runs:
         record, report = load_run(run_dir)
-        result = score_run(paper_id, license_name, claims, record, report, run_dir, None)
+        result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=load_claim_map())
         scored.append({"label": label, "run_dir": run_dir, "record": record, "report": report, "result": result})
     return scored
 
@@ -147,7 +148,7 @@ def store(session: Session, paper_id: str, data_dir: Path, item: dict[str, Any],
     session.flush()
     bd = item["result"]["breakdown"]
     summary = (f"[demo database] {item['label']} (data/{rel}), the best of {count} stored run(s) of this paper. "
-               f"Claims are matched by question ID as in cli.py score; Tier 4 is computed without the staged repository. {bd.summary}")
+               f"Claims go through data/claim_metric_map.json as in cli.py score; Tier 4 is computed without the staged repository. {bd.summary}")
     save_score({"score_id": f"demo-{paper_id}", "paper_id": paper_id, "run_id": run_id, "tier1_build": bd.tier1_build,
                 "tier2_metrics": bd.tier2_metrics, "tier3_stability": bd.tier3_stability, "tier4_artifacts": bd.tier4_artifacts,
                 "total_score": bd.total_score, "status_label": bd.status_label, "summary": summary}, session=session)

@@ -6,8 +6,8 @@
 
 **It shows**
 
-- What the scorer says today on every real, completed, stored run, next to the claims a person accepted, with the reason why each decision is meaningful or not.
-- That a run whose model, dataset and metric match a claim (`paper_003`, FT-Transformer on California Housing) is compared correctly: the numbers are close and the scorer agrees.
+- What the scorer says today on every real, completed, stored run, next to the claims a person accepted, with the reason why each decision is meaningful or not, and what it said before the claim map existed (#507, #509).
+- That a run whose model, dataset and metric match a claim (`paper_003`, FT-Transformer on California Housing) is now compared by the CLI path through the claim map: the numbers are close and the scorer agrees. This is one claim and one number, not a confirmed reproduction.
 - What the K2 check (numbers of the run's output occur in the paper's text) does on the real runs: it passes `paper_003` by coincidence of dense numbers, and fails `paper_006` and `paper_102` (section 4). The expected positive control was not obtained.
 - That the synthetic control, whose answer is known, gets the right decision for a true and for a false claim.
 
@@ -18,63 +18,63 @@
 - A success rate. The runs are the ones that happened to complete; they are not a sample.
 - Anything about claims nobody accepted. `paper_102` has none, so its Tier 2 is a neutral baseline.
 
-## 2. The scorer as the CLI uses it (claims keyed by question ID)
+## 2. The scorer as the CLI uses it, before and with the claim map
 
-`cli.py score --from-run` scores all accepted claims of a paper together, matched by question ID (for example `ft_transformer_rmse`). The run's metrics are keyed by the name the extractor found (`rmse`). The two never agree, so every real claim is reported as not found. This is the first finding of this document.
+`cli.py score --from-run` scores all accepted claims of a paper together. An accepted claim is keyed by its question ID (for example `ft_transformer_rmse`); the run's metrics are keyed by the name the extractor found (`rmse`). **Before the mapping** (the state until #509) the two never agreed, so every real claim was reported as not found: Tier 2 was 0 and the label `Needs Review`. **With the map** (`data/claim_metric_map.json`, `docs/CLAIM_METRIC_MAP.md`) a claim is compared with the run metric of the same model, dataset, measure and split; a claim for which the run has no counterpart does not enter Tier 2. When no claim is left, Tier 2 is the neutral baseline of 'no claims'. The 'before' column is kept so that the change can be read.
 
-| Paper | Run | Run status | Run metrics | Tier 2 | Status label |
+| Paper | Run | Run status | Run metrics | Before the mapping: Tier 2 / total / label | With the map: Tier 2 / total / label |
 |---|---|---|---|---|---|
-| paper_003 | Pilot 3 (`data/pilot3_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 | Needs Review |
-| paper_003 | memory run 1 (`data/memory_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 | Needs Review |
-| paper_003 | memory run 2 (`data/memory_runs/paper_003_run2`) | COMPLETED | loss=0.106, rmse=0.473 | 0 | Needs Review |
-| paper_003 | CPU run (`data/cpu_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 | Needs Review |
-| paper_003 | env-cache run 1 (`data/env_cache_runs/first_run/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 | Needs Review |
-| paper_003 | env-cache run 2 (`data/env_cache_runs/second_run/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 | Needs Review |
-| paper_004 | memory run (`data/memory_runs/paper_004`) | COMPLETED | lr=0.0003, weight_decay=0 | 0 | Needs Review |
-| paper_006 | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 | Needs Review |
-| paper_006 | memory run 2 (`data/memory_runs/paper_006_run2`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 | Needs Review |
-| paper_006 | CPU run (`data/cpu_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 | Needs Review |
-| paper_102 | Pilot 4 (`data/pilot4_runs/paper_102`) | COMPLETED | activation=0.275, geometric_need=0.5425, overlap=0.4117, boundary_conflict=0.0167, ... (12 in all) | 70 | Partially Verified |
-| synthetic_control | run 1 (`data/synthetic_control/run1/synthetic_control`) | COMPLETED | accuracy=0.9 | - | - (scored one claim at a time) |
-| synthetic_control | run 2 (`data/synthetic_control/run2/synthetic_control`) | COMPLETED | accuracy=0.9 | - | - (scored one claim at a time) |
+| paper_003 | Pilot 3 (`data/pilot3_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
+| paper_003 | memory run 1 (`data/memory_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
+| paper_003 | memory run 2 (`data/memory_runs/paper_003_run2`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
+| paper_003 | CPU run (`data/cpu_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
+| paper_003 | env-cache run 1 (`data/env_cache_runs/first_run/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
+| paper_003 | env-cache run 2 (`data/env_cache_runs/second_run/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
+| paper_004 | memory run (`data/memory_runs/paper_004`) | COMPLETED | lr=0.0003, weight_decay=0 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
+| paper_006 | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
+| paper_006 | memory run 2 (`data/memory_runs/paper_006_run2`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
+| paper_006 | CPU run (`data/cpu_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
+| paper_102 | Pilot 4 (`data/pilot4_runs/paper_102`) | COMPLETED | activation=0.275, geometric_need=0.5425, overlap=0.4117, boundary_conflict=0.0167, ... (12 in all) | 70 / 82.75 / Partially Verified | 70 / 82.75 / Partially Verified |
+| synthetic_control | run 1 (`data/synthetic_control/run1/synthetic_control`) | COMPLETED | accuracy=0.9 | - (scored one claim at a time) | - (scored one claim at a time) |
+| synthetic_control | run 2 (`data/synthetic_control/run2/synthetic_control`) | COMPLETED | accuracy=0.9 | - (scored one claim at a time) | - (scored one claim at a time) |
 
 ## 3. Claim by claim
 
 Tolerance: 5% (`DEFAULT_TOLERANCE`). "Aligned" is the Tier 2 of that single claim compared with the run's metric of the same name, only where the pairing is established; `-` means not compared.
 
-| Paper | Run | Claim (question ID) | Claimed | Reproduced | Abs diff | Rel diff | Aligned Tier 2 | Aligned label | Why |
-|---|---|---|---|---|---|---|---|---|---|
-| paper_003 | Pilot 3 | ft_transformer_rmse | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
-| paper_003 | Pilot 3 | resnet_rmse | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
-| paper_003 | Pilot 3 | xgboost_rmse | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
-| paper_003 | memory run 1 | ft_transformer_rmse | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
-| paper_003 | memory run 1 | resnet_rmse | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
-| paper_003 | memory run 1 | xgboost_rmse | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
-| paper_003 | memory run 2 | ft_transformer_rmse | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
-| paper_003 | memory run 2 | resnet_rmse | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
-| paper_003 | memory run 2 | xgboost_rmse | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
-| paper_003 | CPU run | ft_transformer_rmse | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
-| paper_003 | CPU run | resnet_rmse | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
-| paper_003 | CPU run | xgboost_rmse | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
-| paper_003 | env-cache run 1 | ft_transformer_rmse | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
-| paper_003 | env-cache run 1 | resnet_rmse | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
-| paper_003 | env-cache run 1 | xgboost_rmse | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
-| paper_003 | env-cache run 2 | ft_transformer_rmse | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
-| paper_003 | env-cache run 2 | resnet_rmse | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
-| paper_003 | env-cache run 2 | xgboost_rmse | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
-| paper_004 | memory run | tabr_average_rank | 1.3 | - | - | - | - | - | the paper claims an average rank over a benchmark; the stored metrics of the run are `lr` and `weight_decay`, which are hyperparameters printed by the training script, not results |
-| paper_004 | memory run | xgboost_average_rank | 2.5 | - | - | - | - | - | the paper claims an average rank over a benchmark for XGBoost; the run is a TabR training and its stored metrics are hyperparameters (`lr`, `weight_decay`) |
-| paper_006 | Pilot 3 | arcene_auroc | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_006 | Pilot 3 | xgboost_arcene_auroc | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_006 | memory run 2 | arcene_auroc | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_006 | memory run 2 | xgboost_arcene_auroc | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_006 | CPU run | arcene_auroc | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_006 | CPU run | xgboost_arcene_auroc | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_102 | Pilot 4 | (none accepted) | - | - | - | - | - | - | no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no claims', not a measurement; the status label rests on the build tiers only |
-| synthetic_control | run 1 | true_claim | 0.9 | 0.9 | 0 | 0.00% | 100 | Verified | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
-| synthetic_control | run 1 | false_claim | 0.5 | 0.9 | 0.4 | 80.00% | 0 | Needs Review | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
-| synthetic_control | run 2 | true_claim | 0.9 | 0.9 | 0 | 0.00% | 100 | Verified | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
-| synthetic_control | run 2 | false_claim | 0.5 | 0.9 | 0.4 | 80.00% | 0 | Needs Review | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
+| Paper | Run | Claim (question ID) | Map decision | Claimed | Reproduced | Abs diff | Rel diff | Aligned Tier 2 | Aligned label | Why |
+|---|---|---|---|---|---|---|---|---|---|---|
+| paper_003 | Pilot 3 | ft_transformer_rmse | map | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
+| paper_003 | Pilot 3 | resnet_rmse | no_counterpart | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
+| paper_003 | Pilot 3 | xgboost_rmse | no_counterpart | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
+| paper_003 | memory run 1 | ft_transformer_rmse | map | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
+| paper_003 | memory run 1 | resnet_rmse | no_counterpart | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
+| paper_003 | memory run 1 | xgboost_rmse | no_counterpart | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
+| paper_003 | memory run 2 | ft_transformer_rmse | map | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
+| paper_003 | memory run 2 | resnet_rmse | no_counterpart | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
+| paper_003 | memory run 2 | xgboost_rmse | no_counterpart | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
+| paper_003 | CPU run | ft_transformer_rmse | map | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
+| paper_003 | CPU run | resnet_rmse | no_counterpart | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
+| paper_003 | CPU run | xgboost_rmse | no_counterpart | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
+| paper_003 | env-cache run 1 | ft_transformer_rmse | map | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
+| paper_003 | env-cache run 1 | resnet_rmse | no_counterpart | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
+| paper_003 | env-cache run 1 | xgboost_rmse | no_counterpart | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
+| paper_003 | env-cache run 2 | ft_transformer_rmse | map | 0.459 | 0.473 | 0.014 | 3.05% | 100 | Verified | the run trains FT-Transformer on California Housing (config path and output directory in stdout.log) and prints the final test RMSE, which the extractor stored as `rmse` |
+| paper_003 | env-cache run 2 | resnet_rmse | no_counterpart | 0.486 | - | - | - | - | - | the run trains FT-Transformer only; a ResNet number is never produced, so nothing can be compared |
+| paper_003 | env-cache run 2 | xgboost_rmse | no_counterpart | 0.433 | - | - | - | - | - | the run trains FT-Transformer only; an XGBoost number is never produced, so nothing can be compared |
+| paper_004 | memory run | tabr_average_rank | no_counterpart | 1.3 | - | - | - | - | - | the paper claims an average rank over a benchmark; the stored metrics of the run are `lr` and `weight_decay`, which are hyperparameters printed by the training script, not results |
+| paper_004 | memory run | xgboost_average_rank | no_counterpart | 2.5 | - | - | - | - | - | the paper claims an average rank over a benchmark for XGBoost; the run is a TabR training and its stored metrics are hyperparameters (`lr`, `weight_decay`) |
+| paper_006 | Pilot 3 | arcene_auroc | no_counterpart | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
+| paper_006 | Pilot 3 | xgboost_arcene_auroc | no_counterpart | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
+| paper_006 | memory run 2 | arcene_auroc | no_counterpart | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
+| paper_006 | memory run 2 | xgboost_arcene_auroc | no_counterpart | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
+| paper_006 | CPU run | arcene_auroc | no_counterpart | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
+| paper_006 | CPU run | xgboost_arcene_auroc | no_counterpart | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
+| paper_102 | Pilot 4 | (none accepted) | - | - | - | - | - | - | - | no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no claims', not a measurement; the status label rests on the build tiers only |
+| synthetic_control | run 1 | true_claim | - | 0.9 | 0.9 | 0 | 0.00% | 100 | Verified | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
+| synthetic_control | run 1 | false_claim | - | 0.5 | 0.9 | 0.4 | 80.00% | 0 | Needs Review | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
+| synthetic_control | run 2 | true_claim | - | 0.9 | 0.9 | 0 | 0.00% | 100 | Verified | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
+| synthetic_control | run 2 | false_claim | - | 0.5 | 0.9 | 0.4 | 80.00% | 0 | Needs Review | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
 
 ## 4. K2 positive control
 
@@ -151,21 +151,25 @@ defect that this document fixes.
 
 ## 5. Findings
 
-1. **The CLI path never matches a real claim.** Claims are keyed by question ID (`ft_transformer_rmse`), the run's metrics
-   by the extracted name (`rmse`). Section 2: Tier 2 is 0.0 and the label is `Needs Review` for every real run, even where
-   the run printed a number for the claim (`paper_003`). Only a person who aligns the two (section 3, "aligned") gets a
-   comparison. (Tests of `cli.py score` pass because they store the metric under the question ID.)
-2. **`paper_003`, aligned: the decision is meaningful.** Same model, dataset and metric; 0.473 against 0.459 is 3.05% apart,
-   inside the 5% tolerance, so Tier 2 is 100 and the label `Verified`. Whether a 0.014 RMSE gap should count as
-   reproduced is a tolerance question (`docs/TOLERANCE_PROBE.md`), not a fact this document can settle. The ResNet and
-   XGBoost claims of the paper are not produced by the run.
-3. **`paper_006`: claim and run do not match.** Both accepted claims are Arcene numbers; the run reads OpenML dataset 1461
-   (bank-marketing). Any decision on these claims is meaningless. The paper's own table has a SAINT value for Bank (`93.3`,
-   page 7), but nobody accepted it as a claim, so it is not scored here.
+1. **Before the mapping the CLI path never matched a real claim; now it does where the run has a counterpart.** Claims were
+   keyed by question ID (`ft_transformer_rmse`), the run's metrics by the extracted name (`rmse`), so Tier 2 was 0.0 and the
+   label `Needs Review` for every real run, even where the run printed a number for the claim (`paper_003`). With the claim map
+   (section 2, "with the map") the CLI path compares `ft_transformer_rmse` with `rmse`; the other claims are excluded from Tier 2
+   with the reason. The 'before' column keeps the old result. The map is a proposal that the owner may revise.
+2. **`paper_003`, with the map: the decision is meaningful, for one claim.** Same model, dataset and metric; 0.473 against 0.459 is
+   3.05% apart, inside the 5% tolerance, so Tier 2 is 100 and the label `Verified`. It is one claim and one number, not a confirmed
+   reproduction. Whether a 0.014 RMSE gap should count as reproduced is a tolerance question (`docs/TOLERANCE_PROBE.md`), not a
+   fact this document can settle. The ResNet and XGBoost claims of the paper are not produced by the run (`no_counterpart`).
+3. **`paper_006`: claim and run do not match, so the claims are excluded.** Both accepted claims are Arcene numbers; the run reads
+   OpenML dataset 1461 (bank-marketing). With the map nothing is left to compare: Tier 2 70, total 82.75, `Partially Verified`. That label rests on the build tiers only
+   (see finding 6); it is not a measurement. The paper's own table has a SAINT value for Bank (`93.3`, page 7), but nobody
+   accepted it as a claim, so it is not scored here.
 4. **`paper_006`: the stored `auroc` (0.892) is the last logged test line, not the run's "AUROC on best model: 0.929".** The
    extractor keeps the last occurrence of a name; here that is an epoch line. Reported, not changed.
-5. **`paper_004`: the stored metrics are hyperparameters** (`lr`, `weight_decay`); the claims are average ranks. Meaningless.
-6. **`paper_102`: no claim was accepted, and the label is still `Partially Verified`.** With no claims Tier 2 is a neutral
+5. **`paper_004`: the stored metrics are hyperparameters** (`lr`, `weight_decay`); the claims are average ranks, so both claims
+   are excluded (`no_counterpart`) and Tier 2 is the neutral baseline.
+6. **A label without a comparison: `paper_102` (no claim accepted), and with the map every paper whose claims are all
+   `no_counterpart`.** `paper_102`: no claim was accepted, and the label is still `Partially Verified`. With no claims Tier 2 is a neutral
    70.0; with a clean build the total reaches the partial threshold. A reader sees a verdict that rests on no comparison
    (the summary line of the score says so, the label does not). Whether such a paper should get a label at all is a decision
    for the owner.

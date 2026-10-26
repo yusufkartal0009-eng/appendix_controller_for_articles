@@ -2,23 +2,23 @@
 
 Revisiting Deep Learning Models for Tabular Data (NeurIPS 2021, 2021)
 
-Generated 2026-10-25 17:11 from the project database.
+Generated 2026-10-26 21:36 from the project database.
 
 ## Summary
 
-Score 58.25 / 100 - Needs Review
+Score 93.25 / 100 - Verified
 
-[demo database] Pilot 3 (data/pilot3_runs/paper_003), the best of 8 stored run(s) of this paper. Claims are matched by question ID as in cli.py score; Tier 4 is computed without the staged repository. Needs Review (Total: 58.25/100). Code executed cleanly, but claimed metrics not found in the output (nothing was compared).
+[demo database] Pilot 3 (data/pilot3_runs/paper_003), the best of 8 stored run(s) of this paper. Claims go through data/claim_metric_map.json as in cli.py score; Tier 4 is computed without the staged repository. Verified (Total: 93.25/100). Build, metrics, and stability were successfully reproduced within specified tolerance bounds.
 
 ## Score breakdown
 
 | Part | Score (0-100) |
 |---|---|
 | Build (tier 1) | 100 |
-| Metrics (tier 2) | 0 |
+| Metrics (tier 2) | 100 |
 | Stability (tier 3) | 75 |
 | Artifacts (tier 4) | 80 |
-| **Total** | **58.25** |
+| **Total** | **93.25** |
 
 ## Latest run
 
