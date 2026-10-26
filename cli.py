@@ -129,7 +129,8 @@ def cmd_score_paper(args):
     from scripts import preflight, run_pilot
     from src.claim_metric_map import ClaimMapError, load_claim_map
     from src.config import DATA_CACHE_DIR
-    from src.score_run import load_run, score_run
+    from src.models import RunORM
+    from src.score_run import load_run, score_run, scored_run_row
 
     print(f"\nEvaluating reproducibility for: [{paper.paper_id}] {paper.title}")
     if args.from_run:
@@ -175,8 +176,12 @@ def cmd_score_paper(args):
     for tier in ("tier1_notes", "tier2_notes", "tier3_notes", "tier4_notes"):
         for note in result["diagnostics"][tier]:
             print(f"  [{tier[:5]}] {note}")
+    # the score names the run it was computed from, so that the dashboard shows that run beside it
+    scored_run = scored_run_row(paper.paper_id, run_dir, record, report, PROJECT_ROOT)
+    session.merge(RunORM(**scored_run))
+    session.flush()
     save_score({
-        "score_id": str(uuid.uuid4()), "paper_id": paper.paper_id, "tier1_build": bd.tier1_build,
+        "score_id": str(uuid.uuid4()), "paper_id": paper.paper_id, "run_id": scored_run["run_id"], "tier1_build": bd.tier1_build,
         "tier2_metrics": bd.tier2_metrics, "tier3_stability": bd.tier3_stability, "tier4_artifacts": bd.tier4_artifacts,
         "total_score": bd.total_score, "status_label": bd.status_label, "summary": bd.summary,
     }, session=session)

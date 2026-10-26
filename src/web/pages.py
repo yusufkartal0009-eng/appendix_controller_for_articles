@@ -17,6 +17,7 @@ from src.web.routes import (
     STATUS_LABELS,
     LatestRun,
     PaperSummary,
+    RunDetail,
     get_run,
     get_score,
     list_papers,
@@ -96,7 +97,7 @@ def select_rows(rows: list[Row], q: str = "", status: str = "", sort: str = "sco
     return scored + [r for r in rows if r.score_total is None]
 
 
-def _run_cell(run: LatestRun | None) -> str:
+def _run_cell(run: LatestRun | RunDetail | None) -> str:
     if run is None:
         return "<span class='badge'>NOT RUN</span>"
     category = f"<span class='cat'>{escape(run.failure_category)}</span>" if run.failure_category else ""
@@ -190,20 +191,25 @@ def render_detail(engine: Engine, paper_id: str) -> str | None:
         score_html = (f"<p>{_status_badge(score.status_label)}</p><table><tr><th>Part</th><th>Score (0-100)</th></tr>"
                       f"{cells}</table>{summary}")
     run_html = "<div class='empty'><p>This paper has not been run.</p></div>"
-    if paper.latest_run is not None:
+    # the run that the score was computed from, when the score names one; otherwise the latest run of the paper
+    run = get_run(engine, score.run_id) if score is not None and score.run_id else None
+    run_heading = "Run of this score" if run is not None else "Latest run"
+    if run is None and paper.latest_run is not None:
         run = get_run(engine, paper.latest_run.run_id)
-        if run is not None:
-            seconds = "&ndash;" if run.execution_time is None else f"{run.execution_time:g} s"
-            run_html = (f"<dl><dt>Run</dt><dd>{escape(run.run_id)}</dd><dt>Status</dt><dd>{_run_cell(paper.latest_run)}</dd>"
-                        f"<dt>Exit code</dt><dd>{'&ndash;' if run.exit_code is None else run.exit_code}</dd>"
-                        f"<dt>Duration</dt><dd>{seconds}</dd></dl>")
-            for name, text in (("Standard output", run.stdout), ("Standard error", run.stderr)):
-                if text:
-                    run_html += f"<h2>{name} (last {LOG_EXCERPT_LINES} lines)</h2><pre>{escape(_excerpt(text))}</pre>"
+    if run is not None:
+        seconds = "&ndash;" if run.execution_time is None else f"{run.execution_time:g} s"
+        started = "&ndash;" if run.timestamp is None else f"{run.timestamp:%Y-%m-%d %H:%M} UTC"
+        run_html = (f"<dl><dt>Run</dt><dd>{escape(run.run_id)}</dd><dt>Started</dt><dd>{started}</dd>"
+                    f"<dt>Status</dt><dd>{_run_cell(run)}</dd>"
+                    f"<dt>Exit code</dt><dd>{'&ndash;' if run.exit_code is None else run.exit_code}</dd>"
+                    f"<dt>Duration</dt><dd>{seconds}</dd></dl>")
+        for name, text in (("Standard output", run.stdout), ("Standard error", run.stderr)):
+            if text:
+                run_html += f"<h2>{name} (last {LOG_EXCERPT_LINES} lines)</h2><pre>{escape(_excerpt(text))}</pre>"
     body = (f"<a class='back' href='/'>&larr; Back to the list</a><h2 style='margin-top:0'>{escape(paper.title)}</h2>"
             f"{facts}<p><a href='/api/v1/papers/{escape(paper.paper_id)}/report.md'>Download report (Markdown)</a> &middot; "
             f"<a href='/api/v1/papers/{escape(paper.paper_id)}/report.pdf'>Download report (PDF)</a></p>"
-            f"<h2>Score</h2>{score_html}<h2>Latest run</h2>{run_html}")
+            f"<h2>Score</h2>{score_html}<h2>{run_heading}</h2>{run_html}")
     return _layout(f"{paper.paper_id} - Repro Radar", body)
 
 
