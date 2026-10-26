@@ -115,16 +115,17 @@ def earlier_round_repos(root: Path = project_root) -> set[str]:
 
 
 def command_pool(fetcher: ce.Fetcher, out_dir: Path, stage: int, excluded: set[str],
-                 pause: float = SEARCH_PAUSE_SECONDS, sleep: Callable[[float], None] = time.sleep) -> dict[str, Any]:
+                 pause: float = SEARCH_PAUSE_SECONDS, sleep: Callable[[float], None] = time.sleep,
+                 queries_of: Callable[[int], list[str]] = queries, rules: str = "docs/AUTO_SEARCH_ROUND3.md") -> dict[str, Any]:
     """Run the searches of one stage once and store them unchanged, with the date. The candidates of an earlier round are
     removed before the SHA-256 order; the candidates of this stage come after those of the earlier stages."""
     path = out_dir / "pool.json"
     pool: dict[str, Any] = (json.loads(path.read_text(encoding="utf-8")) if path.is_file()
-                            else {"rules": "docs/AUTO_SEARCH_ROUND3.md", "stages": {}, "candidates_in_order": []})
+                            else {"rules": rules, "stages": {}, "candidates_in_order": []})
     if str(stage) in pool["stages"]:
         raise ValueError(f"stage {stage} is already stored in {path}; the searches are run once")
     searches, names = [], []
-    for query in queries(stage):
+    for query in queries_of(stage):
         found = fetcher.search(query)
         searches.append({"query": query, "results": found})
         names.extend(found)
@@ -403,6 +404,10 @@ class Search:
     the consumer, which runs them one at a time (K1 and K2); so the sandbox is busy while the next candidates are checked.
     evaluation.json and papers.json are rewritten after every step, so that a crash loses nothing."""
 
+    rules_doc = "docs/AUTO_SEARCH_ROUND3.md"  # a later round overrides these three (scripts/auto_search4.py)
+    id_prefix = ID_PREFIX
+    note = "selected, non-representative list; not a success rate; K2 passers are match candidates, not verified"
+
     def __init__(self, names: list[str], fetcher: ce.Fetcher, seed_repos: set[str], seed_papers: set[str], out_dir: Path,
                  runner: Runner, k2_runner: K2Runner, extend_pool: Callable[[], list[str]] | None = None,
                  now: Callable[[], float] = time.time, free: Callable[[], int] = free_bytes, max_seconds: float = MAX_SECONDS,
@@ -456,8 +461,7 @@ class Search:
     def write(self) -> None:
         with self.lock:
             document = {**self.document, "written_at": datetime.now(UTC).isoformat(timespec="seconds"),
-                        "rules": "docs/AUTO_SEARCH_ROUND3.md",
-                        "note": "selected, non-representative list; not a success rate; K2 passers are match candidates, not verified",
+                        "rules": self.rules_doc, "note": self.note,
                         **self.counts(), "stopped_because": self.stopped_because, "candidates": self.evaluations}
             write_atomic(self.out_dir / "evaluation.json", json.dumps(document, indent=2) + "\n")
             write_atomic(self.out_dir / "papers.json", json.dumps(self.papers, indent=2) + "\n")
@@ -502,7 +506,7 @@ class Search:
                 with self.lock:
                     self.evaluations.append(result)
                     if result["passed"]:
-                        paper_id = f"{ID_PREFIX}{len(self.papers) + 1:03d}"
+                        paper_id = f"{self.id_prefix}{len(self.papers) + 1:03d}"
                         entry = demo_set.papers_entry(result, paper_id)
                         self.papers.append(entry)
                         self.taken_repos.add(name.lower())
