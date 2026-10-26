@@ -43,6 +43,8 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(scoring): score accepted claims through the claim map (2026-10-27 00:32 +03:00, Issue #509)
+- `src/claim_metric_map.py` (load, validate, apply), `score_run(claim_map=...)`, `cli.py score --claim-map`. A `map` claim enters Tier 2; a `no_counterpart` claim does not and is named in the output; no map or no entry: behaviour as before. `paper_003` real runs: Tier 2 100.0, Verified (0.459 vs 0.473, 3.05%); `paper_006`: baseline 70.0, Partially Verified, recorded for the owner. Tests: `tests/test_score_claim_map.py` and three in `tests/test_cli_score.py`.
 ### feat(scoring): claim-to-run-metric map file (2026-10-27 00:25 +03:00, Issue #507)
 - `data/claim_metric_map.json` and `docs/CLAIM_METRIC_MAP.md`: for each of the 13 accepted claims, `map` (1: `paper_003` / `ft_transformer_rmse` -> `rmse`) or `no_counterpart` (12), each with evidence from stored run files; `tests/test_claim_metric_map.py` checks coverage and the evidence strings.
 - A proposal: the owner may revise the map. The scorer is not connected yet (next issue).
