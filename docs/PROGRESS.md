@@ -43,6 +43,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(scoring): claim-to-run-metric map file (2026-10-27 00:25 +03:00, Issue #507)
+- `data/claim_metric_map.json` and `docs/CLAIM_METRIC_MAP.md`: for each of the 13 accepted claims, `map` (1: `paper_003` / `ft_transformer_rmse` -> `rmse`) or `no_counterpart` (12), each with evidence from stored run files; `tests/test_claim_metric_map.py` checks coverage and the evidence strings.
+- A proposal: the owner may revise the map. The scorer is not connected yet (next issue).
 ### docs: status documents updated after night 5 (2026-10-25 20:28 +03:00, Issue #505)
 - `docs/PENDING.md` (new D12 on how claims meet a run's metrics; the bug-hunt item and the done list updated), the Current Status of `README.md` and of this file.
 - Not verified: that the owner's summary outside the repository says the same.

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "note": "Maps accepted claims (data/claims/review_decisions.json, keyed by question ID) to the metric name the metric extractor stores for a run. Written for #507; see docs/CLAIM_METRIC_MAP.md. A proposal: the owner may revise it. Do not edit by hand without re-checking the evidence strings (tests/test_claim_metric_map.py checks them).",
+  "papers": {
+    "paper_002": {
+      "inference_seconds__cpu": {
+        "decision": "no_counterpart",
+        "reason": "no run of this paper produced a result: the notebook run failed before any metric was printed (no network for OpenML in the sandbox), so there is no runtime or accuracy number to compare. Not verified beyond this.",
+        "evidence": [{"file": "data/pilot3_runs/paper_002/stderr.log", "contains": "Failed to resolve 'www.openml.org'"}]
+      },
+      "inference_seconds__gpu": {
+        "decision": "no_counterpart",
+        "reason": "same as inference_seconds__cpu: the run failed before any metric was printed; also a GPU timing that the CPU-only sandbox run could not measure",
+        "evidence": [{"file": "data/pilot3_runs/paper_002/stderr.log", "contains": "Failed to resolve 'www.openml.org'"}]
+      },
+      "mean_roc_auc": {
+        "decision": "no_counterpart",
+        "reason": "same as inference_seconds__cpu: the run failed before any metric was printed",
+        "evidence": [{"file": "data/pilot3_runs/paper_002/stderr.log", "contains": "Failed to resolve 'www.openml.org'"}]
+      }
+    },
+    "paper_003": {
+      "ft_transformer_rmse": {
+        "decision": "map",
+        "run_metric": "rmse",
+        "reason": "the run trains FT-Transformer (output ft_transformer_default_0) on California Housing (config california_housing/ft_transformer/default/0.toml); its final evaluation prints the test RMSE as the last `rmse` line of the log, and the extractor keeps the last occurrence of a name (src/metric_extractor.py, extract_metrics), so the stored `rmse` is the final test RMSE. The claim is the FT-T test RMSE on California Housing (Table 2, page 7). Same model, dataset, measure and split. In every stored run the validation line printed just before it has the same value (0.473), so the choice of split does not change the number.",
+        "evidence": [
+          {"file": "data/pilot3_runs/paper_003/stdout.log", "contains": "Config: /workspace/repo/output/california_housing/ft_transformer/default/0.toml"},
+          {"file": "data/pilot3_runs/paper_003/stdout.log", "contains": "[test ] score = -0.473 | rmse = 0.473"}
+        ]
+      },
+      "resnet_rmse": {
+        "decision": "no_counterpart",
+        "reason": "the run trains FT-Transformer only; a ResNet number is never printed",
+        "evidence": [{"file": "data/pilot3_runs/paper_003/stdout.log", "contains": "Output: /workspace/output/ft_transformer_default_0"}]
+      },
+      "xgboost_rmse": {
+        "decision": "no_counterpart",
+        "reason": "the run trains FT-Transformer only; an XGBoost number is never printed",
+        "evidence": [{"file": "data/pilot3_runs/paper_003/stdout.log", "contains": "Output: /workspace/output/ft_transformer_default_0"}]
+      }
+    },
+    "paper_004": {
+      "tabr_average_rank": {
+        "decision": "no_counterpart",
+        "reason": "the claim is an average rank over a benchmark of datasets; the run trains TabR on one dataset (california) and prints no rank; its stored metrics are hyperparameters (lr, weight_decay)",
+        "evidence": [{"file": "data/memory_runs/paper_004/stdout.log", "contains": "'path': ':data/california'"}]
+      },
+      "xgboost_average_rank": {
+        "decision": "no_counterpart",
+        "reason": "the claim is an average rank of XGBoost over a benchmark; the run is a single TabR training on one dataset (california)",
+        "evidence": [{"file": "data/memory_runs/paper_004/stdout.log", "contains": "'path': ':data/california'"}]
+      }
+    },
+    "paper_005": {
+      "ep300_avg_kernel_speedup": {
+        "decision": "no_counterpart",
+        "reason": "the run was killed for memory (OOM_KILLED, exit code 137) during the grid search and printed no speed-up factor; the claim is a speed-up ratio that no log line states",
+        "evidence": [{"file": "data/pilot3_runs/paper_005/pilot_record.json", "contains": "\"status\": \"OOM_KILLED\""}]
+      }
+    },
+    "paper_006": {
+      "arcene_auroc": {
+        "decision": "no_counterpart",
+        "reason": "the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing)",
+        "evidence": [{"file": "data/pilot3_runs/paper_006/stdout.log", "contains": "dset_id=1461"}]
+      },
+      "xgboost_arcene_auroc": {
+        "decision": "no_counterpart",
+        "reason": "the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing)",
+        "evidence": [{"file": "data/pilot3_runs/paper_006/stdout.log", "contains": "dset_id=1461"}]
+      }
+    },
+    "paper_008": {
+      "forest_covertype_accuracy__danet_20": {
+        "decision": "no_counterpart",
+        "reason": "the run failed while loading data (the Forest Cover Type CSV is missing), before any metric was printed",
+        "evidence": [{"file": "data/pilot3_runs/paper_008/stderr.log", "contains": "No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"}]
+      },
+      "forest_covertype_accuracy__danet_32": {
+        "decision": "no_counterpart",
+        "reason": "the run failed while loading data (the Forest Cover Type CSV is missing), before any metric was printed",
+        "evidence": [{"file": "data/pilot3_runs/paper_008/stderr.log", "contains": "No such file or directory: './data/forest_cover_type/forest-cover-type.csv'"}]
+      }
+    }
+  }
+}
