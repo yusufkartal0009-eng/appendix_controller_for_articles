@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_007",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "OSError: [Errno 30] Read-only file system: 'data'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.184,
+    "metric_lines": []
+  },
+  "k2": null
+}

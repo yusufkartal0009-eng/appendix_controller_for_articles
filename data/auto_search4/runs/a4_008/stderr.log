@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/utils/download_models.py", line 1, in <module>
+    import nltk, spacy, subprocess, sys
+ModuleNotFoundError: No module named 'nltk'

@@ -1,0 +1,16 @@
+23:33:47 INFO Connecting to database: bioportal.db
+23:33:47 ERROR Database validation failed: unable to open database file
+Traceback (most recent call last):
+  File "/workspace/repo/build_index.py", line 293, in <module>
+    main()
+  File "/workspace/repo/build_index.py", line 286, in main
+    build(args)
+  File "/workspace/repo/build_index.py", line 139, in build
+    db = OntologyDB(args.db)
+         ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/db_layer.py", line 54, in __init__
+    self._validate_connection()
+  File "/workspace/repo/db_layer.py", line 60, in _validate_connection
+    with sqlite3.connect(self.db_path) as conn:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file

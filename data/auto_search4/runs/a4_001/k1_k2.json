@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_001",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for audioread==2.1.9",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.654,
+    "metric_lines": []
+  },
+  "k2": null
+}
