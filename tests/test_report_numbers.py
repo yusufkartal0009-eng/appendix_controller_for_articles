@@ -236,3 +236,9 @@ def test_the_clean_clone_block_fails_loudly_when_the_walkthrough_changes(tmp_pat
     (folder / "WALKTHROUGH.md").write_text("## Update 2\n\nnothing of the expected lines\n", encoding="utf-8")
     with pytest.raises(ValueError, match="no longer holds"):
         rn.render("cleanclone", tmp_path / "data")
+
+
+def test_the_tier3binding_block_shows_both_rules_for_the_stored_seed_records():
+    block = rn.render("tier3binding")
+    assert "| `paper_003` | `rmse` | 65 | 100 | `rmse` (the claimed metric) |" in block
+    assert "| `paper_006` | none (no accepted claim has a counterpart) | 100 | 100 | `auroc` (the largest CV) |" in block

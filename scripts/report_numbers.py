@@ -42,6 +42,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
   (`data/auto_search3/evaluation.json`; #473)
 - `autosearch4`: the automatic search of round 4: checked, run, K1, K2 v1, K2 v2 and both with Wilson intervals, causes of the failures
   (`data/auto_search4/evaluation.json`; #521)
+- `tier3binding`: Tier 3 of the stored seed records under the largest-CV rule and under the claimed-metric rule of the scorer
+  (`data/multi_seed_runs/`, `data/claim_metric_map.json`; #542)
 - `failurestatistics`: why selected runs failed, by category and group: Pilots 1 to 4, the candidate list, the automatic searches
   (`data/failure_statistics.json`, `scripts/failure_statistics.py`; #546)
 - `toleranceprobe`: where the Tier 2 decision changes when a hand-made claim is moved away from a real run's value
@@ -284,6 +286,32 @@ def multiseed_block(data: Path = DATA) -> str:
     lines += [f"| {label} | {runs} | {score} | {basis} | {alone} |" for label, runs, score, basis, alone in rows]
     match = ", ".join(f"`{pid}` {'yes' if r['comparison']['all_match'] else 'NO'}" for pid, r in synthetic["papers"].items())
     lines += ["", f"The synthetic papers' summary equals the mean and standard deviation computed on the host from the same seeds: {match}."]
+    return "\n".join(lines)
+
+
+def tier3binding_block(data: Path = DATA) -> str:
+    """Tier 3 of the stored real seed records under the two rules (#542): the largest CV, and the claimed metric (the scorer)."""
+    from src.claim_metric_map import load_claim_map
+    from src.multi_seed import load_seed_metric_results
+    from src.scoring import Tier3StabilityEvaluator
+
+    claim_map = load_claim_map(data / "claim_metric_map.json") or {}
+    accepted = {(c["paper_id"], c["query_id"]) for c in _load(data / "claims" / "review_decisions.json")["claims"]
+                if c.get("review_status") == "accepted"}
+    lines = [HEADER.format(sources="data/multi_seed_runs/*/multi_seed_summary.json, data/claim_metric_map.json, "
+                                   "data/claims/review_decisions.json (src/scoring.py)"), "",
+             "| Paper | Run metric of an accepted claim | Tier 3, largest-CV rule | Tier 3 by the scorer | Decided by |", "|---|---|---|---|---|"]
+    real_dir = data / "multi_seed_runs"
+    for path in sorted(real_dir.glob("*/multi_seed_summary.json")) if real_dir.is_dir() else []:
+        paper_id = path.parent.name
+        seeds = load_seed_metric_results(paper_id, real_dir)
+        claimed = [e["run_metric"] for q, e in (claim_map.get(paper_id) or {}).items()
+                   if e["decision"] == "map" and (paper_id, q) in accepted]
+        old = Tier3StabilityEvaluator.evaluate_by_metric(seeds)[0]
+        new = Tier3StabilityEvaluator.evaluate_by_metric(seeds, claimed_run_metrics=claimed)[0]
+        metric, basis = Tier3StabilityEvaluator.decisive_metric(seeds, claimed) or ("none", "none")
+        shown = ", ".join(f"`{m}`" for m in claimed) or "none (no accepted claim has a counterpart)"
+        lines.append(f"| `{paper_id}` | {shown} | {old:g} | {new:g} | `{metric}` ({'the claimed metric' if basis == 'claimed' else 'the largest CV'}) |")
     return "\n".join(lines)
 
 
@@ -581,7 +609,7 @@ def cleanclone_block(data: Path = DATA) -> str:
                        f"none found in the output (the run reads another dataset); Tier 2 {tier2}, total {total_score[0]}, status {total_score[1].strip()}.")])
 
 
-BLOCKS = {"realverdicts": realverdicts_block, "pilotintervals": pilotintervals_block, "cleanclone": cleanclone_block, "candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "autosearch4": autosearch4_block, "candidateround2": candidateround2_block, "failurestatistics": failurestatistics_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+BLOCKS = {"realverdicts": realverdicts_block, "pilotintervals": pilotintervals_block, "cleanclone": cleanclone_block, "candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "autosearch4": autosearch4_block, "candidateround2": candidateround2_block, "failurestatistics": failurestatistics_block, "tier3binding": tier3binding_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
           "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
