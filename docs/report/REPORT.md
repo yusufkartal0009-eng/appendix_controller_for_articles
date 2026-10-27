@@ -539,8 +539,8 @@ other work ran on the machine meanwhile, so the times are not those of an idle m
 A fresh clone of the public repository followed through the README for `paper_006`: the run completed; total time from the clone to the end of `diagnose` 2,490 s, run phase 1,092.54 s; metrics `accuracy 0.8886, auroc 0.892`; accepted claims used: 2, none found in the output (the run reads another dataset); Tier 2 0, total 61.25, status Needs Review.
 <!-- numbers:cleanclone:end -->
 
-(This walkthrough was recorded before the claim map existed; with the map the same stored run gets Tier 2 70 and `Partially Verified`,
-because both accepted claims have no counterpart in it, section 6.11.)
+(This walkthrough was recorded before the claim map existed; with the map the same stored run gets Tier 2 70 and `Needs Review`,
+because both accepted claims have no counterpart in it and nothing was compared, section 6.11.)
 
 This shows that the documented steps work end to end for one paper with the 8-CPU setting given on the command line; it does not show
 that the paper's numbers reproduce (its accepted claims belong to another dataset), and it is one paper on one machine.
@@ -872,9 +872,9 @@ are written in the script and agree with the map on the one mapped claim.
 | Paper | Stored runs scored | What the scorer says | Meaning of the decision |
 |---|---|---|---|
 | `paper_003` | 6 | before the claim map (claims by question ID): Tier 2 0.0 in 6 of 6; with the map (same model, dataset and metric): claimed 0.459, reproduced 0.473, relative difference 3.05 %, Tier 2 100, `Verified` in 6 of 6 runs | comparable for one of three claims (the run trains FT-Transformer only); one claim and one number, not a confirmed reproduction |
-| `paper_006` | 3 | before the claim map: Tier 2 0.0 in 3 of 3; with the map: 6 of 6 claim rows have no counterpart (Arcene numbers, the run reads another dataset), Tier 2 70 (neutral baseline), `Partially Verified` | none comparable; the label rests on the build tiers only |
-| `paper_004` | 1 | before the claim map: Tier 2 0.0; with the map: no counterpart, Tier 2 70 (neutral baseline), `Partially Verified` | none comparable: the stored metrics are hyperparameters (lr, weight_decay) |
-| `paper_102` | 1 | no accepted claim; Tier 2 70 (neutral baseline), `Partially Verified` | no comparison was made |
+| `paper_006` | 3 | before the claim map: Tier 2 0.0 in 3 of 3; with the map: 6 of 6 claim rows have no counterpart (Arcene numbers, the run reads another dataset), Tier 2 70 (neutral baseline), `Needs Review` | none comparable; nothing was compared, so the label is Needs Review |
+| `paper_004` | 1 | before the claim map: Tier 2 0.0; with the map: no counterpart, Tier 2 70 (neutral baseline), `Needs Review` | none comparable: the stored metrics are hyperparameters (lr, weight_decay) |
+| `paper_102` | 1 | no accepted claim; Tier 2 70 (neutral baseline), `Needs Review` | no comparison was made |
 | synthetic control (known answer) | 2 | true claim: Tier 2 100, `Verified` in 2 of 2 runs; false claim: Tier 2 0, `Needs Review` in 2 of 2 runs | the only known-answer rows |
 
 Before the claim map the claims never matched a run's metrics: Tier 2 was 0.0 in 10 of the 10 real runs that have accepted claims (question IDs against extracted metric names). With the map a claim is compared in 6 of the 10 runs (the one claim of `paper_003`); in the others no accepted claim has a counterpart in the run and Tier 2 is the neutral baseline. K2 (numbers of the output found in the paper's text) passed 6 of 6 runs of `paper_003`, 0 of 3 runs of `paper_006`, 0 of 1 runs of `paper_102` and 0 of 1 runs of `paper_004`. For `paper_003` the claimed value 0.459 is printed in the paper (page 7), while the run's final rmse 0.473 is not printed in it.

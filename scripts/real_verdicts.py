@@ -149,7 +149,7 @@ def verdict_rows(run_root: Path = DATA, claims: list[dict[str, Any]] | None = No
             rows.append({**base, "query_id": None, "map_decision": None, "claimed": None, "reproduced": None, "abs_diff": None,
                          "rel_diff": None, "aligned_tier2": None, "aligned_status": None, "comparable": False,
                          "reason": "no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no "
-                                   "claims', not a measurement; the status label rests on the build tiers only"})
+                                   "claims', not a measurement; a run with nothing compared is labeled Needs Review (#540)"})
             continue
         for claim in paper_claims:
             pairing = PAIRINGS.get((paper_id, claim["query_id"]))
@@ -381,18 +381,18 @@ FINDINGS = """## 5. Findings
    reproduction. Whether a 0.014 RMSE gap should count as reproduced is a tolerance question (`docs/TOLERANCE_PROBE.md`), not a
    fact this document can settle. The ResNet and XGBoost claims of the paper are not produced by the run (`no_counterpart`).
 3. **`paper_006`: claim and run do not match, so the claims are excluded.** Both accepted claims are Arcene numbers; the run reads
-   OpenML dataset 1461 (bank-marketing). With the map nothing is left to compare: @P6@. That label rests on the build tiers only
-   (see finding 6); it is not a measurement. The paper's own table has a SAINT value for Bank (`93.3`, page 7), but nobody
+   OpenML dataset 1461 (bank-marketing). With the map nothing is left to compare: @P6@. Nothing was compared, so the label is
+   `Needs Review` (finding 6); Tier 2 is not a measurement. The paper's own table has a SAINT value for Bank (`93.3`, page 7), but nobody
    accepted it as a claim, so it is not scored here.
 4. **`paper_006`: the stored `auroc` (0.892) is the last logged test line, not the run's "AUROC on best model: 0.929".** The
    extractor keeps the last occurrence of a name; here that is an epoch line. Reported, not changed.
 5. **`paper_004`: the stored metrics are hyperparameters** (`lr`, `weight_decay`); the claims are average ranks, so both claims
    are excluded (`no_counterpart`) and Tier 2 is the neutral baseline.
-6. **A label without a comparison: `paper_102` (no claim accepted), and with the map every paper whose claims are all
-   `no_counterpart`.** `paper_102`: no claim was accepted, and the label is still `Partially Verified`. With no claims Tier 2 is a neutral
-   70.0; with a clean build the total reaches the partial threshold. A reader sees a verdict that rests on no comparison
-   (the summary line of the score says so, the label does not). Whether such a paper should get a label at all is a decision
-   for the owner.
+6. **A label without a comparison (fixed in #540): `paper_102` (no claim accepted), and with the map every paper whose claims are
+   all `no_counterpart`.** With no claim compared Tier 2 is a neutral 70.0, and with a clean build the total reached the partial
+   threshold, so these papers were labeled `Partially Verified` on the build tiers alone. Since #540 a run with nothing compared is
+   labeled `Needs Review` and its summary says that no accepted claim could be compared; `Verified` and `Partially Verified` need at
+   least one claim compared with a metric of the run. The thresholds and the neutral 70.0 are unchanged.
 7. **The synthetic control behaves as designed.** The true claim (0.9) scores 100 / `Verified`, the false claim (0.5) scores
    0 / `Needs Review`, on both runs. This is the only known-answer case among the rows.
 8. **K2:** see section 4."""

@@ -85,9 +85,9 @@ Repro Radar strictly avoids accusatory or subjective characterizations ("Fake", 
 1. **`Verified` [Score $\ge 85$, Tier 1 $\ge 90$, Tier 2 $\ge 80$]:**
    The codebase built cleanly and reproduced empirical claims within tight tolerance bounds.
 2. **`Partially Verified` [Score $\ge 60$]:**
-   The codebase executed cleanly and the majority of claims replicated; minor discrepancies or incomplete environment specifications exist.
+   The codebase executed cleanly and the majority of claims replicated; minor discrepancies or incomplete environment specifications exist. At least one accepted claim must have been compared with a metric of the run (#540).
 3. **`Needs Review` [Score $< 60$, Tier 1 $\ge 75$]:**
-   The codebase built and ran successfully, but reproduced metrics diverged significantly from reported claims. This indicates potential hardware disparities, dataset version shifts, or unseeded operations requiring human inspection.
+   The codebase built and ran successfully, but reproduced metrics diverged significantly from reported claims. This indicates potential hardware disparities, dataset version shifts, or unseeded operations requiring human inspection. A clean run for which no accepted claim could be compared is also `Needs Review` (#540).
 4. **`Failed` [Tier 1 $< 50$ or Fatal Crash]:**
    The codebase could not be executed due to broken dependencies, missing files, or runtime exceptions.
 

@@ -111,11 +111,12 @@ decision. **Not verified** means a statement in the project that has no evidence
   and the output says so. `paper_003`: 0.459 against 0.473, 3.05 %, Tier 2 100, `Verified` (one claim, one number, not a confirmed reproduction). Before the map: Tier 2 0.0 and
   `Needs Review` for every real run (`docs/REAL_VERDICTS.md` keeps that result as "before the mapping").
 - **Decide (still open):** whether this is the way to tie a claim to a run (the alternatives were a mapping beside each paper's run setup, or a metric name in the claim),
-  and each row of the map. **Two consequences of the map to confirm:** (1) with every claim `no_counterpart` Tier 2 is the neutral 70 and `paper_004` and `paper_006` now get
-  `Partially Verified` from the build tiers alone (before: `Needs Review`), like `paper_102`; (2) the same neutral 70 applies to a failed run whose claims all have no counterpart
+  and each row of the map. **Two consequences of the map to confirm:** (1) with every claim `no_counterpart` Tier 2 is the neutral 70; since #540 such a run is labeled `Needs Review`
+  (it had been `Partially Verified` from the build tiers alone, like `paper_102`); (2) the same neutral 70 applies to a failed run whose claims all have no counterpart
   (`paper_002`, `paper_005`, `paper_008`), so its total is higher than when Tier 2 was 0 (the label stays `Failed` through Tier 1). Neither rule was changed.
-- **Also open:** the scorer gives a paper without an accepted claim a neutral Tier 2 of 70 and the label `Partially Verified` from the build tiers alone (`paper_102`);
-  K2 has no positive control (no real run prints a table value of its paper).
+- **Done (#540):** a paper without an accepted claim, or whose claims all have no counterpart, keeps the neutral Tier 2 of 70 but is labeled `Needs Review`, never
+  `Verified` or `Partially Verified`; the owner may revise this rule.
+- **Also open:** K2 has no positive control (no real run prints a table value of its paper).
 
 ### D10. Two rules of the scorer to confirm (new, from the bug hunt, `docs/BUG_HUNT.md` section 2)
 - **The absolute allowance of 0.05 for a value between 0 and 1** makes small values lenient (0.0167 matches a reproduced 0.06). Keep it, or use it only for

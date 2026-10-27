@@ -70,8 +70,8 @@ graph TD
 
 Repro Radar avoids subjective or punitive terminology. The AI Decision Layer inspects logs, execution traces, and metric differences to assign objective classifications:
 - **`Verified`**: All tiers reproduced within tight tolerance bounds (Score $\ge 85$, Tier 1 $\ge 90$, Tier 2 $\ge 80$).
-- **`Partially Verified`**: Code executed cleanly and the majority of claims aligned (Score $\ge 60$).
-- **`Needs Review`**: Code compiled cleanly, but reproduced outputs diverged significantly from claims (suggesting hardware differences, dataset version mismatch, or unseeded stochastic operations).
+- **`Partially Verified`**: Code executed cleanly and the majority of claims aligned (Score $\ge 60$). At least one accepted claim must have been compared with a metric of the run; a run with nothing to compare is `Needs Review`.
+- **`Needs Review`**: Code compiled cleanly, but reproduced outputs diverged significantly from claims (suggesting hardware differences, dataset version mismatch, or unseeded stochastic operations), or no accepted claim could be compared with the run.
 - **`Failed`**: Compilation or fatal runtime errors prevented execution (Tier 1 $< 50$).
 
 In this repository the layer is **rule-based**: it classifies a failure with the categories of Pilot 1, writes a report in which every sentence names the file and key it was read from, writes "unknown" for a value the files do not hold, names no cause beyond the quoted log line, and explains the difference between two runs without naming a cause either ([`docs/DIAGNOSIS.md`](docs/DIAGNOSIS.md), examples in [`docs/DIAGNOSIS_EXAMPLES.md`](docs/DIAGNOSIS_EXAMPLES.md) and [`docs/DIAGNOSIS_COMPARISONS.md`](docs/DIAGNOSIS_COMPARISONS.md)). The classifier was checked against labels written by hand ([`docs/DIAGNOSIS_VALIDATION.md`](docs/DIAGNOSIS_VALIDATION.md)); the statuses above are assigned by the scorer, not by the diagnosis.

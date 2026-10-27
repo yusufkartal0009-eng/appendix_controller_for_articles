@@ -68,10 +68,10 @@ def test_paper_006_has_no_counterpart_and_the_baseline_and_message_are_kept():
     notes = result["diagnostics"]["tier2_notes"]
     assert "No numeric claims specified; neutral baseline applied (70.0)" in notes
     assert any(n.startswith("Claim arcene_auroc has no counterpart in this run: the claim belongs to the Arcene dataset") for n in notes)
-    # with nothing left to compare, Tier 2 is the neutral 70.0 and the label follows the existing rules (recorded, not chosen here)
+    # with nothing left to compare, Tier 2 is the neutral 70.0, which is not evidence: the label is Needs Review (#540)
     assert bd.tier2_metrics == 70.0
-    # Recorded for the owner: this label rests on the build tiers only, like `paper_102` (docs/REAL_VERDICTS.md, finding 6)
-    assert bd.status_label == "Partially Verified" and bd.total_score == 82.75
+    assert bd.status_label == "Needs Review" and bd.total_score == 82.75
+    assert "no accepted claim could be compared" in bd.summary
 
 
 def test_two_claims_mapped_to_one_run_metric_are_an_error():
