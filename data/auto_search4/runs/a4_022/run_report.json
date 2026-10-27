@@ -1,0 +1,135 @@
+{
+  "paper_id": "a4_022",
+  "source": "https://github.com/imrahulr/adversarial_robustness_pytorch",
+  "commit_hash": "6df6a8f0cd49cf6d18507a4b574c004ab6eedf49",
+  "target_script": "train-wa.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.214,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_022",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.822,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 87314432,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "autoattack==0.1",
+      "name": "autoattack",
+      "requested": "==0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.4.2",
+      "name": "matplotlib",
+      "requested": "==3.4.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.19.5",
+      "name": "numpy",
+      "requested": "==1.19.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==1.2.4",
+      "name": "pandas",
+      "requested": "==1.2.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==8.2.0",
+      "name": "Pillow",
+      "requested": "==8.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "robustbench==0.1",
+      "name": "robustbench",
+      "requested": "==0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.4.1",
+      "name": "scipy",
+      "requested": "==1.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.8.0+cu101",
+      "name": "torch",
+      "requested": "==1.8.0+cu101",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.9.0+cu101",
+      "name": "torchvision",
+      "requested": "==0.9.0+cu101",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.60.0",
+      "name": "tqdm",
+      "requested": "==4.60.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/train-wa.py --data-dir <data_dir> --log-dir <log_dir> --desc <name_of_the_experiment> --data cifar10s --batch-size 1024 --model wrn-28-10-swish --num-adv-epochs 400 --lr 0.4 --beta 6.0 --unsup-fraction 0.7 --aux-data-filename <path_to_additional_data>\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.822s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/train-wa.py\", line 14, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

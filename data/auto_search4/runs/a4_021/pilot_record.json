@@ -1,0 +1,112 @@
+{
+  "paper_id": "a4_021",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T00:54:12+00:00",
+  "repo_url": "https://github.com/ml4ai/mliis",
+  "pinned_commit": "f40352e734f77609bcd5c4ad330ea73a897a217d",
+  "target_script": "run_metasegnet.py",
+  "container_command": "python /workspace/repo/run_metasegnet.py <args>",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python run_metasegnet.py <args>",
+    "readme_url": "https://github.com/ml4ai/mliis/blob/f40352e734f77609bcd5c4ad330ea73a897a217d/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "f40352e734f77609bcd5c4ad330ea73a897a217d",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 2.842
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 7,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_021_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "tensorflow==1.15.4",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for tensorflow==1.15.4"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement tensorflow==1.15.4 (from versions: 2.12.0rc0, 2.12.0rc1, 2.12.0, 2.12.1, 2.13.0rc0, 2.13.0rc1, 2.13.0rc2, 2.13.0, 2.13.1, 2.14.0rc0, 2.14.0rc1, 2.14.0, 2.14.1, 2.15.0rc0, 2.15.0rc1, 2.15.0, 2.15.0.post1, 2.15.1, 2.16.0rc0, 2.16.1, 2.16.2, 2.17.0rc0, 2.17.0rc1, 2.17.0, 2.17.1, 2.18.0rc0, 2.18.0rc1, 2.18.0rc2, 2.18.0, 2.18.1, 2.19.0rc0, 2.19.0, 2.19.1, 2.20.0rc0, 2.20.0, 2.21.0rc0, 2.21.0rc1, 2.21.0, 2.22.0rc0)\nERROR: No matching distribution found for tensorflow==1.15.4\n",
+    "duration_seconds": 11.714
+  },
+  "sandbox_duration_seconds": 2.349,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.758,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 60063744
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.583,
+    "peak_memory_bytes": 38662144
+  },
+  "finished_at": "2026-10-27T00:54:29+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

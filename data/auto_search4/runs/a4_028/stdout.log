@@ -1,0 +1,12 @@
+
+======================================================================
+  CONTINUAL LEARNING IN PyTorch — COMPLETE BENCHMARK
+  Article 07 | Production ML Engineering Series
+  Seed: 42 | Epochs/task: 5 | Hidden: [256, 256]
+======================================================================
+
+======================================================================
+  SCENARIO 1: Task-Incremental — Split-MNIST (5 tasks, multi-head)
+======================================================================
+  Task ID known at inference. Each task = binary digit-pair classifier.
+  Architecture: MultiHeadMLP [256, 256], 5 epochs/task

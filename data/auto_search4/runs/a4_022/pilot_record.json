@@ -1,0 +1,152 @@
+{
+  "paper_id": "a4_022",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T00:54:30+00:00",
+  "repo_url": "https://github.com/imrahulr/adversarial_robustness_pytorch",
+  "pinned_commit": "6df6a8f0cd49cf6d18507a4b574c004ab6eedf49",
+  "target_script": "train-wa.py",
+  "container_command": "python /workspace/repo/train-wa.py --data-dir <data_dir> --log-dir <log_dir> --desc <name_of_the_experiment> --data cifar10s --batch-size 1024 --model wrn-28-10-swish --num-adv-epochs 400 --lr 0.4 --beta 6.0 --unsup-fraction 0.7 --aux-data-filename <path_to_additional_data>",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python train-wa.py --data-dir <data_dir> --log-dir <log_dir> --desc <name_of_the_experiment> --data cifar10s --batch-size 1024 --model wrn-28-10-swish --num-adv-epochs 400 --lr 0.4 --beta 6.0 --unsup-fraction 0.7 --aux-data-filename <path_to_additional_data>",
+    "readme_url": "https://github.com/imrahulr/adversarial_robustness_pytorch/blob/6df6a8f0cd49cf6d18507a4b574c004ab6eedf49/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "6df6a8f0cd49cf6d18507a4b574c004ab6eedf49",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 0.92
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 1,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_022_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "autoattack==0.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for autoattack==0.1"
+      },
+      {
+        "requirement": "matplotlib==3.4.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for matplotlib==3.4.2"
+      },
+      {
+        "requirement": "numpy==1.19.5",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for numpy==1.19.5"
+      },
+      {
+        "requirement": "pandas==1.2.4",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pandas==1.2.4"
+      },
+      {
+        "requirement": "Pillow==8.2.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for Pillow==8.2.0"
+      },
+      {
+        "requirement": "robustbench==0.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for robustbench==0.1"
+      },
+      {
+        "requirement": "scipy==1.4.1",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for scipy==1.4.1"
+      },
+      {
+        "requirement": "torch==1.8.0+cu101",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torch==1.8.0+cu101"
+      },
+      {
+        "requirement": "torchvision==0.9.0+cu101",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for torchvision==0.9.0+cu101"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement autoattack==0.1 (from versions: none)\nERROR: No matching distribution found for autoattack==0.1\n",
+    "duration_seconds": 12.016
+  },
+  "sandbox_duration_seconds": 2.991,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.214,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 87314432
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.599,
+    "peak_memory_bytes": 39538688
+  },
+  "finished_at": "2026-10-27T00:54:45+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

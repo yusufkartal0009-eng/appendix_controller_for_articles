@@ -1,0 +1,167 @@
+{
+  "paper_id": "a4_025",
+  "source": "https://github.com/AYMANE-SNOUSSI/adversarial-attacks-rag",
+  "commit_hash": "bdff9f27ee95bf3d5fea5cab3ed7d6a6c1341989",
+  "target_script": "src/fetch_corpus.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.581,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_025",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.241,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 13336576,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "google-genai==2.25.0",
+      "name": "google-genai",
+      "requested": "==2.25.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.2.3",
+      "name": "python-dotenv",
+      "requested": "==1.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.34.2",
+      "name": "requests",
+      "requested": "==2.34.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pymupdf==1.28.2",
+      "name": "pymupdf",
+      "requested": "==1.28.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sentence-transformers==6.1.0",
+      "name": "sentence-transformers",
+      "requested": "==6.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==5.17.0",
+      "name": "transformers",
+      "requested": "==5.17.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.14.0",
+      "name": "torch",
+      "requested": "==2.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.5.3",
+      "name": "numpy",
+      "requested": "==2.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fastapi==0.142.2",
+      "name": "fastapi",
+      "requested": "==0.142.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "uvicorn==0.54.0",
+      "name": "uvicorn",
+      "requested": "==0.54.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytest==9.1.1",
+      "name": "pytest",
+      "requested": "==9.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx==0.28.1",
+      "name": "httpx",
+      "requested": "==0.28.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "streamlit==1.65.0",
+      "name": "streamlit",
+      "requested": "==1.65.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "huggingface_hub==1.33.0",
+      "name": "huggingface_hub",
+      "requested": "==1.33.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/src/fetch_corpus.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.241s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/src/fetch_corpus.py\", line 7, in <module>\n    import requests\nModuleNotFoundError: No module named 'requests'\n"
+}
