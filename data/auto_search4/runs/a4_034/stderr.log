@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/recall/data_import/data_generation_script.py", line 29, in <module>
+    from recall.utility.config import Configuration
+  File "/workspace/repo/recall/utility/config.py", line 30, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'

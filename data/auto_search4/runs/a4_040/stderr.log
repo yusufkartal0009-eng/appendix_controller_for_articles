@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/build_workshop_artifacts.py", line 3140, in <module>
+    main()
+  File "/workspace/repo/scripts/build_workshop_artifacts.py", line 115, in main
+    artifacts = build_artifacts(run_dir, output_dir)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/scripts/build_workshop_artifacts.py", line 121, in build_artifacts
+    dirs = _prepare_dirs(output_dir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/scripts/build_workshop_artifacts.py", line 232, in _prepare_dirs
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/workspace/repo/results/paper_artifacts/tables/csv'
