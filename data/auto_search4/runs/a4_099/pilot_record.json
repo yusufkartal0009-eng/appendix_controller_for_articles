@@ -1,0 +1,106 @@
+{
+  "paper_id": "a4_099",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T07:22:50+00:00",
+  "repo_url": "https://github.com/SII-MemQ/MemQ",
+  "pinned_commit": "e9c55a202e7bd67aeb94fe30fa7d89dfd8821188",
+  "target_script": "run/run_llb.py",
+  "container_command": "python /workspace/repo/run/run_llb.py --config configs/my_experiment.local.yaml",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python run/run_llb.py --config configs/my_experiment.local.yaml",
+    "readme_url": "https://github.com/SII-MemQ/MemQ/blob/e9c55a202e7bd67aeb94fe30fa7d89dfd8821188/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "e9c55a202e7bd67aeb94fe30fa7d89dfd8821188",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 2.323
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 76,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_099_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "ed ./a4_099_packages/shellingham-1.5.4-py2.py3-none-any.whl\nSaved ./a4_099_packages/tzdata-2026.5-py2.py3-none-any.whl\nSaved ./a4_099_packages/xxhash-4.0.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSuccessfully downloaded openai pydantic pydantic-core anyio httpx2 httpcore2 jiter typing-extensions numpy pandas pyyaml tenacity click tqdm tiktoken huggingface_hub hf-xet transformers tokenizers docker mysql-connector-python datasets dill fsspec multiprocess tensorboard grpcio protobuf tensorboard-data-server matplotlib psutil absl-py aiohttp multidict yarl aiohappyeyeballs aiosignal annotated-types attrs contourpy cycler filelock fonttools frozenlist h11 idna kiwisolver markdown packaging pillow propcache pyarrow pyparsing python-dateutil regex requests charset_normalizer urllib3 certifi safetensors setuptools six truststore typing-inspection werkzeug markupsafe sniffio typer annotated-doc rich pygments markdown-it-py mdurl shellingham tzdata xxhash\n",
+    "stderr": "",
+    "duration_seconds": 20.721
+  },
+  "sandbox_duration_seconds": 580.497,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 11.702,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 146059264
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 567.161,
+    "peak_memory_bytes": 89210880
+  },
+  "finished_at": "2026-10-27T07:32:54+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

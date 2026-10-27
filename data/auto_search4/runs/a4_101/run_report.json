@@ -1,0 +1,135 @@
+{
+  "paper_id": "a4_101",
+  "source": "https://github.com/SPL-BGU/PolyPlan",
+  "commit_hash": "cea12c6e003f4e5b3e3f88e9c660a2273a61fbe4",
+  "target_script": "demo.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.502,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_101",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.176,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 8249344,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "stable_baselines3==1.8.0",
+      "name": "stable_baselines3",
+      "requested": "==1.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gym==0.21.0",
+      "name": "gym",
+      "requested": "==0.21.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sb3_contrib==1.8.0",
+      "name": "sb3_contrib",
+      "requested": "==1.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "imitation==0.3.2",
+      "name": "imitation",
+      "requested": "==0.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tensorboard==2.7.0",
+      "name": "tensorboard",
+      "requested": "==2.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==3.1",
+      "name": "networkx",
+      "requested": "==3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.24.4",
+      "name": "numpy",
+      "requested": "==1.24.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.0.3",
+      "name": "pandas",
+      "requested": "==2.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pddl-plus-parser==3.10.4",
+      "name": "pddl-plus-parser",
+      "requested": "==3.10.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.65.0",
+      "name": "tqdm",
+      "requested": "==4.65.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/demo.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.176s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/demo.py\", line 1, in <module>\n    from envs import BasicMinecraft\n  File \"/workspace/repo/envs/__init__.py\", line 1, in <module>\n    from .polycraft_gym_env import PolycraftGymEnv\n  File \"/workspace/repo/envs/polycraft_gym_env.py\", line 1, in <module>\n    from gym import Env\nModuleNotFoundError: No module named 'gym'\n"
+}

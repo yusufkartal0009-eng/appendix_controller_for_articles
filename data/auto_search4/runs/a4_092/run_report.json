@@ -1,0 +1,212 @@
+{
+  "paper_id": "a4_092",
+  "source": "https://github.com/shaheennabi/Proximal-Policy-Optimization-PPO",
+  "commit_hash": "7d46904f2063e05d06cc73a4db7548dbb47f73a7",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 55.468,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_092",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 55.115,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 842117120,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2"
+    },
+    {
+      "name": "cuda-bindings",
+      "version": "13.4.4"
+    },
+    {
+      "name": "cuda-pathfinder",
+      "version": "1.8.4"
+    },
+    {
+      "name": "cuda-toolkit",
+      "version": "13.0.3.0"
+    },
+    {
+      "name": "Farama-Notifications",
+      "version": "0.0.6"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "gymnasium",
+      "version": "1.4.0"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "nvidia-cublas",
+      "version": "13.1.1.3"
+    },
+    {
+      "name": "nvidia-cuda-cupti",
+      "version": "13.0.85"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc",
+      "version": "13.0.88"
+    },
+    {
+      "name": "nvidia-cuda-runtime",
+      "version": "13.0.96"
+    },
+    {
+      "name": "nvidia-cudnn-cu13",
+      "version": "9.24.0.43"
+    },
+    {
+      "name": "nvidia-cufft",
+      "version": "12.0.0.61"
+    },
+    {
+      "name": "nvidia-cufile",
+      "version": "1.15.1.6"
+    },
+    {
+      "name": "nvidia-curand",
+      "version": "10.4.0.35"
+    },
+    {
+      "name": "nvidia-cusolver",
+      "version": "12.0.4.66"
+    },
+    {
+      "name": "nvidia-cusparse",
+      "version": "12.6.3.3"
+    },
+    {
+      "name": "nvidia-cusparselt-cu13",
+      "version": "0.8.1"
+    },
+    {
+      "name": "nvidia-nccl-cu13",
+      "version": "2.30.7"
+    },
+    {
+      "name": "nvidia-nvjitlink",
+      "version": "13.4.92"
+    },
+    {
+      "name": "nvidia-nvshmem-cu13",
+      "version": "3.4.5"
+    },
+    {
+      "name": "nvidia-nvtx",
+      "version": "13.0.85"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.1"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "torch",
+      "version": "2.14.1"
+    },
+    {
+      "name": "triton",
+      "version": "3.8.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "gymnasium",
+      "name": "gymnasium",
+      "requested": "any",
+      "installed": "1.4.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "torch",
+      "name": "torch",
+      "requested": "any",
+      "installed": "2.14.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": "2.4.6",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py\n==================================================\nIter    0 | Return  -1342.7 | KL 0.0012 | Clip 0.03 | VLoss 96.973 | Entropy 1.415\nIter   10 | Return  -1480.9 | KL 0.0041 | Clip 0.04 | VLoss 125.850 | Entropy 1.377\nIter   20 | Return  -1152.8 | KL 0.0016 | Clip 0.00 | VLoss 68.660 | Entropy 1.339\nIter   30 | Return  -1213.0 | KL 0.0062 | Clip 0.07 | VLoss 114.960 | Entropy 1.281\nIter   40 | Return  -1179.0 | KL 0.0059 | Clip 0.05 | VLoss 86.704 | Entropy 1.205\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : INSTALLED\nDuration      : 55.115s\n==================================================\n",
+  "stderr_preview": ""
+}

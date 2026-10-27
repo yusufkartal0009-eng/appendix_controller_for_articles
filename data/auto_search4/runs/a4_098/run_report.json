@@ -1,0 +1,340 @@
+{
+  "paper_id": "a4_098",
+  "source": "https://github.com/SALT-NLP/agent-collusion",
+  "commit_hash": "5afb2c595aa3eff6b9b829a032f4f117b36ee54d",
+  "target_script": "analysis/agreement_judge.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 2,
+  "duration_seconds": 0.637,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_098",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 0.315,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 16576512,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "boto3",
+      "version": "1.43.62"
+    },
+    {
+      "name": "botocore",
+      "version": "1.43.119"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0"
+    },
+    {
+      "name": "fastuuid",
+      "version": "0.14.0"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "huggingface_hub",
+      "version": "2.3.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "importlib_metadata",
+      "version": "8.9.0"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "jiter",
+      "version": "0.18.0"
+    },
+    {
+      "name": "jmespath",
+      "version": "1.1.0"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1"
+    },
+    {
+      "name": "litellm",
+      "version": "1.94.1"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "multidict",
+      "version": "7.2.1"
+    },
+    {
+      "name": "openai",
+      "version": "2.52.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.2"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0"
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.9.1"
+    },
+    {
+      "name": "s3transfer",
+      "version": "0.19.3"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.14.0"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.2"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "litellm==1.94.1",
+      "name": "litellm",
+      "requested": "==1.94.1",
+      "installed": "1.94.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==2.52.0",
+      "name": "openai",
+      "requested": "==2.52.0",
+      "installed": "2.52.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "boto3==1.43.62",
+      "name": "boto3",
+      "requested": "==1.43.62",
+      "installed": "1.43.62",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytest==9.1.1",
+      "name": "pytest",
+      "requested": "==9.1.1",
+      "installed": "9.1.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.2.2",
+      "name": "python-dotenv",
+      "requested": "==1.2.2",
+      "installed": "1.2.2",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/analysis/agreement_judge.py --runs results/main/*/run.json --out analysis/results/agreement.csv --base-url http://localhost:8042/v1 --model qwen3.8-27b --verdict-policy raw-only\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 2)\nDependencies  : INSTALLED\nDuration      : 0.315s\n==================================================\n",
+  "stderr_preview": "no run.json matched\n"
+}

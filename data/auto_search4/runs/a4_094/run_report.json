@@ -1,0 +1,652 @@
+{
+  "paper_id": "a4_094",
+  "source": "https://github.com/OK-computer008/TradingAgents-CryptoA",
+  "commit_hash": "5df717c88270c9c9d5a5eaba9ac2bc2cc488c29b",
+  "target_script": "run_a_share.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 39.912,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_094",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 39.567,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 212938752,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0"
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "anthropic",
+      "version": "1.17.0"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "name": "backtrader",
+      "version": "1.9.78.123"
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.2"
+    },
+    {
+      "name": "cssselect",
+      "version": "1.6.0"
+    },
+    {
+      "name": "curl_cffi",
+      "version": "0.17.0"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0"
+    },
+    {
+      "name": "docstring_parser",
+      "version": "0.18.0"
+    },
+    {
+      "name": "filetype",
+      "version": "1.2.0"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0"
+    },
+    {
+      "name": "google-auth",
+      "version": "2.62.0"
+    },
+    {
+      "name": "google-genai",
+      "version": "2.33.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "name": "httpx-sse",
+      "version": "0.4.3"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "name": "jiter",
+      "version": "0.18.0"
+    },
+    {
+      "name": "jmespath",
+      "version": "1.1.0"
+    },
+    {
+      "name": "jsonpatch",
+      "version": "1.38"
+    },
+    {
+      "name": "jsonpointer",
+      "version": "3.6"
+    },
+    {
+      "name": "langchain-anthropic",
+      "version": "1.7.6"
+    },
+    {
+      "name": "langchain-classic",
+      "version": "1.0.8"
+    },
+    {
+      "name": "langchain-community",
+      "version": "0.4.2"
+    },
+    {
+      "name": "langchain-core",
+      "version": "1.7.0"
+    },
+    {
+      "name": "langchain-experimental",
+      "version": "0.4.2"
+    },
+    {
+      "name": "langchain-google-genai",
+      "version": "4.4.2"
+    },
+    {
+      "name": "langchain-openai",
+      "version": "1.7.3"
+    },
+    {
+      "name": "langchain-protocol",
+      "version": "0.0.20"
+    },
+    {
+      "name": "langchain-text-splitters",
+      "version": "1.1.3"
+    },
+    {
+      "name": "langgraph",
+      "version": "1.2.18"
+    },
+    {
+      "name": "langgraph-checkpoint",
+      "version": "4.3.1"
+    },
+    {
+      "name": "langgraph-prebuilt",
+      "version": "1.1.1"
+    },
+    {
+      "name": "langgraph-sdk",
+      "version": "0.4.10"
+    },
+    {
+      "name": "langsmith",
+      "version": "0.14.12"
+    },
+    {
+      "name": "lxml",
+      "version": "6.1.3"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2"
+    },
+    {
+      "name": "multidict",
+      "version": "7.2.1"
+    },
+    {
+      "name": "multitasking",
+      "version": "0.0.13"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6"
+    },
+    {
+      "name": "openai",
+      "version": "3.39.0"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1"
+    },
+    {
+      "name": "orjson",
+      "version": "3.13.0"
+    },
+    {
+      "name": "ormsgpack",
+      "version": "1.13.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.0"
+    },
+    {
+      "name": "parsel",
+      "version": "1.12.1"
+    },
+    {
+      "name": "peewee",
+      "version": "4.5.3"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.13.5"
+    },
+    {
+      "name": "prompt_toolkit",
+      "version": "3.0.53"
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4"
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2"
+    },
+    {
+      "name": "pyasn1",
+      "version": "0.6.5"
+    },
+    {
+      "name": "pyasn1_modules",
+      "version": "0.4.2"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.12"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1"
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.16.1"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4"
+    },
+    {
+      "name": "pytz",
+      "version": "2026.5"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "questionary",
+      "version": "2.1.1"
+    },
+    {
+      "name": "rank-bm25",
+      "version": "0.2.2"
+    },
+    {
+      "name": "redis",
+      "version": "8.1.0"
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "name": "requests-toolbelt",
+      "version": "1.0.0"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.1"
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1"
+    },
+    {
+      "name": "soupsieve",
+      "version": "3.0.4"
+    },
+    {
+      "name": "SQLAlchemy",
+      "version": "2.1.6"
+    },
+    {
+      "name": "stockstats",
+      "version": "0.6.10"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.1.4"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.14.0"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "name": "typer",
+      "version": "0.27.3"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0"
+    },
+    {
+      "name": "uuid_utils",
+      "version": "0.19.0"
+    },
+    {
+      "name": "w3lib",
+      "version": "2.5.0"
+    },
+    {
+      "name": "wcwidth",
+      "version": "0.9.4"
+    },
+    {
+      "name": "websockets",
+      "version": "17.3"
+    },
+    {
+      "name": "xxhash",
+      "version": "4.0.2"
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1"
+    },
+    {
+      "name": "yfinance",
+      "version": "1.7.0"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "typing-extensions",
+      "name": "typing-extensions",
+      "requested": "any",
+      "installed": "4.16.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-core",
+      "name": "langchain-core",
+      "requested": "any",
+      "installed": "1.7.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-openai",
+      "name": "langchain-openai",
+      "requested": "any",
+      "installed": "1.7.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-experimental",
+      "name": "langchain-experimental",
+      "requested": "any",
+      "installed": "0.4.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas",
+      "name": "pandas",
+      "requested": "any",
+      "installed": "3.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "yfinance",
+      "name": "yfinance",
+      "requested": "any",
+      "installed": "1.7.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "stockstats",
+      "name": "stockstats",
+      "requested": "any",
+      "installed": "0.6.10",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langgraph",
+      "name": "langgraph",
+      "requested": "any",
+      "installed": "1.2.18",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "rank-bm25",
+      "name": "rank-bm25",
+      "requested": "any",
+      "installed": "0.2.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "setuptools",
+      "name": "setuptools",
+      "requested": "any",
+      "installed": "84.2.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "backtrader",
+      "name": "backtrader",
+      "requested": "any",
+      "installed": "1.9.78.123",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "parsel",
+      "name": "parsel",
+      "requested": "any",
+      "installed": "1.12.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "requests",
+      "name": "requests",
+      "requested": "any",
+      "installed": "2.34.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "tqdm",
+      "name": "tqdm",
+      "requested": "any",
+      "installed": "4.70.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pytz",
+      "name": "pytz",
+      "requested": "any",
+      "installed": "2026.5",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "redis",
+      "name": "redis",
+      "requested": "any",
+      "installed": "8.1.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "rich",
+      "name": "rich",
+      "requested": "any",
+      "installed": "15.0.0",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "typer",
+      "name": "typer",
+      "requested": "any",
+      "installed": "0.27.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "questionary",
+      "name": "questionary",
+      "requested": "any",
+      "installed": "2.1.1",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain_anthropic",
+      "name": "langchain_anthropic",
+      "requested": "any",
+      "installed": "1.7.6",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-google-genai",
+      "name": "langchain-google-genai",
+      "requested": "any",
+      "installed": "4.4.2",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/run_a_share.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 39.567s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/tradingagents/dataflows/akshare_provider.py\", line 9, in <module>\n    import akshare as ak\nModuleNotFoundError: No module named 'akshare'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/workspace/repo/run_a_share.py\", line 4, in <module>\n    from tradingagents.graph.trading_graph import TradingAgentsGraph\n  File \"/workspace/repo/tradingagents/graph/__init__.py\", line 3, in <module>\n    from .trading_graph import TradingAgentsGraph\n  File \"/workspace/repo/tradingagents/graph/trading_graph.py\", line 13, in <module>\n    from tradingagents.agents import *\n  File \"/workspace/repo/tradingagents/agents/__init__.py\", line 1, in <module>\n    from .utils.agent_utils import create_msg_delete\n  File \"/workspace/repo/tradingagents/agents/utils/agent_utils.py\", line 4, in <module>\n    from tradingagents.agents.utils.core_stock_tools import (\n  File \"/workspace/repo/tradingagents/agents/utils/core_stock_tools.py\", line 3, in <module>\n    from tradingagents.dataflows.interface import route_to_vendor\n  File \"/workspace/repo/tradingagents/dataflows/interface.py\", line 28, in <module>\n    from .akshare_provider import (\n  File \"/workspace/repo/tradingagents/dataflows/akshare_provider.py\", line 11, in <module>\n    raise ImportError(\"akshare is required for A-share data. Install with: pip install akshare\")\nImportError: akshare is required for A-share data. Install with: pip install akshare\n"
+}

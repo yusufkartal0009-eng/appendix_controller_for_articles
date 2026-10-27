@@ -1,0 +1,10 @@
+Base LLM accuracy :  44.4%
+ACE   accuracy    :  83.3%   (+38.9 pts)
+Playbook learned  : 5 bullets, ~227 tokens
+
+## Domain Concepts
+- [ctx-649901f9] For manually underwritten loans, the maximum total debt-to-income (DTI) ratio is generally 36%, extendable to 45% with strong compensating factors.  (helpful=4, harmful=0)
+- [ctx-3d51a3ae] Combined LTV (CLTV) including subordinate financing generally cannot exceed 95% for a 1-unit primary residence purchase.  (helpful=9, harmful=0)
+- [ctx-73f1cad2] A rate lock guarantees the interest rate for a defined period; if it expires before closing, the loan must be re-locked at current market rates.  (helpful=9, harmful=0)
+- [ctx-14dc5c9e] Bonus and overtime income require a two-year average and documented likelihood of continuance to be used for qualifying.  (helpful=9, harmful=0)
+- [ctx-042c421f] Virtual currency must be converted to USD and deposited in a U.S. depository institution before closing, with documentation of conversion and source.  (helpful=4, harmful=0)

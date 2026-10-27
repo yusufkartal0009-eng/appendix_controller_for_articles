@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_093",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "Installing collected packages: wcwidth, triton, thop, tensorboardx, stack-data, python-xlib, pynput, pure-eval, ptyprocess, proglog, pexpect, nvidia-ml-py, mpmath, libclang, hydra-submitit-launcher, hydra-core, gym-notices, google-pasta, flatbuffers, fastjsonschema, einops, docker-pycreds, distlib, ",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.484,
+    "metric_lines": []
+  },
+  "k2": null
+}

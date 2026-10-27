@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_103",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for pandas==0.23.1",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.609,
+    "metric_lines": []
+  },
+  "k2": null
+}

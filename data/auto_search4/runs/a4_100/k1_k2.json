@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_100",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for llama_cpp_python==0.2.77",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.742,
+    "metric_lines": []
+  },
+  "k2": null
+}

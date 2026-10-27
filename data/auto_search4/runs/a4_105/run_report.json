@@ -1,0 +1,54 @@
+{
+  "paper_id": "a4_105",
+  "source": "https://github.com/rrahimi-uci/agentic-context-engineering",
+  "commit_hash": "97bdb158f72c7dfca73b581545172c981ea8dc88",
+  "target_script": "examples/01_quickstart.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 0.817,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_105",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 0.51,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 20688896,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/examples/01_quickstart.py\n==================================================\nBase LLM accuracy :  44.4%\nACE   accuracy    :  83.3%   (+38.9 pts)\nPlaybook learned  : 5 bullets, ~227 tokens\n\n## Domain Concepts\n- [ctx-649901f9] For manually underwritten loans, the maximum total debt-to-income (DTI) ratio is generally 36%, extendable to 45% with strong compensating factors.  (helpful=4, harmful=0)\n- [ctx-3d51a3ae] Combined LTV (CLTV) including subordinate financing generally cannot exceed 95% for a 1-unit primary residence purchase.  (helpful=9, harmful=0)\n- [ctx-73f1cad2] A rate lock guarantees the interest rate for a defined period; if it expires before closing, the loan must be re-locked at current market rates.  (helpful=9, harmful=0)\n- [ctx-14dc5c9e] Bonus and overtime income require a two-year average and documented likelihood of continuance to be used for qualifying.  (helpful=9, harmful=0)\n- [ctx-042c421f] Virtual currency must be converted to USD and deposited in a U.S. depository institution before closing, with documentation of conversion and source.  (helpful=4, harmful=0)\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : SKIPPED\nDuration      : 0.51s\n==================================================\n",
+  "stderr_preview": "",
+  "metrics": {
+    "accuracy": 0.833
+  }
+}

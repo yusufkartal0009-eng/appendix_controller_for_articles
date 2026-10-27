@@ -1,0 +1,14 @@
+============================================================
+ LH-AgentBench Trajectory Generator
+ Model    : claude-opus-4-6
+ Provider : AWS Bedrock (us-east-1)
+ Runs     : 3 per scenario
+ Steps    : up to 30 per episode
+ Tokens   : up to 2048 per turn
+============================================================
+
+ERROR: AWS credentials not available: No module named 'boto3'
+
+Ensure you have valid AWS credentials configured, e.g.:
+  aws configure
+  or set AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY env vars

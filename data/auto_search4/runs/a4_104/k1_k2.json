@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_104",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: No matching distribution found for langdetect",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.744,
+    "metric_lines": []
+  },
+  "k2": null
+}

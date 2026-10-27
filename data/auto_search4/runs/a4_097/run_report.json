@@ -1,0 +1,247 @@
+{
+  "paper_id": "a4_097",
+  "source": "https://github.com/enjeeneer/zero-shot-rl",
+  "commit_hash": "2280cdf8fd8a5ccd51593ce9e6e06d27636c5a44",
+  "target_script": "exorl_reformatter.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.877,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_097",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.461,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 60379136,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "chardet==4.0.0",
+      "name": "chardet",
+      "requested": "==4.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "dm_control==1.0.12",
+      "name": "dm_control",
+      "requested": "==1.0.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "dm_env==1.6",
+      "name": "dm_env",
+      "requested": "==1.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gymnasium==0.29.1",
+      "name": "gymnasium",
+      "requested": "==0.29.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gcloud",
+      "name": "gcloud",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "google-cloud-storage==2.9.0",
+      "name": "google-cloud-storage",
+      "requested": "==2.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "loguru==0.7.0",
+      "name": "loguru",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "lxml==4.9.2",
+      "name": "lxml",
+      "requested": "==4.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.7.1",
+      "name": "matplotlib",
+      "requested": "==3.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mujoco==2.3.5",
+      "name": "mujoco",
+      "requested": "==2.3.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.24.3",
+      "name": "numpy",
+      "requested": "==1.24.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "h5py==3.11.0",
+      "name": "h5py",
+      "requested": "==3.11.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.0.3",
+      "name": "pandas",
+      "requested": "==2.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "POT==0.9.0",
+      "name": "POT",
+      "requested": "==0.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==4.25.3",
+      "name": "protobuf",
+      "requested": "==4.25.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.1",
+      "name": "PyYAML",
+      "requested": "==6.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pylint==2.17.3",
+      "name": "pylint",
+      "requested": "==2.17.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rliable==1.0.8",
+      "name": "rliable",
+      "requested": "==1.0.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit_learn==1.4.1.post1",
+      "name": "scikit_learn",
+      "requested": "==1.4.1.post1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.12.0",
+      "name": "scipy",
+      "requested": "==1.12.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tabulate==0.9.0",
+      "name": "tabulate",
+      "requested": "==0.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.1.0",
+      "name": "torch",
+      "requested": "==2.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.65.0",
+      "name": "tqdm",
+      "requested": "==4.65.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "wandb==0.15.2",
+      "name": "wandb",
+      "requested": "==0.15.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/exorl_reformatter.py walker_rnd\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.461s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/exorl_reformatter.py\", line 8, in <module>\n    from utils import BASE_DIR\n  File \"/workspace/repo/utils.py\", line 7, in <module>\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+}

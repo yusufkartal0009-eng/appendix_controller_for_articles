@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/repo/Masters/master_fcrg.py", line 7, in <module>
+    from interactions import MatchInteraction
+  File "/workspace/repo/interactions.py", line 3, in <module>
+    import matchzoo
+  File "/workspace/repo/matchzoo/__init__.py", line 17, in <module>
+    from .data_pack import DataPack
+  File "/workspace/repo/matchzoo/data_pack/__init__.py", line 1, in <module>
+    from .data_pack import DataPack, load_data_pack
+  File "/workspace/repo/matchzoo/data_pack/data_pack.py", line 8, in <module>
+    import dill
+ModuleNotFoundError: No module named 'dill'

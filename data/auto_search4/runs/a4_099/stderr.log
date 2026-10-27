@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/workspace/repo/run/run_llb.py", line 55, in <module>
+    from memq.run.llb_rl_runner import LLBRunner
+  File "/workspace/repo/memq/run/llb_rl_runner.py", line 86, in <module>
+    from src.tasks.task import Task as LLBTask  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/3rdparty/LifelongAgentBench/src/tasks/__init__.py", line 1, in <module>
+    from .task import Task, DatasetItem
+  File "/workspace/repo/3rdparty/LifelongAgentBench/src/tasks/task.py", line 23, in <module>
+    from src.utils import SafeLogger
+  File "/workspace/repo/3rdparty/LifelongAgentBench/src/utils/__init__.py", line 2, in <module>
+    from .logger import SingletonLogger, SafeLogger
+  File "/workspace/repo/3rdparty/LifelongAgentBench/src/utils/logger.py", line 9, in <module>
+    from .color_message import ColorMessage
+  File "/workspace/repo/3rdparty/LifelongAgentBench/src/utils/color_message.py", line 1, in <module>
+    from colorama import Fore, Style, init
+ModuleNotFoundError: No module named 'colorama'

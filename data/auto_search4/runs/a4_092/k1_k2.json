@@ -1,0 +1,32 @@
+{
+  "paper_id": "a4_092",
+  "k1": {
+    "k1_passed": false,
+    "category": "no_metric_line",
+    "log_line": "Iter   40 | Return  -1179.0 | KL 0.0059 | Clip 0.05 | VLoss 86.704 | Entropy 1.205",
+    "install_status": "INSTALLED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 55.468,
+    "metric_lines": []
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 15,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 12,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "v2": {
+      "passed": false,
+      "numbers_in_output": 15,
+      "numbers_found_in_paper": 0,
+      "numbers_found_on_table_page": 0,
+      "pdf_pages": 12,
+      "matches": [],
+      "note": "match candidate only; a string match with scale conversion and rounding, not verified"
+    },
+    "arxiv_id": "1707.06347"
+  }
+}

@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/workspace/repo/tradingagents/dataflows/akshare_provider.py", line 9, in <module>
+    import akshare as ak
+ModuleNotFoundError: No module named 'akshare'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/repo/run_a_share.py", line 4, in <module>
+    from tradingagents.graph.trading_graph import TradingAgentsGraph
+  File "/workspace/repo/tradingagents/graph/__init__.py", line 3, in <module>
+    from .trading_graph import TradingAgentsGraph
+  File "/workspace/repo/tradingagents/graph/trading_graph.py", line 13, in <module>
+    from tradingagents.agents import *
+  File "/workspace/repo/tradingagents/agents/__init__.py", line 1, in <module>
+    from .utils.agent_utils import create_msg_delete
+  File "/workspace/repo/tradingagents/agents/utils/agent_utils.py", line 4, in <module>
+    from tradingagents.agents.utils.core_stock_tools import (
+  File "/workspace/repo/tradingagents/agents/utils/core_stock_tools.py", line 3, in <module>
+    from tradingagents.dataflows.interface import route_to_vendor
+  File "/workspace/repo/tradingagents/dataflows/interface.py", line 28, in <module>
+    from .akshare_provider import (
+  File "/workspace/repo/tradingagents/dataflows/akshare_provider.py", line 11, in <module>
+    raise ImportError("akshare is required for A-share data. Install with: pip install akshare")
+ImportError: akshare is required for A-share data. Install with: pip install akshare

@@ -1,0 +1,4 @@
+  File "/workspace/repo/pre_generation_rag_retrieval_benchmark.py", line 11
+    !pip install -q pypdf pdfplumber tiktoken sentence-transformers faiss-cpu \
+    ^
+SyntaxError: invalid syntax

@@ -1,0 +1,495 @@
+{
+  "paper_id": "a4_100",
+  "source": "https://github.com/tanminsen/creativity-eval",
+  "commit_hash": "aecba830bf15187f7788ad9c9350fc61f6db2ed6",
+  "target_script": "export_data.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.742,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_100",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.427,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 20643840,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "annotated-types==0.7.0",
+      "name": "annotated-types",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "anyio==4.6.2.post1",
+      "name": "anyio",
+      "requested": "==4.6.2.post1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2024.8.30",
+      "name": "certifi",
+      "requested": "==2024.8.30",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==3.4.0",
+      "name": "charset-normalizer",
+      "requested": "==3.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "colorama==0.4.6",
+      "name": "colorama",
+      "requested": "==0.4.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "contourpy==1.3.0",
+      "name": "contourpy",
+      "requested": "==1.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cycler==0.12.1",
+      "name": "cycler",
+      "requested": "==0.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "diskcache==5.6.3",
+      "name": "diskcache",
+      "requested": "==5.6.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "distro==1.9.0",
+      "name": "distro",
+      "requested": "==1.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "filelock==3.16.1",
+      "name": "filelock",
+      "requested": "==3.16.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fonttools==4.54.1",
+      "name": "fonttools",
+      "requested": "==4.54.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fsspec==2024.9.0",
+      "name": "fsspec",
+      "requested": "==2024.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "h11==0.14.0",
+      "name": "h11",
+      "requested": "==0.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpcore==1.0.6",
+      "name": "httpcore",
+      "requested": "==1.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx==0.27.2",
+      "name": "httpx",
+      "requested": "==0.27.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "huggingface-hub==0.25.2",
+      "name": "huggingface-hub",
+      "requested": "==0.25.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.10",
+      "name": "idna",
+      "requested": "==3.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Jinja2==3.1.4",
+      "name": "Jinja2",
+      "requested": "==3.1.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jiter==0.6.1",
+      "name": "jiter",
+      "requested": "==0.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "kiwisolver==1.4.7",
+      "name": "kiwisolver",
+      "requested": "==1.4.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "llama_cpp_python==0.2.77",
+      "name": "llama_cpp_python",
+      "requested": "==0.2.77",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "MarkupSafe==3.0.1",
+      "name": "MarkupSafe",
+      "requested": "==3.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.9.2",
+      "name": "matplotlib",
+      "requested": "==3.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.1.2",
+      "name": "numpy",
+      "requested": "==2.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==1.51.2",
+      "name": "openai",
+      "requested": "==1.51.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==24.1",
+      "name": "packaging",
+      "requested": "==24.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.2.3",
+      "name": "pandas",
+      "requested": "==2.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==10.4.0",
+      "name": "pillow",
+      "requested": "==10.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.9.2",
+      "name": "pydantic",
+      "requested": "==2.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic_core==2.23.4",
+      "name": "pydantic_core",
+      "requested": "==2.23.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.1.4",
+      "name": "pyparsing",
+      "requested": "==3.1.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.9.0.post0",
+      "name": "python-dateutil",
+      "requested": "==2.9.0.post0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2024.2",
+      "name": "pytz",
+      "requested": "==2024.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.2",
+      "name": "PyYAML",
+      "requested": "==6.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "regex==2024.9.11",
+      "name": "regex",
+      "requested": "==2024.9.11",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.32.3",
+      "name": "requests",
+      "requested": "==2.32.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "safetensors==0.4.5",
+      "name": "safetensors",
+      "requested": "==0.4.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.16.0",
+      "name": "six",
+      "requested": "==1.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sniffio==1.3.1",
+      "name": "sniffio",
+      "requested": "==1.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tokenizers==0.20.1",
+      "name": "tokenizers",
+      "requested": "==0.20.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.5",
+      "name": "tqdm",
+      "requested": "==4.66.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.45.2",
+      "name": "transformers",
+      "requested": "==4.45.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.12.2",
+      "name": "typing_extensions",
+      "requested": "==4.12.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tzdata==2024.2",
+      "name": "tzdata",
+      "requested": "==2024.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==2.2.3",
+      "name": "urllib3",
+      "requested": "==2.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.4.1",
+      "name": "torch",
+      "requested": "==2.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "accelerate==1.0.1",
+      "name": "accelerate",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "bitsandbytes==0.44.1",
+      "name": "bitsandbytes",
+      "requested": "==0.44.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "datasets==3.0.1",
+      "name": "datasets",
+      "requested": "==3.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "chromadb==0.5.15",
+      "name": "chromadb",
+      "requested": "==0.5.15",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sentence-transformers==3.2.1",
+      "name": "sentence-transformers",
+      "requested": "==3.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.0.1",
+      "name": "python-dotenv",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.5.2",
+      "name": "scikit-learn",
+      "requested": "==1.5.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openpyxl==3.1.5",
+      "name": "openpyxl",
+      "requested": "==3.1.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.13.2",
+      "name": "seaborn",
+      "requested": "==0.13.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/export_data.py llama results_quickstart.json llmjudge deberta false 1.0 1 nohs 0\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.427s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/export_data.py\", line 15, in <module>\n    from src.process_data import *\n  File \"/workspace/repo/src/process_data.py\", line 22, in <module>\n    from src.Llama_run_benchmark import *\n  File \"/workspace/repo/src/Llama_run_benchmark.py\", line 9, in <module>\n    from src.llama_funcs import *\n  File \"/workspace/repo/src/llama_funcs.py\", line 16, in <module>\n    import transformers\nModuleNotFoundError: No module named 'transformers'\n"
+}

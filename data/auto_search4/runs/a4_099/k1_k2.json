@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_099",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'colorama'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 11.702,
+    "metric_lines": []
+  },
+  "k2": null
+}
