@@ -1,4 +1,4 @@
-# Pending steps (2026-10-25)
+# Pending steps (2026-10-28)
 
 This document lists what is still open: decisions that only the owner can make, work that an assistant can do, open
 issues, and things that were done only partly or not verified. It is a snapshot. The evidence for each item is named; when
@@ -10,6 +10,19 @@ How to read it: **Decision** means a choice that belongs to the owner. **Work** 
 decision. **Not verified** means a statement in the project that has no evidence yet.
 
 ## 1. Decisions that belong to the owner
+
+### Defaults chosen by the assistant on 2026-10-28 (the owner did not answer; the owner may revise each one)
+The owner could not be asked during the night of 2026-10-28. The recommended option of each of the three open questions was applied and is
+marked here and at its place below with "default chosen by the assistant, the owner may revise":
+
+| Code | Question | Default applied | Where | How to revert |
+|---|---|---|---|---|
+| K-A | Which metric decides Tier 3 | The metric of an accepted claim (through `data/claim_metric_map.json`); without such a claim the largest CV decides as before (#542). `paper_003` Tier 3 = 100 (was 65), `paper_006` = 100 | D7, `docs/MULTI_SEED.md` section 5a | drop `claimed_run_metrics` in `src/score_run.py` |
+| K-B | The absolute allowance of 0.05 for a value between 0 and 1 | Kept as it is; written in the report as a known limit | D10, report sections 6.9 and 7, `docs/TOLERANCE_PROBE.md` | restrict the allowance in `src/scoring.py` (`Tier2MetricsEvaluator`) |
+| K-C | The attribution rule of `AGENTS.md` (rule 7) | AI use is declared in the AI assistance statement at the end of the report; commits and PR descriptions carry no attribution line (#544) | D8 | edit rule 7 of `AGENTS.md` |
+
+Other choices made on the same night that the owner may revise: the layout of the added dashboard parts (they follow the earlier design, #548;
+`AGENTS.md` section 6, rule 9 asks the owner for UI decisions), and the wording of the new report sections 6.12 and 6.13.
 
 ### D1. Repository access (private or public)
 - **State (2026-10-24):** the repository is **public** (the owner's statement of 2026-10-24; no setting of the account or the repository was changed by an
