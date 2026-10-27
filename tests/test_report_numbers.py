@@ -197,6 +197,26 @@ def test_the_autosearch3_block_counts_runs_k1_k2_and_both_with_wilson_intervals(
     assert "run 1" in block and "time_limit_9h" in block and "not a success rate" in block
 
 
+def test_the_autosearch4_block_counts_k1_both_k2_versions_and_names_the_passers(tmp_path):
+    (tmp_path / "auto_search4").mkdir()
+    passed = {"k1_passed": True, "category": None}
+    failed = {"k1_passed": False, "category": "install"}
+    v1 = {"passed": True, "v2": {"passed": False}}
+    v2 = {"passed": False, "v2": {"passed": True}}
+    none = {"passed": False, "v2": {"passed": False}}
+    candidates = [{"paper_id": "a4_001", "k1": passed, "k2": v2}, {"paper_id": "a4_002", "k1": failed, "k2": None},
+                  {"paper_id": "a4_003", "k1": passed, "k2": v1}, {"paper_id": "a4_004", "k1": failed, "k2": v2},
+                  {"paper_id": "a4_005", "k1": passed, "k2": none}, {"full_name": "o/static", "passed": False}]
+    (tmp_path / "auto_search4" / "evaluation.json").write_text(
+        json.dumps({"candidates": candidates, "stopped_because": "time_limit_9h"}), encoding="utf-8")
+    block = rn.render("autosearch4", tmp_path)
+    assert "checked against the static rules: 6; run once in the sandbox: 5" in block
+    assert "Passed K1 (the run test): 3 of 5, Wilson 95 % interval 23.1 % to 88.2 % (a4_001, a4_003, a4_005)" in block
+    assert "same spelling): 1 of 5" in block and "rounding): 2 of 5, Wilson 95 % interval 11.8 % to 76.9 % (a4_001, a4_004)" in block
+    assert "Passed K1 and K2 v1: 1 of 5" in block and "Passed K1 and K2 v2: 1 of 5" in block and "either K2: 2 (a4_003, a4_001)" in block
+    assert "install 2" in block and "time_limit_9h" in block and "can match by chance" in block
+
+
 def test_the_real_verdict_pilot_interval_and_clean_clone_blocks_render_their_stored_facts():
     verdicts = rn.render("realverdicts")
     assert "claimed 0.459, reproduced 0.473, relative difference 3.05 %, Tier 2 100, `Verified` in 6 of 6 runs" in verdicts

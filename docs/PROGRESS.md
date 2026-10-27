@@ -4,7 +4,7 @@
 
 ---
 
-## Current Status (2026-10-27 00:38 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
+## Current Status (2026-10-27 11:07 +03:00): Pilots 1-4, Tier 3, Diagnosis Layer, GPU Check, and Field Analysis Written Up; Candidate Runs, Tolerance Probe, Clean-Clone Run, Demo Script and Bug Hunt Done
 
 - **Work order:** `docs/PLAN_2026-10-01.md` (continues `docs/ROADMAP_2026-09-27.md`). The stages are recorded in the entries below; the final report is `docs/report/REPORT.md` and its numbers are generated (`python scripts/report_numbers.py --check`).
 - **Pilots** (12 papers: 6 seed papers in Pilots 1 to 3, 6 new papers in Pilot 4): pilot success 0 / 6 (Pilot 1), 1 / 6 (Pilot 2), 2 / 6 (Pilot 3, with four settings chosen after Pilot 2's failures), and 1 / 6 for the new papers at their first attempt (Pilot 4). `docs/FIELD_ANALYSIS.md` section 8 (generated) has the pool-wide rates, the human-intervention table, the autonomy rate, and a descriptive factor table (exploratory, n = 12).
@@ -16,6 +16,7 @@
 - **Open:** the release (#45), the old M3 issues (#19 to #24), #34 and #35, the standing issue #115, and `docs/PLAN_2026-10-01.md` question Y2 (the AI-attribution rule; issue #165 does not exist in this repository).
 - **Since 2026-10-20 (issues #435 to #452):** the six images rebuilt from scratch with time and size (`docs/ENVIRONMENT.md`); the protocol of the candidate runs written before the runs and the 14 candidates run once each, **0 of 14 passed** (`docs/CANDIDATE_RUNS.md`, `docs/CANDIDATES.md`; a selected list, not a success rate); a fresh run of `paper_006` from a clean clone of the public repository completed (2,490 s, Update 2 of the walk-through); the tolerance probe (`docs/TOLERANCE_PROBE.md`; hand-made claims, not a real error); the demo script (`docs/DEMO_SCRIPT.md`); the bug hunt (three bugs fixed in #448 to #450, seven suspicions in `docs/BUG_HUNT.md`); the report has two new generated sections (6.8 and 6.9). Open: `docs/PENDING.md` (D9 candidate papers and D10 two scorer rules are new).
 - **Automatic search of round 3 (2026-10-25, #469 to #473):** protocol merged before the first search (`docs/AUTO_SEARCH_ROUND3.md`), then `scripts/auto_search3.py`; seven topic stages; 3,399 candidates checked, 135 run once; K1 passed 2, K2 (output numbers found in the paper's text) 0, both 0 (Wilson intervals in the report, section 6.10, generated). Selected, non-representative list, not a success rate. Nothing accepted; no match candidate.
+- **Automatic search of round 4 (2026-10-27, #515 to #538):** protocol with the new match test K2 v2 merged before the first run (`docs/AUTO_SEARCH_ROUND4.md`; v1 unchanged; controls: `paper_006` passes, `paper_102` does not), `scripts/auto_search4.py`, stages 8 to 21; 2,648 candidates checked, 107 run, K1 passed 3, K2 v1 1, K2 v2 1, both 0 (the one K2 pass is a chance match of a fuzzing script that failed K1); stopped at the 9-hour limit; the two K1 passers of round 3 re-evaluated with K2 v2: no match. Selected list, not a success rate; no claim accepted.
 - **Candidate repair round (2026-10-24, #455 to #465):** a separate round with a protocol written before the runs (`docs/CANDIDATE_RUNS_ROUND2.md`): first attempt 0 of 14, with repair 1 of 14 (`cand_002`; its output matches no table of its paper); the others stopped because the failure needs a forbidden repair. Selected list, not a success rate. No claim accepted.
 - **Night 5 (2026-10-25, issues #494 to #505):** verdicts on the real stored runs and the K2 positive control (`docs/REAL_VERDICTS.md`, #494; the expected K2 positive control was not obtained); a dashboard database from the stored runs (`scripts/build_demo_db.py`, #496, screenshots in `docs/evidence/demo2/`); the seven bug-hunt suspicions tried (#498: three real bugs fixed in #499, #500 and #501, one real and left to the owner, three owner decisions); the report brought to its final state with a new section 6.11 and `docs/PAPER_STATUS.md` (#503).
 - **Tests:** 1,210 passed, 9 skipped locally (2026-10-27) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
@@ -65,6 +66,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ### data(corpus): automatic search of round 4, runs a4_051 to a4_060 (2026-10-27 07:10 +03:00, Issue #521)
 - Runs a4_051 to a4_060: install 1, run 9. Cumulative through a4_060 (from `evaluation.json`): 60 run, K1 passed 2, K2 v1 passed 0, K2 v2 passed 0. The walk is not finished.
 - Not verified: anything about later candidates.
+
+### docs(corpus): results of the round 4 search, status documents and report paragraph (2026-10-27 11:07 +03:00, Issue #534)
+- `docs/AUTO_SEARCH_ROUND4.md` section 11 (generated results and notes), `scripts/report_numbers.py` block `autosearch4` with a test, report section 6.10a, README, `docs/PENDING.md` (D13), this status. `report_numbers --check` and `verify_sources --check` results are in the PR.
+- Step B5 of the task (claim forms) was skipped: no candidate passed K1 and K2.
+- Not verified: that the K2 pass of `a4_067` is a chance match (my reading of the stored lines; a person has not checked).
 
 ### data(corpus): automatic search of round 4, runs a4_091 to a4_107, end of the search (2026-10-27 11:04 +03:00, Issue #521)
 - Runs a4_091 to a4_107: K1 passed 1, install 7, no_metric_line 1, run 7, staging 1. Final counts (from `evaluation.json`): 2648 candidates checked, 107 run, K1 passed 3, K2 v1 passed 1, K2 v2 passed 1; the search stopped because `time_limit_9h` (9 hours after 2026-10-27 01:44). Results section and report: Issue #534.

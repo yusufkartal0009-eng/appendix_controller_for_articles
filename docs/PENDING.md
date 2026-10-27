@@ -94,6 +94,16 @@ decision. **Not verified** means a statement in the project that has no evidence
   test whether K2 can pass at all.
 - **Not done:** no match candidate exists, so no form (`aday_iddia_formu_3.md`) was made; whether the numbers of `a3_096` come from a simulation is not verified.
 
+### D13. The automatic search of round 4 with K2 v2 (new, 2026-10-27; done 2026-10-27)
+- **State:** the protocol (`docs/AUTO_SEARCH_ROUND4.md`, merged before the first run; K2 v1 unchanged, K2 v2 added) was run with `scripts/auto_search4.py` over stages 8 to 21
+  (stages 10 to 21 were added by merged changes when the earlier stages were used up): 2,648 candidates checked, 107 run once in the sandbox, K1 passed 3, K2 v1 passed 1, K2 v2 passed 1,
+  both K1 and K2 0 (results section of the document, generated; report section 6.10a). The search ended at the 9-hour limit. K2 v2 passes the positive control `paper_006` (one scale-converted
+  match, `0.933` as `93.3`, plus a coincidental `256`) and not the negative control `paper_102`. The one K2 pass (`a4_067`, a fuzzing script) failed K1 and matched integers by chance.
+  The K2 v2 re-evaluation of the two K1 passers of round 3 found no match. No claim was extracted: nothing passed both tests.
+- **Decide (open):** (a) whether to keep K2 v2 (it can match by chance; the guard limits this); (b) whether to run more stages or stop adding papers (D6, option C); (c) whether the index mask of K2 should also cover `[n/m]` progress
+  counters (it would have removed the pass of `a4_067`); this would change K2 for future rounds only.
+- **Not done:** no match candidate passed K1, so no form (`aday_iddia_formu_4.md`) was made; whether a K1 passer's output has anything to do with a table of its paper is not verified.
+
 ### D12. How the claims meet the run's metrics (new, 2026-10-25, `docs/REAL_VERDICTS.md`)
 - **State: implemented as a mapping file; owner may revise** (#507, #509, #511). `data/claim_metric_map.json` ties each accepted claim (question ID) to the run
   metric of the same model, dataset, measure and split (`map`: 1 claim, `paper_003` / `ft_transformer_rmse` -> `rmse`) or says that the run has no counterpart
@@ -142,6 +152,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 - Fill the form of the demo paper (D3) and of gold set 2 (D2) when the owner has the time; both are outside the repository.
 - D9 (a) is done (round 2); the open items (e) and (f) of D9 need a decision before a third round.
 - D11 (the automatic search of round 3) is done; its open decisions (a) to (c) need the owner.
+- D13 (the automatic search of round 4) is done; its open decisions (a) to (c) need the owner.
 - The bug hunt suspicions were tried on 2026-10-25 (`docs/BUG_HUNT.md` section 3): 2, 3 and 6 were real and are fixed (#499, #500, #501); 4 was real and is fixed
   (#513: the page shows the run that was scored, with its start date); 1, 5 and 7 are decisions of the owner (D10 twice, and the K1 pattern of the protocols).
 - **DONE 2026-10-25:** the verdicts on the real stored runs (`docs/REAL_VERDICTS.md`, #495), the dashboard database from the stored runs (`scripts/build_demo_db.py`, #497),
@@ -178,6 +189,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 - **Clean clone:** one paper (`paper_006`) completed a fresh run from a clean clone of the public repository (Update 2 of the walk-through); it used set CPU and time limits, so
   it is not a protocol run, and no accepted claim was reproduced. `paper_008` still cannot complete from a clean clone (a dataset downloaded by hand).
 - **Automatic search (round 3):** **0 of 135** candidates of the automatic search of round 3 passed both the run test and the match of the output to the paper's text (K1 passed by 2 of 135, K2 by 0 of 135; Wilson 95 % intervals in the report, section 6.10); a selected, non-representative list, not a success rate (D11).
+- **Automatic search (round 4, K2 v2):** **0 of 107** candidates passed both the run test and the match of the output to the paper's text (K1 passed by 3 of 107; K2 v1 by 1 and K2 v2 by 1, a chance match of a fuzzing script that failed K1; Wilson 95 % intervals in the report, section 6.10a); a selected, non-representative list, not a success rate (D13).
 - **Candidate papers:** 0 of the 14 selected candidates passed a first attempt and 1 of 14 after repair (D9); the list was chosen by others for being easy, so this is not a success rate and it does not say that the papers cannot be reproduced.
 - **Tolerance probe:** its claims are hand-made, not errors of real papers; the rates of false positives and false negatives of the scorer in the real world have not been measured.
 - **Tier 2 has compared an accepted claim with a result of a real run once** (`paper_003`, through the claim map: one claim, one number, 3.05 % apart); it has not compared more.
