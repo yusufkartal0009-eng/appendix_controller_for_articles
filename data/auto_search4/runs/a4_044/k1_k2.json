@@ -1,0 +1,64 @@
+{
+  "paper_id": "a4_044",
+  "k1": {
+    "k1_passed": false,
+    "category": "no_metric_line",
+    "log_line": "\u81ea\u68c0\u7ed3\u679c\uff1a14/14 \u901a\u8fc7\uff0c\u7528\u65f6 0.7s",
+    "install_status": "INSTALLED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 1.512,
+    "metric_lines": []
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 8,
+    "numbers_found_in_paper": 1,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 30,
+    "matches": [
+      {
+        "number": "1.000",
+        "line": "\u2705 g01_\u4e59\u7248.txt         \u671f\u671b \u540c\u4e00\u7248\u672c                   \u5b9e\u5224 \u540c\u4e00\u7248\u672c                   Jaccard 1.000",
+        "percent": false,
+        "pages": [
+          {
+            "page": 2,
+            "table_page": false,
+            "line": "cited ever-growing class sizes (from 150 to nearly 1,000 students) as a reason for this practice."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": false
+      }
+    ],
+    "note": "match candidate only; a string match, not verified",
+    "v2": {
+      "passed": false,
+      "numbers_in_output": 8,
+      "numbers_found_in_paper": 1,
+      "numbers_found_on_table_page": 0,
+      "pdf_pages": 30,
+      "matches": [
+        {
+          "number": "1.000",
+          "line": "\u2705 g01_\u4e59\u7248.txt         \u671f\u671b \u540c\u4e00\u7248\u672c                   \u5b9e\u5224 \u540c\u4e00\u7248\u672c                   Jaccard 1.000",
+          "percent": false,
+          "variant": "same",
+          "searched": "1.000",
+          "pages": [
+            {
+              "page": 2,
+              "table_page": false,
+              "line": "cited ever-growing class sizes (from 150 to nearly 1,000 students) as a reason for this practice."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": false
+        }
+      ],
+      "note": "match candidate only; a string match with scale conversion and rounding, not verified"
+    },
+    "arxiv_id": "2010.01700"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_046",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ImportError: cannot import name 'is_torch_tpu_available' from 'transformers' (/workspace/deps/transformers/__init__.py)",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 55.125,
+    "metric_lines": []
+  },
+  "k2": null
+}

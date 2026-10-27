@@ -1,0 +1,120 @@
+{
+  "paper_id": "a4_044",
+  "source": "https://github.com/tmadmao/noveldedup",
+  "commit_hash": "b53ccad22474c44a2fc906859623dead6eb06c69",
+  "target_script": "novel_dedup.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 1.512,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_044",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 1.148,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 28794880,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "altgraph",
+      "version": "0.17.5"
+    },
+    {
+      "name": "opencc-python-reimplemented",
+      "version": "0.1.7"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0"
+    },
+    {
+      "name": "pyinstaller",
+      "version": "6.22.3"
+    },
+    {
+      "name": "pyinstaller-hooks-contrib",
+      "version": "2026.9"
+    },
+    {
+      "name": "pypdf",
+      "version": "6.21.2"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.2.1"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "pypdf>=4.0.0",
+      "name": "pypdf",
+      "requested": ">=4.0.0",
+      "installed": "6.21.2",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "opencc-python-reimplemented",
+      "name": "opencc-python-reimplemented",
+      "requested": "any",
+      "installed": "0.1.7",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pyinstaller>=6.0",
+      "name": "pyinstaller",
+      "requested": ">=6.0",
+      "installed": "6.22.3",
+      "satisfied": true,
+      "pinned": false
+    },
+    {
+      "requirement": "pillow",
+      "name": "pillow",
+      "requested": "any",
+      "installed": "13.0.0",
+      "satisfied": true,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/novel_dedup.py --selftest\n==================================================\n\u5c0f\u8bf4\u67e5\u91cd v1.0.5 \u2014\u2014 \u81ea\u68c0\uff0811 \u7ec4\u5df2\u77e5\u7b54\u6848\u8bed\u6599\uff09\n\n\u2705 g01_\u4e59\u7248.txt         \u671f\u671b \u540c\u4e00\u7248\u672c                   \u5b9e\u5224 \u540c\u4e00\u7248\u672c                   Jaccard 1.000\n\u2705 g02_\u6392\u7248\u7248.txt        \u671f\u671b \u540c\u4e00\u7248\u672c                   \u5b9e\u5224 \u540c\u4e00\u7248\u672c                   Jaccard 1.000\n\u2705 g03_\u5e7f\u544a\u7248.txt        \u671f\u671b \u540c\u4e00\u7248\u672c\uff08\u4ec5\u63d2\u5165\u5e7f\u544a/\u6362\u6392\u7248\uff09        \u5b9e\u5224 \u540c\u4e00\u7248\u672c\uff08\u4ec5\u63d2\u5165\u5e7f\u544a/\u6362\u6392\u7248\uff09        Jaccard 0.989\n\u2705 g04_\u52a0\u524d\u8a00.txt        \u671f\u671b A \u2282 B\uff08A \u7f3a\u7ae0\uff09            \u5b9e\u5224 A \u2282 B\uff08A \u7f3a\u7ae0\uff09            Jaccard 0.731\n\u2705 g05_\u4e09\u5377\u5408\u8ba2.txt       \u671f\u671b A \u2282 B\uff08A \u7f3a\u7ae0\uff09            \u5b9e\u5224 A \u2282 B\uff08A \u7f3a\u7ae0\uff09            Jaccard 0.347\n\u2705 g06_\u65ad\u66f4\u7248.txt        \u671f\u671b B \u2282 A\uff08B \u7f3a\u7ae0\uff09            \u5b9e\u5224 B \u2282 A\uff08B \u7f3a\u7ae0\uff09            Jaccard 0.740\n\u2705 g07_\u4e71\u5e8f\u7248.txt        \u671f\u671b \u7ae0\u8282\u987a\u5e8f\u4e0d\u540c                 \u5b9e\u5224 \u7ae0\u8282\u987a\u5e8f\u4e0d\u540c                 Jaccard 0.984\n\u2705 g08_\u6539\u5199\u7248.txt        \u671f\u671b \u7591\u4f3c\u4fee\u8ba2\u7248                  \u5b9e\u5224 \u7591\u4f3c\u4fee\u8ba2\u7248                  Jaccard 0.854\n\u2705 g09_\u9519\u5b57\u7248.txt        \u671f\u671b \u540c\u4e00\u7248\u672c\uff08\u6709\u7ec6\u5fae\u5b57\u7b26\u5dee\u5f02\uff09          \u5b9e\u5224 \u7591\u4f3c\u4fee\u8ba2\u7248                  Jaccard 0.842\n\u2705 g10_\u65e0\u5173\u4e66.txt        \u671f\u671b \u4e0d\u5224\u91cd  \u5b9e\u5224 \u4e0d\u5224\u91cd\n\u2705 g11_\u5957\u8def\u7532.txt        \u671f\u671b \u4e0d\u5224\u91cd  \u5b9e\u5224 \u4e0d\u5224\u91cd\n\u2705 g11_\u5957\u8def\u4e59.txt        \u671f\u671b \u4e0d\u5224\u91cd  \u5b9e\u5224 \u4e0d\u5224\u91cd\n\u2705 g11_\u5957\u8def\u7532\u4e59\u4e4b\u95f4      \u671f\u671b \u4e0d\u5224\u91cd                \u5b9e\u5224 \u4e0d\u5224\u91cd\n\u2705 \u7ed3\u6784\u8bc6\u522b \u5355\u5377vs\u5408\u8ba2  \u671f\u671b \u5408\u8ba2-\u5206\u5377  \u5b9e\u5224 \u5408\u8ba2-\u5206\u5377\n\n\u81ea\u68c0\u7ed3\u679c\uff1a14/14 \u901a\u8fc7\uff0c\u7528\u65f6 0.7s\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : INSTALLED\nDuration      : 1.148s\n==================================================\n",
+  "stderr_preview": "02:25:55 INFO    \u6587\u4ef6\u679a\u4e3e\u5b8c\u6210\uff1a13 \u4e2a\uff08\u76ee\u5f55 /tmp/noveld_selftest_zirzphuy\uff09\n02:25:55 INFO    \u6307\u7eb9\u7f13\u5b58\uff1a/workspace/home/.noveldedup/cache/c0b314d0cc9602ec\uff080 MB\uff09\n02:25:55 INFO    \u6863\u4f4d=\u6807\u51c6 (w=150\uff0c\u4fdd\u8bc1\u8fde\u7eed 161 \u5b57\u76f8\u540c\u5fc5\u68c0\u51fa)  \u8fdb\u7a0b=1  \u6587\u4ef6=13\n02:25:55 INFO    \u7f13\u5b58\u547d\u4e2d 0 \u672c\uff0c\u9700\u8ba1\u7b97 13 \u672c\n02:25:56 INFO    Pass1 \u5b8c\u6210\uff0c\u7528\u65f6 0.2s\n02:25:56 INFO    \u4e66\u5e93\u5408\u8ba1 0.00 \u4ebf\u5b57\uff0c\u7d22\u5f15\u9884\u8ba1 0 MB\n02:25:56 INFO    L1 \u5f52\u4e00\u5316\u5168\u6587 hash \u76f4\u63a5\u5224\u91cd\uff1a3 \u5bf9\n02:25:56 INFO    \u5019\u9009\u5bf9 43 \u4e2a\uff08\u7528\u65f6 0.0s\uff0c\u5168\u91cf\uff09\n02:25:56 INFO    \u5019\u9009\u5bf9\u5206\u6210 2 \u4e2a\u91cd\u590d\u7c07\uff0c\u6700\u5927\u7684 42 \u5bf9\n02:25:56 INFO    Pass2 \u5b8c\u6210 12 \u672c\uff0c\u7528\u65f6 0.2s\n02:25:56 INFO    \u5b8c\u6210\uff1a45 \u5bf9\u91cd\u590d\uff0c1 \u7ec4\uff0c\u7528\u65f6 0.3s\uff0c\u4e3b\u8fdb\u7a0b\u5cf0\u503c\u5185\u5b58 0 MB\n02:25:56 INFO    \u6587\u4ef6\u679a\u4e3e\u5b8c\u6210\uff1a2 \u4e2a\uff08\u76ee\u5f55 /tmp/noveld_omni_wlmcuh0c\uff09\n02:25:56 INFO    \u6307\u7eb9\u7f13\u5b58\uff1a/workspace/home/.noveldedup/cache/b0def2fb39c1413d\uff080 MB\uff09\n02:25:56 INFO    \u6863\u4f4d=\u6807\u51c6 (w=150\uff0c\u4fdd\u8bc1\u8fde\u7eed 161 \u5b57\u76f8\u540c\u5fc5\u68c0\u51fa)  \u8fdb\u7a0b=1  \u6587\u4ef6=2\n02:25:56 INFO    \u7f13\u5b58\u547d\u4e2d 0 \u672c\uff0c\u9700\u8ba1\u7b97 2 \u672c\n02:25:56 INFO    Pass1 \u5b8c\u6210\uff0c\u7528\u65f6 0.0s\n02:25:56 INFO    \u4e66\u5e93\u5408\u8ba1 0.00 \u4ebf\u5b57\uff0c\u7d22\u5f15\u9884\u8ba1 0 MB\n02:25:56 INFO    \u5019\u9009\u5bf9 1 \u4e2a\uff08\u7528\u65f6 0.0s\uff0c\u5168\u91cf\uff09\n02:25:56 INFO    \u5019\u9009\u5bf9\u5206\u6210 1 \u4e2a\u91cd\u590d\u7c07\uff0c\u6700\u5927\u7684 1 \u5bf9\n02:25:56 INFO    Pass2 \u5b8c\u6210 2 \u672c\uff0c\u7528\u65f6 0.0s\n02:25:56 INFO    \u5b8c\u6210\uff1a1 \u5bf9\u91cd\u590d\uff0c1 \u7ec4\uff0c\u7528\u65f6 0.1s\uff0c\u4e3b\u8fdb\u7a0b\u5cf0\u503c\u5185\u5b58 0 MB\n"
+}
