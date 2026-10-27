@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_078",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "RuntimeError: Missing Gemini API key for models/gemini-3-flash-preview",
+    "install_status": "SKIPPED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.707,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_080",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.51,
+    "metric_lines": []
+  },
+  "k2": null
+}

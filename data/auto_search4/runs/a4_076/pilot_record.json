@@ -1,0 +1,112 @@
+{
+  "paper_id": "a4_076",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T04:31:56+00:00",
+  "repo_url": "https://github.com/IDEA-Research/DINO-X-API",
+  "pinned_commit": "813c629437e5c34c3008669944b4b36ac16a6454",
+  "target_script": "demo.py",
+  "container_command": "python /workspace/repo/demo.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python demo.py",
+    "readme_url": "https://github.com/IDEA-Research/DINO-X-API/blob/813c629437e5c34c3008669944b4b36ac16a6454/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "813c629437e5c34c3008669944b4b36ac16a6454",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.711
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 5,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_076_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "dds-cloudapi-sdk==0.5.3",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for dds-cloudapi-sdk==0.5.3"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "",
+    "stderr": "ERROR: Could not find a version that satisfies the requirement dds-cloudapi-sdk==0.5.3 (from versions: none)\nERROR: No matching distribution found for dds-cloudapi-sdk==0.5.3\n",
+    "duration_seconds": 10.539
+  },
+  "sandbox_duration_seconds": 2.258,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.582,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 7192576
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.593,
+    "peak_memory_bytes": 38924288
+  },
+  "finished_at": "2026-10-27T04:32:10+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
