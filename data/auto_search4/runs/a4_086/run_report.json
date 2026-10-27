@@ -1,0 +1,165 @@
+{
+  "paper_id": "a4_086",
+  "source": "https://github.com/fatemafaria142/LabourCrew",
+  "commit_hash": "f272fa71fa780595af4e3aec22dd9035113988d9",
+  "target_script": "scripts/ingest_pdf.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.626,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_086",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.275,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 14675968,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "python-dotenv>=1.0",
+      "name": "python-dotenv",
+      "requested": ">=1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pydantic>=2.7",
+      "name": "pydantic",
+      "requested": ">=2.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pydantic-settings>=2.4",
+      "name": "pydantic-settings",
+      "requested": ">=2.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "tenacity>=8.2",
+      "name": "tenacity",
+      "requested": ">=8.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain>=1.2",
+      "name": "langchain",
+      "requested": ">=1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "langchain-openai>=1.1",
+      "name": "langchain-openai",
+      "requested": ">=1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "langgraph>=1.1",
+      "name": "langgraph",
+      "requested": ">=1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "openai>=2.0,<3.0",
+      "name": "openai",
+      "requested": "<3.0,>=2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "google-genai>=2.10",
+      "name": "google-genai",
+      "requested": ">=2.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "sentence-transformers>=3.0",
+      "name": "sentence-transformers",
+      "requested": ">=3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pymilvus>=3.0",
+      "name": "pymilvus",
+      "requested": ">=3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "milvus-lite>=3.1.1",
+      "name": "milvus-lite",
+      "requested": ">=3.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pymupdf>=1.26",
+      "name": "pymupdf",
+      "requested": ">=1.26",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "ragas==0.4.3",
+      "name": "ragas",
+      "requested": "==0.4.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/scripts/ingest_pdf.py data/raw/Bangladesh-Labour-Act-2006-Amended-Chapter2.pdf\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.275s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/scripts/ingest_pdf.py\", line 9, in <module>\n    from labourcrew.config import PROCESSED_DIR, get_settings\n  File \"/workspace/repo/labourcrew/config.py\", line 6, in <module>\n    from pydantic_settings import BaseSettings, SettingsConfigDict\nModuleNotFoundError: No module named 'pydantic_settings'\n"
+}

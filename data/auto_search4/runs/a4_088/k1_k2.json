@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_088",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'gcn'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 3.319,
+    "metric_lines": []
+  },
+  "k2": null
+}

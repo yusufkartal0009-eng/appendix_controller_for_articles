@@ -1,0 +1,4 @@
+ERROR: Invalid requirement: 'accelerate=1.0.1': Expected semicolon (after name with no version specifier) or end
+    accelerate=1.0.1
+              ^ (from line 27 of /workspace/repo/requirements.txt)
+Hint: = is not a valid operator. Did you mean == ?

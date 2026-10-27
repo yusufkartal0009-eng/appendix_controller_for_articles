@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/recompute_signal2.py", line 15, in <module>
+    from code.config import PATHS, LLM_PANEL, LLM_RUNS_PER_SAMPLE
+  File "/workspace/repo/code/config.py", line 31, in <module>
+    p.mkdir(parents=True, exist_ok=True)
+  File "/usr/local/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/workspace/repo/data'

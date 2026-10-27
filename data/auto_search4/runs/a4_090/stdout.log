@@ -1,0 +1,82 @@
+(CVXPY) Oct 27 06:00:35 AM: Encountered unexpected exception importing solver MOSEK:
+ImportError('libmosek64.so.10.2: cannot enable executable stack as shared object requires: Invalid argument')
+(CVXPY) Oct 27 06:00:36 AM: Encountered unexpected exception importing solver MOSEK:
+ImportError('libmosek64.so.10.2: cannot enable executable stack as shared object requires: Invalid argument')
+(CVXPY) Oct 27 06:00:36 AM: Encountered unexpected exception importing solver MOSEK:
+ImportError('libmosek64.so.10.2: cannot enable executable stack as shared object requires: Invalid argument')
+{
+  "checks": {
+    "analytic_step_expected": -0.5,
+    "analytic_step_ok": false,
+    "fallback_count": 0,
+    "solver_pure_mosek": false
+  },
+  "cubic_sdp": {
+    "accepted": false,
+    "attempts": [],
+    "classification": "solver_unavailable",
+    "config": {
+      "accept_unknown": false,
+      "allow_cross_solver_fallback": false,
+      "backend": "mosek",
+      "certificate_atol": 1e-09,
+      "certificate_rtol": 1e-07,
+      "enable_dpp_workspace": false,
+      "enable_model_polishing": true,
+      "mosek_eps": null,
+      "mosek_retry_eps": 1e-09,
+      "mosek_threads": 1,
+      "objective_atol": 1e-08,
+      "objective_rtol": 1e-08,
+      "polishing_backtracking_steps": 20,
+      "polishing_max_iters": 3,
+      "psd_atol": 1e-10,
+      "psd_rtol": 1e-08,
+      "scaling_targets": [
+        1000000.0,
+        100000.0
+      ],
+      "scs_eps": 1e-05,
+      "scs_max_iters": 10000,
+      "small_coefficient_target": 1.0,
+      "solver_verbose": false,
+      "strict_pd_rtol": 1e-10,
+      "symmetry_atol": 1e-10,
+      "symmetry_rtol": 1e-08
+    },
+    "effective_backend": "MOSEK",
+    "error": "CVXPY does not report MOSEK as installed.",
+    "fallback_count": 0,
+    "objective": null,
+    "objective_gap_classification": null,
+    "objective_gap_scale": null,
+    "objective_gap_tolerance": null,
+    "polishing_applied": false,
+    "polishing_iterations": 0,
+    "probe": null,
+    "raw_residuals": null,
+    "residuals": null,
+    "scale": 1.0,
+    "solver_name": "MOSEK",
+    "status": "solver_unavailable",
+    "step": null
+  },
+  "environment": {
+    "cvxpy": "1.4.1",
+    "executable": "python",
+    "mosek": "10.2.10",
+    "numpy": "1.26.4",
+    "python": "3.11.17"
+  },
+  "ok": false,
+  "probe": {
+    "classification": "solver_unavailable",
+    "error": "CVXPY does not report MOSEK as an installed solver.",
+    "num_iters": null,
+    "ok": false,
+    "pid": 16,
+    "solve_time": null,
+    "status": null,
+    "wall_time": 0.0
+  }
+}
