@@ -1,0 +1,167 @@
+{
+  "paper_id": "a4_030",
+  "source": "https://github.com/qroa/QROA",
+  "commit_hash": "1bdb96278c8b6e7b5d9b1d68f573ec2e6102be04",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.528,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_030",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.218,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 12066816,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "torch==2.5.1",
+      "name": "torch",
+      "requested": "==2.5.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.46.3",
+      "name": "transformers",
+      "requested": "==4.46.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "accelerate==0.30.1",
+      "name": "accelerate",
+      "requested": "==0.30.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==1.55.0",
+      "name": "openai",
+      "requested": "==1.55.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mistralai==1.2.3",
+      "name": "mistralai",
+      "requested": "==1.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fastchat==0.2.20",
+      "name": "fastchat",
+      "requested": "==0.2.20",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.67.1",
+      "name": "tqdm",
+      "requested": "==4.67.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.2.3",
+      "name": "pandas",
+      "requested": "==2.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.14.1",
+      "name": "scipy",
+      "requested": "==1.14.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tiktoken==0.8.0",
+      "name": "tiktoken",
+      "requested": "==0.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "blobfile==3.0.0",
+      "name": "blobfile",
+      "requested": "==3.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==5.28.3",
+      "name": "protobuf",
+      "requested": "==5.28.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openssl==3.4.0",
+      "name": "openssl",
+      "requested": "==3.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "SentencePiece==0.2.0",
+      "name": "SentencePiece",
+      "requested": "==0.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py data/instructions.csv [API_AUTH_TOKEN]\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.218s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 2, in <module>\n    from src.jailbreak import JailBreak\n  File \"/workspace/repo/src/jailbreak.py\", line 2, in <module>\n    from tqdm import tqdm\nModuleNotFoundError: No module named 'tqdm'\n"
+}

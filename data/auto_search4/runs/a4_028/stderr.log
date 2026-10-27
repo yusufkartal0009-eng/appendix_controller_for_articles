@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/workspace/repo/benchmarks/benchmark.py", line 432, in <module>
+    benchmark_task_incremental()
+  File "/workspace/repo/benchmarks/benchmark.py", line 138, in benchmark_task_incremental
+    train_loaders, test_loaders = get_split_mnist(
+                                  ^^^^^^^^^^^^^^^^
+  File "/workspace/repo/scenarios/datasets.py", line 112, in get_split_mnist
+    train_base = _mnist_base(root=root, train=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/scenarios/datasets.py", line 41, in _mnist_base
+    return datasets.MNIST(root=root, train=train, download=True, transform=transform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/torchvision/datasets/mnist.py", line 100, in __init__
+    self.download()
+  File "/workspace/deps/torchvision/datasets/mnist.py", line 180, in download
+    os.makedirs(self.raw_folder, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: './data'

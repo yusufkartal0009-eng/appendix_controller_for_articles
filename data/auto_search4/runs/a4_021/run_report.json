@@ -1,0 +1,119 @@
+{
+  "paper_id": "a4_021",
+  "source": "https://github.com/ml4ai/mliis",
+  "commit_hash": "f40352e734f77609bcd5c4ad330ea73a897a217d",
+  "target_script": "run_metasegnet.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.758,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_021",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.448,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 60063744,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "tensorflow==1.15.4",
+      "name": "tensorflow",
+      "requested": "==1.15.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "click",
+      "name": "click",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "numpy",
+      "name": "numpy",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "Pillow",
+      "name": "Pillow",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "matplotlib",
+      "name": "matplotlib",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy",
+      "name": "scipy",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scikit-optimize",
+      "name": "scikit-optimize",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas",
+      "name": "pandas",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/run_metasegnet.py <args>\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.448s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/run_metasegnet.py\", line 12, in <module>\n    import tensorflow as tf\nModuleNotFoundError: No module named 'tensorflow'\n"
+}
