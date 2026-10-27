@@ -182,15 +182,15 @@ def test_stage_8_and_9_have_sixteen_topics_each_in_the_order_of_the_document():
         assert all(f"`{t}`" in doc for t in a4.STAGE_TOPICS[stage])
 
 
-def test_stages_10_to_13_have_sixteen_distinct_topics_each_and_the_document_lists_them():
+def test_stages_10_to_17_have_sixteen_distinct_topics_each_and_the_document_lists_them():
     doc = (ROOT / "docs" / "AUTO_SEARCH_ROUND4.md").read_text(encoding="utf-8")
     seen = set()
-    for stage in (10, 11, 12, 13):
+    for stage in range(10, 18):
         topics = a4.STAGE_TOPICS[stage]
         assert len(topics) == 16 and len(a4.queries(stage)) == 16
         assert all(f"`{t}`" in doc for t in topics)
         seen |= set(topics)
-    assert len(seen) == 64 and not seen & set(a3.STAGE_TOPICS[7] + a4.STAGE_TOPICS[8] + a4.STAGE_TOPICS[9])
+    assert len(seen) == 128 and not seen & ({x for v in a3.STAGE_TOPICS.values() for x in v} | set(a4.STAGE_TOPICS[8] + a4.STAGE_TOPICS[9]))
 
 
 def test_the_pool_of_round_3_is_removed_whole_and_the_pool_file_names_this_round(tmp_path):
