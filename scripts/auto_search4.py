@@ -69,6 +69,19 @@ STAGE_TOPICS: dict[int, list[str]] = {
     17: ["survival", "epidemic", "covid-19", "genetics", "single-cell", "proteomics", "neuroimaging", "fmri", "ecg",
         "clinical", "electronic-health-records", "drug-repurposing", "ecology-modeling", "crop",
         "remote-sensing-imagery", "satellite"],
+    18: ["decision-tree", "gradient-boosting", "logistic-regression", "linear-regression", "naive-bayes", "k-means",
+        "pca", "nearest-neighbors", "knn", "hidden-markov-model", "kalman-filter", "particle-filter",
+        "state-space-model", "gaussian-mixture-model", "expectation-maximization", "markov-chain"],
+    19: ["lasso", "ridge-regression", "elastic-net", "bootstrap", "hypothesis-testing", "bayesian-statistics",
+        "mixed-effects", "time-series-decomposition", "spectral-analysis", "wavelet", "fourier-transform",
+        "filtering", "change-point-detection", "sequence-alignment", "phylogenetics", "protein-structure"],
+    20: ["policy-gradient", "q-learning", "multi-agent", "imitation-learning", "offline-reinforcement-learning",
+        "model-based-rl", "planning", "reward-learning", "inverse-reinforcement-learning", "control",
+        "trajectory-optimization", "model-predictive-control", "path-planning", "slam", "autonomous-driving",
+        "drone"],
+    21: ["text-generation", "language-model", "summarization", "information-extraction", "text-mining", "retrieval",
+        "information-retrieval", "search-engine", "embeddings", "dialogue", "chatbot", "prompt",
+        "in-context-learning", "fine-tuning", "lora", "tokenization"],
 }
 ID_PREFIX = "a4_"
 MAX_BOTH = 5
