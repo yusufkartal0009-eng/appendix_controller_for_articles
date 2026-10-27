@@ -265,21 +265,33 @@ class Tier3StabilityEvaluator:
         CV of all decides, as before. Without a metric that has at least two values the single-run behavior of `evaluate`
         applies (the 75.0 baseline).
         """
-        usable = {name: values for name, values in (seed_metric_results or {}).items() if len(values) >= 2}
-        if not usable:
+        decisive = cls.decisive_metric(seed_metric_results, claimed_run_metrics)
+        if decisive is None:
             return cls.evaluate(None, single_run_clean=single_run_clean, execution_succeeded=execution_succeeded)
-        claimed = {name: usable[name] for name in (claimed_run_metrics or ()) if name in usable}
-        pool = claimed or usable
-        worst = max(pool, key=lambda name: coefficient_of_variation(pool[name]))
+        worst, basis = decisive
+        usable = {name: values for name, values in (seed_metric_results or {}).items() if len(values) >= 2}
         score, notes = cls.evaluate(usable[worst], single_run_clean=single_run_clean,
                                     execution_succeeded=execution_succeeded)
         if execution_succeeded:
-            if claimed:
+            if basis == "claimed":
                 notes.insert(0, f"Metric '{worst}' is the one the paper claims (claim-to-metric map) and decides; "
                                 f"{len(usable)} metric(s) have seed results")
             else:
                 notes.insert(0, f"Metric '{worst}' has the largest CV of {len(usable)} metric(s) with seed results and decides")
         return score, notes
+
+    @staticmethod
+    def decisive_metric(
+        seed_metric_results: dict[str, list[float]] | None,
+        claimed_run_metrics: Collection[str] | None = None,
+    ) -> tuple[str, str] | None:
+        """The metric that decides Tier 3 and why: (name, "claimed" or "largest_cv"), or None without a metric of two or more values."""
+        usable = {name: values for name, values in (seed_metric_results or {}).items() if len(values) >= 2}
+        if not usable:
+            return None
+        claimed = {name: usable[name] for name in (claimed_run_metrics or ()) if name in usable}
+        pool = claimed or usable
+        return max(pool, key=lambda name: coefficient_of_variation(pool[name])), ("claimed" if claimed else "largest_cv")
 
 
 class Tier4ArtifactsEvaluator:

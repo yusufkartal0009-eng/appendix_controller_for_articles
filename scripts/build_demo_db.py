@@ -39,6 +39,7 @@ from src.claim_store import restore_decisions
 from src.database import get_engine, get_session, init_db, save_score
 from src.models import PaperCreate, PaperORM, RunORM
 from src.multi_seed import load_seed_metric_results
+from src.score_explanation import build_explanation, save_explanation
 from src.score_run import load_run, score_run
 
 DEFAULT_DATA = project_root / "data"
@@ -122,13 +123,39 @@ def tail(path: Path) -> str | None:
     return path.read_text(encoding="utf-8", errors="replace")[-LOG_CHARS:]
 
 
+def deciding_line(run_dir: Path, paper_id: str) -> str | None:
+    """The stored log line that decided a failed run: the evidence of the pilot's failure list, else the last error line of stderr."""
+    shared = run_dir.parent / "failure_categories.json"
+    if shared.is_file():
+        for item in json.loads(shared.read_text(encoding="utf-8")).get("papers", []):
+            if item.get("paper_id") == paper_id and (item.get("evidence") or {}).get("line"):
+                return item["evidence"]["line"]
+    summary = run_dir.parent / "summary.json"  # Pilot 4 keeps the deciding line of every attempt here
+    if summary.is_file():
+        for item in json.loads(summary.read_text(encoding="utf-8")).get("papers", []):
+            if item.get("paper_id") == paper_id:
+                for attempt in ("corrected", "strict"):
+                    if (item.get(attempt) or {}).get("deciding_line"):
+                        return item[attempt]["deciding_line"]
+    for name in ("install.log", "stderr.log"):
+        log = run_dir / name
+        if log.is_file():
+            errors = [ln.strip() for ln in log.read_text(encoding="utf-8", errors="replace").splitlines()
+                      if re.search(r"Error|ERROR|Exception", ln)]
+            if errors:
+                return errors[-1]
+    return None
+
+
 def score_all(paper_id: str, license_name: str, claims: dict[str, float], runs: list[tuple[str, Path]]) -> list[dict[str, Any]]:
     scored = []
+    seeds = load_seed_metric_results(paper_id)
     for label, run_dir in runs:
         record, report = load_run(run_dir)
         result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=load_claim_map(),
-                           seed_metric_results=load_seed_metric_results(paper_id))
-        scored.append({"label": label, "run_dir": run_dir, "record": record, "report": report, "result": result})
+                           seed_metric_results=seeds)
+        scored.append({"label": label, "run_dir": run_dir, "record": record, "report": report, "result": result,
+                       "claims": claims, "seeds": seeds})
     return scored
 
 
@@ -149,11 +176,29 @@ def store(session: Session, paper_id: str, data_dir: Path, item: dict[str, Any],
                        failure_category=category_of(run_dir, paper_id), timestamp=started_at(record)))
     session.flush()
     bd = item["result"]["breakdown"]
+    category = category_of(run_dir, paper_id)
+    failure = None
+    if category or run.get("status") not in (None, "COMPLETED"):
+        failure = {"category": category or run.get("status"), "line": deciding_line(run_dir, paper_id)}
+    run_info = {"setting": item["label"], "directory": f"data/{rel}", "status": run.get("status") or "FAILED",
+                "started": started_at(record).isoformat(timespec="minutes") if started_at(record) else None,
+                "duration_seconds": report.get("duration_seconds"), "exit_code": run.get("exit_code"), "stored_runs": count}
+    explanation = build_explanation(item["result"], item["claims"], seed_metric_results=item["seeds"], run=run_info, failure=failure,
+                                    control=paper_id == SYNTHETIC_ID, built_on=datetime.now().astimezone().strftime("%Y-%m-%d"),
+                                    source="demo database built from stored runs")
+    tier3 = explanation["tier3"]
+    tier3_text = (f" Tier 3 ({bd.tier3_stability:g}) comes from {tier3['seeds']} stored seed runs; the deciding metric is "
+                  f"'{tier3['metric']}' ({tier3['metric_basis']})." if tier3["source"] == "multi_seed"
+                  else f" Tier 3 ({bd.tier3_stability:g}) is the single-run baseline, not a stability measurement."
+                  if tier3["source"] == "single_run_baseline" else "")
     summary = (f"[demo database] {item['label']} (data/{rel}), the best of {count} stored run(s) of this paper. "
-               f"Claims go through data/claim_metric_map.json as in cli.py score; Tier 4 is computed without the staged repository. {bd.summary}")
+               f"Claims go through data/claim_metric_map.json as in cli.py score; Tier 4 is computed without the staged repository. "
+               f"{bd.summary}{tier3_text}")
     save_score({"score_id": f"demo-{paper_id}", "paper_id": paper_id, "run_id": run_id, "tier1_build": bd.tier1_build,
                 "tier2_metrics": bd.tier2_metrics, "tier3_stability": bd.tier3_stability, "tier4_artifacts": bd.tier4_artifacts,
                 "total_score": bd.total_score, "status_label": bd.status_label, "summary": summary}, session=session)
+    session.commit()
+    save_explanation(session.get_bind(), paper_id, explanation)
     return {"paper_id": paper_id, "run_id": run_id, "label": item["label"], "stored_runs": count,
             "total": bd.total_score, "status": bd.status_label}
 

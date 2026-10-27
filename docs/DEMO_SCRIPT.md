@@ -14,6 +14,11 @@ shows and what it does **not** show. Nothing here is a reproduction of a paper's
 > another run; the remark in Step 1 that score and latest run do not belong together describes the state at the time of recording.
 > The commands and their output were not recorded again.
 
+> **Update 2026-10-28 (#542, #546, #548): the final dashboard.** Step 1 below is replaced by the new Step 1 (the old one is kept under it). The list shows a short
+> reason beside every label, the paper page has "Why this label", the synthetic control is listed apart as "not a paper: known-answer
+> control", and the new page `/failures` shows the failure statistics. Tier 3 of `paper_003` and `paper_006` now comes from the stored
+> three-seed records (100 and 100). The commands below were run for real on 2026-10-28 in a fresh clone of the repository.
+
 Before the talk: `python cli.py init-db` once (loads the 6 papers and the 13 claims that the owner accepted), the virtual environment
 active (`.venv\Scripts\Activate.ps1`), and Docker **not** needed: every step reads stored records.
 
@@ -29,7 +34,48 @@ active (`.venv\Scripts\Activate.ps1`), and Docker **not** needed: every step rea
 | 8 | 0:20 | The candidate papers: 0 of 14 |
 | 9 | 0:40 | The limits, with their intervals |
 
-## Step 1. The dashboard (0:30)
+## Step 1. The dashboard with the stored runs (0:30)
+
+Commands (a fresh clone; the dashboard binds to `127.0.0.1` only; open `http://127.0.0.1:8000/`):
+
+```text
+$ python cli.py init-db
+$ python scripts/build_demo_db.py
+Wrote <REPO>/data/dashboard_demo.db: 13 papers, one score each (the best stored run).
+  paper_002          Failed              62.75  Pilot 2 of 3 run(s)
+  paper_003          Verified            97.00  Pilot 3 of 8 run(s)
+  paper_004          Needs Review        82.75  memory run of 4 run(s)
+  paper_005          Failed              62.75  Pilot 2 of 4 run(s)
+  paper_006          Needs Review        86.50  Pilot 2 of 5 run(s)
+  paper_008          Failed              62.75  Pilot 1 of 3 run(s)
+  paper_101          Needs Review        78.25  Pilot 4 of 1 run(s)
+  paper_102          Needs Review        82.75  Pilot 4 of 1 run(s)
+  paper_103          Failed              54.00  Pilot 4 of 1 run(s)
+  paper_104          Failed              62.75  Pilot 4 of 1 run(s)
+  paper_105          Failed              54.00  Pilot 4 of 1 run(s)
+  paper_106          Failed              58.25  Pilot 4 of 1 run(s)
+  synthetic_control  Verified            88.75  synthetic run 1 of 2 run(s)
+Start the dashboard: python -m src.web --db-url sqlite:///data/dashboard_demo.db
+$ python -m src.web --db-url sqlite:///data/dashboard_demo.db
+```
+
+Screenshots (headless Chrome, 2026-10-28), in `docs/evidence/demo3/`: [`list.png`](evidence/demo3/list.png),
+[`paper_003.png`](evidence/demo3/paper_003.png), [`paper_006.png`](evidence/demo3/paper_006.png),
+[`paper_103.png`](evidence/demo3/paper_103.png), [`synthetic_control.png`](evidence/demo3/synthetic_control.png),
+[`failures.png`](evidence/demo3/failures.png).
+
+- List: `paper_003` shows "Claim compared: yes (1 of 3) - Tier 2: 100"; `paper_006` shows "Claim compared: no - Tier 2: 70 (baseline,
+  nothing compared)" and the label `Needs Review`. Failed papers say "Run failed (category); no claim compared".
+- `/papers/paper_003`, "Why this label": the claim `ft_transformer_rmse` 0.459 against 0.473 in the run, a difference of 3.05 %
+  (within the 5 % rule); the ResNet and XGBoost claims have no counterpart, with the reason; Tier 3 is 100 from 3 stored seed runs,
+  decided by `rmse`, the metric of an accepted claim; one claim and one number, not a confirmed reproduction.
+- `/failures`: counts of why selected runs failed, with the selection-bias warning first. Not a success rate.
+- The footer says that the database was built from stored runs, that the scores come from `src/scoring.py`, and what Needs Review means.
+
+- Shows: why each label was given, from stored data only.
+- Does **not** show: a set of reproduced papers or a success rate.
+
+### Step 1 as recorded on 2026-10-24 (before the final dashboard)
 
 Command (the dashboard binds to `127.0.0.1` only; open `http://127.0.0.1:8137/`):
 
