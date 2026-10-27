@@ -1,5 +1,7 @@
 # demo2 evidence (#496)
 
+> Superseded on 2026-10-28 by `docs/evidence/demo3/` (the final dashboard, #548). Kept as the earlier record.
+
 Screenshots of the local dashboard on `data/dashboard_demo.db`, built by `python scripts/build_demo_db.py` from the real
 stored runs and the accepted claims. They are taken with headless Chrome against `python -m src.web --db-url
 sqlite:///data/dashboard_demo.db` on `127.0.0.1`.

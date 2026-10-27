@@ -183,14 +183,15 @@ python scripts/build_demo_db.py
 python -m src.web --db-url sqlite:///data/dashboard_demo.db
 ```
 The script scores every stored run with the accepted claims and keeps the best record of each paper; the score's summary says
-which run and setting it is. Screenshots: [`docs/evidence/demo2/`](docs/evidence/demo2/).
+which run and setting it is. It also stores the reasons of every score (table `score_explanations`, created when the first one is saved), which the pages below show. Screenshots of the final dashboard: [`docs/evidence/demo3/`](docs/evidence/demo3/) (earlier: [`demo2/`](docs/evidence/demo2/)).
 
 The dashboard runs on **localhost only** (`127.0.0.1`, `docs/DECISIONS.md` D-006) and reads the project database (`data/repro_radar.db`, created by `cli.py init-db`); it never shows a number that is not stored there. Use `--db-url` to point it at another SQLAlchemy database.
 
 | Address | What it shows |
 |---|---|
-| `/` | The leaderboard: one table with search (title, venue), a status filter, and sorting by paper, year, or score. Papers without a stored score are listed last as "Not scored". |
-| `/papers/{paper_id}` | One paper: its score breakdown, its latest run with the end of the logs, and download links for the report. |
+| `/` | The leaderboard: one table with search (title, venue), a status filter, and sorting by paper, year, or score. Beside each label a short reason (claim compared yes/no; Tier 2 "baseline, nothing compared"). Papers without a stored score are listed last as "Not scored". The synthetic control is listed apart as "not a paper: known-answer control". |
+| `/papers/{paper_id}` | One paper: its score breakdown, "Why this label" (claims compared and not compared with reasons, the tolerance rule, the difference in percent, where Tier 3 came from, the stored run, a failure category with the log line), its run with the end of the logs, and download links for the report. |
+| `/failures` | The failure statistics from `data/failure_statistics.json` (`scripts/failure_statistics.py`), with the selection-bias warning. Stored numbers only; not a success rate. |
 | `/api/v1/papers`, `/api/v1/scores`, `/api/v1/scores/{paper_id}`, `/api/v1/runs/{run_id}` | The same data as JSON. The interactive documentation is at `/docs`. |
 | `/api/v1/badges/{paper_id}.svg` | An embeddable SVG badge with the stored score and status, or a gray "not scored" badge. |
 | `/api/v1/papers/{paper_id}/report.md` and `.pdf` | The audit report of one paper as a Markdown or PDF download. |
