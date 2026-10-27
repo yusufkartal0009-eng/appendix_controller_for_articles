@@ -70,6 +70,9 @@ decision. **Not verified** means a statement in the project that has no evidence
 ### D8. Questions for the mentors
 - Issue `#165`, named in the plan file and in old pull request texts, does not exist in this repository ("could not resolve"); which source did it come
   from, and is the "no AI attribution" question it carries still open? The pull request template has an "AI use" section; is it wanted?
+  **Default chosen by the assistant, the owner may revise (K-C, #544):** `AGENTS.md` rule 7 now says that AI use is declared in the AI assistance
+  statement at the end of the report and that commits and PR descriptions carry no attribution line. The mentor answer (Y2) is still wanted; the
+  "AI use" section of the PR template was not changed.
 - Were Tier 3 and the AI diagnosis layer expected? They are done in a rule-based form (no real model run).
 - Which claim should the final report defend: a **rate** (how many papers install and run; with 12 papers the 95% interval is wide, 1 of 6 gives 3% to 56%) or the
   **correctness of the verdict** on papers with a known answer? This decides how many papers are enough.
