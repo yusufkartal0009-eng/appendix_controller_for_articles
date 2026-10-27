@@ -6,6 +6,8 @@ exposed: they are hand-typed and unverified (docs/CORPUS_VERIFICATION.md), and t
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse
 
@@ -14,6 +16,7 @@ from src.web.pages import (
     EMPTY_STATE,
     build_rows,
     render_detail,
+    render_failures,
     render_leaderboard,
     render_not_found,
 )
@@ -22,7 +25,10 @@ from src.web.routes import router
 __all__ = ["EMPTY_STATE", "create_app"]
 
 
-def create_app(db_url: str | None = None) -> FastAPI:
+FAILURE_STATISTICS_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "failure_statistics.json"
+
+
+def create_app(db_url: str | None = None, failure_statistics: Path | None = None) -> FastAPI:
     engine = get_engine(db_url)
     init_db(engine)  # creates missing tables; never deletes data
     app = FastAPI(title="Repro Radar (local)", docs_url="/docs", redoc_url=None)
@@ -41,6 +47,10 @@ def create_app(db_url: str | None = None) -> FastAPI:
         if page is None:
             return HTMLResponse(render_not_found(paper_id), status_code=404)
         return HTMLResponse(page)
+
+    @app.get("/failures", response_class=HTMLResponse)
+    def failures() -> str:
+        return render_failures(failure_statistics or FAILURE_STATISTICS_PATH)
 
     app.state.engine = engine
     return app

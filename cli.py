@@ -189,6 +189,12 @@ def cmd_score_paper(args):
         "tier2_metrics": bd.tier2_metrics, "tier3_stability": bd.tier3_stability, "tier4_artifacts": bd.tier4_artifacts,
         "total_score": bd.total_score, "status_label": bd.status_label, "summary": bd.summary,
     }, session=session)
+    from src.score_explanation import build_explanation, save_explanation
+    explanation = build_explanation(
+        result, claims, seed_metric_results=seed_metrics, source=None,
+        run={"setting": "cli.py score", "directory": run_dir.as_posix() if not run_dir.is_absolute() else run_dir.name,
+             "status": run.get("status") or "FAILED", "exit_code": run.get("exit_code"), "stored_runs": None})
+    save_explanation(session.get_bind(), paper.paper_id, explanation)
     session.close()
     print_breakdown(bd)
 
