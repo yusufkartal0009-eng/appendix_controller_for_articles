@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/repo/pid_tiled_decode.py", line 1175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/repo/pid_tiled_decode.py", line 878, in main
+    from PIL import Image
+ModuleNotFoundError: No module named 'PIL'

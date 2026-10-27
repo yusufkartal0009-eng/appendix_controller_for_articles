@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/repo/setup_project.py", line 8, in <module>
+    import pandas as pd
+  File "/workspace/deps/pandas/__init__.py", line 19, in <module>
+    raise ImportError(
+ImportError: Unable to import required dependencies:
+pytz: No module named 'pytz'

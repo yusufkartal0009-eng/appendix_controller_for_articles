@@ -1,0 +1,85 @@
+{
+  "paper_id": "a4_070",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:55:02+00:00",
+  "repo_url": "https://github.com/zhongshsh/4D-Animal",
+  "pinned_commit": "2b8a95968c1a17287697b6c1c1991bb1415a2097",
+  "target_script": "main_optimize_scene.py",
+  "container_command": "python /workspace/repo/main_optimize_scene.py exp.sequence_index=\"1030_23106_17099\" exp.experiment_folder=\"experiments\"",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python main_optimize_scene.py 'exp.sequence_index=\"1030_23106_17099\"' 'exp.experiment_folder=\"experiments\"'",
+    "readme_url": "https://github.com/zhongshsh/4D-Animal/blob/2b8a95968c1a17287697b6c1c1991bb1415a2097/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "2b8a95968c1a17287697b6c1c1991bb1415a2097",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.011
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_070_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 0.725,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.5,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 12918784
+  },
+  "finished_at": "2026-10-27T03:55:03+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

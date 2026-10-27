@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_068",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "ModuleNotFoundError: No module named 'sqlalchemy'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 55.403,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,8 @@
+ImportError while loading conftest '/workspace/repo/tests/conftest.py'.
+tests/conftest.py:7: in <module>
+    from rcpsp_cf_ivfth import NIVTF, IVFTHTargets, IVFTHWeights, create_triangle
+rcpsp_cf_ivfth/__init__.py:53: in <module>
+    from .model import RCPSP_CF_IVFTH
+rcpsp_cf_ivfth/model.py:16: in <module>
+    from pyomo.environ import Binary, ConcreteModel, Constraint
+E   ModuleNotFoundError: No module named 'pyomo'

@@ -1,0 +1,7 @@
+usage: Train.py [-h] [--n [N]] [--d-model [D_MODEL]] [--d-ff [D_FF]] [--h [H]]
+                [--d-k [D_K]] [--d-v [D_V]] [--p-drop [P_DROP]]
+                [--model-path MODEL_PATH] [--root-data-path [ROOT_DATA_PATH]]
+                [--dataset [DATASET]] [--subset [SUBSET]] [--e-ls [E_LS]]
+                [--epoch [EPOCH]] [--batch-size [BATCH_SIZE]]
+                [--warmup-steps [WARMUP_STEPS]]
+Train.py: error: unrecognized arguments: --d_model=512 --d_ff=8 --d_k=64 --d_v=64 --p_drop=0.1 --e_ls=0.1 --batch_size=128 --warmup_steps=4000 --root_data_path=.Data --model_path=./Model.pb --use_small_data

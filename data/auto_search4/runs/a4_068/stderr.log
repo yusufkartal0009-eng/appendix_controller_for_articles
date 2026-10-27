@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/run_dype.py", line 10, in <module>
+    from flux.transformer_flux import FluxTransformer2DModel
+  File "/workspace/repo/flux/transformer_flux.py", line 40, in <module>
+    from sqlalchemy.sql.functions import current_timestamp
+ModuleNotFoundError: No module named 'sqlalchemy'
