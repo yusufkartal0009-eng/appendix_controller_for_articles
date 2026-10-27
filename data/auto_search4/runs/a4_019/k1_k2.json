@@ -1,0 +1,70 @@
+{
+  "paper_id": "a4_019",
+  "k1": {
+    "k1_passed": true,
+    "category": null,
+    "log_line": "",
+    "install_status": "INSTALLED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 31.869,
+    "metric_lines": [
+      "Accuracy on Task A after training on A only:  99.5%",
+      "Accuracy on Task A after training on B also:  98.0%",
+      "Accuracy on Task B after training on B:       99.5%",
+      "Forgetting on Task A: 1.5%",
+      "\u03bb=0.0  | Task A after B: 98.0%  | Task B: 99.5%  | Forgetting: +1.5%",
+      "\u03bb=0.4  | Task A after B: 98.0%  | Task B: 99.5%  | Forgetting: +1.5%",
+      "\u03bb=4.0  | Task A after B: 98.0%  | Task B: 99.5%  | Forgetting: +1.5%",
+      "Accuracy on Task A after training on A only:  99.5%",
+      "Accuracy on Task A after training on B also:  96.0%",
+      "Accuracy on Task B:                           99.5%",
+      "Accuracy on Task A after training on A only:  100.0%",
+      "Accuracy on Task A after training on B also:  97.0%",
+      "Accuracy on Task B:                           100.0%",
+      "00:51:03  INFO      [Baseline] Task 0 trained | final loss=0.1710",
+      "00:51:03  INFO      [Baseline] Task 1 trained | final loss=0.1425",
+      "00:51:03  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=0.000",
+      "00:51:04  INFO      [EWC] Task 1 trained | final_loss=0.1665 | lambda=0.000",
+      "00:51:04  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=0.400",
+      "00:51:04  INFO      [EWC] Task 1 trained | final_loss=0.1670 | lambda=0.400",
+      "00:51:04  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=4.000"
+    ]
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 11,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 9,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "v2": {
+      "passed": false,
+      "numbers_in_output": 11,
+      "numbers_found_in_paper": 1,
+      "numbers_found_on_table_page": 1,
+      "pdf_pages": 9,
+      "matches": [
+        {
+          "number": "100.0",
+          "line": "Accuracy on Task A after training on A only:  100.0%",
+          "percent": true,
+          "variant": "div100",
+          "searched": "1.000",
+          "pages": [
+            {
+              "page": 4,
+              "table_page": true,
+              "line": "ImageNet [25] 1,281,144 50,000 1,000"
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": true
+        }
+      ],
+      "note": "match candidate only; a string match with scale conversion and rounding, not verified"
+    },
+    "arxiv_id": "1711.05769"
+  }
+}

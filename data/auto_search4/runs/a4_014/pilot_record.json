@@ -1,0 +1,85 @@
+{
+  "paper_id": "a4_014",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "25632e13dce516feca9b9b22a98ab54cec9e36a5",
+  "started_at": "2026-10-27T00:04:52+00:00",
+  "repo_url": "https://github.com/ambekarsameer96/GLSS",
+  "pinned_commit": "55546e04cea5f8a2e92cb154e793fc77043f1a82",
+  "target_script": "vae_u-efficientnet_latent_search.py",
+  "container_command": "python /workspace/repo/vae_u-efficientnet_latent_search.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python vae_u-efficientnet_latent_search.py",
+    "readme_url": "https://github.com/ambekarsameer96/GLSS/blob/55546e04cea5f8a2e92cb154e793fc77043f1a82/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "55546e04cea5f8a2e92cb154e793fc77043f1a82",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.237
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_014_packages",
+    "duration_seconds": 0.001
+  },
+  "sandbox_duration_seconds": 0.895,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.687,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 23375872
+  },
+  "finished_at": "2026-10-27T00:04:54+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

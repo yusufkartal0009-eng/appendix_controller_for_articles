@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/repo/compiling/main_1q_small_rot.py", line 1383, in <module>
+    os.makedirs('checkpoints', exist_ok=True)
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: 'checkpoints'

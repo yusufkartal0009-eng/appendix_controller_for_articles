@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_011",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 57.011,
+    "metric_lines": []
+  },
+  "k2": null
+}
