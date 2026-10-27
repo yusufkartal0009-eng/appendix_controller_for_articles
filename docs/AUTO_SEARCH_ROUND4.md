@@ -134,6 +134,14 @@ The new stage topics, in this order:
   - **Stage 16:** `numerical-optimization`, `convex-optimization`, `stochastic-optimization`, `gradient-descent`, `sgd`, `adam`, `learning-rate`, `regularization`, `dropout`, `batch-normalization`, `activation-functions`, `loss-functions`, `neural-ode`, `physics-informed`, `pinn`, `surrogate-model`.
   - **Stage 17:** `survival`, `epidemic`, `covid-19`, `genetics`, `single-cell`, `proteomics`, `neuroimaging`, `fmri`, `ecg`, `clinical`, `electronic-health-records`, `drug-repurposing`, `ecology-modeling`, `crop`, `remote-sensing-imagery`, `satellite`.
 
+- **Stages 18 to 21** (added on 2026-10-27, after stage 17 was used up with 2,170 candidates checked and 91 run; classical method, statistics,
+  control and language topics chosen without looking at any candidate, none used in any earlier stage; the same rules apply; each stage is
+  used only when the stage before it is used up before a stop condition of section 6 holds):
+  - **Stage 18:** `decision-tree`, `gradient-boosting`, `logistic-regression`, `linear-regression`, `naive-bayes`, `k-means`, `pca`, `nearest-neighbors`, `knn`, `hidden-markov-model`, `kalman-filter`, `particle-filter`, `state-space-model`, `gaussian-mixture-model`, `expectation-maximization`, `markov-chain`.
+  - **Stage 19:** `lasso`, `ridge-regression`, `elastic-net`, `bootstrap`, `hypothesis-testing`, `bayesian-statistics`, `mixed-effects`, `time-series-decomposition`, `spectral-analysis`, `wavelet`, `fourier-transform`, `filtering`, `change-point-detection`, `sequence-alignment`, `phylogenetics`, `protein-structure`.
+  - **Stage 20:** `policy-gradient`, `q-learning`, `multi-agent`, `imitation-learning`, `offline-reinforcement-learning`, `model-based-rl`, `planning`, `reward-learning`, `inverse-reinforcement-learning`, `control`, `trajectory-optimization`, `model-predictive-control`, `path-planning`, `slam`, `autonomous-driving`, `drone`.
+  - **Stage 21:** `text-generation`, `language-model`, `summarization`, `information-extraction`, `text-mining`, `retrieval`, `information-retrieval`, `search-engine`, `embeddings`, `dialogue`, `chatbot`, `prompt`, `in-context-learning`, `fine-tuning`, `lora`, `tokenization`.
+
 Duplicates are removed (case-insensitive). The repositories of **all earlier rounds are removed from the pool before ordering**:
 every repository in `data/auto_search3/pool*.json` (the whole pool of round 3, checked or not), `data/demo_set/pool.json`,
 `data/candidates/` (all files), `data/seed_papers.json` and `data/corpus_expansion/papers.json`. The remaining candidates are
