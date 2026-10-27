@@ -1,0 +1,130 @@
+{
+  "paper_id": "a4_066",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:26:22+00:00",
+  "repo_url": "https://github.com/RelationRx/tiny_moves",
+  "pinned_commit": "7ef884e313a9e7231951b8fc3c7f7e8c335d1417",
+  "target_script": "tiny_moves/entry_points/chat.py",
+  "container_command": "python /workspace/repo/tiny_moves/entry_points/chat.py --config_name tiny_moves_no_corpus.yaml",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python  tiny_moves/entry_points/chat.py --config_name tiny_moves_no_corpus.yaml",
+    "readme_url": "https://github.com/RelationRx/tiny_moves/blob/7ef884e313a9e7231951b8fc3c7f7e8c335d1417/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "7ef884e313a9e7231951b8fc3c7f7e8c335d1417",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.092
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 20,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_066_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [
+      {
+        "cannot_install": [
+          "gilda (requirements.txt line 22)"
+        ],
+        "caused_by": [
+          "gilda 1.2.0 depends on adeft>=0.11.0",
+          "gilda 1.1.0 depends on adeft>=0.11.0",
+          "gilda 1.0.0 depends on adeft>=0.11.0",
+          "gilda 0.10.3 depends on adeft>=0.11.0",
+          "gilda 0.10.2 depends on adeft>=0.11.0",
+          "gilda 0.10.1 depends on adeft>=0.11.0",
+          "gilda 0.9.0 depends on adeft>=0.11.0",
+          "gilda 0.8.3 depends on adeft>=0.11.0",
+          "gilda 0.8.2 depends on adeft>=0.11.0",
+          "gilda 0.6.1 depends on flask-bootstrap",
+          "gilda 0.6.0 depends on flask-bootstrap",
+          "gilda 0.5.3 depends on flask-bootstrap",
+          "gilda 0.5.2 depends on flask-bootstrap",
+          "gilda 0.4 depends on flask-bootstrap",
+          "gilda 0.3.3 depends on flask-bootstrap",
+          "gilda 0.3.2 depends on flask-bootstrap"
+        ]
+      }
+    ],
+    "stdout": " is caused by:\n    gilda 1.2.0 depends on adeft>=0.11.0\n    gilda 1.1.0 depends on adeft>=0.11.0\n    gilda 1.0.0 depends on adeft>=0.11.0\n    gilda 0.10.3 depends on adeft>=0.11.0\n    gilda 0.10.2 depends on adeft>=0.11.0\n    gilda 0.10.1 depends on adeft>=0.11.0\n    gilda 0.9.0 depends on adeft>=0.11.0\n    gilda 0.8.3 depends on adeft>=0.11.0\n    gilda 0.8.2 depends on adeft>=0.11.0\n    gilda 0.6.1 depends on flask-bootstrap\n    gilda 0.6.0 depends on flask-bootstrap\n    gilda 0.5.3 depends on flask-bootstrap\n    gilda 0.5.2 depends on flask-bootstrap\n    gilda 0.4 depends on flask-bootstrap\n    gilda 0.3.3 depends on flask-bootstrap\n    gilda 0.3.2 depends on flask-bootstrap\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    adeft\n    flask-bootstrap\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+    "stderr": "7d311ec2684/omegaconf-2.0.6-py3-none-any.whl (from -r /staging/a4_066/requirements.txt (line 7)) has invalid metadata: .* suffix can only be used with `==` or `!=` operators\n    PyYAML (>=5.1.*)\n            ~~~~~~^\nPlease use pip<24.1 if you need to use this version.\nWARNING: Ignoring version 2.0.5 of omegaconf since it has invalid metadata:\nRequested omegaconf from https://files.pythonhosted.org/packages/e5/f6/043b6d255dd6fbf2025110cea35b87f4c5100a181681d8eab496269f0d5b/omegaconf-2.0.5-py3-none-any.whl (from -r /staging/a4_066/requirements.txt (line 7)) has invalid metadata: .* suffix can only be used with `==` or `!=` operators\n    PyYAML (>=5.1.*)\n            ~~~~~~^\nPlease use pip<24.1 if you need to use this version.\nERROR: Cannot install -r /staging/a4_066/requirements.txt (line 22) because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n",
+    "duration_seconds": 71.157
+  },
+  "sandbox_duration_seconds": 2.655,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.501,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 12713984
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.16,
+    "peak_memory_bytes": 43819008
+  },
+  "finished_at": "2026-10-27T03:27:37+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

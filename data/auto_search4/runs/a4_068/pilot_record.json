@@ -1,0 +1,106 @@
+{
+  "paper_id": "a4_068",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:39:54+00:00",
+  "repo_url": "https://github.com/guyyariv/DyPE",
+  "pinned_commit": "436fe612fb7695fa2d5dc32d63390c048ba6033c",
+  "target_script": "run_dype.py",
+  "container_command": "python /workspace/repo/run_dype.py --prompt Your text prompt here",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python run_dype.py --prompt \"Your text prompt here\"",
+    "readme_url": "https://github.com/guyyariv/DyPE/blob/436fe612fb7695fa2d5dc32d63390c048ba6033c/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "436fe612fb7695fa2d5dc32d63390c048ba6033c",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.231
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 65,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_068_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "one-any.whl\nSaved ./a4_068_packages/pygments-2.21.0-py3-none-any.whl\nSaved ./a4_068_packages/markdown_it_py-4.2.0-py3-none-any.whl\nSaved ./a4_068_packages/mdurl-0.1.2-py3-none-any.whl\nSaved ./a4_068_packages/shellingham-1.5.4-py2.py3-none-any.whl\nSuccessfully downloaded torch cuda-toolkit nvidia-cudnn-cu13 nvidia-cusparselt-cu13 nvidia-nccl-cu13 nvidia-nvshmem-cu13 cuda-bindings nvidia-cublas nvidia-cuda-cupti nvidia-cuda-nvrtc nvidia-cuda-runtime nvidia-cufft nvidia-cufile nvidia-curand nvidia-cusolver nvidia-cusparse nvidia-nvjitlink nvidia-nvtx triton torchvision diffusers huggingface-hub click hf-xet httpx2 httpcore2 transformers tokenizers accelerate sentencepiece anyio cuda-pathfinder filelock fsspec h11 idna networkx numpy packaging pillow pyyaml regex safetensors setuptools sympy mpmath tqdm truststore typing-extensions importlib_metadata zipp jinja2 MarkupSafe psutil requests charset_normalizer urllib3 certifi typer annotated-doc rich pygments markdown-it-py mdurl shellingham\n",
+    "stderr": "",
+    "duration_seconds": 57.071
+  },
+  "sandbox_duration_seconds": 839.115,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 55.403,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 1037987840
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 781.911,
+    "peak_memory_bytes": 145915904
+  },
+  "finished_at": "2026-10-27T03:54:52+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

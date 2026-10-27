@@ -1,0 +1,328 @@
+{
+  "paper_id": "a4_063",
+  "source": "https://github.com/AlbMLpy/laplace-tnkm",
+  "commit_hash": "1a696c7db3f4b9385dafba2f4660a8b096f00b95",
+  "target_script": "setup_project.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.456,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_063",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "INSTALLED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.121,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 39243776,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [
+    {
+      "name": "flax",
+      "version": "0.10.5"
+    },
+    {
+      "name": "imageio",
+      "version": "2.37.0"
+    },
+    {
+      "name": "ipykernel",
+      "version": "6.29.5"
+    },
+    {
+      "name": "ipython",
+      "version": "8.30.0"
+    },
+    {
+      "name": "jax",
+      "version": "0.5.3"
+    },
+    {
+      "name": "jaxlib",
+      "version": "0.5.3"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "laplax",
+      "version": "0.0.2"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.9.2"
+    },
+    {
+      "name": "matplotlib-inline",
+      "version": "0.1.6"
+    },
+    {
+      "name": "nbconvert",
+      "version": "7.16.6"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4"
+    },
+    {
+      "name": "optax",
+      "version": "0.2.4"
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.3"
+    },
+    {
+      "name": "pytest",
+      "version": "8.3.5"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.4"
+    },
+    {
+      "name": "requests-oauthlib",
+      "version": "2.0.0"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.5.2"
+    },
+    {
+      "name": "scipy",
+      "version": "1.14.1"
+    },
+    {
+      "name": "seaborn",
+      "version": "0.13.2"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.66.5"
+    },
+    {
+      "name": "ucimlrepo",
+      "version": "0.0.7"
+    }
+  ],
+  "requested_vs_installed": [
+    {
+      "requirement": "ipykernel==6.29.5",
+      "name": "ipykernel",
+      "requested": "==6.29.5",
+      "installed": "6.29.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ipython==8.30.0",
+      "name": "ipython",
+      "requested": "==8.30.0",
+      "installed": "8.30.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.9.2",
+      "name": "matplotlib",
+      "requested": "==3.9.2",
+      "installed": "3.9.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib-inline==0.1.6",
+      "name": "matplotlib-inline",
+      "requested": "==0.1.6",
+      "installed": "0.1.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.26.4",
+      "name": "numpy",
+      "requested": "==1.26.4",
+      "installed": "1.26.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy-base==1.26.4",
+      "name": "numpy-base",
+      "requested": "==1.26.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.2.3",
+      "name": "pandas",
+      "requested": "==2.2.3",
+      "installed": "2.2.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.5.2",
+      "name": "scikit-learn",
+      "requested": "==1.5.2",
+      "installed": "1.5.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.14.1",
+      "name": "scipy",
+      "requested": "==1.14.1",
+      "installed": "1.14.1",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.5",
+      "name": "tqdm",
+      "requested": "==4.66.5",
+      "installed": "4.66.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "flax==0.10.5",
+      "name": "flax",
+      "requested": "==0.10.5",
+      "installed": "0.10.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "imageio==2.37.0",
+      "name": "imageio",
+      "requested": "==2.37.0",
+      "installed": "2.37.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jax==0.5.3",
+      "name": "jax",
+      "requested": "==0.5.3",
+      "installed": "0.5.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jaxlib==0.5.3",
+      "name": "jaxlib",
+      "requested": "==0.5.3",
+      "installed": "0.5.3",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "jinja2==3.1.6",
+      "name": "jinja2",
+      "requested": "==3.1.6",
+      "installed": "3.1.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "optax==0.2.4",
+      "name": "optax",
+      "requested": "==0.2.4",
+      "installed": "0.2.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "pytest==8.3.5",
+      "name": "pytest",
+      "requested": "==8.3.5",
+      "installed": "8.3.5",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.32.4",
+      "name": "requests",
+      "requested": "==2.32.4",
+      "installed": "2.32.4",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-oauthlib==2.0.0",
+      "name": "requests-oauthlib",
+      "requested": "==2.0.0",
+      "installed": "2.0.0",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "seaborn==0.13.2",
+      "name": "seaborn",
+      "requested": "==0.13.2",
+      "installed": "0.13.2",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "ucimlrepo==0.0.7",
+      "name": "ucimlrepo",
+      "requested": "==0.0.7",
+      "installed": "0.0.7",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "nbconvert==7.16.6",
+      "name": "nbconvert",
+      "requested": "==7.16.6",
+      "installed": "7.16.6",
+      "satisfied": true,
+      "pinned": true
+    },
+    {
+      "requirement": "laplax==0.0.2",
+      "name": "laplax",
+      "requested": "==0.0.2",
+      "installed": "0.0.2",
+      "satisfied": true,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/setup_project.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : INSTALLED\nDuration      : 1.121s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/setup_project.py\", line 8, in <module>\n    import pandas as pd\n  File \"/workspace/deps/pandas/__init__.py\", line 19, in <module>\n    raise ImportError(\nImportError: Unable to import required dependencies:\npytz: No module named 'pytz'\n"
+}

@@ -1,0 +1,51 @@
+{
+  "paper_id": "a4_067",
+  "source": "https://github.com/HyunwooLee0429/GMSPP",
+  "commit_hash": "07cae93a82b31660a24e2a2788679f5fb91bb0b5",
+  "target_script": "fuzz_alns.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 225.212,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_067",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 224.885,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 66940928,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/fuzz_alns.py 200\n==================================================\n[1/200] ok  obj=472  generate_type2(n=36, m=2, seed=271493) obj=makespan alns_seed=424604\n[2/200] ok  obj=59716  generate_type2(n=40, m=3, seed=611720) obj=total_cost alns_seed=529202\n[3/200] ok  obj=28603  generate_type1(n=28, m=2, seed=792518) obj=total_cost alns_seed=648406\n[4/200] ok  obj=79500  generate_type2(n=44, m=4, seed=849574) obj=total_cost alns_seed=325213\n[5/200] ok  obj=45  generate_type1(n=14, m=4, seed=346236) obj=makespan alns_seed=587007\n[6/200] ok  obj=33751  generate_type1(n=32, m=3, seed=331556) obj=total_cost alns_seed=579363\n[7/200] ok  obj=55962  generate_type2(n=38, m=4, seed=273145) obj=total_cost alns_seed=844132\n[8/200] ok  obj=38  generate_type1(n=15, m=4, seed=880899) obj=makespan alns_seed=744754\n[9/200] ok  obj=178  generate_type1(n=41, m=3, seed=255759) obj=makespan alns_seed=737822\n[10/200] ok  obj=26334  generate_type1(n=22, m=4, seed=232473) obj=total_cost alns_seed=842368\n[11/200] ok  obj=49145  generate_type1(n=44, m=3, seed=95646) obj=total_cost alns_seed=335601\n[12/200] ok  obj=164  generate_type2(n=16, m=3, seed=578045) obj=makespan alns_seed=740883\n[13/200] ok  obj=47878  generate_type1(n=45, m=3, seed=854030) obj=total_cost alns_seed=838260\n[14/200] ok  obj=488  generate_type2(n=38, m=2, seed=625252) obj=makespan alns_seed=332447\n[15/200] ok  obj=24837  generate_type1(n=28, m=2, seed=198591) obj=total_cost alns_seed=34574\n[16/200] ok  obj=101022  generate_type2(n=40, m=2, seed=94187) obj=total_cost alns_seed=919360\n[17/200] ok  obj=119  generate_type1(n=12, m=2, seed=941802) obj=makespan alns_seed=878565\n[18/200] ok  obj=82232  generate_type2(n=43, m=2, seed=890750) obj=total_cost alns_s",
+  "stderr_preview": ""
+}

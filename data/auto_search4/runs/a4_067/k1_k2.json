@@ -1,0 +1,424 @@
+{
+  "paper_id": "a4_067",
+  "k1": {
+    "k1_passed": false,
+    "category": "no_metric_line",
+    "log_line": "200/200 passed",
+    "install_status": "SKIPPED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 225.212,
+    "metric_lines": []
+  },
+  "k2": {
+    "passed": true,
+    "numbers_in_output": 408,
+    "numbers_found_in_paper": 12,
+    "numbers_found_on_table_page": 7,
+    "pdf_pages": 28,
+    "matches": [
+      {
+        "number": "472",
+        "line": "[1/200] ok  obj=472  generate_type2(n=36, m=2, seed=271493) obj=makespan alns_seed=424604",
+        "percent": false,
+        "pages": [
+          {
+            "page": 26,
+            "table_page": false,
+            "line": "delivery problem with time windows.Transportation Science, 40(4):455\u2013472, 2006."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": false
+      },
+      {
+        "number": "178",
+        "line": "[9/200] ok  obj=178  generate_type1(n=41, m=3, seed=255759) obj=makespan alns_seed=737822",
+        "percent": false,
+        "pages": [
+          {
+            "page": 27,
+            "table_page": true,
+            "line": "Formulations, applications, and solution algorithms.Computers&Industrial Engineering, 178:109096,"
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": true
+      },
+      {
+        "number": "258",
+        "line": "[64/200] ok  obj=258  generate_type2(n=40, m=3, seed=881693) obj=makespan alns_seed=130364",
+        "percent": false,
+        "pages": [
+          {
+            "page": 21,
+            "table_page": true,
+            "line": "its master can be built, winning the primal comparison on 170 of the 258 instances up ton=800 (78 ties,"
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": true
+      },
+      {
+        "number": "102",
+        "line": "[102/200] ok  obj=109  generate_type1(n=24, m=2, seed=814054) obj=makespan alns_seed=531739",
+        "percent": false,
+        "pages": [
+          {
+            "page": 26,
+            "table_page": false,
+            "line": "based method for solving the two-dimensional strip packing problem.Fundamenta Informaticae, 102"
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": false
+      },
+      {
+        "number": "127",
+        "line": "[127/200] ok  obj=23660  generate_type2(n=15, m=3, seed=791711) obj=total_cost alns_seed=309045",
+        "percent": false,
+        "pages": [
+          {
+            "page": 26,
+            "table_page": false,
+            "line": "the circle bin packing problem.Computers&Operations Research, 127:105140, 2021."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": false
+      },
+      {
+        "number": "145",
+        "line": "[145/200] ok  obj=72  generate_type1(n=15, m=4, seed=995422) obj=makespan alns_seed=6735",
+        "percent": false,
+        "pages": [
+          {
+            "page": 16,
+            "table_page": true,
+            "line": "ZDF splits strip-dep. 145\u2013766 2\u20134 makespan scheduling lens (Tiers 1\u20133)"
+          },
+          {
+            "page": 19,
+            "table_page": true,
+            "line": "zdf1_4 145 4 15 15 0.00 0.00"
+          },
+          {
+            "page": 21,
+            "table_page": true,
+            "line": "sched.n=145\u2013800 2/18 2.93 3/18 6.90 15/3/0"
+          }
+        ],
+        "pages_total": 3,
+        "on_table_page": true
+      },
+      {
+        "number": "284",
+        "line": "[156/200] ok  obj=284  generate_type2(n=36, m=3, seed=56560) obj=makespan alns_seed=609180",
+        "percent": false,
+        "pages": [
+          {
+            "page": 26,
+            "table_page": false,
+            "line": "Science, pages 284\u2013297. Springer, 2021."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": false
+      },
+      {
+        "number": "159",
+        "line": "[159/200] ok  obj=26006  generate_type2(n=10, m=3, seed=686426) obj=total_cost alns_seed=147227",
+        "percent": false,
+        "pages": [
+          {
+            "page": 19,
+            "table_page": true,
+            "line": "zdf10_2\u2217 2532 2 159 159 0.00 0.00"
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": true
+      },
+      {
+        "number": "239",
+        "line": "[172/200] ok  obj=239  generate_type2(n=24, m=2, seed=881285) obj=makespan alns_seed=979853",
+        "percent": false,
+        "pages": [
+          {
+            "page": 27,
+            "table_page": true,
+            "line": "412(3):233\u2013239, 2011."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": true
+      },
+      {
+        "number": "183",
+        "line": "[183/200] ok  obj=20643  generate_type1(n=18, m=3, seed=162784) obj=total_cost alns_seed=535271",
+        "percent": false,
+        "pages": [
+          {
+            "page": 27,
+            "table_page": true,
+            "line": "problems.European Journal of Operational Research, 183(3):1109\u20131130, 2007."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": true
+      },
+      {
+        "number": "197",
+        "line": "[197/200] ok  obj=33401  generate_type1(n=32, m=4, seed=443183) obj=total_cost alns_seed=935779",
+        "percent": false,
+        "pages": [
+          {
+            "page": 16,
+            "table_page": true,
+            "line": "zero-waste fixed 17\u2013197 2\u20133 both calibration only (Appendix A)"
+          },
+          {
+            "page": 27,
+            "table_page": true,
+            "line": "N7 197+0.13 1.53+0.05 0.96 3.24"
+          }
+        ],
+        "pages_total": 2,
+        "on_table_page": true
+      },
+      {
+        "number": "198",
+        "line": "[198/200] ok  obj=132  generate_type1(n=38, m=3, seed=148955) obj=makespan alns_seed=327105",
+        "percent": false,
+        "pages": [
+          {
+            "page": 26,
+            "table_page": false,
+            "line": "of Operational Research, 198(1):73\u201383, 2009."
+          }
+        ],
+        "pages_total": 1,
+        "on_table_page": false
+      }
+    ],
+    "note": "match candidate only; a string match, not verified",
+    "v2": {
+      "passed": true,
+      "numbers_in_output": 408,
+      "numbers_found_in_paper": 12,
+      "numbers_found_on_table_page": 7,
+      "pdf_pages": 28,
+      "matches": [
+        {
+          "number": "472",
+          "line": "[1/200] ok  obj=472  generate_type2(n=36, m=2, seed=271493) obj=makespan alns_seed=424604",
+          "percent": false,
+          "variant": "same",
+          "searched": "472",
+          "pages": [
+            {
+              "page": 26,
+              "table_page": false,
+              "line": "delivery problem with time windows.Transportation Science, 40(4):455\u2013472, 2006."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": false
+        },
+        {
+          "number": "178",
+          "line": "[9/200] ok  obj=178  generate_type1(n=41, m=3, seed=255759) obj=makespan alns_seed=737822",
+          "percent": false,
+          "variant": "same",
+          "searched": "178",
+          "pages": [
+            {
+              "page": 27,
+              "table_page": true,
+              "line": "Formulations, applications, and solution algorithms.Computers&Industrial Engineering, 178:109096,"
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": true
+        },
+        {
+          "number": "258",
+          "line": "[64/200] ok  obj=258  generate_type2(n=40, m=3, seed=881693) obj=makespan alns_seed=130364",
+          "percent": false,
+          "variant": "same",
+          "searched": "258",
+          "pages": [
+            {
+              "page": 21,
+              "table_page": true,
+              "line": "its master can be built, winning the primal comparison on 170 of the 258 instances up ton=800 (78 ties,"
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": true
+        },
+        {
+          "number": "102",
+          "line": "[102/200] ok  obj=109  generate_type1(n=24, m=2, seed=814054) obj=makespan alns_seed=531739",
+          "percent": false,
+          "variant": "same",
+          "searched": "102",
+          "pages": [
+            {
+              "page": 26,
+              "table_page": false,
+              "line": "based method for solving the two-dimensional strip packing problem.Fundamenta Informaticae, 102"
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": false
+        },
+        {
+          "number": "127",
+          "line": "[127/200] ok  obj=23660  generate_type2(n=15, m=3, seed=791711) obj=total_cost alns_seed=309045",
+          "percent": false,
+          "variant": "same",
+          "searched": "127",
+          "pages": [
+            {
+              "page": 26,
+              "table_page": false,
+              "line": "the circle bin packing problem.Computers&Operations Research, 127:105140, 2021."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": false
+        },
+        {
+          "number": "145",
+          "line": "[145/200] ok  obj=72  generate_type1(n=15, m=4, seed=995422) obj=makespan alns_seed=6735",
+          "percent": false,
+          "variant": "same",
+          "searched": "145",
+          "pages": [
+            {
+              "page": 16,
+              "table_page": true,
+              "line": "ZDF splits strip-dep. 145\u2013766 2\u20134 makespan scheduling lens (Tiers 1\u20133)"
+            },
+            {
+              "page": 19,
+              "table_page": true,
+              "line": "zdf1_4 145 4 15 15 0.00 0.00"
+            },
+            {
+              "page": 21,
+              "table_page": true,
+              "line": "sched.n=145\u2013800 2/18 2.93 3/18 6.90 15/3/0"
+            }
+          ],
+          "pages_total": 3,
+          "on_table_page": true
+        },
+        {
+          "number": "284",
+          "line": "[156/200] ok  obj=284  generate_type2(n=36, m=3, seed=56560) obj=makespan alns_seed=609180",
+          "percent": false,
+          "variant": "same",
+          "searched": "284",
+          "pages": [
+            {
+              "page": 26,
+              "table_page": false,
+              "line": "Science, pages 284\u2013297. Springer, 2021."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": false
+        },
+        {
+          "number": "159",
+          "line": "[159/200] ok  obj=26006  generate_type2(n=10, m=3, seed=686426) obj=total_cost alns_seed=147227",
+          "percent": false,
+          "variant": "same",
+          "searched": "159",
+          "pages": [
+            {
+              "page": 19,
+              "table_page": true,
+              "line": "zdf10_2\u2217 2532 2 159 159 0.00 0.00"
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": true
+        },
+        {
+          "number": "239",
+          "line": "[172/200] ok  obj=239  generate_type2(n=24, m=2, seed=881285) obj=makespan alns_seed=979853",
+          "percent": false,
+          "variant": "same",
+          "searched": "239",
+          "pages": [
+            {
+              "page": 27,
+              "table_page": true,
+              "line": "412(3):233\u2013239, 2011."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": true
+        },
+        {
+          "number": "183",
+          "line": "[183/200] ok  obj=20643  generate_type1(n=18, m=3, seed=162784) obj=total_cost alns_seed=535271",
+          "percent": false,
+          "variant": "same",
+          "searched": "183",
+          "pages": [
+            {
+              "page": 27,
+              "table_page": true,
+              "line": "problems.European Journal of Operational Research, 183(3):1109\u20131130, 2007."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": true
+        },
+        {
+          "number": "197",
+          "line": "[197/200] ok  obj=33401  generate_type1(n=32, m=4, seed=443183) obj=total_cost alns_seed=935779",
+          "percent": false,
+          "variant": "same",
+          "searched": "197",
+          "pages": [
+            {
+              "page": 16,
+              "table_page": true,
+              "line": "zero-waste fixed 17\u2013197 2\u20133 both calibration only (Appendix A)"
+            },
+            {
+              "page": 27,
+              "table_page": true,
+              "line": "N7 197+0.13 1.53+0.05 0.96 3.24"
+            }
+          ],
+          "pages_total": 2,
+          "on_table_page": true
+        },
+        {
+          "number": "198",
+          "line": "[198/200] ok  obj=132  generate_type1(n=38, m=3, seed=148955) obj=makespan alns_seed=327105",
+          "percent": false,
+          "variant": "same",
+          "searched": "198",
+          "pages": [
+            {
+              "page": 26,
+              "table_page": false,
+              "line": "of Operational Research, 198(1):73\u201383, 2009."
+            }
+          ],
+          "pages_total": 1,
+          "on_table_page": false
+        }
+      ],
+      "note": "match candidate only; a string match with scale conversion and rounding, not verified"
+    },
+    "arxiv_id": "2604.04740"
+  }
+}

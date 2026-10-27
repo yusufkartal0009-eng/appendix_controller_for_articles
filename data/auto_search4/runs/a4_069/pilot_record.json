@@ -1,0 +1,85 @@
+{
+  "paper_id": "a4_069",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:54:59+00:00",
+  "repo_url": "https://github.com/BennyDaBall930/pid-tiled-decode",
+  "pinned_commit": "00f9a27dbad79bdc2741e0173cabff919a134ffc",
+  "target_script": "pid_tiled_decode.py",
+  "container_command": "python /workspace/repo/pid_tiled_decode.py --from-latent latents/my_shot_00001_.latent --label my_shot_8k --out runs/my_shot_8k --vae-image path/to/your_vae_decode.png",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python pid_tiled_decode.py --from-latent \"latents/my_shot_00001_.latent\" --label my_shot_8k --out runs/my_shot_8k --vae-image path/to/your_vae_decode.png",
+    "readme_url": "https://github.com/BennyDaBall930/pid-tiled-decode/blob/00f9a27dbad79bdc2741e0173cabff919a134ffc/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "00f9a27dbad79bdc2741e0173cabff919a134ffc",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.265
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_069_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 1.135,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.897,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 66818048
+  },
+  "finished_at": "2026-10-27T03:55:01+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

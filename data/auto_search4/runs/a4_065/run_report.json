@@ -1,0 +1,51 @@
+{
+  "paper_id": "a4_065",
+  "source": "https://github.com/DiogoRibeiro7/rcpsp_cf_ivfth",
+  "commit_hash": "4e7a0903abd1c100ad0b334d35a3c41dfd7642f0",
+  "target_script": "run_tests.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 4,
+  "duration_seconds": 1.15,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_065",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 4,
+    "duration_seconds": 0.818,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 44883968,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/run_tests.py --no-solver\n==================================================\nRunning command: python -m pytest tests/ -m not solver --cov-fail-under=0\n\nWARNING: Pyomo not installed. Install with: pip install pyomo\nWARNING: No MILP solvers detected. Some tests may be skipped.\nInstall HiGHS (wheel, all platforms): pip install highspy\nInstall CBC: conda install -c conda-forge coincbc\nInstall GLPK: sudo apt-get install glpk-utils (Linux) or brew install glpk (macOS)\n\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 4)\nDependencies  : SKIPPED\nDuration      : 0.818s\n==================================================\n",
+  "stderr_preview": "ImportError while loading conftest '/workspace/repo/tests/conftest.py'.\ntests/conftest.py:7: in <module>\n    from rcpsp_cf_ivfth import NIVTF, IVFTHTargets, IVFTHWeights, create_triangle\nrcpsp_cf_ivfth/__init__.py:53: in <module>\n    from .model import RCPSP_CF_IVFTH\nrcpsp_cf_ivfth/model.py:16: in <module>\n    from pyomo.environ import Binary, ConcreteModel, Constraint\nE   ModuleNotFoundError: No module named 'pyomo'\n"
+}

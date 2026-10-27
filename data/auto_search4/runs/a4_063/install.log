@@ -1,0 +1,26 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/flax-0.10.5-py3-none-any.whl
+Processing /workspace/packages/imageio-2.37.0-py3-none-any.whl
+Processing /workspace/packages/ipykernel-6.29.5-py3-none-any.whl
+Processing /workspace/packages/ipython-8.30.0-py3-none-any.whl
+Processing /workspace/packages/jax-0.5.3-py3-none-any.whl
+Processing /workspace/packages/jaxlib-0.5.3-cp311-cp311-manylinux2014_x86_64.whl
+Processing /workspace/packages/jinja2-3.1.6-py3-none-any.whl
+Processing /workspace/packages/laplax-0.0.2-py3-none-any.whl
+Processing /workspace/packages/matplotlib-3.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing /workspace/packages/matplotlib_inline-0.1.6-py3-none-any.whl
+Processing /workspace/packages/nbconvert-7.16.6-py3-none-any.whl
+Processing /workspace/packages/numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing /workspace/packages/optax-0.2.4-py3-none-any.whl
+Processing /workspace/packages/pandas-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing /workspace/packages/pytest-8.3.5-py3-none-any.whl
+Processing /workspace/packages/requests-2.32.4-py3-none-any.whl
+Processing /workspace/packages/requests_oauthlib-2.0.0-py2.py3-none-any.whl
+Processing /workspace/packages/scikit_learn-1.5.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing /workspace/packages/scipy-1.14.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing /workspace/packages/seaborn-0.13.2-py3-none-any.whl
+Processing /workspace/packages/tqdm-4.66.5-py3-none-any.whl
+Processing /workspace/packages/ucimlrepo-0.0.7-py3-none-any.whl
+Installing collected packages: ucimlrepo, tqdm, seaborn, scipy, scikit-learn, requests-oauthlib, requests, pytest, pandas, optax, numpy, nbconvert, matplotlib-inline, matplotlib, laplax, jinja2, jaxlib, jax, ipython, ipykernel, imageio, flax
+
+Successfully installed flax-0.10.5 imageio-2.37.0 ipykernel-6.29.5 ipython-8.30.0 jax-0.5.3 jaxlib-0.5.3 jinja2-3.1.6 laplax-0.0.2 matplotlib-3.9.2 matplotlib-inline-0.1.6 nbconvert-7.16.6 numpy-1.26.4 optax-0.2.4 pandas-2.2.3 pytest-8.3.5 requests-2.32.4 requests-oauthlib-2.0.0 scikit-learn-1.5.2 scipy-1.14.1 seaborn-0.13.2 tqdm-4.66.5 ucimlrepo-0.0.7

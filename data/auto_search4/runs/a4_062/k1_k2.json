@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_062",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "Train.py: error: unrecognized arguments: --d_model=512 --d_ff=8 --d_k=64 --d_v=64 --p_drop=0.1 --e_ls=0.1 --batch_size=128 --warmup_steps=4000 --root_data_path=.Data --model_path=./Model.pb --use_small_data",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 2,
+    "duration_seconds": 26.042,
+    "metric_lines": []
+  },
+  "k2": null
+}

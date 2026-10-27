@@ -1,0 +1,8 @@
+Running command: python -m pytest tests/ -m not solver --cov-fail-under=0
+
+WARNING: Pyomo not installed. Install with: pip install pyomo
+WARNING: No MILP solvers detected. Some tests may be skipped.
+Install HiGHS (wheel, all platforms): pip install highspy
+Install CBC: conda install -c conda-forge coincbc
+Install GLPK: sudo apt-get install glpk-utils (Linux) or brew install glpk (macOS)
+
