@@ -8,7 +8,9 @@
 > (`scripts/verify_sources.py`, 9 of 9 verified). It was read through again on 2026-10-25 (#503): the results of the last days
 > (sections 6.4, 6.11), the two claims of the report (section 1), and the limitations were brought up to date, and the contradictions and
 > stale sentences that were found are listed in `docs/PAPER_STATUS.md` (section 2). Which parts are final and which wait for the owner
-> is also there (section 1).
+> is also there (section 1). A last read-through on 2026-10-28 (#550) placed the label rule (#540), the Tier 3 binding (#542), the
+> failure statistics (section 6.12) and the final dashboard (section 6.13), and extended the limitations (section 7); its findings are in
+> `docs/PAPER_STATUS.md` (section 2).
 
 ---
 
@@ -47,6 +49,12 @@ pipeline (section 6.4a), an exploratory analysis covers all twelve papers of Pil
 explains a stored run and the difference between two runs, and its classifier was checked against hand-written labels
 (section 6.7), and an attempt to find independent reference articles in ReScience C selected none (section 6.5a). The diagnosis
 layer was not tried with a real language model.
+
+Four later changes are reported in sections 6.11 to 6.13. A run in which no accepted claim could be compared with a number of the run is
+labeled `Needs Review` and never `Verified` or `Partially Verified` (#540), because its Tier 2 is a neutral baseline and not evidence.
+The stability tier follows the metric that an accepted claim names, when the claim map names one (#542; a default chosen by the assistant,
+which the owner may revise). The first failure of every stored run was counted by category, with a selection-bias warning (section 6.12).
+And the local dashboard now states, beside every label, whether a claim was compared and why the label was given (section 6.13).
 
 - **Sources:** sections 5 to 7 of this report; the generated sentence above is copied from
   `data/pilot3_runs/comparison.json` by `scripts/report_numbers.py`.
@@ -164,7 +172,9 @@ Each run is scored on four weighted tiers (`src/config.py`): **Tier 1**, build a
 2**, agreement between the paper's claimed metrics and the reproduced ones, 35%; **Tier 3**, stability across
 repeated runs with different seeds, 15%; **Tier 4**, documentation and license completeness, 15%. The composite
 score classifies a paper as `Verified` (≥ 85), `Partially Verified` (60–84), or lower tiers below that
-(`src/scoring.py`).
+(`src/scoring.py`). A failed build or run is `Failed`. A run in which no accepted claim was compared with a metric of the run (none
+accepted, none with a counterpart, or none found in the output) is labeled `Needs Review` whatever its total, because Tier 2 is then the
+neutral baseline of 70 and not evidence (#540); the total still contains that baseline.
 
 Tier 2 compares each claimed metric with the reproduced one using a single default tolerance of 5%
 (`DEFAULT_TOLERANCE`, `src/config.py`), applied in `src/scoring.py`: a reproduced value within 5% relative
@@ -180,9 +190,11 @@ metric, so until the claim map (#507, #509) a real claim was reported as not fou
 `data/claim_metric_map.json`, and a claim for which the run has no counterpart stays out of Tier 2 (section 6.11).
 Tier 3's stability check uses the coefficient of variation (CV) across seeds: CV ≤ 2% is
 scored as deterministic, ≤ 5% as stable, with the score falling as the variance grows. Since #48 a paper that has a seed
-parameter of its own is run once per seed (`docs/MULTI_SEED.md`, `scripts/run_multi_seed.py`); the metric with the largest CV
-among the metrics found in every successful seed run decides, and a paper without two successful seed runs keeps the
-single-run baseline of 75.0, which is a placeholder and not a measurement.
+parameter of its own is run once per seed (`docs/MULTI_SEED.md`, `scripts/run_multi_seed.py`). Since #542 the scorer reads the stored
+seed record (`cli.py score`, the dashboard database, `scripts/real_verdicts.py`): if an accepted claim is mapped to a run metric that has
+seed values, that metric decides Tier 3 (a default chosen by the assistant, which the owner may revise, `docs/MULTI_SEED.md` section 5a);
+otherwise the metric with the largest CV among the metrics found in every successful seed run decides. A paper without two successful
+seed runs keeps the single-run baseline of 75.0, which is a placeholder and not a measurement.
 
 ### 4.3 Claim extraction
 
@@ -236,9 +248,10 @@ explicitly marked item.
 
 ### 5.2 Sandbox limits and run setup
 
-Every run, in both pilots, uses the same fixed resource limits: 2 CPUs, 6 GiB of memory (6 GiB swap), 100
+Every run of Pilots 1 and 2 uses the same fixed resource limits: 2 CPUs, 6 GiB of memory (6 GiB swap), 100
 processes, and a 3600-second timeout per phase (build, install, run), with the network disabled throughout
-(`docs/PILOT_2.md` section 3). The first pilot (Pilot 1, `docs/PILOT_WEEK2.md`) ran each paper's script directly
+(`docs/PILOT_2.md` section 3); Pilot 3 changed four per-paper settings (section 6.1a) and Pilot 4 used 50% of the host's memory
+(section 6.5). The first pilot (Pilot 1, `docs/PILOT_WEEK2.md`) ran each paper's script directly
 from the repository root with no paper-specific adjustment; it showed that no paper reached its own experiment
 code this way (full accounting in section 6). Each paper's `run_setup` in `data/seed_papers.json` now records,
 individually, the fix that pilot found necessary: the entry command (several papers are driven through a
@@ -598,14 +611,25 @@ the paper (it uses the same configuration file or the option's default), and the
 top band on both of its metrics. For `paper_003` the headline `rmse` varies little between seeds, but the extractor also finds a `loss`, the
 training loss printed by the code, which varies more; because the metric with the largest CV decides, `loss` sets the Tier 3 of `paper_003`, and `rmse`
 alone would give the top band (the last column). That is a consequence of the rule "the largest CV decides" and of what the extractor picks up from a
-log, not a finding about the paper, and whether the rule is the right one is a question for the owner. In both cases the measured value replaces
-the single-run baseline of 75.0, which was a placeholder.
+log, not a finding about the paper. Because that was a weak basis for a score, the scorer was changed afterwards (#542): when an accepted claim is
+mapped to a run metric that has seed values, only that metric decides Tier 3. The table below shows both rules; the "Tier 3 score" column of the
+generated table above is the summary file's own, older rule, which is kept as a record. The new rule is a default chosen by the assistant and the
+owner may revise it (`docs/PENDING.md`, D7). In both cases the measured value replaces the single-run baseline of 75.0, which was a placeholder.
+
+<!-- numbers:tier3binding:start -->
+<!-- Generated by scripts/report_numbers.py from data/multi_seed_runs/*/multi_seed_summary.json, data/claim_metric_map.json, data/claims/review_decisions.json (src/scoring.py); do not edit by hand. -->
+
+| Paper | Run metric of an accepted claim | Tier 3, largest-CV rule | Tier 3 by the scorer | Decided by |
+|---|---|---|---|---|
+| `paper_003` | `rmse` | 65 | 100 | `rmse` (the claimed metric) |
+| `paper_006` | none (no accepted claim has a counterpart) | 100 | 100 | `auroc` (the largest CV) |
+<!-- numbers:tier3binding:end -->
 
 What these runs do not show: each paper has three seeds, so a CV is a rough number; the runs are not protocol runs (4 CPUs and 50% of the host's memory,
 the records say so) and `paper_006` ran at the same time as `paper_003`, so their durations are not clean; only the paper's training seed varies (the
 data split of `paper_006` has its own option, left at its default) and the runs are CPU-only, so nothing is said about nondeterminism of a GPU or of
-a library; and no claim was compared, because the claim names do not equal the extracted metric names (`paper_003`) or concern another dataset
-(`paper_006`, section 6.3), so Tier 2 was not exercised.
+a library; and Tier 2 was not exercised on the seed runs themselves (the one claim that the claim map pairs with a run metric, of `paper_003`, is compared on
+the stored single runs, section 6.11; the claims of `paper_006` concern another dataset, section 6.3).
 
 **A synthetic paper with the local GPU (#169).** `scripts/gpu_paper_check.py` runs a small repository that pins `torch==2.8.0` (the default
 PyPI Linux wheel of that release is built for CUDA 12.8, which the RTX 5070 needs) through the same pipeline as a pilot paper: wheel bundling
@@ -817,7 +841,9 @@ Accepted claims of the owner that match a probed run by question ID: 0 of 13.
 
 These are hand-made claims, not an error of a real paper. The probe shows the tolerance as implemented (a relative band measured from
 the claimed value, plus an absolute allowance for a claim between 0 and 1 that makes small values lenient); it does not measure how often the
-scorer is wrong on real papers, and the rates of false positives and false negatives in the real world have not been measured. No claim
+scorer is wrong on real papers, and the rates of false positives and false negatives in the real world have not been measured. The absolute allowance of 0.05 for a
+claimed value between 0 and 1 is kept as it is (a default chosen by the assistant, the owner may revise, `docs/PENDING.md`); it is a known limit,
+because it lets a small value such as 0.0167 match a reproduced 0.06. No claim
 that the owner accepted matches a probed run by its question ID.
 
 ### 6.10 An automatic search that checks a run's numbers against the paper's text
@@ -887,8 +913,8 @@ claims. Second, with the map the one meaningful comparison is `paper_003`: the s
 reproduced is a tolerance question (section 6.9), and this single claim and single number is not a confirmed reproduction. The
 Six stored runs of it give the same last RMSE line. Third, the other real runs cannot be compared
 at all (another dataset, hyperparameters stored as metrics, no accepted claim): with the map their claims have no counterpart and
-leave Tier 2, which then is the neutral baseline of 70, so `paper_004` and `paper_006` now get the label `Partially Verified` from the
-build tiers alone, as `paper_102` does; that is a label without a comparison, not a result. Fourth, K2, the check that a run's printed numbers occur in the paper, was expected to pass on `paper_003`, `paper_006` and
+leave Tier 2, which then is the neutral baseline of 70. Before #540 `paper_004` and `paper_006` therefore got the label `Partially Verified` from the
+build tiers alone, as `paper_102` did, a label without a comparison; since #540 a run with nothing compared is `Needs Review` (the table above), and its total still contains the baseline. Fourth, K2, the check that a run's printed numbers occur in the paper, was expected to pass on `paper_003`, `paper_006` and
 `paper_102` as a positive control. It passed on `paper_003` only, and there by coincidence: the numbers it matched are training-log
 values that the paper's tables print for other models, while the run's final value is not printed in the paper. The run of `paper_006`
 prints AUROC as a fraction where its paper prints percent, and the quick start of `paper_102` works on generated toy data, so its output
@@ -945,9 +971,24 @@ hand, and the new papers were chosen by rules from a biased pool. The figures ar
 | `other` | 0 | 0 | 0 | 9 | 15 |
 <!-- numbers:failurestatistics:end -->
 
-In the two automatic searches and in round 1 of the candidate list, a missing Python module and an installation that found no matching package or wheel are the two most frequent first failures; in the repair round and the pilots the picture is flatter (installation, missing data or network, and in the pilots also out-of-memory kills) (and those groups are small). These are counts of why selected runs failed, not a success rate. The lists are selected: the automatic searches rejected every repository whose README or requirement files mention `gpu` or `cuda` (rule S3), so a GPU requirement cannot appear in them, and Pilot 3 used settings chosen after the failures of Pilot 2 had been seen. A category is the kind of the first deciding line, not a proven root cause, and `other` collects lines that no rule matched.
+In the two automatic searches and in round 1 of the candidate list, a missing Python module and an installation that found no matching package or wheel are the two most frequent first failures; in the repair round and the pilots the picture is flatter (installation, missing data or network, and in the pilots also out-of-memory kills), and those groups are small. These are counts of why selected runs failed, not a success rate. The lists are selected: the automatic searches rejected every repository whose README or requirement files mention `gpu` or `cuda` (rule S3), so a GPU requirement cannot appear in them, and Pilot 3 used settings chosen after the failures of Pilot 2 had been seen. A category is the kind of the first deciding line, not a proven root cause, and `other` collects lines that no rule matched.
 
 - **Sources:** `data/failure_statistics.json`, `docs/FAILURE_STATISTICS.md` (`python scripts/failure_statistics.py --check`).
+- **Status:** written.
+
+### 6.13 The dashboard in its final form
+
+The local dashboard (`src/web/`, `docs/DECISIONS.md` D-006: localhost only, no new library, the earlier layout kept) was extended so that a label is
+never shown without its reason (#548). Beside each label the list says whether a claim was compared and, when none was, that Tier 2 is a baseline of
+nothing compared; the page of a paper has a "Why this label" section with the claims that were compared, the claims without a counterpart and the
+reason for each, the tolerance rule, the difference in percent, where Tier 3 came from, the stored run, and, for a failed run, the failure category with
+the log line it was read from; the synthetic control is listed apart as "not a paper: known-answer control"; a page `/failures` shows the stored failure
+statistics with the selection-bias warning; and the footer states how the database was built, that the scores come from `src/scoring.py`, that the
+numbers are not a success rate, and what `Needs Review` means. The pages show stored values only: the reasons are stored beside each score when it is
+computed (`scripts/build_demo_db.py`, `cli.py score`). Screenshots from a fresh clone are in `docs/evidence/demo3/`. The dashboard does not add
+evidence: it shows what the scorer decided on stored runs.
+
+- **Sources:** `src/web/`, `src/score_explanation.py`, `docs/evidence/demo3/`, `docs/DEMO_SCRIPT.md` (Step 1).
 - **Status:** written.
 
 ## 7. Limitations and threats to validity
@@ -981,29 +1022,39 @@ In the two automatic searches and in round 1 of the candidate list, a missing Py
   and none of the listed candidates, at the first attempt or with repair, printed a table value of its paper (sections 6.8 and 6.10 give
   the counts). A run that completes is therefore usually not an attempt to reproduce a table, and this limits what any pilot rate says:
   it is a finding about README commands in this sandbox, not a measure of how reproducible the papers are.
-- **The scorer gives a label without a comparison.** A paper with no accepted claim gets a neutral Tier 2 and can reach `Partially
-  Verified` from the build tiers alone (`paper_102`, section 6.11), and so does, with the claim map, every paper whose accepted claims
-  all have no counterpart in its run (`paper_004`, `paper_006`). K2 has no positive control: the only pass among the real runs is
-  by coincidence of dense numbers. Whether such a label and such a check are acceptable is a decision of the owner.
+- **A total without a comparison.** A paper with no accepted claim, or whose accepted claims all have no counterpart in its run
+  (`paper_102`, `paper_004`, `paper_006`), gets a neutral Tier 2 of 70. Since #540 its label is `Needs Review`, never `Verified` or
+  `Partially Verified`, but its total score still contains the neutral baseline (for example 86.5 for `paper_006`), so the number is higher than
+  the evidence behind it. Only one real claim, of `paper_003`, is compared at all.
+- **No positive control for K2.** The match test of the searches has no real run that is known to print a table value of its paper; the only
+  pass among the real runs, `paper_003`, is by coincidence of dense numbers (section 6.11), so no K2 pass can be read as a reproduction.
+- **The absolute allowance of 0.05.** A claimed value between 0 and 1 matches when it is within 0.05 in absolute terms, which makes small
+  values lenient (section 6.9). It was kept (default K-B, a choice of the assistant that the owner may revise) and is a known limit.
+- **Selection bias.** Every list is selected: the six seed papers and the six Pilot 4 papers by hand or by rules, the candidate list by other
+  people for being easy to run, and the automatic searches through rules that removed repositories mentioning a GPU. The failure counts of
+  section 6.12 and all rates are about these lists, not about research code in general.
 - **Stability rests on three seeds of two papers.** The seed runs of section 6.4a are not protocol runs (the CPU and memory limits
   differ from the protocol's), use three seeds each, and cover only the two papers that complete; a CV from three runs is a rough
-  number, and the metric that decides Tier 3 can be a side number such as a training loss. The synthetic papers show that the
+  number, and when no accepted claim maps to a run metric the metric that decides Tier 3 can still be a side number such as a training loss (since #542 the
+  claimed metric decides when there is one; a default of the assistant, which the owner may revise). The synthetic papers show that the
   path measures a known difference, not that a real paper is stable. Before them the repeated runs of section 6.4 (different
   memory limits or tool commits, no different seeds) showed only that the metrics repeated.
 - **Field analysis.** Twelve papers from two differently chosen sub-pools, definitions written after the pilot outcomes were known,
   and an autonomy rate that counts only human actions that left a file (section 6.6): exploratory, no test, no relationship claimed.
 - **Diagnosis layer.** Rule-based and tested on stored runs of this project; the hand labels are not blind, the real runs are the logs
-  the rules came from, and the probes found gaps that were closed afterwards with rules written from those same lines (section 6.7). No real language model was used.
+  the rules came from, and the probes found gaps that were closed afterwards with rules written from those same lines (section 6.7).
+- **No language-model path was run with a real model.** The optional language-model step of the diagnosis layer was tested with a mock
+  client only, and the API extraction code (#156) was never run with a key (decision D-004); claim extraction was done by an agent under fixed rules (section 4.3).
 - **GPU.** One synthetic paper only; no real paper was run with the GPU, and the seed papers pin PyTorch 1.x, which the GPU cannot use.
-- **External reference.** The ReScience C selection found no article that the pipeline could run (section 6.5a), so the score has no
+- **External reference.** The ReScience C selection evaluated 65 articles and selected none (section 6.5a), so the score has no
   outside reference yet.
 - **Pilot 4 is six new papers, one attempt each.** The sample came from a biased pool and drifted from tabular data, the
   README command is the first `python` line and is not always the paper's experiment (a documentation checker, a data
   preparation step), and the correction round was limited to what the logs justify, so a person with the code might have
   corrected more. The Pilot 4 rates are not comparable to the earlier pilots' rates, whose setups were prepared by hand
   (section 6.5).
-- **Extended gold set without answers.** The 18 added questions have two agreeing passes but no answers from the owner,
-  so no accuracy is claimed for them (section 6.4).
+- **No second gold set.** The 18 added questions have two agreeing passes but no answers from the owner, so the accuracy of the
+  extraction rests on the first 18 questions only and the second set could not be used to measure it (section 6.4).
 - **Extraction.** It is agent-assisted; the two passes are the same model, although pass B was made blind; the gold set was built from candidates listed
   by the same agent; and the quote guard proves that a quote occurs in the page text, not that the number means what the
   question asks (`docs/AGENT_EXTRACTION.md`). `paper_005`'s only accepted claim (EP300 average kernel speedup, 16) is a follow-up question that is not among the 18 gold-set questions, so it is not part of the precision and recall figures.
@@ -1033,7 +1084,7 @@ In the two automatic searches and in round 1 of the candidate list, a missing Py
   someone who had read the rules, so it is not blind; the probes written to find gaps found them. Report both, and keep the numbers
   of the check that cannot lose.
 - **A noisy side number can decide a score.** The first real seed run showed that the metric with the largest CV was a training loss;
-  the summary now shows which metric decided and what each metric alone would give (section 6.4a).
+  the summary shows which metric decided and what each metric alone would give, and since #542 the claimed metric decides when the claim map names one (section 6.4a).
 - **Look at what the scorer does with real data before trusting its tests.** The tests of `cli.py score` pass because they store the
   metric under the question ID; a real run stores it under the name the extractor found, and before the claim map the two never met
   (section 6.11). The
@@ -1065,8 +1116,8 @@ The stability tier was run on real seed runs for the first time (section 6.4a) a
 difference between two (section 6.7). The dashboard of the project (`src/web/`) shows stored scores, badges, and audit reports from the database only; a fresh
 database (`python cli.py init-db`) holds no score, so the dashboard shows "Not scored" for every paper until `cli.py score` is run.
 `python scripts/build_demo_db.py` builds a separate database from the stored real runs, in which every paper has the score of its
-best stored run (`docs/evidence/demo2/`); those scores come from the scorer through the claim map: Tier 2 comes from a comparison for `paper_003` only and is the neutral
-baseline for the papers whose accepted claims have no counterpart, and they are not validations (section 6.11).
+best stored run (`docs/evidence/demo3/`, the final form of section 6.13); those scores come from the scorer through the claim map: Tier 2 comes from a comparison for `paper_003` only and is the neutral
+baseline for the papers whose accepted claims have no counterpart (their label is `Needs Review`), and they are not validations (section 6.11).
 
 **What the two claims rest on.** The decision on a known example (the synthetic control and the hand-made claims) is supported; the
 decision on a real paper is not, because no real paper has a known answer in this work and the one real comparison is close but
@@ -1086,7 +1137,7 @@ rubric's agreement tier and stability tier work on real results.
    not enough) and whether `paper_002` may fetch its OpenML data.
 3. Repeat the blind second pass with another model, or with the owner starting it, so that the two passes are also independent in model.
 4. Run more seeds per paper, and on more papers than the two that complete, so that the stability tier (#48) rests on more than three
-   runs; decide whether the metric with the largest CV should decide (section 6.4a).
+   runs; decide whether the claimed-metric rule of #542 is the right one (section 6.4a).
 5. Try the optional language-model step of the diagnosis layer with a real model, and label new, unseen failure logs to measure the
    classifier again (section 6.7: its six known gaps are closed, so the stored set no longer measures it), before anything is said about either.
 6. Decide what outside reference to use for the score now that the ReScience C selection found none (section 6.5a).
@@ -1158,7 +1209,8 @@ not full texts; the tables name what was read, and what was not verified.
 - **See the dashboard.** `python cli.py init-db`, then `python -m src.web` serves `http://127.0.0.1:8000` on the local
   machine only. With the real stored runs: `python scripts/build_demo_db.py`, then `python -m src.web --db-url
   sqlite:///data/dashboard_demo.db`. The decisions on the stored runs: `python scripts/real_verdicts.py --check` (no Docker; K2 needs the
-  papers' PDFs in `data/pdfs/`, which are not committed, so only `--render` and `--check` run from the repository alone).
+  papers' PDFs in `data/pdfs/`, which are not committed, so only `--render` and `--check` run from the repository alone). The failure counts:
+  `python scripts/failure_statistics.py --check`; the page `/failures` of the dashboard shows them.
 - **What is not reproducible from the repository alone.** The datasets that the papers download (they are fetched
   before a run, `scripts/fetch_data.py`), the live responses of Crossref and arXiv, and any result that depends on the
   speed or memory of the machine.
