@@ -109,6 +109,23 @@ The new stage topics, in this order:
   `graph-neural-networks`, `reinforcement-learning`, `knowledge-graph`, `text-classification`, `sentiment-analysis`,
   `machine-translation`, `image-classification`, `object-detection`, `segmentation`, `forecasting`.
 
+- **Stages 10 to 13** (added on 2026-10-27 at 03:30, after stages 8 and 9 were used up with 573 candidates checked, 18 run and none
+  passing K1; subfield and domain topics chosen from general machine learning and application areas without looking at any
+  candidate; the same rules apply; each stage is used only when the stage before it is used up before a stop condition of
+  section 6 holds):
+  - **Stage 10:** `medical-image-analysis`, `time-series-classification`, `representation-learning`, `contrastive-learning`,
+    `self-supervised-learning`, `meta-learning`, `few-shot-learning`, `continual-learning`, `multi-task-learning`,
+    `neural-architecture-search`, `model-compression`, `adversarial-attacks`, `adversarial-robustness`, `graph-embedding`,
+    `link-prediction`, `community-detection`.
+  - **Stage 11:** `causal-discovery`, `counterfactual`, `fairness`, `privacy`, `differential-privacy`, `recommendation`,
+    `collaborative-filtering`, `matrix-factorization`, `tensor-decomposition`, `compressed-sensing`, `dictionary-learning`,
+    `manifold-learning`, `kernel-density-estimation`, `bandits`, `multi-armed-bandit`, `sparse-regression`.
+  - **Stage 12:** `variational-inference`, `mcmc`, `normalizing-flows`, `diffusion-models`, `gan`, `vae`, `autoencoder`, `attention`,
+    `lstm`, `cnn`, `rnn`, `transformer`, `bert`, `word-embeddings`, `question-answering`, `named-entity-recognition`.
+  - **Stage 13:** `traffic`, `energy`, `power-systems`, `drug-discovery`, `protein`, `molecular-dynamics`, `cheminformatics`,
+    `agriculture`, `earth-observation`, `weather`, `hydrology`, `seismology`, `fluid-dynamics`, `wireless-communication`,
+    `scheduling`, `combinatorial-optimization`.
+
 Duplicates are removed (case-insensitive). The repositories of **all earlier rounds are removed from the pool before ordering**:
 every repository in `data/auto_search3/pool*.json` (the whole pool of round 3, checked or not), `data/demo_set/pool.json`,
 `data/candidates/` (all files), `data/seed_papers.json` and `data/corpus_expansion/papers.json`. The remaining candidates are
