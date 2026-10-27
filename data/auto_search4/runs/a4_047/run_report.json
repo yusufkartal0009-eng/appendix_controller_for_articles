@@ -1,0 +1,111 @@
+{
+  "paper_id": "a4_047",
+  "source": "https://github.com/wenxueru/GraphNER",
+  "commit_hash": "ccd3aae3ec67f4592fa76210502cdebe83de60d8",
+  "target_script": "main.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.646,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_047",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.3,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 15855616,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "bertviz==1.4.0",
+      "name": "bertviz",
+      "requested": "==1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "flair==0.10",
+      "name": "flair",
+      "requested": "==0.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.23.3",
+      "name": "numpy",
+      "requested": "==1.23.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==1.12.1",
+      "name": "torch",
+      "requested": "==1.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchtext==0.13.1",
+      "name": "torchtext",
+      "requested": "==0.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.64.1",
+      "name": "tqdm",
+      "requested": "==4.64.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.22.2",
+      "name": "transformers",
+      "requested": "==4.22.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/main.py --dataset_name=genia --evaluate=test --concat --pretrain_select=dmis-lab/biobert-base-cased-v1.2 --word2vec_select=bio --batch_size=4 --epochs=5 --max_length=128 --pos_dim=50 --char_dim=50\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.3s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/main.py\", line 4, in <module>\n    import modules\n  File \"/workspace/repo/modules/__init__.py\", line 1, in <module>\n    from .data import *\n  File \"/workspace/repo/modules/data.py\", line 7, in <module>\n    from flair.data import Corpus, FlairDataset, Sentence\nModuleNotFoundError: No module named 'flair'\n"
+}

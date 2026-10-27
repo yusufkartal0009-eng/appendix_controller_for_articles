@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/repo/benchmark/parse.py", line 499, in <module>
+    main()
+  File "/workspace/repo/benchmark/parse.py", line 491, in main
+    df = parse_eval_logs(args.logs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/benchmark/parse.py", line 434, in parse_eval_logs
+    from inspect_ai.log import read_eval_log  # lazy: only needed here
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'inspect_ai'

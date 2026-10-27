@@ -1,0 +1,57 @@
+{
+  "paper_id": "a4_045",
+  "source": "https://github.com/sulgik/orts",
+  "commit_hash": "04b95f95f291172e06c8bdd428a790c79edc7271",
+  "target_script": "examples/basic_usage.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "duration_seconds": 1.476,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_045",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 1.146,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 122822656,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/examples/basic_usage.py\n==================================================\nstate carries: ['B', 'C', 'A'] (reference last)\ncontrast means vs C: [ 0.096 -0.034]  level (discarded next time): -4.595\nnext allocation: {'A': 0.10658, 'B': 0.85124, 'C': 0.04218}  leader: B\nafter a level shift, contrast means: [ 0.096 -0.034]\nnext allocation: {'B': 0.91122, 'C': 0.01946, 'A': 0.06932}\ngamma = 2 concentrates: {'B': 0.9972128159109035, 'C': 0.00014868531863267934, 'A': 0.0026384987704638077}\nwith a 5% floor: {'B': 0.8999999999999999, 'C': 0.05, 'A': 0.05}\nallocate over A, B, D: {'A': 0.035026666666666664, 'B': 0.63164, 'D': 0.3333333333333333} (D has no posterior yet and gets the uniform share)\nP(best): {'A': 0.053, 'B': 0.947, 'D': nan}\nexpected loss of committing now: {'A': 0.0968, 'B': 0.0013, 'D': nan}\n==================================================\nRepro Radar: Execution Concluded\nStatus        : COMPLETED (Exit Code: 0)\nDependencies  : SKIPPED\nDuration      : 1.146s\n==================================================\n",
+  "stderr_preview": "",
+  "metrics": {
+    "a": 0.035,
+    "b": 0.6316,
+    "c": 0.05,
+    "d": 0.3333
+  }
+}

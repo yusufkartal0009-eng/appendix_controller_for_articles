@@ -1,0 +1,26 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/json_repair-0.35.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/numpy-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/openai-1.63.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/requests-2.32.3-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/tqdm-4.66.2-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 6))
+Processing /workspace/packages/anyio-4.15.1-py3-none-any.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/distro-1.9.0-py3-none-any.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/httpx-0.28.1-py3-none-any.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/jiter-0.18.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/pydantic-2.14.1-py3-none-any.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/sniffio-1.3.1-py3-none-any.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/typing_extensions-4.16.0-py3-none-any.whl (from openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from Requests==2.32.3->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/idna-3.20-py3-none-any.whl (from Requests==2.32.3->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/urllib3-2.8.0-py3-none-any.whl (from Requests==2.32.3->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/certifi-2026.10.23-py3-none-any.whl (from Requests==2.32.3->-r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/httpcore-1.0.9-py3-none-any.whl (from httpx<1,>=0.23.0->openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/h11-0.16.0-py3-none-any.whl (from httpcore==1.*->httpx<1,>=0.23.0->openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/annotated_types-0.8.0-py3-none-any.whl (from pydantic<3,>=1.9.0->openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/pydantic_core-2.50.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from pydantic<3,>=1.9.0->openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/typing_inspection-0.4.4-py3-none-any.whl (from pydantic<3,>=1.9.0->openai==1.63.0->-r /workspace/repo/requirements.txt (line 3))
+Installing collected packages: urllib3, typing-extensions, tqdm, sniffio, PyYAML, numpy, json_repair, jiter, idna, h11, distro, charset-normalizer, certifi, annotated-types, typing-inspection, Requests, pydantic-core, httpcore, anyio, pydantic, httpx, openai
+
+Successfully installed PyYAML-6.0.2 Requests-2.32.3 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.23 charset-normalizer-3.5.2 distro-1.9.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 jiter-0.18.0 json_repair-0.35.0 numpy-2.2.3 openai-1.63.0 pydantic-2.14.1 pydantic-core-2.50.1 sniffio-1.3.1 tqdm-4.66.2 typing-extensions-4.16.0 typing-inspection-0.4.4 urllib3-2.8.0

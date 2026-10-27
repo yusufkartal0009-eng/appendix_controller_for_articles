@@ -1,0 +1,10 @@
+state carries: ['B', 'C', 'A'] (reference last)
+contrast means vs C: [ 0.096 -0.034]  level (discarded next time): -4.595
+next allocation: {'A': 0.10658, 'B': 0.85124, 'C': 0.04218}  leader: B
+after a level shift, contrast means: [ 0.096 -0.034]
+next allocation: {'B': 0.91122, 'C': 0.01946, 'A': 0.06932}
+gamma = 2 concentrates: {'B': 0.9972128159109035, 'C': 0.00014868531863267934, 'A': 0.0026384987704638077}
+with a 5% floor: {'B': 0.8999999999999999, 'C': 0.05, 'A': 0.05}
+allocate over A, B, D: {'A': 0.035026666666666664, 'B': 0.63164, 'D': 0.3333333333333333} (D has no posterior yet and gets the uniform share)
+P(best): {'A': 0.053, 'B': 0.947, 'D': nan}
+expected loss of committing now: {'A': 0.0968, 'B': 0.0013, 'D': nan}

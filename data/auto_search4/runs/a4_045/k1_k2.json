@@ -1,0 +1,34 @@
+{
+  "paper_id": "a4_045",
+  "k1": {
+    "k1_passed": true,
+    "category": null,
+    "log_line": "",
+    "install_status": "SKIPPED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 1.476,
+    "metric_lines": [
+      "contrast means vs C: [ 0.096 -0.034]  level (discarded next time): -4.595"
+    ]
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 16,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 25,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "v2": {
+      "passed": false,
+      "numbers_in_output": 16,
+      "numbers_found_in_paper": 0,
+      "numbers_found_on_table_page": 0,
+      "pdf_pages": 25,
+      "matches": [],
+      "note": "match candidate only; a string match with scale conversion and rounding, not verified"
+    },
+    "arxiv_id": "2609.19709"
+  }
+}

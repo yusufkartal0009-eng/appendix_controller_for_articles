@@ -1,0 +1,106 @@
+{
+  "paper_id": "a4_043",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T02:04:53+00:00",
+  "repo_url": "https://github.com/jericho-cain/cwt-manifold-grav-wav",
+  "pinned_commit": "addf2910316c914c6ada97fa8468bb592744fea9",
+  "target_script": "scripts/run_end_to_end_test.py",
+  "container_command": "python /workspace/repo/scripts/run_end_to_end_test.py --config config/run_3_5000_samples.yaml",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/run_end_to_end_test.py --config config/run_3_5000_samples.yaml",
+    "readme_url": "https://github.com/jericho-cain/cwt-manifold-grav-wav/blob/addf2910316c914c6ada97fa8468bb592744fea9/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "addf2910316c914c6ada97fa8468bb592744fea9",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.245
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 157,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_043_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "on-dateutil setuptools six stack_data asttokens executing sympy mpmath threadpoolctl traitlets typing-extensions wcwidth filelock ipykernel comm debugpy jupyter-client jupyter-core nest-asyncio2 pyzmq tornado ipywidgets jupyterlab_widgets widgetsnbextension jinja2 MarkupSafe jupyter-console jupyterlab httpx httpcore jupyter-server jupyterlab-server anyio argon2-cffi async-lru babel h11 idna json5 jsonschema attrs jsonschema-specifications jupyter-builder jupyter-events jsonpointer jupyter-lsp jupyter-server-terminals nbconvert mistune bleach nbclient nbformat fastjsonschema notebook-shim overrides pandocfilters prometheus-client python-json-logger referencing requests charset_normalizer urllib3 certifi rfc3986-validator rfc3987-syntax lark rpds-py send2trash terminado tinycss2 webcolors webencodings websocket-client argon2-cffi-bindings cffi beautifulsoup4 soupsieve defusedxml fqdn isoduration arrow jupyterlab-pygments notebook pure-eval pycparser rfc3339-validator tzdata uri-template\n",
+    "stderr": "",
+    "duration_seconds": 88.316
+  },
+  "sandbox_duration_seconds": 1068.476,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 26.055,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 812109824
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 1040.352,
+    "peak_memory_bytes": 147103744
+  },
+  "finished_at": "2026-10-27T02:24:11+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

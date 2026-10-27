@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_043",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "OSError: [Errno 30] Read-only file system: '/workspace/repo/end_to_end_test_20261027_022409.log'",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 26.055,
+    "metric_lines": []
+  },
+  "k2": null
+}

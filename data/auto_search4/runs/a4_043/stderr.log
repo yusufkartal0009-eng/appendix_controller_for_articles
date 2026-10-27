@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/run_end_to_end_test.py", line 491, in <module>
+    main()
+  File "/workspace/repo/scripts/run_end_to_end_test.py", line 397, in main
+    logging.FileHandler(log_file)
+  File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+    StreamHandler.__init__(self, self._open())
+                                 ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+    return open_func(self.baseFilename, self.mode,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: '/workspace/repo/end_to_end_test_20261027_022409.log'
