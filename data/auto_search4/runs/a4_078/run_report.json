@@ -1,0 +1,51 @@
+{
+  "paper_id": "a4_078",
+  "source": "https://github.com/Shidu-Ren/ICM-Bench",
+  "commit_hash": "beeb816a21085e23b8d0c38097576c0f4c0aad7d",
+  "target_script": "evaluation/judging/scripts/rejudge_openqa_m3agent_style.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.707,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_078",
+  "generated_files": [
+    "execution_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "SKIPPED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.397,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 17272832,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py --input $ICM_BENCH_OUTPUT_ROOT/SYSTEM/answers.jsonl --output $ICM_BENCH_OUTPUT_ROOT/SYSTEM/answers.judged.jsonl --summary $ICM_BENCH_OUTPUT_ROOT/SYSTEM/answers.judged.summary.json\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : SKIPPED\nDuration      : 0.397s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py\", line 371, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py\", line 308, in main\n    api_key = api_key_for_model(args.judge_model, Path(args.api_config))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py\", line 99, in api_key_for_model\n    raise RuntimeError(f\"Missing Gemini API key for {model}\")\nRuntimeError: Missing Gemini API key for models/gemini-3-flash-preview\n"
+}

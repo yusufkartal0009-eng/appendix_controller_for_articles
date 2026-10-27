@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/stereo.py", line 5, in <module>
+    import cv2
+  File "/workspace/deps/cv2/__init__.py", line 181, in <module>
+    bootstrap()
+  File "/workspace/deps/cv2/__init__.py", line 153, in bootstrap
+    native_module = importlib.import_module("cv2")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: libGL.so.1: cannot open shared object file: No such file or directory

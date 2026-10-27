@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/src/train.py", line 1, in <module>
+    from config.train import TrainConfig
+  File "/workspace/repo/src/config/train.py", line 1, in <module>
+    import torch as tc
+ModuleNotFoundError: No module named 'torch'

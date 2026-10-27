@@ -13932,6 +13932,38 @@
       "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
     },
     {
+      "full_name": "ysl609/stereovision-mars",
+      "hash": "20b28a4aa5051fd8f9dee581840f89ad8605043e58121fd400515d0f07ceb034",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "2 table captions, 44 decimal numbers",
+      "entry": {
+        "title": "Stereovision Image Processing for Planetary Navigation Maps with Semi-Global Matching and Superpixel Segmentation",
+        "year": 2025,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/ysl609/stereovision-mars",
+        "repo_commit": "0ec6d61422697284bc303d972e685814e3cbab4d",
+        "paper_url": "https://arxiv.org/abs/2509.05645",
+        "license": "MIT",
+        "target_script": "scripts/stereo.py",
+        "run_command": "python scripts/stereo.py",
+        "readme_url": "https://github.com/ysl609/stereovision-mars/blob/0ec6d61422697284bc303d972e685814e3cbab4d/README.md"
+      },
+      "paper_id": "a4_071",
+      "k1": {
+        "started_at": "2026-10-27T03:55:03+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 1.994,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
       "full_name": "hyenal/relate",
       "hash": "2234ec0030b5521a491839798ced004279c034271e3e1ec1c3d562dc09a2e968",
       "passed": false,
@@ -14184,6 +14216,38 @@
       "detail": "license None"
     },
     {
+      "full_name": "ildoonet/unsupervised-data-augmentation",
+      "hash": "3d285129734a50ded47abf641246ed0bad2878bd84b95eeb5d67426cf3683dc9",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "10 table captions, 484 decimal numbers",
+      "entry": {
+        "title": "Unsupervised Data Augmentation for Consistency Training",
+        "year": 2019,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/ildoonet/unsupervised-data-augmentation",
+        "repo_commit": "a2356e4af6b84f56740796d461719229cedc61fd",
+        "paper_url": "https://arxiv.org/abs/1904.12848",
+        "license": "Apache-2.0",
+        "target_script": "train.py",
+        "run_command": "python train.py -c confs/wresnet28x2.yaml --unsupervised",
+        "readme_url": "https://github.com/ildoonet/unsupervised-data-augmentation/blob/a2356e4af6b84f56740796d461719229cedc61fd/README.md"
+      },
+      "paper_id": "a4_072",
+      "k1": {
+        "started_at": "2026-10-27T03:59:41+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.554,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
       "full_name": "XuyangBai/PPF-FoldNet",
       "hash": "3d33cf082c07be2135a3056e2753dc1256eaca2b7cd145ea3a040f50c3a5e567",
       "passed": false,
@@ -14345,6 +14409,38 @@
       "detail": "gpu or cuda mentioned in README"
     },
     {
+      "full_name": "LeapLabTHU/RvR",
+      "hash": "4c2aa50c97c02c86cbf8d76eaefdddf4aef27c1cc31f7af89822bd756c2de6ff",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "2 table captions, 273 decimal numbers",
+      "entry": {
+        "title": "Refinement via Regeneration: Enlarging Modification Space Boosts Image Refinement in Unified Multimodal Models",
+        "year": 2026,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/LeapLabTHU/RvR",
+        "repo_commit": "a82c9c89a3aa9468a52a3d10272f1e8d2222fb85",
+        "paper_url": "https://arxiv.org/abs/2604.25636",
+        "license": "MIT",
+        "target_script": "app.py",
+        "run_command": "python app.py",
+        "readme_url": "https://github.com/LeapLabTHU/RvR/blob/a82c9c89a3aa9468a52a3d10272f1e8d2222fb85/README.md"
+      },
+      "paper_id": "a4_073",
+      "k1": {
+        "started_at": "2026-10-27T03:59:57+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 25.968,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
       "full_name": "baadjis/trocrvision",
       "hash": "4c31cc561b97ed7b832f3ff963d3ab9e377fdc1094989875073c91fdd8f77735",
       "passed": false,
@@ -14427,6 +14523,38 @@
       "passed": false,
       "failed_rule": "S3",
       "detail": "gpu or cuda mentioned in README, requirements.txt"
+    },
+    {
+      "full_name": "HINTLab/pulmonary-tree-labeling",
+      "hash": "54989e96766c55f8ec393cefb324ef114a0c77575fe3b7f4d6104d3ce4872763",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "8 table captions, 517 decimal numbers",
+      "entry": {
+        "title": "Efficient Anatomical Labeling of Pulmonary Tree Structures via Deep Point-Graph Representation-based Implicit Fields",
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/HINTLab/pulmonary-tree-labeling",
+        "repo_commit": "27fdace577293a29480bce4f00efba7501cadd20",
+        "paper_url": "https://arxiv.org/abs/2309.17329",
+        "license": "Apache-2.0",
+        "target_script": "train_network.py",
+        "run_command": "python train_network.py -d $dataset_specs_json_file",
+        "readme_url": "https://github.com/HINTLab/pulmonary-tree-labeling/blob/27fdace577293a29480bce4f00efba7501cadd20/README.md"
+      },
+      "paper_id": "a4_074",
+      "k1": {
+        "started_at": "2026-10-27T04:22:23+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'torch'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.52,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "joslefaure/HERMES",
@@ -14863,6 +14991,38 @@
       "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
     },
     {
+      "full_name": "Lornatang/CRNN-PyTorch",
+      "hash": "7ddc66866533a24a0715b1f392ae1bc6f6e659da830211da21840672f56180f8",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "5 table captions, 124 decimal numbers",
+      "entry": {
+        "title": "An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition",
+        "year": 2015,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/Lornatang/CRNN-PyTorch",
+        "repo_commit": "387fe941820afb6c0e8d362c63edaff6d8810773",
+        "paper_url": "https://arxiv.org/abs/1507.05717",
+        "license": "Apache-2.0",
+        "target_script": "predict.py",
+        "run_command": "python predict.py --image_path ./figures/Available.png --weights_path ./results/pretrained_models/CRNN-MJSynth-e9341ede.pth.tar",
+        "readme_url": "https://github.com/Lornatang/CRNN-PyTorch/blob/387fe941820afb6c0e8d362c63edaff6d8810773/README.md"
+      },
+      "paper_id": "a4_075",
+      "k1": {
+        "started_at": "2026-10-27T04:22:25+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ImportError: libxcb.so.1: cannot open shared object file: No such file or directory",
+        "install_status": "INSTALLED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 1.308,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
       "full_name": "qiankunmu/HGAdapter",
       "hash": "7e705d585081cee4a088a18c4e9bdb9997a946bb526ee0b634f194eb133291ef",
       "passed": false,
@@ -14889,6 +15049,38 @@
       "passed": false,
       "failed_rule": "S1",
       "detail": "license Unlicense"
+    },
+    {
+      "full_name": "IDEA-Research/DINO-X-API",
+      "hash": "80771b59631203967a3a7d1ae9f004bdd03d73a470dd6f071d8d0da1bb498282",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "8 table captions, 661 decimal numbers",
+      "entry": {
+        "title": "DINO-X: A Unified Vision Model for Open-World Object Detection and Understanding",
+        "year": 2024,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/IDEA-Research/DINO-X-API",
+        "repo_commit": "813c629437e5c34c3008669944b4b36ac16a6454",
+        "paper_url": "https://arxiv.org/abs/2411.14347",
+        "license": "Apache-2.0",
+        "target_script": "demo.py",
+        "run_command": "python demo.py",
+        "readme_url": "https://github.com/IDEA-Research/DINO-X-API/blob/813c629437e5c34c3008669944b4b36ac16a6454/README.md"
+      },
+      "paper_id": "a4_076",
+      "k1": {
+        "started_at": "2026-10-27T04:31:56+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: No matching distribution found for dds-cloudapi-sdk==0.5.3",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.582,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "Alokia/Idempotent-Generative-Network",
@@ -14945,6 +15137,38 @@
       "passed": false,
       "failed_rule": "S2",
       "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
+    },
+    {
+      "full_name": "wjq-learning/SleepDG",
+      "hash": "877ca872287f0550957c8a78977f1ce56011dfe8e4cb0e88bd4fbc35476f1c9a",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "4 table captions, 301 decimal numbers",
+      "entry": {
+        "title": "Generalizable Sleep Staging via Multi-Level Domain Alignment",
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/wjq-learning/SleepDG",
+        "repo_commit": "01d209d4fda874933a277a88bccdca6e3835e884",
+        "paper_url": "https://arxiv.org/abs/2401.05363",
+        "license": "MIT",
+        "target_script": "main_5.py",
+        "run_command": "python main_5.py",
+        "readme_url": "https://github.com/wjq-learning/SleepDG/blob/01d209d4fda874933a277a88bccdca6e3835e884/README.md"
+      },
+      "paper_id": "a4_077",
+      "k1": {
+        "started_at": "2026-10-27T04:32:10+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "ModuleNotFoundError: No module named 'torch'",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.555,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "matteospanio/mule-torch",
@@ -15015,6 +15239,38 @@
       "passed": false,
       "failed_rule": "S1",
       "detail": "license None"
+    },
+    {
+      "full_name": "Shidu-Ren/ICM-Bench",
+      "hash": "8fce278e67b0032db5933c4c4456f1cc0d09aef4f0cf2f0497dc8f2413b46719",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "12 table captions, 164 decimal numbers",
+      "entry": {
+        "title": "ICM-Bench: Person-Level Identity Reasoning in Multimodal Agents with Long-Term Memory",
+        "year": 2026,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/Shidu-Ren/ICM-Bench",
+        "repo_commit": "beeb816a21085e23b8d0c38097576c0f4c0aad7d",
+        "paper_url": "https://arxiv.org/abs/2609.04438",
+        "license": "MIT",
+        "target_script": "evaluation/judging/scripts/rejudge_openqa_m3agent_style.py",
+        "run_command": "python evaluation/judging/scripts/rejudge_openqa_m3agent_style.py --input \"$ICM_BENCH_OUTPUT_ROOT/SYSTEM/answers.jsonl\" --output \"$ICM_BENCH_OUTPUT_ROOT/SYSTEM/answers.judged.jsonl\" --summary \"$ICM_BENCH_OUTPUT_ROOT/SYSTEM/answers.judged.summary.json\"",
+        "readme_url": "https://github.com/Shidu-Ren/ICM-Bench/blob/beeb816a21085e23b8d0c38097576c0f4c0aad7d/README.md"
+      },
+      "paper_id": "a4_078",
+      "k1": {
+        "started_at": "2026-10-27T04:32:13+00:00",
+        "k1_passed": false,
+        "category": "run",
+        "log_line": "RuntimeError: Missing Gemini API key for models/gemini-3-flash-preview",
+        "install_status": "SKIPPED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.707,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "yudhisteer/Pseudo-LiDARs-with-Stereo-Vision",
@@ -15164,6 +15420,38 @@
       "detail": "no `python <script>.py` line in a fenced README block with a script that exists"
     },
     {
+      "full_name": "iMoonLab/LLM4Hypergraph",
+      "hash": "99fd0a7a71a13489c389d26479ba8478a3943cc6dccc7cf4687136265980406b",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "8 table captions, 831 decimal numbers",
+      "entry": {
+        "title": "Beyond Graphs: Can Large Language Models Comprehend Hypergraphs?",
+        "year": 2024,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/iMoonLab/LLM4Hypergraph",
+        "repo_commit": "1b1e123b4648239d2bf4505b0508a851b0c54608",
+        "paper_url": "https://arxiv.org/abs/2410.10083",
+        "license": "Apache-2.0",
+        "target_script": "eval_LLM.py",
+        "run_command": "python ./eval_LLM.py",
+        "readme_url": "https://github.com/iMoonLab/LLM4Hypergraph/blob/1b1e123b4648239d2bf4505b0508a851b0c54608/README.md"
+      },
+      "paper_id": "a4_079",
+      "k1": {
+        "started_at": "2026-10-27T04:32:31+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "Installing collected packages: nvidia-cusparselt-cu13, namex, mpmath, libclang, flatbuffers, cuda-toolkit, wrapt, urllib3, tzdata, typing_extensions, triton, tqdm, threadpoolctl, termcolor, sympy, six, setuptools, PyYAML, pyparsing, pygments, protobuf, pillow, packaging, opt_einsum, nvidia-nvtx, nvi",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.477,
+        "metric_lines": []
+      },
+      "k2": null
+    },
+    {
       "full_name": "Multimodal-Intelligence-Lab/CLIP-CC-Bench",
       "hash": "9a4549dfb5142ccac169487f5c968ed1034a872ab41428709ae263d083f6ddb9",
       "passed": false,
@@ -15211,6 +15499,38 @@
       "passed": false,
       "failed_rule": "S1",
       "detail": "license None"
+    },
+    {
+      "full_name": "TreeLLi/AROID",
+      "hash": "9e6b1eddb83d934e9090dfc35e20037f7bd4491e51528df3719ccdaaf4ec85ce",
+      "passed": true,
+      "failed_rule": null,
+      "detail": "15 table captions, 657 decimal numbers",
+      "entry": {
+        "title": "AROID: Improving Adversarial Robustness Through Online Instance-Wise Data Augmentation",
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "repo_url": "https://github.com/TreeLLi/AROID",
+        "repo_commit": "056e4f91b7cab35291d378ca951cc92cbe6fde2d",
+        "paper_url": "https://arxiv.org/abs/2306.07197",
+        "license": "MIT",
+        "target_script": "src/train.py",
+        "run_command": "python src/train.py -a wresnet --depth 34 --width 10 --max_iter 0 --epochs 40 --annealing 20 30 -ei 0",
+        "readme_url": "https://github.com/TreeLLi/AROID/blob/056e4f91b7cab35291d378ca951cc92cbe6fde2d/README.md"
+      },
+      "paper_id": "a4_080",
+      "k1": {
+        "started_at": "2026-10-27T04:55:09+00:00",
+        "k1_passed": false,
+        "category": "install",
+        "log_line": "ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?",
+        "install_status": "FAILED",
+        "run_status": "FAILED",
+        "exit_code": 1,
+        "duration_seconds": 0.51,
+        "metric_lines": []
+      },
+      "k2": null
     },
     {
       "full_name": "mariiammaysara/PointNet-PyTorch",
@@ -16457,8 +16777,8 @@
   "written_at": "2026-10-27T04:55:39+00:00",
   "rules": "docs/AUTO_SEARCH_ROUND4.md",
   "note": "selected, non-representative list; not a success rate; K2 v1 and v2 passers are match candidates, not verified; K2 v2 can match by chance",
-  "evaluated": 2021,
-  "runs": 70,
+  "evaluated": 2031,
+  "runs": 80,
   "k1_passed": 2,
   "k2_passed": 1,
   "k2v2_passed": 1,
@@ -16466,5 +16786,5 @@
   "both_passed_v1": 0,
   "both_passed_v2": 0,
   "stopped_because": "",
-  "snapshot_note": "snapshot of the walk through run a4_070; the walk is not finished"
+  "snapshot_note": "snapshot of the walk through run a4_080; the walk is not finished"
 }

@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_079",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "Installing collected packages: nvidia-cusparselt-cu13, namex, mpmath, libclang, flatbuffers, cuda-toolkit, wrapt, urllib3, tzdata, typing_extensions, triton, tqdm, threadpoolctl, termcolor, sympy, six, setuptools, PyYAML, pyparsing, pygments, protobuf, pillow, packaging, opt_einsum, nvidia-nvtx, nvi",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.477,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,5 @@
+Looking in links: /workspace/packages
+Collecting git+https://github.com/wbaek/theconf@de32022f8c0651a043dc812d17194cdfd62066e8 (from -r /workspace/repo/requirements.txt (line 1))
+  Cloning https://github.com/wbaek/theconf (to revision de32022f8c0651a043dc812d17194cdfd62066e8) to /workspace/deps/.pip-tmp/pip-req-build-lild1iq6
+  ERROR: Error [Errno 2] No such file or directory: 'git' while executing command git version
+ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?

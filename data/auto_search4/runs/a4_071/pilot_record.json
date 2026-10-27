@@ -1,0 +1,106 @@
+{
+  "paper_id": "a4_071",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:55:04+00:00",
+  "repo_url": "https://github.com/ysl609/stereovision-mars",
+  "pinned_commit": "0ec6d61422697284bc303d972e685814e3cbab4d",
+  "target_script": "scripts/stereo.py",
+  "container_command": "python /workspace/repo/scripts/stereo.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/stereo.py",
+    "readme_url": "https://github.com/ysl609/stereovision-mars/blob/0ec6d61422697284bc303d972e685814e3cbab4d/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "0ec6d61422697284bc303d972e685814e3cbab4d",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 3.625
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 21,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_071_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "ved ./a4_071_packages/packaging-25.0-py3-none-any.whl\nSaved ./a4_071_packages/pillow-12.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a4_071_packages/pyparsing-3.2.5-py3-none-any.whl\nSaved ./a4_071_packages/python_dateutil-2.9.0.post0-py2.py3-none-any.whl\nSaved ./a4_071_packages/scikit_image-0.25.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl\nSaved ./a4_071_packages/scikit_learn-1.6.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl\nSaved ./a4_071_packages/scipy-1.16.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl\nSaved ./a4_071_packages/six-1.17.0-py2.py3-none-any.whl\nSaved ./a4_071_packages/threadpoolctl-3.6.0-py3-none-any.whl\nSaved ./a4_071_packages/tifffile-2025.10.16-py3-none-any.whl\nSuccessfully downloaded contourpy cycler fonttools imageio joblib kiwisolver lazy-loader matplotlib networkx numpy opencv-contrib-python packaging pillow pyparsing python-dateutil scikit-image scikit-learn scipy six threadpoolctl tifffile\n",
+    "stderr": "",
+    "duration_seconds": 35.13
+  },
+  "sandbox_duration_seconds": 237.088,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.994,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 37793792
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 233.734,
+    "peak_memory_bytes": 87937024
+  },
+  "finished_at": "2026-10-27T03:59:39+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

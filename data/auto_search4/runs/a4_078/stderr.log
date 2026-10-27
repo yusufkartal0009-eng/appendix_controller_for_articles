@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py", line 371, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py", line 308, in main
+    api_key = api_key_for_model(args.judge_model, Path(args.api_config))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/evaluation/judging/scripts/rejudge_openqa_m3agent_style.py", line 99, in api_key_for_model
+    raise RuntimeError(f"Missing Gemini API key for {model}")
+RuntimeError: Missing Gemini API key for models/gemini-3-flash-preview

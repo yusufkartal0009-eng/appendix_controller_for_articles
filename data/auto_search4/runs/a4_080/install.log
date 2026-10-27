@@ -1,0 +1,5 @@
+Looking in links: /workspace/packages
+Collecting git+https://github.com/fra31/auto-attack (from -r /workspace/repo/requirements.txt (line 8))
+  Cloning https://github.com/fra31/auto-attack to /workspace/deps/.pip-tmp/pip-req-build-rufzdcc0
+  ERROR: Error [Errno 2] No such file or directory: 'git' while executing command git version
+ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?

@@ -1,0 +1,132 @@
+{
+  "paper_id": "a4_072",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:59:42+00:00",
+  "repo_url": "https://github.com/ildoonet/unsupervised-data-augmentation",
+  "pinned_commit": "a2356e4af6b84f56740796d461719229cedc61fd",
+  "target_script": "train.py",
+  "container_command": "python /workspace/repo/train.py -c confs/wresnet28x2.yaml --unsupervised",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python train.py -c confs/wresnet28x2.yaml --unsupervised",
+    "readme_url": "https://github.com/ildoonet/unsupervised-data-augmentation/blob/a2356e4af6b84f56740796d461719229cedc61fd/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "a2356e4af6b84f56740796d461719229cedc61fd",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.258
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 5,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_072_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "git+https://github.com/wbaek/theconf@de32022f8c0651a043dc812d17194cdfd62066e8",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?"
+      },
+      {
+        "requirement": "git+https://github.com/ildoonet/pytorch-gradual-warmup-lr.git@v0.2",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?"
+      },
+      {
+        "requirement": "git+https://github.com/ildoonet/pystopwatch2.git",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?"
+      },
+      {
+        "requirement": "pretrainedmodels",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for pretrainedmodels"
+      },
+      {
+        "requirement": "sklearn",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for sklearn"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "Collecting git+https://github.com/wbaek/theconf@de32022f8c0651a043dc812d17194cdfd62066e8 (from -r /staging/a4_072/requirements.txt (line 1))\n  Cloning https://github.com/wbaek/theconf (to revision de32022f8c0651a043dc812d17194cdfd62066e8) to /tmp/pip-req-build-484ah180\n",
+    "stderr": "  ERROR: Error [Errno 2] No such file or directory: 'git' while executing command git version\nERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?\n",
+    "duration_seconds": 12.164
+  },
+  "sandbox_duration_seconds": 2.214,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.554,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 11886592
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.594,
+    "peak_memory_bytes": 38625280
+  },
+  "finished_at": "2026-10-27T03:59:57+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}
