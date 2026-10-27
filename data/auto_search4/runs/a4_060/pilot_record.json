@@ -1,0 +1,85 @@
+{
+  "paper_id": "a4_060",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T03:07:56+00:00",
+  "repo_url": "https://github.com/alibaba/SRDiffusion",
+  "pinned_commit": "12f78be6266d9218989d35f3cc689ad167c4b0bd",
+  "target_script": "wan/srd_generate.py",
+  "container_command": "python /workspace/repo/wan/srd_generate.py --task t2v-14B --size 832*480 --ckpt_dir ./Wan2.1-T2V-14B --rendering_ckpt_dir ./Wan2.1-T2V-1.3B --offload_model True --t5_cpu --self_diff_threshold 0.01 --prompt Two anthropomorphic cats in comfy boxing gear and bright gloves fight intensely on a spotlighted stage.",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python ./wan/srd_generate.py --task t2v-14B --size 832*480 --ckpt_dir ./Wan2.1-T2V-14B --rendering_ckpt_dir ./Wan2.1-T2V-1.3B --offload_model True --t5_cpu --self_diff_threshold 0.01 --prompt \"Two anthropomorphic cats in comfy boxing gear and bright gloves fight intensely on a spotlighted stage.\"",
+    "readme_url": "https://github.com/alibaba/SRDiffusion/blob/12f78be6266d9218989d35f3cc689ad167c4b0bd/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "12f78be6266d9218989d35f3cc689ad167c4b0bd",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [],
+    "has_conda_env": false,
+    "duration_seconds": 1.249
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SKIPPED",
+    "message": "No requirements.txt found to bundle",
+    "wheel_count": 0,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_060_packages",
+    "duration_seconds": 0.0
+  },
+  "sandbox_duration_seconds": 0.809,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.584,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "SKIPPED",
+    "peak_memory_bytes": 14909440
+  },
+  "finished_at": "2026-10-27T03:07:58+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

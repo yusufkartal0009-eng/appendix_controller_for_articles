@@ -126,7 +126,7 @@ The new stage topics, in this order:
     `agriculture`, `earth-observation`, `weather`, `hydrology`, `seismology`, `fluid-dynamics`, `wireless-communication`,
     `scheduling`, `combinatorial-optimization`.
 
-- **Stages 14 to 17** (added on 2026-10-27 at 06:45, after stage 13 was used up with 1,607 candidates checked and 67 run; topics chosen from
+- **Stages 14 to 17** (added on 2026-10-27, merged at 06:37, after stage 13 was used up with 1,607 candidates checked and 67 run; topics chosen from
   general machine learning, optimization and application areas without looking at any candidate, none used in any earlier stage; the same
   rules apply; each stage is used only when the stage before it is used up before a stop condition of section 6 holds):
   - **Stage 14:** `data-augmentation`, `knowledge-distillation`, `graph-learning`, `hypergraph`, `point-cloud`, `3d-reconstruction`, `pose-estimation`, `video-understanding`, `visual-question-answering`, `image-generation`, `super-resolution`, `denoising`, `ocr`, `speaker-recognition`, `music`, `eeg`.

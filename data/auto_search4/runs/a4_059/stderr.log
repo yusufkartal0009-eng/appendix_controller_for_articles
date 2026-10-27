@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/workspace/repo/train_mnist.py", line 113, in <module>
+    main(args)
+  File "/workspace/repo/train_mnist.py", line 59, in main
+    train_dataloader,test_dataloader=create_mnist_dataloaders(batch_size=args.batch_size,image_size=28)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/train_mnist.py", line 21, in create_mnist_dataloaders
+    train_dataset=MNIST(root="./mnist_data",\
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/torchvision/datasets/mnist.py", line 100, in __init__
+    self.download()
+  File "/workspace/deps/torchvision/datasets/mnist.py", line 180, in download
+    os.makedirs(self.raw_folder, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: './mnist_data'
