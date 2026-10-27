@@ -42,6 +42,8 @@ A block in the report is the text between `<!-- numbers:NAME:start -->` and `<!-
   (`data/auto_search3/evaluation.json`; #473)
 - `autosearch4`: the automatic search of round 4: checked, run, K1, K2 v1, K2 v2 and both with Wilson intervals, causes of the failures
   (`data/auto_search4/evaluation.json`; #521)
+- `failurestatistics`: why selected runs failed, by category and group: Pilots 1 to 4, the candidate list, the automatic searches
+  (`data/failure_statistics.json`, `scripts/failure_statistics.py`; #546)
 - `toleranceprobe`: where the Tier 2 decision changes when a hand-made claim is moved away from a real run's value
   (`data/tolerance_probe/results.json`; #442)
 
@@ -454,6 +456,19 @@ def autosearch4_block(data: Path = DATA) -> str:
                        "K2 v2 can match by chance: a pass is a match candidate, not a verified result.")])
 
 
+def failurestatistics_block(data: Path = DATA) -> str:
+    document = _load(data / "failure_statistics.json")
+    tables = document["tables"]
+    keys = list(tables)
+    names = [c["name"] for c in document["categories"]]
+    used = [n for n in ["passed", *names] if any(tables[k]["counts"][n] for k in keys)]
+    lines = [HEADER.format(sources="data/failure_statistics.json (scripts/failure_statistics.py)"), "",
+             "| Category of the first failure | " + " | ".join(f"{tables[k]['title'].split(' (')[0]} ({tables[k]['attempts']})" for k in keys) + " |",
+             "|---|" + "---|" * len(keys)]
+    lines += [f"| `{n}` | " + " | ".join(str(tables[k]["counts"][n]) for k in keys) + " |" for n in used]
+    return "\n".join(lines)
+
+
 def toleranceprobe_block(data: Path = DATA) -> str:
     probe = _load(data / "tolerance_probe" / "results.json")
     lines = [HEADER.format(sources="data/tolerance_probe/results.json (scripts/tolerance_probe.py)"), "",
@@ -566,7 +581,7 @@ def cleanclone_block(data: Path = DATA) -> str:
                        f"none found in the output (the run reads another dataset); Tier 2 {tier2}, total {total_score[0]}, status {total_score[1].strip()}.")])
 
 
-BLOCKS = {"realverdicts": realverdicts_block, "pilotintervals": pilotintervals_block, "cleanclone": cleanclone_block, "candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "autosearch4": autosearch4_block, "candidateround2": candidateround2_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
+BLOCKS = {"realverdicts": realverdicts_block, "pilotintervals": pilotintervals_block, "cleanclone": cleanclone_block, "candidateruns": candidateruns_block, "autosearch3": autosearch3_block, "autosearch4": autosearch4_block, "candidateround2": candidateround2_block, "failurestatistics": failurestatistics_block, "toleranceprobe": toleranceprobe_block, "multiseed": multiseed_block, "gpucheck": gpucheck_block, "diagnosisvalidation": diagnosisvalidation_block,
           "fieldanalysis": fieldanalysis_block, "rescience": rescience_block, "pilot1": pilot1_block, "pilot2": pilot2_block, "pilot2measurements": pilot2measurements_block,
           "pilot2summary": pilot2summary_block,
           "pilot2failures": pilot2failures_block, "pilot3": pilot3_block,
