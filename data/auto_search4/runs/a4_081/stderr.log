@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/repo/plot_sleep_scoring.py", line 1209, in <module>
+    main()
+  File "/workspace/repo/plot_sleep_scoring.py", line 1147, in main
+    signal, fs, uv_per_lsb = read_edf_channel(args.file, args.channel)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/plot_sleep_scoring.py", line 110, in read_edf_channel
+    raw = Path(filepath).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 1050, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/media/$USER/TS2607-XXX/ADC/AD0021_20261020_2351.BDF'

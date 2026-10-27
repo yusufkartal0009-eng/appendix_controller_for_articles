@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/repo/scripts/ingest_pdf.py", line 9, in <module>
+    from labourcrew.config import PROCESSED_DIR, get_settings
+  File "/workspace/repo/labourcrew/config.py", line 6, in <module>
+    from pydantic_settings import BaseSettings, SettingsConfigDict
+ModuleNotFoundError: No module named 'pydantic_settings'

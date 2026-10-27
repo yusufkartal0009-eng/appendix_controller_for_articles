@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_084",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "Hint: = is not a valid operator. Did you mean == ?",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.52,
+    "metric_lines": []
+  },
+  "k2": null
+}

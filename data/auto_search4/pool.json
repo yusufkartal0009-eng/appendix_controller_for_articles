@@ -7595,6 +7595,492 @@
         "zhangqianhui/sparsely-grouped-gan",
         "zhiningliu1998/bat"
       ]
+    },
+    "16": {
+      "retrieved_at": "2026-10-27T05:19:33+00:00",
+      "per_query_limit": 100,
+      "searches": [
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:numerical-optimization",
+          "results": [
+            "numericalalgorithmsgroup/pybobyqa",
+            "numericalalgorithmsgroup/dfols",
+            "numericalalgorithmsgroup/dfbgn",
+            "yubocai-poly/ALMTON",
+            "zimmerman-cole/ct",
+            "CardiacModelling/BenNevis",
+            "gulhameed361/TRF-Solver",
+            "PatrickJungGermany/Optimizing-Initial-Feature-Mapping-Variables-from-Given-Designs-via-Tracking",
+            "AmirHesamKamalpour/CAT-Trust-Region-Method-Python-Implementation"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:convex-optimization",
+          "results": [
+            "yotakayama/STLCCP",
+            "jalotra/Queue-Detection",
+            "pilancilab/CRONOS",
+            "nicola-bastianello/optopy",
+            "sukiboo/wbga_co",
+            "synkathairo/portfolio_opt",
+            "AbdulazizHGA/optcurves"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:stochastic-optimization",
+          "results": [
+            "harshraj11584/Paper-Implementation-Overview-Gradient-Descent-Optimization-Sebastian-Ruder",
+            "cor3bit/somax"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:gradient-descent",
+          "results": [
+            "tsycnh/mlbasic",
+            "Arko98/Gradient-Descent-Algorithms",
+            "harshraj11584/Paper-Implementation-Overview-Gradient-Descent-Optimization-Sebastian-Ruder",
+            "MatthewK78/Rose",
+            "airPeter/Meta_SCMT",
+            "Adk2001tech/GAN-Image-Super-Resolution",
+            "benjaminpatrickevans/ConvGP",
+            "KonstantinRiedl/NNPDEs",
+            "FilipTirnanic96/t-SNE",
+            "farukalpay/PSD",
+            "bnkausik/occam_gradient_descent",
+            "mbeps/custom-neural-network-classifier",
+            "vismaychuriwala/PDE-aware-optimizer-jax",
+            "rokkian/adam_implementation",
+            "zblasingame/AdjointDEIS",
+            "raymondmyxu/to-grok-grokking",
+            "peymanpro/How-Attentions-Work",
+            "hammadshakeelai/gradient-descent-lr-research",
+            "AbdulazizHGA/optcurves"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:sgd",
+          "results": [
+            "tsycnh/mlbasic",
+            "vballoli/nfnets-pytorch",
+            "MatthewK78/Rose",
+            "wenwei202/terngrad",
+            "ajinkya-awari/nn-optimizer-study"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:adam",
+          "results": [
+            "lucidrains/adam-atan2-pytorch",
+            "JRC1995/DemonRangerOptimizer",
+            "harshraj11584/Paper-Implementation-Overview-Gradient-Descent-Optimization-Sebastian-Ruder",
+            "AdamByerly/HVCsEnableAGD",
+            "kinit-sk/overshoot",
+            "rokkian/adam_implementation",
+            "somefunAgba/sgm_gmake",
+            "ajinkya-awari/nn-optimizer-study"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:learning-rate",
+          "results": [
+            "meet-minimalist/TinyImageNet-Benchmarks",
+            "ahundt/sharpDARTS",
+            "hammadshakeelai/gradient-descent-lr-research"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:regularization",
+          "results": [
+            "ildoonet/cutmix",
+            "wuliwei9278/SSE-PT",
+            "d1024choi/traj-pred-irl",
+            "cfinlay/tulip",
+            "imedslab/semixup",
+            "romain-e-lacoste/sparklen",
+            "benedekrozemberczki/FSCNMF",
+            "g8a9/ear",
+            "najeebkhan/sparseout",
+            "DouniaLakhmiri/SR2",
+            "mbonyani/DropBlock-tf",
+            "Sean652039/Token-Masking",
+            "makeyourownmaker/mixupy",
+            "ari-dasci/S-T-SHIELD",
+            "matheus695p/regularization-techniques-pytorch",
+            "danielmiless/SBL-PriorNormalization-Python",
+            "lauritsf/ensemble-optimality-gap"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:dropout",
+          "results": [
+            "ivannz/cplxmodule",
+            "VITA-Group/Deep_GCN_Benchmarking",
+            "aurelio-amerio/ConcreteDropout",
+            "najeebkhan/sparseout",
+            "marcovirgolin/Uncertainty-Estimation-in-Deep-Nets",
+            "lawzero-org/llm-dropout-noise-recognition"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:batch-normalization",
+          "results": [
+            "deep-learning-algorithm/GoogLeNet",
+            "eigenfoo/batch-renorm",
+            "AngusG/bn-advex-zhang-fixup",
+            "HarmanDotpy/Normalizations-in-Deep-Learning",
+            "mbeps/custom-neural-network-classifier"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:activation-functions",
+          "results": [
+            "Rishit-dagli/GLU",
+            "shuuchen/frelu.pytorch",
+            "satyammittal/SMAI-Project-Sparsemax",
+            "fengwang/CReLU",
+            "takyamamoto/BRU_chainer",
+            "Prashant47/deep-learning-elu"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:loss-functions",
+          "results": [
+            "cvqluu/Angular-Penalty-Softmax-Losses-Pytorch",
+            "dingkeyan93/IQA-optimization",
+            "GT-RIPL/L2C",
+            "AdeelH/pytorch-multi-class-focal-loss",
+            "oikosohn/compound-loss-pytorch",
+            "aryan-jadon/Regression-Loss-Functions-in-Time-Series-Forecasting-Tensorflow",
+            "fcakyon/balanced-loss",
+            "ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch",
+            "junyuchen245/Semi-supervised_FCM_Loss_for_Segmentation",
+            "Buddhi19/MambaFCS",
+            "kumar10725/PeerLoss-Keras",
+            "ZJLAB-AMMI/PSWA",
+            "Cuongvn08/RMCosGAN",
+            "Vidhiwar/roughness-index-distance",
+            "Kidara/hierarchy-aware-cross-entropy",
+            "DannyCollinson/pytorch-focalloss",
+            "colure/GeometricMeanLoss",
+            "stormaref/FairLoss",
+            "gmum/DLoss",
+            "AI6103-DeepLearning-GroupProject/Sentence-BERT"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:neural-ode",
+          "results": [
+            "jacobjinkelly/easy-neural-ode",
+            "cfinlay/ffjord-rnode",
+            "sangyun884/fast-ode",
+            "preacherwhite/ODE-GS",
+            "inhuh/trs-oden",
+            "serre-lab/KuraNet",
+            "juliagusak/neural-ode-metasolver",
+            "PavanMohanN/bliq",
+            "krisss0mecom/AlphaDynamics"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:physics-informed",
+          "results": [
+            "Moh97746/PISSM-Solar-Forecasting",
+            "bydeng01/gp-pde-regression",
+            "kotserge/residuals-are-not-enough-limits-of-physics-informed-pre-training-for-scientific-foudation-models"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:pinn",
+          "results": [
+            "luo-yining/CFDBench",
+            "rmojgani/LPINNs",
+            "jjdabr/BPINN-Wildfire",
+            "Uderwood-TZ/LSTM-PINN-and-PINN-for-population-forecasting",
+            "sck-at-ucy/kbeta",
+            "nikiniki1/PINN-NTK",
+            "sck-at-ucy/kbeta-pinn3d",
+            "scengizci/passc_transient_hybrid_pinn_fem",
+            "kuslavicek/brane_skyrmion",
+            "KartikeyaGangwar/Deep-EEP-PINN",
+            "SebasHBD/wilberforce-pinn-qpinn"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:surrogate-model",
+          "results": [
+            "Litianyu141/Gen-FVGN-3D-unsteady"
+          ]
+        }
+      ],
+      "removed_as_earlier_round": [
+        "abdulazizhga/optcurves",
+        "adeelh/pytorch-multi-class-focal-loss",
+        "ahundt/sharpdarts",
+        "arko98/gradient-descent-algorithms",
+        "aryan-jadon/regression-loss-functions-in-time-series-forecasting-tensorflow",
+        "aurelio-amerio/concretedropout",
+        "benedekrozemberczki/fscnmf",
+        "bydeng01/gp-pde-regression",
+        "cfinlay/ffjord-rnode",
+        "cor3bit/somax",
+        "cvqluu/angular-penalty-softmax-losses-pytorch",
+        "danielmiless/sbl-priornormalization-python",
+        "dannycollinson/pytorch-focalloss",
+        "dingkeyan93/iqa-optimization",
+        "dounialakhmiri/sr2",
+        "farukalpay/psd",
+        "gt-ripl/l2c",
+        "gulhameed361/trf-solver",
+        "harmandotpy/normalizations-in-deep-learning",
+        "harshraj11584/paper-implementation-overview-gradient-descent-optimization-sebastian-ruder",
+        "jacobjinkelly/easy-neural-ode",
+        "jjdabr/bpinn-wildfire",
+        "juliagusak/neural-ode-metasolver",
+        "kartikeyagangwar/deep-eep-pinn",
+        "konstantinriedl/nnpdes",
+        "kumar10725/peerloss-keras",
+        "lauritsf/ensemble-optimality-gap",
+        "luo-yining/cfdbench",
+        "meet-minimalist/tinyimagenet-benchmarks",
+        "moh97746/pissm-solar-forecasting",
+        "najeebkhan/sparseout",
+        "nicola-bastianello/optopy",
+        "numericalalgorithmsgroup/dfbgn",
+        "numericalalgorithmsgroup/dfols",
+        "numericalalgorithmsgroup/pybobyqa",
+        "peymanpro/how-attentions-work",
+        "pilancilab/cronos",
+        "rishit-dagli/glu",
+        "rmojgani/lpinns",
+        "rokkian/adam_implementation",
+        "romain-e-lacoste/sparklen",
+        "scengizci/passc_transient_hybrid_pinn_fem",
+        "sukiboo/wbga_co",
+        "synkathairo/portfolio_opt",
+        "vballoli/nfnets-pytorch",
+        "vidhiwar/roughness-index-distance",
+        "vismaychuriwala/pde-aware-optimizer-jax",
+        "vita-group/deep_gcn_benchmarking",
+        "wenwei202/terngrad",
+        "wuliwei9278/sse-pt",
+        "yotakayama/stlccp",
+        "zblasingame/adjointdeis",
+        "zimmerman-cole/ct",
+        "zjlab-ammi/pswa"
+      ]
+    },
+    "17": {
+      "retrieved_at": "2026-10-27T05:56:32+00:00",
+      "per_query_limit": 100,
+      "searches": [
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:survival",
+          "results": [
+            "christopher-altman/continuation-observatory"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:epidemic",
+          "results": []
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:covid-19",
+          "results": [
+            "petroniocandido/COVID19_AgentBasedSimulation",
+            "saimj7/Social-Distancing-Detection-in-Real-Time",
+            "DLWK/EANet",
+            "Slicer/SlicerLungCTAnalyzer",
+            "icon-lab/HST",
+            "frankkramer-lab/covid19.MIScnn",
+            "JerryWeiAI/COVID-Q",
+            "PingEnLu/Time-dependent_SIR_COVID-19",
+            "imanpalsingh/COVID-19-Detection--from-X-rays",
+            "Junelin2333/COVID19-CXR",
+            "meliksahturker/NetGen",
+            "Hryniewska/checklist",
+            "adnanhaider81/sarscov2-fourth-wave-2021-pakistan",
+            "protagolabs/COVID-Q",
+            "yudhisteer/Face-Recognition-with-Masks",
+            "0xcodemate/Med-annotation",
+            "nhattruongpham/XCT-COVID"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:genetics",
+          "results": []
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:single-cell",
+          "results": [
+            "JacobHanimann/scDINO",
+            "lazaratan/meta-flow-matching",
+            "mims-harvard/bio-mirage",
+            "Sajib-006/PerturbGraph",
+            "mool32/metric-autopsy",
+            "mool32/developmental-epistasis-scrna"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:proteomics",
+          "results": [
+            "ErikHartman/bopep",
+            "statisticalbiotechnology/dIon",
+            "narayananr/proteoem",
+            "leo123-rax/lit-radar"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:neuroimaging",
+          "results": [
+            "ivsemenkov/LISA",
+            "Fjr9516/longitudinal-rigid-registration",
+            "OHBA-analysis/EphysTokenizer",
+            "Darko28/VCA-Net",
+            "KeWang0622/MRFoundry",
+            "sisinflab/WaveDiT",
+            "Danesed/WaveDiT",
+            "v-sundaresan/truenet_tumseg",
+            "LukeConran/alzheimers-contrastive-learning",
+            "tpnurmi-code/GBB"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:fmri",
+          "results": [
+            "botcs/reason-to-play-src",
+            "JustinZHAO-05/HP-GSBS",
+            "pablomm/neural-encoder",
+            "KeWang0622/MRFoundry",
+            "tpnurmi-code/GBB"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:ecg",
+          "results": [
+            "physhik/ecg-mit-bih",
+            "mims-harvard/UniTS",
+            "ferdavid1/ArduPi-ECG",
+            "ForeverBlue816/PhysioWave",
+            "aliraza011/ECG-with-XAI",
+            "likith012/IMLE-Net",
+            "UMCUtrecht-ECGxAI/ecgxai",
+            "AI4HealthUOL/CardioLab",
+            "MrDongdongLin/Cryptanalysis_IEAE",
+            "KonstantinosBarmpas/NeuroRVQ",
+            "sharmi1206/featal-ecg-anomaly-detection",
+            "soheilkooklan/HR-from-ECG",
+            "XOREngine/xand-ecg",
+            "vlmurthylab/pytorch-image-models-ecgflow",
+            "mbwebster/meae-heart-rate-extraction-from-noisy-ppg",
+            "CeBiDa/ECG-XAI-Visualizer",
+            "appleweiping/ecg-recoverability",
+            "MParvan/ecg-biometrics-bench",
+            "martinoa2000/fedecg-lab"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:clinical",
+          "results": [
+            "DennisSchmitz/Jovian_archive",
+            "WadoodAbdul/clinical_ner_benchmark",
+            "uic-nlp-lab/dsprov",
+            "plandes/dsprov"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:electronic-health-records",
+          "results": [
+            "Yangxinyee/ehr2trace",
+            "bbj-lab/cotorra",
+            "jameszhou-gl/Coogee",
+            "takesfujita/information-set-emulation",
+            "sophiewharrie/meta-learning-hierarchical-model-similar-causal-mechanisms",
+            "0xcodemate/Med-annotation"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:drug-repurposing",
+          "results": [
+            "HySonLab/BioMedKG",
+            "HySonLab/drug-interactions",
+            "mhmdsabry/ResLM"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:ecology-modeling",
+          "results": []
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:crop",
+          "results": [
+            "vlasvlasvlas/ImgCropCV"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:remote-sensing-imagery",
+          "results": [
+            "Buddhi19/MambaFCS"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:satellite",
+          "results": [
+            "canturan10/satellighte",
+            "aavek/Satellite-Image-Road-Segmentation",
+            "eceo-epfl/CanadaFireSat-Model",
+            "eceo-epfl/CanadaFireSat-Data",
+            "paoloo/satsec-decomposition",
+            "gordonkoehn/solar-drag-uninsurable",
+            "loosephoto/space-finder-mcp"
+          ]
+        }
+      ],
+      "removed_as_earlier_round": [
+        "0xcodemate/med-annotation",
+        "adnanhaider81/sarscov2-fourth-wave-2021-pakistan",
+        "aliraza011/ecg-with-xai",
+        "appleweiping/ecg-recoverability",
+        "canturan10/satellighte",
+        "cebida/ecg-xai-visualizer",
+        "darko28/vca-net",
+        "erikhartman/bopep",
+        "ferdavid1/ardupi-ecg",
+        "frankkramer-lab/covid19.miscnn",
+        "hryniewska/checklist",
+        "hysonlab/drug-interactions",
+        "icon-lab/hst",
+        "jerryweiai/covid-q",
+        "justinzhao-05/hp-gsbs",
+        "kewang0622/mrfoundry",
+        "konstantinosbarmpas/neurorvq",
+        "lazaratan/meta-flow-matching",
+        "leo123-rax/lit-radar",
+        "likith012/imle-net",
+        "loosephoto/space-finder-mcp",
+        "martinoa2000/fedecg-lab",
+        "mbwebster/meae-heart-rate-extraction-from-noisy-ppg",
+        "mims-harvard/units",
+        "mool32/developmental-epistasis-scrna",
+        "mool32/metric-autopsy",
+        "narayananr/proteoem",
+        "nhattruongpham/xct-covid",
+        "pablomm/neural-encoder",
+        "petroniocandido/covid19_agentbasedsimulation",
+        "protagolabs/covid-q",
+        "sajib-006/perturbgraph",
+        "sharmi1206/featal-ecg-anomaly-detection",
+        "sisinflab/wavedit",
+        "slicer/slicerlungctanalyzer",
+        "soheilkooklan/hr-from-ecg",
+        "sophiewharrie/meta-learning-hierarchical-model-similar-causal-mechanisms",
+        "takesfujita/information-set-emulation",
+        "uic-nlp-lab/dsprov",
+        "umcutrecht-ecgxai/ecgxai",
+        "vlasvlasvlas/imgcropcv",
+        "wadoodabdul/clinical_ner_benchmark",
+        "xorengine/xand-ecg",
+        "yangxinyee/ehr2trace"
+      ]
     }
   },
   "candidates_in_order": [
@@ -18077,6 +18563,376 @@
       "full_name": "LouisJalouzot/MLEM",
       "hash": "ff22d6d11910c97fea0ffe02300eb391939fb029d72779bb428ff8369419d4af",
       "stage": 15
+    },
+    {
+      "full_name": "junyuchen245/Semi-supervised_FCM_Loss_for_Segmentation",
+      "hash": "0bc1d5d2325ab09eb6a517baa3bfab7e8e37af80971784d49b36f291254996de",
+      "stage": 16
+    },
+    {
+      "full_name": "ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch",
+      "hash": "0e28092886f6b26ab978f5e6be3b40f31fe2d7c85cb99bf499c2aa8e280c258a",
+      "stage": 16
+    },
+    {
+      "full_name": "PatrickJungGermany/Optimizing-Initial-Feature-Mapping-Variables-from-Given-Designs-via-Tracking",
+      "hash": "104c08dd299c2a8bb767ffb28a2023e8d863a64fe5ac020a0a65b7b3ed595be8",
+      "stage": 16
+    },
+    {
+      "full_name": "JRC1995/DemonRangerOptimizer",
+      "hash": "1182f1cfd26fd73738724af80019ea48dc40115461643a7c8f29c1b351a8e719",
+      "stage": 16
+    },
+    {
+      "full_name": "Cuongvn08/RMCosGAN",
+      "hash": "11cb6b042192f4502ed0a38d775105d88097fb6fb731e013bdb86e5dc9c74934",
+      "stage": 16
+    },
+    {
+      "full_name": "ivannz/cplxmodule",
+      "hash": "1230834741ca2e7142b537c0fc1693f2ae70940269595cff5c9ba0912121389a",
+      "stage": 16
+    },
+    {
+      "full_name": "d1024choi/traj-pred-irl",
+      "hash": "1ae37bb63f8e95c45c68a01285f2ecbb1b8264b6bf3753bb562034df3abadc7a",
+      "stage": 16
+    },
+    {
+      "full_name": "Adk2001tech/GAN-Image-Super-Resolution",
+      "hash": "1f33772140b3beaaf80e2d17ac419b11a0e0099c6615e98d6969e9b2a377cddf",
+      "stage": 16
+    },
+    {
+      "full_name": "eigenfoo/batch-renorm",
+      "hash": "20e663ffbfb17d9672d17dee5f2e1c5e80cace95698513764dd393586ed26096",
+      "stage": 16
+    },
+    {
+      "full_name": "AmirHesamKamalpour/CAT-Trust-Region-Method-Python-Implementation",
+      "hash": "31a82d9a4e94162aaad28193948424cb5c4a4585932c9679f7c2ae9b12cc14b8",
+      "stage": 16
+    },
+    {
+      "full_name": "deep-learning-algorithm/GoogLeNet",
+      "hash": "31fb9fb7b76a1e4781360b59f0daa197e6ff10d8eaf05f90cb22547caa98f078",
+      "stage": 16
+    },
+    {
+      "full_name": "kuslavicek/brane_skyrmion",
+      "hash": "34ff719aed95364f20b88819053c889fc79a9124b2a805f2e5e26f59ad206f75",
+      "stage": 16
+    },
+    {
+      "full_name": "bnkausik/occam_gradient_descent",
+      "hash": "358e141e167698c4dd075cdf38006d93565e63d241edcb84116c6530789e844f",
+      "stage": 16
+    },
+    {
+      "full_name": "stormaref/FairLoss",
+      "hash": "35cee69f01dd94fbfce864722ee2412be60ee897567e9011908892ade38dcf1f",
+      "stage": 16
+    },
+    {
+      "full_name": "kinit-sk/overshoot",
+      "hash": "37abbce92e010c802e82ecdcf24977715da7f1e7a8f92b5a80dcff54d23dc13d",
+      "stage": 16
+    },
+    {
+      "full_name": "airPeter/Meta_SCMT",
+      "hash": "426f616e3544ced9a9594406df30b9cb7301166644618e27033115caf1fef219",
+      "stage": 16
+    },
+    {
+      "full_name": "serre-lab/KuraNet",
+      "hash": "42987178d44a1ebc08b95a172b1a99707995bb374d7133292c91ff9dda002042",
+      "stage": 16
+    },
+    {
+      "full_name": "lucidrains/adam-atan2-pytorch",
+      "hash": "4438fb850a7c67e2e1b7a39933e70052ed176dd9c5f06a06540ea83d2e670648",
+      "stage": 16
+    },
+    {
+      "full_name": "jalotra/Queue-Detection",
+      "hash": "47ce3f5938d71d74e053266276e63e5c7bcba5ac5c130c371b4f7f1015315f5b",
+      "stage": 16
+    },
+    {
+      "full_name": "imedslab/semixup",
+      "hash": "4ff98b56d430f47178c00fa85ad8829a037f17bf93ab03174213fea38e11ce25",
+      "stage": 16
+    },
+    {
+      "full_name": "AngusG/bn-advex-zhang-fixup",
+      "hash": "51dfdb064f2a91913153dbe6ee06236bd5c90627a692d7fa4918b01d3195888a",
+      "stage": 16
+    },
+    {
+      "full_name": "Prashant47/deep-learning-elu",
+      "hash": "5457269da211037294cc8d9cc973b642a44a9220486e5684c30d7f75128a34e8",
+      "stage": 16
+    },
+    {
+      "full_name": "matheus695p/regularization-techniques-pytorch",
+      "hash": "597ee999c3b2fa792b5610d85b2ba146a87e0ff6f97f7f1c885f68ee08069fb4",
+      "stage": 16
+    },
+    {
+      "full_name": "raymondmyxu/to-grok-grokking",
+      "hash": "5be0689197a5b28c8824cba4153ca0ae3c4b0442432c1ca5c28f43bb4799f9fa",
+      "stage": 16
+    },
+    {
+      "full_name": "Litianyu141/Gen-FVGN-3D-unsteady",
+      "hash": "601f013147e79ce04047d0b661377cd93aa4f5b7db051a39e680a55efb998cec",
+      "stage": 16
+    },
+    {
+      "full_name": "lawzero-org/llm-dropout-noise-recognition",
+      "hash": "6bf756e2cb7a0d8d82acf15fb66a32398e8d612241714fd02610c2d429051b09",
+      "stage": 16
+    },
+    {
+      "full_name": "somefunAgba/sgm_gmake",
+      "hash": "71f8849d4942888495b3c4912199bba42608204cdaf06a53749a370e59e48f8f",
+      "stage": 16
+    },
+    {
+      "full_name": "preacherwhite/ODE-GS",
+      "hash": "7777d80404ceb72cb3d00741a299ce6094e173bee2624ed1416d0583b8adc08c",
+      "stage": 16
+    },
+    {
+      "full_name": "AI6103-DeepLearning-GroupProject/Sentence-BERT",
+      "hash": "7bdf068e40a96b1cf223bf7905879eeb58384e161c8c8c7e4bea96a464936315",
+      "stage": 16
+    },
+    {
+      "full_name": "ajinkya-awari/nn-optimizer-study",
+      "hash": "7c159f72679a46dfab77fae209dcb0a42a4848a3cd64e906006634d189a902b5",
+      "stage": 16
+    },
+    {
+      "full_name": "fengwang/CReLU",
+      "hash": "7c5be30a6f13272e53e0310265366d536a970ab221908e1e4e79a8036141d1a8",
+      "stage": 16
+    },
+    {
+      "full_name": "hammadshakeelai/gradient-descent-lr-research",
+      "hash": "83dbee101742e3541c0b4a1b6a05214591f0b2487fc0796e0db9b241a02052e9",
+      "stage": 16
+    },
+    {
+      "full_name": "gmum/DLoss",
+      "hash": "8800f6d8efe77dc7001573246e2325da858d59d9d8df3988854154c53f45f774",
+      "stage": 16
+    },
+    {
+      "full_name": "yubocai-poly/ALMTON",
+      "hash": "89c3c7724116bab9a2c1028e414a2cd3b82734154a56228d616609f14003ec9d",
+      "stage": 16
+    },
+    {
+      "full_name": "mbonyani/DropBlock-tf",
+      "hash": "8aac060cb6412ba515143ea1d94f5217b4271290c20460bbd83cdf522f27f948",
+      "stage": 16
+    },
+    {
+      "full_name": "AdamByerly/HVCsEnableAGD",
+      "hash": "8cc2521a0d0e4d70b7b024506b7fe6c79e6c8fb6b6eb7c79359c5b85185d35b7",
+      "stage": 16
+    },
+    {
+      "full_name": "takyamamoto/BRU_chainer",
+      "hash": "8eebc9addad4b92d2aa3e3120b64cde28496fde0a6b61c0eb457f94041eda7c9",
+      "stage": 16
+    },
+    {
+      "full_name": "mbeps/custom-neural-network-classifier",
+      "hash": "926f4c1a590b78d31de9fd4695e5efc7bd69b03eeecb5357d1e44f73faf122a2",
+      "stage": 16
+    },
+    {
+      "full_name": "nikiniki1/PINN-NTK",
+      "hash": "991d91f678bf2d22c436b1f5696992b463fd38b12a775877aaed8ae8a198831f",
+      "stage": 16
+    },
+    {
+      "full_name": "FilipTirnanic96/t-SNE",
+      "hash": "a43265ae159e09e8436b2b0b1f5864357ff88fa77bc35a1bf85808353775297b",
+      "stage": 16
+    },
+    {
+      "full_name": "sck-at-ucy/kbeta-pinn3d",
+      "hash": "a4f1cd8d65cb340ed3017e8a509a77846735c7d7ed4b32bf9cab5e1c1f095907",
+      "stage": 16
+    },
+    {
+      "full_name": "oikosohn/compound-loss-pytorch",
+      "hash": "bf309ab7179cebf7d2b8ea0c6b820b3983129248500bab908f8461ad5405e0c6",
+      "stage": 16
+    },
+    {
+      "full_name": "CardiacModelling/BenNevis",
+      "hash": "c411f6114adfa8905c461fb6752cfe006d3f88353134c19da91d8811c8e77d19",
+      "stage": 16
+    },
+    {
+      "full_name": "sck-at-ucy/kbeta",
+      "hash": "c4671aceea9089ace03c373e2f4100288b3a7b840e1301c97cb0ae126bdd9e45",
+      "stage": 16
+    },
+    {
+      "full_name": "cfinlay/tulip",
+      "hash": "c485b2a1413cf924bf38578c109a0906b79261244a8ed5f263590f72764e5c92",
+      "stage": 16
+    },
+    {
+      "full_name": "ari-dasci/S-T-SHIELD",
+      "hash": "c49ad846c08e5088fe5a685a7ee6178ec913823a2ec4fbfc35bcf62c5a3f24b6",
+      "stage": 16
+    },
+    {
+      "full_name": "SebasHBD/wilberforce-pinn-qpinn",
+      "hash": "c8ede03b450a3735f24a904605ec992a74b44616552f089d26137f2dd5483490",
+      "stage": 16
+    },
+    {
+      "full_name": "tsycnh/mlbasic",
+      "hash": "d1a5592cf2fef789c5f22e5e28a49a216bbf58016982c799e05e2ca629c6746d",
+      "stage": 16
+    },
+    {
+      "full_name": "PavanMohanN/bliq",
+      "hash": "daf8a3e8a5409379b9bb3a65cda2040dd604cd3644b47e3888593fa3ff7c9c07",
+      "stage": 16
+    },
+    {
+      "full_name": "kotserge/residuals-are-not-enough-limits-of-physics-informed-pre-training-for-scientific-foudation-models",
+      "hash": "dbfca291cbbdebdf6df76a86d1b294b8aa3979cb8f8b2cbe48bf7beeb34c8f97",
+      "stage": 16
+    },
+    {
+      "full_name": "satyammittal/SMAI-Project-Sparsemax",
+      "hash": "e68f12ca8563b87c4043b09037dad4222344b68c0680c75a14dd23284477d18a",
+      "stage": 16
+    },
+    {
+      "full_name": "inhuh/trs-oden",
+      "hash": "fd057045b87af304099ab5da5e227552b3e1d91fae71e247a0b18ffec097523e",
+      "stage": 16
+    },
+    {
+      "full_name": "tpnurmi-code/GBB",
+      "hash": "032826f5454587b64423c2ef92f44006c4b6abe0f8af342808231fd7f61e0cd0",
+      "stage": 17
+    },
+    {
+      "full_name": "bbj-lab/cotorra",
+      "hash": "2281bde85af22c9687835b677dfb454f7755d6d4fdf997a2997bb2e553a77581",
+      "stage": 17
+    },
+    {
+      "full_name": "ivsemenkov/LISA",
+      "hash": "2a0cb948e85c05a9236cb65e3bc966b15c28459c980770b74bee13acbeccd42f",
+      "stage": 17
+    },
+    {
+      "full_name": "jameszhou-gl/Coogee",
+      "hash": "304e87d1f41461ab338ea9a43cac64663444c13ec0cbf18a3416f91572cf8cba",
+      "stage": 17
+    },
+    {
+      "full_name": "AI4HealthUOL/CardioLab",
+      "hash": "35e43a64f0aad30b51f0b10b2b75a42800a89fb88ba460d7d7f1772002e829e9",
+      "stage": 17
+    },
+    {
+      "full_name": "Fjr9516/longitudinal-rigid-registration",
+      "hash": "42c28b92400fc9f27bfe7848a268914bf45958c31b9e8d5fb44616e1807e4ec7",
+      "stage": 17
+    },
+    {
+      "full_name": "Danesed/WaveDiT",
+      "hash": "4f14a5e13e8d0b059e3c64218eb83910ab10255ee80832ca9327230217756294",
+      "stage": 17
+    },
+    {
+      "full_name": "MParvan/ecg-biometrics-bench",
+      "hash": "5afdf3124d73fc8fdd72d3a9d01572ae1d822d2c0b911b77424dd40204434f8f",
+      "stage": 17
+    },
+    {
+      "full_name": "imanpalsingh/COVID-19-Detection--from-X-rays",
+      "hash": "68b19224095eca8efbcbbcdfb87ac980499269e3fe85eec86d4004dece3abb75",
+      "stage": 17
+    },
+    {
+      "full_name": "MrDongdongLin/Cryptanalysis_IEAE",
+      "hash": "6c1a30cb88f07eb0020b9fc09aac0bc702862a4789637316d045e351ec6afb01",
+      "stage": 17
+    },
+    {
+      "full_name": "plandes/dsprov",
+      "hash": "76d2e772af1c517fe7b51c5c6434c7dd44357418b2fe1274c1e5ebb972d2dbc5",
+      "stage": 17
+    },
+    {
+      "full_name": "gordonkoehn/solar-drag-uninsurable",
+      "hash": "780be510df34cce92c295712a0cd052e36b55f838f85ec9b32c4345a493e737a",
+      "stage": 17
+    },
+    {
+      "full_name": "PingEnLu/Time-dependent_SIR_COVID-19",
+      "hash": "8215837b468709824a33b6c4bb7c84e14f584b27c5263fd44d6477b34048e60e",
+      "stage": 17
+    },
+    {
+      "full_name": "paoloo/satsec-decomposition",
+      "hash": "825fc6e94085d95e35ccbb884b5906a43bbe9aca136ba719d1d7a61d40c3d4e3",
+      "stage": 17
+    },
+    {
+      "full_name": "DennisSchmitz/Jovian_archive",
+      "hash": "9fa8b6b12e2cef6943c3eff9abdfd59560612c3e0060c1a46f1b6230ebec409f",
+      "stage": 17
+    },
+    {
+      "full_name": "christopher-altman/continuation-observatory",
+      "hash": "b5a55aaf36fe8f161f29e4d3e4fae97b669660de5024de42d6a89bb182a83a1e",
+      "stage": 17
+    },
+    {
+      "full_name": "saimj7/Social-Distancing-Detection-in-Real-Time",
+      "hash": "ca699693bce852776a2dba30bb64d4eb6850f17920ddce488d90565937c0e239",
+      "stage": 17
+    },
+    {
+      "full_name": "mims-harvard/bio-mirage",
+      "hash": "d17dfee232c68b1cdd6bf51c44ed93560fd17bcf6dbb5a8937c751281f245f78",
+      "stage": 17
+    },
+    {
+      "full_name": "Junelin2333/COVID19-CXR",
+      "hash": "d1b83e0a9cfc949aa6d3efaafd21c4ae48be3b08a60e81f3a79e7ac14c7478aa",
+      "stage": 17
+    },
+    {
+      "full_name": "vlmurthylab/pytorch-image-models-ecgflow",
+      "hash": "d497ee5745fbdea4c52afe7621319595b9a31770c8741892072939c4772c7831",
+      "stage": 17
+    },
+    {
+      "full_name": "yudhisteer/Face-Recognition-with-Masks",
+      "hash": "e2e84ed46ad3e270ad138a65a0f917c56d63ad48c27e0959cf3c06529dc6f557",
+      "stage": 17
+    },
+    {
+      "full_name": "meliksahturker/NetGen",
+      "hash": "f920ba2ab396f507130f8b88b9e40433841bce9016b0b52433291cf37870671d",
+      "stage": 17
     }
   ]
 }

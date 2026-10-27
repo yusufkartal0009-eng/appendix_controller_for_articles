@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_086",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "Installing collected packages: pymupdf4llm, pymupdf-layout, nvidia-cusparselt-cu13, mpmath, flatbuffers, cuda-toolkit, appdirs, zstandard, xxhash, websockets, uuid-utils, urllib3, tzdata, typing-extensions, truststore, triton, tqdm, threadpoolctl, tenacity, tabulate, sympy, sniffio, six, shellingham",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.626,
+    "metric_lines": []
+  },
+  "k2": null
+}

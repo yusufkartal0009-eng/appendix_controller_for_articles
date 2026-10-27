@@ -1,0 +1,277 @@
+{
+  "paper_id": "a4_084",
+  "source": "https://github.com/SALT-NLP/Sketch2Code",
+  "commit_hash": "21dfd1dd5d14033ac482167e29bcf984fa9fd310",
+  "target_script": "experiments/gpt4_direct.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.52,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_084",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.232,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 13492224,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "anthropic==0.36.2",
+      "name": "anthropic",
+      "requested": "==0.36.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "beautifulsoup4==4.12.3",
+      "name": "beautifulsoup4",
+      "requested": "==4.12.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "boto3==1.35.44",
+      "name": "boto3",
+      "requested": "==1.35.44",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "colormath==3.0.0",
+      "name": "colormath",
+      "requested": "==3.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "datasets==2.19.0",
+      "name": "datasets",
+      "requested": "==2.19.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.3.2",
+      "name": "joblib",
+      "requested": "==1.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "matplotlib==3.8.1",
+      "name": "matplotlib",
+      "requested": "==3.8.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.22.4",
+      "name": "numpy",
+      "requested": "==1.22.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openai==1.52.0",
+      "name": "openai",
+      "requested": "==1.52.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "openai_clip==1.0.1",
+      "name": "openai_clip",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opencv_contrib_python==4.6.0.66",
+      "name": "opencv_contrib_python",
+      "requested": "==4.6.0.66",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opencv_python==4.6.0.66",
+      "name": "opencv_python",
+      "requested": "==4.6.0.66",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opencv_python_headless==4.9.0.80",
+      "name": "opencv_python_headless",
+      "requested": "==4.9.0.80",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "paddleocr==2.7.3",
+      "name": "paddleocr",
+      "requested": "==2.7.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pillow==10.4.0",
+      "name": "Pillow",
+      "requested": "==10.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "playwright==1.43.0",
+      "name": "playwright",
+      "requested": "==1.43.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==5.28.2",
+      "name": "protobuf",
+      "requested": "==5.28.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "retry==0.9.2",
+      "name": "retry",
+      "requested": "==0.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit_learn==1.4.0",
+      "name": "scikit_learn",
+      "requested": "==1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.13.1",
+      "name": "scipy",
+      "requested": "==1.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Shapely==2.0.6",
+      "name": "Shapely",
+      "requested": "==2.0.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "streamlit==1.39.0",
+      "name": "streamlit",
+      "requested": "==1.39.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.4.0",
+      "name": "torch",
+      "requested": "==2.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.19.0",
+      "name": "torchvision",
+      "requested": "==0.19.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.2",
+      "name": "tqdm",
+      "requested": "==4.66.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "transformers==4.44.1",
+      "name": "transformers",
+      "requested": "==4.44.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "accelerate=1.0.1",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    },
+    {
+      "requirement": "bitsandbytes=0.44.1",
+      "name": null,
+      "installed": null,
+      "satisfied": null,
+      "note": "not a parseable requirement"
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/experiments/gpt4_direct.py --model gpt-4o --input_dir /path/to/your/sketch2code/dataset --out_dir /path/to/your/output/directory\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.232s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/experiments/gpt4_direct.py\", line 8, in <module>\n    from openai import OpenAI, AzureOpenAI\nModuleNotFoundError: No module named 'openai'\n"
+}
