@@ -35,6 +35,7 @@ if str(project_root) not in sys.path:
 
 from src.claim_metric_map import load_claim_map
 from src.config import DEFAULT_TOLERANCE
+from src.multi_seed import load_seed_metric_results
 from src.score_run import load_run, score_run
 
 DATA = project_root / "data"
@@ -118,7 +119,8 @@ def evidence_found(run_dir: Path, needles: list[str]) -> bool:
 
 def _scored(paper_id: str, license_name: str, claims: dict[str, float], record: dict[str, Any], report: dict[str, Any],
             run_dir: Path, claim_map: dict[str, Any] | None = None) -> dict[str, Any]:
-    result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=claim_map)
+    result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=claim_map,
+                       seed_metric_results=load_seed_metric_results(paper_id))
     bd = result["breakdown"]
     return {"tier1": bd.tier1_build, "tier2": bd.tier2_metrics, "total": bd.total_score, "status": bd.status_label}
 

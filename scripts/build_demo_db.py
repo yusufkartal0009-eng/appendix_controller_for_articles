@@ -38,6 +38,7 @@ from src.claim_review import claims_for_scoring
 from src.claim_store import restore_decisions
 from src.database import get_engine, get_session, init_db, save_score
 from src.models import PaperCreate, PaperORM, RunORM
+from src.multi_seed import load_seed_metric_results
 from src.score_run import load_run, score_run
 
 DEFAULT_DATA = project_root / "data"
@@ -125,7 +126,8 @@ def score_all(paper_id: str, license_name: str, claims: dict[str, float], runs: 
     scored = []
     for label, run_dir in runs:
         record, report = load_run(run_dir)
-        result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=load_claim_map())
+        result = score_run(paper_id, license_name, claims, record, report, run_dir, None, claim_map=load_claim_map(),
+                           seed_metric_results=load_seed_metric_results(paper_id))
         scored.append({"label": label, "run_dir": run_dir, "record": record, "report": report, "result": result})
     return scored
 

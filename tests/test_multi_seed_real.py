@@ -7,7 +7,8 @@ from pathlib import Path
 import pytest
 
 from scripts import run_multi_seed
-from src.multi_seed import load_seed_settings
+from src.multi_seed import load_seed_metric_results, load_seed_settings
+from src.scoring import Tier3StabilityEvaluator
 
 REPO = Path(__file__).resolve().parent.parent
 ROOT = REPO / "data" / "multi_seed_runs"
@@ -87,6 +88,10 @@ def test_the_readme_quotes_the_stored_tier3_scores():
         pytest.skip("both papers' seed runs are needed")
     readme = (REPO / "README.md").read_text(encoding="utf-8")
     first, second = summary_of("paper_003")["tier3"]["score"], summary_of("paper_006")["tier3"]["score"]
-    assert f"Tier 3 is {first} for `paper_003`" in readme and f"and {second} for `paper_006`" in readme
+    # since #542 the scorer is bound to the claimed metric: the README names that score and the summary's own (largest-CV) one
+    scored = {p: Tier3StabilityEvaluator.evaluate_by_metric(load_seed_metric_results(p), claimed_run_metrics=claimed)[0]
+              for p, claimed in (("paper_003", ["rmse"]), ("paper_006", []))}
+    assert f"Tier 3 is {scored['paper_003']} for `paper_003`" in readme and f"and {scored['paper_006']} for `paper_006`" in readme
+    assert f"gave {first}" in readme and second == scored["paper_006"]
     progress = (REPO / "docs" / "PROGRESS.md").read_text(encoding="utf-8")
     assert f"Tier 3 is {first} for `paper_003`" in progress and f"and {second} for `paper_006`" in progress

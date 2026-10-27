@@ -72,7 +72,8 @@ def score_run(paper_id: str, license_name: str, claims: dict[str, float], record
     question ID, as before.
 
     `seed_metric_results` (docs/MULTI_SEED.md) gives Tier 3 the seed runs of a multi-seed run; without it Tier 3 is the
-    single-run baseline.
+    single-run baseline. If a mapped claim's run metric has seed results, only that metric decides Tier 3 (K-A, docs/MULTI_SEED.md
+    section 5); otherwise the metric with the largest CV does.
     """
     facts = run_facts(record, report, run_dir, repo_dir)
     scored_claims, mapped, no_counterpart = apply_claim_map(paper_id, claims, claim_map)
@@ -81,6 +82,7 @@ def score_run(paper_id: str, license_name: str, claims: dict[str, float], record
         claimed_metrics=scored_claims,
         license_name=license_name,
         seed_metric_results=seed_metric_results,  # per metric, one value per successful seed run (#48); None: one run
+        claimed_run_metrics=list(mapped.values()),
         **facts,
     )
     result["claim_mapping"] = {"mapped": mapped, "no_counterpart": no_counterpart}
