@@ -1,0 +1,35 @@
+{
+  "paper_id": "a4_105",
+  "k1": {
+    "k1_passed": true,
+    "category": null,
+    "log_line": "",
+    "install_status": "SKIPPED",
+    "run_status": "COMPLETED",
+    "exit_code": 0,
+    "duration_seconds": 0.817,
+    "metric_lines": [
+      "Base LLM accuracy :  44.4%",
+      "ACE   accuracy    :  83.3%   (+38.9 pts)"
+    ]
+  },
+  "k2": {
+    "passed": false,
+    "numbers_in_output": 4,
+    "numbers_found_in_paper": 0,
+    "numbers_found_on_table_page": 0,
+    "pdf_pages": 32,
+    "matches": [],
+    "note": "match candidate only; a string match, not verified",
+    "v2": {
+      "passed": false,
+      "numbers_in_output": 4,
+      "numbers_found_in_paper": 0,
+      "numbers_found_on_table_page": 0,
+      "pdf_pages": 32,
+      "matches": [],
+      "note": "match candidate only; a string match with scale conversion and rounding, not verified"
+    },
+    "arxiv_id": "2510.04618"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "paper_id": "a4_107",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T07:39:25+00:00",
+  "repo_url": "https://github.com/Venta02/visual-search-engine",
+  "pinned_commit": "c668a2cf955a25888fff6bbbe7e1e5f876668e5d",
+  "target_script": "scripts/download_sample_dataset.py",
+  "container_command": "python /workspace/repo/scripts/download_sample_dataset.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/download_sample_dataset.py",
+    "readme_url": "https://github.com/Venta02/visual-search-engine/blob/c668a2cf955a25888fff6bbbe7e1e5f876668e5d/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "c668a2cf955a25888fff6bbbe7e1e5f876668e5d",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.104
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 179,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_107_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "ity tokenizers toml tornado typing-extensions urllib3 watchdog annotated-types bcrypt certifi click-didyoumean click-plugins click-repl comm ConfigArgParse contourpy cryptography cffi cycler debugpy ecdsa flask Flask-Cors Flask-Login fonttools fsspec gevent geventhttpclient greenlet grpcio grpcio-tools h11 httptools h2 hpack hyperframe ipython prompt_toolkit ipython-pygments-lexers itsdangerous jedi parso jinja2 joblib cloudpickle jsonschema attrs jsonschema-specifications jupyter-client jupyter-core kiwisolver markdown-it-py mdurl markupsafe matplotlib-inline msgpack mypy-extensions narwhals numba llvmlite pathspec pexpect platformdirs psutil ptyprocess pyarrow pynndescent pyparsing python-dateutil pytz pyzmq referencing regex rpds-py safetensors scipy six stack_data asttokens executing threadpoolctl traitlets tzdata uvloop watchfiles wcwidth websockets Werkzeug brotli filelock iniconfig nest-asyncio networkx pure-eval pyasn1 pycparser rsa setuptools sniffio zope.event zope.interface\n",
+    "stderr": "",
+    "duration_seconds": 222.952
+  },
+  "sandbox_duration_seconds": 1211.395,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.527,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 11599872
+  },
+  "finished_at": "2026-10-27T08:03:21+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "paper_id": "a4_097",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T07:14:31+00:00",
+  "repo_url": "https://github.com/enjeeneer/zero-shot-rl",
+  "pinned_commit": "2280cdf8fd8a5ccd51593ce9e6e06d27636c5a44",
+  "target_script": "exorl_reformatter.py",
+  "container_command": "python /workspace/repo/exorl_reformatter.py walker_rnd",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python exorl_reformatter.py walker_rnd",
+    "readme_url": "https://github.com/enjeeneer/zero-shot-rl/blob/2280cdf8fd8a5ccd51593ce9e6e06d27636c5a44/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "2280cdf8fd8a5ccd51593ce9e6e06d27636c5a44",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.631
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "PARTIAL",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 23,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_097_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [
+      {
+        "requirement": "POT==0.9.0",
+        "status": "NEEDS_SDIST_BUILD",
+        "reason": "ERROR: No matching distribution found for POT==0.9.0"
+      }
+    ],
+    "dependency_conflicts": [],
+    "stdout": "ylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl.metadata (3.6 kB)\nCollecting matplotlib==3.7.1 (from -r /staging/a4_097/requirements.txt (line 9))\n  Using cached matplotlib-3.7.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.6 kB)\nCollecting mujoco==2.3.5 (from -r /staging/a4_097/requirements.txt (line 10))\n  Downloading mujoco-2.3.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)\nCollecting numpy==1.24.3 (from -r /staging/a4_097/requirements.txt (line 11))\n  Using cached numpy-1.24.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.6 kB)\nCollecting h5py==3.11.0 (from -r /staging/a4_097/requirements.txt (line 12))\n  Using cached h5py-3.11.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.5 kB)\nCollecting pandas==2.0.3 (from -r /staging/a4_097/requirements.txt (line 13))\n  Downloading pandas-2.0.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)\n",
+    "stderr": "ERROR: Ignored the following versions that require a different python version: 0.0.322773188 Requires-Python >=3.6,<3.10; 0.0.355168290 Requires-Python >=3.6,<3.10; 0.0.364896371 Requires-Python >=3.6,<3.10; 0.0.403778684 Requires-Python >=3.7,<3.10; 0.0.423341706 Requires-Python >=3.7,<3.10; 0.0.425341097 Requires-Python >=3.7,<3.10; 1.0.0 Requires-Python >=3.7,<=3.10; 1.0.1 Requires-Python >=3.7,<=3.10; 1.0.2 Requires-Python >=3.7,<=3.10\nERROR: Could not find a version that satisfies the requirement POT==0.9.0 (from versions: 0.9.1, 0.9.2, 0.9.3, 0.9.4, 0.9.5, 0.9.6, 0.9.6.post1, 0.9.7, 0.9.7.post1)\nERROR: No matching distribution found for POT==0.9.0\n",
+    "duration_seconds": 140.285
+  },
+  "sandbox_duration_seconds": 2.965,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.877,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 60379136
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.1,
+    "peak_memory_bytes": 41779200
+  },
+  "finished_at": "2026-10-27T07:16:56+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

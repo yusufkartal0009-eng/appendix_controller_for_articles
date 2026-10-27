@@ -1,0 +1,183 @@
+{
+  "paper_id": "a4_103",
+  "source": "https://github.com/nguyenvo09/LearningFromFactCheckers",
+  "commit_hash": "db101beed691a0e399f9b0b19fb59c7dc8b16760",
+  "target_script": "Masters/master_fcrg.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.609,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_103",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 1.205,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 86753280,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "dill",
+      "name": "dill",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "tqdm==4.31.1",
+      "name": "tqdm",
+      "requested": "==4.31.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==0.23.1",
+      "name": "pandas",
+      "requested": "==0.23.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "nltk==3.4.5",
+      "name": "nltk",
+      "requested": "==3.4.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "boto3",
+      "name": "boto3",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "requests",
+      "name": "requests",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "regex",
+      "name": "regex",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "sacremoses",
+      "name": "sacremoses",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "scipy",
+      "name": "scipy",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "sklearn",
+      "name": "sklearn",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "hyperopt",
+      "name": "hyperopt",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "Pillow",
+      "name": "Pillow",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "tensorboardX==1.4",
+      "name": "tensorboardX",
+      "requested": "==1.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "spacy==2.2.3",
+      "name": "spacy",
+      "requested": "==2.2.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "overrides",
+      "name": "overrides",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "h5py==2.10.0",
+      "name": "h5py",
+      "requested": "==2.10.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/Masters/master_fcrg.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 1.205s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/Masters/master_fcrg.py\", line 7, in <module>\n    from interactions import MatchInteraction\n  File \"/workspace/repo/interactions.py\", line 3, in <module>\n    import matchzoo\n  File \"/workspace/repo/matchzoo/__init__.py\", line 17, in <module>\n    from .data_pack import DataPack\n  File \"/workspace/repo/matchzoo/data_pack/__init__.py\", line 1, in <module>\n    from .data_pack import DataPack, load_data_pack\n  File \"/workspace/repo/matchzoo/data_pack/data_pack.py\", line 8, in <module>\n    import dill\nModuleNotFoundError: No module named 'dill'\n"
+}

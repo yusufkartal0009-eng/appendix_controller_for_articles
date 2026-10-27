@@ -1,0 +1,11 @@
+Looking in links: /workspace/packages
+Processing /workspace/packages/anthropic-2.3.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 1))
+Processing /workspace/packages/bs4-0.0.2-py2.py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 2))
+Processing /workspace/packages/bm25s-0.3.15-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 3))
+Processing /workspace/packages/colbert_ai-0.2.22-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 4))
+Processing /workspace/packages/gdown-6.4.2-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 5))
+Processing /workspace/packages/gritlm-1.0.2-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 6))
+Processing /workspace/packages/huggingface_hub-2.3.0-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 7))
+Processing /workspace/packages/langchain-1.4.7-py3-none-any.whl (from -r /workspace/repo/requirements.txt (line 8))
+ERROR: Could not find a version that satisfies the requirement langdetect (from versions: none)
+ERROR: No matching distribution found for langdetect

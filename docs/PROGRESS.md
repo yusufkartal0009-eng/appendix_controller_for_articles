@@ -66,6 +66,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 - Runs a4_051 to a4_060: install 1, run 9. Cumulative through a4_060 (from `evaluation.json`): 60 run, K1 passed 2, K2 v1 passed 0, K2 v2 passed 0. The walk is not finished.
 - Not verified: anything about later candidates.
 
+### data(corpus): automatic search of round 4, runs a4_091 to a4_107, end of the search (2026-10-27 11:04 +03:00, Issue #521)
+- Runs a4_091 to a4_107: K1 passed 1, install 7, no_metric_line 1, run 7, staging 1. Final counts (from `evaluation.json`): 2648 candidates checked, 107 run, K1 passed 3, K2 v1 passed 1, K2 v2 passed 1; the search stopped because `time_limit_9h` (9 hours after 2026-10-27 01:44). Results section and report: Issue #534.
+- Not verified: whether any output number that matched the paper's text is the number of its table; K2 v2 can match by chance.
+
 ### docs(corpus): stages 18 to 21 for the round 4 search (2026-10-27 09:14 +03:00, Issue #535)
 - Stage 17 was used up (2,170 candidates checked, 91 run). Stages 18 to 21 (64 topics, none used in any earlier stage of round 3 or 4, chosen without looking at any candidate) are added to `docs/AUTO_SEARCH_ROUND4.md` and `scripts/auto_search4.py`; the test checks stages 10 to 21. The walk stopped with `pool_used_up` and was idle until this change.
 

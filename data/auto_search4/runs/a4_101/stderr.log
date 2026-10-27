@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/repo/demo.py", line 1, in <module>
+    from envs import BasicMinecraft
+  File "/workspace/repo/envs/__init__.py", line 1, in <module>
+    from .polycraft_gym_env import PolycraftGymEnv
+  File "/workspace/repo/envs/polycraft_gym_env.py", line 1, in <module>
+    from gym import Env
+ModuleNotFoundError: No module named 'gym'

@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_107",
+  "k1": {
+    "k1_passed": false,
+    "category": "install",
+    "log_line": "Installing collected packages: triton, sentencepiece, pytz, pure-eval, ptyprocess, passlib, nvidia-cusparselt-cu12, mpmath, brotli, zope.interface, zope.event, websockets, wcwidth, watchdog, vine, uvloop, urllib3, tzdata, typing-extensions, traitlets, tqdm, tornado, toml, threadpoolctl, tenacity, sy",
+    "install_status": "FAILED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.527,
+    "metric_lines": []
+  },
+  "k2": null
+}

@@ -1,0 +1,5 @@
+Iter    0 | Return  -1342.7 | KL 0.0012 | Clip 0.03 | VLoss 96.973 | Entropy 1.415
+Iter   10 | Return  -1480.9 | KL 0.0041 | Clip 0.04 | VLoss 125.850 | Entropy 1.377
+Iter   20 | Return  -1152.8 | KL 0.0016 | Clip 0.00 | VLoss 68.660 | Entropy 1.339
+Iter   30 | Return  -1213.0 | KL 0.0062 | Clip 0.07 | VLoss 114.960 | Entropy 1.281
+Iter   40 | Return  -1179.0 | KL 0.0059 | Clip 0.05 | VLoss 86.704 | Entropy 1.205

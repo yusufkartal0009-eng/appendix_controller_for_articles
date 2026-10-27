@@ -1,0 +1,46 @@
+{
+  "paper_id": "a4_106",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T07:37:49+00:00",
+  "repo_url": "https://github.com/emory-irlab/conqret-rag",
+  "pinned_commit": "eac411acb2a9e5b79f6d33e03ffebb7e4079f980",
+  "target_script": "retriever.py",
+  "container_command": "python /workspace/repo/retriever.py",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python retriever.py",
+    "readme_url": "https://github.com/emory-irlab/conqret-rag/blob/eac411acb2a9e5b79f6d33e03ffebb7e4079f980/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "FAILED",
+    "error": "Failed to clone repository from 'https://github.com/emory-irlab/conqret-rag': Command '['git', 'clone', 'https://github.com/emory-irlab/conqret-rag', 'C:\\\\Users\\\\USER\\\\rr_pr\\\\.sandbox_staging\\\\a4_106']' returned non-zero exit status 128.",
+    "duration_seconds": 1.214
+  },
+  "collected_files": []
+}

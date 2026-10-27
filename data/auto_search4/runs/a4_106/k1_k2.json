@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_106",
+  "k1": {
+    "k1_passed": false,
+    "category": "staging",
+    "log_line": "Failed to clone repository from 'https://github.com/emory-irlab/conqret-rag': Command '['git', 'clone', 'https://github.com/emory-irlab/conqret-rag', 'C:\\\\Users\\\\USER\\\\rr_pr\\\\.sandbox_staging\\\\a4_106']' returned non-zero exit status 128.",
+    "install_status": null,
+    "run_status": null,
+    "exit_code": null,
+    "duration_seconds": null,
+    "metric_lines": []
+  },
+  "k2": null
+}
