@@ -1,0 +1,407 @@
+{
+  "paper_id": "a4_037",
+  "source": "https://github.com/microsoft/figure",
+  "commit_hash": "2604d1d48efb11122ed9e8e24607a8a928f6a844",
+  "target_script": "download_datasets.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.466,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_037",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.139,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 9969664,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "dgl==2.1.0",
+      "name": "dgl",
+      "requested": "==2.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==3.1",
+      "name": "networkx",
+      "requested": "==3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.24.3",
+      "name": "numpy",
+      "requested": "==1.24.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==24.2",
+      "name": "packaging",
+      "requested": "==24.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.0.2",
+      "name": "pandas",
+      "requested": "==2.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "optuna==3.6.1",
+      "name": "optuna",
+      "requested": "==3.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyarrow==23.0.1",
+      "name": "pyarrow",
+      "requested": "==23.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.9.2",
+      "name": "pydantic",
+      "requested": "==2.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchdata==0.7.1",
+      "name": "torchdata",
+      "requested": "==0.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ray==2.56.0",
+      "name": "ray",
+      "requested": "==2.56.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.10.1",
+      "name": "scipy",
+      "requested": "==1.10.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tabulate==0.9.0",
+      "name": "tabulate",
+      "requested": "==0.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.3",
+      "name": "tqdm",
+      "requested": "==4.66.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gdown==5.2.2",
+      "name": "gdown",
+      "requested": "==5.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.13.0",
+      "name": "torch",
+      "requested": "==2.13.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.17.1+cu121",
+      "name": "torchvision",
+      "requested": "==0.17.1+cu121",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchaudio==2.2.1+cu121",
+      "name": "torchaudio",
+      "requested": "==2.2.1+cu121",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch_geometric",
+      "name": "torch_geometric",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_scatter",
+      "name": "torch_scatter",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_sparse",
+      "name": "torch_sparse",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_cluster",
+      "name": "torch_cluster",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_spline_conv",
+      "name": "torch_spline_conv",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "dgl==2.1.0",
+      "name": "dgl",
+      "requested": "==2.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "networkx==3.1",
+      "name": "networkx",
+      "requested": "==3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==1.24.3",
+      "name": "numpy",
+      "requested": "==1.24.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==24.2",
+      "name": "packaging",
+      "requested": "==24.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.0.2",
+      "name": "pandas",
+      "requested": "==2.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "optuna==3.6.1",
+      "name": "optuna",
+      "requested": "==3.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyarrow==23.0.1",
+      "name": "pyarrow",
+      "requested": "==23.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.9.2",
+      "name": "pydantic",
+      "requested": "==2.9.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchdata==0.7.1",
+      "name": "torchdata",
+      "requested": "==0.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ray==2.56.0",
+      "name": "ray",
+      "requested": "==2.56.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.10.1",
+      "name": "scipy",
+      "requested": "==1.10.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tabulate==0.9.0",
+      "name": "tabulate",
+      "requested": "==0.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.66.3",
+      "name": "tqdm",
+      "requested": "==4.66.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gdown==5.2.2",
+      "name": "gdown",
+      "requested": "==5.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch==2.13.0",
+      "name": "torch",
+      "requested": "==2.13.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchvision==0.17.1+cu121",
+      "name": "torchvision",
+      "requested": "==0.17.1+cu121",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torchaudio==2.2.1+cu121",
+      "name": "torchaudio",
+      "requested": "==2.2.1+cu121",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "torch_geometric",
+      "name": "torch_geometric",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_scatter",
+      "name": "torch_scatter",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_sparse",
+      "name": "torch_sparse",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_cluster",
+      "name": "torch_cluster",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch_spline_conv",
+      "name": "torch_spline_conv",
+      "requested": "any",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/download_datasets.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.139s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/download_datasets.py\", line 1, in <module>\n    import gdown\nModuleNotFoundError: No module named 'gdown'\n"
+}

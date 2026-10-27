@@ -1,0 +1,14 @@
+{
+  "paper_id": "a4_038",
+  "k1": {
+    "k1_passed": false,
+    "category": "run",
+    "log_line": "Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "install_status": "INSTALLED",
+    "run_status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 75.676,
+    "metric_lines": []
+  },
+  "k2": null
+}

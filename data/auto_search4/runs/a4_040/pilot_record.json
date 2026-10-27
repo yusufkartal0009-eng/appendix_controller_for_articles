@@ -1,0 +1,106 @@
+{
+  "paper_id": "a4_040",
+  "protocol": "docs/PILOT_4.md",
+  "repro_radar_commit": "34cf56ed7a99b05169defb82e14befa75c9cd9dd",
+  "started_at": "2026-10-27T01:58:20+00:00",
+  "repo_url": "https://github.com/YTomar79/fairmix-audit",
+  "pinned_commit": "19889f08a061fd345ba129dcff28d64ea93da9ef",
+  "target_script": "scripts/build_workshop_artifacts.py",
+  "container_command": "python /workspace/repo/scripts/build_workshop_artifacts.py --run-dir results/<run-dir> --output-dir results/paper_artifacts",
+  "environment": {},
+  "limits": {
+    "cpus": 4.0,
+    "memory_limit": "14265m",
+    "memory_swap": "14265m",
+    "pids_limit": 100,
+    "timeout_seconds": 1200,
+    "run_timeout_seconds": 600
+  },
+  "pilot4": {
+    "run_command": "python scripts/build_workshop_artifacts.py --run-dir results/<run-dir> --output-dir results/paper_artifacts",
+    "readme_url": "https://github.com/YTomar79/fairmix-audit/blob/19889f08a061fd345ba129dcff28d64ea93da9ef/README.md",
+    "attempt": "first",
+    "correction": null
+  },
+  "memory_override": {
+    "requested": "50%",
+    "resolved": "14265m",
+    "protocol_memory_limit": "6g"
+  },
+  "cpus_override": {
+    "requested": 4.0,
+    "protocol_cpus": 2.0,
+    "note": "not a protocol run: the CPU limit replaces the protocol's (#331)"
+  },
+  "timeout_override": {
+    "requested": 600,
+    "protocol_run_timeout_seconds": 14400,
+    "note": "not a protocol run: the time limit of the run phase replaces the protocol's (#396)"
+  },
+  "stage": {
+    "status": "STAGED",
+    "checked_out_commit": "19889f08a061fd345ba129dcff28d64ea93da9ef",
+    "matches_pinned_commit": true,
+    "target_script_exists": true,
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "has_conda_env": false,
+    "duration_seconds": 1.183
+  },
+  "python_version": "3.11",
+  "run_setup": {
+    "command": null,
+    "working_dir": "",
+    "writable_repo": false,
+    "extra_requirements": [],
+    "constraints": [],
+    "build": null,
+    "decision": "report_as_is",
+    "data_mounts": []
+  },
+  "bundle": {
+    "status": "SUCCESS",
+    "python_version": "3.11",
+    "extra_requirements": [],
+    "constraints": [],
+    "built_wheels": [],
+    "wheel_count": 34,
+    "bundle_dir": "<REPO>\\.sandbox_staging\\a4_040_packages",
+    "requirements_files": [
+      "requirements.txt"
+    ],
+    "needs_sdist_build": [],
+    "dependency_conflicts": [],
+    "stdout": "-3.0.0-py2.py3-none-any.whl\nSaved ./a4_040_packages/pytz-2026.5-py2.py3-none-any.whl\nSaved ./a4_040_packages/six-1.17.0-py2.py3-none-any.whl\nSaved ./a4_040_packages/threadpoolctl-3.7.0-py3-none-any.whl\nSaved ./a4_040_packages/tzdata-2026.5-py2.py3-none-any.whl\nSaved ./a4_040_packages/iniconfig-2.3.1-py3-none-any.whl\nSaved ./a4_040_packages/requests-2.34.2-py3-none-any.whl\nSaved ./a4_040_packages/charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl\nSaved ./a4_040_packages/idna-3.20-py3-none-any.whl\nSaved ./a4_040_packages/urllib3-2.8.0-py3-none-any.whl\nSaved ./a4_040_packages/certifi-2026.10.23-py3-none-any.whl\nSuccessfully downloaded folktables fairlearn matplotlib numpy pandas pyyaml scikit-learn scipy seaborn statsmodels tqdm pytest pluggy contourpy cycler fonttools joblib cloudpickle kiwisolver packaging patsy pillow pyparsing python-dateutil pytz six threadpoolctl tzdata iniconfig requests charset_normalizer idna urllib3 certifi\n",
+    "stderr": "",
+    "duration_seconds": 21.159
+  },
+  "sandbox_duration_seconds": 361.111,
+  "run_report": "run_report.json",
+  "run": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 9.277,
+    "docker_used": true,
+    "isolated": true,
+    "dependency_install_status": "INSTALLED",
+    "peak_memory_bytes": 175443968
+  },
+  "install_meta": {
+    "phase": "install",
+    "status": "INSTALLED",
+    "exit_code": 0,
+    "duration_seconds": 350.509,
+    "peak_memory_bytes": 83795968
+  },
+  "finished_at": "2026-10-27T02:04:43+00:00",
+  "collected_files": [
+    "run_report.json",
+    "execution_meta.json",
+    "install.log",
+    "install_meta.json",
+    "stdout.log",
+    "stderr.log"
+  ]
+}

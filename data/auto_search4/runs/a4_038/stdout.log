@@ -1,0 +1,22 @@
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 1s [Retry 1/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 2s [Retry 2/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 4s [Retry 3/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 8s [Retry 4/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 8s [Retry 5/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 1s [Retry 1/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 2s [Retry 2/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 4s [Retry 3/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 8s [Retry 4/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
+WARNING:huggingface_hub.utils._http:Retrying in 8s [Retry 5/5].
+WARNING:huggingface_hub.utils._http:'[Errno -3] Temporary failure in name resolution' thrown while requesting HEAD https://huggingface.co/bert-base-uncased/resolve/main/config.json
