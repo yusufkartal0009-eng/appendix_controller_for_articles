@@ -1,0 +1,3 @@
+[file1.json]  +500 English tweets  (total: 500)
+[file2.json]  +0 English tweets  (total: 500)
+[warn] File not found, skipping: file3.json

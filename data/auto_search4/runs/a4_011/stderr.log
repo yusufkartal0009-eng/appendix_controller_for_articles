@@ -1,0 +1,56 @@
+Traceback (most recent call last):
+  File "/workspace/deps/redis/connection.py", line 1055, in connect_check_health
+    sock = self._connect()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/connection.py", line 1617, in _connect
+    raise err
+  File "/workspace/deps/redis/connection.py", line 1601, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/repo/ideaforge.py", line 141, in <module>
+    main()
+  File "/workspace/repo/ideaforge.py", line 133, in main
+    run_ideaforge(
+  File "/workspace/repo/ideaforge.py", line 35, in run_ideaforge
+    graph = IdeaGraph(host=FALKORDB_HOST, port=FALKORDB_PORT, graph_name=GRAPH_NAME)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/kg/graph.py", line 34, in __init__
+    self.db = FalkorDB(host=host, port=port)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/falkordb/falkordb.py", line 134, in __init__
+    if Is_Sentinel(conn):
+       ^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/falkordb/sentinel.py", line 142, in Is_Sentinel
+    info = conn.info(section="server")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/commands/core.py", line 1692, in info
+    return self.execute_command("INFO", section, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/client.py", line 867, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/client.py", line 873, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/utils.py", line 258, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/connection.py", line 3273, in get_connection
+    connection.connect()
+  File "/workspace/deps/redis/connection.py", line 1028, in connect
+    self.retry.call_with_retry(
+  File "/workspace/deps/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/workspace/deps/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/workspace/deps/redis/connection.py", line 1029, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/deps/redis/connection.py", line 1077, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.

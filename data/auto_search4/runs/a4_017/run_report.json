@@ -1,0 +1,95 @@
+{
+  "paper_id": "a4_017",
+  "source": "https://github.com/onur-cubukcu/cop28-hate-speech",
+  "commit_hash": "0234dfc78cfc727e6005516904e311d9b8a6b242",
+  "target_script": "merge_datasets.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 0.608,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_017",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.283,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 34897920,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "pywebview>=4.4.1",
+      "name": "pywebview",
+      "requested": ">=4.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "transformers>=4.35.0",
+      "name": "transformers",
+      "requested": ">=4.35.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "torch>=2.0.0",
+      "name": "torch",
+      "requested": ">=2.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "pandas>=2.0.0",
+      "name": "pandas",
+      "requested": ">=2.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    },
+    {
+      "requirement": "openpyxl>=3.1.0",
+      "name": "openpyxl",
+      "requested": ">=3.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": false
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/merge_datasets.py file1.json file2.json file3.json\n==================================================\n[file1.json]  +500 English tweets  (total: 500)\n[file2.json]  +0 English tweets  (total: 500)\n[warn] File not found, skipping: file3.json\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.283s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/merge_datasets.py\", line 79, in <module>\n    merge(sys.argv[1:])\n  File \"/workspace/repo/merge_datasets.py\", line 64, in merge\n    with open(output, \"w\", encoding=\"utf-8\") as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: 'tweets.json'\n"
+}

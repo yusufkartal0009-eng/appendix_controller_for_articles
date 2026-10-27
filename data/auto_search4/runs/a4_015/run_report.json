@@ -1,0 +1,1207 @@
+{
+  "paper_id": "a4_015",
+  "source": "https://github.com/DataSciencePolimi/MDER-DR_RAG",
+  "commit_hash": "e4fa2814bcced86f091baf27d0945b5c794a9b83",
+  "target_script": "build_knowledge_base.py",
+  "command": null,
+  "working_dir": "",
+  "writable_repo": false,
+  "data_mounts": [],
+  "python_version": "3.11",
+  "image": "repro-radar-sandbox:latest",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_seconds": 1.003,
+  "docker_used": true,
+  "isolated": true,
+  "error_message": null,
+  "output_dir": "<REPO>\\sandbox_runs\\a4_015",
+  "generated_files": [
+    "execution_meta.json",
+    "install.log",
+    "installed_packages.json",
+    "install_meta.json",
+    "stderr.log",
+    "stdout.log"
+  ],
+  "dependency_install_status": "FAILED",
+  "gpu": {
+    "requested": null,
+    "available": false,
+    "devices": [],
+    "peak_memory_used_mib": null,
+    "used": null
+  },
+  "dependency_conflicts": [],
+  "meta": {
+    "status": "FAILED",
+    "exit_code": 1,
+    "duration_seconds": 0.68,
+    "timeout_limit_seconds": 600,
+    "killed_before_timeout": false,
+    "dependency_install_status": "FAILED",
+    "peak_memory_bytes": 53010432,
+    "gpu_requested": false,
+    "gpu_devices": [],
+    "gpu_peak_memory_used_mib": null,
+    "user_id": 1000,
+    "group_id": 1000
+  },
+  "installed_packages": [],
+  "requested_vs_installed": [
+    {
+      "requirement": "aiohappyeyeballs==2.6.1",
+      "name": "aiohappyeyeballs",
+      "requested": "==2.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aiohttp==3.13.3",
+      "name": "aiohttp",
+      "requested": "==3.13.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "aiosignal==1.4.0",
+      "name": "aiosignal",
+      "requested": "==1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "altair==6.0.0",
+      "name": "altair",
+      "requested": "==6.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "annotated-doc==0.0.4",
+      "name": "annotated-doc",
+      "requested": "==0.0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "annotated-types==0.7.0",
+      "name": "annotated-types",
+      "requested": "==0.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "anyio==4.12.1",
+      "name": "anyio",
+      "requested": "==4.12.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "attrs==25.4.0",
+      "name": "attrs",
+      "requested": "==25.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "bcrypt==5.0.0",
+      "name": "bcrypt",
+      "requested": "==5.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "beautifulsoup4==4.14.3",
+      "name": "beautifulsoup4",
+      "requested": "==4.14.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "blinker==1.9.0",
+      "name": "blinker",
+      "requested": "==1.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "build==1.4.0",
+      "name": "build",
+      "requested": "==1.4.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cachetools==7.0.4",
+      "name": "cachetools",
+      "requested": "==7.0.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "certifi==2026.2.25",
+      "name": "certifi",
+      "requested": "==2026.2.25",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cffi==2.0.0",
+      "name": "cffi",
+      "requested": "==2.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "charset-normalizer==3.4.5",
+      "name": "charset-normalizer",
+      "requested": "==3.4.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "chromadb==1.5.4",
+      "name": "chromadb",
+      "requested": "==1.5.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "click==8.3.1",
+      "name": "click",
+      "requested": "==8.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "cryptography==46.0.5",
+      "name": "cryptography",
+      "requested": "==46.0.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "dataclasses-json==0.6.7",
+      "name": "dataclasses-json",
+      "requested": "==0.6.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "durationpy==0.10",
+      "name": "durationpy",
+      "requested": "==0.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "filelock==3.25.0",
+      "name": "filelock",
+      "requested": "==3.25.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "flatbuffers==25.12.19",
+      "name": "flatbuffers",
+      "requested": "==25.12.19",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "frozenlist==1.8.0",
+      "name": "frozenlist",
+      "requested": "==1.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "fsspec==2026.2.0",
+      "name": "fsspec",
+      "requested": "==2026.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "gitdb==4.0.12",
+      "name": "gitdb",
+      "requested": "==4.0.12",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "GitPython==3.1.46",
+      "name": "GitPython",
+      "requested": "==3.1.46",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "googleapis-common-protos==1.73.0",
+      "name": "googleapis-common-protos",
+      "requested": "==1.73.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "greenlet==3.3.2",
+      "name": "greenlet",
+      "requested": "==3.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "grpcio==1.78.0",
+      "name": "grpcio",
+      "requested": "==1.78.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "h11==0.16.0",
+      "name": "h11",
+      "requested": "==0.16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "hf-xet==1.3.2",
+      "name": "hf-xet",
+      "requested": "==1.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpcore==1.0.9",
+      "name": "httpcore",
+      "requested": "==1.0.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httptools==0.7.1",
+      "name": "httptools",
+      "requested": "==0.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx==0.28.1",
+      "name": "httpx",
+      "requested": "==0.28.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "httpx-sse==0.4.3",
+      "name": "httpx-sse",
+      "requested": "==0.4.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "huggingface_hub==1.6.0",
+      "name": "huggingface_hub",
+      "requested": "==1.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "idna==3.11",
+      "name": "idna",
+      "requested": "==3.11",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib_metadata==8.7.1",
+      "name": "importlib_metadata",
+      "requested": "==8.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "importlib_resources==6.5.2",
+      "name": "importlib_resources",
+      "requested": "==6.5.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Jinja2==3.1.6",
+      "name": "Jinja2",
+      "requested": "==3.1.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "joblib==1.5.3",
+      "name": "joblib",
+      "requested": "==1.5.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "json_repair==0.58.6",
+      "name": "json_repair",
+      "requested": "==0.58.6",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonpatch==1.33",
+      "name": "jsonpatch",
+      "requested": "==1.33",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonpointer==3.0.0",
+      "name": "jsonpointer",
+      "requested": "==3.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonschema==4.26.0",
+      "name": "jsonschema",
+      "requested": "==4.26.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "jsonschema-specifications==2025.9.1",
+      "name": "jsonschema-specifications",
+      "requested": "==2025.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "kubernetes==35.0.0",
+      "name": "kubernetes",
+      "requested": "==35.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain==1.2.10",
+      "name": "langchain",
+      "requested": "==1.2.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-classic==1.0.2",
+      "name": "langchain-classic",
+      "requested": "==1.0.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-community==0.4.1",
+      "name": "langchain-community",
+      "requested": "==0.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-core==1.2.17",
+      "name": "langchain-core",
+      "requested": "==1.2.17",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-experimental==0.4.1",
+      "name": "langchain-experimental",
+      "requested": "==0.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-ollama==1.0.1",
+      "name": "langchain-ollama",
+      "requested": "==1.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langchain-text-splitters==1.1.1",
+      "name": "langchain-text-splitters",
+      "requested": "==1.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph==1.0.10",
+      "name": "langgraph",
+      "requested": "==1.0.10",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph-checkpoint==4.0.1",
+      "name": "langgraph-checkpoint",
+      "requested": "==4.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph-prebuilt==1.0.8",
+      "name": "langgraph-prebuilt",
+      "requested": "==1.0.8",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langgraph-sdk==0.3.9",
+      "name": "langgraph-sdk",
+      "requested": "==0.3.9",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "langsmith==0.7.14",
+      "name": "langsmith",
+      "requested": "==0.7.14",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "markdown-it-py==4.0.0",
+      "name": "markdown-it-py",
+      "requested": "==4.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "MarkupSafe==3.0.3",
+      "name": "MarkupSafe",
+      "requested": "==3.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "marshmallow==3.26.2",
+      "name": "marshmallow",
+      "requested": "==3.26.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mdurl==0.1.2",
+      "name": "mdurl",
+      "requested": "==0.1.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mmh3==5.2.1",
+      "name": "mmh3",
+      "requested": "==5.2.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mpmath==1.3.0",
+      "name": "mpmath",
+      "requested": "==1.3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "multidict==6.7.1",
+      "name": "multidict",
+      "requested": "==6.7.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "mypy_extensions==1.1.0",
+      "name": "mypy_extensions",
+      "requested": "==1.1.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "narwhals==2.17.0",
+      "name": "narwhals",
+      "requested": "==2.17.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "numpy==2.4.3",
+      "name": "numpy",
+      "requested": "==2.4.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "oauthlib==3.3.1",
+      "name": "oauthlib",
+      "requested": "==3.3.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ollama==0.6.1",
+      "name": "ollama",
+      "requested": "==0.6.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "onnxruntime==1.24.3",
+      "name": "onnxruntime",
+      "requested": "==1.24.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-api==1.40.0",
+      "name": "opentelemetry-api",
+      "requested": "==1.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-exporter-otlp-proto-common==1.40.0",
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "requested": "==1.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-exporter-otlp-proto-grpc==1.40.0",
+      "name": "opentelemetry-exporter-otlp-proto-grpc",
+      "requested": "==1.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-proto==1.40.0",
+      "name": "opentelemetry-proto",
+      "requested": "==1.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-sdk==1.40.0",
+      "name": "opentelemetry-sdk",
+      "requested": "==1.40.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "opentelemetry-semantic-conventions==0.61b0",
+      "name": "opentelemetry-semantic-conventions",
+      "requested": "==0.61b0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "orjson==3.11.7",
+      "name": "orjson",
+      "requested": "==3.11.7",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "ormsgpack==1.12.2",
+      "name": "ormsgpack",
+      "requested": "==1.12.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "overrides==7.7.0",
+      "name": "overrides",
+      "requested": "==7.7.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "packaging==26.0",
+      "name": "packaging",
+      "requested": "==26.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pandas==2.3.3",
+      "name": "pandas",
+      "requested": "==2.3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pdfminer==20191125",
+      "name": "pdfminer",
+      "requested": "==20191125",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pdfminer.six==20260107",
+      "name": "pdfminer.six",
+      "requested": "==20260107",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pillow==12.1.1",
+      "name": "pillow",
+      "requested": "==12.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "propcache==0.4.1",
+      "name": "propcache",
+      "requested": "==0.4.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "protobuf==6.33.5",
+      "name": "protobuf",
+      "requested": "==6.33.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyarrow==23.0.1",
+      "name": "pyarrow",
+      "requested": "==23.0.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pybase64==1.4.3",
+      "name": "pybase64",
+      "requested": "==1.4.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pycparser==3.0",
+      "name": "pycparser",
+      "requested": "==3.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pycryptodome==3.23.0",
+      "name": "pycryptodome",
+      "requested": "==3.23.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic==2.12.5",
+      "name": "pydantic",
+      "requested": "==2.12.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic-settings==2.13.1",
+      "name": "pydantic-settings",
+      "requested": "==2.13.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydantic_core==2.41.5",
+      "name": "pydantic_core",
+      "requested": "==2.41.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pydeck==0.9.1",
+      "name": "pydeck",
+      "requested": "==0.9.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "Pygments==2.19.2",
+      "name": "Pygments",
+      "requested": "==2.19.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyparsing==3.3.2",
+      "name": "pyparsing",
+      "requested": "==3.3.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyPika==0.51.1",
+      "name": "PyPika",
+      "requested": "==0.51.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pyproject_hooks==1.2.0",
+      "name": "pyproject_hooks",
+      "requested": "==1.2.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dateutil==2.9.0.post0",
+      "name": "python-dateutil",
+      "requested": "==2.9.0.post0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "python-dotenv==1.2.2",
+      "name": "python-dotenv",
+      "requested": "==1.2.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "pytz==2026.1.post1",
+      "name": "pytz",
+      "requested": "==2026.1.post1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "PyYAML==6.0.3",
+      "name": "PyYAML",
+      "requested": "==6.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rdflib==7.6.0",
+      "name": "rdflib",
+      "requested": "==7.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "referencing==0.37.0",
+      "name": "referencing",
+      "requested": "==0.37.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests==2.32.5",
+      "name": "requests",
+      "requested": "==2.32.5",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-oauthlib==2.0.0",
+      "name": "requests-oauthlib",
+      "requested": "==2.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "requests-toolbelt==1.0.0",
+      "name": "requests-toolbelt",
+      "requested": "==1.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rich==14.3.3",
+      "name": "rich",
+      "requested": "==14.3.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "rpds-py==0.30.0",
+      "name": "rpds-py",
+      "requested": "==0.30.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scikit-learn==1.8.0",
+      "name": "scikit-learn",
+      "requested": "==1.8.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "scipy==1.17.1",
+      "name": "scipy",
+      "requested": "==1.17.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "shellingham==1.5.4",
+      "name": "shellingham",
+      "requested": "==1.5.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "six==1.17.0",
+      "name": "six",
+      "requested": "==1.17.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "smmap==5.0.3",
+      "name": "smmap",
+      "requested": "==5.0.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "soupsieve==2.8.3",
+      "name": "soupsieve",
+      "requested": "==2.8.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "SQLAlchemy==2.0.48",
+      "name": "SQLAlchemy",
+      "requested": "==2.0.48",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "streamlit==1.55.0",
+      "name": "streamlit",
+      "requested": "==1.55.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "sympy==1.14.0",
+      "name": "sympy",
+      "requested": "==1.14.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tenacity==9.1.4",
+      "name": "tenacity",
+      "requested": "==9.1.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "threadpoolctl==3.6.0",
+      "name": "threadpoolctl",
+      "requested": "==3.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tokenizers==0.22.2",
+      "name": "tokenizers",
+      "requested": "==0.22.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "toml==0.10.2",
+      "name": "toml",
+      "requested": "==0.10.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tornado==6.5.4",
+      "name": "tornado",
+      "requested": "==6.5.4",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tqdm==4.67.3",
+      "name": "tqdm",
+      "requested": "==4.67.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typer==0.24.1",
+      "name": "typer",
+      "requested": "==0.24.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing-inspect==0.9.0",
+      "name": "typing-inspect",
+      "requested": "==0.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing-inspection==0.4.2",
+      "name": "typing-inspection",
+      "requested": "==0.4.2",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "typing_extensions==4.15.0",
+      "name": "typing_extensions",
+      "requested": "==4.15.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "tzdata==2025.3",
+      "name": "tzdata",
+      "requested": "==2025.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "urllib3==2.6.3",
+      "name": "urllib3",
+      "requested": "==2.6.3",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "uuid_utils==0.14.1",
+      "name": "uuid_utils",
+      "requested": "==0.14.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "uvicorn==0.41.0",
+      "name": "uvicorn",
+      "requested": "==0.41.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "uvloop==0.22.1",
+      "name": "uvloop",
+      "requested": "==0.22.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "watchdog==6.0.0",
+      "name": "watchdog",
+      "requested": "==6.0.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "watchfiles==1.1.1",
+      "name": "watchfiles",
+      "requested": "==1.1.1",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "websocket-client==1.9.0",
+      "name": "websocket-client",
+      "requested": "==1.9.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "websockets==16.0",
+      "name": "websockets",
+      "requested": "==16.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "xxhash==3.6.0",
+      "name": "xxhash",
+      "requested": "==3.6.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "yarl==1.23.0",
+      "name": "yarl",
+      "requested": "==1.23.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zipp==3.23.0",
+      "name": "zipp",
+      "requested": "==3.23.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    },
+    {
+      "requirement": "zstandard==0.25.0",
+      "name": "zstandard",
+      "requested": "==0.25.0",
+      "installed": null,
+      "satisfied": null,
+      "pinned": true
+    }
+  ],
+  "stdout_preview": "==================================================\nRepro Radar: Isolated Sandbox Runtime Initiated\nWorking Dir   : /workspace/repo\nTimeout Limit : 600s\nSecurity Mode : Unprivileged (UID: 1000)\nNetwork State : Isolated (--network none)\nCommand       : python /workspace/repo/build_knowledge_base.py\n==================================================\n==================================================\nRepro Radar: Execution Concluded\nStatus        : FAILED (Exit Code: 1)\nDependencies  : FAILED\nDuration      : 0.68s\n==================================================\n",
+  "stderr_preview": "Traceback (most recent call last):\n  File \"/workspace/repo/build_knowledge_base.py\", line 3, in <module>\n    from knowledge_base import KnowledgeExtractor\n  File \"/workspace/repo/knowledge_base/__init__.py\", line 2, in <module>\n    from .knowledge_manager import KnowledgeManager\n  File \"/workspace/repo/knowledge_base/knowledge_manager.py\", line 13, in <module>\n    from langchain_core.documents import Document\nModuleNotFoundError: No module named 'langchain_core'\n"
+}

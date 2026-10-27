@@ -1,0 +1,32 @@
+00:51:03  INFO      [Baseline] Task 0 trained | final loss=0.1710
+00:51:03  INFO      [Baseline] Task 1 trained | final loss=0.1425
+00:51:03  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=0.000
+00:51:03  INFO      [EWC] Computing Fisher diagonal for task 0...
+00:51:03  INFO      [EWC] Consolidated task 0 | total_tasks=1
+00:51:04  INFO      [EWC] Task 1 trained | final_loss=0.1665 | lambda=0.000
+00:51:04  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=0.400
+00:51:04  INFO      [EWC] Computing Fisher diagonal for task 0...
+00:51:04  INFO      [EWC] Consolidated task 0 | total_tasks=1
+00:51:04  INFO      [EWC] Task 1 trained | final_loss=0.1670 | lambda=0.400
+00:51:04  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=4.000
+00:51:04  INFO      [EWC] Computing Fisher diagonal for task 0...
+00:51:04  INFO      [EWC] Consolidated task 0 | total_tasks=1
+00:51:04  INFO      [EWC] Task 1 trained | final_loss=0.1711 | lambda=4.000
+00:51:04  INFO      [Replay] Task 0 trained | final_loss=0.1710 | buffer_size=200
+00:51:04  INFO      [Replay] Task 1 trained | final_loss=0.1623 | buffer_size=200
+00:51:04  INFO      [PackNet] Task 0 trained | loss=0.0823 | free_params=83460
+00:51:04  INFO      [PackNet] Consolidating task 0 | pruning_rate=0.50
+00:51:04  INFO      [PackNet] Consolidated task 0 | free_capacity=50.0%
+00:51:04  INFO      [PackNet] Task 1 trained | loss=0.1396 | free_params=41730
+00:51:04  INFO      [Baseline] Task 0 trained | final loss=0.1710
+00:51:04  INFO      [Baseline] Task 1 trained | final loss=0.1425
+00:51:04  INFO      [EWC] Task 0 trained | final_loss=0.1710 | lambda=0.400
+00:51:04  INFO      [EWC] Computing Fisher diagonal for task 0...
+00:51:04  INFO      [EWC] Consolidated task 0 | total_tasks=1
+00:51:04  INFO      [EWC] Task 1 trained | final_loss=0.1670 | lambda=0.400
+00:51:05  INFO      [Replay] Task 0 trained | final_loss=0.1710 | buffer_size=200
+00:51:05  INFO      [Replay] Task 1 trained | final_loss=0.1623 | buffer_size=200
+00:51:05  INFO      [PackNet] Task 0 trained | loss=0.1710 | free_params=25348
+00:51:05  INFO      [PackNet] Consolidating task 0 | pruning_rate=0.50
+00:51:05  INFO      [PackNet] Consolidated task 0 | free_capacity=50.0%
+00:51:05  INFO      [PackNet] Task 1 trained | loss=0.2102 | free_params=12674
