@@ -126,6 +126,14 @@ The new stage topics, in this order:
     `agriculture`, `earth-observation`, `weather`, `hydrology`, `seismology`, `fluid-dynamics`, `wireless-communication`,
     `scheduling`, `combinatorial-optimization`.
 
+- **Stages 14 to 17** (added on 2026-10-27 at 06:45, after stage 13 was used up with 1,607 candidates checked and 67 run; topics chosen from
+  general machine learning, optimization and application areas without looking at any candidate, none used in any earlier stage; the same
+  rules apply; each stage is used only when the stage before it is used up before a stop condition of section 6 holds):
+  - **Stage 14:** `data-augmentation`, `knowledge-distillation`, `graph-learning`, `hypergraph`, `point-cloud`, `3d-reconstruction`, `pose-estimation`, `video-understanding`, `visual-question-answering`, `image-generation`, `super-resolution`, `denoising`, `ocr`, `speaker-recognition`, `music`, `eeg`.
+  - **Stage 15:** `bayesian-neural-networks`, `conformal-prediction`, `calibration`, `out-of-distribution-detection`, `outlier-detection`, `imbalanced-learning`, `semi-supervised-learning`, `weak-supervision`, `crowdsourcing`, `ranking`, `learning-to-rank`, `metric-learning`, `similarity-search`, `hashing`, `sketching`, `streaming-algorithms`.
+  - **Stage 16:** `numerical-optimization`, `convex-optimization`, `stochastic-optimization`, `gradient-descent`, `sgd`, `adam`, `learning-rate`, `regularization`, `dropout`, `batch-normalization`, `activation-functions`, `loss-functions`, `neural-ode`, `physics-informed`, `pinn`, `surrogate-model`.
+  - **Stage 17:** `survival`, `epidemic`, `covid-19`, `genetics`, `single-cell`, `proteomics`, `neuroimaging`, `fmri`, `ecg`, `clinical`, `electronic-health-records`, `drug-repurposing`, `ecology-modeling`, `crop`, `remote-sensing-imagery`, `satellite`.
+
 Duplicates are removed (case-insensitive). The repositories of **all earlier rounds are removed from the pool before ordering**:
 every repository in `data/auto_search3/pool*.json` (the whole pool of round 3, checked or not), `data/demo_set/pool.json`,
 `data/candidates/` (all files), `data/seed_papers.json` and `data/corpus_expansion/papers.json`. The remaining candidates are

@@ -56,6 +56,19 @@ STAGE_TOPICS: dict[int, list[str]] = {
     13: ["traffic", "energy", "power-systems", "drug-discovery", "protein", "molecular-dynamics", "cheminformatics",
          "agriculture", "earth-observation", "weather", "hydrology", "seismology", "fluid-dynamics", "wireless-communication",
          "scheduling", "combinatorial-optimization"],
+    14: ["data-augmentation", "knowledge-distillation", "graph-learning", "hypergraph", "point-cloud",
+        "3d-reconstruction", "pose-estimation", "video-understanding", "visual-question-answering",
+        "image-generation", "super-resolution", "denoising", "ocr", "speaker-recognition", "music", "eeg"],
+    15: ["bayesian-neural-networks", "conformal-prediction", "calibration", "out-of-distribution-detection",
+        "outlier-detection", "imbalanced-learning", "semi-supervised-learning", "weak-supervision", "crowdsourcing",
+        "ranking", "learning-to-rank", "metric-learning", "similarity-search", "hashing", "sketching",
+        "streaming-algorithms"],
+    16: ["numerical-optimization", "convex-optimization", "stochastic-optimization", "gradient-descent", "sgd",
+        "adam", "learning-rate", "regularization", "dropout", "batch-normalization", "activation-functions",
+        "loss-functions", "neural-ode", "physics-informed", "pinn", "surrogate-model"],
+    17: ["survival", "epidemic", "covid-19", "genetics", "single-cell", "proteomics", "neuroimaging", "fmri", "ecg",
+        "clinical", "electronic-health-records", "drug-repurposing", "ecology-modeling", "crop",
+        "remote-sensing-imagery", "satellite"],
 }
 ID_PREFIX = "a4_"
 MAX_BOTH = 5
