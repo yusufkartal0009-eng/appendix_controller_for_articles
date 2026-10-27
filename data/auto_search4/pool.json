@@ -5970,6 +5970,1210 @@
         "znxlwm/tensorflow-mnist-gan-dcgan",
         "zzdyyy/patho-gan"
       ]
+    },
+    "13": {
+      "retrieved_at": "2026-10-27T03:10:08+00:00",
+      "per_query_limit": 100,
+      "searches": [
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:traffic",
+          "results": [
+            "LibCity/Bigscity-LibCity-Datasets",
+            "cruiseresearchgroup/forecasting-on-new-roads",
+            "gotrafficgo/jam_absorption_driving",
+            "mkturkcan/bikeped"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:energy",
+          "results": [
+            "eddieantonio/collect-data",
+            "chenxuniu/TokenPowerBench",
+            "Power-Lab/argus",
+            "szl-holdings/szl-energy-attest"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:power-systems",
+          "results": [
+            "NatLabRockies/PowerGridworld"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:drug-discovery",
+          "results": [
+            "mir-group/nequip",
+            "Human-Centric-Machine-Learning/nevae",
+            "Dunni3/FlowMol",
+            "mir-group/allegro",
+            "zaixizhang/FLAG",
+            "QSong-github/DrugClaw",
+            "LigandPro/Matcha",
+            "coleygroup/shepherd",
+            "sanjaradylov/moleculegen-ml",
+            "abhishektiwari/hbat",
+            "radh55sh/BAPULM",
+            "MolecularAI/uq4dd",
+            "little1d/MolAct",
+            "Jonghwan-dev/Boost_Up_AI_25",
+            "RelationRx/tiny_moves",
+            "HySonLab/Q-BIOLAT-Extended",
+            "khelverskovp/atom-jepa",
+            "molecularmodelinglab/SABLE",
+            "bz317/PGFS_plus_plus",
+            "Ngoson2004/OpenADMET-ExpansionRX-Challenge",
+            "Amritpal-001/graphPrint",
+            "Aaryan-Patel2/KinetiDiff",
+            "QuantisMol/TDC-ADMET-Pgp-AttrMasking",
+            "ernestpusch26-maxwell/maxwell-qmcc-results",
+            "2am-dev/Drug-Discovery-Pipeline-V2"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:protein",
+          "results": [
+            "j3xugit/RaptorX-Contact",
+            "chao1224/NeuralMD",
+            "amazon-science/LC-PLM",
+            "DeepGraphLearning/SiamDiff",
+            "DeepGraphLearning/esm-s",
+            "liponan/structure-generator",
+            "PabloPauling/posebusters-mcp-server",
+            "chiang-yuan/ProDAR",
+            "TIGER-AI-Lab/DisProtEdit",
+            "ai4protein/VenusREM-Harness",
+            "ASAFind/ASAFind-2"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:molecular-dynamics",
+          "results": [
+            "mir-group/nequip",
+            "lab-cosmo/upet",
+            "torchmd/torchmd",
+            "mir-group/allegro",
+            "molmod/stacie",
+            "chao1224/NeuralMD",
+            "lab-cosmo/flashmd",
+            "nec-research/DIMOS",
+            "ml-jku/LaM-SLidE",
+            "abhishektiwari/hbat",
+            "bio-phys/cadishi",
+            "simantalahkar/lammpskit",
+            "inm-leibniz/flashcart",
+            "sblisesivdin/nanoworks",
+            "Fraunhofer-SCAI/VMDatomistic",
+            "isusanta/quantum-aimd",
+            "stefanhoedl/JAT_potential",
+            "robochimps/keosop",
+            "krisss0mecom/AlphaDynamics",
+            "MinwooPark2026/phosbench"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:cheminformatics",
+          "results": [
+            "isayev/ANI1_dataset",
+            "MLCIL/scikit-fingerprints",
+            "simonfqy/PADME",
+            "mrodobbe/Rxn-INSIGHT",
+            "Augus1999/bayesian-flow-network-for-chemistry",
+            "nijamudheen/CheMLFlow",
+            "sanjaradylov/moleculegen-ml",
+            "AlterLab-IEU/AlterLab-Academic-Skills",
+            "LiamWilbraham/jtnnencoder",
+            "hunter-heidenreich/smiles-subword-vocabularies",
+            "QuantisMol/TDC-ADMET-Pgp-AttrMasking",
+            "gbyuvd/ChemMiniQ3-SAbRLo",
+            "Qasim-Hussain-Code/vina_litpcba_virtual_screening_pipeline"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:agriculture",
+          "results": [
+            "robotic-vision-lab/CropNeRF-A-Neural-Radiance-Field-Based-Framework",
+            "tong-xz/GrapeSAM",
+            "AB-Abdulla/AgroGround",
+            "Datalism/Food-Resilience",
+            "gabrielmahia/kilimo-mcp",
+            "gabrielmahia/africa-coord-bus",
+            "BurakKilci2000/sera-rl-ppo",
+            "Pelex04/Diagnosis-plant-model",
+            "Denis060/sierraleone-agri-ml",
+            "ai-agriculture-circuits-and-systems/ai_agriculture_news"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:earth-observation",
+          "results": [
+            "google-deepmind/jeo",
+            "lukasliebel/dfc2020_baseline",
+            "pagraf/Sea-Undistort",
+            "VMarsocci/3DCD",
+            "eceo-epfl/CanadaFireSat-Model",
+            "ML4Sustain/Awesome-RS-Reasoning-Models",
+            "tsooryakie/skyglow-fft",
+            "prs-eth/xbd-s12",
+            "IGNF/FLAIR-HUB",
+            "unbihexium-oss/unbihexium",
+            "Z0ngL1ng/filling-before-advancing",
+            "eceo-epfl/CanadaFireSat-Data",
+            "alishibli97/gfm-shortcut-learning",
+            "AlbughdadiM/compact-multimodal-moe-eo",
+            "metacore-stack/terrashift",
+            "xiazeyu/FireDataForge",
+            "loosephoto/space-finder-mcp"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:weather",
+          "results": [
+            "google-deepmind/weathernext",
+            "openclimatefix/graph_weather",
+            "eceo-epfl/CanadaFireSat-Model",
+            "eceo-epfl/SAE-Xplainers",
+            "eceo-epfl/CanadaFireSat-Data",
+            "monorez3/keys"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:hydrology",
+          "results": [
+            "mhpi/hydrodl2",
+            "mhpi/dhbv2",
+            "Nischalcs50/nsEVDx"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:seismology",
+          "results": [
+            "gzenhaeusern/polarisation-package",
+            "SeisBlue/BlueDisc",
+            "highfem/tqe"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:fluid-dynamics",
+          "results": [
+            "pdebench/PDEBench",
+            "luo-yining/CFDBench",
+            "katiana22/latent-deeponet",
+            "francois-rozet/sda",
+            "Mohamedelrefaie/DrivAerNet",
+            "yingtian22/FLOATING-BODY-HYDRODYNAMIC-NEURAL-NETWORKS",
+            "vamsigudipati/SwiftCFD"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:wireless-communication",
+          "results": [
+            "victorkreutzfeldt/cf-ra-spatial-separability",
+            "victorkreutzfeldt/dec-fast-iterative-receivers",
+            "sourav2609/Code..Dynamic..FDD...Journal"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:scheduling",
+          "results": [
+            "PyJobShop/PyJobShop",
+            "zhongyuanzhao/gcn-dql",
+            "rajatsen91/QueuingBandits",
+            "kimvandenhouten/pyjobshop_biomanufacturing",
+            "YuClawLab/yuclaw-matrix",
+            "pablo-labo/s2d_specspeed",
+            "DiogoRibeiro7/rcpsp_cf_ivfth"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:combinatorial-optimization",
+          "results": [
+            "Thinklab-SJTU/ThinkMatch",
+            "ntt-dkiku/route-explainer",
+            "ai4co/unsupervised-CO-ucom2",
+            "Shengyu-Feng/CAM",
+            "JuanGiraldo0212/QPLEX",
+            "ebrahimpichka/QAP-RL",
+            "oliviersaidi/pacf-framework",
+            "QutacQuantum/effective_inequality_embedding",
+            "HyunwooLee0429/GMSPP",
+            "taehyunjo90/co-ptr_net-pytorch",
+            "Dipesh-Lc/quantum-enhanced-hyperheuristics",
+            "mlelarge/chaining-gnn-graph-alignment",
+            "claudio-mantuano/fair-clustering-at-scale",
+            "CHSZLab/CHSZLabLib"
+          ]
+        }
+      ],
+      "removed_as_earlier_round": [
+        "aaryan-patel2/kinetidiff",
+        "abhishektiwari/hbat",
+        "alterlab-ieu/alterlab-academic-skills",
+        "asafind/asafind-2",
+        "augus1999/bayesian-flow-network-for-chemistry",
+        "chiang-yuan/prodar",
+        "chszlab/chszlablib",
+        "cruiseresearchgroup/forecasting-on-new-roads",
+        "denis060/sierraleone-agri-ml",
+        "dunni3/flowmol",
+        "ebrahimpichka/qap-rl",
+        "eceo-epfl/sae-xplainers",
+        "francois-rozet/sda",
+        "google-deepmind/jeo",
+        "gotrafficgo/jam_absorption_driving",
+        "human-centric-machine-learning/nevae",
+        "hunter-heidenreich/smiles-subword-vocabularies",
+        "hysonlab/q-biolat-extended",
+        "isayev/ani1_dataset",
+        "katiana22/latent-deeponet",
+        "khelverskovp/atom-jepa",
+        "lab-cosmo/flashmd",
+        "lab-cosmo/upet",
+        "liamwilbraham/jtnnencoder",
+        "liponan/structure-generator",
+        "loosephoto/space-finder-mcp",
+        "luo-yining/cfdbench",
+        "metacore-stack/terrashift",
+        "minwoopark2026/phosbench",
+        "mir-group/allegro",
+        "mir-group/nequip",
+        "ml-jku/lam-slide",
+        "mlcil/scikit-fingerprints",
+        "mohamedelrefaie/drivaernet",
+        "molecularai/uq4dd",
+        "molecularmodelinglab/sable",
+        "molmod/stacie",
+        "natlabrockies/powergridworld",
+        "nijamudheen/chemlflow",
+        "nischalcs50/nsevdx",
+        "openclimatefix/graph_weather",
+        "pablopauling/posebusters-mcp-server",
+        "pdebench/pdebench",
+        "pyjobshop/pyjobshop",
+        "quantismol/tdc-admet-pgp-attrmasking",
+        "simantalahkar/lammpskit",
+        "stefanhoedl/jat_potential",
+        "torchmd/torchmd",
+        "yuclawlab/yuclaw-matrix"
+      ]
+    },
+    "14": {
+      "retrieved_at": "2026-10-27T03:39:17+00:00",
+      "per_query_limit": 100,
+      "searches": [
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:data-augmentation",
+          "results": [
+            "QData/TextAttack",
+            "hongyi-zhang/mixup",
+            "DemisEom/SpecAugment",
+            "yifanjiang19/Pedestrian-Synthesis-GAN",
+            "Westlake-AI/openmixup",
+            "albumentations-team/AlbumentationsX",
+            "jeanjerome/semisupervised_timeseries_infogan",
+            "ildoonet/unsupervised-data-augmentation",
+            "ildoonet/cutmix",
+            "yiqings/RandStainNA",
+            "zzdyyy/Patho-GAN",
+            "sutd-visual-computing-group/dag-gans",
+            "kajyuuen/daaja",
+            "AlexanderVNikitin/tsgm",
+            "vanderschaarlab/synthcity",
+            "ZhaoJ9014/face.evoLVe",
+            "freds0/data_augmentation_for_asr",
+            "albumentations-team/albucore",
+            "hellowangqian/UDA-norm-VAE",
+            "marian-nmt/sotastream",
+            "ZhiningLiu1998/BAT",
+            "bcmi/F2GAN-Few-Shot-Image-Generation",
+            "mrzaizai2k/Automated-scoring-of-handwritten-test-papers",
+            "tuanio/noisy-student-training-asr",
+            "Xovee/ccgl",
+            "lucidrains/rewind-reward-pytorch",
+            "naver-ai/maskris",
+            "jafarbakhshaliyev/Wave-Augs",
+            "ahmadmughees/LayerMix",
+            "JinXins/MergeMix",
+            "lnstadrum/fastaugment",
+            "javier-marti-isasi/GANs-with-limited-data",
+            "makeyourownmaker/mixupy",
+            "zahiriddin-rustamov/gat-rwos",
+            "TreeLLi/AROID",
+            "amirzamanii/Context-Aware-UAV-Detection",
+            "kmalialis/siameseduo",
+            "JulianoLeperso/SBBTS",
+            "MasterToycode/MastiDiff_DDPM"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:knowledge-distillation",
+          "results": [
+            "megvii-research/mdistiller",
+            "SforAiDl/KD_Lib",
+            "titanwings/distilly",
+            "microsoft/NeuronBlocks",
+            "alibaba/EasyNLP",
+            "alibaba/EasyTransfer",
+            "yzd-v/cls_KD",
+            "yanx27/2DPASS",
+            "cuguilke/microexpnet",
+            "snap-research/graphless-neural-networks",
+            "sseung0703/SSKD_SVD",
+            "hnuzhy/SSDA-YOLO",
+            "VainF/Data-Free-Adversarial-Distillation",
+            "shufangxun/LLaVA-MoD",
+            "segmind/distill-sd",
+            "DefangChen/OKDDip",
+            "DefangChen/SimKD",
+            "pauljblazek/deepdistilling",
+            "manhph2211/Vision-SSD",
+            "GilhanPark/ECCV2024_MBS",
+            "zhengli97/OKDHP",
+            "JunjH/Boosting-Light-Weight-Depth-Estimation",
+            "twinkle0331/LGTM",
+            "yahskapar/PPSNet",
+            "sundw2014/DCM",
+            "LTTM/IL-SemSegm",
+            "megvii-research/LGD",
+            "aimagelab/VKD",
+            "Qwen-Applications/STAR",
+            "KickItLikeShika/iSDFT",
+            "aryanasadianuoit/Distilling-Knowledge-via-Intermediate-Classifiers",
+            "zwang84/zsdb3kd",
+            "umitkacar/awesome-tinyml",
+            "mkang315/MCTSeg",
+            "archmaester/proto2proto",
+            "giakoumoglou/rrd",
+            "HKUDS/EasyST",
+            "zsxm1998/awesome-perception-aware-rlvr",
+            "MAGICS-LAB/DAPA",
+            "lapp0/distily",
+            "untitledunmastered1998/DistillationLab",
+            "Burf/VisionTransformer-Tensorflow2",
+            "MithrilMan/teacher-in-the-loop",
+            "satya15july/incremental_system_using_knowledge_distillation",
+            "keithofaptos/EvoDistill",
+            "Ethos-lab/robust-representation-matching",
+            "hexixiang/MT-SDPO",
+            "toffee-desuwa/distillation-reward-audit",
+            "aalto-speech/MTKD4AccentedASR",
+            "dwipddalal/Anchor-Align",
+            "amaurydelille/knowledge-distillation-neural-architecture-search",
+            "zyy-2001/InherNet-Demo",
+            "SeyedMuhammadHosseinMousavi/Synthetic-Data-Generation-for-Emotional-Depth-Faces",
+            "longern/lawf-trainer",
+            "Mahedi-61/CLFace",
+            "wilsonlau-uw/Automatic-Assignment-of-Radiology-Examination",
+            "mirbostani/QA-KD-AL",
+            "basiralab/L2S-KDnet",
+            "IDT-ITI/LLaVA-CKD",
+            "JustinGuese/S2-MoE-llm",
+            "no-way-labs/routing-absorption",
+            "yaniv-shulman/relational-compression",
+            "RNBBarrett/1-Bit-TRM-Sudoku-Solver",
+            "OmerTariq-KAIST/sad-lora",
+            "Qijia-He/dtdd",
+            "chakkritte/SalNAS",
+            "vicfei/awesome-agentic-ml",
+            "ThePeeps191/cosine-similarity-distillation",
+            "Xartman86/neuroca",
+            "js-lee-AI/directional-verification",
+            "js-lee-AI/ALR-IRA",
+            "tardellirs/crivo-decision-encoders",
+            "ZaberKo/vit-gdkd",
+            "niravpatidar37/distillroi"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:graph-learning",
+          "results": [
+            "shamim-hussain/egt",
+            "HKUDS/HiGPT",
+            "WxxShirley/LLMNodeBed",
+            "EQTPartners/CompanyKG",
+            "liugangcode/Data-Centric-Transfer",
+            "jw9730/flock",
+            "WxxShirley/KDD2024ProCom",
+            "Zehong-Wang/G2PM",
+            "LTS4/graph-learning",
+            "kleyt0n/graphnetz",
+            "yaniv-shulman/relational-compression",
+            "kleyt0n/ltga"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:hypergraph",
+          "results": [
+            "LHRLAB/Graph-R1",
+            "jw9730/tokengt",
+            "Sunny5250/CIF",
+            "iMoonLab/LLM4Hypergraph",
+            "Mengqi-Lei/Hypergraph-as-Language",
+            "qiankunmu/HGAdapter",
+            "CHSZLab/CHSZLabLib"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:point-cloud",
+          "results": [
+            "yukitsuji/3D_CNN_tensorflow",
+            "WXinlong/ASIS",
+            "zhaorw02/DeepMesh",
+            "maggie0106/Graph-CNN-in-3D-Point-Cloud-Classification",
+            "MCG-NJU/CamLiFlow",
+            "NVlabs/splatnet",
+            "csiro-robotics/locus",
+            "mabaorui/PredictableContextPrior",
+            "KTH-RPL/OpenSceneFlow",
+            "Pointcept/Pointcept",
+            "sii-pilab/LiDAR4D",
+            "XuyangBai/PPF-FoldNet",
+            "Pang-Yatian/Point-MAE",
+            "tiangexiang/CurveNet",
+            "wzzheng/PointOcc",
+            "cy69855522/Geo-CNN-Pytorch-PYG",
+            "dahliau/DPDist",
+            "huangjh-pub/multibody-sync",
+            "yangyanli/PointCNN",
+            "soumik12345/point-cloud-segmentation",
+            "eliahuhorwitz/3D-ADS",
+            "InternRobotics/P3Former",
+            "Haiyang-W/UniTR",
+            "mikeroyal/Photogrammetry-Guide",
+            "HySonLab/PointDistill",
+            "Say2L/FSHNet",
+            "HaoyiZhu/PointCloudMatters",
+            "HINTLab/pulmonary-tree-labeling",
+            "Lilac-Lee/FastKernelSF",
+            "leduckhai/Audio-3DVG",
+            "CPones/PointNet-with-ModleNet40",
+            "egeozsoy/4D-OR",
+            "Hub-Tian/CADNet",
+            "bhavyagoyal/ppc",
+            "MCG-NJU/APP-Net",
+            "I2-Multimedia-Lab/Pointsoup",
+            "quan-dao/practical-collab-perception",
+            "BYU-FROST-Lab/Terra",
+            "astra-vision/SSC-Priors",
+            "lucadellalib/tensor-field-networks",
+            "ManashJKonwar/IP-Pointnet-ObjectDetection",
+            "mauriceqch/2023_BASICS_PC_toolbox",
+            "blackbird2003/TeethSplineSeg",
+            "yeehengwang/PC-TGS",
+            "egeozsoy/LABRAD-OR",
+            "alice-lri/alice-lri-experiments",
+            "mingqian0850/awsome_depth_noise",
+            "crystalccy1/3D-CovDiffusion",
+            "devanjanmishra/phone-video-3d-recon",
+            "OwenHan10/mm-ADL",
+            "XiaohanZhao123/3D-Dataset-Pruning",
+            "yudhisteer/Robotic-Grasping-Detection-with-PointNet",
+            "ZoreAnuj/AlphaNIST",
+            "brz1409/bathyfacto",
+            "romi/skeleton_refinement",
+            "HighwayScene/roadside-lidar-background-subtraction",
+            "jl6017/ArticFlow",
+            "a34656/gsoc2026-symmetrical-succotash",
+            "goal31121/LOGG3D",
+            "mariiammaysara/PointNet-PyTorch",
+            "RhaggyRhelp/mode-3d"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:3d-reconstruction",
+          "results": [
+            "lpiccinelli-eth/UniDepth",
+            "VAST-AI-Research/TripoSG",
+            "autonomousvision/mip-splatting",
+            "VAST-AI-Research/TripoSF",
+            "ventusff/neurecon",
+            "Yang7879/3D-RecGAN",
+            "HengyiWang/spann3r",
+            "zju3dv/Scal3R",
+            "amap-cvlab/ABot-Recon",
+            "radekd91/emoca",
+            "apchenstu/mvsnerf",
+            "amosgropp/IGR",
+            "THU-SI/VideoScene",
+            "mabaorui/PredictableContextPrior",
+            "autonomousvision/gaussian-opacity-fields",
+            "WU-CVGL/SIU3R",
+            "AniMerPlus/AniMerPlus",
+            "NVlabs/LSM",
+            "anl13/animal_papers",
+            "KupynOrest/epipolar-dpo",
+            "caiyuanhao1998/SAX-NeRF",
+            "QhelDIV/ShapeFormer",
+            "Tencent-Hunyuan/HunyuanWorld-Mirror",
+            "Ruyi-Zha/r2_gaussian",
+            "alexklwong/adareg-monodispnet",
+            "zhongshsh/4D-Animal",
+            "realsee-developer/RealSee3D",
+            "heyoeyo/muggled_dpt",
+            "Inception3D/Motion324",
+            "estheryang11/ReconViaGen",
+            "yudhisteer/3D-Reconstruction-with-Uncalibrated-Stereo",
+            "sunjiayuanro/SCFeat",
+            "yuanzhy29/PXDepth",
+            "mikeroyal/Photogrammetry-Guide",
+            "kevinYitshak/spurfies",
+            "yudhisteer/Pseudo-LiDARs-with-Stereo-Vision",
+            "wzpscott/hybrid-radiance-fields",
+            "aim-uofa/FrozenRecon",
+            "zju3dv/InstaScene",
+            "JianfeiJ/MVSMamba",
+            "InternRobotics/Robo3R",
+            "project-tirtha/tirtha-public",
+            "Ropedia/SpatialBench",
+            "mlvlab/F4Splat",
+            "DLR-RM/shape-completion",
+            "cdb342/ALOcc",
+            "edhuang1/Awesome-Underwater-Visual-Enhancement-and-3D-Reconstruction",
+            "SOTAMak1r/CPS",
+            "szattila/pTFrenderer",
+            "chang-xinhai/Awesome-Embodied-3DV",
+            "sunshinnnn/dut",
+            "alexklwong/calibrated-backprojection-network",
+            "pcl3dv/OV-NeRF",
+            "RuiZhou-cn/Elevator-VIGS",
+            "Asixa/Dirichlet-Splatting",
+            "Sulcate-whipcord611/arxiv-reader-mcp",
+            "graemeniedermayer/3d-depth-gen",
+            "devanjanmishra/phone-video-3d-recon",
+            "HIT-SIRS/GeoRay",
+            "ysl609/stereovision-mars",
+            "JeremyHo1123/DCTrellis2",
+            "brz1409/bathyfacto",
+            "minhmax098/3DPointCloud",
+            "DylanYeung0929/PGSR-reconstruction",
+            "asd0012/COSC440_project",
+            "alexklwong/augundo",
+            "skumailraza/FRSNet-GA",
+            "Barbany/riemannian_metric_preservation",
+            "RhaggyRhelp/mode-3d",
+            "BoPythonAI/video-to-gaussian-world",
+            "sadeeqgandalf/Nerf-3D-Reconstruction",
+            "hiroki-abe-58/ComfyUI-S2Tok",
+            "PriyanshuKumar-CSE/roadwidth-ai",
+            "kevinraymond/giro",
+            "mwasifanwar/geometric-deep-learning",
+            "xjzhang2365/3D-Reconstruction-Low-Dose-Imaging"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:pose-estimation",
+          "results": [
+            "Tau-J/rtmlib",
+            "IDEA-Research/DINO-X-API",
+            "Daniil-Osokin/lightweight-human-pose-estimation.pytorch",
+            "raymon-tian/hourglass-facekeypoints-detection",
+            "NVlabs/SOMA-X",
+            "lmb-freiburg/hand3d",
+            "oarriaga/paz",
+            "RiccardoRiccio/Fitness-AI-Trainer-With-Automatic-Exercise-Recognition-and-Counting",
+            "pypose/pypose",
+            "VlSomers/keypoint_promptable_reidentification",
+            "MiraPurkrabek/BBoxMaskPose",
+            "GuidoManni/BodySLAM",
+            "amathislab/BUCTD",
+            "NVlabs/DREAM",
+            "xingyizhou/StarMap",
+            "WU-CVGL/BAD-Gaussians",
+            "SAtacker/PosenetTflite",
+            "hnuzhy/fcos_pose",
+            "aim-uofa/FrozenRecon",
+            "MigVega/BIMCaP",
+            "WU-CVGL/BeNeRF",
+            "ayoussf/VMatcher",
+            "samson6460/tf2_pose_estimation",
+            "mustafa1728/Yogasana-Classifier",
+            "Fangyh09/pose_nms_python",
+            "ohdanieldw/SocialCurrents",
+            "kbw1nter/workshop-yolo-deteccao-objetos",
+            "lakshmi-sathi/Evaluation-of-NVIDIAs-Camera-to-Robot-Pose-Estimation-Deep-Learning-Research",
+            "dhesenkamp/attentive-lstm",
+            "UAV-AVL/LDVP-SAC",
+            "SRKRZ23/cvpr-gait-2026",
+            "aras-batu/Keyword-Search-for-Sign-Language",
+            "MedisettiRenukeswar/MC-AWPF",
+            "param-valiathan/CUBE",
+            "VRIL-LABS/vril-sense",
+            "Bibas41/exercise-rep-counter",
+            "Vividly-ai/vividly-research"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:video-understanding",
+          "results": [
+            "OpenGVLab/Ask-Anything",
+            "Leon1207/Video-RAG-master",
+            "wangheda/youtube-8m",
+            "EvolvingLMMs-Lab/lmms-eval",
+            "cmhungsteve/SSTDA",
+            "yjxiong/temporal-segment-networks",
+            "TencentARC/ST-LLM",
+            "Caoyichao/STCNet",
+            "joslefaure/HERMES",
+            "MCG-NJU/MMN",
+            "youngwanLEE/VoV3D",
+            "HVision-NKU/OraRL",
+            "UditAkhourii/cdaf",
+            "Siyou-Li/QTSplus",
+            "rohitgirdhar/ActionVLAD",
+            "TsinghuaC3I/AdsQA",
+            "thswodnjs3/CSTA",
+            "Hai-chao-Zhang/ThinkJEPA",
+            "reacher-z/vidground",
+            "VG-GUI-TASKER/VG-GUI-TASKER",
+            "amunozgarza/tsb-gan",
+            "Hoar012/TDC-Video",
+            "keynekassapa13/LAC",
+            "psychemme/PsycheMME",
+            "UARK-AICV/AOE-Net",
+            "yue-723/DaMO",
+            "momentslab/peek",
+            "Sealical/st-mem",
+            "grairudolf/d4rt",
+            "Siiichenggg/SurgRec",
+            "momentslab/awesome-efficient-videollm",
+            "Shidu-Ren/ICM-Bench",
+            "go-agent-x/VideoXAgent",
+            "Hyun1A/DCAT",
+            "chasemetoyer/gameplay-vision-llm",
+            "Multimodal-Intelligence-Lab/CLIP-CC-Bench",
+            "Multimodal-Intelligence-Lab/CLIP-CC",
+            "Fujiry0/stvg-agent",
+            "mwasifanwar/temporal_reasoning_vision_system"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:visual-question-answering",
+          "results": [
+            "mesnico/RelationNetworks-CLEVR",
+            "Cloud-CV/vilbert-multi-task",
+            "MMStar-Benchmark/MMStar",
+            "showlab/LOVA3",
+            "turingmotors/STRIDE-QA-Dataset",
+            "zhangruotian/SalArt-VQA",
+            "cdancette/detect-shortcuts",
+            "nguyennpa412/simple-multimodal-ai",
+            "kkahatapitiya/LangRepo",
+            "zjunlp/Knowledge2Data",
+            "ai-art-dev99/vision-language-caption-vqa",
+            "mz-kim/KoNA",
+            "syed-nazmus-sakib/PlantInquiryVQA",
+            "MSA-LMC/BeyondExactMatch",
+            "nativeqa/nativqa-framework"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:image-generation",
+          "results": [
+            "aelnouby/Text-to-Image-Synthesis",
+            "aitorzip/PyTorch-CycleGAN",
+            "sangyun884/HR-VITON",
+            "Lakonik/LakonLab",
+            "shadow2496/VITON-HD",
+            "guyyariv/DyPE",
+            "FoundationVision/Infinity",
+            "bot66/MNISTDiffusion",
+            "HuiDingUMD/ExprGAN",
+            "Blade6570/icface",
+            "lucidrains/recurrent-interface-network-pytorch",
+            "sangyun884/blur-diffusion",
+            "dorarad/gansformer",
+            "quickgrid/pytorch-diffusion",
+            "poloclub/diffusiondb",
+            "X-GenGroup/Flow-Factory",
+            "duoan/mega-data-factory",
+            "wenyuqing/panacea",
+            "hp-l33/AiM",
+            "musikisomorphie/swd",
+            "lxa9867/ImageFolder",
+            "eliahuhorwitz/Conffusion",
+            "lhf-labs/tm-dataset",
+            "HKU-MedAI/GEM-3D",
+            "vinayakarannil/DCGAN",
+            "basiclab/GNGAN-PyTorch",
+            "jianzhnie/awesome-text-to-video",
+            "haoningwu3639/MegaFusion",
+            "YangLing0818/consistency_flow_matching",
+            "Alokia/Idempotent-Generative-Network",
+            "360CVGroup/HiCo_T2I",
+            "FoundationVision/BitVAE",
+            "NVlabs/HMAR",
+            "huanngzh/MV-Adapter",
+            "Blade6570/Learningimage-to-imagetranslationusingpairedandunpairedtrainingsamples",
+            "FiditeNemini/z-image-turbo-mlx",
+            "xiefan-guo/initno",
+            "microsoft/BizGenEval",
+            "bcmi/F2GAN-Few-Shot-Image-Generation",
+            "AniAggarwal/ecad",
+            "mhson-kyle/World-To-Image",
+            "KooroshRH/AReA",
+            "X-GenGroup/PaCo-RL",
+            "LeapLabTHU/RvR",
+            "HVision-NKU/StyleExpert",
+            "Lakonik/GMFlow",
+            "LouisRouss/DiffuLab",
+            "ATH-MaaS/TextVerifier",
+            "echelon2718/ShinkaiGAN",
+            "VectorSpaceLab/InfoVis",
+            "hyenal/relate",
+            "Harahan/MeanFlowNFT",
+            "MCG-NJU/MIMFlow",
+            "matsuolab/multibanana",
+            "choucisan/poplar",
+            "diarimandimby/Faster-Projected-GAN",
+            "devesh1611singh/Cycle-WGAN",
+            "CVL-UESTC/MVAR",
+            "KuOnoda/AutoRef",
+            "joanrod/ocr-vqgan",
+            "sallamy2580/wearing-cloth",
+            "RuiqingYoung/EAR",
+            "TilemahosAravanis/Only-Style",
+            "jaco-bro/PixGS",
+            "CVL-UESTC/FDPT-AR",
+            "TsinghuaC3I/Efficient-Diffusion-Models",
+            "LiyaoJiang1998/RAISE",
+            "MohitShridhar/genima",
+            "a1443356159/looped-flow-matching",
+            "TKY-27/iris-3b-metal",
+            "morikonon/mnist-generator",
+            "srama2512/VAE",
+            "LCGLiChenge/MixTok",
+            "AMD-AGI/DynamicChunkingDiT",
+            "borhanMorphy/progressive-gan",
+            "SAGNIKMJR/MetaQNN_ImageGenerationVCAE_PyTorch",
+            "saeidrazavi/RECON",
+            "EricRollei/Emu35-Comfyui-Nodes",
+            "shreshthsaini/LumaGuide",
+            "imperial-qore/GON_MNIST",
+            "EvanJ303/nca-texture-synthesis",
+            "martno/cyclegan-pytorch",
+            "huan-yin/UniDG",
+            "theosorus/DiffusionModel",
+            "EtokonE/CycleGAN-keras",
+            "KostasTok/keras_DCGAN_transfer_learning",
+            "SAGNIKMJR/MetaQNN_ImageGenerationGAN_DiscriminatorFixed_PyTorch",
+            "soarxyn/diffusion",
+            "TOMUIV/ZImage-Web-Interface",
+            "DavidRamosArchilla/FluidFlow",
+            "jak-weston/WardrobeWizard",
+            "Zyriix/prologue",
+            "BennyDaBall930/pid-tiled-decode",
+            "kw5t45/mnist-ddpm-from-scratch",
+            "mwasifanwar/NeuralCanvas",
+            "King-play/EvoGen-Harness",
+            "agrawalmalav/EEG2ImageTransformer",
+            "Bili-Sakura/RSGen-8k",
+            "LCGLiChenge/MixTok-Official",
+            "ShyFoo/TerraVis"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:super-resolution",
+          "results": [
+            "jacobgil/pytorch-zssr",
+            "Jakaria08/EESRGAN",
+            "Djdefrag/NiceScaler",
+            "msmsajjadi/EnhanceNet-Code",
+            "Lornatang/ESPCN-PyTorch",
+            "Lornatang/FSRCNN-PyTorch",
+            "Lornatang/SRCNN-PyTorch",
+            "Lornatang/ESRGAN-PyTorch",
+            "seungho-snu/SROOE",
+            "Lornatang/VDSR-PyTorch",
+            "RolnickLab/constrained-downscaling",
+            "eliahuhorwitz/Conffusion",
+            "ShawnPi233/HQ-SVC",
+            "puffnjackie/pytorch-super-resolution-implementations",
+            "brade31919/SRGAN-tensorflow",
+            "erikqu/EnhanceNet-PyTorch",
+            "novwaul/SR3",
+            "corochann/SeRanet",
+            "Lornatang/Real_ESRGAN-PyTorch",
+            "Kiteretsu77/FAST_Anime_VSR",
+            "speridlabs/iris-3b",
+            "hellloxiaotian/ADSRNet",
+            "fengwang/subpixel_conv2d",
+            "Sailor-t/ShiftLUT",
+            "eduardzamfir/seemoredetails",
+            "agus-official/VRPSR",
+            "paulaharder/constrained-downscaling",
+            "sonhm3029/FreqOrtho-SR",
+            "2minkyulee/ECO",
+            "Lipurple/ARIS",
+            "Medabid1/I2I-LR",
+            "Nhat-Thanh/SRCNN-TF",
+            "ihunhh/ESRGAN",
+            "leaxsd/Deep-Learning-Super-Resolution-Image-Reconstruction-DSIR",
+            "CVL-UESTC/IET",
+            "Lornatang/CSNLN-PyTorch",
+            "dslisleedh/SST",
+            "dwight-foster/Pytorch-TecoGAN",
+            "basiralab/AGSR-Net",
+            "Lornatang/DBPN-PyTorch",
+            "marccasals98/Super-Resolution",
+            "purbayankar/Zero-Shot-Super-Resolution",
+            "sangyun884/MSSR",
+            "Etienne-bdt/Super-Resolution-VAE",
+            "sebasmos/latent-sr",
+            "zl190/sisr",
+            "AD2605/Single-Image-Super-Resolution",
+            "Lornatang/CARN-PyTorch",
+            "TKY-27/iris-3b-metal",
+            "Lornatang/LapSRN-PyTorch",
+            "yc-cui/LLaRS",
+            "BrownsugarZeer/ARSR",
+            "dslisleedh/NCNet-flax",
+            "basiralab/IMANGraphNet",
+            "fraromor/DD-ROM-GNN-Friedrichs",
+            "sijinkim/MEPSNet_dev",
+            "030108ming/STRMSR",
+            "filipposchiazza/SuperResolution",
+            "Hayashi-Yudai/SRGAN",
+            "Nhat-Thanh/SRCNN-Tensorflow",
+            "ash1ra/SwinIR",
+            "ash1ra/HAT",
+            "ash1ra/RCAN",
+            "Nanopocket-ai/FFHQ-2048",
+            "ash1ra/SRGAN",
+            "ash1ra/Real-ESRGAN",
+            "ash1ra/ESRGAN",
+            "Jiamian-Wang/Iterative-Soft-Shrinkage-SR"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:denoising",
+          "results": [
+            "StanfordMIMI/DDM2",
+            "workingcoder/EDCNN",
+            "jin-cao-tma/HAIR",
+            "valeoai/NAF",
+            "CFMTech/Optimal_cleaning_for_singular_values_of_cross-covariance_matrices",
+            "pminhtam/Neigh2Neigh",
+            "pminhtam/MIRnet_SIDD",
+            "pminhtam/DeepBurstDenoising",
+            "davisidarta/fastlapmap",
+            "benediktfesl/Diffusion_MSE",
+            "IlyaKodua/dncnn",
+            "mingqian0850/awsome_depth_noise",
+            "USTC-StarTeam/End4Rec",
+            "skafai/denoising_architecture_time_series_paper",
+            "ArpanC6/graphstoch"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:ocr",
+          "results": [
+            "WenmuZhou/DBNet.pytorch",
+            "autonise/CRAFT-Remade",
+            "run-llama/ParseBench",
+            "opendatalab/MinerU-Diffusion",
+            "raphael-baena/DTLR",
+            "xinghedyc/mxnet-cnn-lstm-ctc-ocr",
+            "CycloneBoy/pdf_table",
+            "SALT-NLP/LLaVAR",
+            "Intellindust-AI-Lab/HTR-VT",
+            "harish2704/pottan-ocr",
+            "jakeywu/ocr_torch",
+            "lithium0003/findtextCenterNet",
+            "clovaai/webvicob",
+            "pooya-mohammadi/crnn-pytorch",
+            "mindsdb/aipdf",
+            "WenmuZhou/Segmentation-Free_OCR",
+            "ysig/learnable-typewriter",
+            "felixdittrich92/docling-OCR-OnnxTR",
+            "groundingpi/GroundingPI",
+            "hoangtuanvu/conformer_ocr",
+            "mbzuai-oryx/KITAB-Bench",
+            "mrzaizai2k/Automated-scoring-of-handwritten-test-papers",
+            "Lornatang/CRNN-PyTorch",
+            "groundingpi/GroundAnything",
+            "icarofua/vehicle-rear",
+            "hoangtuanvu/OCR_Correction",
+            "cernis-intelligence/docuglean-ocr",
+            "DCC-BS/docling-glm-ocr",
+            "ATH-MaaS/TextVerifier",
+            "nguyenx2t/semcer",
+            "Event-AHU/EventSTR",
+            "joanrod/ocr-vqgan",
+            "Ramakm/Deepseek-OCR",
+            "kjanjua26/Custom_EAST",
+            "ArchaText/AraMS-28k-Dataset",
+            "Hedrax/AHDoc",
+            "jilstingray/MTWI-2018",
+            "gsdali/coreml-paddleocr",
+            "ruoyuxie/noisy_parallel_data_alignment",
+            "chnk58hoang/Vietnamese_Handwriting_Recognition",
+            "svretina/nougat-mcp",
+            "TZNcse209/ocr_pdf",
+            "AIwork4me/Unlimited-OCR-ROCm",
+            "fisherman611/handwritten-mathematical-expression-recognition",
+            "tobbytools/pdf-to-markdown-rag",
+            "lacerbi/inscriber",
+            "antonyvigouret/Text-Recognition",
+            "baadjis/trocrvision",
+            "halallens-no/halalbench",
+            "Gabryxx7/screenshot-ocr",
+            "duylebkHCM/CONSTANT",
+            "kgnimrod/DocLangID",
+            "XiaokangLei/PaddleOCR-Code",
+            "go-agent-x/VideoXAgent",
+            "fw7th/redact",
+            "K2alyan/aksharaMD",
+            "WulfKolbe/pdfdrill",
+            "run-llama/opendocrouter-py",
+            "lithium0003/Image2UTF8-Transformer",
+            "loremcc/paku",
+            "Moamen-Elsharkawy/multimodal-rag-colpali",
+            "dwin-gharibi/runpod-paddleocr",
+            "badrusiddique/ai-tokendiet-skill",
+            "sugam24/ocr",
+            "fabriziosalmi/glm-ocr-ita",
+            "Ifena-Xia/paddleocr-htr-ancient-chinese",
+            "skyzhao1223/doc2md",
+            "dwin-gharibi/runpod-easyocr",
+            "anton-dergunov/agent-context-pipeline",
+            "sublatesublate-design/unlimited-ocr-openvino",
+            "chenjim/MinerU-convert-md",
+            "recklight/equipment-vision-inspector",
+            "kanwa2006/DocuMindAI"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:speaker-recognition",
+          "results": [
+            "cvqluu/Angular-Penalty-Softmax-Losses-Pytorch",
+            "cvqluu/GE2E-Loss",
+            "manojpamk/pytorch_xvectors",
+            "swshon/multi-speakerID",
+            "Aurora11111/speaker-recognition-pytorch",
+            "cvqluu/nn-similarity-diarization",
+            "theolepage/sslsv",
+            "mrjunjieli/wespeaker_u_cube",
+            "jakariaemon/WSI",
+            "vjoki/fsl-experi",
+            "nikitashvarts/CocktailPartySpeakerRecognition",
+            "19PINE-AI/multimodal-user-memory",
+            "theolepage/wavlm_ssl_sv"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:music",
+          "results": [
+            "purvaten/feel-the-music",
+            "CVxTz/music_genre_classification",
+            "apacha/OMR-Datasets",
+            "KyungsuKim42/tokensynth",
+            "a1ex90/MusicalKeyCNN",
+            "mila-iqia/DeepDrummer",
+            "Neutone/neutone_sdk",
+            "OpenMOSS/MOSS-Audio-Tokenizer",
+            "shaopengw/Awesome-Music-Generation",
+            "YAIxPOZAlabs/Improving-TrXL-for-ComMU",
+            "RickyL-2000/ROSVOT",
+            "markusaksli/ai-music",
+            "sony/sampleid",
+            "Eps-Acoustic-Revolution-Lab/EAR_HEAR",
+            "HuwCheston/deep-pianist-identification",
+            "cpmpercussion/impsy",
+            "localaization/pentagrom",
+            "matteospanio/mule-torch",
+            "TomLiu-Dev/cantabile",
+            "yyf/ai-audio-tools"
+          ]
+        },
+        {
+          "query": "arxiv.org in:readme language:Python archived:false fork:false size:<30000 topic:eeg",
+          "results": [
+            "pbashivan/EEGLearn",
+            "eeyhsong/EEG-Transformer",
+            "mims-harvard/UniTS",
+            "neerajwagh/eeg-gcnn",
+            "yi-ding-cs/EmT",
+            "wjq-learning/SleepDG",
+            "ForeverBlue816/PhysioWave",
+            "maxxxzdn/EEGCN",
+            "xuxiran/ASAD_DenseNet",
+            "KonstantinosBarmpas/NeuroRVQ",
+            "CNElab-Plus/ArtifactRemovalTransformer",
+            "yi-ding-cs/EEG-PatchFormer",
+            "Danielz-z/LGF-EEG-Emotion",
+            "affctivai/coglier",
+            "timonkl/SubjectConditionedLayer",
+            "QunjieHuang/SATTC-CVPR2026",
+            "lu-wo/DETRtime",
+            "JustinZHAO-05/HP-GSBS",
+            "bomatter/OddEEG",
+            "bartlomiej-chybowski/PySeizure",
+            "nidhalom/neuro-graphrag",
+            "InstituteOfSleepAndDreamTechnologies/Traumschreiber_Python_Offline-Data-Analysis",
+            "agrawalmalav/EEG2ImageTransformer",
+            "happyc0der/eeg-dementia-graph-transformer"
+          ]
+        }
+      ],
+      "removed_as_earlier_round": [
+        "030108ming/strmsr",
+        "19pine-ai/multimodal-user-memory",
+        "aelnouby/text-to-image-synthesis",
+        "aitorzip/pytorch-cyclegan",
+        "albumentations-team/albucore",
+        "albumentations-team/albumentationsx",
+        "alexandervnikitin/tsgm",
+        "alibaba/easynlp",
+        "alice-lri/alice-lri-experiments",
+        "amosgropp/igr",
+        "aniaggarwal/ecad",
+        "archmaester/proto2proto",
+        "arpanc6/graphstoch",
+        "basiralab/agsr-net",
+        "benediktfesl/diffusion_mse",
+        "caiyuanhao1998/sax-nerf",
+        "cfmtech/optimal_cleaning_for_singular_values_of_cross-covariance_matrices",
+        "chszlab/chszlablib",
+        "csiro-robotics/locus",
+        "cuguilke/microexpnet",
+        "cvqluu/angular-penalty-softmax-losses-pytorch",
+        "cvqluu/nn-similarity-diarization",
+        "cvxtz/music_genre_classification",
+        "daniil-osokin/lightweight-human-pose-estimation.pytorch",
+        "davisidarta/fastlapmap",
+        "demiseom/specaugment",
+        "djdefrag/nicescaler",
+        "dorarad/gansformer",
+        "dslisleedh/ncnet-flax",
+        "echelon2718/shinkaigan",
+        "eliahuhorwitz/3d-ads",
+        "eliahuhorwitz/conffusion",
+        "eps-acoustic-revolution-lab/ear_hear",
+        "eqtpartners/companykg",
+        "evolvinglmms-lab/lmms-eval",
+        "fengwang/subpixel_conv2d",
+        "foundationvision/infinity",
+        "hai-chao-zhang/thinkjepa",
+        "haoyizhu/pointcloudmatters",
+        "harish2704/pottan-ocr",
+        "hellloxiaotian/adsrnet",
+        "highwayscene/roadside-lidar-background-subtraction",
+        "hkuds/higpt",
+        "hongyi-zhang/mixup",
+        "huan-yin/unidg",
+        "huidingumd/exprgan",
+        "huwcheston/deep-pianist-identification",
+        "icarofua/vehicle-rear",
+        "internrobotics/robo3r",
+        "jacobgil/pytorch-zssr",
+        "jafarbakhshaliyev/wave-augs",
+        "jeanjerome/semisupervised_timeseries_infogan",
+        "jeremyho1123/dctrellis2",
+        "jin-cao-tma/hair",
+        "julianoleperso/sbbts",
+        "justinzhao-05/hp-gsbs",
+        "kajyuuen/daaja",
+        "kbw1nter/workshop-yolo-deteccao-objetos",
+        "kiteretsu77/fast_anime_vsr",
+        "konstantinosbarmpas/neurorvq",
+        "kth-rpl/opensceneflow",
+        "lakonik/gmflow",
+        "lakonik/lakonlab",
+        "leaxsd/deep-learning-super-resolution-image-reconstruction-dsir",
+        "lhrlab/graph-r1",
+        "liugangcode/data-centric-transfer",
+        "lmb-freiburg/hand3d",
+        "lornatang/carn-pytorch",
+        "lornatang/csnln-pytorch",
+        "lpiccinelli-eth/unidepth",
+        "lu-wo/detrtime",
+        "lucadellalib/tensor-field-networks",
+        "lucidrains/rewind-reward-pytorch",
+        "manashjkonwar/ip-pointnet-objectdetection",
+        "maxxxzdn/eegcn",
+        "mbzuai-oryx/kitab-bench",
+        "mcg-nju/app-net",
+        "medisettirenukeswar/mc-awpf",
+        "megvii-research/lgd",
+        "megvii-research/mdistiller",
+        "microsoft/bizgeneval",
+        "microsoft/neuronblocks",
+        "mikeroyal/photogrammetry-guide",
+        "mims-harvard/units",
+        "mirapurkrabek/bboxmaskpose",
+        "mkang315/mctseg",
+        "mmstar-benchmark/mmstar",
+        "momentslab/peek",
+        "mrzaizai2k/automated-scoring-of-handwritten-test-papers",
+        "msmsajjadi/enhancenet-code",
+        "musikisomorphie/swd",
+        "mwasifanwar/geometric-deep-learning",
+        "neerajwagh/eeg-gcnn",
+        "nhat-thanh/srcnn-tf",
+        "nvlabs/soma-x",
+        "openmoss/moss-audio-tokenizer",
+        "param-valiathan/cube",
+        "paulaharder/constrained-downscaling",
+        "pauljblazek/deepdistilling",
+        "pminhtam/deepburstdenoising",
+        "pminhtam/neigh2neigh",
+        "poloclub/diffusiondb",
+        "puffnjackie/pytorch-super-resolution-implementations",
+        "purbayankar/zero-shot-super-resolution",
+        "pypose/pypose",
+        "qdata/textattack",
+        "qheldiv/shapeformer",
+        "quickgrid/pytorch-diffusion",
+        "radekd91/emoca",
+        "ramakm/deepseek-ocr",
+        "raymon-tian/hourglass-facekeypoints-detection",
+        "reacher-z/vidground",
+        "riccardoriccio/fitness-ai-trainer-with-automatic-exercise-recognition-and-counting",
+        "rolnicklab/constrained-downscaling",
+        "run-llama/parsebench",
+        "sangyun884/blur-diffusion",
+        "sangyun884/mssr",
+        "seyedmuhammadhosseinmousavi/synthetic-data-generation-for-emotional-depth-faces",
+        "sforaidl/kd_lib",
+        "shadow2496/viton-hd",
+        "showlab/lova3",
+        "sii-pilab/lidar4d",
+        "skafai/denoising_architecture_time_series_paper",
+        "snap-research/graphless-neural-networks",
+        "sony/sampleid",
+        "soumik12345/point-cloud-segmentation",
+        "srama2512/vae",
+        "sulcate-whipcord611/arxiv-reader-mcp",
+        "sunny5250/cif",
+        "thswodnjs3/csta",
+        "toffee-desuwa/distillation-reward-audit",
+        "tsinghuac3i/adsqa",
+        "twinkle0331/lgtm",
+        "vanderschaarlab/synthcity",
+        "vlsomers/keypoint_promptable_reidentification",
+        "wangheda/youtube-8m",
+        "wenmuzhou/dbnet.pytorch",
+        "westlake-ai/openmixup",
+        "wxinlong/asis",
+        "wxxshirley/kdd2024procom",
+        "wxxshirley/llmnodebed",
+        "x-gengroup/flow-factory",
+        "xjzhang2365/3d-reconstruction-low-dose-imaging",
+        "yangyanli/pointcnn",
+        "yaniv-shulman/relational-compression",
+        "yeehengwang/pc-tgs",
+        "yi-ding-cs/emt",
+        "yifanjiang19/pedestrian-synthesis-gan",
+        "yudhisteer/robotic-grasping-detection-with-pointnet",
+        "yukitsuji/3d_cnn_tensorflow",
+        "yyf/ai-audio-tools",
+        "zahiriddin-rustamov/gat-rwos",
+        "zehong-wang/g2pm",
+        "zhaorw02/deepmesh",
+        "zhiningliu1998/bat",
+        "zsxm1998/awesome-perception-aware-rlvr",
+        "zwang84/zsdb3kd",
+        "zzdyyy/patho-gan"
+      ]
     }
   },
   "candidates_in_order": [
@@ -13632,6 +14836,2416 @@
       "full_name": "mangushev/mfgan",
       "hash": "ffea9471d2bb084c3eeb2be688f92ea75d7627008086b9581897a8f853d1627a",
       "stage": 12
+    },
+    {
+      "full_name": "sanjaradylov/moleculegen-ml",
+      "hash": "0478acb18261e3767d6991f93be3f7153d3fb8a042c5d8f243bf600f19af6849",
+      "stage": 13
+    },
+    {
+      "full_name": "Thinklab-SJTU/ThinkMatch",
+      "hash": "0551365385a86be169ae3571b60522ec1fa1b93cdee94509142f3bebd43b177a",
+      "stage": 13
+    },
+    {
+      "full_name": "amazon-science/LC-PLM",
+      "hash": "058857d32613ec7223a94c05d1586ce9ad2ed1f98b5c2458ed63cbb24557d076",
+      "stage": 13
+    },
+    {
+      "full_name": "eddieantonio/collect-data",
+      "hash": "05d9db042e415f156deaf1422bec7de568090056b98408e9585e9e16918c2b83",
+      "stage": 13
+    },
+    {
+      "full_name": "highfem/tqe",
+      "hash": "06c6209b851882869cf45672407baa936f059fd2974d7c84cd554c2bf22e1dfd",
+      "stage": 13
+    },
+    {
+      "full_name": "IGNF/FLAIR-HUB",
+      "hash": "0b9f32786bf9de610df5b84f31524216410af92aac1ca102e40c1e96597bd886",
+      "stage": 13
+    },
+    {
+      "full_name": "gzenhaeusern/polarisation-package",
+      "hash": "0c7bbea7d89a2b7a00d20c9bc91213ad71d72b82c3b636ae3b687643b22b06f1",
+      "stage": 13
+    },
+    {
+      "full_name": "Dipesh-Lc/quantum-enhanced-hyperheuristics",
+      "hash": "0df0fd4b5e245ece7575a054895f2cdcd35716ce7ba9fd43d1f442055b6043c7",
+      "stage": 13
+    },
+    {
+      "full_name": "Ngoson2004/OpenADMET-ExpansionRX-Challenge",
+      "hash": "0e7f66f1888b3883099c6a36782e612c3686b48661793f5aefee1824a095d16c",
+      "stage": 13
+    },
+    {
+      "full_name": "Shengyu-Feng/CAM",
+      "hash": "0e98b88555bdde5e2b1a82391429df97305713be2aa3d8067f2e5b0ba1098920",
+      "stage": 13
+    },
+    {
+      "full_name": "ernestpusch26-maxwell/maxwell-qmcc-results",
+      "hash": "155c7050ebb0b254ee72633f061aa8b3bd2f53be26b61d11beee0125b69ae775",
+      "stage": 13
+    },
+    {
+      "full_name": "Amritpal-001/graphPrint",
+      "hash": "17be4383052b1e674fb373cc48ed21266ca0436a01887c65b6e47132ad29004e",
+      "stage": 13
+    },
+    {
+      "full_name": "zhongyuanzhao/gcn-dql",
+      "hash": "18ecc5b5ecea0dd37a14c2a742b779c2071ca519dcddd6642b9e5038ebea7d00",
+      "stage": 13
+    },
+    {
+      "full_name": "vamsigudipati/SwiftCFD",
+      "hash": "1a1030fa81940fbe0eedceecbb29d1377a5cac7aa81c6774bb91b533d4574e13",
+      "stage": 13
+    },
+    {
+      "full_name": "QutacQuantum/effective_inequality_embedding",
+      "hash": "2546e4e4711313ffaed1ee0b6b28fb574c124bb6db2e674964ad0d8bc3bf7b3b",
+      "stage": 13
+    },
+    {
+      "full_name": "krisss0mecom/AlphaDynamics",
+      "hash": "2b802b0d0b1e2897d2701e30eb6f32b31aa0f8527ceb7a60eb043d38e07479b5",
+      "stage": 13
+    },
+    {
+      "full_name": "bio-phys/cadishi",
+      "hash": "2e7de0c81ce325911ee7deb51dd5cedc1e4812b59e5924a4544f7f6e9502f471",
+      "stage": 13
+    },
+    {
+      "full_name": "google-deepmind/weathernext",
+      "hash": "30068d176286faddfd68d4fd6bcb4504b531147a7c810f614bf057b47897ead8",
+      "stage": 13
+    },
+    {
+      "full_name": "simonfqy/PADME",
+      "hash": "31c6b806df092aacb8585629877f29387b571e89d5c91764cf9c02fc0bf4941d",
+      "stage": 13
+    },
+    {
+      "full_name": "gabrielmahia/africa-coord-bus",
+      "hash": "37a00de45727a89ce704cbb11f6534423fa8fa705ea3f6e4fb1948782b2e2be8",
+      "stage": 13
+    },
+    {
+      "full_name": "robochimps/keosop",
+      "hash": "3c539b57eab295aee8543136ef44ce2fc2988a10325204ae94389a9a41dde97d",
+      "stage": 13
+    },
+    {
+      "full_name": "inm-leibniz/flashcart",
+      "hash": "4443cc43ebbb87e8005c7bc184c2ba6afa87d46e46e62478cda8985c7cfc8b50",
+      "stage": 13
+    },
+    {
+      "full_name": "LigandPro/Matcha",
+      "hash": "44f1a4406cd3b5f0dfcee1c2536c2f569e62bbd330cc8bd95a61c77a6ffbbf11",
+      "stage": 13
+    },
+    {
+      "full_name": "Qasim-Hussain-Code/vina_litpcba_virtual_screening_pipeline",
+      "hash": "477a1e59c28a6bb21e09ca451abe81852601506dd9f8d5ebac576c938425240c",
+      "stage": 13
+    },
+    {
+      "full_name": "chao1224/NeuralMD",
+      "hash": "477b950a958d3ecbc2163e0b9a667044097d74d49b3c9fbb0c462bbc17a301bf",
+      "stage": 13
+    },
+    {
+      "full_name": "mkturkcan/bikeped",
+      "hash": "4af4809343d448b036566529e1e73aca7b22e6d87df17d713d62c424f969b678",
+      "stage": 13
+    },
+    {
+      "full_name": "zaixizhang/FLAG",
+      "hash": "4ebbe7fc163a5e97e46ce730a54d274fcba287de83071fc6424ec6614e5d03a2",
+      "stage": 13
+    },
+    {
+      "full_name": "DiogoRibeiro7/rcpsp_cf_ivfth",
+      "hash": "55fe5c01bd9df192190946743eaf6696ea01040a4ddc6108c82507cbf712700e",
+      "stage": 13
+    },
+    {
+      "full_name": "DeepGraphLearning/esm-s",
+      "hash": "5a092b7d4f130f4e1cdc6987c5e9a58135b5549f224dedc0a3349752cb38a7ff",
+      "stage": 13
+    },
+    {
+      "full_name": "TIGER-AI-Lab/DisProtEdit",
+      "hash": "5d58de3c3bd381cd74d497cc350cbf38c3c65eea36b3ac92aff38426508ae8e4",
+      "stage": 13
+    },
+    {
+      "full_name": "j3xugit/RaptorX-Contact",
+      "hash": "6237663d26195146c735ade3c228e7faeb6cfb50f598ab2ff0a9187d9b61c8fa",
+      "stage": 13
+    },
+    {
+      "full_name": "tong-xz/GrapeSAM",
+      "hash": "6805ef0126b76ff8d736fc22e3abc57675d32b364b5ae7511c8e72cb35e0bc1b",
+      "stage": 13
+    },
+    {
+      "full_name": "nec-research/DIMOS",
+      "hash": "6dba1add37534ae44a69ac07d6def7cb55ed0b77bc6358cec9e759c297707069",
+      "stage": 13
+    },
+    {
+      "full_name": "gbyuvd/ChemMiniQ3-SAbRLo",
+      "hash": "6f3ac93bf6eaa0260a19f6aef63c5873a164517dd6b64a551ea5001bae535dcf",
+      "stage": 13
+    },
+    {
+      "full_name": "claudio-mantuano/fair-clustering-at-scale",
+      "hash": "72e460a0244bac5c36c30de28d17d3a0276398aad0108def9d490c8d72f1de0c",
+      "stage": 13
+    },
+    {
+      "full_name": "ai4co/unsupervised-CO-ucom2",
+      "hash": "7f8a3d52ac373b9eefb536ccc34166a3380bdff4238ebdebb83c7f563c0c86c1",
+      "stage": 13
+    },
+    {
+      "full_name": "DeepGraphLearning/SiamDiff",
+      "hash": "83b6bb5dcbcd70dfbb07378c26d6d3ad5f5c63e09202121bc129542cbba55308",
+      "stage": 13
+    },
+    {
+      "full_name": "robotic-vision-lab/CropNeRF-A-Neural-Radiance-Field-Based-Framework",
+      "hash": "83da95dde3430b7f1bf409ab3c3a899ed4fa1b5edb9a0f1c193ee8215c915249",
+      "stage": 13
+    },
+    {
+      "full_name": "Datalism/Food-Resilience",
+      "hash": "84e564294a71418b31af18de3fe5bce9c29c26439871fe093b40182d58fe74e0",
+      "stage": 13
+    },
+    {
+      "full_name": "taehyunjo90/co-ptr_net-pytorch",
+      "hash": "8563f2005fe529d8e72f474c993e3b75af9b400e3198888f87caa855748357eb",
+      "stage": 13
+    },
+    {
+      "full_name": "LibCity/Bigscity-LibCity-Datasets",
+      "hash": "85cb946bf4eaaa1be28f382e4c1246c4616ac8df26e9430e48109d74a0703f63",
+      "stage": 13
+    },
+    {
+      "full_name": "ntt-dkiku/route-explainer",
+      "hash": "8b1b1bb5786a2b2f2f0050cef19ea6fea4b6d5b8481aa786e495177f5f68db9b",
+      "stage": 13
+    },
+    {
+      "full_name": "sourav2609/Code..Dynamic..FDD...Journal",
+      "hash": "8deaeff239c79c38217c541151204905d629c305a6f7f8fe71379be8f9988c44",
+      "stage": 13
+    },
+    {
+      "full_name": "sblisesivdin/nanoworks",
+      "hash": "8e6de4350ca8472736b9565e384a9326b7829e1053cb466dcbdf66ff3e83928d",
+      "stage": 13
+    },
+    {
+      "full_name": "isusanta/quantum-aimd",
+      "hash": "9376dfd247fe05fcf4e9cd60dd0989643e4b46e970de1f0233ee7d83c71a07e1",
+      "stage": 13
+    },
+    {
+      "full_name": "victorkreutzfeldt/dec-fast-iterative-receivers",
+      "hash": "952d63315e7d0739f9331d4f24f035e3da1dfac0ac72683c1cfed610024cc5fd",
+      "stage": 13
+    },
+    {
+      "full_name": "bz317/PGFS_plus_plus",
+      "hash": "95e79f1425182fac7ec5c011c1d8b7f332ac90405ccd13149293d7ddea2101b2",
+      "stage": 13
+    },
+    {
+      "full_name": "ai4protein/VenusREM-Harness",
+      "hash": "97bafcff8b281bd582847b780a477e75e835d6b74203ccb25d82e3c82ae1bc00",
+      "stage": 13
+    },
+    {
+      "full_name": "BurakKilci2000/sera-rl-ppo",
+      "hash": "98a6aa54e33a1620b17ebd356a0bb10be5eb5378c91f1716eff4dcccc2c96efa",
+      "stage": 13
+    },
+    {
+      "full_name": "JuanGiraldo0212/QPLEX",
+      "hash": "9a925a31c6378e168924c20028a46e3ca24af142153bc8de10fd729ac213b5b6",
+      "stage": 13
+    },
+    {
+      "full_name": "mhpi/hydrodl2",
+      "hash": "a086de2ab91a22359bff53e94d63dfb404281b1bac95a41486a2993ae9e5fe6e",
+      "stage": 13
+    },
+    {
+      "full_name": "Power-Lab/argus",
+      "hash": "a1c8ac0c58c780553366b59e2dc26a2bc2a36dbd65b9deafbd54ff480f8ce9ca",
+      "stage": 13
+    },
+    {
+      "full_name": "radh55sh/BAPULM",
+      "hash": "ab1ce08e03cdb4bd5b826b54b994ebe859d8c94ad1e11ad55d2eaf6ceb0e5e28",
+      "stage": 13
+    },
+    {
+      "full_name": "ai-agriculture-circuits-and-systems/ai_agriculture_news",
+      "hash": "ac1648ee09e1057c0cd4778f85f5ce4abdafd9d658610b5ae5e971fea5c9e8f1",
+      "stage": 13
+    },
+    {
+      "full_name": "szl-holdings/szl-energy-attest",
+      "hash": "b0dbf426f3dcbc39758c33b75408a38c7236b5dac86d8a5ee7883f62b10c49d5",
+      "stage": 13
+    },
+    {
+      "full_name": "mhpi/dhbv2",
+      "hash": "b7f4d9c65ee8ba276e9e6821a95d5c5aba0f37b6808af81f7d8e8c4934411d0f",
+      "stage": 13
+    },
+    {
+      "full_name": "RelationRx/tiny_moves",
+      "hash": "bfb84d78fbb6cb4fb4bdc3275b1b82658442400cf1112290e923ecc7bdb6bfb5",
+      "stage": 13
+    },
+    {
+      "full_name": "monorez3/keys",
+      "hash": "c02bdb31b4e83aef6b85f6ecb6e7db7a880c6726a69d35841e55aba63a9a3d6f",
+      "stage": 13
+    },
+    {
+      "full_name": "mlelarge/chaining-gnn-graph-alignment",
+      "hash": "c10c07916a5ea8966f180c7c231783c874c31fa525910977e29a3d44514eef87",
+      "stage": 13
+    },
+    {
+      "full_name": "Jonghwan-dev/Boost_Up_AI_25",
+      "hash": "c2573c551c69afd1cd738b6795ae9aeccf48e4601ca80fbe49b7c8362a4ed8c9",
+      "stage": 13
+    },
+    {
+      "full_name": "yingtian22/FLOATING-BODY-HYDRODYNAMIC-NEURAL-NETWORKS",
+      "hash": "c62c62a47228493b5a56a4caa952e8226f83198f1874b55815e3907a538ac813",
+      "stage": 13
+    },
+    {
+      "full_name": "mrodobbe/Rxn-INSIGHT",
+      "hash": "c6831f4dff7a1944ddd07cf7c208c37d1cbbd20e791adc50135bb1e77e2969a3",
+      "stage": 13
+    },
+    {
+      "full_name": "pablo-labo/s2d_specspeed",
+      "hash": "c6b918d2e077ead61e5de170f528395089e363d9ea107e86ad0469731cc168d7",
+      "stage": 13
+    },
+    {
+      "full_name": "SeisBlue/BlueDisc",
+      "hash": "d150b9225c5ef6de96d2bb20711fd454dd6edfd69bb69b3334632a1d3f6c742e",
+      "stage": 13
+    },
+    {
+      "full_name": "victorkreutzfeldt/cf-ra-spatial-separability",
+      "hash": "d2e7a688023478a2a30a3f73fa516db67fa6bd7003c6b30b687774e5d32de530",
+      "stage": 13
+    },
+    {
+      "full_name": "gabrielmahia/kilimo-mcp",
+      "hash": "d3b26aa857593e1529af98cb5408ab5a1daad974b5e65089627e8f62d6c7e631",
+      "stage": 13
+    },
+    {
+      "full_name": "coleygroup/shepherd",
+      "hash": "d4ca77f33c8d7b5a0e0ba1b0390141dcc0301f761cd518845510926081e78d40",
+      "stage": 13
+    },
+    {
+      "full_name": "2am-dev/Drug-Discovery-Pipeline-V2",
+      "hash": "d81900bc8e044d882e8c334d95e052c0ad3deda39625b0175caa3783ccd9ac3b",
+      "stage": 13
+    },
+    {
+      "full_name": "AB-Abdulla/AgroGround",
+      "hash": "e33762875119aa381e99223ff0042e555338415b24db358291406625d4be9da0",
+      "stage": 13
+    },
+    {
+      "full_name": "little1d/MolAct",
+      "hash": "e8f4469802ef88bc5f223f89baeb5a88fc858e68e84ee37072faa5d918f16ea8",
+      "stage": 13
+    },
+    {
+      "full_name": "HyunwooLee0429/GMSPP",
+      "hash": "ea067e3e111dc527cf6f22047cc0ef928110e9c4a4a8a64e034af6dfcffa01c7",
+      "stage": 13
+    },
+    {
+      "full_name": "chenxuniu/TokenPowerBench",
+      "hash": "ef1710c51bb139751ebeb802bae5574e1d6fe5a6f58332f06a04f161270f1fec",
+      "stage": 13
+    },
+    {
+      "full_name": "rajatsen91/QueuingBandits",
+      "hash": "f08cd4243e19f06df1f0073538dbc8c86498de2be5236a113d370efca60426bc",
+      "stage": 13
+    },
+    {
+      "full_name": "kimvandenhouten/pyjobshop_biomanufacturing",
+      "hash": "f3b5c9d9696a48f2ef10efa495f8fcfa6a1405d26bbd067d72289096a0ac5e3c",
+      "stage": 13
+    },
+    {
+      "full_name": "Fraunhofer-SCAI/VMDatomistic",
+      "hash": "fe85a0d60ff2f539911bc34a11620d95cc1829af062824a767ddb272082f9271",
+      "stage": 13
+    },
+    {
+      "full_name": "agrawalmalav/EEG2ImageTransformer",
+      "hash": "01015e449e7f9bba18714420a042c115cf4456ea44f1da6e124175bfc8e5c35f",
+      "stage": 14
+    },
+    {
+      "full_name": "Caoyichao/STCNet",
+      "hash": "014265c5cdce56b298f0a9e1668780137ac9f4b9578dfd622be9ac3a78a0d6d3",
+      "stage": 14
+    },
+    {
+      "full_name": "ForeverBlue816/PhysioWave",
+      "hash": "02628a6a07e9b1be8eea0fabd71a2d7ff3acc60d427ccb69c0c3e2ad1c870b46",
+      "stage": 14
+    },
+    {
+      "full_name": "sebasmos/latent-sr",
+      "hash": "0262f8089db42200f52bdd6def3ab4502e4822d70a6eb729a7b4cde511b83bde",
+      "stage": 14
+    },
+    {
+      "full_name": "WU-CVGL/BAD-Gaussians",
+      "hash": "02d86bc583031279780f760bd246cc8ff3229a57052e3902ce79cdb90bc00bc7",
+      "stage": 14
+    },
+    {
+      "full_name": "aras-batu/Keyword-Search-for-Sign-Language",
+      "hash": "03235ae24e42914b0d6ff65a51db681184dde8aad0effd902c878e93712b3fae",
+      "stage": 14
+    },
+    {
+      "full_name": "pbashivan/EEGLearn",
+      "hash": "03308f86280bebe8a841b2f9ccc5372638f675908901ae6771d4a68a49f26e57",
+      "stage": 14
+    },
+    {
+      "full_name": "apchenstu/mvsnerf",
+      "hash": "039c1d055b790ed2c7fd2d78e570ee09bad58e9af9355605c9eba0c1a65aac5e",
+      "stage": 14
+    },
+    {
+      "full_name": "bomatter/OddEEG",
+      "hash": "04432aa9a5719f332153779b2df797fd76acfcd362ce29b862dc85ce3b800382",
+      "stage": 14
+    },
+    {
+      "full_name": "ayoussf/VMatcher",
+      "hash": "04c5db4fbd6bd9cb1ad84ca1edb90abe7b28f2ca349d3535da75597b5887b54b",
+      "stage": 14
+    },
+    {
+      "full_name": "Qwen-Applications/STAR",
+      "hash": "04da2d404b86b2dd31495205c19f67ba9073b8a6148fa51ef8c9fc61d196550e",
+      "stage": 14
+    },
+    {
+      "full_name": "mwasifanwar/temporal_reasoning_vision_system",
+      "hash": "04ed02dba5fd0b6eaafc7dba5c5ff88da8966db1deb114042422d306539a3108",
+      "stage": 14
+    },
+    {
+      "full_name": "satya15july/incremental_system_using_knowledge_distillation",
+      "hash": "064725381512ad40ac73cf9c46f4bad31318ee12d9f43e3190366e5429a578db",
+      "stage": 14
+    },
+    {
+      "full_name": "Mengqi-Lei/Hypergraph-as-Language",
+      "hash": "085c307cf40ed3a6ee650a11178cfeaa1c3d682dc33829297e2934b2a141792e",
+      "stage": 14
+    },
+    {
+      "full_name": "cernis-intelligence/docuglean-ocr",
+      "hash": "08b1e0580e4bfb707e0dadc07ba1d679431845ae276df4d47d3e5eedc18aa309",
+      "stage": 14
+    },
+    {
+      "full_name": "zl190/sisr",
+      "hash": "09c6224a63dcc022ef69b180bf2c7282593b6c87af60fd1c815b72fdf6623dee",
+      "stage": 14
+    },
+    {
+      "full_name": "NVlabs/LSM",
+      "hash": "09fb704dbb9d5b59d6d9bb3f9c33072e67ce3f668ba78eca7cb1f00de8ed4402",
+      "stage": 14
+    },
+    {
+      "full_name": "devesh1611singh/Cycle-WGAN",
+      "hash": "0a043552b9ac9d7c816380c05d1d92ec3f7539a472d0af64684299469baf6ee7",
+      "stage": 14
+    },
+    {
+      "full_name": "guyyariv/DyPE",
+      "hash": "0ab31f93a3e4ed8b80c506341f58a6a935a40f1843cb048eb6bad7d68fdf85cd",
+      "stage": 14
+    },
+    {
+      "full_name": "JustinGuese/S2-MoE-llm",
+      "hash": "0c2dccdca522949c69206ba0bcb824931cd7cad093bd64ad5334896a4b1e9ed8",
+      "stage": 14
+    },
+    {
+      "full_name": "novwaul/SR3",
+      "hash": "0d281b0b8b6cc805c3ee2c4f50a721fb713e450906141413ad28a1eb6251a0b2",
+      "stage": 14
+    },
+    {
+      "full_name": "ThePeeps191/cosine-similarity-distillation",
+      "hash": "0efa68123a0f8b27e1383422d938d311adef7c8f0035bb9f4f54a1a383950377",
+      "stage": 14
+    },
+    {
+      "full_name": "ShyFoo/TerraVis",
+      "hash": "0fa2711ea32f53e169920ba24b1b53783d65a56d3ac0f052458ee3287020a39f",
+      "stage": 14
+    },
+    {
+      "full_name": "autonomousvision/mip-splatting",
+      "hash": "10658d9582409ca1a7a8b8d0a21d0024dd64796c3ad96f3d028cdeb771dcd920",
+      "stage": 14
+    },
+    {
+      "full_name": "yue-723/DaMO",
+      "hash": "115c32eca87a4b2d7afe87d67b8fd29621b794b38e772d4ec613b944cb9282cd",
+      "stage": 14
+    },
+    {
+      "full_name": "CycloneBoy/pdf_table",
+      "hash": "115d5fc0654e96b549f397b343aaecd421e6510f924242782a44541846b132a4",
+      "stage": 14
+    },
+    {
+      "full_name": "Tencent-Hunyuan/HunyuanWorld-Mirror",
+      "hash": "116652bd162370097ed6ccfe627efb9cf188b0ed07a44e45d3904247c35ef17f",
+      "stage": 14
+    },
+    {
+      "full_name": "kevinraymond/giro",
+      "hash": "11677b0c5fc4997c477e073912171783abca3a3de3a6ee560c7a789cd439115d",
+      "stage": 14
+    },
+    {
+      "full_name": "SALT-NLP/LLaVAR",
+      "hash": "116b7492a1b2e252540d33112b43139ef7f8dd79af5fd93bb0b77ad27ac93ff5",
+      "stage": 14
+    },
+    {
+      "full_name": "giakoumoglou/rrd",
+      "hash": "11c8c1ab94d72bc60144b9adbc344e43c4d486e9971ea35ba49bbc90b8761c3b",
+      "stage": 14
+    },
+    {
+      "full_name": "grairudolf/d4rt",
+      "hash": "12ac3ab5d13cc48a234760256bd35ef215d99f46a07519c0563e9113a55eae3c",
+      "stage": 14
+    },
+    {
+      "full_name": "project-tirtha/tirtha-public",
+      "hash": "130a2232fb212f4fcd1827fdfa20ce724194add8027ad752264e16c967cdf0aa",
+      "stage": 14
+    },
+    {
+      "full_name": "BennyDaBall930/pid-tiled-decode",
+      "hash": "145654c7a288f15edd36cb923b804cafab5b98eefb3c8401e47aa9a7a0e9e3ae",
+      "stage": 14
+    },
+    {
+      "full_name": "opendatalab/MinerU-Diffusion",
+      "hash": "146e1b11c83204576dc1b55f48ad22fdd3f0e65adfbc906e3ab1f73ffd0e026d",
+      "stage": 14
+    },
+    {
+      "full_name": "mhson-kyle/World-To-Image",
+      "hash": "14831dadebd89b6447b62f0b3c5bd8106c0997e25f06612ef4baa2e579e0aa05",
+      "stage": 14
+    },
+    {
+      "full_name": "dwin-gharibi/runpod-easyocr",
+      "hash": "14e06904a76cf6333fc47582c333bb7fbc1cd103da79342d23c906aa6f2bb0db",
+      "stage": 14
+    },
+    {
+      "full_name": "FiditeNemini/z-image-turbo-mlx",
+      "hash": "16033ce48fe8d6ddd21b7027caf1573b5e0edcef3cfb90d4c0325201e8ec34d2",
+      "stage": 14
+    },
+    {
+      "full_name": "swshon/multi-speakerID",
+      "hash": "167f5003b17cdb5d6f6b42f9d6cf0d6cb4e93972577c5262a6e0e8f676e15328",
+      "stage": 14
+    },
+    {
+      "full_name": "Multimodal-Intelligence-Lab/CLIP-CC",
+      "hash": "16dee511c8c7a91dd5bc607f04467ba5d2742e9e8fba0180ffb52ca1f43f7e52",
+      "stage": 14
+    },
+    {
+      "full_name": "zhongshsh/4D-Animal",
+      "hash": "1722bf3859b6965c3154c5849eb5f75cc382ed51c235c6fe8b54d0da67cce171",
+      "stage": 14
+    },
+    {
+      "full_name": "DLR-RM/shape-completion",
+      "hash": "1874b3c7d1556dfbc651e078825957cfaca2f9830022b179f9d6451ffa9c190e",
+      "stage": 14
+    },
+    {
+      "full_name": "manojpamk/pytorch_xvectors",
+      "hash": "191f2e845bedd39682ada7f35e9b66f4f70fa570a1b2dfaadaba4d2e95a5cf71",
+      "stage": 14
+    },
+    {
+      "full_name": "asd0012/COSC440_project",
+      "hash": "19ba1c44e1e272913ad7e91bd69027272f5cce2dcb1a997a64a3bf4f8776ecb4",
+      "stage": 14
+    },
+    {
+      "full_name": "Lilac-Lee/FastKernelSF",
+      "hash": "1a4ed6825fd9d3dd88cee25030ff4f906151cc793be350b4292a7b51950a456b",
+      "stage": 14
+    },
+    {
+      "full_name": "clovaai/webvicob",
+      "hash": "1a6af76fddc7cf7248282139594fc91107a21be334d5c0a9b61052f18d6a14b3",
+      "stage": 14
+    },
+    {
+      "full_name": "matsuolab/multibanana",
+      "hash": "1a80663dcadbfcf679c2d0c928c59186aed6ea84f48e27db84aa287720e8a96f",
+      "stage": 14
+    },
+    {
+      "full_name": "xuxiran/ASAD_DenseNet",
+      "hash": "1b936124988ac80b64065695b64672d4440f0b756ab0bb4adc8a835a8a5f73e6",
+      "stage": 14
+    },
+    {
+      "full_name": "mauriceqch/2023_BASICS_PC_toolbox",
+      "hash": "1bf0e7a21fd3aca9bf48c26451b8b1e922ae85219c024d070847b4fba7dc4528",
+      "stage": 14
+    },
+    {
+      "full_name": "Blade6570/icface",
+      "hash": "1c047279aac33cd2af5d9eeab3481f058e0b4df626f82b7e9079e4828d72542d",
+      "stage": 14
+    },
+    {
+      "full_name": "kkahatapitiya/LangRepo",
+      "hash": "1c432ae4bff5fb0b9b487ce8eff9bdfb1e9ed5ed4e5ac84746934c1e32159672",
+      "stage": 14
+    },
+    {
+      "full_name": "SRKRZ23/cvpr-gait-2026",
+      "hash": "1d667147b979d779d54bda91fa6272e87095469cb5f3256ba38439e2cea4287d",
+      "stage": 14
+    },
+    {
+      "full_name": "Nhat-Thanh/SRCNN-Tensorflow",
+      "hash": "1e011596da06befe8feeae99b4aa789bfaa9a885b9b6fd15b38e50e3588df2d3",
+      "stage": 14
+    },
+    {
+      "full_name": "Danielz-z/LGF-EEG-Emotion",
+      "hash": "1ecbfc26013fd9e5df3bd170f536cc2641109196554e09bf7c0ee6e35cd91f14",
+      "stage": 14
+    },
+    {
+      "full_name": "JunjH/Boosting-Light-Weight-Depth-Estimation",
+      "hash": "1fb355795b09638f3f85aac4a620ea2312fba119ee428b826fe414f1709dbed5",
+      "stage": 14
+    },
+    {
+      "full_name": "ysl609/stereovision-mars",
+      "hash": "20b28a4aa5051fd8f9dee581840f89ad8605043e58121fd400515d0f07ceb034",
+      "stage": 14
+    },
+    {
+      "full_name": "hyenal/relate",
+      "hash": "2234ec0030b5521a491839798ced004279c034271e3e1ec1c3d562dc09a2e968",
+      "stage": 14
+    },
+    {
+      "full_name": "theosorus/DiffusionModel",
+      "hash": "2255a37a62b0248c7e464bbfd9c2d4ef3ecec8b443d07ffa29aadc7bf9378b8e",
+      "stage": 14
+    },
+    {
+      "full_name": "shreshthsaini/LumaGuide",
+      "hash": "22fa3d1de64a92c907b4f9eca8f66bbfe4abf4024bbf34b690631fcd5f09aefb",
+      "stage": 14
+    },
+    {
+      "full_name": "lakshmi-sathi/Evaluation-of-NVIDIAs-Camera-to-Robot-Pose-Estimation-Deep-Learning-Research",
+      "hash": "240c79d00fac594fade631cc8fcd814b955eeb149a462ab683ee56fcdff9eb59",
+      "stage": 14
+    },
+    {
+      "full_name": "estheryang11/ReconViaGen",
+      "hash": "2474705125e89be277c2dcf8f12e8c1662e3f224cf02c4488e89fb0d236923b6",
+      "stage": 14
+    },
+    {
+      "full_name": "yiqings/RandStainNA",
+      "hash": "2526907534fb4ab7a41efd00123872fb56f3f99d8457ff250f660ec47832aa1c",
+      "stage": 14
+    },
+    {
+      "full_name": "HySonLab/PointDistill",
+      "hash": "259a884aee273fdf4bdd087261f5cc3bf619bfe6352fad0068c83dd6771c4591",
+      "stage": 14
+    },
+    {
+      "full_name": "NVlabs/HMAR",
+      "hash": "25b93748ed2c87afdda8b49524e6a42db0e42feb1904bdd6fab06fe47d1bf4a9",
+      "stage": 14
+    },
+    {
+      "full_name": "Nanopocket-ai/FFHQ-2048",
+      "hash": "25ef705f37ee85d9d82b256d89c1ab1bebdb34887c2a71ba439cc871227b3a91",
+      "stage": 14
+    },
+    {
+      "full_name": "anl13/animal_papers",
+      "hash": "27ea5927ce5c69847c87b24992c85817b9690ab47232ec04eadeaac050e0bc21",
+      "stage": 14
+    },
+    {
+      "full_name": "TencentARC/ST-LLM",
+      "hash": "27f6e401f5601fed94536585c4c88331ec1e5cbdfe9e0c91c49bc4543c5ce4e3",
+      "stage": 14
+    },
+    {
+      "full_name": "egeozsoy/LABRAD-OR",
+      "hash": "27fdf12ce198cc81f4b1e5dc6a28f874bc3e07897b15942b914829360690b889",
+      "stage": 14
+    },
+    {
+      "full_name": "TOMUIV/ZImage-Web-Interface",
+      "hash": "28c24042ab03fb00cdc78a656f41e78fffc341447281c89357b093de13afe788",
+      "stage": 14
+    },
+    {
+      "full_name": "sangyun884/HR-VITON",
+      "hash": "292eb5e27e223721bd0a5f8c8e9b4a263aadeeca2cac1a0a8f315c279b756cde",
+      "stage": 14
+    },
+    {
+      "full_name": "Lornatang/Real_ESRGAN-PyTorch",
+      "hash": "2aa09917f3f529e6400cbfb58489c6977e71ba4a44b847be0a755909354e7910",
+      "stage": 14
+    },
+    {
+      "full_name": "IDT-ITI/LLaVA-CKD",
+      "hash": "2aa37cd6891e40dffd65bbe64fbf82cb6e3b61106a46e26ceb0b092ead45bbf0",
+      "stage": 14
+    },
+    {
+      "full_name": "maggie0106/Graph-CNN-in-3D-Point-Cloud-Classification",
+      "hash": "2b1032c204d6378e794553bd77cd3e3eed3d703e039be9748cacf5815226ee84",
+      "stage": 14
+    },
+    {
+      "full_name": "WU-CVGL/BeNeRF",
+      "hash": "2b2ea79617566d2b862c0d2642160db1a2c882b73eaaf5de2ddb4b2bc5c9d690",
+      "stage": 14
+    },
+    {
+      "full_name": "nguyennpa412/simple-multimodal-ai",
+      "hash": "2b3e7e523e25586c4bd432d28b95befa42e324517b662e4c3da1b6df4244ab4b",
+      "stage": 14
+    },
+    {
+      "full_name": "THU-SI/VideoScene",
+      "hash": "2b448ab2004be3b3f1e7ef485096fcfdd85aeea28fa7cb9673e5cad5f9b5584f",
+      "stage": 14
+    },
+    {
+      "full_name": "Lornatang/ESRGAN-PyTorch",
+      "hash": "2f340119696ce2d000d2ff0bc37f356586a955be806f203ee40d757e96705dfc",
+      "stage": 14
+    },
+    {
+      "full_name": "affctivai/coglier",
+      "hash": "31812d42f0493812d1664e69b129a833d2aa9efa20b036acb5ffaff2d359d98b",
+      "stage": 14
+    },
+    {
+      "full_name": "LCGLiChenge/MixTok-Official",
+      "hash": "32308aa5d968987a08c76d2ab62a1b6cf65d71d8fe0115309438048fc72bb1fb",
+      "stage": 14
+    },
+    {
+      "full_name": "localaization/pentagrom",
+      "hash": "34728f66f5d84d9e3f4d84f3399b1fe7d617216fe090f3ca0aa8469cb5af2fd5",
+      "stage": 14
+    },
+    {
+      "full_name": "titanwings/distilly",
+      "hash": "36b7745efc3eaa6960abbde744fa0597ddb72c6ea5a5c0515c51dc12e6e8e86b",
+      "stage": 14
+    },
+    {
+      "full_name": "BoPythonAI/video-to-gaussian-world",
+      "hash": "387e3e14bc4f927643a81ef0aa02d9172037e5998fac3efd5acf280648d8063b",
+      "stage": 14
+    },
+    {
+      "full_name": "recklight/equipment-vision-inspector",
+      "hash": "38c9fe444146d39a884e640c3ba528115c9b70b1dfc6d583d86178d94d791477",
+      "stage": 14
+    },
+    {
+      "full_name": "Qijia-He/dtdd",
+      "hash": "3a06e0beac6c3a4eea596044f543a7caa8c10075bd3bf5b2602672cdd2c16e38",
+      "stage": 14
+    },
+    {
+      "full_name": "EtokonE/CycleGAN-keras",
+      "hash": "3a411f39367214f4ea984f676d07143c29aaec583c93837ae5929258a093849d",
+      "stage": 14
+    },
+    {
+      "full_name": "dwin-gharibi/runpod-paddleocr",
+      "hash": "3a41fef8a1e518c900f46501d6cc27849f5aaf1120bc3872ddd524699bcb13f1",
+      "stage": 14
+    },
+    {
+      "full_name": "aim-uofa/FrozenRecon",
+      "hash": "3ae9d755e254246edff9527ef50278caa9cfca4dfbc069df7a55404a9fa922c1",
+      "stage": 14
+    },
+    {
+      "full_name": "RickyL-2000/ROSVOT",
+      "hash": "3b8037446089398a10926cdda9fc6ad82327832b5ecf163a90e7a1f745a77955",
+      "stage": 14
+    },
+    {
+      "full_name": "HengyiWang/spann3r",
+      "hash": "3bccf9270abdfbf5d6f52a3a1ba1c97576cd2cfb2289e454566a75f47063546d",
+      "stage": 14
+    },
+    {
+      "full_name": "RNBBarrett/1-Bit-TRM-Sudoku-Solver",
+      "hash": "3c131808a4f5c0410cf0cd4e94a4950b47107bf9f27ab30e9fd81438e82c15fd",
+      "stage": 14
+    },
+    {
+      "full_name": "wzzheng/PointOcc",
+      "hash": "3c179e1e8724e964142d8a6055206995b22cb992ef22e478d5cedafc0aff0586",
+      "stage": 14
+    },
+    {
+      "full_name": "duylebkHCM/CONSTANT",
+      "hash": "3cff0a1f1211923493094fa12f0ea2676008828dd3831f986e94e3705a15eedc",
+      "stage": 14
+    },
+    {
+      "full_name": "ildoonet/unsupervised-data-augmentation",
+      "hash": "3d285129734a50ded47abf641246ed0bad2878bd84b95eeb5d67426cf3683dc9",
+      "stage": 14
+    },
+    {
+      "full_name": "XuyangBai/PPF-FoldNet",
+      "hash": "3d33cf082c07be2135a3056e2753dc1256eaca2b7cd145ea3a040f50c3a5e567",
+      "stage": 14
+    },
+    {
+      "full_name": "Jiamian-Wang/Iterative-Soft-Shrinkage-SR",
+      "hash": "3e254109876a02f776512656d1a01f2c0f71bc4268c0554174a19afae840c8db",
+      "stage": 14
+    },
+    {
+      "full_name": "jakeywu/ocr_torch",
+      "hash": "3ef93a497b4d5a812bdcb6c1309c4d13523888ee100d06536794875b861c12e7",
+      "stage": 14
+    },
+    {
+      "full_name": "Asixa/Dirichlet-Splatting",
+      "hash": "3f865eb59011a597145a000d1bc96cbb3deb3eaa523562f6628c59fa2d1ce28b",
+      "stage": 14
+    },
+    {
+      "full_name": "go-agent-x/VideoXAgent",
+      "hash": "3fcc9d52d6de34b732733c04d14705e5a0bc0600bcf308e91b1c9de400f8620c",
+      "stage": 14
+    },
+    {
+      "full_name": "skumailraza/FRSNet-GA",
+      "hash": "3fd772fe258015d66241b9bc669962a48f437e259ba76e30bb02149dab7474b5",
+      "stage": 14
+    },
+    {
+      "full_name": "Harahan/MeanFlowNFT",
+      "hash": "40c5c010a5c2bdecaf43b03ccddcd85ff0d711c32d8b0b84c0bd6da4de3230e7",
+      "stage": 14
+    },
+    {
+      "full_name": "XiaohanZhao123/3D-Dataset-Pruning",
+      "hash": "4212405366712ee862f4119de1e68f3d275850353d4100071721b1ac99aa77e5",
+      "stage": 14
+    },
+    {
+      "full_name": "LTS4/graph-learning",
+      "hash": "433d867106a739e0f831dde97aa604a0c9c93f8898e5ad476cff73639a02c0f2",
+      "stage": 14
+    },
+    {
+      "full_name": "pcl3dv/OV-NeRF",
+      "hash": "43443ed8fe1b21c228d083042d0b63a0840c552a06995b0f07a21f9916cc13ed",
+      "stage": 14
+    },
+    {
+      "full_name": "soarxyn/diffusion",
+      "hash": "4384c0131886da418e3c8756099e1dee6f1a286de5fa77987134f27bb7a2967b",
+      "stage": 14
+    },
+    {
+      "full_name": "szattila/pTFrenderer",
+      "hash": "441c6eb1b5860050ab3a7ac0ac6a5551b7ad74a728fb38806cefacf01d9a41c3",
+      "stage": 14
+    },
+    {
+      "full_name": "MCG-NJU/CamLiFlow",
+      "hash": "44da1a83a49f48aeec6ccaf927e2af0e9d8767004e44ea03008009df89996871",
+      "stage": 14
+    },
+    {
+      "full_name": "yi-ding-cs/EEG-PatchFormer",
+      "hash": "45274435b196371ce4275be917d7dddcde1fe8d917ac18a8e60eb2c52b5606c6",
+      "stage": 14
+    },
+    {
+      "full_name": "ZoreAnuj/AlphaNIST",
+      "hash": "4733a914e21b2bfb0f9acdd959d4bf029d4b3eba586727402c3b5852ea7f0fcd",
+      "stage": 14
+    },
+    {
+      "full_name": "cvqluu/GE2E-Loss",
+      "hash": "487e4c9c8fe4ac52dcf7bacbd9ab4aa15c4743a8fe07f72f119305d2a1cd77af",
+      "stage": 14
+    },
+    {
+      "full_name": "OpenGVLab/Ask-Anything",
+      "hash": "48fb0ec0b0c695447bf6fb402bc435c109e34f9e8d099904029119a0217ef1f5",
+      "stage": 14
+    },
+    {
+      "full_name": "romi/skeleton_refinement",
+      "hash": "49313d7c632d4062518ff01f0f77e9f3feff56a12514a22a2dc034c6a72aacac",
+      "stage": 14
+    },
+    {
+      "full_name": "Haiyang-W/UniTR",
+      "hash": "4960ad6711e41b69296830023f6512d105c171e7067e9f5cae593011e8054087",
+      "stage": 14
+    },
+    {
+      "full_name": "mingqian0850/awsome_depth_noise",
+      "hash": "49b97098ec4041f004696065c9548660c414de9bd79e391b3f94ee335afa1609",
+      "stage": 14
+    },
+    {
+      "full_name": "theolepage/wavlm_ssl_sv",
+      "hash": "4a0911ed7db27262408aa1f2f930b670fb17d24656257ddb048a92f8e761348f",
+      "stage": 14
+    },
+    {
+      "full_name": "wilsonlau-uw/Automatic-Assignment-of-Radiology-Examination",
+      "hash": "4ae1377ff003dc21a4ae82dc3ca560fabe118d32150ff1d1cf4461079be861c2",
+      "stage": 14
+    },
+    {
+      "full_name": "yjxiong/temporal-segment-networks",
+      "hash": "4bf366d39052f97b04b73c66425b15dad72bc3711c72792af30369d35af5a74c",
+      "stage": 14
+    },
+    {
+      "full_name": "LeapLabTHU/RvR",
+      "hash": "4c2aa50c97c02c86cbf8d76eaefdddf4aef27c1cc31f7af89822bd756c2de6ff",
+      "stage": 14
+    },
+    {
+      "full_name": "baadjis/trocrvision",
+      "hash": "4c31cc561b97ed7b832f3ff963d3ab9e377fdc1094989875073c91fdd8f77735",
+      "stage": 14
+    },
+    {
+      "full_name": "quan-dao/practical-collab-perception",
+      "hash": "4c3c4aab757bcd98b9fba11425a1658d171763ad2f30dbfecf4aa1ca2392d422",
+      "stage": 14
+    },
+    {
+      "full_name": "chenjim/MinerU-convert-md",
+      "hash": "4d0df80d151073e85833f39749c196bc13038773467079e4beee2f16b4cc2b63",
+      "stage": 14
+    },
+    {
+      "full_name": "Fangyh09/pose_nms_python",
+      "hash": "4dd6982a37c7e2a4355a9c51351e00f484c7c569a411071ba29688179dacabc8",
+      "stage": 14
+    },
+    {
+      "full_name": "niravpatidar37/distillroi",
+      "hash": "4fb3657fa71369a0a894efa33bf2b341badcc81cbbc1795c10214f032dfec443",
+      "stage": 14
+    },
+    {
+      "full_name": "alexklwong/augundo",
+      "hash": "4fb6434aa37795d985d06acdd13291641f0ab980c8393ca0cb232f439b917b4b",
+      "stage": 14
+    },
+    {
+      "full_name": "sublatesublate-design/unlimited-ocr-openvino",
+      "hash": "502edb614c4278afb50e4f445f1db58f1ffda5ac96da6cd17b07cd6af554fc01",
+      "stage": 14
+    },
+    {
+      "full_name": "2minkyulee/ECO",
+      "hash": "51709ab12d357feede463eb80df9be9b495f0b07f3491ea4347061d56fa5abc9",
+      "stage": 14
+    },
+    {
+      "full_name": "MohitShridhar/genima",
+      "hash": "52bb0356bac8edc7a5daf1f085220238467da9e73ea4805172ed21a9f0e7dbbf",
+      "stage": 14
+    },
+    {
+      "full_name": "MCG-NJU/MMN",
+      "hash": "53262ff3183dfa4593af3d919623129254fa826b3fa9ca0b044280fe8bdac933",
+      "stage": 14
+    },
+    {
+      "full_name": "Say2L/FSHNet",
+      "hash": "53603fe776d7ad081f929595e4397a9161b63a2ae0721e50ffdd3d8535018a4a",
+      "stage": 14
+    },
+    {
+      "full_name": "ATH-MaaS/TextVerifier",
+      "hash": "53a520b1ee091ba678ca60cf8833844ed2803b557a4ce6abe81037ab2c7dc0cc",
+      "stage": 14
+    },
+    {
+      "full_name": "HINTLab/pulmonary-tree-labeling",
+      "hash": "54989e96766c55f8ec393cefb324ef114a0c77575fe3b7f4d6104d3ce4872763",
+      "stage": 14
+    },
+    {
+      "full_name": "joslefaure/HERMES",
+      "hash": "54b869880451207dc09eaf2936123c40686e1ce3d388626cdafd0b4dae958ce4",
+      "stage": 14
+    },
+    {
+      "full_name": "realsee-developer/RealSee3D",
+      "hash": "553d8fe24a31bf3c0c07729a67fb11419020c4884354a9bd2d31715d7f8d4645",
+      "stage": 14
+    },
+    {
+      "full_name": "filipposchiazza/SuperResolution",
+      "hash": "55bc5745bf71eaf909722cdb52075dbb3c730d65ff11060e25aff4f131a1792f",
+      "stage": 14
+    },
+    {
+      "full_name": "DylanYeung0929/PGSR-reconstruction",
+      "hash": "575ca5892629210c4d88acf0d25b19d261947519b9aad5668b0be742f183a067",
+      "stage": 14
+    },
+    {
+      "full_name": "minhmax098/3DPointCloud",
+      "hash": "575d6a0a0c763c03d17847843ebfb383812322a4f1da72d03c6b88e3f73357bc",
+      "stage": 14
+    },
+    {
+      "full_name": "timonkl/SubjectConditionedLayer",
+      "hash": "589f876c2271eef96faeab04c610eada2566d71ca7faf8aa767ecc83fe77fdc2",
+      "stage": 14
+    },
+    {
+      "full_name": "marian-nmt/sotastream",
+      "hash": "58a193b13fe25a7e27b41349027bb320b0aa19bc75c3fa9d2f568fd08cb16bc8",
+      "stage": 14
+    },
+    {
+      "full_name": "Hayashi-Yudai/SRGAN",
+      "hash": "595f69c6ae6b19fe90d5fa4ec0cf7110dff60f61bd0857a940c8ea09875db14d",
+      "stage": 14
+    },
+    {
+      "full_name": "KuOnoda/AutoRef",
+      "hash": "5ab194879013b212820a556084e67611c8f729d5254e172419681644c46082ff",
+      "stage": 14
+    },
+    {
+      "full_name": "Siyou-Li/QTSplus",
+      "hash": "5b72fcb30802e088f6249c1ce3dfefe4d8c57e9ae59c243d5a0d5bb37fafbdaf",
+      "stage": 14
+    },
+    {
+      "full_name": "ShawnPi233/HQ-SVC",
+      "hash": "5c4c226310160063920a3913d31816fae754827a07900470ab500ced83864edc",
+      "stage": 14
+    },
+    {
+      "full_name": "Hub-Tian/CADNet",
+      "hash": "5cd5bee28d27e971994c7b40494d17e3e84fdf7cdecc5fc4965794db04d409bc",
+      "stage": 14
+    },
+    {
+      "full_name": "svretina/nougat-mcp",
+      "hash": "5d2be8ee257eae448d2ab2fb168f48fdbae29a93130809b82fe41303b3d7ad48",
+      "stage": 14
+    },
+    {
+      "full_name": "ysig/learnable-typewriter",
+      "hash": "5d37ce47d76c9b3438b15a3dc60cdea664e5fd2090ad0db0e9f89acc904e8e9d",
+      "stage": 14
+    },
+    {
+      "full_name": "shufangxun/LLaVA-MoD",
+      "hash": "5d89cac0381a2fc056195b050565ed9ab0b1ee478b11ca24ab745593b81c5687",
+      "stage": 14
+    },
+    {
+      "full_name": "dslisleedh/SST",
+      "hash": "5e0a3aae0b1aa63890eb90d0e8f5878fea9d50f2d3801cfd765f83590cb3022b",
+      "stage": 14
+    },
+    {
+      "full_name": "yanx27/2DPASS",
+      "hash": "5e35d035614771c30538ac231f5f7ec8987ae62ed03a77a19b9d42b2a42f4abf",
+      "stage": 14
+    },
+    {
+      "full_name": "JianfeiJ/MVSMamba",
+      "hash": "5eb8facace836e14a5284637eb719164cedf2b4f29b53b8293b2122d8eeb93b5",
+      "stage": 14
+    },
+    {
+      "full_name": "pooya-mohammadi/crnn-pytorch",
+      "hash": "5f1f1f192223031de41dfb3e4263fe8eca2f99b98bb761b874279059d7e4de12",
+      "stage": 14
+    },
+    {
+      "full_name": "huangjh-pub/multibody-sync",
+      "hash": "5fc5b2b7ddedbc3bf9c4be5f6f0ab5ffb61b485c227ebf3f6ea9cf3a2e51a315",
+      "stage": 14
+    },
+    {
+      "full_name": "amap-cvlab/ABot-Recon",
+      "hash": "60da4c2013ef0bf7d0ce37dcc8630df98f609c8cff99737c7054f5de13c4116a",
+      "stage": 14
+    },
+    {
+      "full_name": "pminhtam/MIRnet_SIDD",
+      "hash": "615a76ce9dbe776d74241acd46faf6b17fbcd9233420ce1d1e583e4651194b05",
+      "stage": 14
+    },
+    {
+      "full_name": "zhengli97/OKDHP",
+      "hash": "62aa7e1b93ecf6c2b7c809e26b7650ffa9a25813e93c342f0fe158c67ef66b21",
+      "stage": 14
+    },
+    {
+      "full_name": "workingcoder/EDCNN",
+      "hash": "635bc643c61e1d30ff683c6c8cf718c31a8323e868cd9d1acd192ed80d55a612",
+      "stage": 14
+    },
+    {
+      "full_name": "anton-dergunov/agent-context-pipeline",
+      "hash": "642e6df36961b6ac85901c3a1593c060d4c9c9071d4a24d787b49eb2dd10738f",
+      "stage": 14
+    },
+    {
+      "full_name": "cy69855522/Geo-CNN-Pytorch-PYG",
+      "hash": "648858de2264e45827040263d7faa7411c5a3589ad5fc5e6268671cd5a025e12",
+      "stage": 14
+    },
+    {
+      "full_name": "Lornatang/LapSRN-PyTorch",
+      "hash": "655a23a9f24a066122fde5b5a4dbaf7afc1c293906fd600cdbaa5a67ad4f09a8",
+      "stage": 14
+    },
+    {
+      "full_name": "martno/cyclegan-pytorch",
+      "hash": "65a0d8f12e07300bc5eaf17429817782f5b8562c87eeeb5fc4acb45092067334",
+      "stage": 14
+    },
+    {
+      "full_name": "ash1ra/ESRGAN",
+      "hash": "66380bc575d9a2526b1a30d4a13ffe9c86a4ffba1a3e13ee98a5ced86c59fe2c",
+      "stage": 14
+    },
+    {
+      "full_name": "basiralab/IMANGraphNet",
+      "hash": "666a0c6ed717d27bf38395e171849db67475b5552090eee334abe552d25627b9",
+      "stage": 14
+    },
+    {
+      "full_name": "ash1ra/RCAN",
+      "hash": "66e5e9740f7c684c825d5889aa8006142218f8136ca8a6490ecd7874cf8353eb",
+      "stage": 14
+    },
+    {
+      "full_name": "ohdanieldw/SocialCurrents",
+      "hash": "67b61c4bedb3393637700b6a93adffc8227cbadbf3619d9d549edd300e786f6a",
+      "stage": 14
+    },
+    {
+      "full_name": "ildoonet/cutmix",
+      "hash": "67c9cd915cdcbd7e3191025f4fbd4719c4e24588b4875a9930517d47880ff075",
+      "stage": 14
+    },
+    {
+      "full_name": "Vividly-ai/vividly-research",
+      "hash": "686ee9a2b0429278734ebd867d5efee7fc1ae4449b9b26b9effb42ddeb9e9f4f",
+      "stage": 14
+    },
+    {
+      "full_name": "aalto-speech/MTKD4AccentedASR",
+      "hash": "68bbcb8d9041aa373719b8cf6615fc97ea6b94a896a218c9e80ec6b8012add47",
+      "stage": 14
+    },
+    {
+      "full_name": "bhavyagoyal/ppc",
+      "hash": "69f26a91322ef7a18e47896c0adfafd2afe8a974e34d27aec0e404172175bc05",
+      "stage": 14
+    },
+    {
+      "full_name": "markusaksli/ai-music",
+      "hash": "6bef7fdcb8ec62b2015bd722c8310ab0ab0363da149da91c3d57916d1e2cdacb",
+      "stage": 14
+    },
+    {
+      "full_name": "VAST-AI-Research/TripoSG",
+      "hash": "6c300bd137913b6c71ac894ae4baa897e4bd908558d468587f0842ac5b056945",
+      "stage": 14
+    },
+    {
+      "full_name": "fisherman611/handwritten-mathematical-expression-recognition",
+      "hash": "6ce31660b7cac80be382238b5d4bd300ca969735105826566fbe44c0d60d1a8b",
+      "stage": 14
+    },
+    {
+      "full_name": "mz-kim/KoNA",
+      "hash": "6d2b41e9e27ac3f41254d9b52e0a0d3e81086a2020d6004ee8799e756a2dfca9",
+      "stage": 14
+    },
+    {
+      "full_name": "Lornatang/DBPN-PyTorch",
+      "hash": "6dc2a70f9376b35240ee1e4720fc831eee910c0c8215199594aabd1e2be3710b",
+      "stage": 14
+    },
+    {
+      "full_name": "fw7th/redact",
+      "hash": "6defc4162ecb98d43370c0520b27b481ccd938510e779fb59b8978237e7a518f",
+      "stage": 14
+    },
+    {
+      "full_name": "antonyvigouret/Text-Recognition",
+      "hash": "6f5676d1bdc9c4d40a8d94a9acee2a099c2e87a791e3ae5f24bb2ff41126e766",
+      "stage": 14
+    },
+    {
+      "full_name": "BrownsugarZeer/ARSR",
+      "hash": "70f7bafb828e689087a2a3bb1eba0a6ec1525c1450d65110bfb4e6ca166d8a37",
+      "stage": 14
+    },
+    {
+      "full_name": "halallens-no/halalbench",
+      "hash": "72066c3a54333436deb2e51358696c335ffed5de7c2926d31364dc5c71f8978f",
+      "stage": 14
+    },
+    {
+      "full_name": "hp-l33/AiM",
+      "hash": "72fa235f478689454577c9d226cf21283093cc84a9bd87a8c2595fb1b639a0c7",
+      "stage": 14
+    },
+    {
+      "full_name": "Aurora11111/speaker-recognition-pytorch",
+      "hash": "731d4daddc02c01987028325a4de634884a2c1cd42887356e2c3dec962267bc2",
+      "stage": 14
+    },
+    {
+      "full_name": "mesnico/RelationNetworks-CLEVR",
+      "hash": "74cd2c9792703ca9dc4a954c5fb06a17e0d557a883a985c525045741a806cbca",
+      "stage": 14
+    },
+    {
+      "full_name": "psychemme/PsycheMME",
+      "hash": "74e5d46a228248ad50547826901834b3231ba04a130cdaa7cfbac055d6e2329d",
+      "stage": 14
+    },
+    {
+      "full_name": "Moamen-Elsharkawy/multimodal-rag-colpali",
+      "hash": "7562a78f8feaf6fe8a8727e8d12cae2f29fb39b2cca92a438e81336378a01d53",
+      "stage": 14
+    },
+    {
+      "full_name": "Hedrax/AHDoc",
+      "hash": "75f7d847bb5197fcef27bc71cc149ea428930b9c92d6c57fca3947eca12f2a8b",
+      "stage": 14
+    },
+    {
+      "full_name": "edhuang1/Awesome-Underwater-Visual-Enhancement-and-3D-Reconstruction",
+      "hash": "76e3345fba53c2c3ec7f13f64b5420c49cc0611a0137ef817a88b2aeda2e968a",
+      "stage": 14
+    },
+    {
+      "full_name": "naver-ai/maskris",
+      "hash": "7802c6fdcfe4a91ef23f524542b30a74089bba6d181c4acb46fd6474243cef01",
+      "stage": 14
+    },
+    {
+      "full_name": "borhanMorphy/progressive-gan",
+      "hash": "7879ece7b09b6ffdb2a85ecc84f3b859751a5aa39086f020175eddf4e21fad55",
+      "stage": 14
+    },
+    {
+      "full_name": "tobbytools/pdf-to-markdown-rag",
+      "hash": "790bc2c59615d9945b8b802f2df1ef8000a0248b7f49ce4ab288cf1941155d42",
+      "stage": 14
+    },
+    {
+      "full_name": "ash1ra/HAT",
+      "hash": "7aa0a7afad2e8047f6156501b37f0e0850bd6984d8ad6c5cf0125286b91f6c5c",
+      "stage": 14
+    },
+    {
+      "full_name": "mlvlab/F4Splat",
+      "hash": "7aff9673f3568b599863a2b7884e3090bcb929e9b98d8e3c490f1ecfda655bbf",
+      "stage": 14
+    },
+    {
+      "full_name": "jilstingray/MTWI-2018",
+      "hash": "7b015415d82528ec9d33b1200d60600e1fb9d0cece458b79fdcbc72a3f10679c",
+      "stage": 14
+    },
+    {
+      "full_name": "Intellindust-AI-Lab/HTR-VT",
+      "hash": "7b2ce5ed4996aa0fbc77220765d3a5ba5246e44be1bfca0cc4015369f0e6ed1f",
+      "stage": 14
+    },
+    {
+      "full_name": "ahmadmughees/LayerMix",
+      "hash": "7b6ee7e3044e9dc60346f4c704ba0fd2e2f4c0d4fe1e2c9fe4158a3757349b64",
+      "stage": 14
+    },
+    {
+      "full_name": "ruoyuxie/noisy_parallel_data_alignment",
+      "hash": "7b93e4f4472d0a00a05221168c172e4f132e3b29c30f2679a5034a03fd1fd44e",
+      "stage": 14
+    },
+    {
+      "full_name": "ventusff/neurecon",
+      "hash": "7c41ca624b41fef338f1145af20c1e9034fa6e7c873f77dc699f237f413de783",
+      "stage": 14
+    },
+    {
+      "full_name": "Lornatang/CRNN-PyTorch",
+      "hash": "7ddc66866533a24a0715b1f392ae1bc6f6e659da830211da21840672f56180f8",
+      "stage": 14
+    },
+    {
+      "full_name": "qiankunmu/HGAdapter",
+      "hash": "7e705d585081cee4a088a18c4e9bdb9997a946bb526ee0b634f194eb133291ef",
+      "stage": 14
+    },
+    {
+      "full_name": "SOTAMak1r/CPS",
+      "hash": "7e85edf8d493a4ddd8729fba903e2b3da8f41765536ed3c80b14911ce1861a62",
+      "stage": 14
+    },
+    {
+      "full_name": "Event-AHU/EventSTR",
+      "hash": "7ff9ed0aad322daee69869103a6dd28b8137b5c5e9f3d42546e9c55155a7109e",
+      "stage": 14
+    },
+    {
+      "full_name": "happyc0der/eeg-dementia-graph-transformer",
+      "hash": "8029d955626c9b7233e082bd4db7c3aa072b7b6e33f9fdcd2cb466cbb0267221",
+      "stage": 14
+    },
+    {
+      "full_name": "IDEA-Research/DINO-X-API",
+      "hash": "80771b59631203967a3a7d1ae9f004bdd03d73a470dd6f071d8d0da1bb498282",
+      "stage": 14
+    },
+    {
+      "full_name": "Alokia/Idempotent-Generative-Network",
+      "hash": "814943ea9488a63e783ae9f759b33e5de2fb900e8bee699c06e676521fb1e8e5",
+      "stage": 14
+    },
+    {
+      "full_name": "RuiZhou-cn/Elevator-VIGS",
+      "hash": "83b281f735ec4b5c6c35eaceb3614f444d3a44a72e14ff51c5a69dbfd011933d",
+      "stage": 14
+    },
+    {
+      "full_name": "speridlabs/iris-3b",
+      "hash": "85a42054390f55543d706c7c06744bf3b2f68a0498a95cdcee9aacb79888c431",
+      "stage": 14
+    },
+    {
+      "full_name": "duoan/mega-data-factory",
+      "hash": "85b0ab5bd72c69dc526a045d3d00efa117bbf381f4d716c8d807c2d2d0df50a7",
+      "stage": 14
+    },
+    {
+      "full_name": "amunozgarza/tsb-gan",
+      "hash": "85b8bfb6e46ae613da1555d2b4df9b48a46df9b1aacc6f093c100f892aec891d",
+      "stage": 14
+    },
+    {
+      "full_name": "basiralab/L2S-KDnet",
+      "hash": "8603a9ef7c38df3a0f509e7bb4e50f24e7e21b122aa040d8a97b1c1c97568011",
+      "stage": 14
+    },
+    {
+      "full_name": "kgnimrod/DocLangID",
+      "hash": "865c3906ba3f5c25ceb01b897208b002be4b1723d046abcf23f40be5073068e9",
+      "stage": 14
+    },
+    {
+      "full_name": "graemeniedermayer/3d-depth-gen",
+      "hash": "86f982d592d9973bd4529b9ddaed3f4f8d84f7bd1b6326bada2839bc55170d2c",
+      "stage": 14
+    },
+    {
+      "full_name": "wjq-learning/SleepDG",
+      "hash": "877ca872287f0550957c8a78977f1ce56011dfe8e4cb0e88bd4fbc35476f1c9a",
+      "stage": 14
+    },
+    {
+      "full_name": "matteospanio/mule-torch",
+      "hash": "88e589cbb2f7dba5c2ae58d150ae9d63d84f43319a92d60ed68e3998d01db15d",
+      "stage": 14
+    },
+    {
+      "full_name": "ash1ra/SRGAN",
+      "hash": "89b026496651c694af60cbb443d48ca8eb3a096b8b39f10409ee465d193b7505",
+      "stage": 14
+    },
+    {
+      "full_name": "ash1ra/SwinIR",
+      "hash": "8a3a9b25b3b024f8ad94a58ebf35c66031ebf45c1068b878cde72d0f0c39daac",
+      "stage": 14
+    },
+    {
+      "full_name": "corochann/SeRanet",
+      "hash": "8aae3470f788dda05cdcb7008d946ffe01b609742e68f24a9b4d3cb63424a08a",
+      "stage": 14
+    },
+    {
+      "full_name": "sallamy2580/wearing-cloth",
+      "hash": "8bbcc9442923266c10cf3fa00adc21e61d7997d8a47be7994bcac31b8cd752dc",
+      "stage": 14
+    },
+    {
+      "full_name": "wzpscott/hybrid-radiance-fields",
+      "hash": "8c4d05e61e9ba86048c618c65f7c849ad3a843786ce6191a4f9a642d1f373238",
+      "stage": 14
+    },
+    {
+      "full_name": "King-play/EvoGen-Harness",
+      "hash": "8e13a2f4434d0915ddf780aefc1b2a41663b5126e8f7231030ff95dbb80c108a",
+      "stage": 14
+    },
+    {
+      "full_name": "SAtacker/PosenetTflite",
+      "hash": "8f0bbdb46539c6fa36d266a80e9d3ece235e660d12f89627a2390d66bd15c95e",
+      "stage": 14
+    },
+    {
+      "full_name": "rohitgirdhar/ActionVLAD",
+      "hash": "8f74ed38e98541fc1b4948c39755fab8421b4936786584e58d3d846bac503ec3",
+      "stage": 14
+    },
+    {
+      "full_name": "chnk58hoang/Vietnamese_Handwriting_Recognition",
+      "hash": "8fa3d4a0b42a9eef53d7bf5c888497cea625f13968e3d67d9b4c4751c02e4180",
+      "stage": 14
+    },
+    {
+      "full_name": "Shidu-Ren/ICM-Bench",
+      "hash": "8fce278e67b0032db5933c4c4456f1cc0d09aef4f0cf2f0497dc8f2413b46719",
+      "stage": 14
+    },
+    {
+      "full_name": "yudhisteer/Pseudo-LiDARs-with-Stereo-Vision",
+      "hash": "8fe5b4fc4e6801cf0f4f0ac6faf420a7d77d7f6f2000b80899a6306835f66aa8",
+      "stage": 14
+    },
+    {
+      "full_name": "no-way-labs/routing-absorption",
+      "hash": "901403c6e53975471aa8646c32b5beafdf7eb93c09ac95115b30889759fd0a0c",
+      "stage": 14
+    },
+    {
+      "full_name": "sijinkim/MEPSNet_dev",
+      "hash": "90f5e16b8b5399ee5a34167440ba3573041c4b2dbff6268d9b5329176d8c5930",
+      "stage": 14
+    },
+    {
+      "full_name": "VectorSpaceLab/InfoVis",
+      "hash": "91dd888c1516e9bae430f1454e057a1a34578e7a418d1779d75cdecc59e9d084",
+      "stage": 14
+    },
+    {
+      "full_name": "Fujiry0/stvg-agent",
+      "hash": "92003b4d8a90099aa3d3bac2a025c71edfb614d5d995757af4638db355297aec",
+      "stage": 14
+    },
+    {
+      "full_name": "kleyt0n/ltga",
+      "hash": "922c82667ecf551302371d5bfe98c2827907a81a14e6179c6ddd6ab2d9aa5a7a",
+      "stage": 14
+    },
+    {
+      "full_name": "jl6017/ArticFlow",
+      "hash": "92882193610c567bd40cde01a080e2458721b309e62ff3b779cebc1f5f076922",
+      "stage": 14
+    },
+    {
+      "full_name": "WulfKolbe/pdfdrill",
+      "hash": "92e0d3092304ad64e5c6fff50b404487e0d18f15886fa3a8fa17f53c2828943d",
+      "stage": 14
+    },
+    {
+      "full_name": "ai-art-dev99/vision-language-caption-vqa",
+      "hash": "942c386af5734bee0f7c9bdc9ae3fc18f92ab694083d4ffb2ec02816c8925a9b",
+      "stage": 14
+    },
+    {
+      "full_name": "Barbany/riemannian_metric_preservation",
+      "hash": "946f68b178e48da3dd2bdecd11bfd87f46bf937f29caf30deae4706e26f3ff71",
+      "stage": 14
+    },
+    {
+      "full_name": "mwasifanwar/NeuralCanvas",
+      "hash": "94a7147188c85c8ad5ab0e0d1fe39b03a5e146b3b31929c44508762f7ebfa37f",
+      "stage": 14
+    },
+    {
+      "full_name": "hiroki-abe-58/ComfyUI-S2Tok",
+      "hash": "94d580f1d65e5388c8864b6ac71e9cc2f73cc5532e3365e21f29b250f9f99289",
+      "stage": 14
+    },
+    {
+      "full_name": "mindsdb/aipdf",
+      "hash": "95089a7cb641db398043c84340bf991eca6564707c4d63104a97a7116d7c7f6d",
+      "stage": 14
+    },
+    {
+      "full_name": "Sailor-t/ShiftLUT",
+      "hash": "95b7c780ba9cd610754422c40e8e595715c389b5d569da629d56d60760d6c160",
+      "stage": 14
+    },
+    {
+      "full_name": "Inception3D/Motion324",
+      "hash": "95e8af3517a9d53e512b55ddd4f97f3ed8f46602deb50514d712771698581145",
+      "stage": 14
+    },
+    {
+      "full_name": "HVision-NKU/OraRL",
+      "hash": "95ea253d39cc70108ef39b816b0ff06734de4ae6981f053aca6501fad79adcb6",
+      "stage": 14
+    },
+    {
+      "full_name": "run-llama/opendocrouter-py",
+      "hash": "9611ee7c2f3ec823fd8fd3fd757b73c8656e7f7151e00950c690d2736c5628d8",
+      "stage": 14
+    },
+    {
+      "full_name": "lnstadrum/fastaugment",
+      "hash": "963bc75e226b67a7fe682653d429e8414234e473bb5a787c1a54eee9e0ba995b",
+      "stage": 14
+    },
+    {
+      "full_name": "blackbird2003/TeethSplineSeg",
+      "hash": "9897349da52803cbda275064c84c924bf2a538b7db03cd465f86ee998bf72095",
+      "stage": 14
+    },
+    {
+      "full_name": "UditAkhourii/cdaf",
+      "hash": "992ceb2d42f0e85fe19e795f6dd6d88a81b738ff8ce6b320c2f195e363a38731",
+      "stage": 14
+    },
+    {
+      "full_name": "lithium0003/Image2UTF8-Transformer",
+      "hash": "99e219f2c46d1e182a52e300eaf95f2b3471ec30cb67b61b794b1e2a9fa9d55c",
+      "stage": 14
+    },
+    {
+      "full_name": "iMoonLab/LLM4Hypergraph",
+      "hash": "99fd0a7a71a13489c389d26479ba8478a3943cc6dccc7cf4687136265980406b",
+      "stage": 14
+    },
+    {
+      "full_name": "Multimodal-Intelligence-Lab/CLIP-CC-Bench",
+      "hash": "9a4549dfb5142ccac169487f5c968ed1034a872ab41428709ae263d083f6ddb9",
+      "stage": 14
+    },
+    {
+      "full_name": "ArchaText/AraMS-28k-Dataset",
+      "hash": "9a83848d01694f532eb8f874510bf2ed55330eea96f613a065a84c33e0d0f248",
+      "stage": 14
+    },
+    {
+      "full_name": "dahliau/DPDist",
+      "hash": "9bd190cae8345c86f8d347e2e6b3457fc6fae9ce1dd42fd1b8bebc97753cdd9e",
+      "stage": 14
+    },
+    {
+      "full_name": "badrusiddique/ai-tokendiet-skill",
+      "hash": "9bed54a503c51b28ec183987e16bff67d02ca81ef2ca97c361400b88f8ff3b23",
+      "stage": 14
+    },
+    {
+      "full_name": "heyoeyo/muggled_dpt",
+      "hash": "9c0024ea89b7009d6c782946c658d803f21aebfdee437be5d6a3404d3aa25456",
+      "stage": 14
+    },
+    {
+      "full_name": "apacha/OMR-Datasets",
+      "hash": "9c141fa56e572ccb0cbac96b5bf3f23b9679fef80707adf160c34288bf7306e3",
+      "stage": 14
+    },
+    {
+      "full_name": "yuanzhy29/PXDepth",
+      "hash": "9e44378b9a406cf608bcf45af50a39dbdcfe95bc7476d48e7476b2aa2d154a75",
+      "stage": 14
+    },
+    {
+      "full_name": "TreeLLi/AROID",
+      "hash": "9e6b1eddb83d934e9090dfc35e20037f7bd4491e51528df3719ccdaaf4ec85ce",
+      "stage": 14
+    },
+    {
+      "full_name": "mariiammaysara/PointNet-PyTorch",
+      "hash": "9f42b5e24b11b0130cdde5e7ee79b61271782a72047cfd5091bd1860456e14fd",
+      "stage": 14
+    },
+    {
+      "full_name": "choucisan/poplar",
+      "hash": "9f4b9733ea6a57f9f46475971b0ba5e7504853e1b5361256bc86bece00650cca",
+      "stage": 14
+    },
+    {
+      "full_name": "UAV-AVL/LDVP-SAC",
+      "hash": "9fc4dcf47b63852aaa098c8af9b016c1481fd4bcc3f8f83b4ce897dde5b27a4f",
+      "stage": 14
+    },
+    {
+      "full_name": "QunjieHuang/SATTC-CVPR2026",
+      "hash": "9fe567cf5f3a718a5eb0bcde9113bb1b11464d6d6b364500b1094a6dbc2324ff",
+      "stage": 14
+    },
+    {
+      "full_name": "TsinghuaC3I/Efficient-Diffusion-Models",
+      "hash": "a0adccc5865d2d8c29202c4d1f0650b1bc3e0b314b98a4458a1ac6a25eb59e1c",
+      "stage": 14
+    },
+    {
+      "full_name": "devanjanmishra/phone-video-3d-recon",
+      "hash": "a15facf5c53d3081585a559239fae4f20d44be3951ad5a8850fc65500c6342ed",
+      "stage": 14
+    },
+    {
+      "full_name": "YAIxPOZAlabs/Improving-TrXL-for-ComMU",
+      "hash": "a3dbdf34fff584a6086b35042fbe7fa07aba51fba4e0e1285f1f9f33791f5b70",
+      "stage": 14
+    },
+    {
+      "full_name": "mabaorui/PredictableContextPrior",
+      "hash": "a3fc716ccd3ac679d2394c96132b5718a7fab0e435ab6eadb19827b167b84cd7",
+      "stage": 14
+    },
+    {
+      "full_name": "NVlabs/DREAM",
+      "hash": "a45fa46c6291045cf4a0bc497d341785a62dc81a2a2e7b4d8c7c7f0f08c08133",
+      "stage": 14
+    },
+    {
+      "full_name": "autonise/CRAFT-Remade",
+      "hash": "a4d2cc373d5439be8bfa54d7e7893f3fd0d3032b228e5d54b0b1842f7a6ffd12",
+      "stage": 14
+    },
+    {
+      "full_name": "imperial-qore/GON_MNIST",
+      "hash": "a4f28be67bb12c9eefcbfadda8a0b9c46e2fabe2cf2ff180917e2d279c3aceb6",
+      "stage": 14
+    },
+    {
+      "full_name": "agus-official/VRPSR",
+      "hash": "a54d5c4149baa683888c0735ba00c12152d16f44a93e48ff4ab881b24b0b18c4",
+      "stage": 14
+    },
+    {
+      "full_name": "zju3dv/Scal3R",
+      "hash": "a562ea8e93db05bb72623c435e0e3c9cd3a621ceff7901624176dad23fb9376b",
+      "stage": 14
+    },
+    {
+      "full_name": "mustafa1728/Yogasana-Classifier",
+      "hash": "a5d19e01ecd08c1e40e691d88ae30ba1a2c1ba29d55cac70df5cc9d716ca5af5",
+      "stage": 14
+    },
+    {
+      "full_name": "tuanio/noisy-student-training-asr",
+      "hash": "a7def1c5bfd4a9c61d4407b5bb7773fc49c226e992bd94703f4cc31a1d89a4d6",
+      "stage": 14
+    },
+    {
+      "full_name": "MasterToycode/MastiDiff_DDPM",
+      "hash": "a80d2d399ba3a08ca64f912e29f038db93189b7c9b10ebfe7346b0a30cc97ce6",
+      "stage": 14
+    },
+    {
+      "full_name": "Ifena-Xia/paddleocr-htr-ancient-chinese",
+      "hash": "a8955b5241dba8fa4705b12df8f2185191a077093d9a2f7817c3f8b3cbfdb3d4",
+      "stage": 14
+    },
+    {
+      "full_name": "zju3dv/InstaScene",
+      "hash": "a8f61b8fd6b586bb6043f2675a17137d454794abfc2aa88d1ff75101015b4bd3",
+      "stage": 14
+    },
+    {
+      "full_name": "EricRollei/Emu35-Comfyui-Nodes",
+      "hash": "a90a2baa4f17cbefa252e89a31b5b5c81bc9ef7d591fee44cd63439706b88e14",
+      "stage": 14
+    },
+    {
+      "full_name": "purvaten/feel-the-music",
+      "hash": "a90eaf2af60d0b88bb9627795096f3d8920f008958c205653a51f1e8ebac3600",
+      "stage": 14
+    },
+    {
+      "full_name": "I2-Multimedia-Lab/Pointsoup",
+      "hash": "a923e22a88a6b2bf3a5af8926e96df7bde62d4805f9bfdb36cc876d3ee3e39b7",
+      "stage": 14
+    },
+    {
+      "full_name": "MithrilMan/teacher-in-the-loop",
+      "hash": "a92b92389c927b899928fb9943e0dea105ab12c4fddbc0eb4e1da347a3ba560a",
+      "stage": 14
+    },
+    {
+      "full_name": "CPones/PointNet-with-ModleNet40",
+      "hash": "aa714903499ea7685b53da3f1db27a979fb230ff82d9f4f110afe172124ec405",
+      "stage": 14
+    },
+    {
+      "full_name": "raphael-baena/DTLR",
+      "hash": "ac92f9f9e8a1e7d62e7a9a962de3fe7e99ccf6f289c4ddb3b59668854942fded",
+      "stage": 14
+    },
+    {
+      "full_name": "kanwa2006/DocuMindAI",
+      "hash": "ae6ede98735c101c179bd659bebddf6324ad5d139c1baf8ce3c4c24f0072e108",
+      "stage": 14
+    },
+    {
+      "full_name": "VRIL-LABS/vril-sense",
+      "hash": "afaf17584d13036f070d014028e4bc14fe15f421c9643522d2da4cb038590c11",
+      "stage": 14
+    },
+    {
+      "full_name": "morikonon/mnist-generator",
+      "hash": "b0353dc40bea9fa06b4f034d973f38bc7e99bf6fb3f88dcda90115fefaed9482",
+      "stage": 14
+    },
+    {
+      "full_name": "huanngzh/MV-Adapter",
+      "hash": "b0ee2406d7d894464e846f79744995bef60bb2568cc3cd26fa566335db6de042",
+      "stage": 14
+    },
+    {
+      "full_name": "cdancette/detect-shortcuts",
+      "hash": "b1ecfd6b7c15c8f801cd8aa6196f287e1cff42cbc174c801d99258188c169bb7",
+      "stage": 14
+    },
+    {
+      "full_name": "Bibas41/exercise-rep-counter",
+      "hash": "b1fbab6120e95170a23a88ff212a8a2411cedea997b8757dd45e6a2d406eb16b",
+      "stage": 14
+    },
+    {
+      "full_name": "Xartman86/neuroca",
+      "hash": "b208211adc223808f708378c7e0a4ee6c86a0abcb749f547ca99c9a916e16887",
+      "stage": 14
+    },
+    {
+      "full_name": "jaco-bro/PixGS",
+      "hash": "b237e753b26205ac2bdaee1cd698c465993b19e4996304ef8a03e4389a99a69e",
+      "stage": 14
+    },
+    {
+      "full_name": "Medabid1/I2I-LR",
+      "hash": "b2d5daba177d4430cbc7d8faa3760f566b8795d08aa5d3685c723fa114565f2e",
+      "stage": 14
+    },
+    {
+      "full_name": "OwenHan10/mm-ADL",
+      "hash": "b2f7c467818dd6801030c5674d7d19ad6bb60a50245cf9e1c6eed02b2c6bcac9",
+      "stage": 14
+    },
+    {
+      "full_name": "kw5t45/mnist-ddpm-from-scratch",
+      "hash": "b3479ecabfd763b0a89d7fdfcca8a203920e19d1756986a69612aebc93149df0",
+      "stage": 14
+    },
+    {
+      "full_name": "RhaggyRhelp/mode-3d",
+      "hash": "b3c193b98cba76090f2e4f1227347040c37bc2d7ff311cd6ee71cb20aa1b6925",
+      "stage": 14
+    },
+    {
+      "full_name": "marccasals98/Super-Resolution",
+      "hash": "b4829072adeb0a03f48011649edccbd5994c055d092b6fbc4093523cb739c199",
+      "stage": 14
+    },
+    {
+      "full_name": "jianzhnie/awesome-text-to-video",
+      "hash": "b4ca6b1167672467832dedb13fa8ec7c334ab99395ef1df2a85e20ffae8105c2",
+      "stage": 14
+    },
+    {
+      "full_name": "Zyriix/prologue",
+      "hash": "b60bc1330ad4b46fb035493acbfcd8e4794f0b3a3c756765c07d18434480ce54",
+      "stage": 14
+    },
+    {
+      "full_name": "lapp0/distily",
+      "hash": "b66585f860235a0cded4887fd73f43f23208216306a33262e357ba7f934eac3f",
+      "stage": 14
+    },
+    {
+      "full_name": "gsdali/coreml-paddleocr",
+      "hash": "b66e219af32b9ec4a615648267b0e763d65f04330d5a83bebc56fc91131daf8e",
+      "stage": 14
+    },
+    {
+      "full_name": "InternRobotics/P3Former",
+      "hash": "b66e97e09aa523c943ff1c1523563e0fb80bfe77a819897d3ab897b21ff76109",
+      "stage": 14
+    },
+    {
+      "full_name": "TilemahosAravanis/Only-Style",
+      "hash": "b6932a1ea6bbd3a9d9c2a1d8c1f86ffedd0080f6438e3c8b0f7c8f403ebcb95b",
+      "stage": 14
+    },
+    {
+      "full_name": "amirzamanii/Context-Aware-UAV-Detection",
+      "hash": "b6fa62addb02c1c599d4a26eef98ff90b747849a69e7af41e7631494f462b8af",
+      "stage": 14
+    },
+    {
+      "full_name": "joanrod/ocr-vqgan",
+      "hash": "b73abb0ab79ef40ceee4999946b77c89f746d9ae401a5504ee86ebc3ec443d6c",
+      "stage": 14
+    },
+    {
+      "full_name": "goal31121/LOGG3D",
+      "hash": "b80b9861c8381ac11caaa0206e1cda3ccddc4468d89d4467002e84f7d6725dc9",
+      "stage": 14
+    },
+    {
+      "full_name": "MAGICS-LAB/DAPA",
+      "hash": "b89ffd8d78956101a434383e54471f0fc479eb92a1ad67260090b07a5ef84e81",
+      "stage": 14
+    },
+    {
+      "full_name": "zhangruotian/SalArt-VQA",
+      "hash": "b8b4501e338d0c9e5ab51b31e1efa131e0d450db611f93ef9a9ba9501e6b108a",
+      "stage": 14
+    },
+    {
+      "full_name": "Tau-J/rtmlib",
+      "hash": "b8cb8fb6145a4d646d4cf1439aba3844391e09f8877821935c76d09290621375",
+      "stage": 14
+    },
+    {
+      "full_name": "Pointcept/Pointcept",
+      "hash": "b9654b6389a05b1b3f5b4998a1d195ae4d30aaf1f112ac02ea2745554385c496",
+      "stage": 14
+    },
+    {
+      "full_name": "a1ex90/MusicalKeyCNN",
+      "hash": "b98fe27fbc7ecbd2ecf6d9bf7822159762d68bcf73a39a8188b8a0046025b415",
+      "stage": 14
+    },
+    {
+      "full_name": "HVision-NKU/StyleExpert",
+      "hash": "b9d934622df86249ef7b2d35ff3d12b02345ef58e22121748c1b5bb4a6d25f9c",
+      "stage": 14
+    },
+    {
+      "full_name": "hoangtuanvu/conformer_ocr",
+      "hash": "bb1e2876e644abfbc7d5fe9a6d89c61dcf755f10b7b286430fe5db3acd207099",
+      "stage": 14
+    },
+    {
+      "full_name": "hexixiang/MT-SDPO",
+      "hash": "bb8b487b4e72a64af64443a0723beb6e566e961e95e43872c3c454e39616f082",
+      "stage": 14
+    },
+    {
+      "full_name": "Ruyi-Zha/r2_gaussian",
+      "hash": "bcb9a5ad022347c1e43979ed7fa53ddbfc8e71f823698c7d7597c11d4fef08a1",
+      "stage": 14
+    },
+    {
+      "full_name": "loremcc/paku",
+      "hash": "bcd83651ca792c59ab3507bde6204ff74b6927116c87eeb0e934d9cd5105ea02",
+      "stage": 14
+    },
+    {
+      "full_name": "fabriziosalmi/glm-ocr-ita",
+      "hash": "bd040ab57ea008f5f3483ee1f8ad5ffea69e8d2f584930dbf85128b0da2c9019",
+      "stage": 14
+    },
+    {
+      "full_name": "BYU-FROST-Lab/Terra",
+      "hash": "bd196a0d187daf7d1d54c3f699b4c83e169069f9a9a62689a01fcc29ccb00dc2",
+      "stage": 14
+    },
+    {
+      "full_name": "valeoai/NAF",
+      "hash": "bd76c38a960bbbc40adc07ffca726c82af2e5522e3d166d4a165f68a813270b3",
+      "stage": 14
+    },
+    {
+      "full_name": "a1443356159/looped-flow-matching",
+      "hash": "bf45b66ab49b9b9d54d46cfeaaac51f893affed7bed37e2b5ec9d93c4b92f1fc",
+      "stage": 14
+    },
+    {
+      "full_name": "kleyt0n/graphnetz",
+      "hash": "c05a071a83beef7b3af028266d218f4da51c4f68e968761b8441ae0ae4c514f5",
+      "stage": 14
+    },
+    {
+      "full_name": "Ropedia/SpatialBench",
+      "hash": "c0f1f1af5b74f43912b52b8840e550fc1516cdc1d9f32211817c3e61f1900773",
+      "stage": 14
+    },
+    {
+      "full_name": "wenyuqing/panacea",
+      "hash": "c1e100f4ebf44ca554d38317c3ff5282725d18ed7f122b903bc08aaae190d90d",
+      "stage": 14
+    },
+    {
+      "full_name": "CVL-UESTC/MVAR",
+      "hash": "c23047bf1b03a57a832d334a79025ad913f2cdaacb5e1a606cb7799ac54d3678",
+      "stage": 14
+    },
+    {
+      "full_name": "yudhisteer/3D-Reconstruction-with-Uncalibrated-Stereo",
+      "hash": "c247baf84e1781bf7704414f355d59b3aded14be0268f10af018f234f8edd406",
+      "stage": 14
+    },
+    {
+      "full_name": "AniMerPlus/AniMerPlus",
+      "hash": "c288714057107c5216870e3129c1cdc8bc17b0ba68e11e95fe9fe6558aa22722",
+      "stage": 14
+    },
+    {
+      "full_name": "XiaokangLei/PaddleOCR-Code",
+      "hash": "c2baa99f9e589102792409af022eee212a69b839c5d78bed5b99bb956781bc6f",
+      "stage": 14
+    },
+    {
+      "full_name": "aryanasadianuoit/Distilling-Knowledge-via-Intermediate-Classifiers",
+      "hash": "c37e7afbbf44530532d22d4832afcb6f4c0e84f55a1b1bb0147b8f5ad3bd8f63",
+      "stage": 14
+    },
+    {
+      "full_name": "InstituteOfSleepAndDreamTechnologies/Traumschreiber_Python_Offline-Data-Analysis",
+      "hash": "c4b65b13ee060ae74f54a1152c1c5e8a89a3cb6827479c76c07d5f42a87ee66a",
+      "stage": 14
+    },
+    {
+      "full_name": "UARK-AICV/AOE-Net",
+      "hash": "c4e4e8700213a6292fc419247d8d22fb0dc5ff52450a535a53dc2f2010fdaa31",
+      "stage": 14
+    },
+    {
+      "full_name": "makeyourownmaker/mixupy",
+      "hash": "c51014ef1f7cda37b1fe60abc8d76c57e7319145916d37388d4c9235e45f05f1",
+      "stage": 14
+    },
+    {
+      "full_name": "sugam24/ocr",
+      "hash": "c69448b38bcbdb0c90d7d7409922c79abd0b750b47fb7c4356fbe4070e511bd0",
+      "stage": 14
+    },
+    {
+      "full_name": "eduardzamfir/seemoredetails",
+      "hash": "c7338f109ad1f0548f1d023e33e823ce8500ae2aa8e517b363195c66785819a5",
+      "stage": 14
+    },
+    {
+      "full_name": "dwight-foster/Pytorch-TecoGAN",
+      "hash": "c7ab234c6d326e39400e8897e8f6306490cb4d5d3ad9ff2396b05e6dea8fa86f",
+      "stage": 14
+    },
+    {
+      "full_name": "MSA-LMC/BeyondExactMatch",
+      "hash": "c8f01c553726fa583eb17a76526df067364d5d5fbec8dce358d731711ec3494b",
+      "stage": 14
+    },
+    {
+      "full_name": "tiangexiang/CurveNet",
+      "hash": "c9912ab7bbed7a809e7016fcccd53c7640a2b52e4c94864f168741d4b53cc29a",
+      "stage": 14
+    },
+    {
+      "full_name": "samson6460/tf2_pose_estimation",
+      "hash": "cabef1eeab6dde6d38bf2cd50856270f199b182e9b162fc12ba7ee39bd13c0c5",
+      "stage": 14
+    },
+    {
+      "full_name": "WenmuZhou/Segmentation-Free_OCR",
+      "hash": "cb02de98721ad868586bcc7326c78a99eabeb59cb9e6c2f53c94a2867ffaffe6",
+      "stage": 14
+    },
+    {
+      "full_name": "js-lee-AI/ALR-IRA",
+      "hash": "cb0a1971eee217d8748862dbf04cd46ceca9dae05fe6af9370bf60471f7da9d7",
+      "stage": 14
+    },
+    {
+      "full_name": "DefangChen/OKDDip",
+      "hash": "cb7380fed73744fbdcb64edb84cfe33f7c01f4c28e68483accdd146421670e6b",
+      "stage": 14
+    },
+    {
+      "full_name": "LouisRouss/DiffuLab",
+      "hash": "cc8105366b965aeb4368435d6852c74c995185230dd260a05c37d2591adfe9c5",
+      "stage": 14
+    },
+    {
+      "full_name": "nguyenx2t/semcer",
+      "hash": "cc8593f1a5fe36542ee3236047919181350d2632766a744dbc0735a777378e5e",
+      "stage": 14
+    },
+    {
+      "full_name": "RuiqingYoung/EAR",
+      "hash": "cd24221640f56adfa3a5ea8f81591797b1402b0bd570fd4ef6cdedfd92da4daf",
+      "stage": 14
+    },
+    {
+      "full_name": "kjanjua26/Custom_EAST",
+      "hash": "cd502e7402477e8ace8f2b4faad4b16a5ac47b2c3a480f5e13a5aa4c7d6b44a5",
+      "stage": 14
+    },
+    {
+      "full_name": "NVlabs/splatnet",
+      "hash": "ce50eb6a58b0f02a7f9e166b744acf5465239e2b35beadc8393b66f756456add",
+      "stage": 14
+    },
+    {
+      "full_name": "momentslab/awesome-efficient-videollm",
+      "hash": "cf9642678c7cf2e649252e42cd611553caa34e3b58961eaf97fc16f1460949c9",
+      "stage": 14
+    },
+    {
+      "full_name": "CVL-UESTC/FDPT-AR",
+      "hash": "d10965654c9325861c08fa615732fe625d5a485cd15464d80c24c513575b3bb0",
+      "stage": 14
+    },
+    {
+      "full_name": "chasemetoyer/gameplay-vision-llm",
+      "hash": "d14eb98083b136834ebd2beb0d3f6734e00ca8eece83c3f1147277f6d96eaeb1",
+      "stage": 14
+    },
+    {
+      "full_name": "lacerbi/inscriber",
+      "hash": "d17032abac3842a506f630db889983ad970eb984314546cc7856ef2d31d4fab8",
+      "stage": 14
+    },
+    {
+      "full_name": "skyzhao1223/doc2md",
+      "hash": "d393547a05f74b06f89793900365f0e75eba51d1a6eb7a7edf8e37382ef7f44f",
+      "stage": 14
+    },
+    {
+      "full_name": "seungho-snu/SROOE",
+      "hash": "d476b56af48ceb15e126017099ace6c4487387500949db39a6810c6e52e89771",
+      "stage": 14
+    },
+    {
+      "full_name": "Ethos-lab/robust-representation-matching",
+      "hash": "d4982135cea4d26f1764d8d4a020189730ad62a23678eaea680f8e2d89d7be4b",
+      "stage": 14
+    },
+    {
+      "full_name": "AD2605/Single-Image-Super-Resolution",
+      "hash": "d5ace38c4f2763c46976cccadc018ba63c1e393806e11e512053ae6e85f4f224",
+      "stage": 14
+    },
+    {
+      "full_name": "felixdittrich92/docling-OCR-OnnxTR",
+      "hash": "d6320f43f19659cc0cf28680b5f655aab117416494e91623699b339dce0ab1da",
+      "stage": 14
+    },
+    {
+      "full_name": "lucidrains/recurrent-interface-network-pytorch",
+      "hash": "d93e1895b7363a30a1e61322548c3c612de2c733afa3a997bf14581d24356cf6",
+      "stage": 14
+    },
+    {
+      "full_name": "WU-CVGL/SIU3R",
+      "hash": "d99e9f731dcd65df90a527707d3055f4a13852a546cfca06a7a59c8aea012a45",
+      "stage": 14
+    },
+    {
+      "full_name": "AMD-AGI/DynamicChunkingDiT",
+      "hash": "d9f1eb6b5498d14d6e000b59d689ef256fac424a1e2265410e2cea23de56af8e",
+      "stage": 14
+    },
+    {
+      "full_name": "dhesenkamp/attentive-lstm",
+      "hash": "dcadb3107822386ab2d0dc5acfd6a2f129708f087a3c123bf32d94a2252dc539",
+      "stage": 14
+    },
+    {
+      "full_name": "MigVega/BIMCaP",
+      "hash": "ddb5f41b9ffc7c73a742557cbfaaffa9027a29b4edaa6f3f4e767034d759bab4",
+      "stage": 14
+    },
+    {
+      "full_name": "sonhm3029/FreqOrtho-SR",
+      "hash": "dfc03af8320dce7814dcc08894bec80e1f18a2b40a88f1671719fb0a7a5f5334",
+      "stage": 14
+    },
+    {
+      "full_name": "TKY-27/iris-3b-metal",
+      "hash": "dfdc723a2360aee5fef64b7818637c6a2fa5d9e4ea4a137bbce5e8f82793ec27",
+      "stage": 14
+    },
+    {
+      "full_name": "segmind/distill-sd",
+      "hash": "dfe135514b34175b1a5b2d5285a047384b4ddec4c184f903930a635fadca5011",
+      "stage": 14
+    },
+    {
+      "full_name": "erikqu/EnhanceNet-PyTorch",
+      "hash": "e0cfc3ee7ef58f80cb78888df48314ba406283c229cc635b30bc69389520340e",
+      "stage": 14
+    },
+    {
+      "full_name": "youngwanLEE/VoV3D",
+      "hash": "e0f7970670afbc1be749971e41104dd84eb9761e150ca7aa219207d8e682eb86",
+      "stage": 14
+    },
+    {
+      "full_name": "longern/lawf-trainer",
+      "hash": "e0f98d7c5d90a100daa35c76e4ab6e22ddf2f70c507e647b9b5774f14dcddd53",
+      "stage": 14
+    },
+    {
+      "full_name": "autonomousvision/gaussian-opacity-fields",
+      "hash": "e15c1924917d26d62eeaf4e5e027060a58a9fe103e1a32d898d1e2b7486b6ddf",
+      "stage": 14
+    },
+    {
+      "full_name": "IlyaKodua/dncnn",
+      "hash": "e19ac74ae181c16ba8b724f39f79c967e756e15f5e408e3af9e6999bd1c4b464",
+      "stage": 14
+    },
+    {
+      "full_name": "freds0/data_augmentation_for_asr",
+      "hash": "e1ee64fecd05a790fb75f034966283c7591ef3162c7184da5a54fa6479dd408d",
+      "stage": 14
+    },
+    {
+      "full_name": "CNElab-Plus/ArtifactRemovalTransformer",
+      "hash": "e20963a5fbf1d7e6fa24024055d9d6f845e867738880a37ea98b98b5d0338553",
+      "stage": 14
+    },
+    {
+      "full_name": "Sealical/st-mem",
+      "hash": "e20c1fc52f9899ed6476025670225fa374423976f7f70e6fb52ebdc34171bc56",
+      "stage": 14
+    },
+    {
+      "full_name": "dwipddalal/Anchor-Align",
+      "hash": "e3ab38f30ace143113f89164df341d300efcbd3e3a2270314ebbe42e1addb93f",
+      "stage": 14
+    },
+    {
+      "full_name": "LCGLiChenge/MixTok",
+      "hash": "e50e19067d5f0a208dd51b7758c0c5df9fe3b30686ce3d556e80ff392e503a6c",
+      "stage": 14
+    },
+    {
+      "full_name": "X-GenGroup/PaCo-RL",
+      "hash": "e5b104a740d6ba60d5da66e1a383709fa29a04cfb42e29e1d71e2a00adfac127",
+      "stage": 14
+    },
+    {
+      "full_name": "aimagelab/VKD",
+      "hash": "e60ccdc92e21ff9c3f0cfd8616292bfcb09921da18216d223bf972bb79a666f9",
+      "stage": 14
+    },
+    {
+      "full_name": "Yang7879/3D-RecGAN",
+      "hash": "e613f66f9cf644c0b854597ff863f4364d4d1c8d0d7627347af2fb6c137d02eb",
+      "stage": 14
+    },
+    {
+      "full_name": "OmerTariq-KAIST/sad-lora",
+      "hash": "e6b74befa76aa95f6f9738c7c5968d7bbeb058682dbe55f1d10770674b74e5eb",
+      "stage": 14
+    },
+    {
+      "full_name": "turingmotors/STRIDE-QA-Dataset",
+      "hash": "e6c93e49781a1746c53d699edaa1bb66e1132ded3ec916b4ccdf08c7f6e73273",
+      "stage": 14
+    },
+    {
+      "full_name": "crystalccy1/3D-CovDiffusion",
+      "hash": "e709d897d19f245310d54944b3dd255af938b6c1e1df2aec718eba7aaf29c82f",
+      "stage": 14
+    },
+    {
+      "full_name": "cdb342/ALOcc",
+      "hash": "e747e3c22da0c21f297d7cc8b0e1288934ddc2efc3d0ac40fca2a094afd30884",
+      "stage": 14
+    },
+    {
+      "full_name": "GuidoManni/BodySLAM",
+      "hash": "e77b9ef2f780664b86c80627b10e494f494a9d716d266e1881d4e1f743fe27a3",
+      "stage": 14
+    },
+    {
+      "full_name": "Burf/VisionTransformer-Tensorflow2",
+      "hash": "e7cb56ec375e339352dfcb791570eb5409d8ecafc302f0402fb19143e6ef71ee",
+      "stage": 14
+    },
+    {
+      "full_name": "astra-vision/SSC-Priors",
+      "hash": "e8ad5cb65af9d2a446bac6a96c2e45868ae63febec76f39351200311336f6afa",
+      "stage": 14
+    },
+    {
+      "full_name": "VAST-AI-Research/TripoSF",
+      "hash": "e8b6b64d58648fbbf6c6dc245fdb6a07194b0d8e36047b9d2b607ea8f67f5bdd",
+      "stage": 14
+    },
+    {
+      "full_name": "K2alyan/aksharaMD",
+      "hash": "ec68113c7685e47cc6a0a8628739922ac9cbcc594c1d87dad4007c22fcc41947",
+      "stage": 14
+    },
+    {
+      "full_name": "kevinYitshak/spurfies",
+      "hash": "ec89bf81ca711f6a40d3380b4cdc196f7f154f11123e2535d24ea3af4d11709e",
+      "stage": 14
+    },
+    {
+      "full_name": "js-lee-AI/directional-verification",
+      "hash": "eca4d5eb4ba8b162627d178569a64f17fee8990c25a79dd4526b22d51d52d97b",
+      "stage": 14
+    },
+    {
+      "full_name": "syed-nazmus-sakib/PlantInquiryVQA",
+      "hash": "ed8731a56b6295d8b00cdd479a786a8de3ecad91ddd714fcc9eee8973a7af9bb",
+      "stage": 14
+    },
+    {
+      "full_name": "HKUDS/EasyST",
+      "hash": "edd0d7b7514e9078eb36610a52e87a346ae33f15d5fa244b5405eea02c8b1783",
+      "stage": 14
+    },
+    {
+      "full_name": "VG-GUI-TASKER/VG-GUI-TASKER",
+      "hash": "edf8649949defd9e03d3d6b9c55685d9bf6f0f526695ebca73fcac32774029a7",
+      "stage": 14
+    },
+    {
+      "full_name": "sseung0703/SSKD_SVD",
+      "hash": "eeb2e987d3b2794612cd1f6048a57054c86207cec8985b9be9acb6e04571c10a",
+      "stage": 14
+    },
+    {
+      "full_name": "xingyizhou/StarMap",
+      "hash": "eedd3b875a8a166d32f54499516a32586ae3e98c86cae14a0c8d1a9b55aae45b",
+      "stage": 14
+    },
+    {
+      "full_name": "LTTM/IL-SemSegm",
+      "hash": "eee4395f2c2fc4f9f2ca6a132a2d498efdeb1dff1f01f7da8a2ec7f1073637ce",
+      "stage": 14
+    },
+    {
+      "full_name": "Leon1207/Video-RAG-master",
+      "hash": "efc4f7499f4af9122b0cc266334c1df0a233ec8aa86554a1e413605c3379ff39",
+      "stage": 14
+    },
+    {
+      "full_name": "egeozsoy/4D-OR",
+      "hash": "f02b3a24865f93b1242fca77afc345f7f12a4c38082c61a2ee9bf3cf8c6cfd4e",
+      "stage": 14
+    },
+    {
+      "full_name": "mila-iqia/DeepDrummer",
+      "hash": "f02cecda75958ab7d8302061a730feb9b8666fccb9df4ae299c1394a6fc9f91c",
+      "stage": 14
+    },
+    {
+      "full_name": "TZNcse209/ocr_pdf",
+      "hash": "f08c4eb630d35308442a7da9e3fb4ccbdd8fff17a5d73387ff93ca261569453f",
+      "stage": 14
+    },
+    {
+      "full_name": "Hyun1A/DCAT",
+      "hash": "f08d9e68b2565ae594c149aef2604380f9a2784ae3147635791cc1d39fc1a78e",
+      "stage": 14
+    },
+    {
+      "full_name": "Lipurple/ARIS",
+      "hash": "f0925e0c0f8b0a1579fe5289afeb93df3d917fa17d383911574a0d0979a74e43",
+      "stage": 14
+    },
+    {
+      "full_name": "360CVGroup/HiCo_T2I",
+      "hash": "f14e0673c74cf234bc600b2d35034cf3ae56fb5cb6cac36d376a190f46a323e6",
+      "stage": 14
+    },
+    {
+      "full_name": "DCC-BS/docling-glm-ocr",
+      "hash": "f17585c6451bd7b2aa36945d555dd3764452285e5bd78d63f0d86321bafd57b3",
+      "stage": 14
+    },
+    {
+      "full_name": "mrjunjieli/wespeaker_u_cube",
+      "hash": "f1c275eff24fc91b6550da97541ae6955a30e3f0af5ce06baf28aa565bffaf81",
+      "stage": 14
+    },
+    {
+      "full_name": "umitkacar/awesome-tinyml",
+      "hash": "f1f971b8765c9a023e65fe2ebac8ddea7cb5d285600cc6659a234b8872be1020",
+      "stage": 14
+    },
+    {
+      "full_name": "LiyaoJiang1998/RAISE",
+      "hash": "f2f99130c3dd6171c0aeb6ce85d44114145863a8bfb1089037a638fc0de92108",
+      "stage": 14
+    },
+    {
+      "full_name": "bartlomiej-chybowski/PySeizure",
+      "hash": "f3423747e5a50e45828a3cf92294cc48be86f4ce9aec5b33aa8432fccf81ecdb",
+      "stage": 14
+    },
+    {
+      "full_name": "sunshinnnn/dut",
+      "hash": "f3cfb887cfe61185f899012d34c6dfe2223828788949ca1942add223f104e8f6",
+      "stage": 14
+    },
+    {
+      "full_name": "AIwork4me/Unlimited-OCR-ROCm",
+      "hash": "f4b9e04b856a7b5accf8e5b20e4254bb459156e057878b49f905dcc9ff1dd054",
+      "stage": 14
+    },
+    {
+      "full_name": "Blade6570/Learningimage-to-imagetranslationusingpairedandunpairedtrainingsamples",
+      "hash": "f4ff98fa2b3a681c5d80604a2555161e78efbcc3b61de342e70735505a45794d",
+      "stage": 14
+    },
+    {
+      "full_name": "saeidrazavi/RECON",
+      "hash": "f515afa7cce9e92d31e3aadac9c10df3d04dd8b195120d1c6ae689bb3149b435",
+      "stage": 14
+    },
+    {
+      "full_name": "DefangChen/SimKD",
+      "hash": "f97776565aedc36025c55ecb82a757a8bfe35aeed4757053135c4aeff3339175",
+      "stage": 14
+    },
+    {
+      "full_name": "KostasTok/keras_DCGAN_transfer_learning",
+      "hash": "fa039f5c4c96ba33322d3e9369fa62ede34322461892ae246fe2a9484ce1a95e",
+      "stage": 14
+    },
+    {
+      "full_name": "Gabryxx7/screenshot-ocr",
+      "hash": "fbf1dd7a0bf0ad3d7344df6474c9bba70fe48ec68d6b6c96046c20c0a5e12861",
+      "stage": 14
+    },
+    {
+      "full_name": "hellowangqian/UDA-norm-VAE",
+      "hash": "fc03cbeb251e8aec8beeaa0fd024c152c822343912ad22b9ac73d4cf6d5a4721",
+      "stage": 14
+    },
+    {
+      "full_name": "PriyanshuKumar-CSE/roadwidth-ai",
+      "hash": "fcb3acb3499bbb6a3088e4e6da71e40b959ea0a3576cffe475f257d42ce6c1ed",
+      "stage": 14
+    },
+    {
+      "full_name": "fraromor/DD-ROM-GNN-Friedrichs",
+      "hash": "fd61d39d6442188179fb86ea9d930e1dac9294141434763831113bd3f79eff64",
+      "stage": 14
+    },
+    {
+      "full_name": "ash1ra/Real-ESRGAN",
+      "hash": "fd6827746e0015450363adfc92181339a89ece4dee972449eb215fadaf1bff55",
+      "stage": 14
+    },
+    {
+      "full_name": "sadeeqgandalf/Nerf-3D-Reconstruction",
+      "hash": "fdec6efcb1430c5a1b058edeec8b964caa0e4399e93bfc4a2a4f183e3585d349",
+      "stage": 14
+    },
+    {
+      "full_name": "hoangtuanvu/OCR_Correction",
+      "hash": "fe08eb8c680a60d982b29277c02fc467994b25161f8560f22afbd5fa36d6ca64",
+      "stage": 14
+    },
+    {
+      "full_name": "jak-weston/WardrobeWizard",
+      "hash": "fe553e8b9c8ed642894c6ed12f0b424b78c2dbb7b378add9e1699066bbec0a05",
+      "stage": 14
+    },
+    {
+      "full_name": "EvanJ303/nca-texture-synthesis",
+      "hash": "fe82fa57022439055f5a53a91586463c29b065a6c8ca079b9d4af18506c42b76",
+      "stage": 14
+    },
+    {
+      "full_name": "chang-xinhai/Awesome-Embodied-3DV",
+      "hash": "fee8892722f37436ff574336c62ed6fafa03d6411f695b5266d4218ca9c20ce0",
+      "stage": 14
     }
   ]
 }
