@@ -508,7 +508,7 @@ def realverdicts_block(data: Path = DATA) -> str:
              (f"| `paper_006` | {len(runs_of('paper_006'))} | before the claim map: Tier 2 0.0 in {sum(1 for k in cli_zero if k[0] == 'paper_006')} of "
               f"{len(runs_of('paper_006'))}; with the map: {sum(1 for r in p6 if r['map_decision'] == 'no_counterpart')} of {len(p6)} claim rows "
               f"have no counterpart (Arcene numbers, the run reads another dataset), Tier 2 {p6[0]['cli_tier2']:g} (neutral baseline), "
-              f"`{p6[0]['cli_status']}` | none comparable; the label rests on the build tiers only |"),
+              f"`{p6[0]['cli_status']}` | none comparable; nothing was compared, so the label is Needs Review |"),
              (f"| `paper_004` | {len(runs_of('paper_004'))} | before the claim map: Tier 2 0.0; with the map: no counterpart, Tier 2 "
               f"{p4[0]['cli_tier2']:g} (neutral baseline), `{p4[0]['cli_status']}` | none comparable: the stored metrics are hyperparameters "
               f"({', '.join(p4[0]['run_metrics'])}) |"),

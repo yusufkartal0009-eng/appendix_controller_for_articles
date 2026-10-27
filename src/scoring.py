@@ -376,11 +376,15 @@ class ReproducibilityScorer:
         tier1_exit_code: int | None = 0,
         has_critical_error: bool = False,
         nothing_compared: bool = False,
+        claims_compared: bool = True,
     ) -> tuple[float, str, str]:
         """Compute composite score (0-100) and assign neutral status label.
 
         `nothing_compared` is True when claims exist but none of them was found in the run's output; the summary then
         says so instead of reporting a divergence that was never measured (#317).
+        `claims_compared` is False when no accepted claim was compared with a metric of the run (no claim at all, none with a
+        counterpart, or none found in the output). Tier 2 is then the neutral baseline, which is not evidence, so a run that
+        built cleanly is labeled Needs Review and never Verified or Partially Verified (#540).
         """
         total = (
             tier1 * TIER1_BUILD_WEIGHT
@@ -402,6 +406,18 @@ class ReproducibilityScorer:
                 f"Failed (Total: {total}/100). Build or execution runtime "
                 f"failed (Tier 1: {tier1}/100)."
             )
+        elif not claims_compared and tier1 >= 75.0:
+            status = STATUS_NEEDS_REVIEW
+            if nothing_compared:
+                summary = (
+                    f"Needs Review (Total: {total}/100). Code built and ran cleanly, but "
+                    f"{NOTHING_COMPARED_TEXT} (Tier 2: {tier2}/100)."
+                )
+            else:
+                summary = (
+                    f"Needs Review (Total: {total}/100). Code built and ran cleanly, but no accepted claim could be "
+                    f"compared with the run; Tier 2 is the neutral baseline ({tier2}/100), not a measurement."
+                )
         elif total >= SCORE_VERIFIED_THRESHOLD and tier2 >= 80.0 and tier1 >= 90.0:
             status = STATUS_VERIFIED
             summary = (
@@ -519,6 +535,7 @@ class ReproducibilityScorer:
             has_critical_error=bool(exit_code is not None and exit_code != 0),
             nothing_compared=bool(execution_succeeded and claimed_metrics
                                   and not any(d["reproduced"] is not None for d in claim_details.values())),
+            claims_compared=any(d["reproduced"] is not None for d in claim_details.values()),
         )
 
         breakdown = ScoreBreakdown(

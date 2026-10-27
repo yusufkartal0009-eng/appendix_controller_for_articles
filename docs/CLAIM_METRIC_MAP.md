@@ -65,8 +65,8 @@ If any of these differs, or the run produced no number at all, the decision is `
 - a `map` claim is compared with the run metric under the existing tolerance rule;
 - a `no_counterpart` claim does not enter Tier 2; the output says `Claim X has no counterpart in this run: <reason>`;
 - if no claim is left, Tier 2 is the existing neutral baseline (70.0) with its message. Result for `paper_006`: Tier 2 70.0, total
-  82.75, label `Partially Verified`. That label rests on the build tiers only, as for `paper_102`; whether such a paper should
-  carry a label is the owner's decision (docs/PENDING.md, D10);
+  82.75, label `Needs Review` (since #540 a run with nothing compared never gets `Verified` or `Partially Verified`; before #540
+  the label was `Partially Verified`, resting on the build tiers only, as for `paper_102`);
 - no map file, or no entry for the paper: behaviour as before (claims matched by question ID); a claim without an entry
   stays keyed by its question ID;
 - a broken map file stops with a clear error and nothing is saved.

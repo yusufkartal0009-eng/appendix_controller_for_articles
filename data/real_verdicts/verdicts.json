@@ -534,7 +534,7 @@
     "weight_decay": 0.0
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -563,7 +563,7 @@
     "weight_decay": 0.0
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -592,7 +592,7 @@
     "auroc": 0.892
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -621,7 +621,7 @@
     "auroc": 0.892
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -650,7 +650,7 @@
     "auroc": 0.892
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -679,7 +679,7 @@
     "auroc": 0.892
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -708,7 +708,7 @@
     "auroc": 0.892
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -737,7 +737,7 @@
     "auroc": 0.892
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 0.0,
    "before_status": "Needs Review",
@@ -776,10 +776,10 @@
     "weighted": 0.0
    },
    "cli_tier2": 70.0,
-   "cli_status": "Partially Verified",
+   "cli_status": "Needs Review",
    "cli_total": 82.75,
    "before_tier2": 70.0,
-   "before_status": "Partially Verified",
+   "before_status": "Needs Review",
    "before_total": 82.75,
    "query_id": null,
    "map_decision": null,
@@ -790,7 +790,7 @@
    "aligned_tier2": null,
    "aligned_status": null,
    "comparable": false,
-   "reason": "no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no claims', not a measurement; the status label rests on the build tiers only"
+   "reason": "no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no claims', not a measurement; a run with nothing compared is labeled Needs Review (#540)"
   },
   {
    "paper_id": "synthetic_control",

@@ -44,6 +44,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(scoring): a run with nothing compared is Needs Review, not Partially Verified (2026-10-28 00:40 +03:00, Issue #540)
+- Found on the dashboard demo database: `paper_004`, `paper_006`, `paper_101` and `paper_102` were labeled `Partially Verified` although no accepted claim was compared; their Tier 2 was the neutral baseline of 70, which is not evidence. `calculate_composite_score` takes `claims_compared` (default True, so direct callers behave as before); `evaluate_paper_run` passes whether any claim was compared with a metric of the run. With nothing compared and a clean build the label is `Needs Review` and the summary says that no accepted claim could be compared. `Failed` is unchanged; `Verified` and `Partially Verified` need at least one compared claim. The thresholds and the neutral 70 are unchanged.
+- Effect: in the dashboard demo database only `paper_003` (one claim, one number, 3.05 % apart) and the synthetic control are `Verified`; `paper_004`, `paper_006`, `paper_101` and `paper_102` are `Needs Review`; the seven failed papers stay `Failed`. `docs/REAL_VERDICTS.md`, the report blocks, README, `docs/methodology.md`, `docs/CLAIM_METRIC_MAP.md` and `docs/PENDING.md` were updated.
+- Evidence: 5 new tests in `tests/test_scoring.py`; two tests that encoded the old label were changed.
+- Not verified: the dashboard pages were not looked at again; the owner may revise the rule (D12).
+
 ### data(corpus): automatic search of round 4, runs a4_011 to a4_020 (2026-10-27 04:12 +03:00, Issue #521)
 - Runs a4_011 to a4_020: K1 passed 1, install 2, run 7. Cumulative through a4_020 (from `evaluation.json`): 20 run, K1 passed 1, K2 v1 passed 0, K2 v2 passed 0. The walk is not finished.
 - Not verified: anything about later candidates.

@@ -221,3 +221,41 @@ def test_summary_keeps_divergence_for_claims_that_were_found_and_differ():
     assert breakdown.tier2_metrics == 0.0
     assert "significant divergence" in breakdown.summary
     assert "nothing was compared" not in breakdown.summary
+
+
+# A label must rest on evidence: with nothing compared, Tier 2 is a neutral baseline (#540)
+def _clean_run(claimed, reproduced, **kwargs):
+    return ReproducibilityScorer.evaluate_paper_run(
+        paper_id="p", clone_success=True, deps_installed=True, script_executed=True, exit_code=0,
+        claimed_metrics=claimed, reproduced_metrics=reproduced, license_name="MIT", **kwargs)["breakdown"]
+
+
+def test_a_clean_run_with_no_claim_is_needs_review_not_partially_verified():
+    breakdown = _clean_run({}, {"rmse": 0.47})
+    assert breakdown.tier2_metrics == 70.0
+    assert breakdown.status_label == "Needs Review"
+    assert "no accepted claim could be compared" in breakdown.summary
+
+
+def test_a_clean_run_whose_claims_are_not_in_the_output_keeps_its_old_wording():
+    breakdown = _clean_run({"auroc": 0.9}, {"rmse": 0.47})
+    assert breakdown.status_label == "Needs Review" and "nothing was compared" in breakdown.summary
+
+
+def test_a_compared_claim_within_tolerance_is_still_verified():
+    breakdown = _clean_run({"rmse": 0.459}, {"rmse": 0.473}, tolerance=0.05)
+    assert breakdown.tier2_metrics == 100.0 and breakdown.status_label == "Verified"
+
+
+def test_a_failed_run_with_no_claim_stays_failed():
+    result = ReproducibilityScorer.evaluate_paper_run(
+        paper_id="p", clone_success=True, deps_installed=True, script_executed=True, exit_code=1,
+        claimed_metrics={}, reproduced_metrics={}, license_name="MIT")
+    assert result["breakdown"].status_label == "Failed"
+
+
+def test_the_composite_function_keeps_its_old_behavior_when_the_new_flag_is_not_given():
+    total, status, _ = ReproducibilityScorer.calculate_composite_score(
+        tier1=100.0, tier2=70.0, tier3=75.0, tier4=80.0, tier1_exit_code=0, has_critical_error=False)
+    assert status == "Partially Verified" and total == 82.75
+

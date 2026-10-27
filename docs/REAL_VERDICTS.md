@@ -30,11 +30,11 @@
 | paper_003 | CPU run (`data/cpu_runs/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
 | paper_003 | env-cache run 1 (`data/env_cache_runs/first_run/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
 | paper_003 | env-cache run 2 (`data/env_cache_runs/second_run/paper_003`) | COMPLETED | loss=0.106, rmse=0.473 | 0 / 58.25 / Needs Review | 100 / 93.25 / Verified |
-| paper_004 | memory run (`data/memory_runs/paper_004`) | COMPLETED | lr=0.0003, weight_decay=0 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
-| paper_006 | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
-| paper_006 | memory run 2 (`data/memory_runs/paper_006_run2`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
-| paper_006 | CPU run (`data/cpu_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Partially Verified |
-| paper_102 | Pilot 4 (`data/pilot4_runs/paper_102`) | COMPLETED | activation=0.275, geometric_need=0.5425, overlap=0.4117, boundary_conflict=0.0167, ... (12 in all) | 70 / 82.75 / Partially Verified | 70 / 82.75 / Partially Verified |
+| paper_004 | memory run (`data/memory_runs/paper_004`) | COMPLETED | lr=0.0003, weight_decay=0 | 0 / 58.25 / Needs Review | 70 / 82.75 / Needs Review |
+| paper_006 | Pilot 3 (`data/pilot3_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Needs Review |
+| paper_006 | memory run 2 (`data/memory_runs/paper_006_run2`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Needs Review |
+| paper_006 | CPU run (`data/cpu_runs/paper_006`) | COMPLETED | accuracy=0.8886, auroc=0.892 | 0 / 58.25 / Needs Review | 70 / 82.75 / Needs Review |
+| paper_102 | Pilot 4 (`data/pilot4_runs/paper_102`) | COMPLETED | activation=0.275, geometric_need=0.5425, overlap=0.4117, boundary_conflict=0.0167, ... (12 in all) | 70 / 82.75 / Needs Review | 70 / 82.75 / Needs Review |
 | synthetic_control | run 1 (`data/synthetic_control/run1/synthetic_control`) | COMPLETED | accuracy=0.9 | - (scored one claim at a time) | - (scored one claim at a time) |
 | synthetic_control | run 2 (`data/synthetic_control/run2/synthetic_control`) | COMPLETED | accuracy=0.9 | - (scored one claim at a time) | - (scored one claim at a time) |
 
@@ -70,7 +70,7 @@ Tolerance: 5% (`DEFAULT_TOLERANCE`). "Aligned" is the Tier 2 of that single clai
 | paper_006 | memory run 2 | xgboost_arcene_auroc | no_counterpart | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
 | paper_006 | CPU run | arcene_auroc | no_counterpart | 0.9104 | - | - | - | - | - | the claim belongs to the Arcene dataset; the run reads OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
 | paper_006 | CPU run | xgboost_arcene_auroc | no_counterpart | 0.8141 | - | - | - | - | - | the claim is an XGBoost number on Arcene; the run trains SAINT on OpenML dataset 1461 (bank-marketing). The claim and the run do not match, so the decision is meaningless |
-| paper_102 | Pilot 4 | (none accepted) | - | - | - | - | - | - | - | no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no claims', not a measurement; the status label rests on the build tiers only |
+| paper_102 | Pilot 4 | (none accepted) | - | - | - | - | - | - | - | no claim of this paper has been accepted, so Tier 2 is the neutral 70.0 baseline for 'no claims', not a measurement; a run with nothing compared is labeled Needs Review (#540) |
 | synthetic_control | run 1 | true_claim | - | 0.9 | 0.9 | 0 | 0.00% | 100 | Verified | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
 | synthetic_control | run 1 | false_claim | - | 0.5 | 0.9 | 0.4 | 80.00% | 0 | Needs Review | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
 | synthetic_control | run 2 | true_claim | - | 0.9 | 0.9 | 0 | 0.00% | 100 | Verified | the script prints the fixed line `accuracy: 0.9000`; the claim 0.9 is true and 0.5 is false by construction |
@@ -161,18 +161,18 @@ defect that this document fixes.
    reproduction. Whether a 0.014 RMSE gap should count as reproduced is a tolerance question (`docs/TOLERANCE_PROBE.md`), not a
    fact this document can settle. The ResNet and XGBoost claims of the paper are not produced by the run (`no_counterpart`).
 3. **`paper_006`: claim and run do not match, so the claims are excluded.** Both accepted claims are Arcene numbers; the run reads
-   OpenML dataset 1461 (bank-marketing). With the map nothing is left to compare: Tier 2 70, total 82.75, `Partially Verified`. That label rests on the build tiers only
-   (see finding 6); it is not a measurement. The paper's own table has a SAINT value for Bank (`93.3`, page 7), but nobody
+   OpenML dataset 1461 (bank-marketing). With the map nothing is left to compare: Tier 2 70, total 82.75, `Needs Review`. Nothing was compared, so the label is
+   `Needs Review` (finding 6); Tier 2 is not a measurement. The paper's own table has a SAINT value for Bank (`93.3`, page 7), but nobody
    accepted it as a claim, so it is not scored here.
 4. **`paper_006`: the stored `auroc` (0.892) is the last logged test line, not the run's "AUROC on best model: 0.929".** The
    extractor keeps the last occurrence of a name; here that is an epoch line. Reported, not changed.
 5. **`paper_004`: the stored metrics are hyperparameters** (`lr`, `weight_decay`); the claims are average ranks, so both claims
    are excluded (`no_counterpart`) and Tier 2 is the neutral baseline.
-6. **A label without a comparison: `paper_102` (no claim accepted), and with the map every paper whose claims are all
-   `no_counterpart`.** `paper_102`: no claim was accepted, and the label is still `Partially Verified`. With no claims Tier 2 is a neutral
-   70.0; with a clean build the total reaches the partial threshold. A reader sees a verdict that rests on no comparison
-   (the summary line of the score says so, the label does not). Whether such a paper should get a label at all is a decision
-   for the owner.
+6. **A label without a comparison (fixed in #540): `paper_102` (no claim accepted), and with the map every paper whose claims are
+   all `no_counterpart`.** With no claim compared Tier 2 is a neutral 70.0, and with a clean build the total reached the partial
+   threshold, so these papers were labeled `Partially Verified` on the build tiers alone. Since #540 a run with nothing compared is
+   labeled `Needs Review` and its summary says that no accepted claim could be compared; `Verified` and `Partially Verified` need at
+   least one claim compared with a metric of the run. The thresholds and the neutral 70.0 are unchanged.
 7. **The synthetic control behaves as designed.** The true claim (0.9) scores 100 / `Verified`, the false claim (0.5) scores
    0 / `Needs Review`, on both runs. This is the only known-answer case among the rows.
 8. **K2:** see section 4.
