@@ -59,6 +59,7 @@ Verifies whether reported performance relies on a single cherry-picked seed or r
 - $5\% < \text{CV} \le 10\%$: **65 Points** (Acceptable variance)
 - $\text{CV} > 10\%$: **40 Points** (High stochastic instability)
 - Single-seed clean run: **75 Points** (Baseline clean execution score)
+- With a stored multi-seed record (`data/multi_seed_runs/`), the metric that an accepted claim is mapped to decides; without such a claim the metric with the largest CV decides (`docs/MULTI_SEED.md` section 5a; a default chosen by the assistant, the owner may revise).
 
 ---
 

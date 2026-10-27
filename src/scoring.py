@@ -16,6 +16,7 @@ Generates composite scores (0-100) and neutral status classifications:
 import math
 import os
 import re
+from collections.abc import Collection
 from pathlib import Path
 from typing import Any
 
@@ -255,19 +256,29 @@ class Tier3StabilityEvaluator:
         seed_metric_results: dict[str, list[float]] | None = None,
         single_run_clean: bool = True,
         execution_succeeded: bool = True,
+        claimed_run_metrics: Collection[str] | None = None,
     ) -> tuple[float, list[str]]:
-        """Tier 3 from real seed runs (docs/MULTI_SEED.md section 5): the metric with the largest CV decides.
+        """Tier 3 from real seed runs (docs/MULTI_SEED.md section 5).
 
-        Without a metric that has at least two values the single-run behavior of `evaluate` applies (the 75.0 baseline).
+        `claimed_run_metrics` are the run metrics that an accepted claim of the paper is mapped to. If any of them has at least two
+        seed values, only those metrics decide (the one with the largest CV among them); otherwise the metric with the largest
+        CV of all decides, as before. Without a metric that has at least two values the single-run behavior of `evaluate`
+        applies (the 75.0 baseline).
         """
         usable = {name: values for name, values in (seed_metric_results or {}).items() if len(values) >= 2}
         if not usable:
             return cls.evaluate(None, single_run_clean=single_run_clean, execution_succeeded=execution_succeeded)
-        worst = max(usable, key=lambda name: coefficient_of_variation(usable[name]))
+        claimed = {name: usable[name] for name in (claimed_run_metrics or ()) if name in usable}
+        pool = claimed or usable
+        worst = max(pool, key=lambda name: coefficient_of_variation(pool[name]))
         score, notes = cls.evaluate(usable[worst], single_run_clean=single_run_clean,
                                     execution_succeeded=execution_succeeded)
         if execution_succeeded:
-            notes.insert(0, f"Metric '{worst}' has the largest CV of {len(usable)} metric(s) with seed results and decides")
+            if claimed:
+                notes.insert(0, f"Metric '{worst}' is the one the paper claims (claim-to-metric map) and decides; "
+                                f"{len(usable)} metric(s) have seed results")
+            else:
+                notes.insert(0, f"Metric '{worst}' has the largest CV of {len(usable)} metric(s) with seed results and decides")
         return score, notes
 
 
@@ -477,6 +488,7 @@ class ReproducibilityScorer:
         license_name: str,
         seed_results: list[float] | None = None,
         seed_metric_results: dict[str, list[float]] | None = None,
+        claimed_run_metrics: Collection[str] | None = None,
         has_environment_file: bool = True,
         has_readme: bool = True,
         has_saved_artifacts: bool = True,
@@ -509,6 +521,7 @@ class ReproducibilityScorer:
                 seed_metric_results if execution_succeeded else None,
                 single_run_clean=execution_succeeded,
                 execution_succeeded=execution_succeeded,
+                claimed_run_metrics=claimed_run_metrics,
             )
         else:
             t3_score, t3_notes = Tier3StabilityEvaluator.evaluate(

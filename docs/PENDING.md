@@ -61,9 +61,11 @@ decision. **Not verified** means a statement in the project that has no evidence
   `scripts/verify_corpus.py` and a sandbox run before use.
 
 ### D7. The rule that decides Tier 3
-- **State:** the metric with the largest coefficient of variation decides Tier 3. For `paper_003` that made a training loss decide
+- **State:** the metric with the largest coefficient of variation decided Tier 3. For `paper_003` that made a training loss decide
   (Tier 3 = 65.0), while `rmse` alone gives 100.0. For `paper_006` it is 100.0.
-- **Decide:** keep the rule, or use only the headline or claimed metric. Evidence: `docs/MULTI_SEED.md`.
+- **Default chosen by the assistant, the owner may revise (K-A, #542):** the metric that an accepted claim of the paper is mapped to
+  (`data/claim_metric_map.json`) decides; without such a claim the largest-CV rule stays. `paper_003` is now 100, `paper_006` 100.
+  Evidence: `docs/MULTI_SEED.md` section 5a. To revert, drop `claimed_run_metrics` in `src/score_run.py`.
 
 ### D8. Questions for the mentors
 - Issue `#165`, named in the plan file and in old pull request texts, does not exist in this repository ("could not resolve"); which source did it come
@@ -121,8 +123,11 @@ decision. **Not verified** means a statement in the project that has no evidence
 ### D10. Two rules of the scorer to confirm (new, from the bug hunt, `docs/BUG_HUNT.md` section 2)
 - **The absolute allowance of 0.05 for a value between 0 and 1** makes small values lenient (0.0167 matches a reproduced 0.06). Keep it, or use it only for
   named bounded metrics (accuracy, AUC, F1, precision, recall)?
-- **Tier 3 is the single-run 75.0 for every paper scored by `cli.py score`**, even where `data/multi_seed_runs/` holds seed runs (it is only computed by
-  `scripts/run_multi_seed.py`). Link them, or keep them apart?
+- **Tier 3 was the single-run 75.0 for every paper scored by `cli.py score`**, even where `data/multi_seed_runs/` holds seed runs. **Default chosen by the
+  assistant, the owner may revise (#542):** the stored record is read by `cli.py score`, `scripts/real_verdicts.py` and `scripts/build_demo_db.py`;
+  a paper without a record keeps 75.0.
+- **K-B (default chosen by the assistant, the owner may revise):** the absolute allowance of 0.05 for a value between 0 and 1 stays as it is. It is
+  written in the report as a known limit; the tolerance probe (`docs/TOLERANCE_PROBE.md`) shows its effect.
 
 ## 2. Work that an assistant can do without a decision
 

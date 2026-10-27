@@ -15,6 +15,8 @@ from typing import Any
 
 from src.scoring import coefficient_of_variation
 
+MULTI_SEED_DIR = Path(__file__).resolve().parent.parent / "data" / "multi_seed_runs"
+SUMMARY_NAME = "multi_seed_summary.json"
 SEED_SETTINGS_PATH = Path(__file__).resolve().parent.parent / "data" / "multi_seed_settings.json"
 PLACEHOLDER = "{seed}"
 
@@ -90,3 +92,33 @@ def summarize_seed_runs(metrics_by_seed: dict[int, dict[str, float]]) -> dict[st
             "cv": coefficient_of_variation(values),
         }
     return summary
+
+
+class MultiSeedRecordError(ValueError):
+    """A stored multi-seed summary exists but cannot be used."""
+
+
+def load_seed_metric_results(paper_id: str, root: Path | None = None) -> dict[str, list[float]] | None:
+    """The per-metric seed values of a paper's stored multi-seed summary, or None when the paper has no such record.
+
+    Tier 3 then uses them (`seed_metric_results` of the scorer). A record that exists but is malformed raises
+    `MultiSeedRecordError`; it is never silently ignored, because that would score the paper as a single run.
+    """
+    path = Path(root or MULTI_SEED_DIR) / paper_id / SUMMARY_NAME
+    if not path.is_file():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError) as exc:
+        raise MultiSeedRecordError(f"multi-seed summary {path} cannot be read as JSON: {exc}") from exc
+    metrics = data.get("metrics") if isinstance(data, dict) else None
+    if not isinstance(metrics, dict):
+        raise MultiSeedRecordError(f"multi-seed summary {path} has no 'metrics' object")
+    results: dict[str, list[float]] = {}
+    for name, item in metrics.items():
+        values = item.get("values") if isinstance(item, dict) else None
+        if (not isinstance(values, list) or not values
+                or not all(isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) for v in values)):
+            raise MultiSeedRecordError(f"multi-seed summary {path}: metric '{name}' needs a non-empty list of numeric 'values'")
+        results[name] = [float(v) for v in values]
+    return results

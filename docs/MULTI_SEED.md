@@ -86,6 +86,29 @@
 `
 `The rule applies to metrics, not to claims: Tier 3 does not need an accepted claim, because stability is a property of the
 `paper's own repeated runs. (Tier 2 still needs claims.)
+
+### 5a. The claimed metric decides (K-A, #542)
+
+**Default chosen by the assistant, the owner may revise (`docs/PENDING.md`, D7).** The largest-CV rule let a side number decide
+(`paper_003`: the last printed training loss, CV 7.4 %, Tier 3 = 65, while the claimed `rmse` has CV 0.70 % and alone gives 100).
+Since #542:
+
+- If an accepted claim of the paper is mapped (`data/claim_metric_map.json`, decision `map`, `docs/CLAIM_METRIC_MAP.md`) to a run
+  metric that has at least two seed values, only the mapped metric(s) decide Tier 3. With more than one mapped metric, the one with
+  the largest CV among them decides.
+- Without an accepted claim, without a `map` decision for this paper, or when no mapped metric has seed values, the rule of section 5
+  applies unchanged (the largest CV of all metrics).
+- Without a stored multi-seed record the behavior is unchanged: Tier 3 is the 75.0 single-run baseline.
+- `cli.py score`, `src/score_run.py` (through `seed_metric_results`), `scripts/real_verdicts.py` and `scripts/build_demo_db.py` read the
+  stored record with `src.multi_seed.load_seed_metric_results` (`data/multi_seed_runs/<paper_id>/multi_seed_summary.json`, or
+  `cli.py score --multi-seed-dir`). A summary that exists but cannot be used (not JSON, no `metrics`, a metric without numeric `values`)
+  stops the command with a message; it is never ignored, because that would silently score the paper as a single run.
+- The record belongs to the paper, not to one run: any successful stored run of the paper is scored with it. A failed run keeps Tier 3 = 0.
+- `multi_seed_summary.json` is a record of the seed runs and keeps its own rule (`tier3.decided_by` is the largest-CV metric, and
+  `tier3_by_metric` shows every metric alone); it is not rewritten. The score of the scorer for `paper_003` is therefore 100 while the
+  summary file says 65 under the older rule; the Tier 3 notes of each say which metric decided.
+- Result on the stored records: `paper_003` Tier 3 = 100 (65 under the largest-CV rule, 75 as a single-run baseline);
+  `paper_006` Tier 3 = 100 (its two accepted claims have no counterpart, so the largest-CV rule applies: `auroc`, CV 0.88 %).
 `
 `## 6. Why the single-run baseline of 75.0 changes
 `
