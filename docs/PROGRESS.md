@@ -49,6 +49,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### feat(web): the final report as a PDF (2026-10-28 23:13 +03:00, Issue #567)
+- `scripts/export_report.py` renders `docs/report/REPORT.md` to `docs/report/REPORT.pdf` (22 pages) with `fpdf2`, which the project already depends on; night 8 had concluded that no converter existed because it looked for external tools only. `--check` compares the text of the committed PDF with a fresh rendering.
+- The AI assistance statement, every `DRAFT` mark (none today) and every paragraph, list item, heading and table cell of the report are checked against the PDF text by `tests/test_export_report.py` (11 tests). Five characters outside Latin-1 are written in ASCII. Pages 1, 7, 13 and 22 were rendered to images and read.
+- Not verified: the look in other PDF viewers; the PDF is not a typeset paper with a conference template.
+
 ### docs(devops): second clean-clone walk-through of the README (2026-10-28 23:08 +03:00, Issue #565)
 - A fresh clone of the public repository followed the README in order (`docs/evidence/clean_clone2/WALKTHROUGH.md`): every command that does not need Docker or the network exited 0, the dashboard answered 200 on every page with the default and the demo database (404 for an unknown paper), and the suite gave 1705 passed, 16 skipped in the clean clone.
 - Two README fixes: the note before step 7 said Tier 2 would be 0 for the stored run of `paper_006` (it is the neutral 70, total 86.5, `Needs Review`), and a note that a long clone path made `python -m venv` fail on Windows.
