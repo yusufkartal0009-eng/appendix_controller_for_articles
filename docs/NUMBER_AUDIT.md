@@ -10,7 +10,7 @@ compare. A row is "yes" only if the source was opened; nothing here is marked ve
 
 ## Result in one line
 
-Seven wrong or stale statements were found and corrected (rows marked **no** or **stale**); all other rows agree with their source.
+Eight wrong or stale statements were found and corrected, seven in the first pass (2026-10-28, #554) and one in a second pass the same night (the `tmpfs` row, #573); they are the rows marked **no** or **stale**; all other rows agree with their source.
 After the fixes `python scripts/report_numbers.py --check` is in sync and `python scripts/verify_sources.py --check` lists no
 unverified source; the test output is in the pull request.
 
@@ -54,6 +54,13 @@ unverified source; the test output is in the pull request.
 | Stability: 4 runs of `paper_003`, 4 of `paper_006`, identical metrics | README, REPORT 6.4 | generated block `stability` | yes | none |
 | State of `main`: "1,210 tests passed" (dated 2026-10-25) in a document updated 2026-10-28 | PENDING line 6 | `pytest tests` on 2026-10-28: 1304 passed, 9 skipped | **stale** | Updated to 1,304 tests, 9 skipped, dated 2026-10-28 |
 | Branch protection impossible "for this private repository" | PENDING section 3 (#3) | PENDING D1 and README: the repository is public | **stale** | Reworded: true while private; not retried because GitHub settings are not touched |
+| `/tmp` and home are "2048 MiB, `noexec` on `/tmp`", and the home directory "needs `exec`" | REPORT 4.1 | `src/sandbox/runner.py` (`tmpfs_tmp_size = "64m"`, `tmpfs_home_size = "2048m"`, both mounts `noexec`); `docs/DECISIONS.md` decision 1 keeps `/workspace/home` `noexec`; `docs/SANDBOX_GUIDE.md` | **no** (the size of `/tmp` is 64 MiB, the 2048 MiB belongs to the home directory, and the home directory is `noexec`, not `exec`) | Sentence rewritten with both sizes and both `noexec`; the PDF was regenerated |
+| Run limits of the pilots: 2 CPUs, 6 GiB memory and swap, 100 processes, 3600 s per phase | REPORT 5.2 | `scripts/run_pilot.py` defaults (`memory_limit` 6g, `memory_swap` 6g, `pids_limit` 100, `timeout_seconds` 3600); `src/sandbox/runner.py` `cpus` 2.0 | yes | none |
+| Pilot 3 settings: 12 GiB for `paper_005`, four hours (14400 s) for the run phase of `paper_004`, `lightgbm` for `paper_002`, a writable data copy for `paper_003` | REPORT 6.1a | `data/pilot3_settings.json` | yes | none |
+| Pilot 4 limits: 2 CPUs, 50 % of the host memory, 3600 s install and 14400 s run phase; 263 candidates, 6 selected | REPORT 6.5 | `docs/PILOT_4.md` table of limits; `docs/CORPUS_EXPANSION.md` | yes | none |
+| Seeds: `paper_003` seeds 0, 1, 2 (`0.toml` to `2.toml`); `paper_006` seeds 1, 2, 3 (`--set_seed`); 4 CPUs and 50 % memory | REPORT 6.4a | `data/multi_seed_settings.json` (paper_003 values 0, 1, 2); `docs/MULTI_SEED.md` section 9 (`paper_006` seeds 1, 2, 3, `--cpus 4`, `--memory 50%`) | yes | none |
+| GPU check: `torch==2.8.0`, CUDA 12.8, RTX 5070, about 3.7 GiB of wheels | REPORT 6.4a, 7 | `data/gpu_check/result.json` (`torch_version` 2.8.0+cu128, device name); `docs/ENVIRONMENT.md` (3.7 GiB) | yes | none |
+| Automatic search round 4 uses topic stages 8 to 21; round 3 K2 needs at least two different numbers; the repair round allows at most two repairs and five kinds | REPORT 6.8, 6.10, 6.10a | `docs/AUTO_SEARCH_ROUND4.md` (stages 8 to 21), `docs/AUTO_SEARCH_ROUND3.md`, `docs/CANDIDATE_RUNS_ROUND2.md` ("At most two repair rounds per candidate", five kinds) | yes | none |
 | Dates of the pilots (2026-09-30, 2026-10-10, 2026-10-13) and of the read-throughs | REPORT 6.1, 6.1a, header | headers of `docs/PILOT_WEEK2.md`, `docs/PILOT_2.md`, `docs/PILOT_3.md`; `docs/PAPER_STATUS.md` | yes | none |
 | "Five things" added since the third pilot | REPORT 1 | count of the listed items: stability tier, synthetic GPU paper, field analysis, diagnosis layer, ReScience C selection | yes | none |
 
