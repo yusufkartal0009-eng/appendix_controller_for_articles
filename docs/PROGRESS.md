@@ -49,6 +49,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(scoring): cli.py score --from-run with an unreadable run is a message (2026-10-29 00:50 +03:00, Issue #557)
+- Found by edge tests: `python cli.py score <paper> --from-run <typo>` ended in a traceback (`FileNotFoundError`), and so did a run folder whose `pilot_record.json` or `run_report.json` was empty or malformed. It now prints `Cannot read the run in <dir>: <reason>` and exits with code 1. A valid run is scored as before.
+- Evidence: `tests/test_cli_score_errors.py` (6 cases; 5 fail without the change), ruff clean, full suite passes.
+
 ### fix(corpus): a malformed review_decisions.json is a clear error (2026-10-29 00:25 +03:00, Issue #557)
 - Found by edge tests: `restore_decisions` (called by `cli.py init-db`) raised `JSONDecodeError`, `AttributeError`, `TypeError` or `KeyError` for an empty or malformed decisions file, a file that is not an object, a `claims` that is not a list, or an accepted entry without ids, and `ValueError: Invalid isoformat string` for a bad `reviewed_at` after the claim was already staged. It now raises a `ValueError` that names the file and the problem, and a bad date leaves no half-stored claim. A valid file behaves as before.
 - Evidence: `tests/test_claim_store_edges.py` (18 cases; 9 fail without the change), 1577 passed, 9 skipped, ruff clean.

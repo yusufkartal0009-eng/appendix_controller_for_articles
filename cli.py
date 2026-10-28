@@ -148,7 +148,11 @@ def cmd_score_paper(args):
         run_pilot.run_paper(paper.paper_id, Path(args.staging_dir), pilot2=True, data_cache=Path(args.data_cache or DATA_CACHE_DIR),
                             record_root=run_root, memory_limit=args.memory, cpus=args.cpus, run_timeout=args.timeout)
         run_dir = run_root / paper.paper_id
-    record, report = load_run(run_dir)
+    try:
+        record, report = load_run(run_dir)
+    except (FileNotFoundError, ValueError) as exc:  # ValueError includes json.JSONDecodeError
+        print(f"Cannot read the run in {run_dir}: {exc}")
+        sys.exit(1)
 
     use_consensus = getattr(args, "claims", "accepted") == "auto-consensus"
     claims = claims_for_scoring(session, paper.paper_id, include_auto_consensus=use_consensus)
