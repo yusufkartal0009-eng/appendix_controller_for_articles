@@ -45,7 +45,7 @@ metric extractor, because a defect found while reviewing issue #30 sits there.
 
 | Pull request | Defect |
 |---|---|
-| #559 | Float noise at an exact threshold: a difference of exactly 0.05 lost half the points for 105 of 198 tested claims, and a CV of exactly 2 %, 5 % or 10 % fell into the next worse band. The tolerance and the bands are unchanged. |
+| #559 | Float noise at an exact threshold: a difference of exactly 0.05 lost half the points for 105 of 190 tested claims, and a CV of exactly 2 %, 5 % or 10 % fell into the next worse band. The tolerance and the bands are unchanged. |
 | #560 | An ANSI color code in a log line became part of the metric name (`32maccuracy`), so a claim could not match it. |
 | #561 | A malformed `review_decisions.json` ended in a raw `JSONDecodeError`, `AttributeError`, `TypeError` or `KeyError`; it is now a `ValueError` that names the file. |
 | #562 | `cli.py score --from-run` with a missing or corrupt run folder ended in a traceback; it is now a message and exit code 1. |
