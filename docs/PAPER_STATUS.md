@@ -109,4 +109,4 @@ On 2026-10-28 (night 8) no converter was found and no PDF was made. On the same 
 
 ## 6. Number audit of 2026-10-28 (issue #554)
 
-Every hand-typed number of the report, the README and the status documents was checked against its source; the table and the seven corrections are in `docs/NUMBER_AUDIT.md`.
+Every hand-typed number of the report, the README and the status documents was checked against its source; the table and the eight corrections (seven in the first pass, one in a second pass, #573) are in `docs/NUMBER_AUDIT.md`.

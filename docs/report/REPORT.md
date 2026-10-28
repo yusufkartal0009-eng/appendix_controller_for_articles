@@ -151,9 +151,9 @@ and running (section 6).
 Third-party paper code is untrusted by construction: it is run once, usually without being read first. Every
 run happens inside a Docker container built from `docker/Dockerfile.sandbox`, under a non-root user (uid 1000,
 verified check 1 of `docs/SANDBOX_ACCEPTANCE.md`), with the network disabled (`--network none`, check 2), the
-root filesystem read-only (check 3), and `/tmp` and the user's home directory as size-limited `tmpfs` mounts
-(2048 MiB, `noexec` on `/tmp`; `docs/DECISIONS.md` records why the home directory itself needs `exec` for
-compiled extensions it loads). Resource limits are enforced and checked against real load: 2 CPUs (check 17),
+root filesystem read-only (check 3), and `/tmp` (64 MiB) and the user's home directory (2048 MiB) as size-limited `tmpfs` mounts,
+both `noexec` (`docs/DECISIONS.md` records why the home directory stays `noexec`: compiled dependencies are loaded from a separate
+read-only directory, `/workspace/deps`, check 7). Resource limits are enforced and checked against real load: 2 CPUs (check 17),
 6–8 GiB of memory with the container killed and the kill reported as `OOM_KILLED` rather than confused with a
 timeout (checks 8 and a dedicated acceptance test), 100 processes (check 9), and a wall-clock timeout per phase
 (check 4). Dependencies are installed from pre-downloaded binary wheels only — building a source distribution
