@@ -40,7 +40,7 @@ graph TD
     end
 
     subgraph DEVOPS [area:devops]
-        CI[GitHub Actions CI / CD]
+        CI[Local checks, no CI service - D-010]
         RULES[Branch Protection & Commitlint]
         PROGRESS[Living Progress Tracking]
     end
@@ -84,4 +84,4 @@ graph TD
    - Embeddable markdown/SVG badges and downloadable audit reports.
 
 6. **`area:devops` (`.github/`, `scripts/`, `docs/`)**:
-   - Projectflow guardrails, living documents (`docs/`), PR templates, and GitHub Actions CI automation.
+   - Projectflow guardrails, living documents (`docs/`), PR templates, and local checks (there is no CI service, `docs/DECISIONS.md` D-010).

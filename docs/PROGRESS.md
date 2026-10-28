@@ -49,6 +49,13 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### chore(devops): small cleanups (2026-10-28 23:17 +03:00, Issue #569)
+- `docs/MULTI_SEED.md`: every line of the original text began with a stray backtick (122 lines, code fences included); one backtick was removed from each of them and no other character changed. A check that every line has an even number of backticks (code fences aside) passes.
+- `src/score_run.py` was committed with `CR CR LF` line ends and lone `CR` characters (the only one of 212 Python files; the others are LF in the repository). It is now LF like the rest, with no bulk change of other files; the syntax tree is identical except for blank lines that the old line ends added inside docstrings. No `.gitattributes` rule was needed.
+- `docs/ARCHITECTURE.md` and `docs/STACK.md` no longer describe a GitHub Actions CI that was removed in #388 (D-010).
+- Looked at and left alone: the README directory tree is an overview that lists only some files (it names nothing that does not exist); the other backticked paths that no file matches are historical notes or files of other repositories.
+- Evidence: ruff clean, full suite passes, no dead relative link in any tracked Markdown file.
+
 ### feat(web): the final report as a PDF (2026-10-28 23:13 +03:00, Issue #567)
 - `scripts/export_report.py` renders `docs/report/REPORT.md` to `docs/report/REPORT.pdf` (22 pages) with `fpdf2`, which the project already depends on; night 8 had concluded that no converter existed because it looked for external tools only. `--check` compares the text of the committed PDF with a fresh rendering.
 - The AI assistance statement, every `DRAFT` mark (none today) and every paragraph, list item, heading and table cell of the report are checked against the PDF text by `tests/test_export_report.py` (11 tests). Five characters outside Latin-1 are written in ASCII. Pages 1, 7, 13 and 22 were rendered to images and read.

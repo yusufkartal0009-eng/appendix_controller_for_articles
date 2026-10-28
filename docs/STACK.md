@@ -13,7 +13,7 @@
 | **`area:scoring`** | Scoring Engine | Pandas, NumPy | >= 2.2.0 | Relative error calculation, multi-seed CV variance, tier weighting |
 | **`area:ai`** | Decision & Diagnostics | Local LLM / Prompt templates | Python 3.11 | Automated failure classification and neutral diagnostic summaries |
 | **`area:web`** | API & Dashboard | FastAPI, Uvicorn, Jinja2 / SVG | Latest | REST API endpoints, interactive leaderboard, dynamic badges |
-| **`area:devops`** | CI / CD & Tooling | GitHub Actions, Git, Pytest | Pytest 8.x | Test execution, PR validation, automated releases |
+| **`area:devops`** | Tooling | Git, Pytest, ruff (no CI service, D-010) | Pytest 8.x | Test execution and PR validation run locally; release automation is not built (#45) |
 
 ---
 
