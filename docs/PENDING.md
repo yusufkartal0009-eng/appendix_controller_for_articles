@@ -3,7 +3,7 @@
 This document lists what is still open: decisions that only the owner can make, work that an assistant can do, open
 issues, and things that were done only partly or not verified. It is a snapshot. The evidence for each item is named; when
 an item is closed, its entry is removed or marked in the same pull request that closes it. State of `main` when this was
-written (updated 2026-10-25): no open pull request, 1,210 tests passed, 9 skipped, `ruff check .` clean. Items that were done since 2026-10-22
+written (updated 2026-10-28): no open pull request, 1,304 tests passed, 9 skipped, `ruff check .` clean. Items that were done since 2026-10-22
 are marked **DONE** with the pull request that closed them.
 
 How to read it: **Decision** means a choice that belongs to the owner. **Work** means a task that can be done without a
@@ -191,7 +191,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 | #20 | manifest parser | Partly done in other places (`requirements*.txt` parsing); see the comment of 2026-10-15. |
 | #18 | end-to-end sandbox tests | Partly done; see the comment of 2026-10-15. |
 | #19, #21, #22, #24, #45 | AST import scanner, version solver, GPU-to-CPU flag injection, dependency tests on diverse repositories, release automation | Not started; no related module (review of 2026-10-20). |
-| #3 | commitlint and branch protection | Not started. Branch protection cannot be set: GitHub answers 403 ("upgrade to GitHub Pro or make this repository public") for this private repository on its plan. |
+| #3 | commitlint and branch protection | Not started. Branch protection cannot be set: GitHub answers 403 ("upgrade to GitHub Pro or make this repository public") while this repository was private on its plan; it is public now and the ruleset was not retried (GitHub settings are not touched by an assistant). |
 | #13, #14, #15, #17 | base image, container lifecycle, zero-network isolation, timeout and memory watchdog | Open; each has a status comment of 2026-10-15 that was checked again on 2026-10-20 and is still correct. They were not closed for lack of new evidence. #13 stays open for the missing `xgboost` and `lightgbm` packages in the image. |
 | #115 | working agreement | Standing issue; never closed. |
 

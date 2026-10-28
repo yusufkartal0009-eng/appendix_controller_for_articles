@@ -14,7 +14,7 @@
 | Image | `repro-radar-sandbox:latest` built from `docker/Dockerfile.sandbox` in the same job |
 | Re-run | `python scripts/sandbox_acceptance.py --wheel-dir <dir>` on a host with Docker; `<dir>` holds `toolz==0.12.1` and `ujson==5.10.0` wheels (manylinux, CPython 3.11) |
 
-The job runs on every push and pull request and fails if any check fails.
+The job ran on every push and pull request and failed if any check failed. The CI workflow was removed in #388 (`docs/DECISIONS.md` D-010), so the evidence below is from the CI run named above; re-run the checks locally with the command in the table.
 
 
 ## Results

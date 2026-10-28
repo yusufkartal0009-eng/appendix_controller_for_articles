@@ -84,7 +84,7 @@ rather than against a value someone wrote down from memory.
 
 Repro Radar is an attempt to do this mechanically and honestly for a small set of tabular machine learning
 papers: stage each paper's code at a pinned commit, run it inside an isolated sandbox whose isolation properties
-are checked against a real Docker daemon in continuous integration (`docs/SANDBOX_ACCEPTANCE.md`), extract the
+were checked against a real Docker daemon in continuous integration while a CI workflow existed (it was removed in #388, `docs/DECISIONS.md` D-010; `docs/SANDBOX_ACCEPTANCE.md`), extract the
 paper's own numerical claims with a verbatim-quote guard against invented matches, and score the result on a
 four-tier rubric instead of a single pass/fail. As of this writing, the sandbox and the corpus verification are
 checked, the six papers of the corpus have been run through the sandbox in three pilots (section 6), and
@@ -171,8 +171,8 @@ property of container isolation generally, not specific to this project.
 Each run is scored on four weighted tiers (`src/config.py`): **Tier 1**, build and install success, 35%; **Tier
 2**, agreement between the paper's claimed metrics and the reproduced ones, 35%; **Tier 3**, stability across
 repeated runs with different seeds, 15%; **Tier 4**, documentation and license completeness, 15%. The composite
-score classifies a paper as `Verified` (≥ 85), `Partially Verified` (60–84), or lower tiers below that
-(`src/scoring.py`). A failed build or run is `Failed`. A run in which no accepted claim was compared with a metric of the run (none
+score classifies a paper as `Verified` (total ≥ 85, and also Tier 1 ≥ 90 and Tier 2 ≥ 80), `Partially Verified` (total ≥ 60 and not `Verified`), or lower tiers below that
+(`src/scoring.py`; a run with Tier 2 < 50 and Tier 1 ≥ 80 inside that band is `Needs Review`). A failed build or run is `Failed`. A run in which no accepted claim was compared with a metric of the run (none
 accepted, none with a counterpart, or none found in the output) is labeled `Needs Review` whatever its total, because Tier 2 is then the
 neutral baseline of 70 and not evidence (#540); the total still contains that baseline.
 
@@ -216,7 +216,7 @@ two cases built specifically to catch a fabricated match: a dataset name ("EP360
 do not occur in their papers at all, both correctly answered `not_found`.
 
 - **Sources:** `docs/SANDBOX_ACCEPTANCE.md` (all numbered checks cited above are its own verbatim evidence,
-  re-run against a real Docker daemon in CI); `docs/DECISIONS.md` (D-004, D-005, and the home-directory
+  taken from a CI run against a real Docker daemon, 2026-10-05); `docs/DECISIONS.md` (D-004, D-005, and the home-directory
   `noexec` decision); `src/config.py`, `src/scoring.py` (weights, thresholds,
   tolerance rules, CV bands — read directly from the code, not retyped by hand); `docs/CLAIM_SCHEMA.md`,
   `docs/PDF_TEXT_EXTRACTION.md`, `docs/AGENT_EXTRACTION.md`; `data/claims/gold_score_pass_A.json` (the
@@ -236,7 +236,7 @@ found only one paper had been (`docs/PROGRESS.md`, the 18→8 note). Two further
 not fixable, leaving the 6 papers scored in `docs/CORPUS_VERIFICATION.md` today: TabPFN, FT-Transformer, TabR,
 FastSK, SAINT, and DANet, each pinned to one commit of its repository.
 
-An automated check (`scripts/verify_corpus.py`, run in CI on every push) verifies, for every entry, that the
+An automated check (`scripts/verify_corpus.py`, run in CI on every push while the workflow existed, now run locally, D-010) verifies, for every entry, that the
 paper title matches its arXiv or Crossref record, that the repository exists, that its declared license matches
 GitHub's own license detection and is on an allow-list of open licenses, and that the pinned target script
 exists at the pinned commit. As of the last recorded run, 6 of 6 entries pass this check. Passing it proves the
@@ -354,7 +354,7 @@ never published (`paper_008`). `paper_006` is the only paper that ran to complet
 in `docs/PILOT_2.md` section 12.
 
 The first Pilot 2 attempts were stopped mostly by defects in Repro Radar itself, which only running the tool on a second
-platform (Windows, against Linux CI) and on real papers revealed: a CRLF container entrypoint, dependency markers
+platform (Windows, against the Linux CI that existed then) and on real papers revealed: a CRLF container entrypoint, dependency markers
 evaluated for the host instead of the sandbox, a conda lock resolved instead of installed as pinned, a writable mount
 whose parent directory was owned by root, and others. Each was fixed in its own issue and PR, the paper was re-run, and
 every earlier attempt is kept with its reason (`data/pilot2_runs/first_attempts/README.md`, generated from the stored
@@ -1067,7 +1067,7 @@ evidence: it shows what the scorer decided on stored runs.
 
 ## 8. Lessons learned
 
-- **Run the tool on a second platform early.** The real-Docker acceptance checks passed in CI throughout; two defects only
+- **Run the tool on a second platform early.** The real-Docker acceptance checks passed in CI throughout (while CI existed); two defects only
   appeared on a Windows host (a CRLF entrypoint, dependency markers evaluated for the host), and several more only when
   real papers were run.
 - **A conda environment file is a lock.** The first answer to the conda failures was a resolver pass over the pins

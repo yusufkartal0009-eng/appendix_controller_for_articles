@@ -108,3 +108,7 @@ record is not in the repository).
 On 2026-10-28 no converter was found on the machine: `pandoc`, `weasyprint`, `wkhtmltopdf`, LaTeX (`xelatex`, `pdflatex`), LibreOffice and the
 Python packages `markdown` and `weasyprint` are absent (nothing was installed or downloaded). **Not verified: no converter available**, so no
 `REPORT.pdf` or `REPORT.html` was produced. Headless Chrome exists, but it prints HTML only and there is no Markdown-to-HTML converter to feed it.
+
+## 6. Number audit of 2026-10-28 (issue #554)
+
+Every hand-typed number of the report, the README and the status documents was checked against its source; the table and the seven corrections are in `docs/NUMBER_AUDIT.md`.
