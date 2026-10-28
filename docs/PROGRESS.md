@@ -24,7 +24,8 @@
 - **Failure statistics (2026-10-28, #546):** `scripts/failure_statistics.py` counts the first failure of every stored run by documented text rules (Pilots 1-4: 24 attempts; the candidate list; the automatic searches of rounds 3 and 4) into `data/failure_statistics.json` and `docs/FAILURE_STATISTICS.md` (`--check`), with a selection-bias warning; report section 6.12 and the `failurestatistics` block of `scripts/report_numbers.py`.
 - **Final dashboard (2026-10-28, #548):** reasons beside every label, "Why this label" on the paper page (table `score_explanations`, written by `scripts/build_demo_db.py` and `cli.py score`), the synthetic control listed apart, `/failures` from `data/failure_statistics.json`, and a footer; screenshots in `docs/evidence/demo3/`, README and `docs/DEMO_SCRIPT.md` Step 1 updated. Checked in a fresh clone: `init-db`, `build_demo_db.py` and `python -m src.web` run and every page returns 200 (unknown paper 404). Bug-hunt suspicion 4 was already fixed in #513.
 - **Report final pass (2026-10-28, #550):** `docs/report/REPORT.md` brought to the current state (label rule #540, Tier 3 binding #542 with a generated `tier3binding` block, failure statistics 6.12, dashboard 6.13, limitations extended); stale `Partially Verified` sentences fixed; `docs/PAPER_STATUS.md` updated (scan, export: no converter available, not verified). `report_numbers.py --check` and `verify_sources.py --check` pass.
-- **Tests:** 1,304 passed, 9 skipped locally (2026-10-28) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
+- **Night 9 (2026-10-28, #554 to #571):** quality work, no new feature. The numbers of the report, README and status documents were audited against their sources (7 corrections, `docs/NUMBER_AUDIT.md`); the old issues were triaged (`docs/ISSUE_TRIAGE.md`; #11 and #30 closed, 18 open); boundary tests and four fixed defects (`docs/COVERAGE.md`; coverage 94.8 % to 96.8 %); a second clean-clone walk-through (`docs/evidence/clean_clone2/WALKTHROUGH.md`); `docs/report/REPORT.pdf` from `scripts/export_report.py`; small cleanups.
+- **Tests:** 1,722 passed, 10 skipped locally (2026-10-28, after night 9) (Windows; network and POSIX-only tests skip). There is no CI at the moment (D-010): every PR records its local `ruff check .` and `pytest` run.
 
 ---
 
@@ -48,6 +49,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 ---
 
 ## Changelog & Completed Work
+
+### docs(devops): status documents after the second night session of 2026-10-28 (2026-10-28 23:18 +03:00, Issue #571)
+- Night 9 summary (issues #554 to #571): number audit (#554, PR #555), issue triage (#556, PR #558, #564), boundary tests and four fixes (#557, PRs #559 to #563), clean-clone walk-through (#565, PR #566), PDF export (#567, PR #568), cleanups (#569, PR #570). `docs/PENDING.md`, the README and this file were updated; main has 1,722 tests (10 skipped), ruff clean.
+- Corrected on the way: four PROGRESS entries of this session had estimated time stamps (fixed in PR #563), and one command wrote a PROGRESS line with a missing path (fixed in PR #566).
 
 ### chore(devops): small cleanups (2026-10-28 23:17 +03:00, Issue #569)
 - `docs/MULTI_SEED.md`: every line of the original text began with a stray backtick (122 lines, code fences included); one backtick was removed from each of them and no other character changed. A check that every line has an even number of backticks (code fences aside) passes.

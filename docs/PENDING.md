@@ -3,7 +3,7 @@
 This document lists what is still open: decisions that only the owner can make, work that an assistant can do, open
 issues, and things that were done only partly or not verified. It is a snapshot. The evidence for each item is named; when
 an item is closed, its entry is removed or marked in the same pull request that closes it. State of `main` when this was
-written (updated 2026-10-28): no open pull request, 1,304 tests passed, 9 skipped, `ruff check .` clean. Items that were done since 2026-10-22
+written (updated 2026-10-28, second night session): no open pull request, 1,722 tests passed, 10 skipped, `ruff check .` clean. Items that were done since 2026-10-22
 are marked **DONE** with the pull request that closed them.
 
 How to read it: **Decision** means a choice that belongs to the owner. **Work** means a task that can be done without a
@@ -179,6 +179,9 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
   (#513: the page shows the run that was scored, with its start date); 1, 5 and 7 are decisions of the owner (D10 twice, and the K1 pattern of the protocols).
 - **DONE 2026-10-25:** the verdicts on the real stored runs (`docs/REAL_VERDICTS.md`, #495), the dashboard database from the stored runs (`scripts/build_demo_db.py`, #497),
   the second pass of the bug hunt (#499, #500, #501, #502), the report in its final state and `docs/PAPER_STATUS.md` (#504). What the paper still needs from the owner is in `docs/PAPER_STATUS.md`.
+
+- **DONE 2026-10-28 (second night session, quality work, no new feature):** every number of the report, README and status documents checked against its source, with 7 corrections (`docs/NUMBER_AUDIT.md`, #554); the old open issues compared with `main` (`docs/ISSUE_TRIAGE.md`, #556; #11 and #30 closed with evidence, 18 issues stay open); boundary-case tests and four real defects fixed (`docs/COVERAGE.md`, #557, PRs #559 to #563; coverage of `src/` and `cli.py` 94.8 % to 96.8 %); a second clean-clone walk-through (`docs/evidence/clean_clone2/WALKTHROUGH.md`, #565); the report as a PDF (`docs/report/REPORT.pdf`, `scripts/export_report.py`, #567); small cleanups (#569).
+- **Open after that session (owner):** the edge behaviors listed in section 5 (metric extractor formats, infinity and NaN in the scorer) are decisions, not defects that were fixed; whether to run `pytest --cov` as a habit; the PDF is not typeset with a conference template (needs the mentor's format, D8).
 
 ## 3. Open issues and their state
 
