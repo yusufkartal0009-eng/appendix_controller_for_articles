@@ -94,7 +94,7 @@ Metrics of the run (as printed): activation = 0.275, geometric_need = 0.5425, ov
 | +1 % | 100.0 | 12 | 0 | 0 | 93.25 | Verified |
 | -2 % | 100.0 | 12 | 0 | 0 | 93.25 | Verified |
 | +2 % | 100.0 | 12 | 0 | 0 | 93.25 | Verified |
-| -5 % | 83.33 | 8 | 4 | 0 | 87.42 | Verified |
+| -5 % | 91.67 | 10 | 2 | 0 | 90.33 | Verified |
 | +5 % | 100.0 | 12 | 0 | 0 | 93.25 | Verified |
 | -10 % | 62.5 | 5 | 5 | 2 | 80.12 | Partially Verified |
 | +10 % | 70.83 | 5 | 7 | 0 | 83.04 | Partially Verified |
@@ -111,11 +111,11 @@ Each metric alone: the largest tested deviation at which it still earns a full p
 | geometric_need | 0.5425 | -5 % | +5 % |
 | overlap | 0.4117 | -10 % | +10 % |
 | boundary_conflict | 0.0167 | -20 % | +20 % |
-| minority_sparsity | 1 | -2 % | +5 % |
+| minority_sparsity | 1 | -5 % | +5 % |
 | majority_sparsity | 0.7753 | -5 % | +5 % |
 | imbalance_pressure | 0.7448 | -5 % | +5 % |
 | minority_sufficiency | 0.0097 | -20 % | +20 % |
-| majority_removed | 1 | -2 % | +5 % |
+| majority_removed | 1 | -5 % | +5 % |
 | synthetic_added | 2 | -2 % | +5 % |
 | majority_synthetic_added | 5 | -2 % | +5 % |
 | weighted | 0 | -20 % | +20 % |
