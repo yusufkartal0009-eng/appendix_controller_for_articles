@@ -49,6 +49,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(devops): second clean-clone walk-through of the README (2026-10-28 23:08 +03:00, Issue #565)
+- A fresh clone of the public repository followed the README in order (): every command that does not need Docker or the network exited 0, the dashboard answered 200 on every page with the default and the demo database (404 for an unknown paper), and the suite gave 1705 passed, 16 skipped in the clean clone.
+- Two README fixes: the note before step 7 said Tier 2 would be 0 for the stored run of `paper_006` (it is the neutral 70, total 86.5, `Needs Review`), and a note that a long clone path made `python -m venv` fail on Windows.
+- Not run: the Docker commands and the network scripts (stated in the walk-through). The temporary directory was removed.
+
 ### docs(devops): issues #11 and #30 closed with evidence (2026-10-28 23:02 +03:00, Issue #556)
 - After PR #563, the definition of done of #11 (zero-division and boundary tests) and #30 (noisy-log and ANSI tests) is met by named tests; both were closed with a comment that cites them. `docs/ISSUE_TRIAGE.md` and `docs/PENDING.md` section 3 were updated. 18 issues remain open (the standing process issue #115 included).
 
