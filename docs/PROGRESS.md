@@ -49,6 +49,9 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(devops): issues #11 and #30 closed with evidence (2026-10-28 23:02 +03:00, Issue #556)
+- After PR #563, the definition of done of #11 (zero-division and boundary tests) and #30 (noisy-log and ANSI tests) is met by named tests; both were closed with a comment that cites them. `docs/ISSUE_TRIAGE.md` and `docs/PENDING.md` section 3 were updated. 18 issues remain open (the standing process issue #115 included).
+
 ### test(scoring): boundary-case tests for the weakest modules and a coverage report (2026-10-28 23:00 +03:00, Issue #557)
 - Coverage of `src/` and `cli.py` went from 94.8 % to 96.8 % (`docs/COVERAGE.md` has the table per module): `cli.py` 69.9 % to 89.3 %, `src/sandbox/resources.py` 71.4 % to 100 %, `src/sandbox/run_setup.py` 87.5 % to 100 %, `src/sandbox/env_cache.py` 91.5 % to 98.9 %, `src/score_run.py` 98.2 % to 100 %. `src/sandbox/runner.py` (90.2 %) was not changed: its gaps are Docker error branches.
 - Four real defects were found and fixed earlier in their own pull requests (#559, #560, #561, #562); behaviors that are decisions were not changed and are listed in `docs/PENDING.md` section 5.
