@@ -10,6 +10,10 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+# Terminal color and cursor codes (`ESC [ ... letter`) and operating-system commands (`ESC ] ... BEL`). Paper code that colors its
+# log lines would otherwise put `32m` into a metric name: `ESC[32maccuracy: 0.85` was extracted as `32maccuracy`.
+_ANSI_ESCAPE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]|\x1b\][^\x07\x1b]*(?:\x07|\x1b\\)")
+
 # Canonical metric normalization aliases
 CANONICAL_METRIC_MAP: dict[str, str] = {
     # Accuracy
@@ -330,6 +334,7 @@ class MetricExtractor:
         Later occurrences in the logs take precedence (representing final test/eval metrics).
         """
         all_metrics: list[ExtractedMetric] = []
+        text = _ANSI_ESCAPE.sub("", text)
 
         # 1. Framework logs
         all_metrics.extend(self.extract_from_framework_logs(text))

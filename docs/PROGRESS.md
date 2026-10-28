@@ -49,6 +49,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(scoring): ANSI color codes no longer corrupt metric names (2026-10-28 23:55 +03:00, Issues #30 and #557)
+- Found while triaging #30: `MetricExtractor.extract_metrics` on a colored log line returned `{'32maccuracy': 0.85}`, so a claim for `accuracy` could never match a run whose code colors its output. `extract_metrics` now removes terminal escape sequences first (`_ANSI_ESCAPE`).
+- Evidence: `tests/test_metric_extractor_noisy.py` (26 cases; 5 fail without the fix), ruff clean, full suite passes. `real_verdicts --check` and `report_numbers --check` unchanged. Not verified: the stored logs were not re-extracted with the new code, so a stored `extracted_metrics.json` made from a colored log would still carry the old name.
+- Found and not changed (owner decision, `docs/PENDING.md`): a decimal comma (`accuracy: 0,85`) is read as `0.0`; `.85` and `1e-5` are not read; a JSON `NaN` is kept while a log line `nan` is dropped.
+
 ### fix(scoring): float noise at an exact threshold no longer lowers a score (2026-10-28 23:35 +03:00, Issue #557)
 - Found by boundary tests: a difference of exactly 0.05 (the documented absolute allowance) lost half the points for 105 of 198 tested claims between 0.05 and 0.95 (`0.15 - 0.10` is `0.04999999999999999`, `0.75 - 0.70` is `0.050000000000000044`); the same noise moved a CV of exactly 2 %, 5 % or 10 % into the next worse Tier 3 band. `src/scoring.py` now compares with `BOUNDARY_EPSILON = 1e-9`. The tolerance, the 0.05 allowance and the bands are unchanged.
 - Effect on stored results: `scripts/tolerance_probe.py` was re-run (`data/tolerance_probe/results.json`, `docs/TOLERANCE_PROBE.md`): the -5 % probe of one paper now scores 91.67 (was 83.33) because two probes sat exactly on 5 %. `real_verdicts --check` and `report_numbers --check` are unchanged.
