@@ -114,25 +114,43 @@ def restore_decisions(session: Session, decisions_file: Path) -> dict[str, int]:
     Only entries with `review_status == "accepted"` and `verified_by == "human"` are restored; anything else in the file is
     ignored. A claim that already has a review in this database keeps it (a decision made here outranks the file), and a
     claim whose reviewed fields differ from the file is left alone for the same reason as in `save_extracted_claim`.
-    Returns the counts `restored`, `kept` (already reviewed here), and `ignored`.
+    Returns the counts `restored`, `kept` (already reviewed here), and `ignored`. A file that is not valid JSON, is not an object with a
+    `claims` list, or has an entry to restore without its ids or with a `reviewed_at` that is not a date raises a `ValueError` that
+    names the file (and nothing is restored from the entries after the bad one).
     """
     counts = {"restored": 0, "kept": 0, "ignored": 0}
     if not decisions_file.is_file():
         return counts
     columns = {column.name for column in ExtractedClaimORM.__table__.columns}
     skip = {"extracted_claim_id", "review_status", "verified_by", "reviewed_at", "review_note", "created_at"}
-    for entry in json.loads(decisions_file.read_text(encoding="utf-8")).get("claims", []):
+    name = decisions_file.name
+    try:
+        data = json.loads(decisions_file.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{name} is not valid JSON: {exc}") from exc
+    entries = data.get("claims", []) if isinstance(data, dict) else None
+    if not isinstance(entries, list) or not all(isinstance(entry, dict) for entry in entries):
+        raise ValueError(f"{name} must be an object whose 'claims' is a list of objects")
+    for entry in entries:
         if entry.get("review_status") != "accepted" or entry.get("verified_by") != "human":
             counts["ignored"] += 1
             continue
-        existing = session.get(ExtractedClaimORM, claim_key(entry["paper_id"], entry["query_id"]))
+        missing = [field for field in ("paper_id", "query_id") if field not in entry]
+        if missing:
+            raise ValueError(f"{name}: an accepted entry has no {' and no '.join(missing)}")
+        key = claim_key(entry["paper_id"], entry["query_id"])
+        try:
+            reviewed_at = datetime.fromisoformat(entry["reviewed_at"]) if entry.get("reviewed_at") else None
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"{name}: reviewed_at {entry['reviewed_at']!r} of {key} is not an ISO date") from exc
+        existing = session.get(ExtractedClaimORM, key)
         if existing is not None and existing.review_status != "pending":
             counts["kept"] += 1
             continue
         data = {name: value for name, value in entry.items() if name in columns and name not in skip}
         row, _ = save_extracted_claim(session, data)
         row.review_status, row.verified_by = "accepted", "human"
-        row.reviewed_at = datetime.fromisoformat(entry["reviewed_at"]) if entry.get("reviewed_at") else None
+        row.reviewed_at = reviewed_at
         note = f"restored from {decisions_file.name}"
         row.review_note = f"{entry['review_note']} ({note})" if entry.get("review_note") else note
         counts["restored"] += 1

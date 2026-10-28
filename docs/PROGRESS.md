@@ -49,6 +49,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(corpus): a malformed review_decisions.json is a clear error (2026-10-29 00:25 +03:00, Issue #557)
+- Found by edge tests: `restore_decisions` (called by `cli.py init-db`) raised `JSONDecodeError`, `AttributeError`, `TypeError` or `KeyError` for an empty or malformed decisions file, a file that is not an object, a `claims` that is not a list, or an accepted entry without ids, and `ValueError: Invalid isoformat string` for a bad `reviewed_at` after the claim was already staged. It now raises a `ValueError` that names the file and the problem, and a bad date leaves no half-stored claim. A valid file behaves as before.
+- Evidence: `tests/test_claim_store_edges.py` (18 cases; 9 fail without the change), 1577 passed, 9 skipped, ruff clean.
+
 ### fix(scoring): ANSI color codes no longer corrupt metric names (2026-10-28 23:55 +03:00, Issues #30 and #557)
 - Found while triaging #30: `MetricExtractor.extract_metrics` on a colored log line returned `{'32maccuracy': 0.85}`, so a claim for `accuracy` could never match a run whose code colors its output. `extract_metrics` now removes terminal escape sequences first (`_ANSI_ESCAPE`).
 - Evidence: `tests/test_metric_extractor_noisy.py` (26 cases; 5 fail without the fix), ruff clean, full suite passes. `real_verdicts --check` and `report_numbers --check` unchanged. Not verified: the stored logs were not re-extracted with the new code, so a stored `extracted_metrics.json` made from a colored log would still carry the old name.
