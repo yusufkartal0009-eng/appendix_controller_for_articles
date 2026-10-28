@@ -49,29 +49,35 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
-### fix(scoring): cli.py score --from-run with an unreadable run is a message (2026-10-29 00:50 +03:00, Issue #557)
+### test(scoring): boundary-case tests for the weakest modules and a coverage report (2026-10-28 23:00 +03:00, Issue #557)
+- Coverage of `src/` and `cli.py` went from 94.8 % to 96.8 % (`docs/COVERAGE.md` has the table per module): `cli.py` 69.9 % to 89.3 %, `src/sandbox/resources.py` 71.4 % to 100 %, `src/sandbox/run_setup.py` 87.5 % to 100 %, `src/sandbox/env_cache.py` 91.5 % to 98.9 %, `src/score_run.py` 98.2 % to 100 %. `src/sandbox/runner.py` (90.2 %) was not changed: its gaps are Docker error branches.
+- Four real defects were found and fixed earlier in their own pull requests (#559, #560, #561, #562); behaviors that are decisions were not changed and are listed in `docs/PENDING.md` section 5.
+- Also corrected in this entry's pull request: the time stamps of the four fix entries above had been estimated instead of read from the clock; they now carry the merge times.
+- Evidence: 1711 passed, 10 skipped, ruff clean. Not verified: mutation testing was not run.
+
+### fix(scoring): cli.py score --from-run with an unreadable run is a message (2026-10-28 22:52 +03:00, Issue #557)
 - Found by edge tests: `python cli.py score <paper> --from-run <typo>` ended in a traceback (`FileNotFoundError`), and so did a run folder whose `pilot_record.json` or `run_report.json` was empty or malformed. It now prints `Cannot read the run in <dir>: <reason>` and exits with code 1. A valid run is scored as before.
 - Evidence: `tests/test_cli_score_errors.py` (6 cases; 5 fail without the change), ruff clean, full suite passes.
 
-### fix(corpus): a malformed review_decisions.json is a clear error (2026-10-29 00:25 +03:00, Issue #557)
+### fix(corpus): a malformed review_decisions.json is a clear error (2026-10-28 22:50 +03:00, Issue #557)
 - Found by edge tests: `restore_decisions` (called by `cli.py init-db`) raised `JSONDecodeError`, `AttributeError`, `TypeError` or `KeyError` for an empty or malformed decisions file, a file that is not an object, a `claims` that is not a list, or an accepted entry without ids, and `ValueError: Invalid isoformat string` for a bad `reviewed_at` after the claim was already staged. It now raises a `ValueError` that names the file and the problem, and a bad date leaves no half-stored claim. A valid file behaves as before.
 - Evidence: `tests/test_claim_store_edges.py` (18 cases; 9 fail without the change), 1577 passed, 9 skipped, ruff clean.
 
-### fix(scoring): ANSI color codes no longer corrupt metric names (2026-10-28 23:55 +03:00, Issues #30 and #557)
+### fix(scoring): ANSI color codes no longer corrupt metric names (2026-10-28 22:48 +03:00, Issues #30 and #557)
 - Found while triaging #30: `MetricExtractor.extract_metrics` on a colored log line returned `{'32maccuracy': 0.85}`, so a claim for `accuracy` could never match a run whose code colors its output. `extract_metrics` now removes terminal escape sequences first (`_ANSI_ESCAPE`).
 - Evidence: `tests/test_metric_extractor_noisy.py` (26 cases; 5 fail without the fix), ruff clean, full suite passes. `real_verdicts --check` and `report_numbers --check` unchanged. Not verified: the stored logs were not re-extracted with the new code, so a stored `extracted_metrics.json` made from a colored log would still carry the old name.
 - Found and not changed (owner decision, `docs/PENDING.md`): a decimal comma (`accuracy: 0,85`) is read as `0.0`; `.85` and `1e-5` are not read; a JSON `NaN` is kept while a log line `nan` is dropped.
 
-### fix(scoring): float noise at an exact threshold no longer lowers a score (2026-10-28 23:35 +03:00, Issue #557)
+### fix(scoring): float noise at an exact threshold no longer lowers a score (2026-10-28 22:46 +03:00, Issue #557)
 - Found by boundary tests: a difference of exactly 0.05 (the documented absolute allowance) lost half the points for 105 of 198 tested claims between 0.05 and 0.95 (`0.15 - 0.10` is `0.04999999999999999`, `0.75 - 0.70` is `0.050000000000000044`); the same noise moved a CV of exactly 2 %, 5 % or 10 % into the next worse Tier 3 band. `src/scoring.py` now compares with `BOUNDARY_EPSILON = 1e-9`. The tolerance, the 0.05 allowance and the bands are unchanged.
 - Effect on stored results: `scripts/tolerance_probe.py` was re-run (`data/tolerance_probe/results.json`, `docs/TOLERANCE_PROBE.md`): the -5 % probe of one paper now scores 91.67 (was 83.33) because two probes sat exactly on 5 %. `real_verdicts --check` and `report_numbers --check` are unchanged.
 - Evidence: `tests/test_scoring_edges.py` (215 cases; 102 of them fail without the fix), 1533 passed, 9 skipped, ruff clean.
 
-### docs(devops): triage of the old open issues (2026-10-28 22:55 +03:00, Issue #556)
+### docs(devops): triage of the old open issues (2026-10-28 22:39 +03:00, Issue #556)
 - 20 old open issues were compared with `main`; the table is `docs/ISSUE_TRIAGE.md`. No issue was closed: each lacks a definition-of-done box or a file it names. Comments were written on #3, #8, #11, #18, #19, #21, #22, #24, #30, #45.
 - New finding: ANSI color codes corrupt metric names in `MetricExtractor` (`32maccuracy`); fixed in the test-gap work (#557).
 
-### docs(report): number audit of the report and the status documents (2026-10-28 22:40 +03:00, Issue #554)
+### docs(report): number audit of the report and the status documents (2026-10-28 22:36 +03:00, Issue #554)
 - Every hand-typed number in `docs/report/REPORT.md`, `README.md`, `docs/PAPER_STATUS.md` and `docs/PENDING.md` was checked against its source; the table is `docs/NUMBER_AUDIT.md`.
 - Seven wrong or stale statements were corrected: the `Verified` rule in report section 4.2 (Tier 1 and Tier 2 conditions were missing), CI described in the present tense in the report, README and `docs/SANDBOX_ACCEPTANCE.md` (the workflow was removed in #388), `CONTRIBUTING.md` claiming a CI workflow, README saying 12 claims in 5 papers (13 in 6), the image size range in README, the test count in `docs/PENDING.md`, and the 'private repository' remark on #3.
 - Evidence: `report_numbers.py --check` in sync, `verify_sources.py --check` empty list, `ruff check .` clean, 1304 passed, 9 skipped.

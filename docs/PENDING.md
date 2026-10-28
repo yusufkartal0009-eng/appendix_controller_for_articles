@@ -206,6 +206,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 
 ## 5. Known limits and statements without evidence
 
+- **Scorer behaviors at the edges (found 2026-10-28, #557; owner decision whether to change, `docs/COVERAGE.md`):** a claimed infinity against an equal infinity earns no points; a NaN or infinite seed value gives Tier 3 = 40 with a note that says the variation exceeds 10 %; a boolean in a run report's `metrics` is read as 1.0 or 0.0. All are conservative or cannot occur in a stored run; changing any of them would be a scoring decision.
 - **Metric extractor limits (found 2026-10-28, #557; owner decision whether to change):** a decimal comma (`accuracy: 0,85`) is read as `0.0`, which is a wrong value, not a missing one; `.85` and scientific notation (`1e-5`) are not read; a JSON `NaN` is kept as a metric while a log line `nan` is dropped. None of these is known to occur in a stored run; they were found with hand-written probes. The ANSI color-code defect was fixed (`tests/test_metric_extractor_noisy.py`).
 - **Success rate:** Pilot 4 gave pilot success 1 of 6 on new papers (install 3 of 6 after one correction round, run 2 of 6). Pilot 3 (2 of 6) used settings chosen after the
   failures of Pilots 1 and 2 and says nothing about new papers. No rate over 12 papers is claimed.
