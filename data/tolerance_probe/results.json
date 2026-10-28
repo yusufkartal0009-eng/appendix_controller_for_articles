@@ -1445,7 +1445,7 @@
           "up": 20.0
         },
         "minority_sparsity": {
-          "down": 2.0,
+          "down": 5.0,
           "up": 5.0
         },
         "majority_sparsity": {
@@ -1461,7 +1461,7 @@
           "up": 20.0
         },
         "majority_removed": {
-          "down": 2.0,
+          "down": 5.0,
           "up": 5.0
         },
         "synthetic_added": {
@@ -1564,14 +1564,14 @@
         },
         {
           "deviation_percent": -5.0,
-          "tier2": 83.33,
+          "tier2": 91.67,
           "labels": {
-            "MATCHED": 8,
-            "PARTIAL": 4,
+            "MATCHED": 10,
+            "PARTIAL": 2,
             "DIVERGED": 0,
             "NOT FOUND": 0
           },
-          "total": 87.42,
+          "total": 90.33,
           "status": "Verified"
         },
         {

@@ -49,6 +49,11 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### fix(scoring): float noise at an exact threshold no longer lowers a score (2026-10-28 23:35 +03:00, Issue #557)
+- Found by boundary tests: a difference of exactly 0.05 (the documented absolute allowance) lost half the points for 105 of 198 tested claims between 0.05 and 0.95 (`0.15 - 0.10` is `0.04999999999999999`, `0.75 - 0.70` is `0.050000000000000044`); the same noise moved a CV of exactly 2 %, 5 % or 10 % into the next worse Tier 3 band. `src/scoring.py` now compares with `BOUNDARY_EPSILON = 1e-9`. The tolerance, the 0.05 allowance and the bands are unchanged.
+- Effect on stored results: `scripts/tolerance_probe.py` was re-run (`data/tolerance_probe/results.json`, `docs/TOLERANCE_PROBE.md`): the -5 % probe of one paper now scores 91.67 (was 83.33) because two probes sat exactly on 5 %. `real_verdicts --check` and `report_numbers --check` are unchanged.
+- Evidence: `tests/test_scoring_edges.py` (215 cases; 102 of them fail without the fix), 1533 passed, 9 skipped, ruff clean.
+
 ### docs(devops): triage of the old open issues (2026-10-28 22:55 +03:00, Issue #556)
 - 20 old open issues were compared with `main`; the table is `docs/ISSUE_TRIAGE.md`. No issue was closed: each lacks a definition-of-done box or a file it names. Comments were written on #3, #8, #11, #18, #19, #21, #22, #24, #30, #45.
 - New finding: ANSI color codes corrupt metric names in `MetricExtractor` (`32maccuracy`); fixed in the test-gap work (#557).

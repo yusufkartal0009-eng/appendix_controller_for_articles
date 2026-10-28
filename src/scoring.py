@@ -36,6 +36,10 @@ from src.config import (
 )
 from src.models import ScoreBreakdown
 
+# Float noise must not decide a value that sits exactly on a bound: 0.15 - 0.10 is 0.04999999999999999 but 0.75 - 0.70 is
+# 0.050000000000000044, and both are a difference of 0.05. A difference is within a bound if it exceeds it by less than this.
+BOUNDARY_EPSILON = 1e-9
+
 NOTHING_COMPARED_TEXT = "claimed metrics not found in the output (nothing was compared)"
 
 # A time or latency metric is judged on its relative error only (no absolute allowance). It is recognized by the words of
@@ -118,6 +122,9 @@ class Tier2MetricsEvaluator:
         earned_points = 0.0
         notes = []
 
+        limit = tolerance + BOUNDARY_EPSILON
+        double_limit = 2.0 * tolerance + BOUNDARY_EPSILON
+
         for metric_name, claimed_val in claimed_metrics.items():
             if metric_name not in reproduced_metrics:
                 claim_results[metric_name] = {
@@ -140,13 +147,13 @@ class Tier2MetricsEvaluator:
             if is_time_metric(metric_name):
                 # Time / latency metrics must strictly evaluate relative tolerance
                 # to prevent the absolute tolerance trap (e.g. 0.02s taking 0.06s is 200% error)
-                if rel_error <= tolerance:
+                if rel_error <= limit:
                     points = 1.0
                     matches = True
                     notes.append(
                         f"Metric '{metric_name}' (runtime/latency) MATCHED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})"
                     )
-                elif rel_error <= 2.0 * tolerance:
+                elif rel_error <= double_limit:
                     points = 0.5
                     matches = False
                     notes.append(
@@ -164,15 +171,15 @@ class Tier2MetricsEvaluator:
                 # 1. Matches if relative error is within tolerance OR
                 # 2. For bounded probability/ratio metrics (claimed in [0, 1]), absolute difference is within tolerance
                 is_bounded_rate = (0.0 <= claimed_val <= 1.0)
-                if rel_error <= tolerance:
+                if rel_error <= limit:
                     points = 1.0
                     matches = True
                     notes.append(f"Metric '{metric_name}' MATCHED (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
-                elif is_bounded_rate and abs_diff <= tolerance:
+                elif is_bounded_rate and abs_diff <= limit:
                     points = 1.0
                     matches = True
                     notes.append(f"Metric '{metric_name}' MATCHED (Absolute: Claimed {claimed_val}, Repro {reproduced_val}, AbsDiff: {abs_diff:.4f})")
-                elif rel_error <= 2.0 * tolerance or (is_bounded_rate and abs_diff <= 2.0 * tolerance):
+                elif rel_error <= double_limit or (is_bounded_rate and abs_diff <= double_limit):
                     points = 0.5
                     matches = False
                     notes.append(f"Metric '{metric_name}' PARTIAL MATCH (Claimed: {claimed_val}, Repro: {reproduced_val}, RelErr: {rel_error:.3%})")
@@ -235,13 +242,13 @@ class Tier3StabilityEvaluator:
 
         notes.append(f"Multi-seed evaluated (n={len(seed_results)}, Mean={mean_val:.4f}, StdDev={std_dev:.4f}, CV={cv:.3%})")
 
-        if cv <= 0.02:
+        if cv <= 0.02 + BOUNDARY_EPSILON:
             score = 100.0
             notes.append("Excellent seed invariance: Coefficient of Variation <= 2% (+100)")
-        elif cv <= 0.05:
+        elif cv <= 0.05 + BOUNDARY_EPSILON:
             score = 85.0
             notes.append("Good stability: Coefficient of Variation <= 5% (+85)")
-        elif cv <= 0.10:
+        elif cv <= 0.10 + BOUNDARY_EPSILON:
             score = 65.0
             notes.append("Moderate variance across seeds: Coefficient of Variation <= 10% (+65)")
         else:
