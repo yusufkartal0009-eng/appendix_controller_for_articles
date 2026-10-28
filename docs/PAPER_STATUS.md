@@ -105,9 +105,7 @@ record is not in the repository).
 
 ## 5. Export
 
-On 2026-10-28 no converter was found on the machine: `pandoc`, `weasyprint`, `wkhtmltopdf`, LaTeX (`xelatex`, `pdflatex`), LibreOffice and the
-Python packages `markdown` and `weasyprint` are absent (nothing was installed or downloaded). **Not verified: no converter available**, so no
-`REPORT.pdf` or `REPORT.html` was produced. Headless Chrome exists, but it prints HTML only and there is no Markdown-to-HTML converter to feed it.
+On 2026-10-28 (night 8) no converter was found and no PDF was made. On the same night (night 9, issue #567) the project's own dependency `fpdf2` turned out to be enough: `python scripts/export_report.py` writes `docs/report/REPORT.pdf` (22 pages) and `python scripts/export_report.py --check` fails if the committed PDF has other text than a fresh rendering of `docs/report/REPORT.md` (a test does the same). The PDF is made with core fonts, so the five characters of the report outside Latin-1 are written in ASCII (`REPLACEMENTS` in the script); the HTML comments that mark the generated number blocks are not shown. A test compares the AI assistance statement, every `DRAFT` mark, and every paragraph, list item, heading and table cell of the Markdown with the text of the PDF. The report carries no `DRAFT` mark today, and the statement is copied unchanged. **Not verified:** the layout in a PDF viewer other than the page images that were looked at (pages 1, 7, 13 and 22 were rendered and read); the PDF is not a typeset paper and does not use a conference template.
 
 ## 6. Number audit of 2026-10-28 (issue #554)
 
