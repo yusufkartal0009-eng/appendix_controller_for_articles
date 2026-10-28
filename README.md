@@ -11,7 +11,7 @@
 
 ## 📍 Current Status (2026-10-28)
 
-- **Built and checked:** the Docker sandbox (its isolation is checked against a real Docker daemon in CI, [`docs/SANDBOX_ACCEPTANCE.md`](docs/SANDBOX_ACCEPTANCE.md)), the corpus verification, claim extraction with a verbatim-quote guard and a person's review of every claim, `cli.py score` for a stored or a fresh real run, and a local dashboard.
+- **Built and checked:** the Docker sandbox (its isolation was checked against a real Docker daemon in CI while a workflow existed (removed in #388, D-010), [`docs/SANDBOX_ACCEPTANCE.md`](docs/SANDBOX_ACCEPTANCE.md)), the corpus verification, claim extraction with a verbatim-quote guard and a person's review of every claim, `cli.py score` for a stored or a fresh real run, and a local dashboard.
 - **Pilots:** four pilots ran 12 papers in total ([`docs/report/REPORT.md`](docs/report/REPORT.md) section 6, [`docs/FIELD_ANALYSIS.md`](docs/FIELD_ANALYSIS.md)). The success rate is low, and the run setups of Pilots 2 and 3 were written by us (see *What a Result Means* below).
 - **Tier 3 (seed stability) now runs real seed runs** (#48, [`docs/MULTI_SEED.md`](docs/MULTI_SEED.md)): `paper_003` and `paper_006` were run with three seeds each (`data/multi_seed_runs/`, not protocol runs). `cli.py score` and the dashboard database read these records (#542): the metric that an accepted claim is mapped to decides Tier 3 (default chosen by the assistant, the owner may revise), so Tier 3 is 100.0 for `paper_003` (the claimed RMSE has a CV of 0.70 %; the largest-CV rule, which a training loss of 7.4 % would have decided, gave 65.0) and 100.0 for `paper_006` (no accepted claim has a counterpart, so the largest-CV rule applies). A paper without a record keeps the 75.0 single-run baseline.
 - **AI Decision Layer:** implemented as a rule-based diagnosis (`python cli.py diagnose <run directory>`, [`docs/DIAGNOSIS.md`](docs/DIAGNOSIS.md)). An optional language-model step is off by default and was tested only with a mock client, never with a real model.
@@ -210,7 +210,7 @@ The dashboard runs on **localhost only** (`127.0.0.1`, `docs/DECISIONS.md` D-006
 | Python, Git | Python 3.11 (3.10+ for the tests), Git | |
 | Docker | Docker Desktop or Engine that starts containers; on Windows with WSL2 it gets about half of the machine's RAM by default (15.5 GiB on a 32 GB machine) | `scripts/preflight.py` reads it |
 | RAM | 32 GB is what the heavy pilots were run on; 16 GB should cover light papers (my estimate, not tested). In the pilots `paper_004` peaked at 10.6 GiB; `paper_005` was killed for memory even at 13.9 GiB. | `docs/MEMORY_RUNS.md` |
-| Disk | At least 30 GB free (the preflight warns below that). The six sandbox images are 0.6 to 1.1 GB each. | `scripts/preflight.py`, `docker images` |
+| Disk | At least 30 GB free (the preflight warns below that). The six sandbox images are 0.6 to 1.2 GB each (629 MB to 1.15 GB). | `scripts/preflight.py`, `docker images` |
 | Time | A tiny paper runs in seconds (`paper_102`: 12.7 s run). The two strongest examples take minutes: `paper_006` about 19 min on 8 CPUs, `paper_003` about 25 min for the run alone (the whole run, with staging and install, took about 44 min cold and about 26 min with a warm environment cache); `paper_004` took about 2.5 h. | `docs/CPU_RUNS.md`, `docs/MEMORY_RUNS.md`, `docs/ENV_CACHE_RUNS.md` |
 | Network | Needed to clone repositories and download wheels and datasets *before* a run; the run itself has no network | `docs/SANDBOX_GUIDE.md` |
 | GPU | Not needed; opt-in only (`docs/ENVIRONMENT.md`) | |
@@ -230,7 +230,7 @@ Times are from one machine (Windows, 8 CPUs given to Docker) and are not guarant
 
 The seed domain is **"Tabular Machine Learning & Light NLP Benchmarks"**:
 - **Frameworks:** TabPFN, FT-Transformer, TabR, FastSK, SAINT, DANets.
-- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); run it yourself with `python scripts/verify_corpus.py` (there is no CI service, `docs/DECISIONS.md` D-010; checks run locally). Whether the papers install and run was measured in Pilot 2 (`docs/PILOT_2.md`), and the numeric claims are the **12 claims** that were extracted from the papers' text and accepted one by one by the owner, in 5 of the 6 papers (`paper_005` has none); see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
+- **Dataset:** 6 entries in `data/seed_papers.json`. **6 of 6 entries pass `scripts/verify_corpus.py`** (paper link and title, repository, open license matching GitHub, target script present at a pinned commit); run it yourself with `python scripts/verify_corpus.py` (there is no CI service, `docs/DECISIONS.md` D-010; checks run locally). Whether the papers install and run was measured in Pilot 2 (`docs/PILOT_2.md`), and the numeric claims are the **13 claims** that were extracted from the papers' text and accepted one by one by the owner, in all 6 papers (`paper_005` has one, a follow-up question); see [docs/CORPUS_VERIFICATION.md](docs/CORPUS_VERIFICATION.md). Most entries expect a GPU and download their datasets, so short CPU-only runs are not guaranteed.
 
 ---
 
@@ -274,7 +274,7 @@ repro-radar/
 ├── scripts/
 │   ├── stage_and_bundle_repo.py        # Repo cloning, dependency bundling & sandbox CLI
 │   ├── verify_corpus.py                # Checks seed entries: paper, repo, license, pinned script
-│   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run in CI)
+│   ├── sandbox_acceptance.py           # Real-Docker sandbox acceptance checks (run locally; CI was removed, D-010)
 │   ├── hash_run.py                     # SHA-256 manifest of a run directory; verify and compare runs (#29)
 │   ├── run_multi_seed.py               # One real sandbox run per seed; summary and Tier 3 (#48)
 │   ├── field_analysis.py               # Week 6 analysis over 12 papers: rates, autonomy, descriptive factors (#413)

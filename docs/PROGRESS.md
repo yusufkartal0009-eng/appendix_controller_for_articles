@@ -49,6 +49,12 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(report): number audit of the report and the status documents (2026-10-28 22:40 +03:00, Issue #554)
+- Every hand-typed number in `docs/report/REPORT.md`, `README.md`, `docs/PAPER_STATUS.md` and `docs/PENDING.md` was checked against its source; the table is `docs/NUMBER_AUDIT.md`.
+- Seven wrong or stale statements were corrected: the `Verified` rule in report section 4.2 (Tier 1 and Tier 2 conditions were missing), CI described in the present tense in the report, README and `docs/SANDBOX_ACCEPTANCE.md` (the workflow was removed in #388), `CONTRIBUTING.md` claiming a CI workflow, README saying 12 claims in 5 papers (13 in 6), the image size range in README, the test count in `docs/PENDING.md`, and the 'private repository' remark on #3.
+- Evidence: `report_numbers.py --check` in sync, `verify_sources.py --check` empty list, `ruff check .` clean, 1304 passed, 9 skipped.
+- Not verified: numbers inside generated blocks were not recomputed by hand (only the Wilson intervals were); the network lookups were not re-run.
+
 ### fix(scoring): a run with nothing compared is Needs Review, not Partially Verified (2026-10-28 00:40 +03:00, Issue #540)
 - Found on the dashboard demo database: `paper_004`, `paper_006`, `paper_101` and `paper_102` were labeled `Partially Verified` although no accepted claim was compared; their Tier 2 was the neutral baseline of 70, which is not evidence. `calculate_composite_score` takes `claims_compared` (default True, so direct callers behave as before); `evaluate_paper_run` passes whether any claim was compared with a metric of the run. With nothing compared and a clean build the label is `Needs Review` and the summary says that no accepted claim could be compared. `Failed` is unchanged; `Verified` and `Partially Verified` need at least one compared claim. The thresholds and the neutral 70 are unchanged.
 - Effect: in the dashboard demo database only `paper_003` (one claim, one number, 3.05 % apart) and the synthetic control are `Verified`; `paper_004`, `paper_006`, `paper_101` and `paper_102` are `Needs Review`; the seven failed papers stay `Failed`. `docs/REAL_VERDICTS.md`, the report blocks, README, `docs/methodology.md`, `docs/CLAIM_METRIC_MAP.md` and `docs/PENDING.md` were updated.
