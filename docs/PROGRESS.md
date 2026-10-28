@@ -49,6 +49,10 @@ The weekly "Hafta 1–7" milestones were retired on 2026-09-25: their umbrella i
 
 ## Changelog & Completed Work
 
+### docs(devops): triage of the old open issues (2026-10-28 22:55 +03:00, Issue #556)
+- 20 old open issues were compared with `main`; the table is `docs/ISSUE_TRIAGE.md`. No issue was closed: each lacks a definition-of-done box or a file it names. Comments were written on #3, #8, #11, #18, #19, #21, #22, #24, #30, #45.
+- New finding: ANSI color codes corrupt metric names in `MetricExtractor` (`32maccuracy`); fixed in the test-gap work (#557).
+
 ### docs(report): number audit of the report and the status documents (2026-10-28 22:40 +03:00, Issue #554)
 - Every hand-typed number in `docs/report/REPORT.md`, `README.md`, `docs/PAPER_STATUS.md` and `docs/PENDING.md` was checked against its source; the table is `docs/NUMBER_AUDIT.md`.
 - Seven wrong or stale statements were corrected: the `Verified` rule in report section 4.2 (Tier 1 and Tier 2 conditions were missing), CI described in the present tense in the report, README and `docs/SANDBOX_ACCEPTANCE.md` (the workflow was removed in #388), `CONTRIBUTING.md` claiming a CI workflow, README saying 12 claims in 5 papers (13 in 6), the image size range in README, the test count in `docs/PENDING.md`, and the 'private repository' remark on #3.
