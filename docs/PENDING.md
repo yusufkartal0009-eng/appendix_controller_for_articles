@@ -186,7 +186,7 @@ The five tasks above were done on 2026-10-24. Also done that day: the tolerance 
 |---|---|---|
 | #34 | local model fallback | Done: backends with a number lock, fallback to the rule-based report. **Left:** a model that extracts claims as validated JSON was not built. **Not verified:** nothing was run against a real model (no key, no local server) (comment of 2026-10-20). |
 | #35 | discrepancy explainer | Done: rule-based comparison of two runs. **Left:** nothing writes `Needs Review` to the database (a `review_suggested` flag only); the 0.1% and 5% lines are conventions, not shown to separate floating-point jitter from divergence (comment of 2026-10-20). |
-| #30 | metric extraction on noisy logs | Partly done; fixtures with ANSI escape codes and noisy multi-line logs missing (status comment). |
+| #30 | metric extraction on noisy logs | **Closed 2026-10-28:** ANSI and noisy-log tests exist (`tests/test_metric_extractor_noisy.py`), the color-code defect was fixed (#560). |
 | #23 | entry-point detection | Partly done (`Stager.detect_candidate_scripts`); see the comment of 2026-10-15. |
 | #20 | manifest parser | Partly done in other places (`requirements*.txt` parsing); see the comment of 2026-10-15. |
 | #18 | end-to-end sandbox tests | Partly done; see the comment of 2026-10-15. |
