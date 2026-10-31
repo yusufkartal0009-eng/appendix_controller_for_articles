@@ -104,3 +104,32 @@ def test_unknown_paper_gives_404_page(client):
 def test_empty_database_shows_the_empty_state_not_a_table(tmp_path):
     page = TestClient(create_app(f"sqlite:///{(tmp_path / 'e.db').as_posix()}")).get("/").text
     assert EMPTY_STATE in page and "<table>" not in page
+
+
+def test_failed_score_is_grey_and_a_verified_score_is_not(client):
+    page = client.get("/").text
+    assert page.count("class='num muted'") == 1  # only paper_902 (Failed)
+    assert "Score of a failed run; not a measure of reproducibility" in page
+
+
+def test_venue_year_is_not_repeated_when_the_venue_carries_it(client):
+    from src.web.pages import _venue_year
+
+    assert _venue_year("NeurIPS 2021", 2021) == "NeurIPS 2021"
+    assert _venue_year("ICLR", 2020) == "ICLR, 2020"
+    assert "ICLR, 2020" in client.get("/papers/paper_901").text
+
+
+def test_log_excerpt_hides_progress_bar_lines_and_says_so():
+    from src.web.pages import _excerpt
+
+    bar = "  0%|          | 4038/52000000000 [24:44<4868947:06:28,  2.97it/s]"
+    text = f"start\n{bar}\n{bar}\n[test ] rmse = 0.473\nDone!"
+    out = _excerpt(text)
+    assert "4038/52000000000" not in out
+    assert out.splitlines() == ["start", "[test ] rmse = 0.473", "Done!", "[2 progress-bar lines hidden]"]
+    assert _excerpt("a\nb") == "a\nb"  # nothing hidden, nothing added
+
+
+def test_score_table_has_the_compact_class(client):
+    assert "<table class='parts'>" in client.get("/papers/paper_901").text
