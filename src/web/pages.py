@@ -8,6 +8,7 @@ database through `src/web/routes.py`. Filters and sorting are URL query paramete
 from __future__ import annotations
 
 import json
+import re
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -76,6 +77,9 @@ header nav{margin-top:8px;font-size:13px}header nav a{margin-right:16px}
 footer{padding:16px 32px 32px;color:#57606a;font-size:12px;max-width:960px}
 .quote{border-left:3px solid #d0d7de;margin:8px 0;padding:4px 12px;color:#1f2328;font-family:ui-monospace,monospace;font-size:12px}
 .sub{color:#57606a;font-size:13px;margin:4px 0 8px}
+td.muted{color:#8c959f}
+table.parts{width:auto;min-width:360px}
+table.parts td.num,table.parts th:last-child{text-align:right;padding-left:48px}
 """
 
 
@@ -131,6 +135,16 @@ def _run_cell(run: LatestRun | RunDetail | None) -> str:
 def _status_badge(status: str) -> str:
     css = "s-" + status.replace(" ", "-")
     return f"<span class='badge {escape(css)}'>{escape(status)}</span>"
+
+
+def _failed_hint(status: str) -> str:
+    """A tooltip on the grey score of a failed run: the number is not a measure of reproducibility."""
+    return " title='Score of a failed run; not a measure of reproducibility'" if status == "Failed" else ""
+
+
+def _venue_year(venue: str, year: int) -> str:
+    """The venue with the year, unless the venue name already carries it ("NeurIPS 2021")."""
+    return venue if str(year) in venue else f"{venue}, {year}"
 
 
 def _score_text(value: float | None) -> str:
@@ -219,7 +233,8 @@ def _list_rows(rows: list[Row]) -> str:
         cells.append(
             f"<tr><td><a href='/papers/{escape(r.paper.paper_id)}'>{escape(r.paper.paper_id)}</a></td>"
             f"<td>{escape(r.paper.title)}{badge}</td><td>{escape(r.paper.venue)}</td><td>{r.paper.year}</td>"
-            f"<td class='num'>{_score_text(r.score_total)}</td><td>{_status_badge(r.status)}{why}</td>"
+            f"<td class='num{' muted' if r.status == 'Failed' else ''}'{_failed_hint(r.status)}>{_score_text(r.score_total)}</td>"
+            f"<td>{_status_badge(r.status)}{why}</td>"
             f"<td>{_run_cell(r.paper.latest_run)}</td></tr>")
     return "".join(cells)
 
@@ -230,9 +245,18 @@ def _safe_link(url: str | None) -> str:
     return f"<a href='{escape(url)}' rel='noopener noreferrer'>{escape(url)}</a>"
 
 
+_PROGRESS_LINE = re.compile(r"\d+%\||it/s\]|s/it\]")
+
+
 def _excerpt(text: str | None) -> str:
+    """The last lines of a log, without progress-bar lines (they fill the excerpt and say nothing); the cut is stated."""
     lines = (text or "").splitlines()
-    return "\n".join(lines[-LOG_EXCERPT_LINES:])
+    kept = [ln for ln in lines if not _PROGRESS_LINE.search(ln)]
+    shown = "\n".join(kept[-LOG_EXCERPT_LINES:])
+    hidden = len(lines) - len(kept)
+    if hidden:
+        shown += f"\n[{hidden} progress-bar lines hidden]"
+    return shown
 
 
 def render_detail(engine: Engine, paper_id: str) -> str | None:
@@ -241,7 +265,7 @@ def render_detail(engine: Engine, paper_id: str) -> str | None:
     if paper is None:
         return None
     score = get_score(engine, paper_id)
-    facts = (f"<dl><dt>Paper</dt><dd>{escape(paper.paper_id)}</dd><dt>Venue</dt><dd>{escape(paper.venue)}, {paper.year}</dd>"
+    facts = (f"<dl><dt>Paper</dt><dd>{escape(paper.paper_id)}</dd><dt>Venue</dt><dd>{escape(_venue_year(paper.venue, paper.year))}</dd>"
              f"<dt>License</dt><dd>{escape(paper.license)}</dd><dt>Paper link</dt><dd>{_safe_link(paper.paper_url)}</dd>"
              f"<dt>Repository</dt><dd>{_safe_link(paper.repo_url)}</dd></dl>")
     if score is None:
@@ -251,8 +275,10 @@ def render_detail(engine: Engine, paper_id: str) -> str | None:
                  ("Stability (tier 3)", score.tier3_stability), ("Artifacts (tier 4)", score.tier4_artifacts),
                  ("Total", score.total_score))
         cells = "".join(f"<tr><td>{label}</td><td class='num'>{value:g}</td></tr>" for label, value in tiers)
-        summary = f"<p>{escape(score.summary)}</p>" if score.summary else ""
-        score_html = (f"<p>{_status_badge(score.status_label)}</p><table><tr><th>Part</th><th>Score (0-100)</th></tr>"
+        has_why = score.run_id is not None and paper_id in get_explanations(engine)
+        # the "Why this label" section below says the same and more, so the stored summary is shown only without it
+        summary = f"<p>{escape(score.summary)}</p>" if score.summary and not has_why else ""
+        score_html = (f"<p>{_status_badge(score.status_label)}</p><table class='parts'><tr><th>Part</th><th>Score (0-100)</th></tr>"
                       f"{cells}</table>{summary}")
     run_html = "<div class='empty'><p>This paper has not been run.</p></div>"
     # the run that the score was computed from, when the score names one; otherwise the latest run of the paper
