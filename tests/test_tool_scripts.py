@@ -130,3 +130,45 @@ def test_the_dashboard_binds_to_localhost_only(monkeypatch):
     monkeypatch.setattr(sys, "argv", ["src.web", "--port", "8123", "--db-url", "sqlite://"])
     runpy.run_module("src.web", run_name="__main__")
     assert started == {"app": ("app", "sqlite://"), "host": "127.0.0.1", "port": 8123}
+
+
+def _fake_server(monkeypatch):
+    started, opened = {}, []
+    monkeypatch.setattr("uvicorn.run", lambda app, host, port: started.update(app=app, host=host, port=port))
+    monkeypatch.setattr(src.web.app, "create_app", lambda db_url=None: ("app", db_url))
+    monkeypatch.setattr("webbrowser.open", lambda url: opened.append(url))
+    monkeypatch.setattr("threading.Timer", lambda delay, fn, args: SimpleNamespace(start=lambda: fn(*args)))
+    return started, opened
+
+
+def test_the_demo_flag_builds_the_demo_database_and_opens_the_page(monkeypatch, capsys):
+    from scripts import build_demo_db as demo
+
+    started, opened = _fake_server(monkeypatch)
+    built = []
+    monkeypatch.setattr(demo, "build", lambda: built.append(1) or [{"paper_id": "p"}])
+    monkeypatch.setattr(sys, "argv", ["src.web", "--demo", "--port", "8124"])
+    runpy.run_module("src.web", run_name="__main__")
+    assert built == [1]
+    assert started["app"] == ("app", f"sqlite:///{demo.DEFAULT_OUT.as_posix()}") and started["host"] == "127.0.0.1"
+    assert opened == ["http://127.0.0.1:8124/"]
+    assert "1 papers" in capsys.readouterr().out
+
+
+def test_the_demo_flag_can_skip_the_browser(monkeypatch):
+    from scripts import build_demo_db as demo
+
+    started, opened = _fake_server(monkeypatch)
+    monkeypatch.setattr(demo, "build", list)
+    monkeypatch.setattr(sys, "argv", ["src.web", "--demo", "--no-browser"])
+    runpy.run_module("src.web", run_name="__main__")
+    assert started["port"] == 8000 and opened == []
+
+
+@pytest.mark.parametrize("flags", [["--demo", "--db-url", "sqlite://"], ["--no-browser"]])
+def test_the_demo_flags_refuse_a_bad_combination(monkeypatch, flags):
+    started, _ = _fake_server(monkeypatch)
+    monkeypatch.setattr(sys, "argv", ["src.web", *flags])
+    with pytest.raises(SystemExit) as exc:
+        runpy.run_module("src.web", run_name="__main__")
+    assert exc.value.code == 2 and started == {}
